@@ -1,0 +1,142 @@
+
+OpenSBI v1.8.1
+   ____                    _____ ____ _____
+  / __ \                  / ____|  _ \_   _|
+ | |  | |_ __   ___ _ __ | (___ | |_) || |
+ | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
+ | |__| | |_) |  __/ | | |____) | |_) || |_
+  \____/| .__/ \___|_| |_|_____/|____/_____|
+        | |
+        |_|
+
+Platform Name               : Generic
+Platform Features           : medeleg
+Platform HART Count         : 1
+Platform HART Protection    : pmp
+Platform IPI Device         : ---
+Platform Timer Device       : aclint-mtimer @ 10000000Hz
+Platform Console Device     : uart8250
+Platform HSM Device         : ---
+Platform PMU Device         : ---
+Platform Reboot Device      : ---
+Platform Shutdown Device    : ---
+Platform Suspend Device     : ---
+Platform CPPC Device        : ---
+Firmware Base               : 0x80000000
+Firmware Size               : 309 KB
+Firmware RW Offset          : 0x40000
+Firmware RW Size            : 53 KB
+Firmware Heap Offset        : 0x44000
+Firmware Heap Size          : 37 KB (total), 0 KB (reserved), 10 KB (used), 26 KB (free)
+Firmware Scratch Size       : 4096 B (total), 232 B (used), 3864 B (free)
+Runtime SBI Version         : 3.0
+Standard SBI Extensions     : time,rfnc,ipi,base,hsm,pmu,dbcn,fwft,legacy,dbtr,sse
+Experimental SBI Extensions : none
+
+Domain0 Name                : root
+Domain0 Boot HART           : 0
+Domain0 HARTs               : 0*
+Domain0 Region00            : 0x80040000-0x8004ffff M: (F,R,W) S/U: ()
+Domain0 Region01            : 0x80000000-0x8003ffff M: (F,R,X) S/U: ()
+Domain0 Region02            : 0x02004000-0x02004007 M: (I,R,W) S/U: ()
+Domain0 Region03            : 0x0200bff8-0x0200bfff M: (I,R,W) S/U: ()
+Domain0 Region04            : 0x10000000-0x10000fff M: (I,R,W) S/U: (R,W)
+Domain0 Region05            : 0x00000000-0xffffffff M: () S/U: (R,W,X)
+Domain0 Next Address        : 0x80400000
+Domain0 Next Arg1           : 0x87f00000
+Domain0 Next Mode           : S-mode
+Domain0 SysReset            : yes
+Domain0 SysSuspend          : yes
+
+Boot HART ID                : 0
+Boot HART Domain            : root
+Boot HART Priv Version      : v1.12
+Boot HART Base ISA          : rv32imah
+Boot HART ISA Extensions    : sstc,zicntr,zihpm,sdtrig
+Boot HART PMP Count         : 16
+Boot HART PMP Granularity   : 2 bits
+Boot HART PMP Address Bits  : 32
+Boot HART MHPM Info         : 16 (0x0007fff8)
+Boot HART Debug Triggers    : 2 triggers
+Boot HART MIDELEG           : 0x00001666
+Boot HART MEDELEG           : 0x00f0b509
+Linux version 6.12.0-haebancheon-userland (haebancheon@build) (riscv32-buildroot-linux-musl-gcc.br_real (Buildroot 2025.02.19) 13.4.0, GNU ld (GNU Binutils) 2.43.1) #1 2026-11-07 00:00:00 UTC
+OF: fdt: Ignoring memory range 0x80000000 - 0x80400000
+Machine model: riscv-virtio
+SBI specification v3.0 detected
+SBI implementation ID=0x1 Version=0x10008
+SBI TIME extension detected
+SBI IPI extension detected
+SBI RFENCE extension detected
+SBI DBCN extension detected
+earlycon: sbi0 at I/O port 0x0 (options '')
+printk: legacy bootconsole [sbi0] enabled
+OF: reserved mem: 0x80000000..0x8003ffff (256 KiB) nomap non-reusable mmode_resv1@80000000
+OF: reserved mem: 0x80040000..0x8004ffff (64 KiB) nomap non-reusable mmode_resv0@80040000
+OF: reserved mem: 0xbd000000..0xbdffffff (16384 KiB) nomap non-reusable dma-pool@bd000000
+OF: reserved mem: 0xbf800000..0xbfffffff (8192 KiB) nomap non-reusable framebuffer@bf800000
+Zone ranges:
+  Normal   [mem 0x0000000080400000-0x00000000bfffffff]
+Movable zone start for each node
+Early memory node ranges
+  node   0: [mem 0x0000000080400000-0x00000000bcffffff]
+  node   0: [mem 0x00000000bd000000-0x00000000bdffffff]
+  node   0: [mem 0x00000000be000000-0x00000000bf7fffff]
+  node   0: [mem 0x00000000bf800000-0x00000000bfffffff]
+Initmem setup node 0 [mem 0x0000000080400000-0x00000000bfffffff]
+riscv: base ISA extensions
+riscv: ELF capabilities
+Kernel command line: earlycon=sbi console=hvc0 nokaslr lpj=1000000 rdinit=/init haebancheon.root=/dev/vda2
+Dentry cache hash table entries: 131072 (order: 7, 524288 bytes, linear)
+Inode-cache hash table entries: 65536 (order: 6, 262144 bytes, linear)
+Built 1 zonelists, mobility grouping on.  Total pages: 261120
+mem auto-init: stack:all(zero), heap alloc:off, heap free:off
+SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+NR_IRQS: 64, nr_irqs: 64, preallocated irqs: 0
+riscv-intc: 32 local interrupts mapped
+clocksource: riscv_clocksource: mask: 0xffffffffffffffff max_cycles: 0x24e6a1710, max_idle_ns: 440795202120 ns
+sched_clock: 64 bits at 10MHz, resolution 100ns, wraps every 4398046511100ns
+Calibrating delay loop (skipped) preset value.. 200.00 BogoMIPS (lpj=1000000)
+pid_max: default: 32768 minimum: 301
+Mount-cache hash table entries: 2048 (order: 1, 8192 bytes, linear)
+Mountpoint-cache hash table entries: 2048 (order: 1, 8192 bytes, linear)
+ASID allocator using 9 bits (512 entries)
+Memory: 1003104K/1044480K available (2638K kernel code, 489K rwdata, 305K rodata, 1649K init, 186K bss, 39828K reserved, 0K cma-reserved)
+devtmpfs: initialized
+clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+futex hash table entries: 256 (order: -1, 3072 bytes, linear)
+NET: Registered PF_NETLINK/PF_ROUTE protocol family
+cpu0: Ratio of byte access time to unaligned word access is 1.33, unaligned accesses are fast
+[C0]
+[C1]
+[C2]
+[N0]
+[X0]
+[X1]
+[X2]
+[X3]
+[X4]
+[X5]
+[N1]
+clocksource: Switched to clocksource riscv_clocksource
+[C3]
+[C4]
+NET: Registered PF_UNIX/PF_LOCAL protocol family
+workingset: timestamp_bits=30 max_order=18 bucket_order=0
+io scheduler mq-deadline registered
+io scheduler kyber registered
+io scheduler bfq registered
+riscv-plic: interrupt-controller@c000000: mapped 4 interrupts with 1 handlers for 2 contexts.
+printk: legacy console [hvc0] enabled
+printk: legacy console [hvc0] enabled
+printk: legacy bootconsole [sbi0] disabled
+printk: legacy bootconsole [sbi0] disabled
+clk: Disabling unused clocks
+Freeing unused kernel image (initmem) memory: 1648K
+Kernel memory protection not selected by kernel config.
+Run /init as init process
+/dev/vda2: Can't lookup blockdev
+mount: mounting /dev/vda2 on /newroot failed: No such file or directory
+HAEBANCHEON: cannot mount /dev/vda2; entering recovery shell (rootfs was not formatted)
+e~ # echo RECOVERY_OK
+RECOVERY_OK

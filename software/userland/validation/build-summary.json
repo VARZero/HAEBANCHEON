@@ -1,0 +1,50 @@
+{
+  "boot_lba": 2048,
+  "root_lba": 14336,
+  "root_sectors": 2097152,
+  "segments": [
+    {
+      "address": "0x80000000",
+      "sectors": 519,
+      "crc32": "edd168be"
+    },
+    {
+      "address": "0x80400000",
+      "sectors": 10175,
+      "crc32": "165639dc"
+    },
+    {
+      "address": "0x87f00000",
+      "sectors": 6,
+      "crc32": "632dac84"
+    }
+  ],
+  "image": "HAEBANCHEON-userland.img",
+  "bytes": 1081081856,
+  "sha256": "a516e8a9acf66439a158602d78e1cac4d3cd692dbe99d9196bfc261e83d03ffa",
+  "rootfs_sha256": "16a4d117c25e9c1b23a354f54a6fb03fe8263183befa6a9cf718e0dbb8b1a8e7",
+  "opensbi_sha256": "0e7c072de5160f8346719a6b458bed12754ac4df88a5d812272721a25fe79eee",
+  "kernel_sha256": "988082b1912bcaeecef4b5e3f394203a21853ab9fc733bb10c2184ec251e2546",
+  "hardware_tested": false,
+  "requires": "Current L1-16K DMA3 LRU-RAM bitstream; unchanged RTL",
+  "source_date_epoch": 1794009600,
+  "apps": {
+    "hello": "69e1e2db0d44547c609d96d4e757b3a809c14dc96d1edbe60979b7607a66fff9",
+    "hello-python": "52a086cf6cc6222de5d458a5b81948e5c362ef010c478ea2147584c2c07348ae"
+  },
+  "buildroot.config_sha256": "94ebfd252b24af77088f5b270ce4f84066593ae800f9b28b8182fd56bf3aa1b4",
+  "linux.config_sha256": "e1d271d3b2a6ed9084048964c5547d96b9e9401b102bccb6fa9e2b27487fd013",
+  "bootstrap.config_sha256": "caa72f1fe62a31dcf9c5f0d7afea05c28cead616cc6b8fd9110c0a93a11fe095",
+  "bootstrap_busybox_sha256": "3d2e10d24f64d1006de61aceaeb631e02964d76dbb35007a515b889d6ec3ae0f",
+  "elf_objects_checked": 141,
+  "packages": {
+    "buildroot": "2025.02.19",
+    "linux": "6.12",
+    "busybox": "1.37.0",
+    "vim": "9.2.0943",
+    "python": "3.12.15",
+    "gcc": "13.4.0",
+    "musl": "1.2.6",
+    "binutils": "2.43.1"
+  }
+}

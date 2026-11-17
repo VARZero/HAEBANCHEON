@@ -31,6 +31,7 @@ python scripts/verify_current_rtl.py --require-tracked
 - **빌드:** [현재 비트스트림 안내](docs/현재_비트스트림.md)의 Vivado 재구현 절차를 따릅니다.
 - **외부 IP:** HDMI 원본은 고정 버전으로 내려받고, MIG는 Vivado 2022.2에서 보존 설정으로 생성합니다. [전체 구성의 IP 준비 방법](docs/외부_HDMI.md)
 - **SD 이미지:** 버전별 안내와 검증 기록은 `updates/`에 있습니다. 현재 소프트웨어 기준은 [BoAYO v14](updates/boayo-tilebatch-v14/README_KO.md)입니다. 새 환경의 SD 빌드에는 추가 커널·userspace 준비가 필요합니다.
+- **Linux 개발 환경:** [재현 가능한 BusyBox·Vim·Python 3·GCC 빌드](software/userland/README.md)는 현재 RTL용 별도 SD 개발 이미지입니다. 자체 앱 빌드·배포, 복구 셸, 메모리·저장장치 한계와 검증 범위를 설명합니다.
 
 비트스트림·SD 이미지·MIG 생성물·외부 HDMI IP 원본은 Git에 포함하지 않습니다.
 

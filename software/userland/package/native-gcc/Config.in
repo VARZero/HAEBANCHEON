@@ -1,0 +1,17 @@
+config BR2_PACKAGE_NATIVE_GCC
+	bool "HAEBANCHEON native GCC (C and C++)"
+	depends on BR2_riscv && BR2_RISCV_32
+	depends on BR2_TOOLCHAIN_BUILDROOT_MUSL
+	depends on BR2_GCC_VERSION_13_X
+	depends on BR2_INSTALL_LIBSTDCPP
+	depends on BR2_USE_WCHAR
+	select BR2_PACKAGE_GMP
+	select BR2_PACKAGE_MPFR
+	select BR2_PACKAGE_MPC
+	select BR2_PACKAGE_ZLIB
+	select BR2_PACKAGE_BINUTILS
+	select BR2_PACKAGE_BINUTILS_TARGET
+	help
+	  Native RV32IMA/ILP32 GCC, using the same version and patches as
+	  the host cross compiler. Development headers and runtime archives
+	  are restored after Buildroot's normal target cleanup.

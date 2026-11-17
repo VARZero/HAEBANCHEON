@@ -1,0 +1,18 @@
+#!/bin/sh
+# Install a trusted executable from mounted removable media or /data/src.
+set -eu
+if [ "$#" -lt 1 ] || [ "$#" -gt 2 ]; then
+    echo 'usage: app-install FILE [NAME]' >&2
+    exit 2
+fi
+source=$1
+name=${2:-$(basename "$source")}
+case "$name" in ''|.*|*[!a-zA-Z0-9_.-]*) echo 'invalid app name' >&2; exit 2;; esac
+test -f "$source"
+mkdir -p /data/apps
+temp=$(mktemp "/data/apps/.$name.XXXXXX")
+trap 'rm -f "$temp"' EXIT HUP INT TERM
+cp "$source" "$temp"
+chmod 0755 "$temp"
+mv -f "$temp" "/data/apps/$name"
+echo "Installed /data/apps/$name; run: $name"

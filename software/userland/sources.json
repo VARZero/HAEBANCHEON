@@ -1,0 +1,13 @@
+{
+  "buildroot": {
+    "version": "2025.02.19",
+    "url": "https://buildroot.org/downloads/buildroot-2025.02.19.tar.xz",
+    "sha256": "e5e58bff1da91f022f60cefdfe280140c08023cd0aeec1e5f6f9da0ea866d69c"
+  },
+  "opensbi": {
+    "path": "variants/l1-16k-dma3-lru-ram/software/firmware/fw_jump.bin",
+    "sha256": "0e7c072de5160f8346719a6b458bed12754ac4df88a5d812272721a25fe79eee",
+    "policy": "Preserve the published OpenSBI v1.8.1 binary; source provenance is in provenance/firmware_origin.json."
+  },
+  "source_date_epoch": 1794009600
+}
