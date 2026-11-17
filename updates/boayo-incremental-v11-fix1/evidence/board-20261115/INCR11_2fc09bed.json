@@ -1,0 +1,8 @@
+{
+  "command": "BOAYO_PROFILE=1 BOAYO_DRIVER_LEGACY=1 BOAYO_INIT_TRACE=0 /usr/bin/boayo-native start",
+  "seconds": 3.28,
+  "rc": 0,
+  "uart": "BOAYO_PROFILE=1 BOAYO_DRIVER_LEGACY=1 BOAYO_INIT_TRACE=0 /usr/bin/boayo\r\r\r\n-native start; echo INCR11_2fc09bed_RC:$?\r\r\nBoAYO C++ service started; initialization continues. boayo-status / boayo-keys / boayo-stop\r\r\n{\"features\":[\"windows\",\"pointer\",\"input-injection\",\"button-events\",\"scene-stream\",\"spatial-workspace\",\"pointer-capture\"],\"headless\":false,\"m\":32,\"mock_backend\":false,\"runtime\":\"C++17\",\"version\":2}\r\r\nINCR11_2fc09bed_RC:0\r\r\n",
+  "observed_at": "2026-11-15T00:33:27.136061",
+  "log_start": 343159
+}

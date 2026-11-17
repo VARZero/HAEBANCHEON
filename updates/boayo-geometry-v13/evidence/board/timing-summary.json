@@ -1,0 +1,229 @@
+{
+  "baseline": {
+    "first_move_seconds": 228.95701620000023,
+    "geometry": {
+      "geometry_builds": 4,
+      "geometry_cull_us_total": 4402424,
+      "geometry_descriptor_us_total": 133262842,
+      "geometry_insert_us_total": 439316,
+      "geometry_prepare_us_total": 177167,
+      "geometry_tiles_evaluated_total": 3136,
+      "mask_build_us_total": 31361665,
+      "mask_builds": 4,
+      "mask_fast_tiles_total": 59,
+      "mask_integer_samples_total": 52043,
+      "mask_precise_samples_total": 991,
+      "mask_samples_evaluated_total": 113664
+    },
+    "phases_wall_us_cpu_us_calls": {
+      "app_present": [
+        3293976,
+        1918893,
+        16
+      ],
+      "apps": [
+        31075689,
+        22820192,
+        7
+      ],
+      "blend": [
+        7970234,
+        4748336,
+        20
+      ],
+      "captions": [
+        1870797,
+        1401346,
+        46
+      ],
+      "compose": [
+        195467210,
+        111027257,
+        2
+      ],
+      "descriptors": [
+        1265614,
+        731623,
+        20
+      ],
+      "finish": [
+        988238,
+        643623,
+        2
+      ],
+      "image": [
+        1111587,
+        607005,
+        9
+      ],
+      "image_publish": [
+        77885,
+        49671,
+        9
+      ],
+      "layers": [
+        175298238,
+        100137354,
+        2
+      ],
+      "output_publish": [
+        363546,
+        238259,
+        2
+      ],
+      "pointer": [
+        76512,
+        61135,
+        4
+      ],
+      "projection_wait": [
+        1667515,
+        511611,
+        20
+      ],
+      "state_publish": [
+        5439757,
+        3920002,
+        3
+      ],
+      "texture": [
+        4728495,
+        2489781,
+        12
+      ],
+      "tiles_prepare": [
+        2084118,
+        1083494,
+        2
+      ],
+      "workspace": [
+        22868522,
+        17231449,
+        7
+      ]
+    },
+    "steps": [
+      {
+        "output_complete": true,
+        "phase": "view-axis",
+        "seconds": 17.891922280000017,
+        "step": 1,
+        "view": {
+          "pitch": 0.0,
+          "roll": 0.0,
+          "yaw": 0.0
+        }
+      },
+      {
+        "output_complete": true,
+        "phase": "view-axis",
+        "seconds": 17.868716279999944,
+        "step": 2,
+        "view": {
+          "pitch": 0.0,
+          "roll": 0.0,
+          "yaw": -12.0
+        }
+      },
+      {
+        "output_complete": true,
+        "phase": "view-axis",
+        "seconds": 18.15357666,
+        "step": 3,
+        "view": {
+          "pitch": 0.0,
+          "roll": 0.0,
+          "yaw": 12.0
+        }
+      },
+      {
+        "output_complete": true,
+        "phase": "view-axis",
+        "seconds": 17.523198599999887,
+        "step": 4,
+        "view": {
+          "pitch": -8.0,
+          "roll": 0.0,
+          "yaw": 0.0
+        }
+      },
+      {
+        "output_complete": true,
+        "phase": "view-axis",
+        "seconds": 17.71490542000015,
+        "step": 5,
+        "view": {
+          "pitch": 8.0,
+          "roll": 0.0,
+          "yaw": 0.0
+        }
+      },
+      {
+        "output_complete": true,
+        "phase": "view-axis",
+        "seconds": 18.517650959999855,
+        "step": 6,
+        "view": {
+          "pitch": 0.0,
+          "roll": -20.0,
+          "yaw": 0.0
+        }
+      },
+      {
+        "output_complete": true,
+        "phase": "view-axis",
+        "seconds": 18.405423859999928,
+        "step": 7,
+        "view": {
+          "pitch": 0.0,
+          "roll": 20.0,
+          "yaw": 0.0
+        }
+      },
+      {
+        "output_complete": true,
+        "phase": "view-mixed",
+        "seconds": 18.52451999999994,
+        "step": 8,
+        "view": {
+          "pitch": 6.0,
+          "roll": -15.0,
+          "yaw": -8.0
+        }
+      },
+      {
+        "output_complete": true,
+        "phase": "view-mixed",
+        "seconds": 18.249905679999983,
+        "step": 9,
+        "view": {
+          "pitch": -6.0,
+          "roll": 15.0,
+          "yaw": 8.0
+        }
+      },
+      {
+        "output_complete": true,
+        "phase": "view-axis",
+        "seconds": 17.459720900000093,
+        "step": 10,
+        "view": {
+          "pitch": 0.0,
+          "roll": 0.0,
+          "yaw": 0.0
+        }
+      },
+      {
+        "output_complete": true,
+        "phase": "window-azimuth-elevation",
+        "seconds": 228.95701620000023,
+        "step": 11,
+        "view": {
+          "pitch": 0.0,
+          "roll": 0.0,
+          "yaw": 0.0
+        }
+      }
+    ]
+  }
+}

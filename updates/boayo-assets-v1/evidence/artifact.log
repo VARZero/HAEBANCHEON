@@ -1,0 +1,58 @@
+e2fsck 1.47.0 (5-Feb-2023)
+Pass 1: Checking inodes, blocks, and sizes
+Pass 2: Checking directory structure
+Pass 3: Checking directory connectivity
+Pass 4: Checking reference counts
+Pass 5: Checking group summary information
+ORYDATA: 146/65536 files (0.0% non-contiguous), 9200/65536 blocks
+{
+  "result": "PASS_ARTIFACT_AUDIT",
+  "hardware": false,
+  "checks": [
+    "BOSIO built kernel sources match overlay",
+    "SD v2 and original DMAengine driver unchanged",
+    "RV32 build snapshot, UAPI and installed stripped app match",
+    "embedded initramfs exact, BusyBox/OpenSBI preserved, DT DMA binding compiled",
+    "132 prebuilt assets exact in ext4; first launcher embedded in actual kernel; generator provenance matches",
+    "SD header CRCs and exact firmware/kernel/DTB/ext4 payloads; ext4 fsck"
+  ],
+  "image_sha256": "2828306943079cf93d45f655052bd6ad8235a9a6b3edc9ec15a1ac567995e38f",
+  "image_bytes": 276824064,
+  "kernel_sha256": "48600f223c22d1492cf2403a2993bb3a4feba1a163265a9de364b1b767bb0750",
+  "app_sha256": "b573b8ddd1fdc9a3682e6629bb223c33eac37d1b17f0af03b8fc11efb19c12da",
+  "busybox_sha256": "317d847c48b0d1177993f5721ee0438c70ac0d0ee6284ceaade31eac7b5a84cf",
+  "driver_sha256": "717001877ec8ea2bedb62b3b79ceecb2af3ada386a62be644ff9cdb6cce3bdcb",
+  "app_build_manifest": {
+    "binary_sha256": "9d8bd69f91c3894b57dacd63bbc6106fc0b0a36251f6189d3c15930be6bedf43",
+    "source": "/var/tmp/oryukdo-boayo-assets-v1/release/apps/source-rv32-oQhfnf/software/boayo/native",
+    "source_sha256": {
+      "reference/wm/native/bosio_compositor.cpp": "251dbd92c0ea7800d2e61ce21fb9d36a43f6f2afa54b8dc63a02a38d27ebbb9f",
+      "src/apps.cpp": "ccb521559ed0322310ac647c49a2dbe2596cad841f288ef6f9c802175aaea821",
+      "src/apps.hpp": "bd9acee5ffebb8e5289c6495f194e2f4e5cdf213d99560094545d5c507d5187f",
+      "src/assets.cpp": "4d02eda8cd5c7a6ca41ed813a0c46b8559b1734bb9a4b8c05a8097dd19e10b59",
+      "src/assets.hpp": "971f12af48808775135f5cc25d78a06ef7edbbf2cbde869877234f2e4d57f748",
+      "src/backend.cpp": "31e7fe2eb7a493828dcb3c8bfa1a71d74859dedcdd51d11db02cbb0eb4651bdd",
+      "src/backend.hpp": "575e172dca06d469ec0465cf4840fe2872b216f906471fdd7d4de6c86f155aaf",
+      "src/common.hpp": "3a71da75ea1289e79d6b7009b8a7ab7d0d4e600e46665d93277564f40d2d7d04",
+      "src/fallback.hpp": "1c18aa5ca7f5dbe7d9b93e4e9dadf890b139c47c26e66918adbf1f3dc92bf714",
+      "src/fixed_geometry.inc": "a6d243f048510f6239d79b6fea351cab26d178217ce36905c23e88cdad10f268",
+      "src/font.hpp": "65153ae3363e9bf7e98c9bbcc90dd90718c1969acdc7e7119a82f8b6673526e4",
+      "src/geometry.cpp": "133ae0f24f583abf32045151542fce7fcda85a80cab746c2e5bebbb5676b717b",
+      "src/geometry.hpp": "2c40da77b35904170edd34e7aeccf380003bfb44faf13df5e58ad22d91015c64",
+      "src/golden.hpp": "860a20933c5698eeec0d6873baaff81757cc83ddf2bb33b2836403e6a5d1fbb4",
+      "src/init_trace.hpp": "9a255fcca478a35e7c50706370fd3f4daa214fabd79c9062e9a236210c77ff20",
+      "src/main.cpp": "058bdbdd09f0143560add70792822a3ed89e24ba29f67b43f6b7b51389846bbd",
+      "src/rgb_fill.hpp": "cd69f79921bff722151a281bbf30f3dc81787a09dc835e34796be78f0c2221cd",
+      "src/runtime.cpp": "4ed2056a85bdec8c3a2cfa6011c0969a41c2beaeed479dc06bded2290e64b671",
+      "src/runtime.hpp": "811556937978584d87f1060ff0f4cf2962713f86d11c165be39facf64d0b1a6d",
+      "src/selftest.cpp": "856a06f84189d8d1089fc144572752bcbe660ea1b9edc0a14f30c56d6b9f21a3",
+      "src/ui.cpp": "b4081ce2683012d4e53476054f5362a0511e3cb5fd8ad1cf8714f4ef8344335c",
+      "src/ui.hpp": "44e81739ee0fd87d9269a13d681ed60a937370053d92505a79389cd7459493d9",
+      "src/wm.cpp": "8b587aba6411f1ecfa3a5ce56db941a21a681bf07e7bceaa086948df5490ae72",
+      "src/wm.hpp": "659878db83176aa87b4535e6bddeecc2cf979e8300d4d99b340ff8a5584f450b",
+      "vendor/json-LICENSE.MIT": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+      "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6"
+    },
+    "uapi_sha256": "1b8290d4d53c12b10e1a99622589e611b5b1f748731b04b49b11a081f77f704c"
+  }
+}

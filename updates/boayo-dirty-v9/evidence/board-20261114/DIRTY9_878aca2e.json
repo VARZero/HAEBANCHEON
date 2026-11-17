@@ -1,0 +1,8 @@
+{
+  "command": "sleep 20",
+  "seconds": 21.811,
+  "rc": 0,
+  "uart": "oryukdo# sleep 20; echo DIRTY9_878aca2e_RC:$?\r\r\nDIRTY9_878aca2e_RC:0\r\r\n",
+  "observed_at": "2026-11-14T21:05:48.734717",
+  "log_start": 225973
+}

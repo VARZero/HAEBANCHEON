@@ -1,0 +1,7 @@
+{
+  "started": "2026-11-11T00:36:07.341956",
+  "bitstream": "D:\\temp\\gen3bosio\\sd4-dma\\candidate\\ORYUKDO-KFB-SD4-DMA-v1.bit",
+  "sha256": "fe1ce8e52f30f1b9bd7bad944a0bf6f981eef9bba01438c0d26b40da6126fdf0",
+  "expected_kernel": "6.12.0-oryukdo-rgbdma1",
+  "image_sha256": "559e5b45f161b0f045ddf73ce6ec82394c4414ad70f762ddc4cb52f862104519"
+}

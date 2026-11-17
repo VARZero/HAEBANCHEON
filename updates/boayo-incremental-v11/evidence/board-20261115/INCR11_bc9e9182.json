@@ -1,0 +1,8 @@
+{
+  "command": "cp /bin/ddrcheck /tmp/view-rx && : > /tmp/view-rx",
+  "seconds": 1.022,
+  "rc": 0,
+  "uart": "cp /bin/ddrcheck /tmp/view-rx && : > /tmp/view-rx; echo INCR11_bc9e9182\r\r\r\n_RC:$?\r\r\nINCR11_bc9e9182_RC:0\r\r\n",
+  "observed_at": "2026-11-15T00:54:32.477914",
+  "log_start": 408353
+}

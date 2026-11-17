@@ -1,0 +1,8 @@
+{
+  "command": "BOAYO_INIT_TRACE=0 /tmp/boayo-v8-baseline start",
+  "seconds": 3.268,
+  "rc": 0,
+  "uart": "BOAYO_INIT_TRACE=0 /tmp/boayo-v8-baseline start; echo DIRTY9_59046191_R\r\r\r\nC:$?\r\r\nBoAYO C++ service started; initialization continues. boayo-status / boayo-keys / boayo-stop\r\r\n{\"features\":[\"windows\",\"pointer\",\"input-injection\",\"button-events\",\"scene-stream\",\"spatial-workspace\",\"pointer-capture\"],\"headless\":false,\"m\":32,\"mock_backend\":false,\"runtime\":\"C++17\",\"version\":2}\r\r\nDIRTY9_59046191_RC:0\r\r\n",
+  "observed_at": "2026-11-14T21:02:30.357199",
+  "log_start": 212316
+}

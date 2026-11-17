@@ -1,0 +1,36 @@
+cat /etc/oryukdo-image; uname -r; cat /proc/mounts; ps; echo V14_9a604e
+0f_RC:$?
+HAEBANCHEON-BoAYO-tilebatch-v14 / L1-16K DMA3 / 32x32 source damage, cached assets, batched copies, rectangular app bodies
+6.12.0-haebancheon-tilebatch14
+rootfs / rootfs rw 0 0
+devtmpfs /dev devtmpfs rw,relatime 0 0
+/dev/mmcblk0p2 /data ext4 rw,relatime 0 0
+proc /proc proc rw,relatime 0 0
+sysfs /sys sysfs rw,relatime 0 0
+    1 root       192 S    /init.console
+    2 root         0 SW   [kthreadd]
+    3 root         0 SW   [pool_workqueue_]
+    4 root         0 IW<  [kworker/R-slub_]
+    5 root         0 IW   [kworker/0:0-eve]
+    6 root         0 IW<  [kworker/0:0H]
+    7 root         0 IW   [kworker/u4:0-ev]
+    8 root         0 IW<  [kworker/R-mm_pe]
+    9 root         0 SW   [ksoftirqd/0]
+   10 root         0 SW   [kdevtmpfs]
+   11 root         0 SW   [oom_reaper]
+   12 root         0 IW<  [kworker/R-write]
+   13 root         0 IW<  [kworker/R-kbloc]
+   14 root         0 SW   [kswapd0]
+   15 root         0 IW   [kworker/u4:1-ev]
+   16 root         0 IW   [kworker/0:1-eve]
+   17 root         0 SW   [khvcd]
+   18 root         0 IW   [kworker/u4:2-ev]
+   19 root         0 IW   [kworker/0:2-eve]
+   20 root         0 IW   [kworker/0:3-eve]
+   21 root         0 IW<  [kworker/R-mmc_c]
+   22 root         0 IW<  [kworker/0:1H-mm]
+   26 root         0 SW   [jbd2/mmcblk0p2-]
+   27 root         0 IW<  [kworker/R-ext4-]
+   29 root       496 S    sh -i
+   33 root       504 R    {ps} sh -i
+V14_9a604e0f_RC:0

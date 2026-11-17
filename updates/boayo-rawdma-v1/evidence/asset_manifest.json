@@ -1,0 +1,4940 @@
+{
+  "format": "BUITEX01",
+  "generator_binary_sha256": "3fcebfdca3cb9f0fea63e1fd172ea1e5bcb6f3b040e24ae456d3700b1d3358fa",
+  "assets": [
+    {
+      "file": "a0ebce13.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        -1,
+        -1,
+        0,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": -1,
+        "hovered": -1,
+        "offset": 0
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "99be5f69311bdd05db679d4416f8bbc24e1ccaeb81d37efd8e4557f7c9422e4d",
+      "pixels_sha256": "8f465795b9d8167b7fc5fb430bc09b405a44acdbcc0cf051968ed9a8fefac531"
+    },
+    {
+      "file": "217c5fdc.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        -1,
+        -1,
+        1,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": -1,
+        "hovered": -1,
+        "offset": 1
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "1fe740f2f0d0ebdd9a21e6cfbfe38cd3cc220d8398be1b26803d749ce189b17a",
+      "pixels_sha256": "c2252675fd51c53b8b9b0783739dd0e4b96c5a1f7742a6d2b9d1c223ec3235fb"
+    },
+    {
+      "file": "62328ded.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        -1,
+        -1,
+        2,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": -1,
+        "hovered": -1,
+        "offset": 2
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "6efe1becd721025ce2f6fc30526f2780d94a1aff2bd983f753f32addb213f7df",
+      "pixels_sha256": "9ad1a6d8f2f399dc37eb83949937ec303a75f83c70a57ecc0715436fec9fe9b7"
+    },
+    {
+      "file": "dd2c30c1.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        -1,
+        0,
+        0,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": -1,
+        "hovered": 0,
+        "offset": 0
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "e3941a5268aaea57fb1e63e1748a66818012bd92f79e36aa569085a03a55708b",
+      "pixels_sha256": "a73d8fb067cd0ddafb7734b3c088434c35034b3b707273fb76ac6fbb49e6e908"
+    },
+    {
+      "file": "4c0cfd0a.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        -1,
+        0,
+        1,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": -1,
+        "hovered": 0,
+        "offset": 1
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "a66ebeeeb0563ce11a62ecbd2a9b72a1fe96380107cf6f529c389f8fba9bacc4",
+      "pixels_sha256": "c2252675fd51c53b8b9b0783739dd0e4b96c5a1f7742a6d2b9d1c223ec3235fb"
+    },
+    {
+      "file": "cf0fcbf7.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        -1,
+        0,
+        2,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": -1,
+        "hovered": 0,
+        "offset": 2
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "719a6ff8e2d13b186371f20d88e8fed5baa2c8d854057e82f11c157048d9318f",
+      "pixels_sha256": "9ad1a6d8f2f399dc37eb83949937ec303a75f83c70a57ecc0715436fec9fe9b7"
+    },
+    {
+      "file": "74f9b0a2.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        -1,
+        1,
+        0,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": -1,
+        "hovered": 1,
+        "offset": 0
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "393ffb7e57cd8ca660cf6d9539cd2e5f9e9e8cf2c847256af2e5e4d4e414b066",
+      "pixels_sha256": "89a32ae1a5141df99aaf67134ca8551712bf28a83bb21e847c95a14b0685c7bc"
+    },
+    {
+      "file": "a6011719.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        -1,
+        1,
+        1,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": -1,
+        "hovered": 1,
+        "offset": 1
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "e5efb7abaefca7683c2b5aff9ed5df15acf883a3193ebb9b078b32dc342f8a23",
+      "pixels_sha256": "afc631918d2f008281501a77461b0797eb7ac6109dadae2e7d2025f3b141b940"
+    },
+    {
+      "file": "e3f787a8.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        -1,
+        1,
+        2,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": -1,
+        "hovered": 1,
+        "offset": 2
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "d7d2590daa2ef73c50ebea5f74d32bcb0766d4bbc1daf5bb54c59a6b869e8cd1",
+      "pixels_sha256": "9ad1a6d8f2f399dc37eb83949937ec303a75f83c70a57ecc0715436fec9fe9b7"
+    },
+    {
+      "file": "8c62badf.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        -1,
+        2,
+        0,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": -1,
+        "hovered": 2,
+        "offset": 0
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "34badef9e585a31b7c7b6e01dc93180166522895c3b21e728da7afbc0df97614",
+      "pixels_sha256": "67d61f506d8b30e829a6520cb89f8ff0dfe205ee82c063b03b030486ce859235"
+    },
+    {
+      "file": "320744d8.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        -1,
+        2,
+        1,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": -1,
+        "hovered": 2,
+        "offset": 1
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "cacd2553239737532241adbcf2b64692bdde7de5f4926c1fafa2dcbca3d3f2ad",
+      "pixels_sha256": "b8d58a6b5f9286deadf1942752b4bc7c25368287b77980be1315830fd3fff7df"
+    },
+    {
+      "file": "06fbd749.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        -1,
+        2,
+        2,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": -1,
+        "hovered": 2,
+        "offset": 2
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "c33231054dce061dc5e99be4c22957172e63512d3aa0d7197171991f15d0373a",
+      "pixels_sha256": "07b8aced908e10d8972091e66098edb43869e64579ece9899d772151acf3b327"
+    },
+    {
+      "file": "09061381.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        0,
+        -1,
+        0,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 0,
+        "hovered": -1,
+        "offset": 0
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "9ea0fffada39b59fabc7b199a1737fdcb73cd35a8e8b38772c346fe62c562619",
+      "pixels_sha256": "a73d8fb067cd0ddafb7734b3c088434c35034b3b707273fb76ac6fbb49e6e908"
+    },
+    {
+      "file": "b52bc8ca.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        0,
+        -1,
+        1,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 0,
+        "hovered": -1,
+        "offset": 1
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "4ab70de9c0bcb5cd1c5315f05a3ed8162e2664fba68eb261a175ae45c19a7676",
+      "pixels_sha256": "c2252675fd51c53b8b9b0783739dd0e4b96c5a1f7742a6d2b9d1c223ec3235fb"
+    },
+    {
+      "file": "da0d09b7.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        0,
+        -1,
+        2,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 0,
+        "hovered": -1,
+        "offset": 2
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "d7893d8c7540a754b0b12a276d72d9a1f9d95eb3faad45c06d611e787b26d1f0",
+      "pixels_sha256": "9ad1a6d8f2f399dc37eb83949937ec303a75f83c70a57ecc0715436fec9fe9b7"
+    },
+    {
+      "file": "6b2684d3.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        0,
+        0,
+        0,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 0,
+        "hovered": 0,
+        "offset": 0
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "7f06f10b2e01da67501d0cb25d9a56e5edf26ed37c412d8762a02ebb2c57587a",
+      "pixels_sha256": "a73d8fb067cd0ddafb7734b3c088434c35034b3b707273fb76ac6fbb49e6e908"
+    },
+    {
+      "file": "5f7b659c.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        0,
+        0,
+        1,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 0,
+        "hovered": 0,
+        "offset": 1
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "dc3edaa933bb342063910277efd223f828121b7ce89ffdf294936580e0149f12",
+      "pixels_sha256": "c2252675fd51c53b8b9b0783739dd0e4b96c5a1f7742a6d2b9d1c223ec3235fb"
+    },
+    {
+      "file": "d97734ad.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        0,
+        0,
+        2,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 0,
+        "hovered": 0,
+        "offset": 2
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "c93747fe32dec385947af7491aaef0736c1fe1c374862ef556dba9a49e0fe569",
+      "pixels_sha256": "9ad1a6d8f2f399dc37eb83949937ec303a75f83c70a57ecc0715436fec9fe9b7"
+    },
+    {
+      "file": "0813c28c.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        0,
+        1,
+        0,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 0,
+        "hovered": 1,
+        "offset": 0
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "64c82326841fa5b7893aa22daa659a4da8393a676f205b505bceac6a4175397a",
+      "pixels_sha256": "ff98dfb33128ffb5f6394e2e4f8af40df55c442ceddf5a493fe023c699d9edf0"
+    },
+    {
+      "file": "7ba22ec3.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        0,
+        1,
+        1,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 0,
+        "hovered": 1,
+        "offset": 1
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "93ddb541f44c410807389fc30912735e7d7f87ec13a84ee6815d0eef28c19502",
+      "pixels_sha256": "afc631918d2f008281501a77461b0797eb7ac6109dadae2e7d2025f3b141b940"
+    },
+    {
+      "file": "6aa3ca16.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        0,
+        1,
+        2,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 0,
+        "hovered": 1,
+        "offset": 2
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "526d2f3426a337b12f1e2611b7ee7e8022bf028e92468de3d2fce9ecb37bb0fe",
+      "pixels_sha256": "9ad1a6d8f2f399dc37eb83949937ec303a75f83c70a57ecc0715436fec9fe9b7"
+    },
+    {
+      "file": "295aebe5.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        0,
+        2,
+        0,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 0,
+        "hovered": 2,
+        "offset": 0
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "a410615d092fc8a4e3f71c930597900dcc3c667576435cdec14887635c8d6f30",
+      "pixels_sha256": "5f6061c7b9362feaf390debe69d92af3c5dedbe005e0cf0cd5a2e309dc4fa046"
+    },
+    {
+      "file": "8794561e.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        0,
+        2,
+        1,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 0,
+        "hovered": 2,
+        "offset": 1
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "ac6b4a572bfb9315070d3802d8166a4c1ec5cc22f48c5af1543bc4a02d596303",
+      "pixels_sha256": "b8d58a6b5f9286deadf1942752b4bc7c25368287b77980be1315830fd3fff7df"
+    },
+    {
+      "file": "499d66ab.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        0,
+        2,
+        2,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 0,
+        "hovered": 2,
+        "offset": 2
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "7803165eaef7926b6107f6a66f6e3c32603c970aff69370e9bfae04f721589a3",
+      "pixels_sha256": "07b8aced908e10d8972091e66098edb43869e64579ece9899d772151acf3b327"
+    },
+    {
+      "file": "c4a53d04.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        1,
+        -1,
+        0,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 1,
+        "hovered": -1,
+        "offset": 0
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "817aa748d0bacf967e8fa6f8f0b239e9ad2096a47d8126b30d270988687fabef",
+      "pixels_sha256": "89a32ae1a5141df99aaf67134ca8551712bf28a83bb21e847c95a14b0685c7bc"
+    },
+    {
+      "file": "0eab4c7b.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        1,
+        -1,
+        1,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 1,
+        "hovered": -1,
+        "offset": 1
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "664c9ddcb785608680afa9842d5476342a4079ae992b7e0732349e21c187ef38",
+      "pixels_sha256": "afc631918d2f008281501a77461b0797eb7ac6109dadae2e7d2025f3b141b940"
+    },
+    {
+      "file": "3679656e.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        1,
+        -1,
+        2,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 1,
+        "hovered": -1,
+        "offset": 2
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "458105b1ef46fc0798acc30af1cdb8bbe29e052f8fce80681fabe0f1ce7ceec7",
+      "pixels_sha256": "9ad1a6d8f2f399dc37eb83949937ec303a75f83c70a57ecc0715436fec9fe9b7"
+    },
+    {
+      "file": "9221109c.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        1,
+        0,
+        0,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 1,
+        "hovered": 0,
+        "offset": 0
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "b3b6fe6e2921f4775a0db7add597f809302dfb0fcdf479d07abe410383dc4ec3",
+      "pixels_sha256": "ff98dfb33128ffb5f6394e2e4f8af40df55c442ceddf5a493fe023c699d9edf0"
+    },
+    {
+      "file": "9dcc2fd3.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        1,
+        0,
+        1,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 1,
+        "hovered": 0,
+        "offset": 1
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "64c8418ab9a74d19b6faa51d2df63ef43d96acd8b0115f599d2c2620d053135c",
+      "pixels_sha256": "afc631918d2f008281501a77461b0797eb7ac6109dadae2e7d2025f3b141b940"
+    },
+    {
+      "file": "ef6121e6.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        1,
+        0,
+        2,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 1,
+        "hovered": 0,
+        "offset": 2
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "e833bbbd0c1373b3052e9518093c0b95a739bb0ba9950a5caed9177e84dd38cb",
+      "pixels_sha256": "9ad1a6d8f2f399dc37eb83949937ec303a75f83c70a57ecc0715436fec9fe9b7"
+    },
+    {
+      "file": "9e8ab823.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        1,
+        1,
+        0,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 1,
+        "hovered": 1,
+        "offset": 0
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "3d656b11ab00950d416dc1e7b4eab44535760768329a8be03d2092fd67e44109",
+      "pixels_sha256": "89a32ae1a5141df99aaf67134ca8551712bf28a83bb21e847c95a14b0685c7bc"
+    },
+    {
+      "file": "07c7c8ec.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        1,
+        1,
+        1,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 1,
+        "hovered": 1,
+        "offset": 1
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "23addfb0a0b83420995f489f6b336cd3570ab971754232ea8bb3dba1b82e2273",
+      "pixels_sha256": "afc631918d2f008281501a77461b0797eb7ac6109dadae2e7d2025f3b141b940"
+    },
+    {
+      "file": "18cf553d.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        1,
+        1,
+        2,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 1,
+        "hovered": 1,
+        "offset": 2
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "281d1b9d541a4f2f525d7fdd25f08d861a13885a14995264db4307ed1759ef3b",
+      "pixels_sha256": "9ad1a6d8f2f399dc37eb83949937ec303a75f83c70a57ecc0715436fec9fe9b7"
+    },
+    {
+      "file": "b6681d46.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        1,
+        2,
+        0,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 1,
+        "hovered": 2,
+        "offset": 0
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "138b0ac8b8bbbdc138db6baba16351c06a2643415468ab963441c8dcf79d0fd1",
+      "pixels_sha256": "11d1e328a5a4e76d0c5fd46221bd2a150d4646c8fa82776ab0e505ee6c6e4762"
+    },
+    {
+      "file": "59bdd00d.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        1,
+        2,
+        1,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 1,
+        "hovered": 2,
+        "offset": 1
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "7bccb06e45a20834486439eb1696dd81ad0a8ce871f3836fd4fa69ecd6a10c0a",
+      "pixels_sha256": "dde2dfcdd510759e6ff35f4b59a25a985165398dea4ca354bf917561961b3812"
+    },
+    {
+      "file": "b9f59f7c.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        1,
+        2,
+        2,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 1,
+        "hovered": 2,
+        "offset": 2
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "1b40059f6861107e534eb4049eef213e12a1e0cdc7a25783230f3b6005bd3746",
+      "pixels_sha256": "07b8aced908e10d8972091e66098edb43869e64579ece9899d772151acf3b327"
+    },
+    {
+      "file": "63f8e6df.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        2,
+        -1,
+        0,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 2,
+        "hovered": -1,
+        "offset": 0
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "d4db08c705bc71fbe285cedb68606ff7ae21c0c5d7c58c77a4bac9613b730add",
+      "pixels_sha256": "67d61f506d8b30e829a6520cb89f8ff0dfe205ee82c063b03b030486ce859235"
+    },
+    {
+      "file": "099d70d8.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        2,
+        -1,
+        1,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 2,
+        "hovered": -1,
+        "offset": 1
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "17f1e12b5351c51e57d0916996879f467ec4b93bce0665a08ec2869a77a046e7",
+      "pixels_sha256": "b8d58a6b5f9286deadf1942752b4bc7c25368287b77980be1315830fd3fff7df"
+    },
+    {
+      "file": "de920349.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        2,
+        -1,
+        2,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 2,
+        "hovered": -1,
+        "offset": 2
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "2cd8c254695ba79a434473508f0cf87e8ba9062387262dd9025f6f2cdddfb827",
+      "pixels_sha256": "07b8aced908e10d8972091e66098edb43869e64579ece9899d772151acf3b327"
+    },
+    {
+      "file": "a29f71cd.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        2,
+        0,
+        0,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 2,
+        "hovered": 0,
+        "offset": 0
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "24b5b04ddcbe127fb41b6354ee734679b6c054bfe8ab997e8ed4c8a1221976e8",
+      "pixels_sha256": "5f6061c7b9362feaf390debe69d92af3c5dedbe005e0cf0cd5a2e309dc4fa046"
+    },
+    {
+      "file": "40e1a606.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        2,
+        0,
+        1,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 2,
+        "hovered": 0,
+        "offset": 1
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "4e0fa65a758f6622bac9c21383fd67f5aaf5b9a706e3d403a799a820e02137c7",
+      "pixels_sha256": "b8d58a6b5f9286deadf1942752b4bc7c25368287b77980be1315830fd3fff7df"
+    },
+    {
+      "file": "7fe5b0f3.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        2,
+        0,
+        2,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 2,
+        "hovered": 0,
+        "offset": 2
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "71630a5e3229ff547210d8cebeedb5fc4225ef9a5e64229846d4d5f0c9afc673",
+      "pixels_sha256": "07b8aced908e10d8972091e66098edb43869e64579ece9899d772151acf3b327"
+    },
+    {
+      "file": "ce4ba65e.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        2,
+        1,
+        0,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 2,
+        "hovered": 1,
+        "offset": 0
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "5e7aeb3e8fe669049c913b3a7310bab79f182ffa7f6cab6c126fccec245faf67",
+      "pixels_sha256": "11d1e328a5a4e76d0c5fd46221bd2a150d4646c8fa82776ab0e505ee6c6e4762"
+    },
+    {
+      "file": "85aba025.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        2,
+        1,
+        1,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 2,
+        "hovered": 1,
+        "offset": 1
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "4a31bdebdbe72efc49e9af720ff59f81e5db7ef23ec159bb3287c9cb13e1e50a",
+      "pixels_sha256": "dde2dfcdd510759e6ff35f4b59a25a985165398dea4ca354bf917561961b3812"
+    },
+    {
+      "file": "3a576274.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        2,
+        1,
+        2,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 2,
+        "hovered": 1,
+        "offset": 2
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "470454b72de70c1120eda1de3644f27712b8acd3267fdcbc05e7633ae42dd7bb",
+      "pixels_sha256": "07b8aced908e10d8972091e66098edb43869e64579ece9899d772151acf3b327"
+    },
+    {
+      "file": "ad6383db.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        2,
+        2,
+        0,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 2,
+        "hovered": 2,
+        "offset": 0
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "a065860b29c2ced6b60c86d19e034aad3baff823432f72e391a00e2e79f27508",
+      "pixels_sha256": "67d61f506d8b30e829a6520cb89f8ff0dfe205ee82c063b03b030486ce859235"
+    },
+    {
+      "file": "1e5f6064.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        2,
+        2,
+        1,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 2,
+        "hovered": 2,
+        "offset": 1
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "a94ade9a55bda483eb317a7f30d7afcd405e916cadf4f37473099cb8b711698d",
+      "pixels_sha256": "b8d58a6b5f9286deadf1942752b4bc7c25368287b77980be1315830fd3fff7df"
+    },
+    {
+      "file": "fea884d5.bui",
+      "key": [
+        "launcher",
+        [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        2,
+        2,
+        2,
+        true,
+        false,
+        640,
+        360
+      ],
+      "args": {
+        "kind": "launcher",
+        "apps": [
+          {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "color": "#347CFF"
+          },
+          {
+            "id": "telemetry",
+            "name": "Telemetry",
+            "color": "#33B57A"
+          },
+          {
+            "id": "sdk-pulse",
+            "name": "SDK Pulse",
+            "color": "#347CFF"
+          }
+        ],
+        "selected": 2,
+        "hovered": 2,
+        "offset": 2
+      },
+      "width": 640,
+      "height": 360,
+      "bytes": 925696,
+      "payload_offset": 4096,
+      "sha256": "8e05f7311df90243ed05c78f679a7552f5361559428bcff6cca9c15bc8d7c247",
+      "pixels_sha256": "07b8aced908e10d8972091e66098edb43869e64579ece9899d772151acf3b327"
+    },
+    {
+      "file": "12dff48b.bui",
+      "key": [
+        "caption",
+        "move",
+        false,
+        40
+      ],
+      "args": {
+        "kind": "caption",
+        "name": "move",
+        "selected": false,
+        "height": 40
+      },
+      "width": 40,
+      "height": 40,
+      "bytes": 10496,
+      "payload_offset": 4096,
+      "sha256": "6006d0000dae37fb6f2e77589ed3dc630426bbca88e2c54dc1fdaebf8842c445",
+      "pixels_sha256": "4de41dceb71554782d827c2e9fb1e742c28b26d41a17b1ce594e1114c02ee4ce"
+    },
+    {
+      "file": "c62c317f.bui",
+      "key": [
+        "caption",
+        "move",
+        false,
+        80
+      ],
+      "args": {
+        "kind": "caption",
+        "name": "move",
+        "selected": false,
+        "height": 80
+      },
+      "width": 40,
+      "height": 80,
+      "bytes": 16896,
+      "payload_offset": 4096,
+      "sha256": "bb101d4ee5a44c80f645ab962ecc06e1aeee5e7371a9f5d34f1ea24552bbf7e0",
+      "pixels_sha256": "ee9325e4acf03f303432c90994c727a6e0ab80c8b800bca5efe4b40cbd495ae6"
+    },
+    {
+      "file": "0dcf54e2.bui",
+      "key": [
+        "caption",
+        "move",
+        true,
+        40
+      ],
+      "args": {
+        "kind": "caption",
+        "name": "move",
+        "selected": true,
+        "height": 40
+      },
+      "width": 40,
+      "height": 40,
+      "bytes": 10496,
+      "payload_offset": 4096,
+      "sha256": "7ecd179beed4cc6b97f51580f1b92e6e635b3dd2196ef2f2292b8a366980b78d",
+      "pixels_sha256": "b21c5e08908696c51f2737780fb9195f5a15033ec6648d73e039846f1735ed13"
+    },
+    {
+      "file": "6800fc5e.bui",
+      "key": [
+        "caption",
+        "move",
+        true,
+        80
+      ],
+      "args": {
+        "kind": "caption",
+        "name": "move",
+        "selected": true,
+        "height": 80
+      },
+      "width": 40,
+      "height": 80,
+      "bytes": 16896,
+      "payload_offset": 4096,
+      "sha256": "617df0eea99397ff8e991d35b9b8330e1e9c851d9e0734478ec231674ab75721",
+      "pixels_sha256": "04ed2818b2856a75e06378bce147ffd997273b4a65ad46d70b8a438cc85a7bc4"
+    },
+    {
+      "file": "9738382b.bui",
+      "key": [
+        "caption",
+        "resize_right",
+        false,
+        40
+      ],
+      "args": {
+        "kind": "caption",
+        "name": "resize_right",
+        "selected": false,
+        "height": 40
+      },
+      "width": 40,
+      "height": 40,
+      "bytes": 10496,
+      "payload_offset": 4096,
+      "sha256": "a6cca736b6f30876958e61904b414d4f67cecf156346d629f0077d0ee143a317",
+      "pixels_sha256": "d3c0b8a6c892d8be8d17616cbee991171af25a55e4e0657d48a24652ee019925"
+    },
+    {
+      "file": "4a84751f.bui",
+      "key": [
+        "caption",
+        "resize_right",
+        false,
+        80
+      ],
+      "args": {
+        "kind": "caption",
+        "name": "resize_right",
+        "selected": false,
+        "height": 80
+      },
+      "width": 40,
+      "height": 80,
+      "bytes": 16896,
+      "payload_offset": 4096,
+      "sha256": "a331d81f1ab41f40bb8fb01d04b206b531c92bb272ebebd77849fcb20f45320b",
+      "pixels_sha256": "ee2725fdd75cf48d5f9de0a41eb0aa5136f216f03c6ecbd92ae0673870c51946"
+    },
+    {
+      "file": "7deac782.bui",
+      "key": [
+        "caption",
+        "resize_right",
+        true,
+        40
+      ],
+      "args": {
+        "kind": "caption",
+        "name": "resize_right",
+        "selected": true,
+        "height": 40
+      },
+      "width": 40,
+      "height": 40,
+      "bytes": 10496,
+      "payload_offset": 4096,
+      "sha256": "ba62081308f5064e940c3ae021107988fca22d9b79a7cae0c3bbd8c9f962003f",
+      "pixels_sha256": "950339a107fda8e07f90cf7ca2fd94eed7caab5b4bf20e742594e4b414bc082d"
+    },
+    {
+      "file": "595a6cfe.bui",
+      "key": [
+        "caption",
+        "resize_right",
+        true,
+        80
+      ],
+      "args": {
+        "kind": "caption",
+        "name": "resize_right",
+        "selected": true,
+        "height": 80
+      },
+      "width": 40,
+      "height": 80,
+      "bytes": 16896,
+      "payload_offset": 4096,
+      "sha256": "7719186edc679531f6abb175b4a1d83fa8ce111b81514da01b30a0d8973f7336",
+      "pixels_sha256": "debbdffec72998e99928a3dd974a84bc85972c924e29c36794dc30ddd0d3eca0"
+    },
+    {
+      "file": "2c489b24.bui",
+      "key": [
+        "caption",
+        "close",
+        false,
+        40
+      ],
+      "args": {
+        "kind": "caption",
+        "name": "close",
+        "selected": false,
+        "height": 40
+      },
+      "width": 40,
+      "height": 40,
+      "bytes": 10496,
+      "payload_offset": 4096,
+      "sha256": "7e039dc4653558f4ebbc92a0a38d2788c254302b235931808d482d2dc6dd894a",
+      "pixels_sha256": "c5dabd0a5ae17db022319da90b3a389b59e65bc03873a0128623c92a62643353"
+    },
+    {
+      "file": "78fc5e30.bui",
+      "key": [
+        "caption",
+        "close",
+        false,
+        80
+      ],
+      "args": {
+        "kind": "caption",
+        "name": "close",
+        "selected": false,
+        "height": 80
+      },
+      "width": 40,
+      "height": 80,
+      "bytes": 16896,
+      "payload_offset": 4096,
+      "sha256": "4c56945f5616fe7f7bd1ec0f2c33b70b6146cb56a3222b51e9d75040b1ab60a6",
+      "pixels_sha256": "fc4477b58153f7086fb69356683024c04deecb815d00b8fcb10e740e25e5c66c"
+    },
+    {
+      "file": "995fa5df.bui",
+      "key": [
+        "caption",
+        "close",
+        true,
+        40
+      ],
+      "args": {
+        "kind": "caption",
+        "name": "close",
+        "selected": true,
+        "height": 40
+      },
+      "width": 40,
+      "height": 40,
+      "bytes": 10496,
+      "payload_offset": 4096,
+      "sha256": "77b5a8641d46807f7d2da7c090fdd7176a9e11479a9e8fda43deda80e5b3a2af",
+      "pixels_sha256": "311ee8919f6e4597810b23f02064c0c85964b4fe575dcb8c441cc9b60e842963"
+    },
+    {
+      "file": "e614fbeb.bui",
+      "key": [
+        "caption",
+        "close",
+        true,
+        80
+      ],
+      "args": {
+        "kind": "caption",
+        "name": "close",
+        "selected": true,
+        "height": 80
+      },
+      "width": 40,
+      "height": 80,
+      "bytes": 16896,
+      "payload_offset": 4096,
+      "sha256": "bb27b4f96220a5891c9e88a82373a946cad070738168b662c23989fa2f9766c5",
+      "pixels_sha256": "63daf2c5e7cb3fc8c79252091cd9e90b7d9d95594216ec4831bba90761b94745"
+    },
+    {
+      "file": "2750d93a.bui",
+      "key": [
+        "frame",
+        "Dashboard",
+        640,
+        440,
+        false,
+        "",
+        false
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "Dashboard",
+        "width": 640,
+        "height": 440,
+        "focused": false,
+        "hovered": "",
+        "external": false
+      },
+      "width": 640,
+      "height": 440,
+      "bytes": 1130496,
+      "payload_offset": 4096,
+      "sha256": "5518d73df656f5a35a99f27f51f5f4f62af4d10d024cfead431bf9c54274d997",
+      "pixels_sha256": "17f794780b5b7bb521708569644dfa83a3243cc68054c38fa91227f947d37ce4"
+    },
+    {
+      "file": "b694bb8f.bui",
+      "key": [
+        "frame",
+        "Dashboard",
+        640,
+        440,
+        false,
+        "",
+        true
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "Dashboard",
+        "width": 640,
+        "height": 440,
+        "focused": false,
+        "hovered": "",
+        "external": true
+      },
+      "width": 640,
+      "height": 440,
+      "bytes": 1130496,
+      "payload_offset": 4096,
+      "sha256": "8781696c641f77aa5a1f021f1afcb16b7f7314c2c05fda9ed6aa5e38607e3351",
+      "pixels_sha256": "17f794780b5b7bb521708569644dfa83a3243cc68054c38fa91227f947d37ce4"
+    },
+    {
+      "file": "5de3ecc7.bui",
+      "key": [
+        "frame",
+        "Dashboard",
+        640,
+        440,
+        false,
+        "move",
+        false
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "Dashboard",
+        "width": 640,
+        "height": 440,
+        "focused": false,
+        "hovered": "move",
+        "external": false
+      },
+      "width": 640,
+      "height": 440,
+      "bytes": 1130496,
+      "payload_offset": 4096,
+      "sha256": "36ec12447d3418b9125ae88fe09a1f7396f8f8fa55ae760ae3787f7e92f8f12c",
+      "pixels_sha256": "40dd31f036b52d3e88421b5bf13afde2c4718d199c9a4768c12294c9a2cc77c3"
+    },
+    {
+      "file": "b8b55690.bui",
+      "key": [
+        "frame",
+        "Dashboard",
+        640,
+        440,
+        false,
+        "move",
+        true
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "Dashboard",
+        "width": 640,
+        "height": 440,
+        "focused": false,
+        "hovered": "move",
+        "external": true
+      },
+      "width": 640,
+      "height": 440,
+      "bytes": 1130496,
+      "payload_offset": 4096,
+      "sha256": "7c7156164eccb11e904e45209ffdb0b1ba1988b50209551e52576cf91e705ce0",
+      "pixels_sha256": "40dd31f036b52d3e88421b5bf13afde2c4718d199c9a4768c12294c9a2cc77c3"
+    },
+    {
+      "file": "dc0c340f.bui",
+      "key": [
+        "frame",
+        "Dashboard",
+        640,
+        440,
+        false,
+        "resize_right",
+        false
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "Dashboard",
+        "width": 640,
+        "height": 440,
+        "focused": false,
+        "hovered": "resize_right",
+        "external": false
+      },
+      "width": 640,
+      "height": 440,
+      "bytes": 1130496,
+      "payload_offset": 4096,
+      "sha256": "0ed881755627a19d36c5fec4a4556607f02b9f6c87acef4cccfff6db8d9cd03d",
+      "pixels_sha256": "4a9c9baffdc53cd034fda3a2e8b0ac5c0e00444668cc008d9c1ba2fa5fc5dfaa"
+    },
+    {
+      "file": "cb5e5138.bui",
+      "key": [
+        "frame",
+        "Dashboard",
+        640,
+        440,
+        false,
+        "resize_right",
+        true
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "Dashboard",
+        "width": 640,
+        "height": 440,
+        "focused": false,
+        "hovered": "resize_right",
+        "external": true
+      },
+      "width": 640,
+      "height": 440,
+      "bytes": 1130496,
+      "payload_offset": 4096,
+      "sha256": "2d57a333190cd4e826f9dbec477256a9142802fcda05e8de18f2f6b5477094e2",
+      "pixels_sha256": "4a9c9baffdc53cd034fda3a2e8b0ac5c0e00444668cc008d9c1ba2fa5fc5dfaa"
+    },
+    {
+      "file": "17ab138e.bui",
+      "key": [
+        "frame",
+        "Dashboard",
+        640,
+        440,
+        false,
+        "close",
+        false
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "Dashboard",
+        "width": 640,
+        "height": 440,
+        "focused": false,
+        "hovered": "close",
+        "external": false
+      },
+      "width": 640,
+      "height": 440,
+      "bytes": 1130496,
+      "payload_offset": 4096,
+      "sha256": "1305f944fe7995997bded34327a1a3c6d2b8458a8077c052c613eed26c68c335",
+      "pixels_sha256": "b2bba08a205db984230b8530931bc2290107fb8a951a25f2839cf4b1bd5865e4"
+    },
+    {
+      "file": "43c37dcb.bui",
+      "key": [
+        "frame",
+        "Dashboard",
+        640,
+        440,
+        false,
+        "close",
+        true
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "Dashboard",
+        "width": 640,
+        "height": 440,
+        "focused": false,
+        "hovered": "close",
+        "external": true
+      },
+      "width": 640,
+      "height": 440,
+      "bytes": 1130496,
+      "payload_offset": 4096,
+      "sha256": "65c450dec192b66190cab689ee331d338cd06f9f39706e110175eb6d08fa3855",
+      "pixels_sha256": "b2bba08a205db984230b8530931bc2290107fb8a951a25f2839cf4b1bd5865e4"
+    },
+    {
+      "file": "429cf89b.bui",
+      "key": [
+        "frame",
+        "Dashboard",
+        640,
+        440,
+        true,
+        "",
+        false
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "Dashboard",
+        "width": 640,
+        "height": 440,
+        "focused": true,
+        "hovered": "",
+        "external": false
+      },
+      "width": 640,
+      "height": 440,
+      "bytes": 1130496,
+      "payload_offset": 4096,
+      "sha256": "a3cd3e9772dcd401d7b9888e9952af2f3fcd5e2b3a8a4d4b62fe70265378e19c",
+      "pixels_sha256": "83bd238d03103204fe280f15cd004d340aae6edf4947ce0db56b92b8695baf41"
+    },
+    {
+      "file": "afd6f99c.bui",
+      "key": [
+        "frame",
+        "Dashboard",
+        640,
+        440,
+        true,
+        "",
+        true
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "Dashboard",
+        "width": 640,
+        "height": 440,
+        "focused": true,
+        "hovered": "",
+        "external": true
+      },
+      "width": 640,
+      "height": 440,
+      "bytes": 1130496,
+      "payload_offset": 4096,
+      "sha256": "5e17f5cded5443e72db160a9d21840a635b13ddee7755e05fbdef4d2a5aacb0f",
+      "pixels_sha256": "2dfdb23baaf1049cd12107b7cfccc784e8747a01cf151d3ac6e7429344797403"
+    },
+    {
+      "file": "57466b8a.bui",
+      "key": [
+        "frame",
+        "Dashboard",
+        640,
+        440,
+        true,
+        "move",
+        false
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "Dashboard",
+        "width": 640,
+        "height": 440,
+        "focused": true,
+        "hovered": "move",
+        "external": false
+      },
+      "width": 640,
+      "height": 440,
+      "bytes": 1130496,
+      "payload_offset": 4096,
+      "sha256": "3ca1ed0b0beea4f26e56dd523135d44b10b80437e23e128f06d769888e34a376",
+      "pixels_sha256": "e85051991d323852908ee6c1cdde9034f4399c091fd65326ebd3bc844fec5d2b"
+    },
+    {
+      "file": "5f38163f.bui",
+      "key": [
+        "frame",
+        "Dashboard",
+        640,
+        440,
+        true,
+        "move",
+        true
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "Dashboard",
+        "width": 640,
+        "height": 440,
+        "focused": true,
+        "hovered": "move",
+        "external": true
+      },
+      "width": 640,
+      "height": 440,
+      "bytes": 1130496,
+      "payload_offset": 4096,
+      "sha256": "ea6ce006d2fd33ee6507ebf299863c84bc0374eb1192a1260c454b5a8b0990ae",
+      "pixels_sha256": "df6e9f4220e90c774e418cccca0497de43ba6a52e80d0995612b0849dae32b51"
+    },
+    {
+      "file": "9dd01166.bui",
+      "key": [
+        "frame",
+        "Dashboard",
+        640,
+        440,
+        true,
+        "resize_right",
+        false
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "Dashboard",
+        "width": 640,
+        "height": 440,
+        "focused": true,
+        "hovered": "resize_right",
+        "external": false
+      },
+      "width": 640,
+      "height": 440,
+      "bytes": 1130496,
+      "payload_offset": 4096,
+      "sha256": "6eff772cba2b1b913ad55ebfcbe322b6e7636a6d3285f610c787c24c7d414d8b",
+      "pixels_sha256": "df13e4450a16351cfbcea1ca8ed6b284385085d1406937450a7440b3cf8c3891"
+    },
+    {
+      "file": "a9a2a3e3.bui",
+      "key": [
+        "frame",
+        "Dashboard",
+        640,
+        440,
+        true,
+        "resize_right",
+        true
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "Dashboard",
+        "width": 640,
+        "height": 440,
+        "focused": true,
+        "hovered": "resize_right",
+        "external": true
+      },
+      "width": 640,
+      "height": 440,
+      "bytes": 1130496,
+      "payload_offset": 4096,
+      "sha256": "88673e8662520201f47666f7e8a3fd76552630188fb9ceeb4298a9cbe7418c69",
+      "pixels_sha256": "5e8790b1aa1fc8690e301ab024cde25c3b115be62764c8b5091272e867a3a693"
+    },
+    {
+      "file": "070d9715.bui",
+      "key": [
+        "frame",
+        "Dashboard",
+        640,
+        440,
+        true,
+        "close",
+        false
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "Dashboard",
+        "width": 640,
+        "height": 440,
+        "focused": true,
+        "hovered": "close",
+        "external": false
+      },
+      "width": 640,
+      "height": 440,
+      "bytes": 1130496,
+      "payload_offset": 4096,
+      "sha256": "e94cbf34e17f4264a29fc438f1c5769138ba61aab3dac54f16ae122b335a9b18",
+      "pixels_sha256": "f0aa978d3ffcb44c1b4ef5eb378a5734eb9e78302534803e22420905795b97ae"
+    },
+    {
+      "file": "7d70fb8e.bui",
+      "key": [
+        "frame",
+        "Dashboard",
+        640,
+        440,
+        true,
+        "close",
+        true
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "Dashboard",
+        "width": 640,
+        "height": 440,
+        "focused": true,
+        "hovered": "close",
+        "external": true
+      },
+      "width": 640,
+      "height": 440,
+      "bytes": 1130496,
+      "payload_offset": 4096,
+      "sha256": "d706dda4765b3595f2cf79311cfe51a28fe1ff555a7fff3bee856526dcf6a222",
+      "pixels_sha256": "656cf2257e20200283f22698a1f6857dafef550ec3d602fb448a86a020a0a54d"
+    },
+    {
+      "file": "4ed12da5.bui",
+      "key": [
+        "storage",
+        "Dashboard",
+        false,
+        false,
+        false
+      ],
+      "args": {
+        "kind": "storage",
+        "title": "Dashboard",
+        "selected": false,
+        "dim": false,
+        "closing": false
+      },
+      "width": 320,
+      "height": 96,
+      "bytes": 126976,
+      "payload_offset": 4096,
+      "sha256": "ad8cffdd875a69518a8bba4cd224464e1b08b54f17bd3afaa9560c0b7a425312",
+      "pixels_sha256": "fda1f7587dc2ebffe0dafb79c41c3dd52d528414ecd94b9adee800f859d6f004"
+    },
+    {
+      "file": "8c315e3e.bui",
+      "key": [
+        "storage",
+        "Dashboard",
+        false,
+        false,
+        true
+      ],
+      "args": {
+        "kind": "storage",
+        "title": "Dashboard",
+        "selected": false,
+        "dim": false,
+        "closing": true
+      },
+      "width": 320,
+      "height": 96,
+      "bytes": 126976,
+      "payload_offset": 4096,
+      "sha256": "f39ceeb79441b864a57bae2f2d18336a723d4f1317f918d4e21461b8cd7bad80",
+      "pixels_sha256": "eb01754b1b7b4a0ee84b6f2ba0b0b08ad3c178b1707cba97c018ea848c851d82"
+    },
+    {
+      "file": "9821fe54.bui",
+      "key": [
+        "storage",
+        "Dashboard",
+        false,
+        true,
+        false
+      ],
+      "args": {
+        "kind": "storage",
+        "title": "Dashboard",
+        "selected": false,
+        "dim": true,
+        "closing": false
+      },
+      "width": 320,
+      "height": 96,
+      "bytes": 126976,
+      "payload_offset": 4096,
+      "sha256": "9f8839b1d223bbe03d4a0916a6ea00e727a90c4aa27ad1e5574119fe251d57b0",
+      "pixels_sha256": "8c5f429746fda7e56d671dafbacd882002eda6a0d981d94612476ccb65a5ec8a"
+    },
+    {
+      "file": "7a600b21.bui",
+      "key": [
+        "storage",
+        "Dashboard",
+        false,
+        true,
+        true
+      ],
+      "args": {
+        "kind": "storage",
+        "title": "Dashboard",
+        "selected": false,
+        "dim": true,
+        "closing": true
+      },
+      "width": 320,
+      "height": 96,
+      "bytes": 126976,
+      "payload_offset": 4096,
+      "sha256": "36631a7c51a84d3d8b81bd7e848e9e548e761bdcd22e601c0ce03bba5c4fd2e8",
+      "pixels_sha256": "fbee9ded3535dda522d195c514a13d39342f5230387930ee8b830d4864a36e86"
+    },
+    {
+      "file": "c292aae6.bui",
+      "key": [
+        "storage",
+        "Dashboard",
+        true,
+        false,
+        false
+      ],
+      "args": {
+        "kind": "storage",
+        "title": "Dashboard",
+        "selected": true,
+        "dim": false,
+        "closing": false
+      },
+      "width": 320,
+      "height": 96,
+      "bytes": 126976,
+      "payload_offset": 4096,
+      "sha256": "d812c93d7058d84fe7cdf08e4ed04a3000f02b5fc483ab25a724f82a54bcfb6f",
+      "pixels_sha256": "0d9284c28de38214166378817af245b38093f855a762eb006640f91fbc710f6c"
+    },
+    {
+      "file": "a63b9463.bui",
+      "key": [
+        "storage",
+        "Dashboard",
+        true,
+        false,
+        true
+      ],
+      "args": {
+        "kind": "storage",
+        "title": "Dashboard",
+        "selected": true,
+        "dim": false,
+        "closing": true
+      },
+      "width": 320,
+      "height": 96,
+      "bytes": 126976,
+      "payload_offset": 4096,
+      "sha256": "851e157f769b50dcbe236942db77de6dce6d086a90bf9e492f7bde69df74469b",
+      "pixels_sha256": "48da3565b264b01820131cd4e5eb0e4ab47f6f61bcaf693d2e0352dd534356ab"
+    },
+    {
+      "file": "02515875.bui",
+      "key": [
+        "storage",
+        "Dashboard",
+        true,
+        true,
+        false
+      ],
+      "args": {
+        "kind": "storage",
+        "title": "Dashboard",
+        "selected": true,
+        "dim": true,
+        "closing": false
+      },
+      "width": 320,
+      "height": 96,
+      "bytes": 126976,
+      "payload_offset": 4096,
+      "sha256": "46c908ce9ceee4f43de618451d053a41b9e7214f74428f1a06cad25e937dd02e",
+      "pixels_sha256": "c7654a49b0a9f48c47921480259805f83204b12c79326ff30fcbf3573046a880"
+    },
+    {
+      "file": "17ce946e.bui",
+      "key": [
+        "storage",
+        "Dashboard",
+        true,
+        true,
+        true
+      ],
+      "args": {
+        "kind": "storage",
+        "title": "Dashboard",
+        "selected": true,
+        "dim": true,
+        "closing": true
+      },
+      "width": 320,
+      "height": 96,
+      "bytes": 126976,
+      "payload_offset": 4096,
+      "sha256": "94685c266856e0be7e2e9cd4aa7908b01f32c6e6ff6b6e431211a9388430cc4d",
+      "pixels_sha256": "dd00c4e1614a69dd42430b31f728904d687a7be4749515eb9a5e0f9e40568138"
+    },
+    {
+      "file": "1648781c.bui",
+      "key": [
+        "frame",
+        "Telemetry",
+        400,
+        300,
+        false,
+        "",
+        false
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "Telemetry",
+        "width": 400,
+        "height": 300,
+        "focused": false,
+        "hovered": "",
+        "external": false
+      },
+      "width": 400,
+      "height": 300,
+      "bytes": 484096,
+      "payload_offset": 4096,
+      "sha256": "471312b55cdbad4a35e89215b19a284655e22a67bfe8fc2bb8f38075b15533e4",
+      "pixels_sha256": "0ca988c73d7a063875ce3f4a491bbf8670be762d2908db09cd7800bbd22bd5eb"
+    },
+    {
+      "file": "cb212c89.bui",
+      "key": [
+        "frame",
+        "Telemetry",
+        400,
+        300,
+        false,
+        "",
+        true
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "Telemetry",
+        "width": 400,
+        "height": 300,
+        "focused": false,
+        "hovered": "",
+        "external": true
+      },
+      "width": 400,
+      "height": 300,
+      "bytes": 484096,
+      "payload_offset": 4096,
+      "sha256": "dfb8e57ab1187e324c6e3d7b620b0a5c9ce3a4c3b78302c83982e18b441bb1b1",
+      "pixels_sha256": "0ca988c73d7a063875ce3f4a491bbf8670be762d2908db09cd7800bbd22bd5eb"
+    },
+    {
+      "file": "84df74a1.bui",
+      "key": [
+        "frame",
+        "Telemetry",
+        400,
+        300,
+        false,
+        "move",
+        false
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "Telemetry",
+        "width": 400,
+        "height": 300,
+        "focused": false,
+        "hovered": "move",
+        "external": false
+      },
+      "width": 400,
+      "height": 300,
+      "bytes": 484096,
+      "payload_offset": 4096,
+      "sha256": "f2edc77766c7afee7bfcd1188b52e2fc28e303b2944ae0e95ba4a2c2052f5339",
+      "pixels_sha256": "b066a577ea91b328ae5ee47dce1c99c2f9ea404785709e3923d0eed744a72caf"
+    },
+    {
+      "file": "848b3b12.bui",
+      "key": [
+        "frame",
+        "Telemetry",
+        400,
+        300,
+        false,
+        "move",
+        true
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "Telemetry",
+        "width": 400,
+        "height": 300,
+        "focused": false,
+        "hovered": "move",
+        "external": true
+      },
+      "width": 400,
+      "height": 300,
+      "bytes": 484096,
+      "payload_offset": 4096,
+      "sha256": "33b246f6691e5845dc992d43a5eb51eb1cb5e925f8620f10a9d380e1c634202b",
+      "pixels_sha256": "b066a577ea91b328ae5ee47dce1c99c2f9ea404785709e3923d0eed744a72caf"
+    },
+    {
+      "file": "1350dfe1.bui",
+      "key": [
+        "frame",
+        "Telemetry",
+        400,
+        300,
+        false,
+        "resize_right",
+        false
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "Telemetry",
+        "width": 400,
+        "height": 300,
+        "focused": false,
+        "hovered": "resize_right",
+        "external": false
+      },
+      "width": 400,
+      "height": 300,
+      "bytes": 484096,
+      "payload_offset": 4096,
+      "sha256": "b4b6be045c01c56b5766302681b0cde8b711251b64b927e10da39209de200c89",
+      "pixels_sha256": "29effe927df5611c196c6b0e4468afbd2c2828cc5a77da05abf05489576c5165"
+    },
+    {
+      "file": "3ba13b52.bui",
+      "key": [
+        "frame",
+        "Telemetry",
+        400,
+        300,
+        false,
+        "resize_right",
+        true
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "Telemetry",
+        "width": 400,
+        "height": 300,
+        "focused": false,
+        "hovered": "resize_right",
+        "external": true
+      },
+      "width": 400,
+      "height": 300,
+      "bytes": 484096,
+      "payload_offset": 4096,
+      "sha256": "23bd209209b1c474c2cf90ed69114c00434ea069051cbd372543f2946e32210c",
+      "pixels_sha256": "29effe927df5611c196c6b0e4468afbd2c2828cc5a77da05abf05489576c5165"
+    },
+    {
+      "file": "3fa61f48.bui",
+      "key": [
+        "frame",
+        "Telemetry",
+        400,
+        300,
+        false,
+        "close",
+        false
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "Telemetry",
+        "width": 400,
+        "height": 300,
+        "focused": false,
+        "hovered": "close",
+        "external": false
+      },
+      "width": 400,
+      "height": 300,
+      "bytes": 484096,
+      "payload_offset": 4096,
+      "sha256": "8e065e2b9bf8d8ef8ac5d4f4be9c10d9d81d2d13fc230b7b3f79122fc8b7dc33",
+      "pixels_sha256": "a6efb8c8c119532357f2916b4e6c2f6e125ec7ef24d4adbf105b63792393cc2c"
+    },
+    {
+      "file": "2846831d.bui",
+      "key": [
+        "frame",
+        "Telemetry",
+        400,
+        300,
+        false,
+        "close",
+        true
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "Telemetry",
+        "width": 400,
+        "height": 300,
+        "focused": false,
+        "hovered": "close",
+        "external": true
+      },
+      "width": 400,
+      "height": 300,
+      "bytes": 484096,
+      "payload_offset": 4096,
+      "sha256": "cd5f3f742993c63cb161ff54cf52a67b726a3532a8c8c1f8f6fb6c5b7e122fa0",
+      "pixels_sha256": "a6efb8c8c119532357f2916b4e6c2f6e125ec7ef24d4adbf105b63792393cc2c"
+    },
+    {
+      "file": "765e184d.bui",
+      "key": [
+        "frame",
+        "Telemetry",
+        400,
+        300,
+        true,
+        "",
+        false
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "Telemetry",
+        "width": 400,
+        "height": 300,
+        "focused": true,
+        "hovered": "",
+        "external": false
+      },
+      "width": 400,
+      "height": 300,
+      "bytes": 484096,
+      "payload_offset": 4096,
+      "sha256": "f9961317b633da81e16ed78cca6747e43e343b8841b52c5ac2adb14f188b30d6",
+      "pixels_sha256": "f14bbb5d942473ebe658375b5eb8c37dfe83ce1bb2aae8ef692ca111eb1ca900"
+    },
+    {
+      "file": "84a3d166.bui",
+      "key": [
+        "frame",
+        "Telemetry",
+        400,
+        300,
+        true,
+        "",
+        true
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "Telemetry",
+        "width": 400,
+        "height": 300,
+        "focused": true,
+        "hovered": "",
+        "external": true
+      },
+      "width": 400,
+      "height": 300,
+      "bytes": 484096,
+      "payload_offset": 4096,
+      "sha256": "423b8b07e2400050061c513d1fe70a44bb52d59a3fb7797e786e9d02496cad46",
+      "pixels_sha256": "193e5c6f11129886112313627753a7e2dccce27b638650a55050458373f80ec4"
+    },
+    {
+      "file": "eb69e30c.bui",
+      "key": [
+        "frame",
+        "Telemetry",
+        400,
+        300,
+        true,
+        "move",
+        false
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "Telemetry",
+        "width": 400,
+        "height": 300,
+        "focused": true,
+        "hovered": "move",
+        "external": false
+      },
+      "width": 400,
+      "height": 300,
+      "bytes": 484096,
+      "payload_offset": 4096,
+      "sha256": "29a641f96afce80b4897baccfb122c42a37543972a146e7af42b7df5128f20c8",
+      "pixels_sha256": "b970bd265d0c85d8079ed833d2899c19610fb7598712885ed22751a38a025d6d"
+    },
+    {
+      "file": "5ac59d99.bui",
+      "key": [
+        "frame",
+        "Telemetry",
+        400,
+        300,
+        true,
+        "move",
+        true
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "Telemetry",
+        "width": 400,
+        "height": 300,
+        "focused": true,
+        "hovered": "move",
+        "external": true
+      },
+      "width": 400,
+      "height": 300,
+      "bytes": 484096,
+      "payload_offset": 4096,
+      "sha256": "f679b75634156f84ef979c940dea29e33dd565c52d3a1d6629a67a1129915e6d",
+      "pixels_sha256": "4e3e825f9ea785cbe00c90fa284f4bef211e0480b86ba7a6633ca5a0ddd55744"
+    },
+    {
+      "file": "b4552998.bui",
+      "key": [
+        "frame",
+        "Telemetry",
+        400,
+        300,
+        true,
+        "resize_right",
+        false
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "Telemetry",
+        "width": 400,
+        "height": 300,
+        "focused": true,
+        "hovered": "resize_right",
+        "external": false
+      },
+      "width": 400,
+      "height": 300,
+      "bytes": 484096,
+      "payload_offset": 4096,
+      "sha256": "4817a5e8714b496c75309905888665898f4fc5d8af74c8d2310def40cac7c70f",
+      "pixels_sha256": "ee8848e56efd4cba1f221139afdd53ab4568d1397eb2788f8fb21b94999c3755"
+    },
+    {
+      "file": "6f49044d.bui",
+      "key": [
+        "frame",
+        "Telemetry",
+        400,
+        300,
+        true,
+        "resize_right",
+        true
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "Telemetry",
+        "width": 400,
+        "height": 300,
+        "focused": true,
+        "hovered": "resize_right",
+        "external": true
+      },
+      "width": 400,
+      "height": 300,
+      "bytes": 484096,
+      "payload_offset": 4096,
+      "sha256": "586d09c13df68faa821d7ebe0612a056685e4883c23ce7dc842cd31751d4b513",
+      "pixels_sha256": "2b25a5107dadac4edcc74bb086d73ff047fac213351a77c0cc859cf22b14b4b5"
+    },
+    {
+      "file": "8f20e7ff.bui",
+      "key": [
+        "frame",
+        "Telemetry",
+        400,
+        300,
+        true,
+        "close",
+        false
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "Telemetry",
+        "width": 400,
+        "height": 300,
+        "focused": true,
+        "hovered": "close",
+        "external": false
+      },
+      "width": 400,
+      "height": 300,
+      "bytes": 484096,
+      "payload_offset": 4096,
+      "sha256": "cd8898cf2bb1483ebb4c20e24b1f3360ab789d7008e73c3c162d41b3682d023b",
+      "pixels_sha256": "d3e28924f66da42f33eaa16589cea03a79b2bae85e2ac931b9580db08f441604"
+    },
+    {
+      "file": "92c6dfc8.bui",
+      "key": [
+        "frame",
+        "Telemetry",
+        400,
+        300,
+        true,
+        "close",
+        true
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "Telemetry",
+        "width": 400,
+        "height": 300,
+        "focused": true,
+        "hovered": "close",
+        "external": true
+      },
+      "width": 400,
+      "height": 300,
+      "bytes": 484096,
+      "payload_offset": 4096,
+      "sha256": "a4bc39977d28ab1c0efaba0991369a0df0e5b9afcac24115638d0e00a054d355",
+      "pixels_sha256": "eaf0ec2ba3fc19cf5afe6ceb469607a113f8146404c0253a94c63bd56e624fe4"
+    },
+    {
+      "file": "14d59352.bui",
+      "key": [
+        "storage",
+        "Telemetry",
+        false,
+        false,
+        false
+      ],
+      "args": {
+        "kind": "storage",
+        "title": "Telemetry",
+        "selected": false,
+        "dim": false,
+        "closing": false
+      },
+      "width": 320,
+      "height": 96,
+      "bytes": 126976,
+      "payload_offset": 4096,
+      "sha256": "4f77b1f231cd1bd2ec13482f4fa182187391fc41eddb7052dd763130ba6d4d25",
+      "pixels_sha256": "10bc36d8e723db099b188273520f4900630b505c0dcb9396ad7ce34bf026cadb"
+    },
+    {
+      "file": "3664abc7.bui",
+      "key": [
+        "storage",
+        "Telemetry",
+        false,
+        false,
+        true
+      ],
+      "args": {
+        "kind": "storage",
+        "title": "Telemetry",
+        "selected": false,
+        "dim": false,
+        "closing": true
+      },
+      "width": 320,
+      "height": 96,
+      "bytes": 126976,
+      "payload_offset": 4096,
+      "sha256": "a0f0ee8e40ee441a7319cf16330ca79dfc513a40537cea7dd53465321c4dfe48",
+      "pixels_sha256": "805b8f585565e1037eaddd2f9c24d3e3540794f4e4871776455eadb36e5321f4"
+    },
+    {
+      "file": "647c22e9.bui",
+      "key": [
+        "storage",
+        "Telemetry",
+        false,
+        true,
+        false
+      ],
+      "args": {
+        "kind": "storage",
+        "title": "Telemetry",
+        "selected": false,
+        "dim": true,
+        "closing": false
+      },
+      "width": 320,
+      "height": 96,
+      "bytes": 126976,
+      "payload_offset": 4096,
+      "sha256": "4c3104ae9e13f4b94ac0d60912bcdb95d1863758c651a95123a7d2e3c496908b",
+      "pixels_sha256": "24f2892d98bb59f3487aa7183664ed5005ac78874fe51e5260f8e45ed2cdd0b9"
+    },
+    {
+      "file": "428b7e5a.bui",
+      "key": [
+        "storage",
+        "Telemetry",
+        false,
+        true,
+        true
+      ],
+      "args": {
+        "kind": "storage",
+        "title": "Telemetry",
+        "selected": false,
+        "dim": true,
+        "closing": true
+      },
+      "width": 320,
+      "height": 96,
+      "bytes": 126976,
+      "payload_offset": 4096,
+      "sha256": "bcc4f41339f894f7e14cc8200a987bd6efcfb62290c0462495bcb0a18f667e93",
+      "pixels_sha256": "e27b009b78198679aa65659318f68ec2928a769f142e3456f9b81e45e901faa3"
+    },
+    {
+      "file": "b709364f.bui",
+      "key": [
+        "storage",
+        "Telemetry",
+        true,
+        false,
+        false
+      ],
+      "args": {
+        "kind": "storage",
+        "title": "Telemetry",
+        "selected": true,
+        "dim": false,
+        "closing": false
+      },
+      "width": 320,
+      "height": 96,
+      "bytes": 126976,
+      "payload_offset": 4096,
+      "sha256": "93936039def5812e7361988512eb96c33d75eb2f8d44fcaef882ee8808128dfb",
+      "pixels_sha256": "c1bf558402167c21cf2ee2a77f0850c7b01e04a4e4bb877591cd0ca55f460b63"
+    },
+    {
+      "file": "62652b78.bui",
+      "key": [
+        "storage",
+        "Telemetry",
+        true,
+        false,
+        true
+      ],
+      "args": {
+        "kind": "storage",
+        "title": "Telemetry",
+        "selected": true,
+        "dim": false,
+        "closing": true
+      },
+      "width": 320,
+      "height": 96,
+      "bytes": 126976,
+      "payload_offset": 4096,
+      "sha256": "45fa9c69cf6350c9524cb79eec59f8a186ef2b71c788dbb1c4ecbb0083247ce7",
+      "pixels_sha256": "d5faa1c4499b6ce0d6ded0f6ff4ac77f92112c858636ccc9f5a9c6428edc1d9e"
+    },
+    {
+      "file": "c1f4581e.bui",
+      "key": [
+        "storage",
+        "Telemetry",
+        true,
+        true,
+        false
+      ],
+      "args": {
+        "kind": "storage",
+        "title": "Telemetry",
+        "selected": true,
+        "dim": true,
+        "closing": false
+      },
+      "width": 320,
+      "height": 96,
+      "bytes": 126976,
+      "payload_offset": 4096,
+      "sha256": "2880c29504b92f020807184221233480e9ad8c37af1902e225abcdec5c66762a",
+      "pixels_sha256": "39d5992803f9b2704e0fd08b9f56dfd390dac71b73d340069a63100c321168b1"
+    },
+    {
+      "file": "17aabcbb.bui",
+      "key": [
+        "storage",
+        "Telemetry",
+        true,
+        true,
+        true
+      ],
+      "args": {
+        "kind": "storage",
+        "title": "Telemetry",
+        "selected": true,
+        "dim": true,
+        "closing": true
+      },
+      "width": 320,
+      "height": 96,
+      "bytes": 126976,
+      "payload_offset": 4096,
+      "sha256": "5e7ed02a531f4cb583a54ae70f98a999b0749bc331069c6ce3ccfeffdccd563a",
+      "pixels_sha256": "3f431a0907a960c55cf82446513a134995280f858b397dd37e225212636c85a9"
+    },
+    {
+      "file": "2bd80832.bui",
+      "key": [
+        "frame",
+        "SDK Pulse",
+        400,
+        300,
+        false,
+        "",
+        false
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "SDK Pulse",
+        "width": 400,
+        "height": 300,
+        "focused": false,
+        "hovered": "",
+        "external": false
+      },
+      "width": 400,
+      "height": 300,
+      "bytes": 484096,
+      "payload_offset": 4096,
+      "sha256": "7b4edd754df342811109c388cefe032ef44d8a8201d80210f7d518c082291205",
+      "pixels_sha256": "e1cfe40086106bc40d286279c1c6c472e2d2158f3a27392941f52f87f4c40795"
+    },
+    {
+      "file": "0b1fd527.bui",
+      "key": [
+        "frame",
+        "SDK Pulse",
+        400,
+        300,
+        false,
+        "",
+        true
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "SDK Pulse",
+        "width": 400,
+        "height": 300,
+        "focused": false,
+        "hovered": "",
+        "external": true
+      },
+      "width": 400,
+      "height": 300,
+      "bytes": 484096,
+      "payload_offset": 4096,
+      "sha256": "3254a268d16abbfba6daeb304a5597896cd8e0dd55934030b6ad88b63ba6a96a",
+      "pixels_sha256": "e1cfe40086106bc40d286279c1c6c472e2d2158f3a27392941f52f87f4c40795"
+    },
+    {
+      "file": "bdd5613f.bui",
+      "key": [
+        "frame",
+        "SDK Pulse",
+        400,
+        300,
+        false,
+        "move",
+        false
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "SDK Pulse",
+        "width": 400,
+        "height": 300,
+        "focused": false,
+        "hovered": "move",
+        "external": false
+      },
+      "width": 400,
+      "height": 300,
+      "bytes": 484096,
+      "payload_offset": 4096,
+      "sha256": "4a8eeada7277c62bd65abc4cc8e24afc8d047e2c48febb50d79e0a57b2621daf",
+      "pixels_sha256": "6a7b0fbb57cbb7c7124036b6fc67e2946308c0c150c5b26bdf4a82527086843f"
+    },
+    {
+      "file": "c103cc08.bui",
+      "key": [
+        "frame",
+        "SDK Pulse",
+        400,
+        300,
+        false,
+        "move",
+        true
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "SDK Pulse",
+        "width": 400,
+        "height": 300,
+        "focused": false,
+        "hovered": "move",
+        "external": true
+      },
+      "width": 400,
+      "height": 300,
+      "bytes": 484096,
+      "payload_offset": 4096,
+      "sha256": "60ae18d92509c669a74d0f5ec222f8690aa85a1ab4d1a99504af9d7fb1026c92",
+      "pixels_sha256": "6a7b0fbb57cbb7c7124036b6fc67e2946308c0c150c5b26bdf4a82527086843f"
+    },
+    {
+      "file": "7c8b66b7.bui",
+      "key": [
+        "frame",
+        "SDK Pulse",
+        400,
+        300,
+        false,
+        "resize_right",
+        false
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "SDK Pulse",
+        "width": 400,
+        "height": 300,
+        "focused": false,
+        "hovered": "resize_right",
+        "external": false
+      },
+      "width": 400,
+      "height": 300,
+      "bytes": 484096,
+      "payload_offset": 4096,
+      "sha256": "df2aa8aaf3ee85a3c452567cf3d7843e42a93f07c3912a38841f720ce0581daf",
+      "pixels_sha256": "be3572e866ffe3c253ae9021db1b27c7bbe4b44f0f1d08a2e135cfb3d71d8fe6"
+    },
+    {
+      "file": "a88784a0.bui",
+      "key": [
+        "frame",
+        "SDK Pulse",
+        400,
+        300,
+        false,
+        "resize_right",
+        true
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "SDK Pulse",
+        "width": 400,
+        "height": 300,
+        "focused": false,
+        "hovered": "resize_right",
+        "external": true
+      },
+      "width": 400,
+      "height": 300,
+      "bytes": 484096,
+      "payload_offset": 4096,
+      "sha256": "f158fcae1a79d60b5d5d5eff639331a525853ccbd638b946577df9ae60300ada",
+      "pixels_sha256": "be3572e866ffe3c253ae9021db1b27c7bbe4b44f0f1d08a2e135cfb3d71d8fe6"
+    },
+    {
+      "file": "b2345c76.bui",
+      "key": [
+        "frame",
+        "SDK Pulse",
+        400,
+        300,
+        false,
+        "close",
+        false
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "SDK Pulse",
+        "width": 400,
+        "height": 300,
+        "focused": false,
+        "hovered": "close",
+        "external": false
+      },
+      "width": 400,
+      "height": 300,
+      "bytes": 484096,
+      "payload_offset": 4096,
+      "sha256": "0cf0a826d0fdeb810dc0203b8079d78e342e36f9ec16543b12631f99802683dc",
+      "pixels_sha256": "06e0e97b7b881fe4231bd2872919d79dea3d5261994548a7c22067359683a0a9"
+    },
+    {
+      "file": "deef9753.bui",
+      "key": [
+        "frame",
+        "SDK Pulse",
+        400,
+        300,
+        false,
+        "close",
+        true
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "SDK Pulse",
+        "width": 400,
+        "height": 300,
+        "focused": false,
+        "hovered": "close",
+        "external": true
+      },
+      "width": 400,
+      "height": 300,
+      "bytes": 484096,
+      "payload_offset": 4096,
+      "sha256": "1c654f07c12dfe99d9e0eef127a299314c4fc8d99fa99a6a5330704c2779f3f7",
+      "pixels_sha256": "06e0e97b7b881fe4231bd2872919d79dea3d5261994548a7c22067359683a0a9"
+    },
+    {
+      "file": "b3042e33.bui",
+      "key": [
+        "frame",
+        "SDK Pulse",
+        400,
+        300,
+        true,
+        "",
+        false
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "SDK Pulse",
+        "width": 400,
+        "height": 300,
+        "focused": true,
+        "hovered": "",
+        "external": false
+      },
+      "width": 400,
+      "height": 300,
+      "bytes": 484096,
+      "payload_offset": 4096,
+      "sha256": "db24f6cea44206b348a4d2fa583ccb246c0eaf4046f23604801e2a5846e153a1",
+      "pixels_sha256": "b649cbbd4e0a08f7b8ea6b3c9cd87d0a4c8cc46c6c81968d86276a07f08634ed"
+    },
+    {
+      "file": "ef118854.bui",
+      "key": [
+        "frame",
+        "SDK Pulse",
+        400,
+        300,
+        true,
+        "",
+        true
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "SDK Pulse",
+        "width": 400,
+        "height": 300,
+        "focused": true,
+        "hovered": "",
+        "external": true
+      },
+      "width": 400,
+      "height": 300,
+      "bytes": 484096,
+      "payload_offset": 4096,
+      "sha256": "0e788e07ed436962dd8b6cf946ccda394ef74ffcb8cbe0506357a01dc01679a5",
+      "pixels_sha256": "afac5a8cde7e34b0d9951d59a93e5f88053b0408fd1725569c92069d581c0549"
+    },
+    {
+      "file": "ba415de2.bui",
+      "key": [
+        "frame",
+        "SDK Pulse",
+        400,
+        300,
+        true,
+        "move",
+        false
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "SDK Pulse",
+        "width": 400,
+        "height": 300,
+        "focused": true,
+        "hovered": "move",
+        "external": false
+      },
+      "width": 400,
+      "height": 300,
+      "bytes": 484096,
+      "payload_offset": 4096,
+      "sha256": "90087a7cda0b4e1448c5ee12af44ad330b0e22470d9d449c5036fdf2b2382238",
+      "pixels_sha256": "2a3256d0ed9bdf5589f049f8cc214cf158643c26265383162f326c7955b8ade4"
+    },
+    {
+      "file": "f94ffaf7.bui",
+      "key": [
+        "frame",
+        "SDK Pulse",
+        400,
+        300,
+        true,
+        "move",
+        true
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "SDK Pulse",
+        "width": 400,
+        "height": 300,
+        "focused": true,
+        "hovered": "move",
+        "external": true
+      },
+      "width": 400,
+      "height": 300,
+      "bytes": 484096,
+      "payload_offset": 4096,
+      "sha256": "0e5d59eb6e952f3575b6c33f19fa61ffa504d2cb3aee5b24196ce6f2fb0bbc5a",
+      "pixels_sha256": "dcae43fbbb461e9559f11dba099a45961696f138730d90b25693c5a6bea01b02"
+    },
+    {
+      "file": "4e5cd32e.bui",
+      "key": [
+        "frame",
+        "SDK Pulse",
+        400,
+        300,
+        true,
+        "resize_right",
+        false
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "SDK Pulse",
+        "width": 400,
+        "height": 300,
+        "focused": true,
+        "hovered": "resize_right",
+        "external": false
+      },
+      "width": 400,
+      "height": 300,
+      "bytes": 484096,
+      "payload_offset": 4096,
+      "sha256": "b0bb27fef2c807e11765b6111c7389f0bac9a3eb101a57c4a8bdf3a79f3c8e17",
+      "pixels_sha256": "476029e58c2f16c30fe6f841a32cd82c888c7fabda05781fa2f4fe9237bb95bf"
+    },
+    {
+      "file": "3b4e35eb.bui",
+      "key": [
+        "frame",
+        "SDK Pulse",
+        400,
+        300,
+        true,
+        "resize_right",
+        true
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "SDK Pulse",
+        "width": 400,
+        "height": 300,
+        "focused": true,
+        "hovered": "resize_right",
+        "external": true
+      },
+      "width": 400,
+      "height": 300,
+      "bytes": 484096,
+      "payload_offset": 4096,
+      "sha256": "c3ca1c9689d9ac46e553b5e82344d9974ca4369dc2844f3490d838af5bae10da",
+      "pixels_sha256": "744776ff757b08a9432f1c0e7ad05a6a24acca7c013da313ebf0e252aed3c8a5"
+    },
+    {
+      "file": "6386a47d.bui",
+      "key": [
+        "frame",
+        "SDK Pulse",
+        400,
+        300,
+        true,
+        "close",
+        false
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "SDK Pulse",
+        "width": 400,
+        "height": 300,
+        "focused": true,
+        "hovered": "close",
+        "external": false
+      },
+      "width": 400,
+      "height": 300,
+      "bytes": 484096,
+      "payload_offset": 4096,
+      "sha256": "90587ecfc9528042f3dcb07e03f7e92a7a38e28a323690217b8a4d98b9f7051c",
+      "pixels_sha256": "845e9ef8f1aa018721afcc1b139962edd9bf4500e152fa6f7e7889e5dca9894a"
+    },
+    {
+      "file": "ad3fb3b6.bui",
+      "key": [
+        "frame",
+        "SDK Pulse",
+        400,
+        300,
+        true,
+        "close",
+        true
+      ],
+      "args": {
+        "kind": "frame",
+        "title": "SDK Pulse",
+        "width": 400,
+        "height": 300,
+        "focused": true,
+        "hovered": "close",
+        "external": true
+      },
+      "width": 400,
+      "height": 300,
+      "bytes": 484096,
+      "payload_offset": 4096,
+      "sha256": "f8c0162e9f728d238745f25db259c6ad8284261f8899331be1ca34f7f2152aa6",
+      "pixels_sha256": "c8edee2a551e45c3abbf15e0ab68c6bf297731ffe5540c027b6616298e8aed9f"
+    },
+    {
+      "file": "46a0a850.bui",
+      "key": [
+        "storage",
+        "SDK Pulse",
+        false,
+        false,
+        false
+      ],
+      "args": {
+        "kind": "storage",
+        "title": "SDK Pulse",
+        "selected": false,
+        "dim": false,
+        "closing": false
+      },
+      "width": 320,
+      "height": 96,
+      "bytes": 126976,
+      "payload_offset": 4096,
+      "sha256": "8477c29968dd037df275fdc52bcd734c6a58396629e51acc2e6ba4496d9c0a47",
+      "pixels_sha256": "e0e7c177d79ad9773b6ae8c5c66aecb0e8c1e362034ed86e7bbf5bcf689cc76c"
+    },
+    {
+      "file": "71d9a685.bui",
+      "key": [
+        "storage",
+        "SDK Pulse",
+        false,
+        false,
+        true
+      ],
+      "args": {
+        "kind": "storage",
+        "title": "SDK Pulse",
+        "selected": false,
+        "dim": false,
+        "closing": true
+      },
+      "width": 320,
+      "height": 96,
+      "bytes": 126976,
+      "payload_offset": 4096,
+      "sha256": "f2f43b6c0f9767a45ded45bf761501c398180139a848f43d59e2386960279358",
+      "pixels_sha256": "583bfbcaa71377827cb0796a81a2c847dd1fa9de14f3680a695480c469bf573b"
+    },
+    {
+      "file": "8e3ae457.bui",
+      "key": [
+        "storage",
+        "SDK Pulse",
+        false,
+        true,
+        false
+      ],
+      "args": {
+        "kind": "storage",
+        "title": "SDK Pulse",
+        "selected": false,
+        "dim": true,
+        "closing": false
+      },
+      "width": 320,
+      "height": 96,
+      "bytes": 126976,
+      "payload_offset": 4096,
+      "sha256": "16c8a3f1644bf34102ca247ac08e913a7725b8f8c1402ffc95a76fbbccadafb2",
+      "pixels_sha256": "4341cf2379f942db4660454b24ceaf6cff36ecd9045856fc844ec2ec682d65ed"
+    },
+    {
+      "file": "231aea40.bui",
+      "key": [
+        "storage",
+        "SDK Pulse",
+        false,
+        true,
+        true
+      ],
+      "args": {
+        "kind": "storage",
+        "title": "SDK Pulse",
+        "selected": false,
+        "dim": true,
+        "closing": true
+      },
+      "width": 320,
+      "height": 96,
+      "bytes": 126976,
+      "payload_offset": 4096,
+      "sha256": "9aa0286222e8e5237a85ccf79ec6b8284db3ba9b5cef3c703247b507358027ba",
+      "pixels_sha256": "adf361bfd00e21409a10b5270436e7fb44caf5b21a539fea7c367e9e9282a1bd"
+    },
+    {
+      "file": "3cb2b8bd.bui",
+      "key": [
+        "storage",
+        "SDK Pulse",
+        true,
+        false,
+        false
+      ],
+      "args": {
+        "kind": "storage",
+        "title": "SDK Pulse",
+        "selected": true,
+        "dim": false,
+        "closing": false
+      },
+      "width": 320,
+      "height": 96,
+      "bytes": 126976,
+      "payload_offset": 4096,
+      "sha256": "b0aaf6739c878d189b8ddd626fce76fe3eefb2e116483bfa52f9cd2e12c7fd65",
+      "pixels_sha256": "f756f65f9f3870364de5e8b1f5d325ec57c85ca5ec67ae403508846f88fe6725"
+    },
+    {
+      "file": "bf5724f6.bui",
+      "key": [
+        "storage",
+        "SDK Pulse",
+        true,
+        false,
+        true
+      ],
+      "args": {
+        "kind": "storage",
+        "title": "SDK Pulse",
+        "selected": true,
+        "dim": false,
+        "closing": true
+      },
+      "width": 320,
+      "height": 96,
+      "bytes": 126976,
+      "payload_offset": 4096,
+      "sha256": "1bb74f49ff473f25a244732b922905fa90e0bbec28399d0e8e4f8c1034b08ad8",
+      "pixels_sha256": "aa1b971fdfbdb4f1b0790e9b383a84ccde551bea7e55858526e21b304027ceec"
+    },
+    {
+      "file": "c6889bcc.bui",
+      "key": [
+        "storage",
+        "SDK Pulse",
+        true,
+        true,
+        false
+      ],
+      "args": {
+        "kind": "storage",
+        "title": "SDK Pulse",
+        "selected": true,
+        "dim": true,
+        "closing": false
+      },
+      "width": 320,
+      "height": 96,
+      "bytes": 126976,
+      "payload_offset": 4096,
+      "sha256": "ad4c93258471aaf322545cbc76ee12cc275d449c87fac7fe5f4d8e844364cfc4",
+      "pixels_sha256": "ce1232caa8dcf574f9dd4e53586eb94558e6033f49c07cdf7d0b763259a72d25"
+    },
+    {
+      "file": "84727a59.bui",
+      "key": [
+        "storage",
+        "SDK Pulse",
+        true,
+        true,
+        true
+      ],
+      "args": {
+        "kind": "storage",
+        "title": "SDK Pulse",
+        "selected": true,
+        "dim": true,
+        "closing": true
+      },
+      "width": 320,
+      "height": 96,
+      "bytes": 126976,
+      "payload_offset": 4096,
+      "sha256": "91ea7484022c1d39b1d3146b7a13ddbe7f91ecc3c4a7281fbe4e69c7ec84ea3e",
+      "pixels_sha256": "512788359c0d9e0584102a46343ce11b48301bab8c740a64bb846b45c055ae87"
+    }
+  ],
+  "bootstrap": "a0ebce13.bui",
+  "total_bytes": 81224192
+}

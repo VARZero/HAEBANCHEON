@@ -1,0 +1,45 @@
+{
+  "image_sha256": "3000847d65ed7cdb82aba816a2ebb44d7e833bc6bc031b9fd70db2f7c00229f2",
+  "image_bytes": 42489344,
+  "segments": [
+    {
+      "file": "fw_jump.bin",
+      "bytes": 265224,
+      "address": "0x80000000",
+      "lba": 2049,
+      "sectors": 519,
+      "crc32": "edd168be",
+      "sha256": "0e7c072de5160f8346719a6b458bed12754ac4df88a5d812272721a25fe79eee"
+    },
+    {
+      "file": "Image",
+      "bytes": 41171208,
+      "address": "0x80400000",
+      "lba": 2568,
+      "sectors": 80413,
+      "crc32": "7579f00a",
+      "sha256": "65e3116dabf8c6cc6b975e939c6d2fa956f76f0961723d1429bcde888ef0361c"
+    },
+    {
+      "file": "gen3.dtb",
+      "bytes": 3058,
+      "address": "0x87f00000",
+      "lba": 82981,
+      "sectors": 6,
+      "crc32": "632dac84",
+      "sha256": "1cfb039c8f2d140ea3186b36e67458a966865e17123017f3cc32a13842f75acb"
+    }
+  ]
+}
+PASS fw_jump.bin bytes=265224 LBA=2049 sectors=519 sha256=0e7c072de5160f8346719a6b458bed12754ac4df88a5d812272721a25fe79eee
+PASS Image bytes=41171208 LBA=2568 sectors=80413 sha256=65e3116dabf8c6cc6b975e939c6d2fa956f76f0961723d1429bcde888ef0361c
+PASS gen3.dtb bytes=3058 LBA=82981 sectors=6 sha256=1cfb039c8f2d140ea3186b36e67458a966865e17123017f3cc32a13842f75acb
+PASS raw image bytes=42489344 sha256=3000847d65ed7cdb82aba816a2ebb44d7e833bc6bc031b9fd70db2f7c00229f2
+e2fsck 1.47.0 (5-Feb-2023)
+Pass 1: Checking inodes, blocks, and sizes
+Pass 2: Checking directory structure
+Pass 3: Checking directory connectivity
+Pass 4: Checking reference counts
+Pass 5: Checking group summary information
+ORYDATA: 778/65536 files (0.1% non-contiguous), 36099/65536 blocks
+PASS boot CRCs, MBR non-overlap, ext4 filesystem: {"image": "/var/tmp/haebancheon-mask-v12/release/image/ORYUKDO-KFB-SD4-DMA-v1.img", "sha256": "a14cb702636b07bce056261778d432abe92703604291f7b543be9515cfb63d90", "bytes": 311427072, "boot_lba": 2048, "data_lba": 83968, "data_sectors": 524288, "data_fs": "ext4", "mount": "/data", "hardware_tested": false, "requires": "SD4 native bitstream; incompatible with SPI-only runtime"}

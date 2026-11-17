@@ -1,0 +1,22 @@
+{
+  "result": "PASS_LOCAL_PREBUILT_UI_IMAGE_HARDWARE_PENDING",
+  "image": "/mnt/d/temp/gen3bosio/boayo-assets-v1/ORYUKDO-KFB-BoAYO-assets-v1.img",
+  "image_sha256": "2828306943079cf93d45f655052bd6ad8235a9a6b3edc9ec15a1ac567995e38f",
+  "bytes": 276824064,
+  "kernel": "6.12.0-oryukdo-assets1",
+  "host_regression_tests": 9,
+  "host_configurations": 2,
+  "pixel_and_scene_equivalence": "PASS",
+  "trace_events": 9,
+  "precomputed_variants": 132,
+  "qemu_uart_trace": "PASS",
+  "qemu_boayo": "PASS_MOCK_BACKEND",
+  "sd_rtl": "PASS_MOCK_DDR",
+  "bitstream_changed": false,
+  "hardware_tested": false,
+  "performance_measured": false,
+  "rgb_dma_driver_boundary_model": "PASS_480_CASES_AND_FAILURE_PATHS",
+  "scope": "132 prebuilt UI variants, RGB and projector-word expansion cache, initial publish move, immutable texture resident reuse",
+  "remaining_cpu_work": "asset expansion/copies, dynamic drawing, masks and final tile composition",
+  "bitstream_sha256": "fe1ce8e52f30f1b9bd7bad944a0bf6f981eef9bba01438c0d26b40da6126fdf0"
+}

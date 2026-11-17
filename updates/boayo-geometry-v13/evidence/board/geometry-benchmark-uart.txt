@@ -1,0 +1,11 @@
+/tmp/geometry-bench; echo INCR11_5308dc08_RC:$?
+GEOMETRY_STAGE {"candidates":992,"case":0,"coefficients_us":3293611,"cull_us":580840,"encode_visibility_us":4094297,"masks_signature_us":9719897,"mode":"v12","prepare_us":21882,"project_us":6081214,"scale_us":3725685,"scratch_us":265535,"total_us":27782965,"visible":141}
+GEOMETRY_STAGE {"candidates":768,"case":1,"coefficients_us":2482468,"cull_us":464003,"encode_visibility_us":3135046,"masks_signature_us":1267701,"mode":"v12","prepare_us":20497,"project_us":4625443,"scale_us":2837806,"scratch_us":194005,"total_us":15026972,"visible":11}
+GEOMETRY_STAGE {"candidates":640,"case":2,"coefficients_us":2060230,"cull_us":428901,"encode_visibility_us":2609719,"masks_signature_us":1070229,"mode":"v12","prepare_us":20584,"project_us":3838150,"scale_us":2360135,"scratch_us":158432,"total_us":12546385,"visible":8}
+GEOMETRY_STAGE {"candidates":736,"case":3,"coefficients_us":2373318,"cull_us":439373,"encode_visibility_us":2992198,"masks_signature_us":1205197,"mode":"v12","prepare_us":20513,"project_us":4403714,"scale_us":2724699,"scratch_us":188383,"total_us":14347398,"visible":10}
+GEOMETRY_STAGE {"candidates":228,"case":0,"coefficients_us":737958,"cull_us":1494224,"encode_visibility_us":925936,"masks_signature_us":9620005,"mode":"v13","prepare_us":17358,"project_us":1315723,"scale_us":39708,"scratch_us":65963,"total_us":14216879,"visible":141}
+GEOMETRY_STAGE {"candidates":96,"case":1,"coefficients_us":306982,"cull_us":1028295,"encode_visibility_us":397581,"masks_signature_us":1258837,"mode":"v13","prepare_us":20304,"project_us":568620,"scale_us":15332,"scratch_us":31690,"total_us":3627643,"visible":11}
+GEOMETRY_STAGE {"candidates":76,"case":2,"coefficients_us":244618,"cull_us":900162,"encode_visibility_us":309216,"masks_signature_us":1070738,"mode":"v13","prepare_us":21547,"project_us":453885,"scale_us":13023,"scratch_us":28499,"total_us":3041691,"visible":8}
+GEOMETRY_STAGE {"candidates":84,"case":3,"coefficients_us":269191,"cull_us":910016,"encode_visibility_us":341348,"masks_signature_us":1198967,"mode":"v13","prepare_us":20887,"project_us":505954,"scale_us":14060,"scratch_us":29225,"total_us":3289652,"visible":10}
+PASS_RV32_GEOMETRY_STAGES_EXACT
+INCR11_5308dc08_RC:0

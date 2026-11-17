@@ -1,0 +1,53 @@
+{
+  "result": "PASS_PRECOMPUTED_PLANS",
+  "checks": [
+    "10 scenes exact: initial, pixel edit, move/restore, reveal clipped tiles/restore shape, roll/FOV/restore, occlusion/removal",
+    "first frame performs zero descriptor candidates and zero mask sample calculations; clipped jobs omitted",
+    "uncached calculation exactly matches every prebuilt descriptor/mask byte",
+    "missing/stale/truncated/CRC/bounds/invalid-mask plans fall back to identical output"
+  ],
+  "execution": "host",
+  "hardware": false,
+  "first_frame": {
+    "active_tiles": 94,
+    "changed_tiles": 94,
+    "dirty_tiles": 4220,
+    "fallback_frames": 0,
+    "geometry_tiles_evaluated_total": 0,
+    "hardware_frames": 1,
+    "jobs_per_core": [
+      48,
+      48
+    ],
+    "mask_samples_evaluated_total": 0,
+    "mode": "kfb-dual-projectors+cpu-tile-composition",
+    "output_words": 1084800,
+    "plan_cache": {
+      "hits": 0,
+      "loads": 1,
+      "misses": 0,
+      "rejected": 0,
+      "revision": "746089fe5e66eb1cf0d915a35257922c1192742b73d0ede1d099181cbfb03cdc"
+    },
+    "precomputed_layers_total": 1,
+    "projected_windows": [
+      1
+    ],
+    "reused_window_tiles": 0,
+    "sampling": "fixed-point bilinear RGB332",
+    "texture_reuses_total": 0,
+    "texture_upload_words": 230400,
+    "texture_uploads_total": 1,
+    "total_hw_jobs": 96,
+    "update_kind": "full",
+    "windows": [
+      1
+    ],
+    "written_cells_per_core": [
+      49061,
+      49152
+    ]
+  },
+  "baseline_sha256": "3fcebfdca3cb9f0fea63e1fd172ea1e5bcb6f3b040e24ae456d3700b1d3358fa",
+  "candidate_sha256": "a0d1f697da26bd8d3a5bdd2cd42dac5fa644dc8292fa0a6def8c0cb8a595b536"
+}

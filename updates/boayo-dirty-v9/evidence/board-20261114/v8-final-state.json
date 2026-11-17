@@ -1,0 +1,316 @@
+{
+  "app_error": null,
+  "assets": {
+    "cache_hits": 13,
+    "format": "raw-mapped-00RRGGBB",
+    "loads": 27,
+    "misses": 0,
+    "rejected": 0,
+    "rgb_materializations": 0
+  },
+  "buttons": {
+    "available": false,
+    "last_event_id": 0,
+    "state": 0
+  },
+  "compositor": "cpp-native",
+  "focused_window": 2,
+  "generation": 28,
+  "motion": {
+    "active": false,
+    "next_step": 0,
+    "phase": "idle",
+    "steps": 25,
+    "target_generation": 0,
+    "view": {
+      "pitch": 0.0,
+      "roll": 0.0,
+      "yaw": 0.0
+    },
+    "windows": []
+  },
+  "output": {
+    "abi": 3,
+    "active_bank": 0,
+    "active_base": 3170959360,
+    "antialias": false,
+    "backend": "kfb-linux-frame-atomic-output",
+    "capability": 1146373681,
+    "commits": 13,
+    "dma_copied_words": 2304,
+    "max_jobs": 64,
+    "max_scene_words": 1084816,
+    "memory_dma": {
+      "available": true,
+      "copy_bytes": 13102552,
+      "copy_ops": 24880,
+      "errors": 0,
+      "features": 255,
+      "fill_bytes": 1427456,
+      "fill_ops": 1394,
+      "quarantined": 0,
+      "timeouts": 0,
+      "upload_bytes": 12195808,
+      "upload_ops": 272,
+      "upload_threshold": 4096
+    },
+    "metadata_only": false,
+    "mock_backend": false,
+    "poisoned": 0,
+    "publish_profile": {
+      "backend": "kernel",
+      "command": 2,
+      "configure_us": 89,
+      "finish_us": 4152,
+      "select_us": 151549,
+      "upload_ranges": 0,
+      "upload_us": 50211,
+      "uploaded_words": 0,
+      "user_copy_us": 9002,
+      "validate_us": 35455,
+      "wait_us": 267875
+    },
+    "sensor_available": false,
+    "shadow_copied_words": 0,
+    "signature": 1112748597,
+    "status": 1895497731,
+    "uploaded_words": 228
+  },
+  "performance": {
+    "frame_limit": 2.0,
+    "full_update_count": 1,
+    "last_compose_ms": 4895.314239999834,
+    "last_upload_ms": 0.0,
+    "no_op_update_count": 0,
+    "patch_update_count": 12,
+    "render_count": 12,
+    "rendered_generation": 28,
+    "update_words": 4480,
+    "uptime_seconds": 135.70212818000005
+  },
+  "pointer": {
+    "azimuth": 0.0,
+    "buttons": [],
+    "cancel_serial": 0,
+    "captured_window": null,
+    "dragging": false,
+    "elevation": 0.0,
+    "last_left_press": null,
+    "last_left_release": null,
+    "left_press_serial": 0,
+    "left_release_serial": 0,
+    "scroll_delta": 0.0,
+    "scroll_serial": 0,
+    "visible": false,
+    "window_id": 2,
+    "zone": "content"
+  },
+  "projection": {
+    "cpu_output_shadow_words": 4480,
+    "cpu_result_download_words": 0,
+    "cpu_scene_words": 0,
+    "device_ready_frames": 1,
+    "dirty_tiles": 89,
+    "fallback_frames": 0,
+    "geometry_tiles_evaluated_total": 0,
+    "hardware_frames": 12,
+    "jobs_per_core": [
+      53,
+      50
+    ],
+    "lazy_copied_tiles_total": 9,
+    "mask_samples_evaluated_total": 0,
+    "masked_tiles_total": 669,
+    "mode": "ddr-resident-dirty-tiles",
+    "packed_mask_tiles_total": 669,
+    "plan_cache": {
+      "builtin_loads": 5,
+      "hits": 0,
+      "loads": 5,
+      "misses": 0,
+      "payload_scan_bytes": 0,
+      "rejected": 0,
+      "revision": "c830e2bae43593f8c188620447b4ce808ce4894a826a073b44f12b949ad54b7e"
+    },
+    "precomputed_layers_total": 5,
+    "redrawn_tiles": 89,
+    "reused_tiles_total": 0,
+    "solid_tiles_total": 0,
+    "texture_reuses_total": 0,
+    "texture_uploads_total": 45,
+    "tile_fills_total": 515,
+    "total_hw_jobs": 1238,
+    "update_kind": "tiles"
+  },
+  "render_error": null,
+  "runtime": "C++17",
+  "scene_owner": null,
+  "service": {
+    "phase": "apps",
+    "queued_requests": 0,
+    "snapshot_age_seconds": 0.38102334000018345,
+    "state_is_snapshot": true
+  },
+  "view": {
+    "pitch": 0.0,
+    "roll": 0.0,
+    "yaw": 0.0
+  },
+  "windows": [
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": true,
+      "height_deg": 26.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          14.0
+        ]
+      ],
+      "surface_height": 300,
+      "surface_width": 400,
+      "title": "Telemetry",
+      "width_deg": 36.0,
+      "window_id": 2,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 0
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 30.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "boayo-desktop",
+      "roll": 0.0,
+      "shape": [
+        [
+          51.2,
+          36.0,
+          537.6,
+          252.0,
+          18.0
+        ]
+      ],
+      "surface_height": 360,
+      "surface_width": 640,
+      "title": "BoAYO Launcher",
+      "width_deg": 42.0,
+      "window_id": 1,
+      "workspace": {},
+      "z": 1
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -16.47105751657935,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: Telemetry",
+      "width_deg": 2.88,
+      "window_id": 3,
+      "workspace": {
+        "control": "move",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 2
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": -10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 4,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 3
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": 10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": -3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 5,
+      "workspace": {
+        "control": "close",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 4
+    }
+  ]
+}

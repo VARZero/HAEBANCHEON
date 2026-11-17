@@ -1,0 +1,31 @@
+{
+  "binary_sha256": "3db81667ab2d8c0a0323aca674628116922828373ad9430734db94f85b5da460",
+  "source": "/var/tmp/oryukdo-boayo-rgbdma-v1/host/source-host-3sQURU/software/boayo/native",
+  "source_sha256": {
+    "reference/wm/native/bosio_compositor.cpp": "251dbd92c0ea7800d2e61ce21fb9d36a43f6f2afa54b8dc63a02a38d27ebbb9f",
+    "src/apps.cpp": "a82044e0578d6a0e3915cfda40258feb13f0703b5367796ef6e8cde3b08dfe72",
+    "src/apps.hpp": "649750781b6cc71178320f448477e23016b3c6251a2869a9787b149548709363",
+    "src/backend.cpp": "8bbb356541dcf8c6ec931be045ab58faddb321f0aa8e51fc12255c914ce631fe",
+    "src/backend.hpp": "885a4d36737dc79dea9d70016557c85f61943d30d283d694504d737a19b9879c",
+    "src/common.hpp": "3a71da75ea1289e79d6b7009b8a7ab7d0d4e600e46665d93277564f40d2d7d04",
+    "src/fallback.hpp": "1c18aa5ca7f5dbe7d9b93e4e9dadf890b139c47c26e66918adbf1f3dc92bf714",
+    "src/fixed_geometry.inc": "a6d243f048510f6239d79b6fea351cab26d178217ce36905c23e88cdad10f268",
+    "src/font.hpp": "65153ae3363e9bf7e98c9bbcc90dd90718c1969acdc7e7119a82f8b6673526e4",
+    "src/geometry.cpp": "133ae0f24f583abf32045151542fce7fcda85a80cab746c2e5bebbb5676b717b",
+    "src/geometry.hpp": "2c40da77b35904170edd34e7aeccf380003bfb44faf13df5e58ad22d91015c64",
+    "src/golden.hpp": "860a20933c5698eeec0d6873baaff81757cc83ddf2bb33b2836403e6a5d1fbb4",
+    "src/init_trace.hpp": "9a255fcca478a35e7c50706370fd3f4daa214fabd79c9062e9a236210c77ff20",
+    "src/main.cpp": "040a7c5bf0b8880068ade6db88ee09ff29d7a32d7c01daa12e26353977d0c47f",
+    "src/rgb_fill.hpp": "e98b13972ef54568ec2c160e56bc7eed73e1e786dea959f316559231fd46e327",
+    "src/runtime.cpp": "4ed2056a85bdec8c3a2cfa6011c0969a41c2beaeed479dc06bded2290e64b671",
+    "src/runtime.hpp": "811556937978584d87f1060ff0f4cf2962713f86d11c165be39facf64d0b1a6d",
+    "src/selftest.cpp": "856a06f84189d8d1089fc144572752bcbe660ea1b9edc0a14f30c56d6b9f21a3",
+    "src/ui.cpp": "f8d3af1922bace1f2ca93d71711cc759f43211533256754b12044e9b8e2aa14e",
+    "src/ui.hpp": "94e741e8b8ced88e76d02aaf038290bc1e4beb5944be5d25b06fb71eca4329ac",
+    "src/wm.cpp": "049e2e3a3fdad822cd0a76dad7e96738509b40a7cad6d374a8945c66e4f66b3b",
+    "src/wm.hpp": "b74239e9d1ecf4b52e2d7254db8f62b0192b06c02f5920f70a83d49a03eb6a64",
+    "vendor/json-LICENSE.MIT": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+    "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6"
+  },
+  "uapi_sha256": "1b8290d4d53c12b10e1a99622589e611b5b1f748731b04b49b11a081f77f704c"
+}

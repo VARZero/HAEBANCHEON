@@ -1,0 +1,121 @@
+{
+  "label": "fast-driver-profile",
+  "frames": 15,
+  "seconds_per_update": 3.2423868453333324,
+  "profile": 1,
+  "legacy": 0,
+  "software": {
+    "app_present": {
+      "wall_ms": 267.6669333333333,
+      "cpu_ms": 181.14826666666667,
+      "calls": 1.0
+    },
+    "apps": {
+      "wall_ms": 454.71986666666663,
+      "cpu_ms": 319.90706666666665,
+      "calls": 1.0
+    },
+    "blend": {
+      "wall_ms": 370.71486666666664,
+      "cpu_ms": 307.231,
+      "calls": 3.0
+    },
+    "captions": {
+      "wall_ms": 20.4802,
+      "cpu_ms": 15.740266666666667,
+      "calls": 2.0
+    },
+    "compose": {
+      "wall_ms": 1620.3113999999998,
+      "cpu_ms": 1155.4201333333333,
+      "calls": 1.0
+    },
+    "descriptors": {
+      "wall_ms": 51.12466666666667,
+      "cpu_ms": 33.211800000000004,
+      "calls": 3.0
+    },
+    "finish": {
+      "wall_ms": 243.86679999999998,
+      "cpu_ms": 180.2444,
+      "calls": 1.0
+    },
+    "image": {
+      "wall_ms": 161.61086666666668,
+      "cpu_ms": 100.63806666666666,
+      "calls": 1.0
+    },
+    "image_publish": {
+      "wall_ms": 5.271533333333333,
+      "cpu_ms": 4.621733333333333,
+      "calls": 1.0
+    },
+    "layers": {
+      "wall_ms": 215.2082,
+      "cpu_ms": 153.7296,
+      "calls": 1.0
+    },
+    "output_publish": {
+      "wall_ms": 155.51273333333333,
+      "cpu_ms": 122.61193333333334,
+      "calls": 1.0
+    },
+    "pointer": {
+      "wall_ms": 20.002266666666667,
+      "cpu_ms": 12.935533333333332,
+      "calls": 2.0
+    },
+    "projection_wait": {
+      "wall_ms": 108.09273333333334,
+      "cpu_ms": 30.7728,
+      "calls": 3.0
+    },
+    "state_publish": {
+      "wall_ms": 1055.9414666666667,
+      "cpu_ms": 802.3261333333334,
+      "calls": 1.0666666666666667
+    },
+    "texture": {
+      "wall_ms": 135.67353333333332,
+      "cpu_ms": 90.37333333333332,
+      "calls": 2.0
+    },
+    "tiles_prepare": {
+      "wall_ms": 242.12120000000002,
+      "cpu_ms": 164.375,
+      "calls": 1.0
+    },
+    "workspace": {
+      "wall_ms": 115.63026666666666,
+      "cpu_ms": 85.955,
+      "calls": 1.0
+    }
+  },
+  "driver": {
+    "batch_calls": 3.0,
+    "batch_copy_dma_us": 1.2933999999999999,
+    "batch_copy_us": 2.8425333333333334,
+    "batch_execute_us": 359.57353333333333,
+    "batch_fill_dma_us": 45.98826666666666,
+    "batch_validate_us": 1.7338,
+    "publish_calls": 1.0,
+    "publish_compare_us": 24.213199999999997,
+    "publish_copy_us": 9.6836,
+    "publish_diff_us": 45.31333333333334,
+    "publish_finish_us": 0.27466666666666667,
+    "publish_mmio_us": 0.2764666666666667,
+    "publish_poll_us": 0.3889333333333333,
+    "publish_polls": 3.3333333333333335,
+    "publish_sleep_us": 32.47793333333333,
+    "publish_transfer_us": 0.0,
+    "publish_validate_us": 34.6612,
+    "tile_calls": 11.6,
+    "tile_cpu_us": 95.6024,
+    "tile_cpu_words": 1144.6,
+    "tile_dma_bytes": 601.8666666666667,
+    "tile_dma_calls": 3.8666666666666667,
+    "tile_dma_us": 30.7376,
+    "tile_fence_us": 2.9306666666666668,
+    "tile_mask_us": 80.12853333333334
+  }
+}

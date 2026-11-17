@@ -1,0 +1,3 @@
+{"frames": 120, "period_us": 50000, "bytes": 87860, "sha256": "354d03f25e318e3462be096476f9eb9a3c72b9e98bc70bc2f83a0595e934cfbb"}
+PASS view coefficient, pacing, skip, restore, deadline, failure state
+PASS service preview, query, busy guard, natural stop, malformed/checksum, explicit stop, disconnect restore

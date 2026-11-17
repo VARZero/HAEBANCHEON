@@ -1,0 +1,1 @@
+{"result": "PASS_MOCK_BACKEND", "checks": ["launcher via both modeled projection engines and output", "launch dashboard", "launch telemetry", "launch pulse", "minimize storage restore", "close app and captions", "PTY WASD CRLF one click reset quit terminal restore"], "hardware": false}

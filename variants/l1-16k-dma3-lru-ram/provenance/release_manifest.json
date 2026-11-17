@@ -1,0 +1,48 @@
+{
+  "result": "PASS_RTL_AND_FULL_BOARD_IMPLEMENTATION_PHYSICAL_BOARD_UNTESTED",
+  "project": "HAEBANCHEON",
+  "source_directory": "D:\\ORYUKDO-Gen3_AB_integrated_unverified\\ORYUKDO-Gen3\\work\\ORYUKDO-3d5i_BOSIO_SoC\\variants\\l1-16k-dma3-lru-ram",
+  "configuration": {
+    "l1i_bytes": 16384,
+    "l1d_bytes": 16384,
+    "ways": 2,
+    "line_bytes": 32,
+    "sets": 256,
+    "dma_engines": 3
+  },
+  "bitstream": {
+    "path": "D:\\temp\\haebancheon-l1-16k-dma3\\HAEBANCHEON-KFB-L1-16K-DMA3-v1.bit",
+    "bytes": 6361921,
+    "sha256": "9bb855886be0ac55d983f9a72ab0e6c23317b7f4fe27e13430cb2de17d7d4e07"
+  },
+  "sd_image": {
+    "path": "D:\\temp\\haebancheon-l1-16k-dma3\\image\\HAEBANCHEON-KFB-L1-16K-DMA3-v1.img",
+    "bytes": 277872640,
+    "sha256": "7bc6541ea1215ec01780dfc5e372c729c4721d4dde42ceb605df308a2550c333"
+  },
+  "rtl_evidence_logs": 44,
+  "additional_cycle_equivalence_seeds": [
+    1,
+    7,
+    23
+  ],
+  "resources": {
+    "lut": 119141.0,
+    "ff": 76182.0,
+    "bram_tiles": 110.0,
+    "dsp": 62.0,
+    "occupied_slices": 33131.0
+  },
+  "timing_ns": {
+    "wns": 0.093,
+    "tns": 0.0,
+    "whs": 0.011,
+    "ths": 0.0,
+    "wpws": 0.0,
+    "tpws": 0.0
+  },
+  "physical_board_tested": false,
+  "full_linux_cpu_rtl_coldboot": false,
+  "linux_qemu": "PASS using identical runtime software and Mock BOSIO; not FPGA validation",
+  "compatibility": "Use this bitstream and the dedicated L1-16K-DMA3 SD image together."
+}

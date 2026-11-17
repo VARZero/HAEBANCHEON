@@ -1,0 +1,8 @@
+{
+  "command": ": > /tmp/v11-sample",
+  "seconds": 1.284,
+  "rc": 0,
+  "uart": ": > /tmp/v11-sample; echo INCR11_b06650e0_RC:$?\r\r\nINCR11_b06650e0_RC:0\r\r\n",
+  "observed_at": "2026-11-15T00:45:20.959232",
+  "log_start": 394993
+}

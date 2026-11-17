@@ -1,0 +1,8 @@
+make: Entering directory '/var/tmp/haebancheon-mask-v12/release/linux'
+make[1]: Entering directory '/var/tmp/haebancheon-mask-v12/release/kernel'
+  GEN     Makefile
+#
+# No change to .config
+#
+make[1]: Leaving directory '/var/tmp/haebancheon-mask-v12/release/kernel'
+make: Leaving directory '/var/tmp/haebancheon-mask-v12/release/linux'

@@ -1,0 +1,276 @@
+{
+  "scope": "Physical KFB board; same kernel, SD, FPGA; warmed Telemetry updates; profile enabled both runs",
+  "baseline": {
+    "frames": 6,
+    "snapshot_interval_ms": 6068.649903333608,
+    "per_frame": {
+      "app_present": {
+        "wall_ms": 582.062,
+        "cpu_ms": 381.745,
+        "calls": 1.0
+      },
+      "apps": {
+        "wall_ms": 2590.848,
+        "cpu_ms": 1757.093,
+        "calls": 1.0
+      },
+      "blend": {
+        "wall_ms": 453.34,
+        "cpu_ms": 340.409,
+        "calls": 3.0
+      },
+      "captions": {
+        "wall_ms": 520.645,
+        "cpu_ms": 354.697,
+        "calls": 2.0
+      },
+      "compose": {
+        "wall_ms": 1964.184,
+        "cpu_ms": 1404.848,
+        "calls": 1.0
+      },
+      "descriptors": {
+        "wall_ms": 62.904,
+        "cpu_ms": 42.872,
+        "calls": 3.0
+      },
+      "finish": {
+        "wall_ms": 300.041,
+        "cpu_ms": 239.451,
+        "calls": 1.0
+      },
+      "image": {
+        "wall_ms": 166.386,
+        "cpu_ms": 103.536,
+        "calls": 1.0
+      },
+      "image_publish": {
+        "wall_ms": 9.302,
+        "cpu_ms": 5.455,
+        "calls": 1.0
+      },
+      "layers": {
+        "wall_ms": 243.231,
+        "cpu_ms": 166.641,
+        "calls": 1.0
+      },
+      "output_publish": {
+        "wall_ms": 300.65,
+        "cpu_ms": 261.428,
+        "calls": 1.0
+      },
+      "pointer": {
+        "wall_ms": 12.531,
+        "cpu_ms": 11.005,
+        "calls": 2.0
+      },
+      "projection_wait": {
+        "wall_ms": 109.847,
+        "cpu_ms": 34.429,
+        "calls": 3.0
+      },
+      "state_publish": {
+        "wall_ms": 1420.493,
+        "cpu_ms": 1123.963,
+        "calls": 1.1666666666666667
+      },
+      "texture": {
+        "wall_ms": 140.172,
+        "cpu_ms": 85.858,
+        "calls": 2.0
+      },
+      "tiles_prepare": {
+        "wall_ms": 248.367,
+        "cpu_ms": 161.646,
+        "calls": 1.0
+      },
+      "workspace": {
+        "wall_ms": 869.559,
+        "cpu_ms": 598.908,
+        "calls": 1.0
+      }
+    },
+    "errors": [
+      null,
+      null
+    ]
+  },
+  "candidate": {
+    "frames": 9,
+    "snapshot_interval_ms": 3726.7632022222742,
+    "per_frame": {
+      "app_present": {
+        "wall_ms": 252.889,
+        "cpu_ms": 181.38,
+        "calls": 1.0
+      },
+      "apps": {
+        "wall_ms": 809.084,
+        "cpu_ms": 583.866,
+        "calls": 1.0
+      },
+      "blend": {
+        "wall_ms": 406.047,
+        "cpu_ms": 314.939,
+        "calls": 3.0
+      },
+      "captions": {
+        "wall_ms": 22.691,
+        "cpu_ms": 18.113,
+        "calls": 2.0
+      },
+      "compose": {
+        "wall_ms": 1782.216,
+        "cpu_ms": 1285.11,
+        "calls": 1.0
+      },
+      "descriptors": {
+        "wall_ms": 47.917,
+        "cpu_ms": 34.28,
+        "calls": 3.0
+      },
+      "finish": {
+        "wall_ms": 239.116,
+        "cpu_ms": 178.236,
+        "calls": 1.0
+      },
+      "image": {
+        "wall_ms": 144.354,
+        "cpu_ms": 101.379,
+        "calls": 1.0
+      },
+      "image_publish": {
+        "wall_ms": 6.083,
+        "cpu_ms": 4.216,
+        "calls": 1.0
+      },
+      "layers": {
+        "wall_ms": 213.239,
+        "cpu_ms": 155.268,
+        "calls": 1.0
+      },
+      "output_publish": {
+        "wall_ms": 312.649,
+        "cpu_ms": 262.752,
+        "calls": 1.0
+      },
+      "pointer": {
+        "wall_ms": 20.639,
+        "cpu_ms": 11.667,
+        "calls": 2.0
+      },
+      "projection_wait": {
+        "wall_ms": 109.205,
+        "cpu_ms": 35.699,
+        "calls": 3.0
+      },
+      "state_publish": {
+        "wall_ms": 1166.786,
+        "cpu_ms": 832.962,
+        "calls": 1.1111111111111112
+      },
+      "texture": {
+        "wall_ms": 116.413,
+        "cpu_ms": 73.805,
+        "calls": 2.0
+      },
+      "tiles_prepare": {
+        "wall_ms": 228.106,
+        "cpu_ms": 159.554,
+        "calls": 1.0
+      },
+      "workspace": {
+        "wall_ms": 479.159,
+        "cpu_ms": 348.627,
+        "calls": 1.0
+      }
+    },
+    "errors": [
+      null,
+      null
+    ]
+  },
+  "interval_reduction_percent": 38.58991272218384,
+  "profile_quiet": {
+    "frames": 9,
+    "seconds_per_update": 3.8701369133333277,
+    "direct_upload_bytes_per_update": 38400.0,
+    "partial_uploads": 9,
+    "full_uploads": 0,
+    "samples": [
+      {
+        "compose_ms": 2225.2351000006456,
+        "renders": 16,
+        "uptime": 83.13612039999862,
+        "generation": 31,
+        "commits": 17,
+        "dma_errors": 0,
+        "dma_upload_bytes": 91968608,
+        "pool_upload_bytes": 1984000,
+        "partial_uploads": 14,
+        "full_uploads": 5,
+        "phase": "composing",
+        "snapshot_age": 3.9967940200003795,
+        "render_error": null,
+        "app_error": null
+      },
+      {
+        "compose_ms": 1648.6296200000652,
+        "renders": 25,
+        "uptime": 117.96735261999856,
+        "generation": 40,
+        "commits": 26,
+        "dma_errors": 0,
+        "dma_upload_bytes": 92314208,
+        "pool_upload_bytes": 2329600,
+        "partial_uploads": 23,
+        "full_uploads": 5,
+        "phase": "composing",
+        "snapshot_age": 3.0484795199990913,
+        "render_error": null,
+        "app_error": null
+      }
+    ]
+  },
+  "normal_quiet": {
+    "frames": 13,
+    "seconds_per_update": 3.338763935384542,
+    "direct_upload_bytes_per_update": 36676.92307692308,
+    "partial_uploads": 13,
+    "full_uploads": 0,
+    "samples": [
+      {
+        "compose_ms": 1722.2714199997426,
+        "renders": 6,
+        "uptime": 43.18605390000084,
+        "generation": 21,
+        "commits": 7,
+        "dma_errors": 0,
+        "dma_upload_bytes": 94205408,
+        "pool_upload_bytes": 1622400,
+        "partial_uploads": 4,
+        "full_uploads": 5,
+        "phase": "apps",
+        "snapshot_age": 0.5920338200012338,
+        "render_error": null,
+        "app_error": null
+      },
+      {
+        "compose_ms": 1577.5110199992923,
+        "renders": 19,
+        "uptime": 86.58998505999989,
+        "generation": 34,
+        "commits": 20,
+        "dma_errors": 0,
+        "dma_upload_bytes": 94682208,
+        "pool_upload_bytes": 2099200,
+        "partial_uploads": 17,
+        "full_uploads": 5,
+        "phase": "composing",
+        "snapshot_age": 1.5077328399984253,
+        "render_error": null,
+        "app_error": null
+      }
+    ]
+  }
+}

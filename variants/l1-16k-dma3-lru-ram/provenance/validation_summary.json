@@ -1,0 +1,370 @@
+{
+  "result": "PASS_RTL_REGRESSIONS",
+  "checks": [
+    {
+      "log": "validation/l1_seed1.log",
+      "sha256": "cee9f945fb2ff32db76e83cebd7c0cb1d2182147faf28c3b6110e6dde54c9427",
+      "pass_lines": [
+        "PASS L1_16K_2WAY capacity I/D, LRU, byte stores, DMA visibility, refill races, independent responses, errors, random checks=4469 cycles=98250"
+      ]
+    },
+    {
+      "log": "validation/cpu_storage_seed1.log",
+      "sha256": "0bb153a7a1d77a976228c6e45aa664188ad29ed799d2439e1668b8a990cc593c",
+      "pass_lines": [
+        "PASS THREE_DMA concurrent engines, independent PLIC sources, cached destinations coherent",
+        "PASS CPU self-modifying code FENCE.I, AMO, cached DMA destination",
+        "PASS CPU SD read/write/roundtrip, DMA MMIO copy/fill payloads, PLIC M/S claim/complete, CDC, precise external interrupts cycles=706519 retired=16855 M=7 S=3 snoops=3584"
+      ]
+    },
+    {
+      "log": "validation/cpu_storage_native_seed1.log",
+      "sha256": "caabca8bfc6a78ecb0a553c83d0d4a13e24e96a88eeed6153a7c7663e95f1f3d",
+      "pass_lines": [
+        "PASS THREE_DMA concurrent engines, independent PLIC sources, cached destinations coherent",
+        "PASS CPU self-modifying code FENCE.I, AMO, cached DMA destination",
+        "PASS CPU SD read/write/roundtrip, DMA MMIO copy/fill payloads, PLIC M/S claim/complete, CDC, precise external interrupts cycles=732898 retired=18036 M=8 S=4 snoops=3776",
+        "PASS production AXI-MIG bridge/native arbiter with mock DDR, SD DMA at 0xbffff000 and fill through 0xbffffffc"
+      ]
+    },
+    {
+      "log": "validation/cpu_sv32_axi_seed1.log",
+      "sha256": "7b3e2f5fa408921de77d34fd9f6de8eb4180bd53f4d414132885047d7247ffc3",
+      "pass_lines": [
+        "PASS THREE_DMA concurrent engines, independent PLIC sources, cached destinations coherent",
+        "PASS CPU self-modifying code FENCE.I, AMO, cached DMA destination",
+        "PASS CPU SD read/write/roundtrip, DMA MMIO copy/fill payloads, PLIC M/S claim/complete, CDC, precise external interrupts cycles=902665 retired=20001 M=7 S=3 snoops=3600",
+        "PASS CPU_SV32_CACHE virtual aliases, page-table update/SFENCE.VMA, coherent DMA1/DMA2, S-mode IRQ with paging"
+      ]
+    },
+    {
+      "log": "validation/cpu_sv32_native_seed1.log",
+      "sha256": "e2d1fd172231d728065761c83994a65a33eea9c86fa38d3313207c37e7e580a4",
+      "pass_lines": [
+        "PASS THREE_DMA concurrent engines, independent PLIC sources, cached destinations coherent",
+        "PASS CPU self-modifying code FENCE.I, AMO, cached DMA destination",
+        "PASS CPU SD read/write/roundtrip, DMA MMIO copy/fill payloads, PLIC M/S claim/complete, CDC, precise external interrupts cycles=929024 retired=21137 M=8 S=4 snoops=3792",
+        "PASS production AXI-MIG bridge/native arbiter with mock DDR, SD DMA at 0xbffff000 and fill through 0xbffffffc",
+        "PASS CPU_SV32_CACHE virtual aliases, page-table update/SFENCE.VMA, coherent DMA1/DMA2, S-mode IRQ with paging"
+      ]
+    },
+    {
+      "log": "soc/reports/integration_seed1.log",
+      "sha256": "43a6281a7ebc52c318aaf156db256043972aac3f781275084388e6a3ac5855e8",
+      "pass_lines": [
+        "PASS GEN3_BOSIO cycles=374193 retired=3271 reads='{'h208, 'h24, 'h12, 'h1190}  writes='{'h13b, 'h200, 'h100, 'h0}  snoops=768 lock_cycles=162 pixels=148481 output_read_beats=4496"
+      ]
+    },
+    {
+      "log": "soc/reports/integration_patterned_seed1.log",
+      "sha256": "152f45782a93b8bb94aff67bd40d7aaafe2629301ccd166546106e5d49d1de9e",
+      "pass_lines": [
+        "PASS GEN3_BOSIO cycles=740385 retired=9241 reads='{'h220, 'h24, 'h12, 'h1190}  writes='{'h23b, 'h200, 'h100, 'h0}  snoops=768 lock_cycles=166 pixels=148486 output_read_beats=4496"
+      ]
+    },
+    {
+      "log": "soc/reports/native_integration_seed1.log",
+      "sha256": "53de0c44b2da447a201b342be9f9ba7adc5a2b087b68882a881f0e0845f62d4f",
+      "pass_lines": [
+        "PASS GEN3_BOSIO cycles=383207 retired=3331 reads='{'h208, 'h24, 'h12, 'h1190}  writes='{'h13b, 'h200, 'h100, 'h0}  snoops=768 lock_cycles=186 pixels=147103 output_read_beats=4496"
+      ]
+    },
+    {
+      "log": "soc/reports/native_integration_patterned_seed1.log",
+      "sha256": "4a9105f16022d58c1e8747320b02c53c81462cba5cabea8e6cfe3dd71b29254a",
+      "pass_lines": [
+        "PASS GEN3_BOSIO cycles=757627 retired=9400 reads='{'h220, 'h24, 'h12, 'h1190}  writes='{'h23b, 'h200, 'h100, 'h0}  snoops=768 lock_cycles=184 pixels=148634 output_read_beats=4496"
+      ]
+    },
+    {
+      "log": "validation/dma_seed1.log",
+      "sha256": "8210cb2d3b3e2c87b6308cd1588ca47904de567cba574cdc33da129d72510410",
+      "pass_lines": [
+        "PASS DMA copy/fill, 4KiB split, 5-master contention, atomic lock, snoops, SD directions, queue, errors, 256 randomized descriptors cycles=101846"
+      ]
+    },
+    {
+      "log": "validation/plic_seed1.log",
+      "sha256": "8650c2c7509c1c5eae1067d085e04f4d59316d08c53ec11081d197a3856f2b9f",
+      "pass_lines": [
+        "PASS PLIC M/S contexts, priorities, level re-pending, claim/complete, response stalls"
+      ]
+    },
+    {
+      "log": "validation/irq_seed1.log",
+      "sha256": "22870cdb5689353ec1ccff043c272fd3d47e360150938410b163ebebb8ca1440",
+      "pass_lines": [
+        "PASS CSR external IRQ mask, M/S delegation, privilege and priority"
+      ]
+    },
+    {
+      "log": "validation/l1_seed7.log",
+      "sha256": "ae0962ae46417274bf18a370b177027ecfe6df9d984a0bba5e8c83fc9987078f",
+      "pass_lines": [
+        "PASS L1_16K_2WAY capacity I/D, LRU, byte stores, DMA visibility, refill races, independent responses, errors, random checks=4469 cycles=98224"
+      ]
+    },
+    {
+      "log": "validation/cpu_storage_seed7.log",
+      "sha256": "ccd885ed7691272bbd365f505b3b529acdf43cc590a9f64cfa0388754639287d",
+      "pass_lines": [
+        "PASS THREE_DMA concurrent engines, independent PLIC sources, cached destinations coherent",
+        "PASS CPU self-modifying code FENCE.I, AMO, cached DMA destination",
+        "PASS CPU SD read/write/roundtrip, DMA MMIO copy/fill payloads, PLIC M/S claim/complete, CDC, precise external interrupts cycles=706516 retired=16855 M=7 S=3 snoops=3584"
+      ]
+    },
+    {
+      "log": "validation/cpu_storage_native_seed7.log",
+      "sha256": "1cdf03ae51f3c2b7e79facfb3d7cdc03a05b00fa541e699ffa9e1e40a4294e16",
+      "pass_lines": [
+        "PASS THREE_DMA concurrent engines, independent PLIC sources, cached destinations coherent",
+        "PASS CPU self-modifying code FENCE.I, AMO, cached DMA destination",
+        "PASS CPU SD read/write/roundtrip, DMA MMIO copy/fill payloads, PLIC M/S claim/complete, CDC, precise external interrupts cycles=733000 retired=18021 M=8 S=4 snoops=3776",
+        "PASS production AXI-MIG bridge/native arbiter with mock DDR, SD DMA at 0xbffff000 and fill through 0xbffffffc"
+      ]
+    },
+    {
+      "log": "validation/cpu_sv32_axi_seed7.log",
+      "sha256": "7b3e2f5fa408921de77d34fd9f6de8eb4180bd53f4d414132885047d7247ffc3",
+      "pass_lines": [
+        "PASS THREE_DMA concurrent engines, independent PLIC sources, cached destinations coherent",
+        "PASS CPU self-modifying code FENCE.I, AMO, cached DMA destination",
+        "PASS CPU SD read/write/roundtrip, DMA MMIO copy/fill payloads, PLIC M/S claim/complete, CDC, precise external interrupts cycles=902665 retired=20001 M=7 S=3 snoops=3600",
+        "PASS CPU_SV32_CACHE virtual aliases, page-table update/SFENCE.VMA, coherent DMA1/DMA2, S-mode IRQ with paging"
+      ]
+    },
+    {
+      "log": "validation/cpu_sv32_native_seed7.log",
+      "sha256": "7d1933c7dd9aabb4cc925a2a666c158da43a368502907f723c8c3daff583886e",
+      "pass_lines": [
+        "PASS THREE_DMA concurrent engines, independent PLIC sources, cached destinations coherent",
+        "PASS CPU self-modifying code FENCE.I, AMO, cached DMA destination",
+        "PASS CPU SD read/write/roundtrip, DMA MMIO copy/fill payloads, PLIC M/S claim/complete, CDC, precise external interrupts cycles=928622 retired=21137 M=8 S=4 snoops=3792",
+        "PASS production AXI-MIG bridge/native arbiter with mock DDR, SD DMA at 0xbffff000 and fill through 0xbffffffc",
+        "PASS CPU_SV32_CACHE virtual aliases, page-table update/SFENCE.VMA, coherent DMA1/DMA2, S-mode IRQ with paging"
+      ]
+    },
+    {
+      "log": "soc/reports/integration_seed7.log",
+      "sha256": "f2d61d08085401866f7b540f3dddf12ddec3c5d463b6cce45da1fa59edf4202e",
+      "pass_lines": [
+        "PASS GEN3_BOSIO cycles=374199 retired=3271 reads='{'h208, 'h24, 'h12, 'h1190}  writes='{'h13b, 'h200, 'h100, 'h0}  snoops=768 lock_cycles=166 pixels=148487 output_read_beats=4496"
+      ]
+    },
+    {
+      "log": "soc/reports/integration_patterned_seed7.log",
+      "sha256": "46593f79cbdd8e100803eb121d02bda3feb3925ccd9e0ad1c4d5dc8efdc72c02",
+      "pass_lines": [
+        "PASS GEN3_BOSIO cycles=740379 retired=9241 reads='{'h220, 'h24, 'h12, 'h1190}  writes='{'h23b, 'h200, 'h100, 'h0}  snoops=768 lock_cycles=162 pixels=148481 output_read_beats=4496"
+      ]
+    },
+    {
+      "log": "soc/reports/native_integration_seed7.log",
+      "sha256": "fddb4a84b310c5151e7a477f9216cc3987d8fee75bbe926f5b8d5951e74b6e11",
+      "pass_lines": [
+        "PASS GEN3_BOSIO cycles=382353 retired=3325 reads='{'h208, 'h24, 'h12, 'h1190}  writes='{'h13b, 'h200, 'h100, 'h0}  snoops=768 lock_cycles=182 pixels=147094 output_read_beats=4496"
+      ]
+    },
+    {
+      "log": "soc/reports/native_integration_patterned_seed7.log",
+      "sha256": "1f475830b4e9260032187b3e190bc47b9444f4ab2b5058ed91ea219e54088c21",
+      "pass_lines": [
+        "PASS GEN3_BOSIO cycles=757619 retired=9412 reads='{'h220, 'h24, 'h12, 'h1190}  writes='{'h23b, 'h200, 'h100, 'h0}  snoops=768 lock_cycles=184 pixels=148735 output_read_beats=4496"
+      ]
+    },
+    {
+      "log": "validation/dma_seed7.log",
+      "sha256": "67e3584ace0dbb61e84d8e1cfecc275a6ed30b86bd5575c97a985e268316961e",
+      "pass_lines": [
+        "PASS DMA copy/fill, 4KiB split, 5-master contention, atomic lock, snoops, SD directions, queue, errors, 256 randomized descriptors cycles=107183"
+      ]
+    },
+    {
+      "log": "validation/plic_seed7.log",
+      "sha256": "8650c2c7509c1c5eae1067d085e04f4d59316d08c53ec11081d197a3856f2b9f",
+      "pass_lines": [
+        "PASS PLIC M/S contexts, priorities, level re-pending, claim/complete, response stalls"
+      ]
+    },
+    {
+      "log": "validation/irq_seed7.log",
+      "sha256": "22870cdb5689353ec1ccff043c272fd3d47e360150938410b163ebebb8ca1440",
+      "pass_lines": [
+        "PASS CSR external IRQ mask, M/S delegation, privilege and priority"
+      ]
+    },
+    {
+      "log": "validation/l1_seed23.log",
+      "sha256": "5698b6ea521e1c4ecc0c136555391842e3b8e345e6b0549dd145826c871bd3cd",
+      "pass_lines": [
+        "PASS L1_16K_2WAY capacity I/D, LRU, byte stores, DMA visibility, refill races, independent responses, errors, random checks=4469 cycles=97983"
+      ]
+    },
+    {
+      "log": "validation/cpu_storage_seed23.log",
+      "sha256": "292ed493dba2baacb611b33a0540ddae226114afb19f6bc3de113b6fbcded00d",
+      "pass_lines": [
+        "PASS THREE_DMA concurrent engines, independent PLIC sources, cached destinations coherent",
+        "PASS CPU self-modifying code FENCE.I, AMO, cached DMA destination",
+        "PASS CPU SD read/write/roundtrip, DMA MMIO copy/fill payloads, PLIC M/S claim/complete, CDC, precise external interrupts cycles=706517 retired=16855 M=7 S=3 snoops=3584"
+      ]
+    },
+    {
+      "log": "validation/cpu_storage_native_seed23.log",
+      "sha256": "22fe5bb624e41194b9440fd17d574bb17f976f0668eddcc6f21ce810eacd2dc2",
+      "pass_lines": [
+        "PASS THREE_DMA concurrent engines, independent PLIC sources, cached destinations coherent",
+        "PASS CPU self-modifying code FENCE.I, AMO, cached DMA destination",
+        "PASS CPU SD read/write/roundtrip, DMA MMIO copy/fill payloads, PLIC M/S claim/complete, CDC, precise external interrupts cycles=733291 retired=18036 M=8 S=4 snoops=3776",
+        "PASS production AXI-MIG bridge/native arbiter with mock DDR, SD DMA at 0xbffff000 and fill through 0xbffffffc"
+      ]
+    },
+    {
+      "log": "validation/cpu_sv32_axi_seed23.log",
+      "sha256": "db126c23176b25b58c23ac497959943d7949bbf7800fa2a80b0a1e3ad2c5c44d",
+      "pass_lines": [
+        "PASS THREE_DMA concurrent engines, independent PLIC sources, cached destinations coherent",
+        "PASS CPU self-modifying code FENCE.I, AMO, cached DMA destination",
+        "PASS CPU SD read/write/roundtrip, DMA MMIO copy/fill payloads, PLIC M/S claim/complete, CDC, precise external interrupts cycles=902666 retired=20001 M=7 S=3 snoops=3600",
+        "PASS CPU_SV32_CACHE virtual aliases, page-table update/SFENCE.VMA, coherent DMA1/DMA2, S-mode IRQ with paging"
+      ]
+    },
+    {
+      "log": "validation/cpu_sv32_native_seed23.log",
+      "sha256": "d0d7587013c9bb87b6f1099ff5c8a14abb005d6e8810ed60add1089f37b1cc45",
+      "pass_lines": [
+        "PASS THREE_DMA concurrent engines, independent PLIC sources, cached destinations coherent",
+        "PASS CPU self-modifying code FENCE.I, AMO, cached DMA destination",
+        "PASS CPU SD read/write/roundtrip, DMA MMIO copy/fill payloads, PLIC M/S claim/complete, CDC, precise external interrupts cycles=928876 retired=21138 M=8 S=4 snoops=3792",
+        "PASS production AXI-MIG bridge/native arbiter with mock DDR, SD DMA at 0xbffff000 and fill through 0xbffffffc",
+        "PASS CPU_SV32_CACHE virtual aliases, page-table update/SFENCE.VMA, coherent DMA1/DMA2, S-mode IRQ with paging"
+      ]
+    },
+    {
+      "log": "soc/reports/integration_seed23.log",
+      "sha256": "d32515350d1dc7bbbec773e650ace5d76f5f7f7a321352741785d9ae066a31a1",
+      "pass_lines": [
+        "PASS GEN3_BOSIO cycles=372253 retired=3210 reads='{'h208, 'h24, 'h12, 'h1190}  writes='{'h13b, 'h200, 'h100, 'h0}  snoops=768 lock_cycles=164 pixels=146659 output_read_beats=4496"
+      ]
+    },
+    {
+      "log": "soc/reports/integration_patterned_seed23.log",
+      "sha256": "83ec0ceafc19d59d61108f048dac1c7d87d2317e0bcd2579b3b1323a58e2f601",
+      "pass_lines": [
+        "PASS GEN3_BOSIO cycles=738657 retired=9180 reads='{'h220, 'h24, 'h12, 'h1190}  writes='{'h23b, 'h200, 'h100, 'h0}  snoops=768 lock_cycles=164 pixels=146655 output_read_beats=4496"
+      ]
+    },
+    {
+      "log": "soc/reports/native_integration_seed23.log",
+      "sha256": "341c0db62fce727ba8363a487cf20e98a8f4ae7dc89dc6fc4757c4237be57a9a",
+      "pass_lines": [
+        "PASS GEN3_BOSIO cycles=385029 retired=3328 reads='{'h208, 'h24, 'h12, 'h1190}  writes='{'h13b, 'h200, 'h100, 'h0}  snoops=768 lock_cycles=186 pixels=148639 output_read_beats=4496"
+      ]
+    },
+    {
+      "log": "soc/reports/native_integration_patterned_seed23.log",
+      "sha256": "5407fcf087dc4bef3a128ffce1283afed28b71b4c549ef670d3424cf07301556",
+      "pass_lines": [
+        "PASS GEN3_BOSIO cycles=758239 retired=9415 reads='{'h220, 'h24, 'h12, 'h1190}  writes='{'h23b, 'h200, 'h100, 'h0}  snoops=768 lock_cycles=182 pixels=148649 output_read_beats=4496"
+      ]
+    },
+    {
+      "log": "validation/dma_seed23.log",
+      "sha256": "373f67ede863248630c29ff467af9ce823aab99dcb3c4d7ce90916c98ae144fa",
+      "pass_lines": [
+        "PASS DMA copy/fill, 4KiB split, 5-master contention, atomic lock, snoops, SD directions, queue, errors, 256 randomized descriptors cycles=100722"
+      ]
+    },
+    {
+      "log": "validation/plic_seed23.log",
+      "sha256": "8650c2c7509c1c5eae1067d085e04f4d59316d08c53ec11081d197a3856f2b9f",
+      "pass_lines": [
+        "PASS PLIC M/S contexts, priorities, level re-pending, claim/complete, response stalls"
+      ]
+    },
+    {
+      "log": "validation/irq_seed23.log",
+      "sha256": "22870cdb5689353ec1ccff043c272fd3d47e360150938410b163ebebb8ca1440",
+      "pass_lines": [
+        "PASS CSR external IRQ mask, M/S delegation, privilege and priority"
+      ]
+    },
+    {
+      "log": "validation/native_test.log",
+      "sha256": "f47589fd45bd964f8f3d2f312553a589fc5e38faa319b5a9dd8a3776b4261755",
+      "pass_lines": [
+        "PASS native SD R7/R2, 1/4-bit 512-byte read/write, SCR, CRC errors, write reject, timeout input_delay_ns=0 cycles=274527"
+      ]
+    },
+    {
+      "log": "validation/native_delayed_input_test.log",
+      "sha256": "7cbd84b8a7d1448ea3d219089f7ec28243c7f7d18a9696d2e6359eeae476ffb9",
+      "pass_lines": [
+        "PASS native SD R7/R2, 1/4-bit 512-byte read/write, SCR, CRC errors, write reject, timeout input_delay_ns=20 cycles=274527"
+      ]
+    },
+    {
+      "log": "validation/storage_test.log",
+      "sha256": "093c3a9d112a53b274795f1bb76b848198e705b1b37b2cb87daf42aaad0a51dc",
+      "pass_lines": [
+        "PASS native SD boot initialization, header and 3 CRC-checked segments to mock DDR cycles=294715",
+        "PASS boot-to-runtime ownership, MMIO command, SD->DMA->RAM, fill, RAM->DMA->SD, sector roundtrip cycles=321465"
+      ]
+    },
+    {
+      "log": "validation/boot_reject_header.log",
+      "sha256": "8cb710c19a715c938fe594f5854654420e94d17d757bf601ab538d0a4c5c9bef",
+      "pass_lines": [
+        "PASS native boot rejects header before CPU release"
+      ]
+    },
+    {
+      "log": "validation/boot_reject_oversize.log",
+      "sha256": "0a96f13ed30d2b826e5558a45095cea7f1f68cfa3d0ec25d809cef1036344f01",
+      "pass_lines": [
+        "PASS native boot rejects oversize before CPU release"
+      ]
+    },
+    {
+      "log": "validation/boot_reject_payload-crc.log",
+      "sha256": "71aec10e89a714fde579db8971683a2c8c52c4622083a3fbd2537e17480f78f9",
+      "pass_lines": [
+        "PASS native boot rejects payload-crc before CPU release"
+      ]
+    },
+    {
+      "log": "validation/boot_reject_card-crc.log",
+      "sha256": "97ae23600f36565a0f181b8256de1893d2fb810d1db568494264c95f4fc26abb",
+      "pass_lines": [
+        "PASS native boot rejects card-crc before CPU release"
+      ]
+    },
+    {
+      "log": "validation/boot_reject_ddr.log",
+      "sha256": "58da742c2ab992a36033409caef1f215c2c507dfe67f6b2fde38be2312b42896",
+      "pass_lines": [
+        "PASS native boot rejects ddr before CPU release"
+      ]
+    }
+  ],
+  "lint_errors_latches_multidrivers_comb_loops": 0,
+  "cpu_firmware_sha256": {
+    "validation/cpu_storage.bin": "b7a0ee006652006af3cb1ed0e249ba4f529daef4232be014863c85330bfd7a09",
+    "validation/cpu_storage.elf": "d489d077224803697dcfc20bf4ea80856c8f826b62ba423415b2ef025c230e0c",
+    "validation/cpu_storage.hex": "3c9f91c2148dfaa7b2eed8ab3b2acad2cca0ca396096691322b712b3ee87ffdc",
+    "validation/cpu_storage_native.bin": "1138796498a8204ce9c067b1b1275e612e4e8584687d6aa2a1ddd9cd9fbf2d90",
+    "validation/cpu_storage_native.elf": "12fff935c04cb3b2a25f39dffd4e33187e0a547df0651a36c8b925262357b625",
+    "validation/cpu_storage_native.hex": "bc399aa23555a71865a375cabc256fd9dc7cf27336d37b1cec9e06e74bf6fa50",
+    "validation/cpu_sv32_axi.bin": "0fe0058d18a57a6363651c8c4aef5ef1f8822d4fea3a5eafe67d93fff9137584",
+    "validation/cpu_sv32_axi.elf": "f4cc979f2a3c1efa6f9aaef8051e40ef42b88a684cfef1cfd513b7ca48d9816c",
+    "validation/cpu_sv32_axi.hex": "e595efcfc410914ddc8977fe52e7a2d05a22b77af2843520e56a8bbcea3f475d",
+    "validation/cpu_sv32_native.bin": "31945a74acc1957834400a63c336a0d9e21ee17fef26a5e82cac71efba17cefc",
+    "validation/cpu_sv32_native.elf": "2ab3b4a1b6cb7da86a48ed4a376221ceeff37bd6fe4551d56f08eacfdb1b4493",
+    "validation/cpu_sv32_native.hex": "789189258580a9e044189e12367881f26b5c983b8d6a58f371a4e8f1955d0b30"
+  },
+  "sv32_test_source_sha256": "beee4a5770827c1ef111992a06da756de2f2b7c4a06371c0be0c389990372a7a",
+  "new_cache_dma_interface_lint_warnings": [],
+  "linux_full_cpu_rtl_boot": false,
+  "physical_board_test": false,
+  "ddr_backend": "AXI RAM and production AXI-MIG adapter/native arbiter with mock DDR"
+}

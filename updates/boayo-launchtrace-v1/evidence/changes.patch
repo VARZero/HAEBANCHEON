@@ -1,0 +1,261 @@
+--- bosio-dma-v1/apps.cpp
++++ launchtrace-v1/apps.cpp
+@@ -1,10 +1,13 @@
+ #include "apps.hpp"
++#include "init_trace.hpp"
+ namespace boayo {
+ void publish(WM &wm, int id, const Surface &s, bool first) {
++  init_trace::mark("surface.publish.begin", s.pixels.size());
+   auto &w = wm.window(id);
+   require(w.surface.size() == s.pixels.size(), "surface size mismatch");
+   int x0 = s.width, y0 = s.height, x1 = -1, y1 = -1;
+-  for (int y = 0; y < s.height; y++)
++  for (int y = 0; y < s.height; y++) {
++    if (init_trace::active && (y == 0 || y == s.height/2 || y == s.height-1)) init_trace::mark("surface.scan.row", y);
+     for (int x = 0; x < s.width; x++) {
+       size_t p = (size_t(y) * s.width + x) * 3;
+       if (first ||
+@@ -15,9 +18,13 @@
+         y1 = std::max(y1, y);
+       }
+     }
++  }
++  init_trace::mark("surface.scan.end", s.height);
+   if (x1 < 0)
+     return;
++  init_trace::mark("surface.copy.begin", s.pixels.size());
+   w.surface = s.pixels;
++  init_trace::mark("surface.copy.end", s.pixels.size());
+   if (w.dirty[2]) {
+     x0 = std::min(x0, w.dirty[0]);
+     y0 = std::min(y0, w.dirty[1]);
+@@ -27,6 +34,7 @@
+   w.dirty = {x0, y0, x1 - x0 + 1, y1 - y0 + 1};
+   ++w.revision;
+   ++wm.generation;
++  init_trace::mark("surface.publish.end", id);
+ }
+ std::pair<double, double> gaze(double az, double el, double w, double h, double u, double v) {
+   auto a = axes(az, el);
+@@ -679,9 +687,11 @@
+   }
+ }
+ Desktop::Desktop(WM &w) : wm(w), workspace(w) {
++  init_trace::Scope trace;
+   apps = J::array({{{"id", "dashboard"}, {"name", "Dashboard"}, {"color", "#347CFF"}},
+                    {{"id", "telemetry"}, {"name", "Telemetry"}, {"color", "#33B57A"}},
+                    {{"id", "sdk-pulse"}, {"name", "SDK Pulse"}, {"color", "#347CFF"}}});
++  init_trace::mark("window.create.begin");
+   launcher = workspace.call("create_window", {{"title", "BoAYO Launcher"},
+                                               {"azimuth", 0},
+                                               {"elevation", 0},
+@@ -690,10 +700,14 @@
+                                               {"surface_width", 640},
+                                               {"surface_height", 360},
+                                               {"always_on_top", true}})["window_id"];
++  init_trace::mark("window.create.end", launcher);
++  init_trace::mark("window.configure.begin");
+   workspace.call(
+       "configure_window",
+       {{"window_id", launcher}, {"shape", J::array({J::array({51.2, 36., 537.6, 252., 18.})})}});
++  init_trace::mark("window.configure.end", launcher);
+   publish(wm, launcher, launcher_image(apps), true);
++  init_trace::mark("desktop.end", launcher);
+ }
+ int Desktop::launch(std::string kind, double az, double el) {
+   if (kind == "pulse")
+--- bosio-dma-v1/ui.cpp
++++ launchtrace-v1/ui.cpp
+@@ -1,11 +1,14 @@
+ #include "ui.hpp"
++#include "init_trace.hpp"
+ #include "font.hpp"
+ #include <cctype>
+ #include <cstdio>
+ namespace boayo {
+ void Surface::clear(Color c) {
++  init_trace::mark("surface.clear.begin", pixels.size());
+   for (size_t i = 0; i < pixels.size(); i++)
+     pixels[i] = c[i % 3];
++  init_trace::mark("surface.clear.end", pixels.size());
+ }
+ void Surface::blend(int x, int y, unsigned n, Color c) {
+   if (x < 0 || y < 0 || x >= width || y >= height)
+@@ -24,12 +27,13 @@
+           pixels[(size_t(yy) * width + xx) * 3 + k] = c[k];
+ }
+ void Surface::rounded(double xx, double yy, double ww, double hh, double rr, Color c) {
++  init_trace::mark("rounded.begin");
+   int x = xx, y = yy, w = ww, h = hh, r = std::max(0, std::min({int(rr), w / 2, h / 2}));
+   rect(x + r, y, w - 2 * r, h, c);
+   rect(x, y + r, w, h - 2 * r, c);
+-  if (!r)
+-    return;
+-  for (int iy = 0; iy < r; iy++)
++  if (!r) { init_trace::mark("rounded.end", 0); return; }
++  for (int iy = 0; iy < r; iy++) {
++    if (init_trace::active && (iy == 0 || iy == r/2 || iy == r-1)) init_trace::mark("rounded.row", iy);
+     for (int ix = 0; ix < r; ix++) {
+       unsigned n = 0;
+       for (double oy : {.125, .375, .625, .875})
+@@ -42,10 +46,14 @@
+       blend(x + ix, y + h - 1 - iy, n, c);
+       blend(x + w - 1 - ix, y + h - 1 - iy, n, c);
+     }
++  }
++  init_trace::mark("rounded.end", r);
+ }
+ void Surface::circle(double cx, double cy, double r, Color c) {
++  init_trace::mark("circle.begin");
+   for (int y = std::max(0, int(std::floor(cy - r))); y < std::min(height, int(std::ceil(cy + r)));
+-       y++)
++       y++) {
++    if (init_trace::active && (y % 8 == 0)) init_trace::mark("circle.row", y);
+     for (int x = std::max(0, int(std::floor(cx - r))); x < std::min(width, int(std::ceil(cx + r)));
+          x++) {
+       unsigned n = 0;
+@@ -54,6 +62,8 @@
+           n += (x + ox - cx) * (x + ox - cx) + (y + oy - cy) * (y + oy - cy) <= r * r;
+       blend(x, y, n, c);
+     }
++  }
++  init_trace::mark("circle.end");
+ }
+ void Surface::polygon(const std::vector<std::array<float, 2>> &p, Color c) {
+   if (p.empty())
+@@ -134,7 +144,9 @@
+ }
+ Surface launcher_image(const J &apps, int selected, int hovered, int offset, bool visible,
+                        bool active, int width, int height) {
++  init_trace::mark("launcher.allocate.begin", static_cast<long long>(width)*height*3);
+   Surface c(width, height);
++  init_trace::mark("launcher.allocate.end", c.pixels.size());
+   if (!visible || active)
+     return c;
+   double rx = width * .08, ry = height * .10, rw = width * .84, rh = height * .70;
+@@ -147,17 +159,20 @@
+   c.circle(x + 52, y + 46, 5, focus_color);
+   c.rect(x + 30, y + 45, 8, 3, focus_color);
+   c.rect(x + 66, y + 45, 8, 3, focus_color);
++  init_trace::mark("launcher.text.begin");
+   c.text("BOAYO", x + 24, y + 80, text_color, 3, true);
+   c.text("WORKSPACE", x + 24, y + 111, subtle, 2);
+   c.text("LOOK / HOLD", x + 24, y + 147, subtle, 1);
+   c.text("DOWN TO STORE", x + 24, y + 166, subtle, 1);
+   c.text("BTN1: APP LIST", x + 24, y + h - 37, subtle, 1);
++  init_trace::mark("launcher.text.end");
+   int lx = split + 20, ly = y + 22, n = std::max(1, std::min(5, (h - 38) / 54));
+   for (int row = 0; row < n; row++) {
+     int index = offset + row;
+     if (index >= int(apps.size()))
+       break;
+     auto a = apps[index];
++    init_trace::mark("launcher.app.begin", index);
+     int bx = lx, by = ly + row * 54;
+     bool sel = index == selected || index == hovered;
+     if (sel)
+@@ -175,8 +190,10 @@
+     if (sel)
+       c.rect(bx, by + 8, 3, 33, focus_color);
+   }
++  init_trace::mark("launcher.apps.end");
+   if (int(apps.size()) > n)
+     c.text("WHEEL", lx + 8, y + h - 27, subtle, 2, true);
++  init_trace::mark("launcher.image.end", c.pixels.size());
+   return c;
+ }
+ Surface app_frame(const std::string &title, int w, int h, bool focused, const std::string &hovered,
+--- bosio-dma-v1/runtime.cpp
++++ launchtrace-v1/runtime.cpp
+@@ -277,7 +277,7 @@
+   auto publish = [&] { b.publish(dispatch({{"op", "get_state"}})); };
+   publish();
+   b.phase("ready");
+-  std::cout << "BOAYO_NATIVE_READY initial_scene_committed" << std::endl;
++  std::cout << "BOAYO_NATIVE_READY blank_committed_launcher_pending" << std::endl;
+   while (!b.stop) {
+     std::deque<std::shared_ptr<Work>> work;
+     {
+@@ -326,6 +326,7 @@
+       uint64_t gen = wm.generation;
+       try {
+         b.phase("composing");
++        if (!render_count) std::cout << "BOAYO_FIRST_FRAME_COMPOSE_BEGIN" << std::endl;
+         b.mock_delay(mock);
+         auto start = seconds();
+         Composition c;
+@@ -343,6 +344,7 @@
+           c = compositor.update(wm);
+         auto middle = seconds();
+         b.phase("uploading");
++        if (!render_count) std::cout << "BOAYO_FIRST_FRAME_UPLOAD_BEGIN" << std::endl;
+         if (c.patch) {
+           output.patch(c.data());
+           if (c.data().empty())
+@@ -359,6 +361,7 @@
+         compose_ms = (middle - start) * 1000;
+         upload_ms = (seconds() - middle) * 1000;
+         words += c.data().size();
++        if (!render_count) std::cout << "BOAYO_FIRST_FRAME_PRESENT_DONE" << std::endl;
+         ++render_count;
+         rendered = gen;
+         last_scene = scene_generation;
+--- bosio-dma-v1/init_trace.hpp
++++ launchtrace-v1/init_trace.hpp
+@@ -0,0 +1,56 @@
++#pragma once
++#include <cstdio>
++#include <cerrno>
++#include <cstdlib>
++#include <cstring>
++#include <ctime>
++#include <fcntl.h>
++#include <unistd.h>
++
++// Diagnostic only: bounded first-desktop trace, no pixel/geometry changes.
++// Integer clocks avoid adding software floating point to the measured path.
++namespace boayo::init_trace {
++inline thread_local bool active = false;
++inline thread_local unsigned sequence = 0;
++inline thread_local long long wall_start = 0, cpu_start = 0;
++inline thread_local int uart = -1;
++inline long long clock_us(clockid_t kind) {
++  timespec t{};
++  if (clock_gettime(kind, &t)) return -1;
++  return static_cast<long long>(t.tv_sec) * 1000000 + t.tv_nsec / 1000;
++}
++inline void mark(const char *event, long long value = 0) {
++  if (!active || sequence >= 128) return;
++  const int saved_errno = errno;
++  long long wall = clock_us(CLOCK_MONOTONIC), cpu = clock_us(CLOCK_THREAD_CPUTIME_ID);
++  char line[224];
++  int n = std::snprintf(line, sizeof(line),
++      "BOAYO_INITTRACE n=%u event=%s wall_us=%lld cpu_us=%lld value=%lld\n",
++      ++sequence, event, wall < 0 ? -1 : wall-wall_start,
++      cpu < 0 || cpu_start < 0 ? -1 : cpu-cpu_start, value);
++  if (n > 0 && n < static_cast<int>(sizeof(line))) {
++    // stderr is the persistent /tmp/boayo-wm.log in daemon mode.
++    (void)!write(STDERR_FILENO, line, n);
++    if (uart >= 0) (void)!write(uart, line, n);
++  }
++  errno = saved_errno;
++}
++struct Scope {
++  bool owner = false;
++  Scope() {
++    const char *enabled = std::getenv("BOAYO_INIT_TRACE");
++    if (active || !enabled || std::strcmp(enabled, "1")) return;
++    owner = active = true; sequence = 0;
++    wall_start = clock_us(CLOCK_MONOTONIC); cpu_start = clock_us(CLOCK_THREAD_CPUTIME_ID);
++    const char *console = std::getenv("BOAYO_INIT_TRACE_UART");
++    if (console && !std::strcmp(console, "1")) uart = open("/dev/console", O_WRONLY | O_CLOEXEC);
++    mark("desktop.begin");
++  }
++  ~Scope() {
++    if (!owner) return;
++    mark("desktop.scope_exit");
++    if (uart >= 0) close(uart);
++    uart = -1; active = false;
++  }
++};
++}

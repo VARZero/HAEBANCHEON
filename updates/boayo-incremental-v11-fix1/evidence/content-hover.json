@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "pixel_comparisons": 72,
+  "original_content_asset_misses": 2,
+  "fixed_asset_misses": 0,
+  "fixed_asset_rejections": 0,
+  "test": "tests/test_content_hover.py; actual test_ui pixel materialization is a test oracle, not production rendering"
+}

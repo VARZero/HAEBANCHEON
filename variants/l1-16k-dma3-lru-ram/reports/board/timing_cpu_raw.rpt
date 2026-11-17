@@ -1,0 +1,1618 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2022.2 (win64) Build 3671981 Fri Oct 14 05:00:03 MDT 2022
+| Date         : Sat Nov 14 04:06:38 2026
+| Host         : VieupE-Desk running 64-bit major release  (build 9200)
+| Command      : report_timing -from [get_clocks cpu_raw] -to [get_clocks cpu_raw] -max_paths 10 -file D:/temp/haebancheon-l1-16k-dma3/board_route_lru_fanout_v1/timing_cpu_raw.rpt
+| Design       : gen3_kfb_bosio
+| Device       : 7a200t-fbg484
+| Speed File   : -2  PRODUCTION 1.23 2018-06-13
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             0.099ns  (required time - arrival time)
+  Source:                 system/soc/cpu/ctrl_valid_reg/C
+                            (rising edge-triggered cell FDRE clocked by cpu_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[0].U_FDU/G_SLOT[2].o_sidefx_reg[2]/D
+                            (rising edge-triggered cell FDRE clocked by cpu_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             cpu_raw
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (cpu_raw rise@20.000ns - cpu_raw rise@0.000ns)
+  Data Path Delay:        19.495ns  (logic 5.264ns (27.002%)  route 14.231ns (72.998%))
+  Logic Levels:           33  (CARRY4=12 LUT2=5 LUT3=1 LUT4=3 LUT5=6 LUT6=6)
+  Clock Path Skew:        -0.052ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.997ns = ( 25.997 - 20.000 ) 
+    Source Clock Delay      (SCD):    6.410ns
+    Clock Pessimism Removal (CPR):    0.361ns
+  Clock Uncertainty:      0.386ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.157ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.300ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock cpu_raw rise edge)    0.000     0.000 r  
+    R4                                                0.000     0.000 r  sys_clk_p (IN)
+                         net (fo=0)                   0.000     0.000    sys_clk_p
+    R4                   IBUFDS (Prop_ibufds_I_O)     0.842     0.842 r  sysbuf/O
+                         net (fo=1, routed)           1.792     2.634    sysclk
+    BUFGCTRL_X0Y2        BUFG (Prop_bufg_I_O)         0.082     2.716 r  sysclk_BUFG_inst/O
+                         net (fo=63, routed)          1.519     4.234    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i_0
+    PLLE2_ADV_X1Y2       PLLE2_ADV (Prop_plle2_adv_CLKIN1_CLKOUT3)
+                                                      0.077     4.311 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i/CLKOUT3
+                         net (fo=1, routed)           1.165     5.476    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3_out
+    BUFHCE_X1Y24         BUFH (Prop_bufh_I_O)         0.106     5.582 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufh_pll_clk3/O
+                         net (fo=1, routed)           0.813     6.395    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKFBOUT)
+                                                     -3.104     3.291 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/gen_mmcm.mmcm_i/CLKFBOUT
+                         net (fo=1, routed)           1.524     4.815    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/clk_pll_i
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.081     4.896 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufg_clkdiv0/O
+                         net (fo=52558, routed)       1.517     6.412    ui_clk
+    MMCME2_ADV_X0Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -3.156     3.256 r  cpu_mmcm/CLKOUT0
+                         net (fo=1, routed)           1.559     4.815    cpu_raw
+    BUFGCTRL_X0Y4        BUFG (Prop_bufg_I_O)         0.081     4.896 r  cpu_buffer/O
+                         net (fo=30076, routed)       1.514     6.410    system/soc/cpu/cpu_clk
+    SLICE_X78Y77         FDRE                                         r  system/soc/cpu/ctrl_valid_reg/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X78Y77         FDRE (Prop_fdre_C_Q)         0.379     6.789 r  system/soc/cpu/ctrl_valid_reg/Q
+                         net (fo=140, routed)         0.720     7.508    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[4].U_FDU/ctrl_valid
+    SLICE_X80Y79         LUT3 (Prop_lut3_I1_O)        0.105     7.613 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[4].U_FDU/i__carry_i_12__0/O
+                         net (fo=105, routed)         1.171     8.784    system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/wb_tag[0]_45[3]
+    SLICE_X79Y69         LUT2 (Prop_lut2_I0_O)        0.264     9.048 r  system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i__carry_i_5__11/O
+                         net (fo=1, routed)           0.000     9.048    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/i__carry_i_8__0_0[3]
+    SLICE_X79Y69         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.332     9.380 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry/CO[3]
+                         net (fo=1, routed)           0.000     9.380    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry_n_3
+    SLICE_X79Y70         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.478 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__0/CO[3]
+                         net (fo=1, routed)           0.000     9.478    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__0_n_3
+    SLICE_X79Y71         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.576 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__1/CO[3]
+                         net (fo=1, routed)           0.000     9.576    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__1_n_3
+    SLICE_X79Y72         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.674 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__2/CO[3]
+                         net (fo=1, routed)           0.000     9.674    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__2_n_3
+    SLICE_X79Y73         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.772 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__3/CO[3]
+                         net (fo=1, routed)           0.000     9.772    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__3_n_3
+    SLICE_X79Y74         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.870 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__4/CO[3]
+                         net (fo=1, routed)           0.008     9.878    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__4_n_3
+    SLICE_X79Y75         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.976 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__5/CO[3]
+                         net (fo=1, routed)           0.000     9.976    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__5_n_3
+    SLICE_X79Y76         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.265    10.241 f  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__6/O[1]
+                         net (fo=2, routed)           0.715    10.956    system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/o_kill1_inferred__1/i__carry__2[1]
+    SLICE_X80Y74         LUT2 (Prop_lut2_I1_O)        0.250    11.206 r  system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i__carry__2_i_6/O
+                         net (fo=1, routed)           0.000    11.206    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/i___192_i_34__0_1[0]
+    SLICE_X80Y74         CARRY4 (Prop_carry4_S[2]_CO[3])
+                                                      0.316    11.522 f  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill1_inferred__1/i__carry__2/CO[3]
+                         net (fo=1, routed)           0.848    12.370    system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i___192_i_13__0[0]
+    SLICE_X89Y76         LUT6 (Prop_lut6_I3_O)        0.105    12.475 f  system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i___192_i_34__0/O
+                         net (fo=1, routed)           0.220    12.695    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[0].U_FDU/i___192_i_4__0
+    SLICE_X89Y77         LUT6 (Prop_lut6_I0_O)        0.105    12.800 f  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[0].U_FDU/i___192_i_13__0/O
+                         net (fo=2, routed)           0.368    13.168    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/i___192_i_1__0
+    SLICE_X89Y77         LUT5 (Prop_lut5_I0_O)        0.105    13.273 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/i___192_i_4__0/O
+                         net (fo=38, routed)          0.870    14.143    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/FSM_onehot_state_reg[3]_1
+    SLICE_X78Y81         LUT2 (Prop_lut2_I1_O)        0.126    14.269 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/p01_reg_i_188/O
+                         net (fo=11, routed)          1.015    15.284    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/accepted[0]
+    SLICE_X71Y95         LUT5 (Prop_lut5_I4_O)        0.267    15.551 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_operand[31]_i_15/O
+                         net (fo=32, routed)          0.812    16.364    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ex_lane[0].source_a1
+    SLICE_X64Y99         LUT5 (Prop_lut5_I3_O)        0.105    16.469 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_operand[12]_i_3/O
+                         net (fo=1, routed)           0.433    16.901    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_operand[12]_i_3_n_3
+    SLICE_X65Y97         LUT5 (Prop_lut5_I4_O)        0.105    17.006 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_operand[12]_i_2/O
+                         net (fo=1, routed)           0.378    17.384    system/soc/cpu/lsu/sys_operand_reg[12]_0
+    SLICE_X66Y96         LUT6 (Prop_lut6_I4_O)        0.105    17.489 r  system/soc/cpu/lsu/sys_operand[12]_i_1/O
+                         net (fo=12, routed)          1.143    18.632    system/soc/cpu/lsu/ex_lane[0].source_a[12]
+    SLICE_X71Y92         LUT4 (Prop_lut4_I1_O)        0.105    18.737 r  system/soc/cpu/lsu/ctrl_tval[31]_i_109/O
+                         net (fo=1, routed)           0.000    18.737    system/soc/cpu/lsu/ctrl_tval[31]_i_109_n_3
+    SLICE_X71Y92         CARRY4 (Prop_carry4_S[2]_CO[3])
+                                                      0.332    19.069 r  system/soc/cpu/lsu/ctrl_tval_reg[31]_i_58/CO[3]
+                         net (fo=1, routed)           0.000    19.069    system/soc/cpu/lsu/ctrl_tval_reg[31]_i_58_n_3
+    SLICE_X71Y93         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098    19.167 r  system/soc/cpu/lsu/ctrl_tval_reg[31]_i_23/CO[3]
+                         net (fo=1, routed)           0.000    19.167    system/soc/cpu/lsu/ctrl_tval_reg[31]_i_23_n_3
+    SLICE_X71Y94         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098    19.265 r  system/soc/cpu/lsu/ctrl_tval_reg[31]_i_18/CO[3]
+                         net (fo=1, routed)           1.031    20.296    system/soc/cpu/lsu/bru/data2
+    SLICE_X74Y95         LUT6 (Prop_lut6_I0_O)        0.105    20.401 r  system/soc/cpu/lsu/ctrl_tval[31]_i_12/O
+                         net (fo=1, routed)           0.500    20.900    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_tval[0]_i_2_0
+    SLICE_X76Y95         LUT4 (Prop_lut4_I0_O)        0.105    21.005 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_tval[31]_i_5/O
+                         net (fo=32, routed)          0.658    21.663    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_tval[31]_i_5_n_3
+    SLICE_X81Y92         LUT5 (Prop_lut5_I1_O)        0.105    21.768 f  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_tval[1]_i_2/O
+                         net (fo=4, routed)           0.626    22.393    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/br_next[1]
+    SLICE_X84Y93         LUT6 (Prop_lut6_I1_O)        0.105    22.498 f  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_rd[5]_i_3/O
+                         net (fo=5, routed)           0.333    22.832    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_bad
+    SLICE_X87Y93         LUT4 (Prop_lut4_I1_O)        0.105    22.937 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/G_SLOT[0].o_sidefx[0]_i_10__0/O
+                         net (fo=24, routed)          1.183    24.119    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/cs
+    SLICE_X113Y90        LUT5 (Prop_lut5_I1_O)        0.105    24.224 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/G_SLOT[0].o_sidefx[0]_i_4__5/O
+                         net (fo=3, routed)           0.347    24.571    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/G_OUTPUT[0].output_data_reg[0][34]_23
+    SLICE_X116Y90        LUT2 (Prop_lut2_I0_O)        0.106    24.677 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/G_SLOT[8].o_sidefx[8]_i_2__6/O
+                         net (fo=3, routed)           0.240    24.917    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[0].U_FDU/G_SLOT[8].o_sidefx_reg[8]_1
+    SLICE_X119Y90        LUT6 (Prop_lut6_I2_O)        0.268    25.185 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[0].U_FDU/G_SLOT[2].o_sidefx[2]_i_2__6/O
+                         net (fo=1, routed)           0.615    25.799    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[0].U_FDU/G_SLOT[2].o_sidefx[2]_i_2__6_n_3
+    SLICE_X115Y87        LUT2 (Prop_lut2_I0_O)        0.105    25.904 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[0].U_FDU/G_SLOT[2].o_sidefx[2]_i_1__6/O
+                         net (fo=1, routed)           0.000    25.904    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[0].U_FDU/G_SLOT[2].o_sidefx[2]_i_1__6_n_3
+    SLICE_X115Y87        FDRE                                         r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[0].U_FDU/G_SLOT[2].o_sidefx_reg[2]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock cpu_raw rise edge)   20.000    20.000 r  
+    R4                                                0.000    20.000 r  sys_clk_p (IN)
+                         net (fo=0)                   0.000    20.000    sys_clk_p
+    R4                   IBUFDS (Prop_ibufds_I_O)     0.804    20.804 r  sysbuf/O
+                         net (fo=1, routed)           1.699    22.503    sysclk
+    BUFGCTRL_X0Y2        BUFG (Prop_bufg_I_O)         0.078    22.581 r  sysclk_BUFG_inst/O
+                         net (fo=63, routed)          1.417    23.998    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i_0
+    PLLE2_ADV_X1Y2       PLLE2_ADV (Prop_plle2_adv_CLKIN1_CLKOUT3)
+                                                      0.073    24.071 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i/CLKOUT3
+                         net (fo=1, routed)           1.029    25.100    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3_out
+    BUFHCE_X1Y24         BUFH (Prop_bufh_I_O)         0.069    25.169 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufh_pll_clk3/O
+                         net (fo=1, routed)           0.777    25.946    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKFBOUT)
+                                                     -2.927    23.019 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/gen_mmcm.mmcm_i/CLKFBOUT
+                         net (fo=1, routed)           1.452    24.471    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/clk_pll_i
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.077    24.548 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufg_clkdiv0/O
+                         net (fo=52558, routed)       1.415    25.963    ui_clk
+    MMCME2_ADV_X0Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -2.979    22.984 r  cpu_mmcm/CLKOUT0
+                         net (fo=1, routed)           1.488    24.471    cpu_raw
+    BUFGCTRL_X0Y4        BUFG (Prop_bufg_I_O)         0.077    24.548 r  cpu_buffer/O
+                         net (fo=30076, routed)       1.449    25.997    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[0].U_FDU/cpu_clk
+    SLICE_X115Y87        FDRE                                         r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[0].U_FDU/G_SLOT[2].o_sidefx_reg[2]/C
+                         clock pessimism              0.361    26.358    
+                         clock uncertainty           -0.386    25.972    
+    SLICE_X115Y87        FDRE (Setup_fdre_C_D)        0.032    26.004    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[0].U_FDU/G_SLOT[2].o_sidefx_reg[2]
+  -------------------------------------------------------------------
+                         required time                         26.004    
+                         arrival time                         -25.904    
+  -------------------------------------------------------------------
+                         slack                                  0.099    
+
+Slack (MET) :             0.157ns  (required time - arrival time)
+  Source:                 system/soc/cpu/ctrl_valid_reg/C
+                            (rising edge-triggered cell FDRE clocked by cpu_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[1].U_FDU/G_SLOT[2].o_sidefx_reg[2]/D
+                            (rising edge-triggered cell FDRE clocked by cpu_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             cpu_raw
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (cpu_raw rise@20.000ns - cpu_raw rise@0.000ns)
+  Data Path Delay:        19.442ns  (logic 5.265ns (27.080%)  route 14.177ns (72.920%))
+  Logic Levels:           33  (CARRY4=12 LUT2=5 LUT3=1 LUT4=3 LUT5=6 LUT6=6)
+  Clock Path Skew:        -0.047ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    6.002ns = ( 26.002 - 20.000 ) 
+    Source Clock Delay      (SCD):    6.410ns
+    Clock Pessimism Removal (CPR):    0.361ns
+  Clock Uncertainty:      0.386ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.157ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.300ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock cpu_raw rise edge)    0.000     0.000 r  
+    R4                                                0.000     0.000 r  sys_clk_p (IN)
+                         net (fo=0)                   0.000     0.000    sys_clk_p
+    R4                   IBUFDS (Prop_ibufds_I_O)     0.842     0.842 r  sysbuf/O
+                         net (fo=1, routed)           1.792     2.634    sysclk
+    BUFGCTRL_X0Y2        BUFG (Prop_bufg_I_O)         0.082     2.716 r  sysclk_BUFG_inst/O
+                         net (fo=63, routed)          1.519     4.234    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i_0
+    PLLE2_ADV_X1Y2       PLLE2_ADV (Prop_plle2_adv_CLKIN1_CLKOUT3)
+                                                      0.077     4.311 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i/CLKOUT3
+                         net (fo=1, routed)           1.165     5.476    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3_out
+    BUFHCE_X1Y24         BUFH (Prop_bufh_I_O)         0.106     5.582 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufh_pll_clk3/O
+                         net (fo=1, routed)           0.813     6.395    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKFBOUT)
+                                                     -3.104     3.291 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/gen_mmcm.mmcm_i/CLKFBOUT
+                         net (fo=1, routed)           1.524     4.815    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/clk_pll_i
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.081     4.896 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufg_clkdiv0/O
+                         net (fo=52558, routed)       1.517     6.412    ui_clk
+    MMCME2_ADV_X0Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -3.156     3.256 r  cpu_mmcm/CLKOUT0
+                         net (fo=1, routed)           1.559     4.815    cpu_raw
+    BUFGCTRL_X0Y4        BUFG (Prop_bufg_I_O)         0.081     4.896 r  cpu_buffer/O
+                         net (fo=30076, routed)       1.514     6.410    system/soc/cpu/cpu_clk
+    SLICE_X78Y77         FDRE                                         r  system/soc/cpu/ctrl_valid_reg/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X78Y77         FDRE (Prop_fdre_C_Q)         0.379     6.789 r  system/soc/cpu/ctrl_valid_reg/Q
+                         net (fo=140, routed)         0.720     7.508    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[4].U_FDU/ctrl_valid
+    SLICE_X80Y79         LUT3 (Prop_lut3_I1_O)        0.105     7.613 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[4].U_FDU/i__carry_i_12__0/O
+                         net (fo=105, routed)         1.171     8.784    system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/wb_tag[0]_45[3]
+    SLICE_X79Y69         LUT2 (Prop_lut2_I0_O)        0.264     9.048 r  system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i__carry_i_5__11/O
+                         net (fo=1, routed)           0.000     9.048    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/i__carry_i_8__0_0[3]
+    SLICE_X79Y69         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.332     9.380 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry/CO[3]
+                         net (fo=1, routed)           0.000     9.380    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry_n_3
+    SLICE_X79Y70         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.478 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__0/CO[3]
+                         net (fo=1, routed)           0.000     9.478    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__0_n_3
+    SLICE_X79Y71         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.576 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__1/CO[3]
+                         net (fo=1, routed)           0.000     9.576    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__1_n_3
+    SLICE_X79Y72         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.674 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__2/CO[3]
+                         net (fo=1, routed)           0.000     9.674    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__2_n_3
+    SLICE_X79Y73         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.772 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__3/CO[3]
+                         net (fo=1, routed)           0.000     9.772    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__3_n_3
+    SLICE_X79Y74         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.870 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__4/CO[3]
+                         net (fo=1, routed)           0.008     9.878    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__4_n_3
+    SLICE_X79Y75         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.976 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__5/CO[3]
+                         net (fo=1, routed)           0.000     9.976    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__5_n_3
+    SLICE_X79Y76         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.265    10.241 f  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__6/O[1]
+                         net (fo=2, routed)           0.715    10.956    system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/o_kill1_inferred__1/i__carry__2[1]
+    SLICE_X80Y74         LUT2 (Prop_lut2_I1_O)        0.250    11.206 r  system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i__carry__2_i_6/O
+                         net (fo=1, routed)           0.000    11.206    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/i___192_i_34__0_1[0]
+    SLICE_X80Y74         CARRY4 (Prop_carry4_S[2]_CO[3])
+                                                      0.316    11.522 f  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill1_inferred__1/i__carry__2/CO[3]
+                         net (fo=1, routed)           0.848    12.370    system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i___192_i_13__0[0]
+    SLICE_X89Y76         LUT6 (Prop_lut6_I3_O)        0.105    12.475 f  system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i___192_i_34__0/O
+                         net (fo=1, routed)           0.220    12.695    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[0].U_FDU/i___192_i_4__0
+    SLICE_X89Y77         LUT6 (Prop_lut6_I0_O)        0.105    12.800 f  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[0].U_FDU/i___192_i_13__0/O
+                         net (fo=2, routed)           0.368    13.168    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/i___192_i_1__0
+    SLICE_X89Y77         LUT5 (Prop_lut5_I0_O)        0.105    13.273 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/i___192_i_4__0/O
+                         net (fo=38, routed)          0.870    14.143    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/FSM_onehot_state_reg[3]_1
+    SLICE_X78Y81         LUT2 (Prop_lut2_I1_O)        0.126    14.269 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/p01_reg_i_188/O
+                         net (fo=11, routed)          1.015    15.284    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/accepted[0]
+    SLICE_X71Y95         LUT5 (Prop_lut5_I4_O)        0.267    15.551 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_operand[31]_i_15/O
+                         net (fo=32, routed)          0.812    16.364    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ex_lane[0].source_a1
+    SLICE_X64Y99         LUT5 (Prop_lut5_I3_O)        0.105    16.469 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_operand[12]_i_3/O
+                         net (fo=1, routed)           0.433    16.901    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_operand[12]_i_3_n_3
+    SLICE_X65Y97         LUT5 (Prop_lut5_I4_O)        0.105    17.006 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_operand[12]_i_2/O
+                         net (fo=1, routed)           0.378    17.384    system/soc/cpu/lsu/sys_operand_reg[12]_0
+    SLICE_X66Y96         LUT6 (Prop_lut6_I4_O)        0.105    17.489 r  system/soc/cpu/lsu/sys_operand[12]_i_1/O
+                         net (fo=12, routed)          1.143    18.632    system/soc/cpu/lsu/ex_lane[0].source_a[12]
+    SLICE_X71Y92         LUT4 (Prop_lut4_I1_O)        0.105    18.737 r  system/soc/cpu/lsu/ctrl_tval[31]_i_109/O
+                         net (fo=1, routed)           0.000    18.737    system/soc/cpu/lsu/ctrl_tval[31]_i_109_n_3
+    SLICE_X71Y92         CARRY4 (Prop_carry4_S[2]_CO[3])
+                                                      0.332    19.069 r  system/soc/cpu/lsu/ctrl_tval_reg[31]_i_58/CO[3]
+                         net (fo=1, routed)           0.000    19.069    system/soc/cpu/lsu/ctrl_tval_reg[31]_i_58_n_3
+    SLICE_X71Y93         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098    19.167 r  system/soc/cpu/lsu/ctrl_tval_reg[31]_i_23/CO[3]
+                         net (fo=1, routed)           0.000    19.167    system/soc/cpu/lsu/ctrl_tval_reg[31]_i_23_n_3
+    SLICE_X71Y94         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098    19.265 r  system/soc/cpu/lsu/ctrl_tval_reg[31]_i_18/CO[3]
+                         net (fo=1, routed)           1.031    20.296    system/soc/cpu/lsu/bru/data2
+    SLICE_X74Y95         LUT6 (Prop_lut6_I0_O)        0.105    20.401 r  system/soc/cpu/lsu/ctrl_tval[31]_i_12/O
+                         net (fo=1, routed)           0.500    20.900    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_tval[0]_i_2_0
+    SLICE_X76Y95         LUT4 (Prop_lut4_I0_O)        0.105    21.005 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_tval[31]_i_5/O
+                         net (fo=32, routed)          0.658    21.663    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_tval[31]_i_5_n_3
+    SLICE_X81Y92         LUT5 (Prop_lut5_I1_O)        0.105    21.768 f  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_tval[1]_i_2/O
+                         net (fo=4, routed)           0.626    22.393    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/br_next[1]
+    SLICE_X84Y93         LUT6 (Prop_lut6_I1_O)        0.105    22.498 f  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_rd[5]_i_3/O
+                         net (fo=5, routed)           0.333    22.832    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_bad
+    SLICE_X87Y93         LUT4 (Prop_lut4_I1_O)        0.105    22.937 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/G_SLOT[0].o_sidefx[0]_i_10__0/O
+                         net (fo=24, routed)          1.261    24.198    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/cs
+    SLICE_X114Y93        LUT5 (Prop_lut5_I1_O)        0.105    24.303 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/G_SLOT[4].o_sidefx[4]_i_4__1/O
+                         net (fo=3, routed)           0.572    24.874    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/G_SLOT[4].o_sidefx[4]_i_4__1_n_3
+    SLICE_X119Y92        LUT2 (Prop_lut2_I0_O)        0.108    24.982 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/G_SLOT[8].o_sidefx[8]_i_4__2/O
+                         net (fo=3, routed)           0.257    25.239    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[1].U_FDU/G_SLOT[10].o_sidefx_reg[10]_0
+    SLICE_X119Y90        LUT6 (Prop_lut6_I5_O)        0.267    25.506 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[1].U_FDU/G_SLOT[2].o_sidefx[2]_i_2__5/O
+                         net (fo=1, routed)           0.240    25.747    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[1].U_FDU/o_sidefx55_out
+    SLICE_X121Y90        LUT2 (Prop_lut2_I0_O)        0.105    25.852 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[1].U_FDU/G_SLOT[2].o_sidefx[2]_i_1__5/O
+                         net (fo=1, routed)           0.000    25.852    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[1].U_FDU/G_SLOT[2].o_sidefx[2]_i_1__5_n_3
+    SLICE_X121Y90        FDRE                                         r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[1].U_FDU/G_SLOT[2].o_sidefx_reg[2]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock cpu_raw rise edge)   20.000    20.000 r  
+    R4                                                0.000    20.000 r  sys_clk_p (IN)
+                         net (fo=0)                   0.000    20.000    sys_clk_p
+    R4                   IBUFDS (Prop_ibufds_I_O)     0.804    20.804 r  sysbuf/O
+                         net (fo=1, routed)           1.699    22.503    sysclk
+    BUFGCTRL_X0Y2        BUFG (Prop_bufg_I_O)         0.078    22.581 r  sysclk_BUFG_inst/O
+                         net (fo=63, routed)          1.417    23.998    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i_0
+    PLLE2_ADV_X1Y2       PLLE2_ADV (Prop_plle2_adv_CLKIN1_CLKOUT3)
+                                                      0.073    24.071 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i/CLKOUT3
+                         net (fo=1, routed)           1.029    25.100    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3_out
+    BUFHCE_X1Y24         BUFH (Prop_bufh_I_O)         0.069    25.169 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufh_pll_clk3/O
+                         net (fo=1, routed)           0.777    25.946    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKFBOUT)
+                                                     -2.927    23.019 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/gen_mmcm.mmcm_i/CLKFBOUT
+                         net (fo=1, routed)           1.452    24.471    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/clk_pll_i
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.077    24.548 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufg_clkdiv0/O
+                         net (fo=52558, routed)       1.415    25.963    ui_clk
+    MMCME2_ADV_X0Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -2.979    22.984 r  cpu_mmcm/CLKOUT0
+                         net (fo=1, routed)           1.488    24.471    cpu_raw
+    BUFGCTRL_X0Y4        BUFG (Prop_bufg_I_O)         0.077    24.548 r  cpu_buffer/O
+                         net (fo=30076, routed)       1.454    26.002    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[1].U_FDU/cpu_clk
+    SLICE_X121Y90        FDRE                                         r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[1].U_FDU/G_SLOT[2].o_sidefx_reg[2]/C
+                         clock pessimism              0.361    26.363    
+                         clock uncertainty           -0.386    25.977    
+    SLICE_X121Y90        FDRE (Setup_fdre_C_D)        0.032    26.009    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[1].U_FDU/G_SLOT[2].o_sidefx_reg[2]
+  -------------------------------------------------------------------
+                         required time                         26.009    
+                         arrival time                         -25.852    
+  -------------------------------------------------------------------
+                         slack                                  0.157    
+
+Slack (MET) :             0.185ns  (required time - arrival time)
+  Source:                 system/soc/cpu/ctrl_valid_reg/C
+                            (rising edge-triggered cell FDRE clocked by cpu_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[2].U_FDU/G_SLOT[2].o_sidefx_reg[2]/D
+                            (rising edge-triggered cell FDRE clocked by cpu_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             cpu_raw
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (cpu_raw rise@20.000ns - cpu_raw rise@0.000ns)
+  Data Path Delay:        19.414ns  (logic 5.271ns (27.150%)  route 14.143ns (72.850%))
+  Logic Levels:           33  (CARRY4=12 LUT2=5 LUT3=1 LUT4=3 LUT5=6 LUT6=6)
+  Clock Path Skew:        -0.047ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    6.002ns = ( 26.002 - 20.000 ) 
+    Source Clock Delay      (SCD):    6.410ns
+    Clock Pessimism Removal (CPR):    0.361ns
+  Clock Uncertainty:      0.386ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.157ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.300ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock cpu_raw rise edge)    0.000     0.000 r  
+    R4                                                0.000     0.000 r  sys_clk_p (IN)
+                         net (fo=0)                   0.000     0.000    sys_clk_p
+    R4                   IBUFDS (Prop_ibufds_I_O)     0.842     0.842 r  sysbuf/O
+                         net (fo=1, routed)           1.792     2.634    sysclk
+    BUFGCTRL_X0Y2        BUFG (Prop_bufg_I_O)         0.082     2.716 r  sysclk_BUFG_inst/O
+                         net (fo=63, routed)          1.519     4.234    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i_0
+    PLLE2_ADV_X1Y2       PLLE2_ADV (Prop_plle2_adv_CLKIN1_CLKOUT3)
+                                                      0.077     4.311 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i/CLKOUT3
+                         net (fo=1, routed)           1.165     5.476    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3_out
+    BUFHCE_X1Y24         BUFH (Prop_bufh_I_O)         0.106     5.582 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufh_pll_clk3/O
+                         net (fo=1, routed)           0.813     6.395    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKFBOUT)
+                                                     -3.104     3.291 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/gen_mmcm.mmcm_i/CLKFBOUT
+                         net (fo=1, routed)           1.524     4.815    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/clk_pll_i
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.081     4.896 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufg_clkdiv0/O
+                         net (fo=52558, routed)       1.517     6.412    ui_clk
+    MMCME2_ADV_X0Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -3.156     3.256 r  cpu_mmcm/CLKOUT0
+                         net (fo=1, routed)           1.559     4.815    cpu_raw
+    BUFGCTRL_X0Y4        BUFG (Prop_bufg_I_O)         0.081     4.896 r  cpu_buffer/O
+                         net (fo=30076, routed)       1.514     6.410    system/soc/cpu/cpu_clk
+    SLICE_X78Y77         FDRE                                         r  system/soc/cpu/ctrl_valid_reg/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X78Y77         FDRE (Prop_fdre_C_Q)         0.379     6.789 r  system/soc/cpu/ctrl_valid_reg/Q
+                         net (fo=140, routed)         0.720     7.508    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[4].U_FDU/ctrl_valid
+    SLICE_X80Y79         LUT3 (Prop_lut3_I1_O)        0.105     7.613 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[4].U_FDU/i__carry_i_12__0/O
+                         net (fo=105, routed)         1.171     8.784    system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/wb_tag[0]_45[3]
+    SLICE_X79Y69         LUT2 (Prop_lut2_I0_O)        0.264     9.048 r  system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i__carry_i_5__11/O
+                         net (fo=1, routed)           0.000     9.048    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/i__carry_i_8__0_0[3]
+    SLICE_X79Y69         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.332     9.380 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry/CO[3]
+                         net (fo=1, routed)           0.000     9.380    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry_n_3
+    SLICE_X79Y70         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.478 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__0/CO[3]
+                         net (fo=1, routed)           0.000     9.478    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__0_n_3
+    SLICE_X79Y71         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.576 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__1/CO[3]
+                         net (fo=1, routed)           0.000     9.576    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__1_n_3
+    SLICE_X79Y72         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.674 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__2/CO[3]
+                         net (fo=1, routed)           0.000     9.674    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__2_n_3
+    SLICE_X79Y73         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.772 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__3/CO[3]
+                         net (fo=1, routed)           0.000     9.772    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__3_n_3
+    SLICE_X79Y74         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.870 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__4/CO[3]
+                         net (fo=1, routed)           0.008     9.878    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__4_n_3
+    SLICE_X79Y75         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.976 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__5/CO[3]
+                         net (fo=1, routed)           0.000     9.976    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__5_n_3
+    SLICE_X79Y76         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.265    10.241 f  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__6/O[1]
+                         net (fo=2, routed)           0.715    10.956    system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/o_kill1_inferred__1/i__carry__2[1]
+    SLICE_X80Y74         LUT2 (Prop_lut2_I1_O)        0.250    11.206 r  system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i__carry__2_i_6/O
+                         net (fo=1, routed)           0.000    11.206    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/i___192_i_34__0_1[0]
+    SLICE_X80Y74         CARRY4 (Prop_carry4_S[2]_CO[3])
+                                                      0.316    11.522 f  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill1_inferred__1/i__carry__2/CO[3]
+                         net (fo=1, routed)           0.848    12.370    system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i___192_i_13__0[0]
+    SLICE_X89Y76         LUT6 (Prop_lut6_I3_O)        0.105    12.475 f  system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i___192_i_34__0/O
+                         net (fo=1, routed)           0.220    12.695    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[0].U_FDU/i___192_i_4__0
+    SLICE_X89Y77         LUT6 (Prop_lut6_I0_O)        0.105    12.800 f  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[0].U_FDU/i___192_i_13__0/O
+                         net (fo=2, routed)           0.368    13.168    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/i___192_i_1__0
+    SLICE_X89Y77         LUT5 (Prop_lut5_I0_O)        0.105    13.273 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/i___192_i_4__0/O
+                         net (fo=38, routed)          0.870    14.143    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/FSM_onehot_state_reg[3]_1
+    SLICE_X78Y81         LUT2 (Prop_lut2_I1_O)        0.126    14.269 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/p01_reg_i_188/O
+                         net (fo=11, routed)          1.015    15.284    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/accepted[0]
+    SLICE_X71Y95         LUT5 (Prop_lut5_I4_O)        0.267    15.551 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_operand[31]_i_15/O
+                         net (fo=32, routed)          0.812    16.364    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ex_lane[0].source_a1
+    SLICE_X64Y99         LUT5 (Prop_lut5_I3_O)        0.105    16.469 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_operand[12]_i_3/O
+                         net (fo=1, routed)           0.433    16.901    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_operand[12]_i_3_n_3
+    SLICE_X65Y97         LUT5 (Prop_lut5_I4_O)        0.105    17.006 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_operand[12]_i_2/O
+                         net (fo=1, routed)           0.378    17.384    system/soc/cpu/lsu/sys_operand_reg[12]_0
+    SLICE_X66Y96         LUT6 (Prop_lut6_I4_O)        0.105    17.489 r  system/soc/cpu/lsu/sys_operand[12]_i_1/O
+                         net (fo=12, routed)          1.143    18.632    system/soc/cpu/lsu/ex_lane[0].source_a[12]
+    SLICE_X71Y92         LUT4 (Prop_lut4_I1_O)        0.105    18.737 r  system/soc/cpu/lsu/ctrl_tval[31]_i_109/O
+                         net (fo=1, routed)           0.000    18.737    system/soc/cpu/lsu/ctrl_tval[31]_i_109_n_3
+    SLICE_X71Y92         CARRY4 (Prop_carry4_S[2]_CO[3])
+                                                      0.332    19.069 r  system/soc/cpu/lsu/ctrl_tval_reg[31]_i_58/CO[3]
+                         net (fo=1, routed)           0.000    19.069    system/soc/cpu/lsu/ctrl_tval_reg[31]_i_58_n_3
+    SLICE_X71Y93         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098    19.167 r  system/soc/cpu/lsu/ctrl_tval_reg[31]_i_23/CO[3]
+                         net (fo=1, routed)           0.000    19.167    system/soc/cpu/lsu/ctrl_tval_reg[31]_i_23_n_3
+    SLICE_X71Y94         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098    19.265 r  system/soc/cpu/lsu/ctrl_tval_reg[31]_i_18/CO[3]
+                         net (fo=1, routed)           1.031    20.296    system/soc/cpu/lsu/bru/data2
+    SLICE_X74Y95         LUT6 (Prop_lut6_I0_O)        0.105    20.401 r  system/soc/cpu/lsu/ctrl_tval[31]_i_12/O
+                         net (fo=1, routed)           0.500    20.900    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_tval[0]_i_2_0
+    SLICE_X76Y95         LUT4 (Prop_lut4_I0_O)        0.105    21.005 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_tval[31]_i_5/O
+                         net (fo=32, routed)          0.658    21.663    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_tval[31]_i_5_n_3
+    SLICE_X81Y92         LUT5 (Prop_lut5_I1_O)        0.105    21.768 f  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_tval[1]_i_2/O
+                         net (fo=4, routed)           0.626    22.393    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/br_next[1]
+    SLICE_X84Y93         LUT6 (Prop_lut6_I1_O)        0.105    22.498 f  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_rd[5]_i_3/O
+                         net (fo=5, routed)           0.333    22.832    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_bad
+    SLICE_X87Y93         LUT4 (Prop_lut4_I1_O)        0.105    22.937 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/G_SLOT[0].o_sidefx[0]_i_10__0/O
+                         net (fo=24, routed)          1.330    24.267    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/cs
+    SLICE_X120Y92        LUT5 (Prop_lut5_I4_O)        0.105    24.372 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/G_SLOT[0].o_sidefx[0]_i_2__1/O
+                         net (fo=3, routed)           0.453    24.825    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/G_OUTPUT[0].output_data_reg[0][34]_1
+    SLICE_X122Y90        LUT2 (Prop_lut2_I0_O)        0.107    24.932 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/G_SLOT[8].o_sidefx[8]_i_2/O
+                         net (fo=3, routed)           0.400    25.332    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[2].U_FDU/G_SLOT[8].o_sidefx_reg[8]_1
+    SLICE_X123Y90        LUT6 (Prop_lut6_I2_O)        0.274    25.606 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[2].U_FDU/G_SLOT[2].o_sidefx[2]_i_2__1/O
+                         net (fo=1, routed)           0.113    25.719    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[2].U_FDU/G_SLOT[2].o_sidefx[2]_i_2__1_n_3
+    SLICE_X123Y90        LUT2 (Prop_lut2_I0_O)        0.105    25.824 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[2].U_FDU/G_SLOT[2].o_sidefx[2]_i_1__0/O
+                         net (fo=1, routed)           0.000    25.824    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[2].U_FDU/G_SLOT[2].o_sidefx[2]_i_1__0_n_3
+    SLICE_X123Y90        FDRE                                         r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[2].U_FDU/G_SLOT[2].o_sidefx_reg[2]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock cpu_raw rise edge)   20.000    20.000 r  
+    R4                                                0.000    20.000 r  sys_clk_p (IN)
+                         net (fo=0)                   0.000    20.000    sys_clk_p
+    R4                   IBUFDS (Prop_ibufds_I_O)     0.804    20.804 r  sysbuf/O
+                         net (fo=1, routed)           1.699    22.503    sysclk
+    BUFGCTRL_X0Y2        BUFG (Prop_bufg_I_O)         0.078    22.581 r  sysclk_BUFG_inst/O
+                         net (fo=63, routed)          1.417    23.998    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i_0
+    PLLE2_ADV_X1Y2       PLLE2_ADV (Prop_plle2_adv_CLKIN1_CLKOUT3)
+                                                      0.073    24.071 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i/CLKOUT3
+                         net (fo=1, routed)           1.029    25.100    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3_out
+    BUFHCE_X1Y24         BUFH (Prop_bufh_I_O)         0.069    25.169 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufh_pll_clk3/O
+                         net (fo=1, routed)           0.777    25.946    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKFBOUT)
+                                                     -2.927    23.019 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/gen_mmcm.mmcm_i/CLKFBOUT
+                         net (fo=1, routed)           1.452    24.471    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/clk_pll_i
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.077    24.548 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufg_clkdiv0/O
+                         net (fo=52558, routed)       1.415    25.963    ui_clk
+    MMCME2_ADV_X0Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -2.979    22.984 r  cpu_mmcm/CLKOUT0
+                         net (fo=1, routed)           1.488    24.471    cpu_raw
+    BUFGCTRL_X0Y4        BUFG (Prop_bufg_I_O)         0.077    24.548 r  cpu_buffer/O
+                         net (fo=30076, routed)       1.454    26.002    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[2].U_FDU/cpu_clk
+    SLICE_X123Y90        FDRE                                         r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[2].U_FDU/G_SLOT[2].o_sidefx_reg[2]/C
+                         clock pessimism              0.361    26.363    
+                         clock uncertainty           -0.386    25.977    
+    SLICE_X123Y90        FDRE (Setup_fdre_C_D)        0.032    26.009    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[2].U_FDU/G_SLOT[2].o_sidefx_reg[2]
+  -------------------------------------------------------------------
+                         required time                         26.009    
+                         arrival time                         -25.824    
+  -------------------------------------------------------------------
+                         slack                                  0.185    
+
+Slack (MET) :             0.203ns  (required time - arrival time)
+  Source:                 system/soc/cpu/ctrl_valid_reg/C
+                            (rising edge-triggered cell FDRE clocked by cpu_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[5].U_FDU/G_SLOT[0].o_sidefx_reg[0]/D
+                            (rising edge-triggered cell FDRE clocked by cpu_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             cpu_raw
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (cpu_raw rise@20.000ns - cpu_raw rise@0.000ns)
+  Data Path Delay:        19.388ns  (logic 5.271ns (27.187%)  route 14.117ns (72.813%))
+  Logic Levels:           33  (CARRY4=12 LUT2=4 LUT3=2 LUT4=3 LUT5=5 LUT6=7)
+  Clock Path Skew:        -0.053ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.996ns = ( 25.996 - 20.000 ) 
+    Source Clock Delay      (SCD):    6.410ns
+    Clock Pessimism Removal (CPR):    0.361ns
+  Clock Uncertainty:      0.386ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.157ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.300ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock cpu_raw rise edge)    0.000     0.000 r  
+    R4                                                0.000     0.000 r  sys_clk_p (IN)
+                         net (fo=0)                   0.000     0.000    sys_clk_p
+    R4                   IBUFDS (Prop_ibufds_I_O)     0.842     0.842 r  sysbuf/O
+                         net (fo=1, routed)           1.792     2.634    sysclk
+    BUFGCTRL_X0Y2        BUFG (Prop_bufg_I_O)         0.082     2.716 r  sysclk_BUFG_inst/O
+                         net (fo=63, routed)          1.519     4.234    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i_0
+    PLLE2_ADV_X1Y2       PLLE2_ADV (Prop_plle2_adv_CLKIN1_CLKOUT3)
+                                                      0.077     4.311 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i/CLKOUT3
+                         net (fo=1, routed)           1.165     5.476    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3_out
+    BUFHCE_X1Y24         BUFH (Prop_bufh_I_O)         0.106     5.582 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufh_pll_clk3/O
+                         net (fo=1, routed)           0.813     6.395    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKFBOUT)
+                                                     -3.104     3.291 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/gen_mmcm.mmcm_i/CLKFBOUT
+                         net (fo=1, routed)           1.524     4.815    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/clk_pll_i
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.081     4.896 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufg_clkdiv0/O
+                         net (fo=52558, routed)       1.517     6.412    ui_clk
+    MMCME2_ADV_X0Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -3.156     3.256 r  cpu_mmcm/CLKOUT0
+                         net (fo=1, routed)           1.559     4.815    cpu_raw
+    BUFGCTRL_X0Y4        BUFG (Prop_bufg_I_O)         0.081     4.896 r  cpu_buffer/O
+                         net (fo=30076, routed)       1.514     6.410    system/soc/cpu/cpu_clk
+    SLICE_X78Y77         FDRE                                         r  system/soc/cpu/ctrl_valid_reg/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X78Y77         FDRE (Prop_fdre_C_Q)         0.379     6.789 r  system/soc/cpu/ctrl_valid_reg/Q
+                         net (fo=140, routed)         0.720     7.508    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[4].U_FDU/ctrl_valid
+    SLICE_X80Y79         LUT3 (Prop_lut3_I1_O)        0.105     7.613 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[4].U_FDU/i__carry_i_12__0/O
+                         net (fo=105, routed)         1.171     8.784    system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/wb_tag[0]_45[3]
+    SLICE_X79Y69         LUT2 (Prop_lut2_I0_O)        0.264     9.048 r  system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i__carry_i_5__11/O
+                         net (fo=1, routed)           0.000     9.048    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/i__carry_i_8__0_0[3]
+    SLICE_X79Y69         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.332     9.380 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry/CO[3]
+                         net (fo=1, routed)           0.000     9.380    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry_n_3
+    SLICE_X79Y70         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.478 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__0/CO[3]
+                         net (fo=1, routed)           0.000     9.478    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__0_n_3
+    SLICE_X79Y71         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.576 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__1/CO[3]
+                         net (fo=1, routed)           0.000     9.576    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__1_n_3
+    SLICE_X79Y72         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.674 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__2/CO[3]
+                         net (fo=1, routed)           0.000     9.674    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__2_n_3
+    SLICE_X79Y73         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.772 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__3/CO[3]
+                         net (fo=1, routed)           0.000     9.772    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__3_n_3
+    SLICE_X79Y74         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.870 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__4/CO[3]
+                         net (fo=1, routed)           0.008     9.878    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__4_n_3
+    SLICE_X79Y75         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.976 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__5/CO[3]
+                         net (fo=1, routed)           0.000     9.976    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__5_n_3
+    SLICE_X79Y76         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.265    10.241 f  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__6/O[1]
+                         net (fo=2, routed)           0.715    10.956    system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/o_kill1_inferred__1/i__carry__2[1]
+    SLICE_X80Y74         LUT2 (Prop_lut2_I1_O)        0.250    11.206 r  system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i__carry__2_i_6/O
+                         net (fo=1, routed)           0.000    11.206    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/i___192_i_34__0_1[0]
+    SLICE_X80Y74         CARRY4 (Prop_carry4_S[2]_CO[3])
+                                                      0.316    11.522 f  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill1_inferred__1/i__carry__2/CO[3]
+                         net (fo=1, routed)           0.848    12.370    system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i___192_i_13__0[0]
+    SLICE_X89Y76         LUT6 (Prop_lut6_I3_O)        0.105    12.475 f  system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i___192_i_34__0/O
+                         net (fo=1, routed)           0.220    12.695    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[0].U_FDU/i___192_i_4__0
+    SLICE_X89Y77         LUT6 (Prop_lut6_I0_O)        0.105    12.800 f  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[0].U_FDU/i___192_i_13__0/O
+                         net (fo=2, routed)           0.368    13.168    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/i___192_i_1__0
+    SLICE_X89Y77         LUT5 (Prop_lut5_I0_O)        0.105    13.273 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/i___192_i_4__0/O
+                         net (fo=38, routed)          0.870    14.143    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/FSM_onehot_state_reg[3]_1
+    SLICE_X78Y81         LUT2 (Prop_lut2_I1_O)        0.126    14.269 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/p01_reg_i_188/O
+                         net (fo=11, routed)          1.015    15.284    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/accepted[0]
+    SLICE_X71Y95         LUT5 (Prop_lut5_I4_O)        0.267    15.551 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_operand[31]_i_15/O
+                         net (fo=32, routed)          0.812    16.364    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ex_lane[0].source_a1
+    SLICE_X64Y99         LUT5 (Prop_lut5_I3_O)        0.105    16.469 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_operand[12]_i_3/O
+                         net (fo=1, routed)           0.433    16.901    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_operand[12]_i_3_n_3
+    SLICE_X65Y97         LUT5 (Prop_lut5_I4_O)        0.105    17.006 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_operand[12]_i_2/O
+                         net (fo=1, routed)           0.378    17.384    system/soc/cpu/lsu/sys_operand_reg[12]_0
+    SLICE_X66Y96         LUT6 (Prop_lut6_I4_O)        0.105    17.489 r  system/soc/cpu/lsu/sys_operand[12]_i_1/O
+                         net (fo=12, routed)          1.143    18.632    system/soc/cpu/lsu/ex_lane[0].source_a[12]
+    SLICE_X71Y92         LUT4 (Prop_lut4_I1_O)        0.105    18.737 r  system/soc/cpu/lsu/ctrl_tval[31]_i_109/O
+                         net (fo=1, routed)           0.000    18.737    system/soc/cpu/lsu/ctrl_tval[31]_i_109_n_3
+    SLICE_X71Y92         CARRY4 (Prop_carry4_S[2]_CO[3])
+                                                      0.332    19.069 r  system/soc/cpu/lsu/ctrl_tval_reg[31]_i_58/CO[3]
+                         net (fo=1, routed)           0.000    19.069    system/soc/cpu/lsu/ctrl_tval_reg[31]_i_58_n_3
+    SLICE_X71Y93         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098    19.167 r  system/soc/cpu/lsu/ctrl_tval_reg[31]_i_23/CO[3]
+                         net (fo=1, routed)           0.000    19.167    system/soc/cpu/lsu/ctrl_tval_reg[31]_i_23_n_3
+    SLICE_X71Y94         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098    19.265 r  system/soc/cpu/lsu/ctrl_tval_reg[31]_i_18/CO[3]
+                         net (fo=1, routed)           1.031    20.296    system/soc/cpu/lsu/bru/data2
+    SLICE_X74Y95         LUT6 (Prop_lut6_I0_O)        0.105    20.401 r  system/soc/cpu/lsu/ctrl_tval[31]_i_12/O
+                         net (fo=1, routed)           0.500    20.900    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_tval[0]_i_2_0
+    SLICE_X76Y95         LUT4 (Prop_lut4_I0_O)        0.105    21.005 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_tval[31]_i_5/O
+                         net (fo=32, routed)          0.658    21.663    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_tval[31]_i_5_n_3
+    SLICE_X81Y92         LUT5 (Prop_lut5_I1_O)        0.105    21.768 f  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_tval[1]_i_2/O
+                         net (fo=4, routed)           0.626    22.393    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/br_next[1]
+    SLICE_X84Y93         LUT6 (Prop_lut6_I1_O)        0.105    22.498 f  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_rd[5]_i_3/O
+                         net (fo=5, routed)           0.333    22.832    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_bad
+    SLICE_X87Y93         LUT4 (Prop_lut4_I1_O)        0.105    22.937 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/G_SLOT[0].o_sidefx[0]_i_10__0/O
+                         net (fo=24, routed)          1.177    24.113    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/cs
+    SLICE_X115Y89        LUT6 (Prop_lut6_I3_O)        0.105    24.218 f  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/G_SLOT[2].o_sidefx[2]_i_4__0/O
+                         net (fo=2, routed)           0.323    24.541    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/G_SLOT[2].o_sidefx[2]_i_4__0_n_3
+    SLICE_X115Y87        LUT3 (Prop_lut3_I2_O)        0.107    24.648 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/G_SLOT[4].o_sidefx[4]_i_4/O
+                         net (fo=4, routed)           0.420    25.068    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[5].U_FDU/G_SLOT[12].o_sidefx_reg[12]_0
+    SLICE_X120Y86        LUT6 (Prop_lut6_I1_O)        0.274    25.342 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[5].U_FDU/G_SLOT[0].o_sidefx[0]_i_2__2/O
+                         net (fo=1, routed)           0.351    25.693    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[5].U_FDU/o_sidefx59_out
+    SLICE_X119Y85        LUT2 (Prop_lut2_I0_O)        0.105    25.798 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[5].U_FDU/G_SLOT[0].o_sidefx[0]_i_1__2/O
+                         net (fo=1, routed)           0.000    25.798    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[5].U_FDU/G_SLOT[0].o_sidefx[0]_i_1__2_n_3
+    SLICE_X119Y85        FDRE                                         r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[5].U_FDU/G_SLOT[0].o_sidefx_reg[0]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock cpu_raw rise edge)   20.000    20.000 r  
+    R4                                                0.000    20.000 r  sys_clk_p (IN)
+                         net (fo=0)                   0.000    20.000    sys_clk_p
+    R4                   IBUFDS (Prop_ibufds_I_O)     0.804    20.804 r  sysbuf/O
+                         net (fo=1, routed)           1.699    22.503    sysclk
+    BUFGCTRL_X0Y2        BUFG (Prop_bufg_I_O)         0.078    22.581 r  sysclk_BUFG_inst/O
+                         net (fo=63, routed)          1.417    23.998    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i_0
+    PLLE2_ADV_X1Y2       PLLE2_ADV (Prop_plle2_adv_CLKIN1_CLKOUT3)
+                                                      0.073    24.071 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i/CLKOUT3
+                         net (fo=1, routed)           1.029    25.100    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3_out
+    BUFHCE_X1Y24         BUFH (Prop_bufh_I_O)         0.069    25.169 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufh_pll_clk3/O
+                         net (fo=1, routed)           0.777    25.946    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKFBOUT)
+                                                     -2.927    23.019 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/gen_mmcm.mmcm_i/CLKFBOUT
+                         net (fo=1, routed)           1.452    24.471    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/clk_pll_i
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.077    24.548 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufg_clkdiv0/O
+                         net (fo=52558, routed)       1.415    25.963    ui_clk
+    MMCME2_ADV_X0Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -2.979    22.984 r  cpu_mmcm/CLKOUT0
+                         net (fo=1, routed)           1.488    24.471    cpu_raw
+    BUFGCTRL_X0Y4        BUFG (Prop_bufg_I_O)         0.077    24.548 r  cpu_buffer/O
+                         net (fo=30076, routed)       1.448    25.996    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[5].U_FDU/cpu_clk
+    SLICE_X119Y85        FDRE                                         r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[5].U_FDU/G_SLOT[0].o_sidefx_reg[0]/C
+                         clock pessimism              0.361    26.357    
+                         clock uncertainty           -0.386    25.971    
+    SLICE_X119Y85        FDRE (Setup_fdre_C_D)        0.030    26.001    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[5].U_FDU/G_SLOT[0].o_sidefx_reg[0]
+  -------------------------------------------------------------------
+                         required time                         26.001    
+                         arrival time                         -25.798    
+  -------------------------------------------------------------------
+                         slack                                  0.203    
+
+Slack (MET) :             0.249ns  (required time - arrival time)
+  Source:                 system/soc/cpu/ctrl_valid_reg/C
+                            (rising edge-triggered cell FDRE clocked by cpu_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            system/soc/cpu/lsu/walk/physical_address_reg[16]/D
+                            (rising edge-triggered cell FDRE clocked by cpu_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             cpu_raw
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (cpu_raw rise@20.000ns - cpu_raw rise@0.000ns)
+  Data Path Delay:        19.178ns  (logic 6.036ns (31.473%)  route 13.142ns (68.527%))
+  Logic Levels:           31  (CARRY4=13 LUT2=4 LUT3=1 LUT4=1 LUT5=7 LUT6=4 RAMD32=1)
+  Clock Path Skew:        -0.217ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.839ns = ( 25.839 - 20.000 ) 
+    Source Clock Delay      (SCD):    6.410ns
+    Clock Pessimism Removal (CPR):    0.354ns
+  Clock Uncertainty:      0.386ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.157ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.300ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock cpu_raw rise edge)    0.000     0.000 r  
+    R4                                                0.000     0.000 r  sys_clk_p (IN)
+                         net (fo=0)                   0.000     0.000    sys_clk_p
+    R4                   IBUFDS (Prop_ibufds_I_O)     0.842     0.842 r  sysbuf/O
+                         net (fo=1, routed)           1.792     2.634    sysclk
+    BUFGCTRL_X0Y2        BUFG (Prop_bufg_I_O)         0.082     2.716 r  sysclk_BUFG_inst/O
+                         net (fo=63, routed)          1.519     4.234    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i_0
+    PLLE2_ADV_X1Y2       PLLE2_ADV (Prop_plle2_adv_CLKIN1_CLKOUT3)
+                                                      0.077     4.311 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i/CLKOUT3
+                         net (fo=1, routed)           1.165     5.476    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3_out
+    BUFHCE_X1Y24         BUFH (Prop_bufh_I_O)         0.106     5.582 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufh_pll_clk3/O
+                         net (fo=1, routed)           0.813     6.395    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKFBOUT)
+                                                     -3.104     3.291 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/gen_mmcm.mmcm_i/CLKFBOUT
+                         net (fo=1, routed)           1.524     4.815    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/clk_pll_i
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.081     4.896 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufg_clkdiv0/O
+                         net (fo=52558, routed)       1.517     6.412    ui_clk
+    MMCME2_ADV_X0Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -3.156     3.256 r  cpu_mmcm/CLKOUT0
+                         net (fo=1, routed)           1.559     4.815    cpu_raw
+    BUFGCTRL_X0Y4        BUFG (Prop_bufg_I_O)         0.081     4.896 r  cpu_buffer/O
+                         net (fo=30076, routed)       1.514     6.410    system/soc/cpu/cpu_clk
+    SLICE_X78Y77         FDRE                                         r  system/soc/cpu/ctrl_valid_reg/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X78Y77         FDRE (Prop_fdre_C_Q)         0.379     6.789 r  system/soc/cpu/ctrl_valid_reg/Q
+                         net (fo=140, routed)         0.720     7.508    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[4].U_FDU/ctrl_valid
+    SLICE_X80Y79         LUT3 (Prop_lut3_I1_O)        0.105     7.613 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[4].U_FDU/i__carry_i_12__0/O
+                         net (fo=105, routed)         1.171     8.784    system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/wb_tag[0]_45[3]
+    SLICE_X79Y69         LUT2 (Prop_lut2_I0_O)        0.264     9.048 r  system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i__carry_i_5__11/O
+                         net (fo=1, routed)           0.000     9.048    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/i__carry_i_8__0_0[3]
+    SLICE_X79Y69         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.332     9.380 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry/CO[3]
+                         net (fo=1, routed)           0.000     9.380    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry_n_3
+    SLICE_X79Y70         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.478 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__0/CO[3]
+                         net (fo=1, routed)           0.000     9.478    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__0_n_3
+    SLICE_X79Y71         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.576 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__1/CO[3]
+                         net (fo=1, routed)           0.000     9.576    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__1_n_3
+    SLICE_X79Y72         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.674 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__2/CO[3]
+                         net (fo=1, routed)           0.000     9.674    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__2_n_3
+    SLICE_X79Y73         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.772 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__3/CO[3]
+                         net (fo=1, routed)           0.000     9.772    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__3_n_3
+    SLICE_X79Y74         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.870 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__4/CO[3]
+                         net (fo=1, routed)           0.008     9.878    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__4_n_3
+    SLICE_X79Y75         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.976 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__5/CO[3]
+                         net (fo=1, routed)           0.000     9.976    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__5_n_3
+    SLICE_X79Y76         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.265    10.241 f  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__6/O[1]
+                         net (fo=2, routed)           0.715    10.956    system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/o_kill1_inferred__1/i__carry__2[1]
+    SLICE_X80Y74         LUT2 (Prop_lut2_I1_O)        0.250    11.206 r  system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i__carry__2_i_6/O
+                         net (fo=1, routed)           0.000    11.206    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/i___192_i_34__0_1[0]
+    SLICE_X80Y74         CARRY4 (Prop_carry4_S[2]_CO[3])
+                                                      0.316    11.522 f  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill1_inferred__1/i__carry__2/CO[3]
+                         net (fo=1, routed)           0.848    12.370    system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i___192_i_13__0[0]
+    SLICE_X89Y76         LUT6 (Prop_lut6_I3_O)        0.105    12.475 f  system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i___192_i_34__0/O
+                         net (fo=1, routed)           0.220    12.695    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[0].U_FDU/i___192_i_4__0
+    SLICE_X89Y77         LUT6 (Prop_lut6_I0_O)        0.105    12.800 f  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[0].U_FDU/i___192_i_13__0/O
+                         net (fo=2, routed)           0.368    13.168    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/i___192_i_1__0
+    SLICE_X89Y77         LUT5 (Prop_lut5_I0_O)        0.105    13.273 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/i___192_i_4__0/O
+                         net (fo=38, routed)          0.870    14.143    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/FSM_onehot_state_reg[3]_1
+    SLICE_X78Y81         LUT2 (Prop_lut2_I1_O)        0.126    14.269 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/p01_reg_i_188/O
+                         net (fo=11, routed)          1.332    15.602    system/soc/cpu/scheduler/G_LSQ.U_LSQ/accepted[0]
+    SLICE_X64Y100        LUT5 (Prop_lut5_I0_O)        0.267    15.869 r  system/soc/cpu/scheduler/G_LSQ.U_LSQ/va[31]_i_40/O
+                         net (fo=32, routed)          0.908    16.777    system/soc/cpu/scheduler/G_LSQ.U_LSQ/ex_lane[4].source_a1
+    SLICE_X64Y114        LUT5 (Prop_lut5_I3_O)        0.105    16.882 r  system/soc/cpu/scheduler/G_LSQ.U_LSQ/va[15]_i_21/O
+                         net (fo=1, routed)           0.471    17.352    system/soc/cpu/scheduler/G_LSQ.U_LSQ/va[15]_i_21_n_3
+    SLICE_X66Y113        LUT5 (Prop_lut5_I4_O)        0.105    17.457 r  system/soc/cpu/scheduler/G_LSQ.U_LSQ/va[15]_i_13/O
+                         net (fo=2, routed)           0.896    18.353    system/soc/cpu/scheduler/G_LSQ.U_LSQ/va[15]_i_13_n_3
+    SLICE_X80Y108        LUT4 (Prop_lut4_I1_O)        0.105    18.458 r  system/soc/cpu/scheduler/G_LSQ.U_LSQ/va[15]_i_5/O
+                         net (fo=1, routed)           0.790    19.248    system/soc/cpu/scheduler/G_LSQ.U_LSQ/ex_lane[4].source_a[12]
+    SLICE_X67Y104        CARRY4 (Prop_carry4_DI[0]_O[1])
+                                                      0.348    19.596 r  system/soc/cpu/scheduler/G_LSQ.U_LSQ/va_reg[15]_i_1/O[1]
+                         net (fo=76, routed)          1.092    20.688    system/soc/cpu/lsu/walk/cache_satp_reg_0_7_0_5/ADDRA1
+    SLICE_X70Y107        RAMD32 (Prop_ramd32_RADR1_O)
+                                                      0.260    20.948 r  system/soc/cpu/lsu/walk/cache_satp_reg_0_7_0_5/RAMA/O
+                         net (fo=1, routed)           0.554    21.502    system/soc/cpu/lsu/walk/cache_satp_reg_0_7_0_5_n_4
+    SLICE_X69Y107        LUT6 (Prop_lut6_I2_O)        0.264    21.766 r  system/soc/cpu/lsu/walk/cache_hit1_carry_i_4/O
+                         net (fo=1, routed)           0.000    21.766    system/soc/cpu/lsu/walk/cache_hit1_carry_i_4_n_3
+    SLICE_X69Y107        CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.440    22.206 r  system/soc/cpu/lsu/walk/cache_hit1_carry/CO[3]
+                         net (fo=1, routed)           0.000    22.206    system/soc/cpu/lsu/walk/cache_hit1_carry_n_3
+    SLICE_X69Y108        CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098    22.304 r  system/soc/cpu/lsu/walk/cache_hit1_carry__0/CO[3]
+                         net (fo=1, routed)           0.000    22.304    system/soc/cpu/lsu/walk/cache_hit1_carry__0_n_3
+    SLICE_X69Y109        CARRY4 (Prop_carry4_CI_CO[0])
+                                                      0.216    22.520 f  system/soc/cpu/lsu/walk/cache_hit1_carry__1/CO[0]
+                         net (fo=1, routed)           0.466    22.987    system/soc/cpu/csr/CO[0]
+    SLICE_X69Y111        LUT6 (Prop_lut6_I4_O)        0.309    23.296 r  system/soc/cpu/csr/request_address[31]_i_8/O
+                         net (fo=1, routed)           0.262    23.558    system/soc/cpu/lsu/walk/request_address_reg[2]_3
+    SLICE_X70Y112        LUT5 (Prop_lut5_I4_O)        0.105    23.663 f  system/soc/cpu/lsu/walk/request_address[31]_i_5/O
+                         net (fo=3, routed)           0.386    24.049    system/soc/cpu/lsu/walk/cache_hit
+    SLICE_X70Y112        LUT2 (Prop_lut2_I1_O)        0.105    24.154 r  system/soc/cpu/lsu/walk/physical_address[31]_i_4/O
+                         net (fo=20, routed)          0.697    24.851    system/soc/cpu/lsu/walk/physical_address[31]_i_4_n_3
+    SLICE_X68Y109        LUT5 (Prop_lut5_I3_O)        0.264    25.115 r  system/soc/cpu/lsu/walk/physical_address[16]_i_2/O
+                         net (fo=1, routed)           0.368    25.483    system/soc/cpu/lsu/walk/physical_address[16]_i_2_n_3
+    SLICE_X67Y109        LUT5 (Prop_lut5_I4_O)        0.105    25.588 r  system/soc/cpu/lsu/walk/physical_address[16]_i_1/O
+                         net (fo=1, routed)           0.000    25.588    system/soc/cpu/lsu/walk/physical_address1_in[16]
+    SLICE_X67Y109        FDRE                                         r  system/soc/cpu/lsu/walk/physical_address_reg[16]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock cpu_raw rise edge)   20.000    20.000 r  
+    R4                                                0.000    20.000 r  sys_clk_p (IN)
+                         net (fo=0)                   0.000    20.000    sys_clk_p
+    R4                   IBUFDS (Prop_ibufds_I_O)     0.804    20.804 r  sysbuf/O
+                         net (fo=1, routed)           1.699    22.503    sysclk
+    BUFGCTRL_X0Y2        BUFG (Prop_bufg_I_O)         0.078    22.581 r  sysclk_BUFG_inst/O
+                         net (fo=63, routed)          1.417    23.998    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i_0
+    PLLE2_ADV_X1Y2       PLLE2_ADV (Prop_plle2_adv_CLKIN1_CLKOUT3)
+                                                      0.073    24.071 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i/CLKOUT3
+                         net (fo=1, routed)           1.029    25.100    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3_out
+    BUFHCE_X1Y24         BUFH (Prop_bufh_I_O)         0.069    25.169 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufh_pll_clk3/O
+                         net (fo=1, routed)           0.777    25.946    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKFBOUT)
+                                                     -2.927    23.019 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/gen_mmcm.mmcm_i/CLKFBOUT
+                         net (fo=1, routed)           1.452    24.471    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/clk_pll_i
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.077    24.548 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufg_clkdiv0/O
+                         net (fo=52558, routed)       1.415    25.963    ui_clk
+    MMCME2_ADV_X0Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -2.979    22.984 r  cpu_mmcm/CLKOUT0
+                         net (fo=1, routed)           1.488    24.471    cpu_raw
+    BUFGCTRL_X0Y4        BUFG (Prop_bufg_I_O)         0.077    24.548 r  cpu_buffer/O
+                         net (fo=30076, routed)       1.291    25.839    system/soc/cpu/lsu/walk/cpu_clk
+    SLICE_X67Y109        FDRE                                         r  system/soc/cpu/lsu/walk/physical_address_reg[16]/C
+                         clock pessimism              0.354    26.192    
+                         clock uncertainty           -0.386    25.807    
+    SLICE_X67Y109        FDRE (Setup_fdre_C_D)        0.030    25.837    system/soc/cpu/lsu/walk/physical_address_reg[16]
+  -------------------------------------------------------------------
+                         required time                         25.837    
+                         arrival time                         -25.588    
+  -------------------------------------------------------------------
+                         slack                                  0.249    
+
+Slack (MET) :             0.261ns  (required time - arrival time)
+  Source:                 system/soc/cpu/ctrl_valid_reg/C
+                            (rising edge-triggered cell FDRE clocked by cpu_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            system/soc/cpu/lsu/walk/physical_address_reg[20]/D
+                            (rising edge-triggered cell FDRE clocked by cpu_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             cpu_raw
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (cpu_raw rise@20.000ns - cpu_raw rise@0.000ns)
+  Data Path Delay:        19.164ns  (logic 6.036ns (31.497%)  route 13.128ns (68.503%))
+  Logic Levels:           31  (CARRY4=13 LUT2=4 LUT3=1 LUT4=1 LUT5=7 LUT6=4 RAMD32=1)
+  Clock Path Skew:        -0.221ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.835ns = ( 25.835 - 20.000 ) 
+    Source Clock Delay      (SCD):    6.410ns
+    Clock Pessimism Removal (CPR):    0.354ns
+  Clock Uncertainty:      0.386ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.157ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.300ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock cpu_raw rise edge)    0.000     0.000 r  
+    R4                                                0.000     0.000 r  sys_clk_p (IN)
+                         net (fo=0)                   0.000     0.000    sys_clk_p
+    R4                   IBUFDS (Prop_ibufds_I_O)     0.842     0.842 r  sysbuf/O
+                         net (fo=1, routed)           1.792     2.634    sysclk
+    BUFGCTRL_X0Y2        BUFG (Prop_bufg_I_O)         0.082     2.716 r  sysclk_BUFG_inst/O
+                         net (fo=63, routed)          1.519     4.234    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i_0
+    PLLE2_ADV_X1Y2       PLLE2_ADV (Prop_plle2_adv_CLKIN1_CLKOUT3)
+                                                      0.077     4.311 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i/CLKOUT3
+                         net (fo=1, routed)           1.165     5.476    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3_out
+    BUFHCE_X1Y24         BUFH (Prop_bufh_I_O)         0.106     5.582 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufh_pll_clk3/O
+                         net (fo=1, routed)           0.813     6.395    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKFBOUT)
+                                                     -3.104     3.291 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/gen_mmcm.mmcm_i/CLKFBOUT
+                         net (fo=1, routed)           1.524     4.815    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/clk_pll_i
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.081     4.896 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufg_clkdiv0/O
+                         net (fo=52558, routed)       1.517     6.412    ui_clk
+    MMCME2_ADV_X0Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -3.156     3.256 r  cpu_mmcm/CLKOUT0
+                         net (fo=1, routed)           1.559     4.815    cpu_raw
+    BUFGCTRL_X0Y4        BUFG (Prop_bufg_I_O)         0.081     4.896 r  cpu_buffer/O
+                         net (fo=30076, routed)       1.514     6.410    system/soc/cpu/cpu_clk
+    SLICE_X78Y77         FDRE                                         r  system/soc/cpu/ctrl_valid_reg/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X78Y77         FDRE (Prop_fdre_C_Q)         0.379     6.789 r  system/soc/cpu/ctrl_valid_reg/Q
+                         net (fo=140, routed)         0.720     7.508    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[4].U_FDU/ctrl_valid
+    SLICE_X80Y79         LUT3 (Prop_lut3_I1_O)        0.105     7.613 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[4].U_FDU/i__carry_i_12__0/O
+                         net (fo=105, routed)         1.171     8.784    system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/wb_tag[0]_45[3]
+    SLICE_X79Y69         LUT2 (Prop_lut2_I0_O)        0.264     9.048 r  system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i__carry_i_5__11/O
+                         net (fo=1, routed)           0.000     9.048    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/i__carry_i_8__0_0[3]
+    SLICE_X79Y69         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.332     9.380 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry/CO[3]
+                         net (fo=1, routed)           0.000     9.380    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry_n_3
+    SLICE_X79Y70         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.478 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__0/CO[3]
+                         net (fo=1, routed)           0.000     9.478    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__0_n_3
+    SLICE_X79Y71         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.576 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__1/CO[3]
+                         net (fo=1, routed)           0.000     9.576    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__1_n_3
+    SLICE_X79Y72         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.674 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__2/CO[3]
+                         net (fo=1, routed)           0.000     9.674    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__2_n_3
+    SLICE_X79Y73         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.772 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__3/CO[3]
+                         net (fo=1, routed)           0.000     9.772    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__3_n_3
+    SLICE_X79Y74         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.870 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__4/CO[3]
+                         net (fo=1, routed)           0.008     9.878    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__4_n_3
+    SLICE_X79Y75         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.976 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__5/CO[3]
+                         net (fo=1, routed)           0.000     9.976    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__5_n_3
+    SLICE_X79Y76         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.265    10.241 f  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__6/O[1]
+                         net (fo=2, routed)           0.715    10.956    system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/o_kill1_inferred__1/i__carry__2[1]
+    SLICE_X80Y74         LUT2 (Prop_lut2_I1_O)        0.250    11.206 r  system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i__carry__2_i_6/O
+                         net (fo=1, routed)           0.000    11.206    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/i___192_i_34__0_1[0]
+    SLICE_X80Y74         CARRY4 (Prop_carry4_S[2]_CO[3])
+                                                      0.316    11.522 f  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill1_inferred__1/i__carry__2/CO[3]
+                         net (fo=1, routed)           0.848    12.370    system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i___192_i_13__0[0]
+    SLICE_X89Y76         LUT6 (Prop_lut6_I3_O)        0.105    12.475 f  system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i___192_i_34__0/O
+                         net (fo=1, routed)           0.220    12.695    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[0].U_FDU/i___192_i_4__0
+    SLICE_X89Y77         LUT6 (Prop_lut6_I0_O)        0.105    12.800 f  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[0].U_FDU/i___192_i_13__0/O
+                         net (fo=2, routed)           0.368    13.168    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/i___192_i_1__0
+    SLICE_X89Y77         LUT5 (Prop_lut5_I0_O)        0.105    13.273 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/i___192_i_4__0/O
+                         net (fo=38, routed)          0.870    14.143    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/FSM_onehot_state_reg[3]_1
+    SLICE_X78Y81         LUT2 (Prop_lut2_I1_O)        0.126    14.269 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/p01_reg_i_188/O
+                         net (fo=11, routed)          1.332    15.602    system/soc/cpu/scheduler/G_LSQ.U_LSQ/accepted[0]
+    SLICE_X64Y100        LUT5 (Prop_lut5_I0_O)        0.267    15.869 r  system/soc/cpu/scheduler/G_LSQ.U_LSQ/va[31]_i_40/O
+                         net (fo=32, routed)          0.908    16.777    system/soc/cpu/scheduler/G_LSQ.U_LSQ/ex_lane[4].source_a1
+    SLICE_X64Y114        LUT5 (Prop_lut5_I3_O)        0.105    16.882 r  system/soc/cpu/scheduler/G_LSQ.U_LSQ/va[15]_i_21/O
+                         net (fo=1, routed)           0.471    17.352    system/soc/cpu/scheduler/G_LSQ.U_LSQ/va[15]_i_21_n_3
+    SLICE_X66Y113        LUT5 (Prop_lut5_I4_O)        0.105    17.457 r  system/soc/cpu/scheduler/G_LSQ.U_LSQ/va[15]_i_13/O
+                         net (fo=2, routed)           0.896    18.353    system/soc/cpu/scheduler/G_LSQ.U_LSQ/va[15]_i_13_n_3
+    SLICE_X80Y108        LUT4 (Prop_lut4_I1_O)        0.105    18.458 r  system/soc/cpu/scheduler/G_LSQ.U_LSQ/va[15]_i_5/O
+                         net (fo=1, routed)           0.790    19.248    system/soc/cpu/scheduler/G_LSQ.U_LSQ/ex_lane[4].source_a[12]
+    SLICE_X67Y104        CARRY4 (Prop_carry4_DI[0]_O[1])
+                                                      0.348    19.596 r  system/soc/cpu/scheduler/G_LSQ.U_LSQ/va_reg[15]_i_1/O[1]
+                         net (fo=76, routed)          1.092    20.688    system/soc/cpu/lsu/walk/cache_satp_reg_0_7_0_5/ADDRA1
+    SLICE_X70Y107        RAMD32 (Prop_ramd32_RADR1_O)
+                                                      0.260    20.948 r  system/soc/cpu/lsu/walk/cache_satp_reg_0_7_0_5/RAMA/O
+                         net (fo=1, routed)           0.554    21.502    system/soc/cpu/lsu/walk/cache_satp_reg_0_7_0_5_n_4
+    SLICE_X69Y107        LUT6 (Prop_lut6_I2_O)        0.264    21.766 r  system/soc/cpu/lsu/walk/cache_hit1_carry_i_4/O
+                         net (fo=1, routed)           0.000    21.766    system/soc/cpu/lsu/walk/cache_hit1_carry_i_4_n_3
+    SLICE_X69Y107        CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.440    22.206 r  system/soc/cpu/lsu/walk/cache_hit1_carry/CO[3]
+                         net (fo=1, routed)           0.000    22.206    system/soc/cpu/lsu/walk/cache_hit1_carry_n_3
+    SLICE_X69Y108        CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098    22.304 r  system/soc/cpu/lsu/walk/cache_hit1_carry__0/CO[3]
+                         net (fo=1, routed)           0.000    22.304    system/soc/cpu/lsu/walk/cache_hit1_carry__0_n_3
+    SLICE_X69Y109        CARRY4 (Prop_carry4_CI_CO[0])
+                                                      0.216    22.520 f  system/soc/cpu/lsu/walk/cache_hit1_carry__1/CO[0]
+                         net (fo=1, routed)           0.466    22.987    system/soc/cpu/csr/CO[0]
+    SLICE_X69Y111        LUT6 (Prop_lut6_I4_O)        0.309    23.296 r  system/soc/cpu/csr/request_address[31]_i_8/O
+                         net (fo=1, routed)           0.262    23.558    system/soc/cpu/lsu/walk/request_address_reg[2]_3
+    SLICE_X70Y112        LUT5 (Prop_lut5_I4_O)        0.105    23.663 f  system/soc/cpu/lsu/walk/request_address[31]_i_5/O
+                         net (fo=3, routed)           0.386    24.049    system/soc/cpu/lsu/walk/cache_hit
+    SLICE_X70Y112        LUT2 (Prop_lut2_I1_O)        0.105    24.154 r  system/soc/cpu/lsu/walk/physical_address[31]_i_4/O
+                         net (fo=20, routed)          0.581    24.735    system/soc/cpu/lsu/walk/physical_address[31]_i_4_n_3
+    SLICE_X70Y114        LUT5 (Prop_lut5_I3_O)        0.264    24.999 r  system/soc/cpu/lsu/walk/physical_address[20]_i_2/O
+                         net (fo=1, routed)           0.470    25.469    system/soc/cpu/lsu/walk/physical_address[20]_i_2_n_3
+    SLICE_X69Y114        LUT5 (Prop_lut5_I4_O)        0.105    25.574 r  system/soc/cpu/lsu/walk/physical_address[20]_i_1/O
+                         net (fo=1, routed)           0.000    25.574    system/soc/cpu/lsu/walk/physical_address1_in[20]
+    SLICE_X69Y114        FDRE                                         r  system/soc/cpu/lsu/walk/physical_address_reg[20]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock cpu_raw rise edge)   20.000    20.000 r  
+    R4                                                0.000    20.000 r  sys_clk_p (IN)
+                         net (fo=0)                   0.000    20.000    sys_clk_p
+    R4                   IBUFDS (Prop_ibufds_I_O)     0.804    20.804 r  sysbuf/O
+                         net (fo=1, routed)           1.699    22.503    sysclk
+    BUFGCTRL_X0Y2        BUFG (Prop_bufg_I_O)         0.078    22.581 r  sysclk_BUFG_inst/O
+                         net (fo=63, routed)          1.417    23.998    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i_0
+    PLLE2_ADV_X1Y2       PLLE2_ADV (Prop_plle2_adv_CLKIN1_CLKOUT3)
+                                                      0.073    24.071 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i/CLKOUT3
+                         net (fo=1, routed)           1.029    25.100    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3_out
+    BUFHCE_X1Y24         BUFH (Prop_bufh_I_O)         0.069    25.169 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufh_pll_clk3/O
+                         net (fo=1, routed)           0.777    25.946    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKFBOUT)
+                                                     -2.927    23.019 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/gen_mmcm.mmcm_i/CLKFBOUT
+                         net (fo=1, routed)           1.452    24.471    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/clk_pll_i
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.077    24.548 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufg_clkdiv0/O
+                         net (fo=52558, routed)       1.415    25.963    ui_clk
+    MMCME2_ADV_X0Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -2.979    22.984 r  cpu_mmcm/CLKOUT0
+                         net (fo=1, routed)           1.488    24.471    cpu_raw
+    BUFGCTRL_X0Y4        BUFG (Prop_bufg_I_O)         0.077    24.548 r  cpu_buffer/O
+                         net (fo=30076, routed)       1.287    25.835    system/soc/cpu/lsu/walk/cpu_clk
+    SLICE_X69Y114        FDRE                                         r  system/soc/cpu/lsu/walk/physical_address_reg[20]/C
+                         clock pessimism              0.354    26.188    
+                         clock uncertainty           -0.386    25.803    
+    SLICE_X69Y114        FDRE (Setup_fdre_C_D)        0.032    25.835    system/soc/cpu/lsu/walk/physical_address_reg[20]
+  -------------------------------------------------------------------
+                         required time                         25.835    
+                         arrival time                         -25.574    
+  -------------------------------------------------------------------
+                         slack                                  0.261    
+
+Slack (MET) :             0.281ns  (required time - arrival time)
+  Source:                 system/soc/cpu/ctrl_valid_reg/C
+                            (rising edge-triggered cell FDRE clocked by cpu_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[4].U_FDU/G_SLOT[2].o_sidefx_reg[2]/D
+                            (rising edge-triggered cell FDRE clocked by cpu_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             cpu_raw
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (cpu_raw rise@20.000ns - cpu_raw rise@0.000ns)
+  Data Path Delay:        19.319ns  (logic 5.271ns (27.284%)  route 14.048ns (72.716%))
+  Logic Levels:           33  (CARRY4=12 LUT2=4 LUT3=2 LUT4=3 LUT5=6 LUT6=6)
+  Clock Path Skew:        -0.046ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    6.003ns = ( 26.003 - 20.000 ) 
+    Source Clock Delay      (SCD):    6.410ns
+    Clock Pessimism Removal (CPR):    0.361ns
+  Clock Uncertainty:      0.386ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.157ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.300ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock cpu_raw rise edge)    0.000     0.000 r  
+    R4                                                0.000     0.000 r  sys_clk_p (IN)
+                         net (fo=0)                   0.000     0.000    sys_clk_p
+    R4                   IBUFDS (Prop_ibufds_I_O)     0.842     0.842 r  sysbuf/O
+                         net (fo=1, routed)           1.792     2.634    sysclk
+    BUFGCTRL_X0Y2        BUFG (Prop_bufg_I_O)         0.082     2.716 r  sysclk_BUFG_inst/O
+                         net (fo=63, routed)          1.519     4.234    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i_0
+    PLLE2_ADV_X1Y2       PLLE2_ADV (Prop_plle2_adv_CLKIN1_CLKOUT3)
+                                                      0.077     4.311 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i/CLKOUT3
+                         net (fo=1, routed)           1.165     5.476    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3_out
+    BUFHCE_X1Y24         BUFH (Prop_bufh_I_O)         0.106     5.582 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufh_pll_clk3/O
+                         net (fo=1, routed)           0.813     6.395    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKFBOUT)
+                                                     -3.104     3.291 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/gen_mmcm.mmcm_i/CLKFBOUT
+                         net (fo=1, routed)           1.524     4.815    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/clk_pll_i
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.081     4.896 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufg_clkdiv0/O
+                         net (fo=52558, routed)       1.517     6.412    ui_clk
+    MMCME2_ADV_X0Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -3.156     3.256 r  cpu_mmcm/CLKOUT0
+                         net (fo=1, routed)           1.559     4.815    cpu_raw
+    BUFGCTRL_X0Y4        BUFG (Prop_bufg_I_O)         0.081     4.896 r  cpu_buffer/O
+                         net (fo=30076, routed)       1.514     6.410    system/soc/cpu/cpu_clk
+    SLICE_X78Y77         FDRE                                         r  system/soc/cpu/ctrl_valid_reg/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X78Y77         FDRE (Prop_fdre_C_Q)         0.379     6.789 r  system/soc/cpu/ctrl_valid_reg/Q
+                         net (fo=140, routed)         0.720     7.508    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[4].U_FDU/ctrl_valid
+    SLICE_X80Y79         LUT3 (Prop_lut3_I1_O)        0.105     7.613 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[4].U_FDU/i__carry_i_12__0/O
+                         net (fo=105, routed)         1.171     8.784    system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/wb_tag[0]_45[3]
+    SLICE_X79Y69         LUT2 (Prop_lut2_I0_O)        0.264     9.048 r  system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i__carry_i_5__11/O
+                         net (fo=1, routed)           0.000     9.048    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/i__carry_i_8__0_0[3]
+    SLICE_X79Y69         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.332     9.380 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry/CO[3]
+                         net (fo=1, routed)           0.000     9.380    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry_n_3
+    SLICE_X79Y70         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.478 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__0/CO[3]
+                         net (fo=1, routed)           0.000     9.478    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__0_n_3
+    SLICE_X79Y71         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.576 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__1/CO[3]
+                         net (fo=1, routed)           0.000     9.576    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__1_n_3
+    SLICE_X79Y72         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.674 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__2/CO[3]
+                         net (fo=1, routed)           0.000     9.674    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__2_n_3
+    SLICE_X79Y73         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.772 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__3/CO[3]
+                         net (fo=1, routed)           0.000     9.772    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__3_n_3
+    SLICE_X79Y74         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.870 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__4/CO[3]
+                         net (fo=1, routed)           0.008     9.878    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__4_n_3
+    SLICE_X79Y75         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.976 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__5/CO[3]
+                         net (fo=1, routed)           0.000     9.976    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__5_n_3
+    SLICE_X79Y76         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.265    10.241 f  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__6/O[1]
+                         net (fo=2, routed)           0.715    10.956    system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/o_kill1_inferred__1/i__carry__2[1]
+    SLICE_X80Y74         LUT2 (Prop_lut2_I1_O)        0.250    11.206 r  system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i__carry__2_i_6/O
+                         net (fo=1, routed)           0.000    11.206    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/i___192_i_34__0_1[0]
+    SLICE_X80Y74         CARRY4 (Prop_carry4_S[2]_CO[3])
+                                                      0.316    11.522 f  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill1_inferred__1/i__carry__2/CO[3]
+                         net (fo=1, routed)           0.848    12.370    system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i___192_i_13__0[0]
+    SLICE_X89Y76         LUT6 (Prop_lut6_I3_O)        0.105    12.475 f  system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i___192_i_34__0/O
+                         net (fo=1, routed)           0.220    12.695    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[0].U_FDU/i___192_i_4__0
+    SLICE_X89Y77         LUT6 (Prop_lut6_I0_O)        0.105    12.800 f  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[0].U_FDU/i___192_i_13__0/O
+                         net (fo=2, routed)           0.368    13.168    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/i___192_i_1__0
+    SLICE_X89Y77         LUT5 (Prop_lut5_I0_O)        0.105    13.273 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/i___192_i_4__0/O
+                         net (fo=38, routed)          0.870    14.143    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/FSM_onehot_state_reg[3]_1
+    SLICE_X78Y81         LUT2 (Prop_lut2_I1_O)        0.126    14.269 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/p01_reg_i_188/O
+                         net (fo=11, routed)          1.015    15.284    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/accepted[0]
+    SLICE_X71Y95         LUT5 (Prop_lut5_I4_O)        0.267    15.551 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_operand[31]_i_15/O
+                         net (fo=32, routed)          0.812    16.364    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ex_lane[0].source_a1
+    SLICE_X64Y99         LUT5 (Prop_lut5_I3_O)        0.105    16.469 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_operand[12]_i_3/O
+                         net (fo=1, routed)           0.433    16.901    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_operand[12]_i_3_n_3
+    SLICE_X65Y97         LUT5 (Prop_lut5_I4_O)        0.105    17.006 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_operand[12]_i_2/O
+                         net (fo=1, routed)           0.378    17.384    system/soc/cpu/lsu/sys_operand_reg[12]_0
+    SLICE_X66Y96         LUT6 (Prop_lut6_I4_O)        0.105    17.489 r  system/soc/cpu/lsu/sys_operand[12]_i_1/O
+                         net (fo=12, routed)          1.143    18.632    system/soc/cpu/lsu/ex_lane[0].source_a[12]
+    SLICE_X71Y92         LUT4 (Prop_lut4_I1_O)        0.105    18.737 r  system/soc/cpu/lsu/ctrl_tval[31]_i_109/O
+                         net (fo=1, routed)           0.000    18.737    system/soc/cpu/lsu/ctrl_tval[31]_i_109_n_3
+    SLICE_X71Y92         CARRY4 (Prop_carry4_S[2]_CO[3])
+                                                      0.332    19.069 r  system/soc/cpu/lsu/ctrl_tval_reg[31]_i_58/CO[3]
+                         net (fo=1, routed)           0.000    19.069    system/soc/cpu/lsu/ctrl_tval_reg[31]_i_58_n_3
+    SLICE_X71Y93         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098    19.167 r  system/soc/cpu/lsu/ctrl_tval_reg[31]_i_23/CO[3]
+                         net (fo=1, routed)           0.000    19.167    system/soc/cpu/lsu/ctrl_tval_reg[31]_i_23_n_3
+    SLICE_X71Y94         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098    19.265 r  system/soc/cpu/lsu/ctrl_tval_reg[31]_i_18/CO[3]
+                         net (fo=1, routed)           1.031    20.296    system/soc/cpu/lsu/bru/data2
+    SLICE_X74Y95         LUT6 (Prop_lut6_I0_O)        0.105    20.401 r  system/soc/cpu/lsu/ctrl_tval[31]_i_12/O
+                         net (fo=1, routed)           0.500    20.900    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_tval[0]_i_2_0
+    SLICE_X76Y95         LUT4 (Prop_lut4_I0_O)        0.105    21.005 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_tval[31]_i_5/O
+                         net (fo=32, routed)          0.658    21.663    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_tval[31]_i_5_n_3
+    SLICE_X81Y92         LUT5 (Prop_lut5_I1_O)        0.105    21.768 f  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_tval[1]_i_2/O
+                         net (fo=4, routed)           0.626    22.393    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/br_next[1]
+    SLICE_X84Y93         LUT6 (Prop_lut6_I1_O)        0.105    22.498 f  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_rd[5]_i_3/O
+                         net (fo=5, routed)           0.333    22.832    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_bad
+    SLICE_X87Y93         LUT4 (Prop_lut4_I1_O)        0.105    22.937 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/G_SLOT[0].o_sidefx[0]_i_10__0/O
+                         net (fo=24, routed)          1.253    24.189    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/cs
+    SLICE_X123Y91        LUT5 (Prop_lut5_I4_O)        0.105    24.294 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/G_SLOT[0].o_sidefx[0]_i_3/O
+                         net (fo=3, routed)           0.462    24.756    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/G_OUTPUT[0].output_data_reg[0][33]_1
+    SLICE_X125Y91        LUT2 (Prop_lut2_I0_O)        0.107    24.863 f  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/G_SLOT[8].o_sidefx[8]_i_3/O
+                         net (fo=3, routed)           0.263    25.126    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[4].U_FDU/G_SLOT[10].o_sidefx_reg[10]_0
+    SLICE_X124Y90        LUT3 (Prop_lut3_I1_O)        0.274    25.400 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[4].U_FDU/G_SLOT[2].o_sidefx[2]_i_2/O
+                         net (fo=1, routed)           0.224    25.624    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[4].U_FDU/G_SLOT[2].o_sidefx[2]_i_2_n_3
+    SLICE_X127Y90        LUT6 (Prop_lut6_I1_O)        0.105    25.729 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[4].U_FDU/G_SLOT[2].o_sidefx[2]_i_1/O
+                         net (fo=1, routed)           0.000    25.729    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[4].U_FDU/G_SLOT[2].o_sidefx[2]_i_1_n_3
+    SLICE_X127Y90        FDRE                                         r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[4].U_FDU/G_SLOT[2].o_sidefx_reg[2]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock cpu_raw rise edge)   20.000    20.000 r  
+    R4                                                0.000    20.000 r  sys_clk_p (IN)
+                         net (fo=0)                   0.000    20.000    sys_clk_p
+    R4                   IBUFDS (Prop_ibufds_I_O)     0.804    20.804 r  sysbuf/O
+                         net (fo=1, routed)           1.699    22.503    sysclk
+    BUFGCTRL_X0Y2        BUFG (Prop_bufg_I_O)         0.078    22.581 r  sysclk_BUFG_inst/O
+                         net (fo=63, routed)          1.417    23.998    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i_0
+    PLLE2_ADV_X1Y2       PLLE2_ADV (Prop_plle2_adv_CLKIN1_CLKOUT3)
+                                                      0.073    24.071 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i/CLKOUT3
+                         net (fo=1, routed)           1.029    25.100    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3_out
+    BUFHCE_X1Y24         BUFH (Prop_bufh_I_O)         0.069    25.169 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufh_pll_clk3/O
+                         net (fo=1, routed)           0.777    25.946    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKFBOUT)
+                                                     -2.927    23.019 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/gen_mmcm.mmcm_i/CLKFBOUT
+                         net (fo=1, routed)           1.452    24.471    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/clk_pll_i
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.077    24.548 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufg_clkdiv0/O
+                         net (fo=52558, routed)       1.415    25.963    ui_clk
+    MMCME2_ADV_X0Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -2.979    22.984 r  cpu_mmcm/CLKOUT0
+                         net (fo=1, routed)           1.488    24.471    cpu_raw
+    BUFGCTRL_X0Y4        BUFG (Prop_bufg_I_O)         0.077    24.548 r  cpu_buffer/O
+                         net (fo=30076, routed)       1.455    26.003    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[4].U_FDU/cpu_clk
+    SLICE_X127Y90        FDRE                                         r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[4].U_FDU/G_SLOT[2].o_sidefx_reg[2]/C
+                         clock pessimism              0.361    26.364    
+                         clock uncertainty           -0.386    25.978    
+    SLICE_X127Y90        FDRE (Setup_fdre_C_D)        0.032    26.010    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[4].U_FDU/G_SLOT[2].o_sidefx_reg[2]
+  -------------------------------------------------------------------
+                         required time                         26.010    
+                         arrival time                         -25.729    
+  -------------------------------------------------------------------
+                         slack                                  0.281    
+
+Slack (MET) :             0.296ns  (required time - arrival time)
+  Source:                 system/soc/cpu/ctrl_valid_reg/C
+                            (rising edge-triggered cell FDRE clocked by cpu_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[6].U_FDU/G_SLOT[0].o_sidefx_reg[0]/D
+                            (rising edge-triggered cell FDRE clocked by cpu_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             cpu_raw
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (cpu_raw rise@20.000ns - cpu_raw rise@0.000ns)
+  Data Path Delay:        19.294ns  (logic 5.271ns (27.319%)  route 14.023ns (72.681%))
+  Logic Levels:           33  (CARRY4=12 LUT2=4 LUT3=2 LUT4=3 LUT5=5 LUT6=7)
+  Clock Path Skew:        -0.054ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.995ns = ( 25.995 - 20.000 ) 
+    Source Clock Delay      (SCD):    6.410ns
+    Clock Pessimism Removal (CPR):    0.361ns
+  Clock Uncertainty:      0.386ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.157ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.300ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock cpu_raw rise edge)    0.000     0.000 r  
+    R4                                                0.000     0.000 r  sys_clk_p (IN)
+                         net (fo=0)                   0.000     0.000    sys_clk_p
+    R4                   IBUFDS (Prop_ibufds_I_O)     0.842     0.842 r  sysbuf/O
+                         net (fo=1, routed)           1.792     2.634    sysclk
+    BUFGCTRL_X0Y2        BUFG (Prop_bufg_I_O)         0.082     2.716 r  sysclk_BUFG_inst/O
+                         net (fo=63, routed)          1.519     4.234    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i_0
+    PLLE2_ADV_X1Y2       PLLE2_ADV (Prop_plle2_adv_CLKIN1_CLKOUT3)
+                                                      0.077     4.311 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i/CLKOUT3
+                         net (fo=1, routed)           1.165     5.476    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3_out
+    BUFHCE_X1Y24         BUFH (Prop_bufh_I_O)         0.106     5.582 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufh_pll_clk3/O
+                         net (fo=1, routed)           0.813     6.395    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKFBOUT)
+                                                     -3.104     3.291 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/gen_mmcm.mmcm_i/CLKFBOUT
+                         net (fo=1, routed)           1.524     4.815    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/clk_pll_i
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.081     4.896 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufg_clkdiv0/O
+                         net (fo=52558, routed)       1.517     6.412    ui_clk
+    MMCME2_ADV_X0Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -3.156     3.256 r  cpu_mmcm/CLKOUT0
+                         net (fo=1, routed)           1.559     4.815    cpu_raw
+    BUFGCTRL_X0Y4        BUFG (Prop_bufg_I_O)         0.081     4.896 r  cpu_buffer/O
+                         net (fo=30076, routed)       1.514     6.410    system/soc/cpu/cpu_clk
+    SLICE_X78Y77         FDRE                                         r  system/soc/cpu/ctrl_valid_reg/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X78Y77         FDRE (Prop_fdre_C_Q)         0.379     6.789 r  system/soc/cpu/ctrl_valid_reg/Q
+                         net (fo=140, routed)         0.720     7.508    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[4].U_FDU/ctrl_valid
+    SLICE_X80Y79         LUT3 (Prop_lut3_I1_O)        0.105     7.613 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[4].U_FDU/i__carry_i_12__0/O
+                         net (fo=105, routed)         1.171     8.784    system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/wb_tag[0]_45[3]
+    SLICE_X79Y69         LUT2 (Prop_lut2_I0_O)        0.264     9.048 r  system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i__carry_i_5__11/O
+                         net (fo=1, routed)           0.000     9.048    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/i__carry_i_8__0_0[3]
+    SLICE_X79Y69         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.332     9.380 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry/CO[3]
+                         net (fo=1, routed)           0.000     9.380    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry_n_3
+    SLICE_X79Y70         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.478 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__0/CO[3]
+                         net (fo=1, routed)           0.000     9.478    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__0_n_3
+    SLICE_X79Y71         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.576 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__1/CO[3]
+                         net (fo=1, routed)           0.000     9.576    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__1_n_3
+    SLICE_X79Y72         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.674 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__2/CO[3]
+                         net (fo=1, routed)           0.000     9.674    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__2_n_3
+    SLICE_X79Y73         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.772 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__3/CO[3]
+                         net (fo=1, routed)           0.000     9.772    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__3_n_3
+    SLICE_X79Y74         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.870 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__4/CO[3]
+                         net (fo=1, routed)           0.008     9.878    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__4_n_3
+    SLICE_X79Y75         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.976 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__5/CO[3]
+                         net (fo=1, routed)           0.000     9.976    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__5_n_3
+    SLICE_X79Y76         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.265    10.241 f  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__6/O[1]
+                         net (fo=2, routed)           0.715    10.956    system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/o_kill1_inferred__1/i__carry__2[1]
+    SLICE_X80Y74         LUT2 (Prop_lut2_I1_O)        0.250    11.206 r  system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i__carry__2_i_6/O
+                         net (fo=1, routed)           0.000    11.206    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/i___192_i_34__0_1[0]
+    SLICE_X80Y74         CARRY4 (Prop_carry4_S[2]_CO[3])
+                                                      0.316    11.522 f  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill1_inferred__1/i__carry__2/CO[3]
+                         net (fo=1, routed)           0.848    12.370    system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i___192_i_13__0[0]
+    SLICE_X89Y76         LUT6 (Prop_lut6_I3_O)        0.105    12.475 f  system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i___192_i_34__0/O
+                         net (fo=1, routed)           0.220    12.695    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[0].U_FDU/i___192_i_4__0
+    SLICE_X89Y77         LUT6 (Prop_lut6_I0_O)        0.105    12.800 f  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[0].U_FDU/i___192_i_13__0/O
+                         net (fo=2, routed)           0.368    13.168    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/i___192_i_1__0
+    SLICE_X89Y77         LUT5 (Prop_lut5_I0_O)        0.105    13.273 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/i___192_i_4__0/O
+                         net (fo=38, routed)          0.870    14.143    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/FSM_onehot_state_reg[3]_1
+    SLICE_X78Y81         LUT2 (Prop_lut2_I1_O)        0.126    14.269 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/p01_reg_i_188/O
+                         net (fo=11, routed)          1.015    15.284    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/accepted[0]
+    SLICE_X71Y95         LUT5 (Prop_lut5_I4_O)        0.267    15.551 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_operand[31]_i_15/O
+                         net (fo=32, routed)          0.812    16.364    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ex_lane[0].source_a1
+    SLICE_X64Y99         LUT5 (Prop_lut5_I3_O)        0.105    16.469 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_operand[12]_i_3/O
+                         net (fo=1, routed)           0.433    16.901    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_operand[12]_i_3_n_3
+    SLICE_X65Y97         LUT5 (Prop_lut5_I4_O)        0.105    17.006 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_operand[12]_i_2/O
+                         net (fo=1, routed)           0.378    17.384    system/soc/cpu/lsu/sys_operand_reg[12]_0
+    SLICE_X66Y96         LUT6 (Prop_lut6_I4_O)        0.105    17.489 r  system/soc/cpu/lsu/sys_operand[12]_i_1/O
+                         net (fo=12, routed)          1.143    18.632    system/soc/cpu/lsu/ex_lane[0].source_a[12]
+    SLICE_X71Y92         LUT4 (Prop_lut4_I1_O)        0.105    18.737 r  system/soc/cpu/lsu/ctrl_tval[31]_i_109/O
+                         net (fo=1, routed)           0.000    18.737    system/soc/cpu/lsu/ctrl_tval[31]_i_109_n_3
+    SLICE_X71Y92         CARRY4 (Prop_carry4_S[2]_CO[3])
+                                                      0.332    19.069 r  system/soc/cpu/lsu/ctrl_tval_reg[31]_i_58/CO[3]
+                         net (fo=1, routed)           0.000    19.069    system/soc/cpu/lsu/ctrl_tval_reg[31]_i_58_n_3
+    SLICE_X71Y93         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098    19.167 r  system/soc/cpu/lsu/ctrl_tval_reg[31]_i_23/CO[3]
+                         net (fo=1, routed)           0.000    19.167    system/soc/cpu/lsu/ctrl_tval_reg[31]_i_23_n_3
+    SLICE_X71Y94         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098    19.265 r  system/soc/cpu/lsu/ctrl_tval_reg[31]_i_18/CO[3]
+                         net (fo=1, routed)           1.031    20.296    system/soc/cpu/lsu/bru/data2
+    SLICE_X74Y95         LUT6 (Prop_lut6_I0_O)        0.105    20.401 r  system/soc/cpu/lsu/ctrl_tval[31]_i_12/O
+                         net (fo=1, routed)           0.500    20.900    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_tval[0]_i_2_0
+    SLICE_X76Y95         LUT4 (Prop_lut4_I0_O)        0.105    21.005 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_tval[31]_i_5/O
+                         net (fo=32, routed)          0.658    21.663    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_tval[31]_i_5_n_3
+    SLICE_X81Y92         LUT5 (Prop_lut5_I1_O)        0.105    21.768 f  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_tval[1]_i_2/O
+                         net (fo=4, routed)           0.626    22.393    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/br_next[1]
+    SLICE_X84Y93         LUT6 (Prop_lut6_I1_O)        0.105    22.498 f  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_rd[5]_i_3/O
+                         net (fo=5, routed)           0.333    22.832    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_bad
+    SLICE_X87Y93         LUT4 (Prop_lut4_I1_O)        0.105    22.937 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/G_SLOT[0].o_sidefx[0]_i_10__0/O
+                         net (fo=24, routed)          1.253    24.190    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/cs
+    SLICE_X108Y85        LUT6 (Prop_lut6_I3_O)        0.105    24.295 f  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/G_SLOT[2].o_sidefx[2]_i_4__1/O
+                         net (fo=2, routed)           0.314    24.609    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/G_SLOT[2].o_sidefx[2]_i_4__1_n_3
+    SLICE_X111Y85        LUT3 (Prop_lut3_I2_O)        0.107    24.716 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/G_SLOT[4].o_sidefx[4]_i_5__0/O
+                         net (fo=4, routed)           0.382    25.098    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[6].U_FDU/G_SLOT[12].o_sidefx_reg[12]_0
+    SLICE_X114Y85        LUT6 (Prop_lut6_I1_O)        0.274    25.372 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[6].U_FDU/G_SLOT[0].o_sidefx[0]_i_2__3/O
+                         net (fo=1, routed)           0.227    25.599    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[6].U_FDU/o_sidefx59_out
+    SLICE_X113Y85        LUT2 (Prop_lut2_I0_O)        0.105    25.704 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[6].U_FDU/G_SLOT[0].o_sidefx[0]_i_1__3/O
+                         net (fo=1, routed)           0.000    25.704    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[6].U_FDU/G_SLOT[0].o_sidefx[0]_i_1__3_n_3
+    SLICE_X113Y85        FDRE                                         r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[6].U_FDU/G_SLOT[0].o_sidefx_reg[0]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock cpu_raw rise edge)   20.000    20.000 r  
+    R4                                                0.000    20.000 r  sys_clk_p (IN)
+                         net (fo=0)                   0.000    20.000    sys_clk_p
+    R4                   IBUFDS (Prop_ibufds_I_O)     0.804    20.804 r  sysbuf/O
+                         net (fo=1, routed)           1.699    22.503    sysclk
+    BUFGCTRL_X0Y2        BUFG (Prop_bufg_I_O)         0.078    22.581 r  sysclk_BUFG_inst/O
+                         net (fo=63, routed)          1.417    23.998    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i_0
+    PLLE2_ADV_X1Y2       PLLE2_ADV (Prop_plle2_adv_CLKIN1_CLKOUT3)
+                                                      0.073    24.071 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i/CLKOUT3
+                         net (fo=1, routed)           1.029    25.100    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3_out
+    BUFHCE_X1Y24         BUFH (Prop_bufh_I_O)         0.069    25.169 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufh_pll_clk3/O
+                         net (fo=1, routed)           0.777    25.946    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKFBOUT)
+                                                     -2.927    23.019 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/gen_mmcm.mmcm_i/CLKFBOUT
+                         net (fo=1, routed)           1.452    24.471    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/clk_pll_i
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.077    24.548 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufg_clkdiv0/O
+                         net (fo=52558, routed)       1.415    25.963    ui_clk
+    MMCME2_ADV_X0Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -2.979    22.984 r  cpu_mmcm/CLKOUT0
+                         net (fo=1, routed)           1.488    24.471    cpu_raw
+    BUFGCTRL_X0Y4        BUFG (Prop_bufg_I_O)         0.077    24.548 r  cpu_buffer/O
+                         net (fo=30076, routed)       1.447    25.995    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[6].U_FDU/cpu_clk
+    SLICE_X113Y85        FDRE                                         r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[6].U_FDU/G_SLOT[0].o_sidefx_reg[0]/C
+                         clock pessimism              0.361    26.356    
+                         clock uncertainty           -0.386    25.970    
+    SLICE_X113Y85        FDRE (Setup_fdre_C_D)        0.030    26.000    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[6].U_FDU/G_SLOT[0].o_sidefx_reg[0]
+  -------------------------------------------------------------------
+                         required time                         26.000    
+                         arrival time                         -25.704    
+  -------------------------------------------------------------------
+                         slack                                  0.296    
+
+Slack (MET) :             0.381ns  (required time - arrival time)
+  Source:                 system/soc/cpu/ctrl_valid_reg/C
+                            (rising edge-triggered cell FDRE clocked by cpu_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[1].U_FDU/G_SLOT[8].o_sidefx_reg[8]/D
+                            (rising edge-triggered cell FDRE clocked by cpu_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             cpu_raw
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (cpu_raw rise@20.000ns - cpu_raw rise@0.000ns)
+  Data Path Delay:        19.219ns  (logic 5.160ns (26.848%)  route 14.059ns (73.152%))
+  Logic Levels:           32  (CARRY4=12 LUT2=4 LUT3=1 LUT4=3 LUT5=6 LUT6=6)
+  Clock Path Skew:        -0.047ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    6.002ns = ( 26.002 - 20.000 ) 
+    Source Clock Delay      (SCD):    6.410ns
+    Clock Pessimism Removal (CPR):    0.361ns
+  Clock Uncertainty:      0.386ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.157ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.300ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock cpu_raw rise edge)    0.000     0.000 r  
+    R4                                                0.000     0.000 r  sys_clk_p (IN)
+                         net (fo=0)                   0.000     0.000    sys_clk_p
+    R4                   IBUFDS (Prop_ibufds_I_O)     0.842     0.842 r  sysbuf/O
+                         net (fo=1, routed)           1.792     2.634    sysclk
+    BUFGCTRL_X0Y2        BUFG (Prop_bufg_I_O)         0.082     2.716 r  sysclk_BUFG_inst/O
+                         net (fo=63, routed)          1.519     4.234    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i_0
+    PLLE2_ADV_X1Y2       PLLE2_ADV (Prop_plle2_adv_CLKIN1_CLKOUT3)
+                                                      0.077     4.311 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i/CLKOUT3
+                         net (fo=1, routed)           1.165     5.476    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3_out
+    BUFHCE_X1Y24         BUFH (Prop_bufh_I_O)         0.106     5.582 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufh_pll_clk3/O
+                         net (fo=1, routed)           0.813     6.395    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKFBOUT)
+                                                     -3.104     3.291 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/gen_mmcm.mmcm_i/CLKFBOUT
+                         net (fo=1, routed)           1.524     4.815    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/clk_pll_i
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.081     4.896 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufg_clkdiv0/O
+                         net (fo=52558, routed)       1.517     6.412    ui_clk
+    MMCME2_ADV_X0Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -3.156     3.256 r  cpu_mmcm/CLKOUT0
+                         net (fo=1, routed)           1.559     4.815    cpu_raw
+    BUFGCTRL_X0Y4        BUFG (Prop_bufg_I_O)         0.081     4.896 r  cpu_buffer/O
+                         net (fo=30076, routed)       1.514     6.410    system/soc/cpu/cpu_clk
+    SLICE_X78Y77         FDRE                                         r  system/soc/cpu/ctrl_valid_reg/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X78Y77         FDRE (Prop_fdre_C_Q)         0.379     6.789 r  system/soc/cpu/ctrl_valid_reg/Q
+                         net (fo=140, routed)         0.720     7.508    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[4].U_FDU/ctrl_valid
+    SLICE_X80Y79         LUT3 (Prop_lut3_I1_O)        0.105     7.613 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[4].U_FDU/i__carry_i_12__0/O
+                         net (fo=105, routed)         1.171     8.784    system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/wb_tag[0]_45[3]
+    SLICE_X79Y69         LUT2 (Prop_lut2_I0_O)        0.264     9.048 r  system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i__carry_i_5__11/O
+                         net (fo=1, routed)           0.000     9.048    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/i__carry_i_8__0_0[3]
+    SLICE_X79Y69         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.332     9.380 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry/CO[3]
+                         net (fo=1, routed)           0.000     9.380    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry_n_3
+    SLICE_X79Y70         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.478 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__0/CO[3]
+                         net (fo=1, routed)           0.000     9.478    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__0_n_3
+    SLICE_X79Y71         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.576 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__1/CO[3]
+                         net (fo=1, routed)           0.000     9.576    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__1_n_3
+    SLICE_X79Y72         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.674 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__2/CO[3]
+                         net (fo=1, routed)           0.000     9.674    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__2_n_3
+    SLICE_X79Y73         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.772 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__3/CO[3]
+                         net (fo=1, routed)           0.000     9.772    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__3_n_3
+    SLICE_X79Y74         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.870 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__4/CO[3]
+                         net (fo=1, routed)           0.008     9.878    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__4_n_3
+    SLICE_X79Y75         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.976 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__5/CO[3]
+                         net (fo=1, routed)           0.000     9.976    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__5_n_3
+    SLICE_X79Y76         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.265    10.241 f  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__6/O[1]
+                         net (fo=2, routed)           0.715    10.956    system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/o_kill1_inferred__1/i__carry__2[1]
+    SLICE_X80Y74         LUT2 (Prop_lut2_I1_O)        0.250    11.206 r  system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i__carry__2_i_6/O
+                         net (fo=1, routed)           0.000    11.206    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/i___192_i_34__0_1[0]
+    SLICE_X80Y74         CARRY4 (Prop_carry4_S[2]_CO[3])
+                                                      0.316    11.522 f  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill1_inferred__1/i__carry__2/CO[3]
+                         net (fo=1, routed)           0.848    12.370    system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i___192_i_13__0[0]
+    SLICE_X89Y76         LUT6 (Prop_lut6_I3_O)        0.105    12.475 f  system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i___192_i_34__0/O
+                         net (fo=1, routed)           0.220    12.695    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[0].U_FDU/i___192_i_4__0
+    SLICE_X89Y77         LUT6 (Prop_lut6_I0_O)        0.105    12.800 f  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[0].U_FDU/i___192_i_13__0/O
+                         net (fo=2, routed)           0.368    13.168    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/i___192_i_1__0
+    SLICE_X89Y77         LUT5 (Prop_lut5_I0_O)        0.105    13.273 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/i___192_i_4__0/O
+                         net (fo=38, routed)          0.870    14.143    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/FSM_onehot_state_reg[3]_1
+    SLICE_X78Y81         LUT2 (Prop_lut2_I1_O)        0.126    14.269 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/p01_reg_i_188/O
+                         net (fo=11, routed)          1.015    15.284    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/accepted[0]
+    SLICE_X71Y95         LUT5 (Prop_lut5_I4_O)        0.267    15.551 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_operand[31]_i_15/O
+                         net (fo=32, routed)          0.812    16.364    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ex_lane[0].source_a1
+    SLICE_X64Y99         LUT5 (Prop_lut5_I3_O)        0.105    16.469 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_operand[12]_i_3/O
+                         net (fo=1, routed)           0.433    16.901    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_operand[12]_i_3_n_3
+    SLICE_X65Y97         LUT5 (Prop_lut5_I4_O)        0.105    17.006 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_operand[12]_i_2/O
+                         net (fo=1, routed)           0.378    17.384    system/soc/cpu/lsu/sys_operand_reg[12]_0
+    SLICE_X66Y96         LUT6 (Prop_lut6_I4_O)        0.105    17.489 r  system/soc/cpu/lsu/sys_operand[12]_i_1/O
+                         net (fo=12, routed)          1.143    18.632    system/soc/cpu/lsu/ex_lane[0].source_a[12]
+    SLICE_X71Y92         LUT4 (Prop_lut4_I1_O)        0.105    18.737 r  system/soc/cpu/lsu/ctrl_tval[31]_i_109/O
+                         net (fo=1, routed)           0.000    18.737    system/soc/cpu/lsu/ctrl_tval[31]_i_109_n_3
+    SLICE_X71Y92         CARRY4 (Prop_carry4_S[2]_CO[3])
+                                                      0.332    19.069 r  system/soc/cpu/lsu/ctrl_tval_reg[31]_i_58/CO[3]
+                         net (fo=1, routed)           0.000    19.069    system/soc/cpu/lsu/ctrl_tval_reg[31]_i_58_n_3
+    SLICE_X71Y93         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098    19.167 r  system/soc/cpu/lsu/ctrl_tval_reg[31]_i_23/CO[3]
+                         net (fo=1, routed)           0.000    19.167    system/soc/cpu/lsu/ctrl_tval_reg[31]_i_23_n_3
+    SLICE_X71Y94         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098    19.265 r  system/soc/cpu/lsu/ctrl_tval_reg[31]_i_18/CO[3]
+                         net (fo=1, routed)           1.031    20.296    system/soc/cpu/lsu/bru/data2
+    SLICE_X74Y95         LUT6 (Prop_lut6_I0_O)        0.105    20.401 r  system/soc/cpu/lsu/ctrl_tval[31]_i_12/O
+                         net (fo=1, routed)           0.500    20.900    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_tval[0]_i_2_0
+    SLICE_X76Y95         LUT4 (Prop_lut4_I0_O)        0.105    21.005 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_tval[31]_i_5/O
+                         net (fo=32, routed)          0.658    21.663    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_tval[31]_i_5_n_3
+    SLICE_X81Y92         LUT5 (Prop_lut5_I1_O)        0.105    21.768 f  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_tval[1]_i_2/O
+                         net (fo=4, routed)           0.626    22.393    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/br_next[1]
+    SLICE_X84Y93         LUT6 (Prop_lut6_I1_O)        0.105    22.498 f  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/sys_rd[5]_i_3/O
+                         net (fo=5, routed)           0.333    22.832    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/ctrl_bad
+    SLICE_X87Y93         LUT4 (Prop_lut4_I1_O)        0.105    22.937 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/G_SLOT[0].o_sidefx[0]_i_10__0/O
+                         net (fo=24, routed)          1.261    24.198    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/cs
+    SLICE_X114Y93        LUT5 (Prop_lut5_I1_O)        0.105    24.303 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/G_SLOT[4].o_sidefx[4]_i_4__1/O
+                         net (fo=3, routed)           0.572    24.874    system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/G_SLOT[4].o_sidefx[4]_i_4__1_n_3
+    SLICE_X119Y92        LUT2 (Prop_lut2_I0_O)        0.108    24.982 r  system/soc/cpu/scheduler/U_READY_STATION/genblk1[0].U_RS_FIFO/G_SLOT[8].o_sidefx[8]_i_4__2/O
+                         net (fo=3, routed)           0.379    25.362    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[1].U_FDU/G_SLOT[10].o_sidefx_reg[10]_0
+    SLICE_X121Y90        LUT6 (Prop_lut6_I3_O)        0.267    25.629 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[1].U_FDU/G_SLOT[8].o_sidefx[8]_i_1__5/O
+                         net (fo=1, routed)           0.000    25.629    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[1].U_FDU/G_SLOT[8].o_sidefx[8]_i_1__5_n_3
+    SLICE_X121Y90        FDRE                                         r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[1].U_FDU/G_SLOT[8].o_sidefx_reg[8]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock cpu_raw rise edge)   20.000    20.000 r  
+    R4                                                0.000    20.000 r  sys_clk_p (IN)
+                         net (fo=0)                   0.000    20.000    sys_clk_p
+    R4                   IBUFDS (Prop_ibufds_I_O)     0.804    20.804 r  sysbuf/O
+                         net (fo=1, routed)           1.699    22.503    sysclk
+    BUFGCTRL_X0Y2        BUFG (Prop_bufg_I_O)         0.078    22.581 r  sysclk_BUFG_inst/O
+                         net (fo=63, routed)          1.417    23.998    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i_0
+    PLLE2_ADV_X1Y2       PLLE2_ADV (Prop_plle2_adv_CLKIN1_CLKOUT3)
+                                                      0.073    24.071 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i/CLKOUT3
+                         net (fo=1, routed)           1.029    25.100    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3_out
+    BUFHCE_X1Y24         BUFH (Prop_bufh_I_O)         0.069    25.169 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufh_pll_clk3/O
+                         net (fo=1, routed)           0.777    25.946    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKFBOUT)
+                                                     -2.927    23.019 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/gen_mmcm.mmcm_i/CLKFBOUT
+                         net (fo=1, routed)           1.452    24.471    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/clk_pll_i
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.077    24.548 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufg_clkdiv0/O
+                         net (fo=52558, routed)       1.415    25.963    ui_clk
+    MMCME2_ADV_X0Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -2.979    22.984 r  cpu_mmcm/CLKOUT0
+                         net (fo=1, routed)           1.488    24.471    cpu_raw
+    BUFGCTRL_X0Y4        BUFG (Prop_bufg_I_O)         0.077    24.548 r  cpu_buffer/O
+                         net (fo=30076, routed)       1.454    26.002    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[1].U_FDU/cpu_clk
+    SLICE_X121Y90        FDRE                                         r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[1].U_FDU/G_SLOT[8].o_sidefx_reg[8]/C
+                         clock pessimism              0.361    26.363    
+                         clock uncertainty           -0.386    25.977    
+    SLICE_X121Y90        FDRE (Setup_fdre_C_D)        0.033    26.010    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[1].U_FDU/G_SLOT[8].o_sidefx_reg[8]
+  -------------------------------------------------------------------
+                         required time                         26.010    
+                         arrival time                         -25.629    
+  -------------------------------------------------------------------
+                         slack                                  0.381    
+
+Slack (MET) :             0.382ns  (required time - arrival time)
+  Source:                 system/soc/cpu/ctrl_valid_reg/C
+                            (rising edge-triggered cell FDRE clocked by cpu_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            system/soc/cpu/lsu/walk/physical_address_reg[15]/D
+                            (rising edge-triggered cell FDRE clocked by cpu_raw  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             cpu_raw
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (cpu_raw rise@20.000ns - cpu_raw rise@0.000ns)
+  Data Path Delay:        19.048ns  (logic 6.036ns (31.688%)  route 13.012ns (68.312%))
+  Logic Levels:           31  (CARRY4=13 LUT2=4 LUT3=1 LUT4=1 LUT5=7 LUT6=4 RAMD32=1)
+  Clock Path Skew:        -0.216ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.840ns = ( 25.840 - 20.000 ) 
+    Source Clock Delay      (SCD):    6.410ns
+    Clock Pessimism Removal (CPR):    0.354ns
+  Clock Uncertainty:      0.386ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.157ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.300ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock cpu_raw rise edge)    0.000     0.000 r  
+    R4                                                0.000     0.000 r  sys_clk_p (IN)
+                         net (fo=0)                   0.000     0.000    sys_clk_p
+    R4                   IBUFDS (Prop_ibufds_I_O)     0.842     0.842 r  sysbuf/O
+                         net (fo=1, routed)           1.792     2.634    sysclk
+    BUFGCTRL_X0Y2        BUFG (Prop_bufg_I_O)         0.082     2.716 r  sysclk_BUFG_inst/O
+                         net (fo=63, routed)          1.519     4.234    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i_0
+    PLLE2_ADV_X1Y2       PLLE2_ADV (Prop_plle2_adv_CLKIN1_CLKOUT3)
+                                                      0.077     4.311 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i/CLKOUT3
+                         net (fo=1, routed)           1.165     5.476    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3_out
+    BUFHCE_X1Y24         BUFH (Prop_bufh_I_O)         0.106     5.582 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufh_pll_clk3/O
+                         net (fo=1, routed)           0.813     6.395    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKFBOUT)
+                                                     -3.104     3.291 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/gen_mmcm.mmcm_i/CLKFBOUT
+                         net (fo=1, routed)           1.524     4.815    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/clk_pll_i
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.081     4.896 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufg_clkdiv0/O
+                         net (fo=52558, routed)       1.517     6.412    ui_clk
+    MMCME2_ADV_X0Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -3.156     3.256 r  cpu_mmcm/CLKOUT0
+                         net (fo=1, routed)           1.559     4.815    cpu_raw
+    BUFGCTRL_X0Y4        BUFG (Prop_bufg_I_O)         0.081     4.896 r  cpu_buffer/O
+                         net (fo=30076, routed)       1.514     6.410    system/soc/cpu/cpu_clk
+    SLICE_X78Y77         FDRE                                         r  system/soc/cpu/ctrl_valid_reg/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X78Y77         FDRE (Prop_fdre_C_Q)         0.379     6.789 r  system/soc/cpu/ctrl_valid_reg/Q
+                         net (fo=140, routed)         0.720     7.508    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[4].U_FDU/ctrl_valid
+    SLICE_X80Y79         LUT3 (Prop_lut3_I1_O)        0.105     7.613 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[4].U_FDU/i__carry_i_12__0/O
+                         net (fo=105, routed)         1.171     8.784    system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/wb_tag[0]_45[3]
+    SLICE_X79Y69         LUT2 (Prop_lut2_I0_O)        0.264     9.048 r  system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i__carry_i_5__11/O
+                         net (fo=1, routed)           0.000     9.048    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/i__carry_i_8__0_0[3]
+    SLICE_X79Y69         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.332     9.380 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry/CO[3]
+                         net (fo=1, routed)           0.000     9.380    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry_n_3
+    SLICE_X79Y70         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.478 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__0/CO[3]
+                         net (fo=1, routed)           0.000     9.478    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__0_n_3
+    SLICE_X79Y71         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.576 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__1/CO[3]
+                         net (fo=1, routed)           0.000     9.576    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__1_n_3
+    SLICE_X79Y72         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.674 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__2/CO[3]
+                         net (fo=1, routed)           0.000     9.674    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__2_n_3
+    SLICE_X79Y73         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.772 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__3/CO[3]
+                         net (fo=1, routed)           0.000     9.772    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__3_n_3
+    SLICE_X79Y74         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.870 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__4/CO[3]
+                         net (fo=1, routed)           0.008     9.878    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__4_n_3
+    SLICE_X79Y75         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098     9.976 r  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__5/CO[3]
+                         net (fo=1, routed)           0.000     9.976    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__5_n_3
+    SLICE_X79Y76         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.265    10.241 f  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill2_inferred__3/i__carry__6/O[1]
+                         net (fo=2, routed)           0.715    10.956    system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/o_kill1_inferred__1/i__carry__2[1]
+    SLICE_X80Y74         LUT2 (Prop_lut2_I1_O)        0.250    11.206 r  system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i__carry__2_i_6/O
+                         net (fo=1, routed)           0.000    11.206    system/soc/cpu/scheduler/U_RESULT_CLASSIFY/i___192_i_34__0_1[0]
+    SLICE_X80Y74         CARRY4 (Prop_carry4_S[2]_CO[3])
+                                                      0.316    11.522 f  system/soc/cpu/scheduler/U_RESULT_CLASSIFY/o_kill1_inferred__1/i__carry__2/CO[3]
+                         net (fo=1, routed)           0.848    12.370    system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i___192_i_13__0[0]
+    SLICE_X89Y76         LUT6 (Prop_lut6_I3_O)        0.105    12.475 f  system/soc/cpu/scheduler/U_CONTROL_PLANE/U_RECOVERY_ARB/i___192_i_34__0/O
+                         net (fo=1, routed)           0.220    12.695    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[0].U_FDU/i___192_i_4__0
+    SLICE_X89Y77         LUT6 (Prop_lut6_I0_O)        0.105    12.800 f  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[0].U_FDU/i___192_i_13__0/O
+                         net (fo=2, routed)           0.368    13.168    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/i___192_i_1__0
+    SLICE_X89Y77         LUT5 (Prop_lut5_I0_O)        0.105    13.273 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/i___192_i_4__0/O
+                         net (fo=38, routed)          0.870    14.143    system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/FSM_onehot_state_reg[3]_1
+    SLICE_X78Y81         LUT2 (Prop_lut2_I1_O)        0.126    14.269 r  system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[3].U_FDU/p01_reg_i_188/O
+                         net (fo=11, routed)          1.332    15.602    system/soc/cpu/scheduler/G_LSQ.U_LSQ/accepted[0]
+    SLICE_X64Y100        LUT5 (Prop_lut5_I0_O)        0.267    15.869 r  system/soc/cpu/scheduler/G_LSQ.U_LSQ/va[31]_i_40/O
+                         net (fo=32, routed)          0.908    16.777    system/soc/cpu/scheduler/G_LSQ.U_LSQ/ex_lane[4].source_a1
+    SLICE_X64Y114        LUT5 (Prop_lut5_I3_O)        0.105    16.882 r  system/soc/cpu/scheduler/G_LSQ.U_LSQ/va[15]_i_21/O
+                         net (fo=1, routed)           0.471    17.352    system/soc/cpu/scheduler/G_LSQ.U_LSQ/va[15]_i_21_n_3
+    SLICE_X66Y113        LUT5 (Prop_lut5_I4_O)        0.105    17.457 r  system/soc/cpu/scheduler/G_LSQ.U_LSQ/va[15]_i_13/O
+                         net (fo=2, routed)           0.896    18.353    system/soc/cpu/scheduler/G_LSQ.U_LSQ/va[15]_i_13_n_3
+    SLICE_X80Y108        LUT4 (Prop_lut4_I1_O)        0.105    18.458 r  system/soc/cpu/scheduler/G_LSQ.U_LSQ/va[15]_i_5/O
+                         net (fo=1, routed)           0.790    19.248    system/soc/cpu/scheduler/G_LSQ.U_LSQ/ex_lane[4].source_a[12]
+    SLICE_X67Y104        CARRY4 (Prop_carry4_DI[0]_O[1])
+                                                      0.348    19.596 r  system/soc/cpu/scheduler/G_LSQ.U_LSQ/va_reg[15]_i_1/O[1]
+                         net (fo=76, routed)          1.092    20.688    system/soc/cpu/lsu/walk/cache_satp_reg_0_7_0_5/ADDRA1
+    SLICE_X70Y107        RAMD32 (Prop_ramd32_RADR1_O)
+                                                      0.260    20.948 r  system/soc/cpu/lsu/walk/cache_satp_reg_0_7_0_5/RAMA/O
+                         net (fo=1, routed)           0.554    21.502    system/soc/cpu/lsu/walk/cache_satp_reg_0_7_0_5_n_4
+    SLICE_X69Y107        LUT6 (Prop_lut6_I2_O)        0.264    21.766 r  system/soc/cpu/lsu/walk/cache_hit1_carry_i_4/O
+                         net (fo=1, routed)           0.000    21.766    system/soc/cpu/lsu/walk/cache_hit1_carry_i_4_n_3
+    SLICE_X69Y107        CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.440    22.206 r  system/soc/cpu/lsu/walk/cache_hit1_carry/CO[3]
+                         net (fo=1, routed)           0.000    22.206    system/soc/cpu/lsu/walk/cache_hit1_carry_n_3
+    SLICE_X69Y108        CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.098    22.304 r  system/soc/cpu/lsu/walk/cache_hit1_carry__0/CO[3]
+                         net (fo=1, routed)           0.000    22.304    system/soc/cpu/lsu/walk/cache_hit1_carry__0_n_3
+    SLICE_X69Y109        CARRY4 (Prop_carry4_CI_CO[0])
+                                                      0.216    22.520 f  system/soc/cpu/lsu/walk/cache_hit1_carry__1/CO[0]
+                         net (fo=1, routed)           0.466    22.987    system/soc/cpu/csr/CO[0]
+    SLICE_X69Y111        LUT6 (Prop_lut6_I4_O)        0.309    23.296 r  system/soc/cpu/csr/request_address[31]_i_8/O
+                         net (fo=1, routed)           0.262    23.558    system/soc/cpu/lsu/walk/request_address_reg[2]_3
+    SLICE_X70Y112        LUT5 (Prop_lut5_I4_O)        0.105    23.663 f  system/soc/cpu/lsu/walk/request_address[31]_i_5/O
+                         net (fo=3, routed)           0.386    24.049    system/soc/cpu/lsu/walk/cache_hit
+    SLICE_X70Y112        LUT2 (Prop_lut2_I1_O)        0.105    24.154 r  system/soc/cpu/lsu/walk/physical_address[31]_i_4/O
+                         net (fo=20, routed)          0.524    24.678    system/soc/cpu/lsu/walk/physical_address[31]_i_4_n_3
+    SLICE_X71Y110        LUT5 (Prop_lut5_I3_O)        0.264    24.942 r  system/soc/cpu/lsu/walk/physical_address[15]_i_2/O
+                         net (fo=1, routed)           0.411    25.353    system/soc/cpu/lsu/walk/physical_address[15]_i_2_n_3
+    SLICE_X69Y104        LUT5 (Prop_lut5_I4_O)        0.105    25.458 r  system/soc/cpu/lsu/walk/physical_address[15]_i_1/O
+                         net (fo=1, routed)           0.000    25.458    system/soc/cpu/lsu/walk/physical_address1_in[15]
+    SLICE_X69Y104        FDRE                                         r  system/soc/cpu/lsu/walk/physical_address_reg[15]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock cpu_raw rise edge)   20.000    20.000 r  
+    R4                                                0.000    20.000 r  sys_clk_p (IN)
+                         net (fo=0)                   0.000    20.000    sys_clk_p
+    R4                   IBUFDS (Prop_ibufds_I_O)     0.804    20.804 r  sysbuf/O
+                         net (fo=1, routed)           1.699    22.503    sysclk
+    BUFGCTRL_X0Y2        BUFG (Prop_bufg_I_O)         0.078    22.581 r  sysclk_BUFG_inst/O
+                         net (fo=63, routed)          1.417    23.998    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i_0
+    PLLE2_ADV_X1Y2       PLLE2_ADV (Prop_plle2_adv_CLKIN1_CLKOUT3)
+                                                      0.073    24.071 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/plle2_i/CLKOUT3
+                         net (fo=1, routed)           1.029    25.100    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3_out
+    BUFHCE_X1Y24         BUFH (Prop_bufh_I_O)         0.069    25.169 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufh_pll_clk3/O
+                         net (fo=1, routed)           0.777    25.946    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/pll_clk3
+    MMCME2_ADV_X1Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKFBOUT)
+                                                     -2.927    23.019 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/gen_mmcm.mmcm_i/CLKFBOUT
+                         net (fo=1, routed)           1.452    24.471    ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/clk_pll_i
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.077    24.548 r  ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/u_bufg_clkdiv0/O
+                         net (fo=52558, routed)       1.415    25.963    ui_clk
+    MMCME2_ADV_X0Y2      MMCME2_ADV (Prop_mmcme2_adv_CLKIN1_CLKOUT0)
+                                                     -2.979    22.984 r  cpu_mmcm/CLKOUT0
+                         net (fo=1, routed)           1.488    24.471    cpu_raw
+    BUFGCTRL_X0Y4        BUFG (Prop_bufg_I_O)         0.077    24.548 r  cpu_buffer/O
+                         net (fo=30076, routed)       1.292    25.840    system/soc/cpu/lsu/walk/cpu_clk
+    SLICE_X69Y104        FDRE                                         r  system/soc/cpu/lsu/walk/physical_address_reg[15]/C
+                         clock pessimism              0.354    26.193    
+                         clock uncertainty           -0.386    25.808    
+    SLICE_X69Y104        FDRE (Setup_fdre_C_D)        0.032    25.840    system/soc/cpu/lsu/walk/physical_address_reg[15]
+  -------------------------------------------------------------------
+                         required time                         25.840    
+                         arrival time                         -25.458    
+  -------------------------------------------------------------------
+                         slack                                  0.382    
+
+
+
+

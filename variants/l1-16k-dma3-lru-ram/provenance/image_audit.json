@@ -1,0 +1,13 @@
+{
+  "result": "PASS_IMAGE_AUDIT",
+  "image_sha256": "7bc6541ea1215ec01780dfc5e372c729c4721d4dde42ceb605df308a2550c333",
+  "root_file_changes_from_tiles_v5": [
+    "etc/oryukdo-image"
+  ],
+  "data_files_identical_to_tiles_v5": true,
+  "opensbi_identical_to_tiles_v5": true,
+  "boot_payload_crc_and_exact_bytes": true,
+  "ext4_check": true,
+  "cache_dt_and_three_dma_nodes": true,
+  "physical_board_test": false
+}

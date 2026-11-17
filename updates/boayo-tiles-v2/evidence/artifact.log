@@ -1,0 +1,66 @@
+e2fsck 1.47.0 (5-Feb-2023)
+Pass 1: Checking inodes, blocks, and sizes
+Pass 2: Checking directory structure
+Pass 3: Checking directory connectivity
+Pass 4: Checking reference counts
+Pass 5: Checking group summary information
+ORYDATA: 149/65536 files (0.0% non-contiguous), 28181/65536 blocks
+{
+  "result": "PASS_ARTIFACT_AUDIT",
+  "hardware": false,
+  "checks": [
+    "BOSIO built kernel sources match overlay",
+    "SD v2 and original DMAengine driver unchanged",
+    "RV32 build snapshot, UAPI and installed stripped app match",
+    "embedded initramfs exact, BusyBox/OpenSBI preserved, DT DMA binding compiled",
+    "132 prebuilt assets exact in ext4; first launcher embedded in actual kernel; generator provenance matches",
+    "plan exact in initramfs and ext4; generated from audited host/source revision; reserved DDR mapping without blanket zero; tile blend kernel interface built",
+    "SD header CRCs and exact firmware/kernel/DTB/ext4 payloads; ext4 fsck"
+  ],
+  "image_sha256": "94226ed020351df9fb3cb7a46b96292793943b39b57c5e83999c0d94694eb911",
+  "image_bytes": 277872640,
+  "kernel_sha256": "3ebd957ea2adb7db4f6afeccb5219b023a066c5273736854a7fb6eadd420e1cf",
+  "app_sha256": "2a5f44d723a7069f1ccd824ecd188730a8dcc2709cd73e4ce359fae54d876d08",
+  "busybox_sha256": "317d847c48b0d1177993f5721ee0438c70ac0d0ee6284ceaade31eac7b5a84cf",
+  "driver_sha256": "082e5cac482d7e81497fb2262d62389a50758e12fb8384c77a918a8844624a23",
+  "app_build_manifest": {
+    "binary_sha256": "8cdf28337f4b38298092b76a25c38db97ccbed98d410b0d8be07306b18d24dfb",
+    "source": "/var/tmp/oryukdo-boayo-tiles-v2/release/apps/source-rv32-D8bDC3/software/boayo/native",
+    "source_sha256": {
+      "reference/wm/native/bosio_compositor.cpp": "251dbd92c0ea7800d2e61ce21fb9d36a43f6f2afa54b8dc63a02a38d27ebbb9f",
+      "src/apps.cpp": "4c6f23e09482f74bfcee8fec59fe346ffd3a767a714b86b9a400d97c18a0d5bb",
+      "src/apps.hpp": "bd9acee5ffebb8e5289c6495f194e2f4e5cdf213d99560094545d5c507d5187f",
+      "src/assets.cpp": "c0187fd08742064140e7d90dbcb43ced6f2997982dff811759f1b97658fe1c16",
+      "src/assets.hpp": "971f12af48808775135f5cc25d78a06ef7edbbf2cbde869877234f2e4d57f748",
+      "src/backend.cpp": "1074fcc1439b676440da94b3a9cd0f3f535b36214492e425c47d98b99b982dfa",
+      "src/backend.hpp": "20b02e2f16be20c88b0fc72d2051c396fdd0e4593c71561d3367a32f487b83e5",
+      "src/common.hpp": "3a71da75ea1289e79d6b7009b8a7ab7d0d4e600e46665d93277564f40d2d7d04",
+      "src/fallback.hpp": "c0e3a27ff26454fc8c9d6eec3bfc93bc210461680136dece9f31147504493f6a",
+      "src/fixed_geometry.inc": "a6d243f048510f6239d79b6fea351cab26d178217ce36905c23e88cdad10f268",
+      "src/font.hpp": "65153ae3363e9bf7e98c9bbcc90dd90718c1969acdc7e7119a82f8b6673526e4",
+      "src/frame_trace.hpp": "ccc581dcc014108e3817a71c3f81943b3b9dbec5e78731886a6deb1a44c482fb",
+      "src/geometry.cpp": "133ae0f24f583abf32045151542fce7fcda85a80cab746c2e5bebbb5676b717b",
+      "src/geometry.hpp": "2c40da77b35904170edd34e7aeccf380003bfb44faf13df5e58ad22d91015c64",
+      "src/golden.hpp": "860a20933c5698eeec0d6873baaff81757cc83ddf2bb33b2836403e6a5d1fbb4",
+      "src/init_trace.hpp": "9a255fcca478a35e7c50706370fd3f4daa214fabd79c9062e9a236210c77ff20",
+      "src/main.cpp": "c9da554b0d6c638cf39409fb9d27cf16e65d90fa37a97a9dd343b06b4666b58e",
+      "src/plan.cpp": "c08bf965cbc71255ba7417f5e4e22e7966cce9b88c8dee943ca04655cefa4f67",
+      "src/plan.hpp": "dac0b65e45955a18b6cac3323f9d8b3f20fd1fdb9394de23107cfd5593d7db10",
+      "src/plan_revision.hpp": "c3d91814b7d55931f54b026a9c7ae48aee53a54f54adff3aa3e099bc75c023f7",
+      "src/resident.cpp": "dabd0a3b75ea045f959ad14fb5bc8342cc7d82109c523248b9007066bfe957ce",
+      "src/resident.hpp": "fd3544bd71d86d40552e26cf3c0c8bc4508ea628fcd560df605cf0f6b9298afa",
+      "src/rgb_fill.hpp": "cd69f79921bff722151a281bbf30f3dc81787a09dc835e34796be78f0c2221cd",
+      "src/runtime.cpp": "7d065a9e933927f72945b60f266edf3760b301b0ddc82ce473398582f20947b9",
+      "src/runtime.hpp": "811556937978584d87f1060ff0f4cf2962713f86d11c165be39facf64d0b1a6d",
+      "src/selftest.cpp": "ca62a0191fc7b8aa4f2afdaa9667e73dbdf9e6a0ebf92725edeb07316573ebea",
+      "src/texture.hpp": "9a87770a7fe617010a51a39ca48cfbc9b603b85249708848642d39cc6cb7921e",
+      "src/ui.cpp": "99f1c3f1c88472ced4d273fa99b9b2f6758219488fd652b8aa49dec1a310a95f",
+      "src/ui.hpp": "307136946150cb7727a29978430c801471b2accb78f6156a1904fdbb023d409d",
+      "src/wm.cpp": "ed8e700942a741848e80ed3fecb2da6a323948446f2460468ecaa58b082f9cf2",
+      "src/wm.hpp": "3bbbf8d0553fd0555fc95a366dd1f7b24b28ec7e7ba45ebe2f0cf4ced74db88c",
+      "vendor/json-LICENSE.MIT": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+      "vendor/json.hpp": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6"
+    },
+    "uapi_sha256": "523f83ec65f26bf3b9c05b7fdfadc344263a9f595e3215789a2e0531a67655c1"
+  }
+}

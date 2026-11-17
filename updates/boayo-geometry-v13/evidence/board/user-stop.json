@@ -1,0 +1,1 @@
+{"result": "STOP_REQUESTED_BY_USER", "time": 1794710524.115414, "reason": "Stop further optimization/trials; review projection request latency and multicore stalls", "log_offset": 179964}

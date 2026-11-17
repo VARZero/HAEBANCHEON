@@ -1,0 +1,32 @@
+{
+  "result": "PASS_LOCAL_HARDWARE_PENDING",
+  "image": "ORYUKDO-KFB-SD4-DMA-v2.img",
+  "image_sha256": "6a6b92f300faeb80c89108d94d3411c28438b185abaaca8f71dac06216ca2424",
+  "bytes": 275775488,
+  "driver_sha256": "94078a234e6a8baa0f3f846747ef4f7b3b4fece0c5abf113fe5f18d958d42cd5",
+  "kernel": "6.12.0-oryukdo-sd4-dma2",
+  "bitstream": "D:\\temp\\gen3bosio\\sd4-dma\\candidate\\ORYUKDO-KFB-SD4-DMA-v1.bit",
+  "bitstream_sha256": "fe1ce8e52f30f1b9bd7bad944a0bf6f981eef9bba01438c0d26b40da6126fdf0",
+  "bitstream_changed": false,
+  "checks": {
+    "driver_actual_functions_asan_ubsan": 49,
+    "kernel_build": "PASS",
+    "boot_crc_mbr_ext4_fsck": "PASS",
+    "rtl_loader_mock_ddr": "PASS",
+    "qemu_shell_arithmetic_high_memory": "PASS",
+    "busybox_boayo_preserved": "PASS"
+  },
+  "not_verified": [
+    "v2 physical MMC block registration",
+    "v2 physical ext4 read/write",
+    "power-cycle persistence",
+    "DDR memcpy/fill DMA on board"
+  ],
+  "rtl_test_binary_sha256": "39db16e1e10953fa8d0c1d916567cc116e3fef25e039733f099dd3c628955c94",
+  "rtl_loader_scope": "existing native SD RTL, pin-level card model, mock DDR and reduced clear; CPU does not run Linux",
+  "kernel_warning": "Inherited clocksource.c pr_fmt redefinition; not modified by v2",
+  "root_changes": [
+    "init",
+    "etc/oryukdo-image"
+  ]
+}

@@ -1,0 +1,34 @@
+[
+  {
+    "compose_ms": 4833.584040000005,
+    "renders": 7,
+    "uptime": 87.73317083999996,
+    "generation": 23,
+    "commits": 8,
+    "dma_errors": 0,
+    "dma_upload_bytes": 9459808,
+    "pool_upload_bytes": null,
+    "partial_uploads": null,
+    "full_uploads": null,
+    "phase": "composing",
+    "snapshot_age": 8.783874799999921,
+    "render_error": null,
+    "app_error": null
+  },
+  {
+    "compose_ms": 3898.727640000061,
+    "renders": 11,
+    "uptime": 124.55009309999991,
+    "generation": 27,
+    "commits": 12,
+    "dma_errors": 0,
+    "dma_upload_bytes": 11648608,
+    "pool_upload_bytes": null,
+    "partial_uploads": null,
+    "full_uploads": null,
+    "phase": "composing",
+    "snapshot_age": 5.660819120000042,
+    "render_error": null,
+    "app_error": null
+  }
+]

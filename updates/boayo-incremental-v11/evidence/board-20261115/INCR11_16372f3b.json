@@ -1,0 +1,8 @@
+{
+  "command": "sleep 20",
+  "seconds": 22.078,
+  "rc": 0,
+  "uart": "sleep 20; echo INCR11_16372f3b_RC:$?\r\r\nINCR11_16372f3b_RC:0\r\r\n",
+  "observed_at": "2026-11-15T00:34:10.799792",
+  "log_start": 343742
+}

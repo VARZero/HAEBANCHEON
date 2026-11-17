@@ -1,0 +1,7 @@
+{
+  "command": "bosio-rgb-check",
+  "seconds": 86.25,
+  "rc": 0,
+  "uart": "bosio-rgb-check; echo BODMA_333c86b3_RC:$?\r\r\nRGB_DMA_DONE offset=4 bytes=691200 elapsed_ms=4872\r\r\nRGB_DMA_DONE offset=8 bytes=691200 elapsed_ms=2317\r\r\nRGB_DMA_DONE offset=4092 bytes=691200 elapsed_ms=2272\r\r\nPASS RGB_DMA page phases RGB bytes canaries COW readonly rejection completion counters\r\r\nBODMA_333c86b3_RC:0\r\r\n",
+  "observed_at": "2026-11-11T00:41:38.070305"
+}

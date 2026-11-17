@@ -1,0 +1,23 @@
+make: Entering directory '/var/tmp/haebancheon-mask-v12/release/linux'
+make[1]: Entering directory '/var/tmp/haebancheon-mask-v12/release/kernel'
+  SYNC    include/config/auto.conf.cmd
+  GEN     Makefile
+  GEN     Makefile
+  CALL    /var/tmp/haebancheon-mask-v12/release/linux/scripts/checksyscalls.sh
+  GEN     usr/initramfs_data.cpio
+  COPY    usr/initramfs_inc_data
+  AS      usr/initramfs_data.o
+  AR      usr/built-in.a
+  AR      built-in.a
+  AR      vmlinux.a
+  LD      vmlinux.o
+  OBJCOPY modules.builtin.modinfo
+  GEN     modules.builtin
+  MODPOST vmlinux.symvers
+  LD      vmlinux
+  NM      System.map
+  SORTTAB vmlinux
+  OBJCOPY arch/riscv/boot/Image
+  Kernel: arch/riscv/boot/Image is ready
+make[1]: Leaving directory '/var/tmp/haebancheon-mask-v12/release/kernel'
+make: Leaving directory '/var/tmp/haebancheon-mask-v12/release/linux'

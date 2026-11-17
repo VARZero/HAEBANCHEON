@@ -1,0 +1,9 @@
+{"command": "kill -9 105 96; while test -e /proc/96/exe; do sleep 1; done; rm /tmp/bosio-wm.sock; sync; BOAYO_PROFILE=0 BOAYO_INIT_TRACE=0 /tmp/boayo-fix1 start", "seconds": 8.863, "rc": 1, "uart": "kill -9 105 96; while test -e /proc/96/exe; do sleep 1; done; rm /tmp/b\r\r\r\nosio-wm.sock; sync; BOAYO_PROFILE=0 BOAYO_INIT_TRACE=0 /tmp/boayo-fix1 start; ec\r\r\r\nho INCR11_28d0418d_RC:$?\r\r\nWM startup failed; read /tmp/boayo-wm.log\r\r\nINCR11_28d0418d_RC:1\r\r\n", "observed_at": "2026-11-15T01:10:40.423488", "log_start": 467812}
+Traceback (most recent call last):
+  File "D:\temp\haebancheon-incremental-v11\board-trial\board_io.py", line 32, in <module>
+    command(sys.argv[1],int(sys.argv[2]) if len(sys.argv)>2 else 300)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\temp\haebancheon-incremental-v11\board-trial\board_io.py", line 22, in command
+    assert rc==0,report
+           ^^^^^
+AssertionError: {'command': 'kill -9 105 96; while test -e /proc/96/exe; do sleep 1; done; rm /tmp/bosio-wm.sock; sync; BOAYO_PROFILE=0 BOAYO_INIT_TRACE=0 /tmp/boayo-fix1 start', 'seconds': 8.863, 'rc': 1, 'uart': 'kill -9 105 96; while test -e /proc/96/exe; do sleep 1; done; rm /tmp/b\r\r\r\nosio-wm.sock; sync; BOAYO_PROFILE=0 BOAYO_INIT_TRACE=0 /tmp/boayo-fix1 start; ec\r\r\r\nho INCR11_28d0418d_RC:$?\r\r\nWM startup failed; read /tmp/boayo-wm.log\r\r\nINCR11_28d0418d_RC:1\r\r\n', 'observed_at': '2026-11-15T01:10:40.423488', 'log_start': 467812}

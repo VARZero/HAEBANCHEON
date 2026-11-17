@@ -1,0 +1,1 @@
+PASS BUILD_PLAN_GATE valid input, CRC corruption, signed invalid descriptor/mask/classification rejected

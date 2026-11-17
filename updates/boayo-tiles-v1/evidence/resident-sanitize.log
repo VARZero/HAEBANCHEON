@@ -1,0 +1,1 @@
+PASS_RESIDENT_TILES 17 scenes, no CPU scene/readback/output pixel uploads, stale DDR initialized nonzero

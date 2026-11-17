@@ -1,0 +1,11 @@
+{
+  "output_complete": true,
+  "phase": "window-azimuth-elevation",
+  "seconds": 216.5040860600002,
+  "step": 12,
+  "view": {
+    "pitch": 0.0,
+    "roll": 0.0,
+    "yaw": 0.0
+  }
+}

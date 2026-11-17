@@ -1,0 +1,25 @@
+{
+  "image": "HAEBANCHEON-KFB-BoAYO-tilebatch-v14.img",
+  "image_bytes": 311427072,
+  "image_sha256": "cccee8bb4704fa2ec14a4b1f71d882c4d3a541809c0b91c2506467b3850cff30",
+  "app_sha256": "1ee39a196b05c1457d442f2bc281794b47c4ff1524f6ffa36f74461cecd03a82",
+  "kernel_sha256": "a7803356d22a004dc99c3594f654bc6c7155f88ae74e6c17875e17e6336ad541",
+  "required_bitstream": "HAEBANCHEON-KFB-L1-16K-DMA3-v1.bit",
+  "bitstream_sha256": "9bb855886be0ac55d983f9a72ab0e6c23317b7f4fe27e13430cb2de17d7d4e07",
+  "rtl_changed": false,
+  "driver_changed": false,
+  "hardware_tested": true,
+  "physical_timing_measured": true,
+  "local_result": "PASS",
+  "qemu_result": "PASS_QEMU_ONLY",
+  "qemu_mock_backend": true,
+  "board_mock_backend": false,
+  "board_validation": {
+    "date": "2026-11-16",
+    "functional_scope": "physical Linux shell, ext4 mount, launcher and app HDMI observation, Telemetry/SDK Pulse update comparison",
+    "result": "FUNCTIONAL_OBSERVED_PERFORMANCE_REGRESSION",
+    "telemetry_time_increase_percent": 31.55290342228241,
+    "sdk_pulse_time_increase_percent": 26.69149894118188,
+    "report": "BOARD_RESULT_KO.md"
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "result": "PASS_QEMU_ONLY",
+  "image": "/var/tmp/oryukdo-boayo-assets-v1/release/image/ORYUKDO-KFB-BoAYO-assets-v1.img",
+  "image_sha256": "2828306943079cf93d45f655052bd6ad8235a9a6b3edc9ec15a1ac567995e38f",
+  "hardware": false,
+  "rtl": false,
+  "mock_backend": true,
+  "checks": [
+    "BusyBox shell",
+    "cat /etc/oryukdo-image",
+    "/bin/storage-check --identity",
+    "test -x /bin/bosio-dma-check",
+    "test -r /usr/share/boayo/assets/a0ebce13.bui",
+    "test ! -L /usr/bin/python && test ! -e /usr/bin/python3 && test ! -d /usr/lib/python3.12",
+    "echo $((19+23))",
+    "ddrcheck",
+    "boayo-selftest",
+    "boayo-dual-selftest",
+    "boayo-start --mock",
+    "boayo-status",
+    "boayo-app dashboard",
+    "boayo-status",
+    "boayo-app telemetry",
+    "boayo-status",
+    "boayo-app pulse",
+    "boayo-status",
+    "echo KEYS_SHELL_RESTORED",
+    "boayo-status",
+    "boayo-stop",
+    "prebuilt first launcher loaded without CPU rounded/circle drawing"
+  ],
+  "final_projection": {
+    "active_tiles": 131,
+    "changed_tiles": 3,
+    "dirty_tiles": 10,
+    "fallback_frames": 0,
+    "hardware_frames": 12,
+    "jobs_per_core": [
+      6,
+      6
+    ],
+    "mode": "kfb-dual-projectors+cpu-tile-composition",
+    "output_words": 832,
+    "projected_windows": [
+      6,
+      10
+    ],
+    "reused_window_tiles": 416,
+    "sampling": "fixed-point bilinear RGB332",
+    "texture_reuses_total": 0,
+    "texture_upload_words": 240000,
+    "texture_uploads_total": 29,
+    "total_hw_jobs": 987,
+    "update_kind": "patch",
+    "windows": [
+      2,
+      6,
+      10,
+      11,
+      12,
+      13
+    ],
+    "written_cells_per_core": [
+      6144,
+      6144
+    ]
+  },
+  "final_output": {
+    "abi": 3,
+    "active_bank": 1,
+    "active_base": 0,
+    "antialias": false,
+    "backend": "kfb-linux-frame-atomic-output",
+    "capability": 0,
+    "commits": 12,
+    "dma_copied_words": 135306,
+    "max_jobs": 64,
+    "max_scene_words": 1084816,
+    "memory_dma": {
+      "available": true,
+      "copy_ops": 816,
+      "fill_ops": 188
+    },
+    "metadata_only": false,
+    "mock_backend": true,
+    "poisoned": 0,
+    "sensor_available": false,
+    "shadow_copied_words": 1191566,
+    "signature": 0,
+    "status": 1114115,
+    "uploaded_words": 135306
+  }
+}

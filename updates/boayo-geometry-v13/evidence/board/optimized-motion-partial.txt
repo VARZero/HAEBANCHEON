@@ -1,0 +1,507 @@
+BOAYO_PROFILE=1 BOAYO_INIT_TRACE=0 BOAYO_GEOMETRY_V12=0 /tmp/boayo-v13 
+start; echo INCR11_1b7e3151_RC:$?
+BoAYO C++ service started; initialization continues. boayo-status / boayo-keys / boayo-stop
+{"features":["windows","pointer","input-injection","button-events","scene-stream","spatial-workspace","pointer-capture"],"headless":false,"m":32,"mock_backend":false,"runtime":"C++17","version":2}
+INCR11_1b7e3151_RC:0
+oryukdo# sleep 12; /tmp/boayo-v13 app telemetry; sleep 20; echo INCR11_615bbe9a_
+RC:$?
+BOAYO_APP_READY window=2
+INCR11_615bbe9a_RC:0
+oryukdo# boayo-status; echo INCR11_e928d8fd_RC:$?
+{
+  "app_error": null,
+  "assets": {
+    "cache_hits": 7,
+    "format": "raw-mapped-00RRGGBB",
+    "loads": 15,
+    "misses": 0,
+    "rejected": 0,
+    "rgb_materializations": 0
+  },
+  "buttons": {
+    "available": false,
+    "last_event_id": 0,
+    "state": 0
+  },
+  "compositor": "cpp-native",
+  "driver_profile": {
+    "available": true,
+    "batch_calls": 19,
+    "batch_copy_dma_us": 85964,
+    "batch_copy_us": 26945,
+    "batch_execute_us": 3944198,
+    "batch_fill_dma_us": 569374,
+    "batch_validate_us": 27720,
+    "enabled": true,
+    "fast_paths": true,
+    "publish_calls": 7,
+    "publish_compare_us": 102773,
+    "publish_copy_us": 63577,
+    "publish_diff_us": 313226,
+    "publish_finish_us": 16106,
+    "publish_mmio_us": 910,
+    "publish_poll_us": 2212,
+    "publish_polls": 19,
+    "publish_sleep_us": 126357,
+    "publish_transfer_us": 9457,
+    "publish_validate_us": 247895,
+    "tile_calls": 157,
+    "tile_cpu_us": 914653,
+    "tile_cpu_words": 10466,
+    "tile_dma_bytes": 32652,
+    "tile_dma_calls": 70,
+    "tile_dma_us": 392610,
+    "tile_fence_us": 39277,
+    "tile_mask_us": 915398,
+    "units": "microseconds",
+    "version": 1
+  },
+  "focused_window": 2,
+  "generation": 21,
+  "motion": {
+    "active": false,
+    "next_step": 0,
+    "phase": "idle",
+    "steps": 25,
+    "target_generation": 0,
+    "view": {
+      "pitch": 0.0,
+      "roll": 0.0,
+      "yaw": 0.0
+    },
+    "windows": []
+  },
+  "output": {
+    "abi": 3,
+    "active_bank": 0,
+    "active_base": 3170959360,
+    "antialias": false,
+    "backend": "kfb-linux-frame-atomic-output",
+    "capability": 1146373681,
+    "commits": 7,
+    "dma_copied_words": 17920,
+    "max_jobs": 64,
+    "max_scene_words": 1084816,
+    "memory_dma": {
+      "available": true,
+      "copy_bytes": 26436772,
+      "copy_ops": 5234,
+      "errors": 0,
+      "features": 255,
+      "fill_bytes": 3481600,
+      "fill_ops": 3400,
+      "quarantined": 0,
+      "timeouts": 0,
+      "upload_bytes": 24903408,
+      "upload_ops": 842,
+      "upload_threshold": 4096
+    },
+    "metadata_only": false,
+    "mock_backend": false,
+    "poisoned": 0,
+    "publish_profile": {
+      "backend": "kernel",
+      "command": 2,
+      "configure_us": 89,
+      "finish_us": 271,
+      "select_us": 24008,
+      "upload_ranges": 0,
+      "upload_us": 46236,
+      "uploaded_words": 0,
+      "user_copy_us": 10614,
+      "validate_us": 32925,
+      "wait_us": 14191
+    },
+    "sensor_available": false,
+    "shadow_copied_words": 0,
+    "signature": 1112748597,
+    "status": 3064791043,
+    "uploaded_words": 228
+  },
+  "performance": {
+    "frame_interval_ms": 2993.7366200001634,
+    "frame_limit": 2.0,
+    "frame_pacing": "start-to-start",
+    "full_update_count": 1,
+    "last_apps_ms": 406.9723200000226,
+    "last_compose_ms": 1789.6878199999264,
+    "last_upload_ms": 0.0,
+    "no_op_update_count": 0,
+    "patch_update_count": 6,
+    "render_count": 6,
+    "rendered_generation": 21,
+    "update_words": 4480,
+    "uptime_seconds": 42.350206020000314
+  },
+  "pointer": {
+    "azimuth": 0.0,
+    "buttons": [],
+    "cancel_serial": 0,
+    "captured_window": null,
+    "dragging": false,
+    "elevation": 0.0,
+    "last_left_press": null,
+    "last_left_release": null,
+    "left_press_serial": 0,
+    "left_release_serial": 0,
+    "scroll_delta": 0.0,
+    "scroll_serial": 0,
+    "visible": false,
+    "window_id": 2,
+    "zone": "content"
+  },
+  "profile": {
+    "app_present": [
+      2982407,
+      2213426,
+      6
+    ],
+    "apps": [
+      8514968,
+      5690670,
+      61
+    ],
+    "blend": [
+      2993994,
+      2629672,
+      17
+    ],
+    "captions": [
+      1864282,
+      1374172,
+      11
+    ],
+    "compose": [
+      17280692,
+      12906051,
+      6
+    ],
+    "descriptors": [
+      374466,
+      292364,
+      17
+    ],
+    "enabled": true,
+    "finish": [
+      2188843,
+      1636380,
+      6
+    ],
+    "image": [
+      671582,
+      496089,
+      5
+    ],
+    "image_publish": [
+      33995,
+      32618,
+      5
+    ],
+    "layers": [
+      3237030,
+      2509241,
+      6
+    ],
+    "nested": true,
+    "output_publish": [
+      877175,
+      737072,
+      6
+    ],
+    "pointer": [
+      116916,
+      87453,
+      12
+    ],
+    "projection_wait": [
+      741178,
+      236066,
+      17
+    ],
+    "state_publish": [
+      9855020,
+      7360222,
+      9
+    ],
+    "texture": [
+      3171414,
+      2084779,
+      13
+    ],
+    "tiles_prepare": [
+      4764443,
+      3352243,
+      6
+    ],
+    "units": "microseconds",
+    "workspace": [
+      4451794,
+      3105577,
+      61
+    ]
+  },
+  "projection": {
+    "cpu_output_shadow_words": 4480,
+    "cpu_result_download_words": 0,
+    "cpu_scene_words": 0,
+    "device_ready_frames": 1,
+    "dirty_tiles": 28,
+    "fallback_frames": 0,
+    "geometry_builds": 0,
+    "geometry_cull_us_total": 0,
+    "geometry_descriptor_us_total": 0,
+    "geometry_insert_us_total": 0,
+    "geometry_prepare_us_total": 0,
+    "geometry_tiles_evaluated_total": 0,
+    "hardware_frames": 6,
+    "jobs_per_core": [
+      16,
+      16
+    ],
+    "lazy_copied_tiles_total": 70,
+    "mask_build_us_total": 0,
+    "mask_builds": 0,
+    "mask_fast_tiles_total": 0,
+    "mask_integer_samples_total": 0,
+    "mask_precise_samples_total": 0,
+    "mask_samples_evaluated_total": 0,
+    "masked_tiles_total": 157,
+    "mode": "ddr-resident-dirty-tiles",
+    "packed_mask_tiles_total": 157,
+    "plan_cache": {
+      "builtin_loads": 5,
+      "hits": 0,
+      "loads": 5,
+      "misses": 0,
+      "payload_scan_bytes": 0,
+      "rejected": 0,
+      "revision": "967005ee422f912c39464b07fc4c366acb1c3b33fb2e972b2449e0dd8eb4a19f"
+    },
+    "precomputed_layers_total": 5,
+    "redrawn_tiles": 28,
+    "reused_tiles_total": 0,
+    "solid_tiles_total": 0,
+    "texture_pool": {
+      "capacity_bytes": 4194304,
+      "evictions": 0,
+      "full_uploads": 5,
+      "partial_uploads": 4,
+      "resident_bytes": 1430400,
+      "resident_windows": 5,
+      "reuses": 4,
+      "staged_copy_bytes": 0,
+      "upload_bytes": 1622400,
+      "upload_calls": 15
+    },
+    "texture_reuses_total": 4,
+    "texture_uploads_total": 9,
+    "tile_fills_total": 127,
+    "total_hw_jobs": 336,
+    "update_kind": "tiles"
+  },
+  "render_error": null,
+  "runtime": "C++17",
+  "scene_owner": null,
+  "service": {
+    "phase": "composing",
+    "queued_requests": 0,
+    "snapshot_age_seconds": 2.4214685400002054,
+    "state_is_snapshot": true
+  },
+  "view": {
+    "pitch": 0.0,
+    "roll": 0.0,
+    "yaw": 0.0
+  },
+  "windows": [
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": true,
+      "height_deg": 26.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          14.0
+        ]
+      ],
+      "surface_height": 300,
+      "surface_width": 400,
+      "title": "Telemetry",
+      "width_deg": 36.0,
+      "window_id": 2,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 0
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 30.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "boayo-desktop",
+      "roll": 0.0,
+      "shape": [
+        [
+          51.2,
+          36.0,
+          537.6,
+          252.0,
+          18.0
+        ]
+      ],
+      "surface_height": 360,
+      "surface_width": 640,
+      "title": "BoAYO Launcher",
+      "width_deg": 42.0,
+      "window_id": 1,
+      "workspace": {},
+      "z": 1
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -16.47105751657935,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: Telemetry",
+      "width_deg": 2.88,
+      "window_id": 3,
+      "workspace": {
+        "control": "move",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 2
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": -10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 4,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 3
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": 10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": -3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 5,
+      "workspace": {
+        "control": "close",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 4
+    }
+  ]
+}
+INCR11_e928d8fd_RC:0
+oryukdo# BOAYO_MOTION_PROFILE=1 /tmp/boayo-v13 motion 1 0 25; echo INCR11_a1143f
+c4_RC:$?
+BOAYO_MOTION_BEGIN loop=1 steps=25
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-axis","seconds":17.57676588000004,"step":1,"view":{"pitch":0.0,"roll":0.0,"yaw":0.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-axis","seconds":17.54917260000002,"step":2,"view":{"pitch":0.0,"roll":0.0,"yaw":-12.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-axis","seconds":17.729169360000014,"step":3,"view":{"pitch":0.0,"roll":0.0,"yaw":12.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-axis","seconds":17.45735341999989,"step":4,"view":{"pitch":-8.0,"roll":0.0,"yaw":0.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-axis","seconds":17.409433219999755,"step":5,"view":{"pitch":8.0,"roll":0.0,"yaw":0.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-axis","seconds":17.93964915999959,"step":6,"view":{"pitch":0.0,"roll":-20.0,"yaw":0.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-axis","seconds":17.958139360000132,"step":7,"view":{"pitch":0.0,"roll":20.0,"yaw":0.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-mixed","seconds":18.451024720000078,"step":8,"view":{"pitch":6.0,"roll":-15.0,"yaw":-8.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-mixed","seconds":18.0098877800001,"step":9,"view":{"pitch":-6.0,"roll":15.0,"yaw":8.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-axis","seconds":17.288923179999983,"step":10,"view":{"pitch":0.0,"roll":0.0,"yaw":0.0}}
+BOAYO_MOTION_PROFILE {"counters":{"app_error":null,"driver_profile":{"available":true,"batch_calls":163,"batch_copy_dma_us":480191,"batch_copy_us":227566,"batch_execute_us":32883220,"batch_fill_dma_us":2189983,"batch_validate_us":123717,"enabled":true,"fast_paths":true,"publish_calls":32,"publish_compare_us":691225,"publish_copy_us":317289,"publish_diff_us":1462965,"publish_finish_us":31526,"publish_mmio_us":4244,"publish_poll_us":14338,"publish_polls":82,"publish_sleep_us":1474938,"publish_transfer_us":12950,"publish_validate_us":1109454,"tile_calls":1014,"tile_cpu_us":8015016,"tile_cpu_words":93819,"tile_dma_bytes":151148,"tile_dma_calls":469,"tile_dma_us":6864805,"tile_fence_us":270109,"tile_mask_us":6757836,"units":"microseconds","version":1},"output_profile":{"backend":"kernel","command":2,"configure_us":87,"finish_us":302,"select_us":23810,"upload_ranges":0,"upload_us":46173,"uploaded_words":0,"user_copy_us":9944,"validate_us":33907,"wait_us":86945},"performance":{"frame_interval_ms":10104.054779999842,"frame_limit":2.0,"frame_pacing":"start-to-start","full_update_count":1,"last_apps_ms":1690.5099199998403,"last_compose_ms":4513.14820000016,"last_upload_ms":0.0,"no_op_update_count":0,"patch_update_count":31,"render_count":31,"rendered_generation":179,"update_words":4480,"uptime_seconds":289.0328526200001},"phase":"apps","profile":{"app_present":[37822277,25491498,141],"apps":[64256349,42590405,97],"blend":[36400931,25253903,220],"captions":[9487714,6874861,253],"compose":[129354655,79440826,31],"descriptors":[8017432,5048656,220],"enabled":true,"finish":[12997983,8205182,31],"image":[12580062,8021227,108],"image_publish":[842351,573577,108],"layers":[20430289,13039484,31],"nested":true,"output_publish":[5498205,3879883,31],"pointer":[735174,400118,62],"projection_wait":[10892119,3127323,220],"state_publish":[62343612,41905116,46],"texture":[16529547,9392247,128],"tiles_prepare":[13037732,8411113,31],"units":"microseconds","workspace":[20303512,14169616,97]},"projection":{"cpu_output_shadow_words":4480,"cpu_result_download_words":0,"cpu_scene_words":0,"device_ready_frames":1,"dirty_tiles":28,"fallback_frames":0,"geometry_builds":0,"geometry_cull_us_total":0,"geometry_descriptor_us_total":0,"geometry_insert_us_total":0,"geometry_prepare_us_total":0,"geometry_tiles_evaluated_total":0,"hardware_frames":31,"jobs_per_core":[57,57],"lazy_copied_tiles_total":173,"mask_build_us_total":0,"mask_builds":0,"mask_fast_tiles_total":0,"mask_integer_samples_total":0,"mask_precise_samples_total":0,"mask_samples_evaluated_total":0,"masked_tiles_total":1014,"mode":"ddr-resident-dirty-tiles","packed_mask_tiles_total":1014,"plan_cache":{"builtin_loads":10,"hits":1,"loads":10,"misses":0,"payload_scan_bytes":0,"rejected":0,"revision":"967005ee422f912c39464b07fc4c366acb1c3b33fb2e972b2449e0dd8eb4a19f"},"precomputed_layers_total":11,"redrawn_tiles":28,"reused_tiles_total":0,"solid_tiles_total":0,"texture_pool":{"capacity_bytes":4194304,"evictions":0,"full_uploads":11,"partial_uploads":69,"resident_bytes":3545600,"resident_windows":11,"reuses":48,"staged_copy_bytes":9800,"upload_bytes":6755400,"upload_calls":137},"texture_reuses_total":48,"texture_uploads_total":80,"tile_fills_total":403,"total_hw_jobs":3176,"update_kind":"tiles"},"render_error":null,"snapshot_time":2423.60799962},"step":10}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"window-azimuth-elevation","seconds":120.93795779999982,"step":11,"view":{"pitch":0.0,"roll":0.0,"yaw":0.0}}
+BOAYO_MOTION_PROFILE {"counters":{"app_error":null,"driver_profile":{"available":true,"batch_calls":181,"batch_copy_dma_us":716419,"batch_copy_us":268118,"batch_execute_us":40191566,"batch_fill_dma_us":2806288,"batch_validate_us":147923,"enabled":true,"fast_paths":true,"publish_calls":34,"publish_compare_us":718351,"publish_copy_us":337724,"publish_diff_us":1552369,"publish_finish_us":36207,"publish_mmio_us":4510,"publish_poll_us":15059,"publish_polls":88,"publish_sleep_us":1611081,"publish_transfer_us":17934,"publish_validate_us":1180547,"tile_calls":1249,"tile_cpu_us":9361520,"tile_cpu_words":109121,"tile_dma_bytes":204452,"tile_dma_calls":590,"tile_dma_us":9163752,"tile_fence_us":328927,"tile_mask_us":8035821,"units":"microseconds","version":1},"output_profile":{"backend":"kernel","command":1,"configure_us":88,"finish_us":4415,"select_us":1194,"upload_ranges":20,"upload_us":60362,"uploaded_words":55,"user_copy_us":9261,"validate_us":37683,"wait_us":96380},"performance":{"frame_interval_ms":39788.426560000065,"frame_limit":2.0,"frame_pacing":"start-to-start","full_update_count":1,"last_apps_ms":1835.5591599997751,"last_compose_ms":82690.53777999988,"last_upload_ms":0.0,"no_op_update_count":0,"patch_update_count":33,"render_count":33,"rendered_generation":216,"update_words":4480,"uptime_seconds":415.2046014800003},"phase":"apps","profile":{"app_present":[41149814,27436207,157],"apps":[94990828,65302619,104],"blend":[44163148,29962695,240],"captions":[11304211,8250836,299],"compose":[216959842,128105532,33],"descriptors":[9595571,5785647,240],"enabled":true,"finish":[14016872,8846959,33],"image":[13689819,8625823,117],"image_publish":[907746,619770,117],"layers":[86340381,49990196,33],"nested":true,"output_publish":[5881727,4123566,33],"pointer":[825137,458735,66],"projection_wait":[12705971,3626943,240],"state_publish":[67734329,45797077,49],"texture":[22774366,12746822,140],"tiles_prepare":[15078442,9473778,33],"units":"microseconds","workspace":[42732343,31254812,104]},"projection":{"cpu_output_shadow_words":4480,"cpu_result_download_words":0,"cpu_scene_words":0,"device_ready_frames":1,"dirty_tiles":190,"fallback_frames":0,"geometry_builds":4,"geometry_cull_us_total":10617392,"geometry_descriptor_us_total":16738819,"geometry_insert_us_total":359337,"geometry_prepare_us_total":209627,"geometry_tiles_evaluated_total":484,"hardware_frames":33,"jobs_per_core":[214,208],"lazy_copied_tiles_total":173,"mask_build_us_total":32615582,"mask_builds":4,"mask_fast_tiles_total":59,"mask_integer_samples_total":52043,"mask_precise_samples_total":991,"mask_samples_evaluated_total":113664,"masked_tiles_total":1249,"mode":"ddr-resident-dirty-tiles","packed_mask_tiles_total":1249,"plan_cache":{"builtin_loads":10,"hits":1,"loads":10,"misses":8,"payload_scan_bytes":0,"rejected":0,"revision":"967005ee422f912c39464b07fc4c366acb1c3b33fb2e972b2449e0dd8eb4a19f"},"precomputed_layers_total":11,"redrawn_tiles":158,"reused_tiles_total":0,"solid_tiles_total":0,"texture_pool":{"capacity_bytes":4194304,"evictions":0,"full_uploads":14,"partial_uploads":76,"resident_bytes":3574400,"resident_windows":14,"reuses":50,"staged_copy_bytes":19600,"upload_bytes":8630800,"upload_calls":156},"texture_reuses_total":50,"texture_uploads_total":90,"tile_fills_total":503,"total_hw_jobs":3712,"update_kind":"tiles"},"render_error":null,"snapshot_time":2549.72706424},"step":11}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"window-azimuth-elevation","seconds":111.15868610000007,"step":12,"view":{"pitch":0.0,"roll":0.0,"yaw":0.0}}
+BOAYO_MOTION_PROFILE {"counters":{"app_error":null,"driver_profile":{"available":true,"batch_calls":194,"batch_copy_dma_us":1031571,"batch_copy_us":302759,"batch_execute_us":47317954,"batch_fill_dma_us":3434303,"batch_validate_us":161940,"enabled":true,"fast_paths":true,"publish_calls":36,"publish_compare_us":746165,"publish_copy_us":357842,"publish_diff_us":1650841,"publish_finish_us":43743,"publish_mmio_us":4783,"publish_poll_us":15785,"publish_polls":94,"publish_sleep_us":1730543,"publish_transfer_us":25864,"publish_validate_us":1252926,"tile_calls":1480,"tile_cpu_us":10652733,"tile_cpu_words":123602,"tile_dma_bytes":258096,"tile_dma_calls":706,"tile_dma_us":11326452,"tile_fence_us":386093,"tile_mask_us":9291020,"units":"microseconds","version":1},"output_profile":{"backend":"kernel","command":1,"configure_us":94,"finish_us":5058,"select_us":3767,"upload_ranges":23,"upload_us":64614,"uploaded_words":105,"user_copy_us":10466,"validate_us":36111,"wait_us":90291},"performance":{"frame_interval_ms":35546.86727999979,"frame_limit":2.0,"frame_pacing":"start-to-start","full_update_count":1,"last_apps_ms":1770.274420000078,"last_compose_ms":77054.89339999986,"last_upload_ms":0.0,"no_op_update_count":0,"patch_update_count":35,"render_count":35,"rendered_generation":241,"update_words":4480,"uptime_seconds":531.4850426400003},"phase":"apps","profile":{"app_present":[44468603,29381755,173],"apps":[122109493,85359705,111],"blend":[51968836,34778429,259],"captions":[12252930,8967918,343],"compose":[298866946,174589058,35],"descriptors":[11156966,6607707,259],"enabled":true,"finish":[15001987,9476224,35],"image":[14788013,9233753,126],"image_publish":[1013398,666349,126],"layers":[151453191,87415168,35],"nested":true,"output_publish":[6277555,4387185,35],"pointer":[898473,507373,70],"projection_wait":[14325458,4123314,259],"state_publish":[72939397,49522119,52],"texture":[23456179,13089998,151],"tiles_prepare":[18024374,10732401,35],"units":"microseconds","workspace":[62758941,46589437,111]},"projection":{"cpu_output_shadow_words":4480,"cpu_result_download_words":0,"cpu_scene_words":0,"device_ready_frames":1,"dirty_tiles":228,"fallback_frames":0,"geometry_builds":8,"geometry_cull_us_total":21511877,"geometry_descriptor_us_total":34096462,"geometry_insert_us_total":748386,"geometry_prepare_us_total":396163,"geometry_tiles_evaluated_total":1004,"hardware_frames":35,"jobs_per_core":[213,207],"lazy_copied_tiles_total":303,"mask_build_us_total":63804901,"mask_builds":8,"mask_fast_tiles_total":117,"mask_integer_samples_total":104172,"mask_precise_samples_total":1909,"mask_samples_evaluated_total":228352,"masked_tiles_total":1480,"mode":"ddr-resident-dirty-tiles","packed_mask_tiles_total":1480,"plan_cache":{"builtin_loads":10,"hits":1,"loads":10,"misses":16,"payload_scan_bytes":0,"rejected":0,"revision":"967005ee422f912c39464b07fc4c366acb1c3b33fb2e972b2449e0dd8eb4a19f"},"precomputed_layers_total":11,"redrawn_tiles":155,"reused_tiles_total":1,"solid_tiles_total":0,"texture_pool":{"capacity_bytes":4194304,"evictions":0,"full_uploads":14,"partial_uploads":82,"resident_bytes":3574400,"resident_windows":14,"reuses":55,"staged_copy_bytes":19600,"upload_bytes":8861200,"upload_calls":166},"texture_reuses_total":55,"texture_uploads_total":96,"tile_fills_total":600,"total_hw_jobs":4237,"update_kind":"tiles"},"render_error":null,"snapshot_time":2665.97644972},"step":12}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"window-azimuth-elevation","seconds":48.23841736000031,"step":13,"view":{"pitch":0.0,"roll":0.0,"yaw":0.0}}
+BOAYO_MOTION_PROFILE {"counters":{"app_error":null,"driver_profile":{"available":true,"batch_calls":208,"batch_copy_dma_us":1510105,"batch_copy_us":343702,"batch_execute_us":54608290,"batch_fill_dma_us":4111055,"batch_validate_us":180218,"enabled":true,"fast_paths":true,"publish_calls":38,"publish_compare_us":773438,"publish_copy_us":379668,"publish_diff_us":1754180,"publish_finish_us":48166,"publish_mmio_us":5058,"publish_poll_us":16271,"publish_polls":98,"publish_sleep_us":1848268,"publish_transfer_us":31457,"publish_validate_us":1321470,"tile_calls":1724,"tile_cpu_us":11997734,"tile_cpu_words":138889,"tile_dma_bytes":304948,"tile_dma_calls":821,"tile_dma_us":13249362,"tile_fence_us":451496,"tile_mask_us":10629184,"units":"microseconds","version":1},"output_profile":{"backend":"kernel","command":1,"configure_us":94,"finish_us":4152,"select_us":1263,"upload_ranges":20,"upload_us":65739,"uploaded_words":52,"user_copy_us":11268,"validate_us":33129,"wait_us":108241},"performance":{"frame_interval_ms":34980.94962000004,"frame_limit":2.0,"frame_pacing":"start-to-start","full_update_count":1,"last_apps_ms":1824.9870399999963,"last_compose_ms":14921.988640000109,"last_upload_ms":0.0,"no_op_update_count":0,"patch_update_count":37,"render_count":37,"rendered_generation":266,"update_words":4480,"uptime_seconds":584.9680840200003},"phase":"apps","profile":{"app_present":[47648220,31261844,189],"apps":[148778943,105020335,118],"blend":[59878802,39767453,279],"captions":[13111316,9582618,387],"compose":[319242752,185469334,37],"descriptors":[12407097,7275667,279],"enabled":true,"finish":[15987881,10082109,37],"image":[15865778,9832841,135],"image_publish":[1083596,711762,135],"layers":[155204809,89276411,37],"nested":true,"output_publish":[6659944,4646996,37],"pointer":[993141,578097,74],"projection_wait":[15932537,4620827,279],"state_publish":[77346711,52648692,55],"texture":[24264413,13453161,163],"tiles_prepare":[20777831,11932923,37],"units":"microseconds","workspace":[82584232,61681617,118]},"projection":{"cpu_output_shadow_words":4480,"cpu_result_download_words":0,"cpu_scene_words":0,"device_ready_frames":1,"dirty_tiles":190,"fallback_frames":0,"geometry_builds":8,"geometry_cull_us_total":21511877,"geometry_descriptor_us_total":34096462,"geometry_insert_us_total":748386,"geometry_prepare_us_total":396163,"geometry_tiles_evaluated_total":1004,"hardware_frames":37,"jobs_per_core":[219,213],"lazy_copied_tiles_total":430,"mask_build_us_total":63804901,"mask_builds":8,"mask_fast_tiles_total":117,"mask_integer_samples_total":104172,"mask_precise_samples_total":1909,"mask_samples_evaluated_total":228352,"masked_tiles_total":1724,"mode":"ddr-resident-dirty-tiles","packed_mask_tiles_total":1724,"plan_cache":{"builtin_loads":13,"hits":2,"loads":13,"misses":16,"payload_scan_bytes":0,"rejected":0,"revision":"967005ee422f912c39464b07fc4c366acb1c3b33fb2e972b2449e0dd8eb4a19f"},"precomputed_layers_total":15,"redrawn_tiles":135,"reused_tiles_total":1,"solid_tiles_total":0,"texture_pool":{"capacity_bytes":4194304,"evictions":0,"full_uploads":14,"partial_uploads":88,"resident_bytes":3574400,"resident_windows":14,"reuses":61,"staged_copy_bytes":19600,"upload_bytes":9091600,"upload_calls":176},"texture_reuses_total":61,"texture_uploads_total":102,"tile_fills_total":696,"total_hw_jobs":4781,"update_kind":"tiles"},"render_error":null,"snapshot_time":2719.567377},"step":13}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"window-width-height","seconds":104.5506656800003,"step":14,"view":{"pitch":0.0,"roll":0.0,"yaw":0.0}}
+BOAYO_MOTION_PROFILE {"counters":{"app_error":null,"driver_profile":{"available":true,"batch_calls":224,"batch_copy_dma_us":2216255,"batch_copy_us":383372,"batch_execute_us":62687756,"batch_fill_dma_us":4902239,"batch_validate_us":206434,"enabled":true,"fast_paths":true,"publish_calls":40,"publish_compare_us":798284,"publish_copy_us":400613,"publish_diff_us":1849212,"publish_finish_us":54778,"publish_mmio_us":5342,"publish_poll_us":16749,"publish_polls":102,"publish_sleep_us":1870370,"publish_transfer_us":35371,"publish_validate_us":1393430,"tile_calls":1969,"tile_cpu_us":13354913,"tile_cpu_words":154300,"tile_dma_bytes":357380,"tile_dma_calls":942,"tile_dma_us":15597639,"tile_fence_us":513781,"tile_mask_us":11944629,"units":"microseconds","version":1},"output_profile":{"backend":"kernel","command":1,"configure_us":96,"finish_us":6342,"select_us":1268,"upload_ranges":11,"upload_us":57519,"uploaded_words":30,"user_copy_us":10682,"validate_us":33798,"wait_us":10753},"performance":{"frame_interval_ms":20578.784280000036,"frame_limit":2.0,"frame_pacing":"start-to-start","full_update_count":1,"last_apps_ms":1935.309160000088,"last_compose_ms":85609.50121999986,"last_upload_ms":0.0,"no_op_update_count":0,"patch_update_count":39,"render_count":39,"rendered_generation":292,"update_words":4480,"uptime_seconds":694.8836180600001},"phase":"apps","profile":{"app_present":[51039046,33253063,205],"apps":[160734250,113138106,125],"blend":[68151793,44744340,299],"captions":[14187548,10373892,434],"compose":[409786076,236385633,39],"descriptors":[13439818,7857549,299],"enabled":true,"finish":[17033782,10725048,39],"image":[17019530,10478530,145],"image_publish":[1138996,756123,145],"layers":[226029455,129651414,39],"nested":true,"output_publish":[6940054,4898967,39],"pointer":[1093878,634748,78],"projection_wait":[17658203,5137378,299],"state_publish":[82594344,56374481,58],"texture":[27806139,15257490,175],"tiles_prepare":[23759636,13271527,39],"units":"microseconds","workspace":[86981736,64769127,125]},"projection":{"cpu_output_shadow_words":4480,"cpu_result_download_words":0,"cpu_scene_words":0,"device_ready_frames":1,"dirty_tiles":181,"fallback_frames":0,"geometry_builds":12,"geometry_cull_us_total":32724457,"geometry_descriptor_us_total":52693419,"geometry_insert_us_total":1034792,"geometry_prepare_us_total":590951,"geometry_tiles_evaluated_total":1552,"hardware_frames":39,"jobs_per_core":[232,227],"lazy_copied_tiles_total":537,"mask_build_us_total":98812700,"mask_builds":12,"mask_fast_tiles_total":199,"mask_integer_samples_total":164858,"mask_precise_samples_total":2926,"mask_samples_evaluated_total":351232,"masked_tiles_total":1969,"mode":"ddr-resident-dirty-tiles","packed_mask_tiles_total":1969,"plan_cache":{"builtin_loads":13,"hits":2,"loads":13,"misses":24,"payload_scan_bytes":0,"rejected":0,"revision":"967005ee422f912c39464b07fc4c366acb1c3b33fb2e972b2449e0dd8eb4a19f"},"precomputed_layers_total":15,"redrawn_tiles":163,"reused_tiles_total":1,"solid_tiles_total":0,"texture_pool":{"capacity_bytes":4194304,"evictions":0,"full_uploads":14,"partial_uploads":97,"resident_bytes":3574400,"resident_windows":14,"reuses":64,"staged_copy_bytes":25872,"upload_bytes":10477072,"upload_calls":191},"texture_reuses_total":64,"texture_uploads_total":111,"tile_fills_total":812,"total_hw_jobs":5354,"update_kind":"tiles"},"render_error":null,"snapshot_time":2829.54975246},"step":14}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"window-width-height","seconds":31.618960499999957,"step":15,"view":{"pitch":0.0,"roll":0.0,"yaw":0.0}}
+BOAYO_MOTION_PROFILE {"counters":{"app_error":null,"driver_profile":{"available":true,"batch_calls":238,"batch_copy_dma_us":2555281,"batch_copy_us":408026,"batch_execute_us":70125664,"batch_fill_dma_us":5863798,"batch_validate_us":229297,"enabled":true,"fast_paths":true,"publish_calls":42,"publish_compare_us":825901,"publish_copy_us":421973,"publish_diff_us":1948500,"publish_finish_us":64062,"publish_mmio_us":5627,"publish_poll_us":17380,"publish_polls":107,"publish_sleep_us":1951441,"publish_transfer_us":38126,"publish_validate_us":1462972,"tile_calls":2206,"tile_cpu_us":14691320,"tile_cpu_words":169222,"tile_dma_bytes":402992,"tile_dma_calls":1055,"tile_dma_us":17584129,"tile_fence_us":578575,"tile_mask_us":13289354,"units":"microseconds","version":1},"output_profile":{"backend":"kernel","command":1,"configure_us":90,"finish_us":9017,"select_us":1256,"upload_ranges":11,"upload_us":60706,"uploaded_words":30,"user_copy_us":10675,"validate_us":36023,"wait_us":59170},"performance":{"frame_interval_ms":19167.881439999746,"frame_limit":2.0,"frame_pacing":"start-to-start","full_update_count":1,"last_apps_ms":1911.3549200001216,"last_compose_ms":13964.25476000013,"last_upload_ms":0.0,"no_op_update_count":0,"patch_update_count":41,"render_count":41,"rendered_generation":314,"update_words":4480,"uptime_seconds":731.9131110800004},"phase":"apps","profile":{"app_present":[54671572,35350019,221],"apps":[172059804,120745391,132],"blend":[75814652,49577043,319],"captions":[15172529,11063365,479],"compose":[428893476,246729089,41],"descriptors":[14408899,8412722,319],"enabled":true,"finish":[18000738,11355410,41],"image":[18287054,11165343,155],"image_publish":[1229692,808048,155],"layers":[229059135,131196204,41],"nested":true,"output_publish":[7308015,5162473,41],"pointer":[1205734,693181,82],"projection_wait":[19323616,5660909,319],"state_publish":[87074810,59543279,61],"texture":[28451542,15584305,187],"tiles_prepare":[26690887,14501877,41],"units":"microseconds","workspace":[90904140,67529632,132]},"projection":{"cpu_output_shadow_words":4480,"cpu_result_download_words":0,"cpu_scene_words":0,"device_ready_frames":1,"dirty_tiles":181,"fallback_frames":0,"geometry_builds":12,"geometry_cull_us_total":32724457,"geometry_descriptor_us_total":52693419,"geometry_insert_us_total":1034792,"geometry_prepare_us_total":590951,"geometry_tiles_evaluated_total":1552,"hardware_frames":41,"jobs_per_core":[219,213],"lazy_copied_tiles_total":672,"mask_build_us_total":98812700,"mask_builds":12,"mask_fast_tiles_total":199,"mask_integer_samples_total":164858,"mask_precise_samples_total":2926,"mask_samples_evaluated_total":351232,"masked_tiles_total":2206,"mode":"ddr-resident-dirty-tiles","packed_mask_tiles_total":2206,"plan_cache":{"builtin_loads":13,"hits":6,"loads":13,"misses":24,"payload_scan_bytes":0,"rejected":0,"revision":"967005ee422f912c39464b07fc4c366acb1c3b33fb2e972b2449e0dd8eb4a19f"},"precomputed_layers_total":19,"redrawn_tiles":135,"reused_tiles_total":1,"solid_tiles_total":0,"texture_pool":{"capacity_bytes":4194304,"evictions":0,"full_uploads":14,"partial_uploads":103,"resident_bytes":3574400,"resident_windows":14,"reuses":70,"staged_copy_bytes":25872,"upload_bytes":10707472,"upload_calls":201},"texture_reuses_total":70,"texture_uploads_total":117,"tile_fills_total":908,"total_hw_jobs":5900,"update_kind":"tiles"},"render_error":null,"snapshot_time":2866.39694718},"step":15}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"overlap","seconds":111.8164507800002,"step":16,"view":{"pitch":0.0,"roll":0.0,"yaw":0.0}}
+BOAYO_MOTION_PROFILE {"counters":{"app_error":null,"driver_profile":{"available":true,"batch_calls":254,"batch_copy_dma_us":2893695,"batch_copy_us":439840,"batch_execute_us":77373193,"batch_fill_dma_us":6518636,"batch_validate_us":257083,"enabled":true,"fast_paths":true,"publish_calls":44,"publish_compare_us":852775,"publish_copy_us":443539,"publish_diff_us":2042792,"publish_finish_us":70656,"publish_mmio_us":5888,"publish_poll_us":18105,"publish_polls":113,"publish_sleep_us":1998876,"publish_transfer_us":40601,"publish_validate_us":1529118,"tile_calls":2438,"tile_cpu_us":16016880,"tile_cpu_words":183784,"tile_dma_bytes":449696,"tile_dma_calls":1172,"tile_dma_us":19775459,"tile_fence_us":637560,"tile_mask_us":14583865,"units":"microseconds","version":1},"output_profile":{"backend":"kernel","command":1,"configure_us":87,"finish_us":6326,"select_us":1231,"upload_ranges":9,"upload_us":56054,"uploaded_words":11,"user_copy_us":10735,"validate_us":33231,"wait_us":23300},"performance":{"frame_interval_ms":38220.949119999656,"frame_limit":2.0,"frame_pacing":"start-to-start","full_update_count":1,"last_apps_ms":1768.2050200000958,"last_compose_ms":75109.66278000023,"last_upload_ms":0.0,"no_op_update_count":0,"patch_update_count":43,"render_count":43,"rendered_generation":349,"update_words":4480,"uptime_seconds":848.7820464400002},"phase":"apps","profile":{"app_present":[57939594,37290553,237],"apps":[201314584,142483094,139],"blend":[83601424,54282457,339],"captions":[16953213,12414489,524],"compose":[508713418,291878662,43],"descriptors":[15864699,9263389,339],"enabled":true,"finish":[18952675,11946728,43],"image":[19375053,11774452,164],"image_publish":[1292841,848219,164],"layers":[290190122,166418848,43],"nested":true,"output_publish":[7603362,5411955,43],"pointer":[1329281,762275,86],"projection_wait":[21079340,6147152,339],"state_publish":[92396265,63399230,64],"texture":[31863967,17099382,199],"tiles_prepare":[28960771,15615043,43],"units":"microseconds","workspace":[112264571,83875058,139]},"projection":{"cpu_output_shadow_words":4480,"cpu_result_download_words":0,"cpu_scene_words":0,"device_ready_frames":1,"dirty_tiles":152,"fallback_frames":0,"geometry_builds":16,"geometry_cull_us_total":43008006,"geometry_descriptor_us_total":68306291,"geometry_insert_us_total":1366163,"geometry_prepare_us_total":787068,"geometry_tiles_evaluated_total":2024,"hardware_frames":43,"jobs_per_core":[216,211],"lazy_copied_tiles_total":779,"mask_build_us_total":128536337,"mask_builds":16,"mask_fast_tiles_total":244,"mask_integer_samples_total":218118,"mask_precise_samples_total":4166,"mask_samples_evaluated_total":448512,"masked_tiles_total":2438,"mode":"ddr-resident-dirty-tiles","packed_mask_tiles_total":2438,"plan_cache":{"builtin_loads":13,"hits":6,"loads":13,"misses":32,"payload_scan_bytes":0,"rejected":0,"revision":"967005ee422f912c39464b07fc4c366acb1c3b33fb2e972b2449e0dd8eb4a19f"},"precomputed_layers_total":19,"redrawn_tiles":134,"reused_tiles_total":1,"solid_tiles_total":0,"texture_pool":{"capacity_bytes":4194304,"evictions":0,"full_uploads":17,"partial_uploads":110,"resident_bytes":3603200,"resident_windows":17,"reuses":72,"staged_copy_bytes":32144,"upload_bytes":12579344,"upload_calls":218},"texture_reuses_total":72,"texture_uploads_total":127,"tile_fills_total":1003,"total_hw_jobs":6441,"update_kind":"tiles"},"render_error":null,"snapshot_time":2983.48433538},"step":16}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"front-back","seconds":30.31626666000011,"step":17,"view":{"pitch":0.0,"roll":0.0,"yaw":0.0}}
+BOAYO_MOTION_PROFILE {"counters":{"app_error":null,"driver_profile":{"available":true,"batch_calls":270,"batch_copy_dma_us":3441279,"batch_copy_us":473923,"batch_execute_us":84813270,"batch_fill_dma_us":7082039,"batch_validate_us":296163,"enabled":true,"fast_paths":true,"publish_calls":46,"publish_compare_us":880085,"publish_copy_us":464270,"publish_diff_us":2134614,"publish_finish_us":75254,"publish_mmio_us":6152,"publish_poll_us":18702,"publish_polls":118,"publish_sleep_us":2109682,"publish_transfer_us":45149,"publish_validate_us":1597874,"tile_calls":2678,"tile_cpu_us":17340065,"tile_cpu_words":198995,"tile_dma_bytes":496160,"tile_dma_calls":1288,"tile_dma_us":21929327,"tile_fence_us":709993,"tile_mask_us":15947388,"units":"microseconds","version":1},"output_profile":{"backend":"kernel","command":1,"configure_us":89,"finish_us":4331,"select_us":1230,"upload_ranges":8,"upload_us":55839,"uploaded_words":10,"user_copy_us":9311,"validate_us":33292,"wait_us":88927},"performance":{"frame_interval_ms":15649.565260000145,"frame_limit":2.0,"frame_pacing":"start-to-start","full_update_count":1,"last_apps_ms":1744.999900000039,"last_compose_ms":16269.24906000022,"last_upload_ms":0.0,"no_op_update_count":0,"patch_update_count":45,"render_count":45,"rendered_generation":368,"update_words":4480,"uptime_seconds":884.56935754},"phase":"apps","profile":{"app_present":[61041788,39043857,250],"apps":[209344525,147626335,143],"blend":[91097022,58994996,359],"captions":[17945283,13156454,551],"compose":[530371761,303497694,45],"descriptors":[17698901,10230877,359],"enabled":true,"finish":[19793903,12491683,45],"image":[20549087,12423505,173],"image_publish":[1349174,892658,173],"layers":[292638752,167665024,45],"nested":true,"output_publish":[7966653,5658036,45],"pointer":[1429347,822731,90],"projection_wait":[22804251,6689209,359],"state_publish":[97925869,67371117,67],"texture":[35283346,18867036,211],"tiles_prepare":[31722332,16763670,45],"units":"microseconds","workspace":[115260242,85911146,143]},"projection":{"cpu_output_shadow_words":4480,"cpu_result_download_words":0,"cpu_scene_words":0,"device_ready_frames":1,"dirty_tiles":152,"fallback_frames":0,"geometry_builds":16,"geometry_cull_us_total":43008006,"geometry_descriptor_us_total":68306291,"geometry_insert_us_total":1366163,"geometry_prepare_us_total":787068,"geometry_tiles_evaluated_total":2024,"hardware_frames":45,"jobs_per_core":[217,211],"lazy_copied_tiles_total":876,"mask_build_us_total":128536337,"mask_builds":16,"mask_fast_tiles_total":244,"mask_integer_samples_total":218118,"mask_precise_samples_total":4166,"mask_samples_evaluated_total":448512,"masked_tiles_total":2678,"mode":"ddr-resident-dirty-tiles","packed_mask_tiles_total":2678,"plan_cache":{"builtin_loads":13,"hits":6,"loads":13,"misses":32,"payload_scan_bytes":0,"rejected":0,"revision":"967005ee422f912c39464b07fc4c366acb1c3b33fb2e972b2449e0dd8eb4a19f"},"precomputed_layers_total":19,"redrawn_tiles":132,"reused_tiles_total":5,"solid_tiles_total":0,"texture_pool":{"capacity_bytes":4194304,"evictions":0,"full_uploads":17,"partial_uploads":118,"resident_bytes":3603200,"resident_windows":17,"reuses":76,"staged_copy_bytes":38416,"upload_bytes":14428816,"upload_calls":233},"texture_reuses_total":76,"texture_uploads_total":135,"tile_fills_total":1098,"total_hw_jobs":7016,"update_kind":"tiles"},"render_error":null,"snapshot_time":3019.17656004},"step":17}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"front-back","seconds":28.634769620000043,"step":18,"view":{"pitch":0.0,"roll":0.0,"yaw":0.0}}
+BOAYO_MOTION_PROFILE {"counters":{"app_error":null,"driver_profile":{"available":true,"batch_calls":286,"batch_copy_dma_us":3973233,"batch_copy_us":512281,"batch_execute_us":92125044,"batch_fill_dma_us":7643179,"batch_validate_us":319829,"enabled":true,"fast_paths":true,"publish_calls":48,"publish_compare_us":907705,"publish_copy_us":485182,"publish_diff_us":2228282,"publish_finish_us":85288,"publish_mmio_us":6409,"publish_poll_us":19405,"publish_polls":124,"publish_sleep_us":2160712,"publish_transfer_us":47140,"publish_validate_us":1669968,"tile_calls":2908,"tile_cpu_us":18589353,"tile_cpu_words":213492,"tile_dma_bytes":543428,"tile_dma_calls":1404,"tile_dma_us":24099567,"tile_fence_us":775471,"tile_mask_us":17233395,"units":"microseconds","version":1},"output_profile":{"backend":"kernel","command":1,"configure_us":89,"finish_us":7552,"select_us":1231,"upload_ranges":8,"upload_us":53392,"uploaded_words":10,"user_copy_us":9760,"validate_us":36390,"wait_us":30091},"performance":{"frame_interval_ms":15255.197500000122,"frame_limit":2.0,"frame_pacing":"start-to-start","full_update_count":1,"last_apps_ms":1710.0419200000943,"last_compose_ms":15082.086979999985,"last_upload_ms":0.0,"no_op_update_count":0,"patch_update_count":47,"render_count":47,"rendered_generation":387,"update_words":4480,"uptime_seconds":918.6745150200004},"phase":"apps","profile":{"app_present":[64096021,40792904,263],"apps":[217296072,152704402,147],"blend":[98494934,63593041,379],"captions":[19065609,13964841,578],"compose":[550749631,314266078,47],"descriptors":[19410157,11173645,379],"enabled":true,"finish":[20616216,13027707,47],"image":[21679950,13042978,182],"image_publish":[1416370,941228,182],"layers":[295153552,168916090,47],"nested":true,"output_publish":[8296978,5905620,47],"pointer":[1509706,880400,94],"projection_wait":[24548517,7216220,379],"state_publish":[103149019,71128336,70],"texture":[37675754,19967988,223],"tiles_prepare":[34437014,17907400,47],"units":"microseconds","workspace":[118127765,87820073,147]},"projection":{"cpu_output_shadow_words":4480,"cpu_result_download_words":0,"cpu_scene_words":0,"device_ready_frames":1,"dirty_tiles":152,"fallback_frames":0,"geometry_builds":16,"geometry_cull_us_total":43008006,"geometry_descriptor_us_total":68306291,"geometry_insert_us_total":1366163,"geometry_prepare_us_total":787068,"geometry_tiles_evaluated_total":2024,"hardware_frames":47,"jobs_per_core":[214,209],"lazy_copied_tiles_total":971,"mask_build_us_total":128536337,"mask_builds":16,"mask_fast_tiles_total":244,"mask_integer_samples_total":218118,"mask_precise_samples_total":4166,"mask_samples_evaluated_total":448512,"masked_tiles_total":2908,"mode":"ddr-resident-dirty-tiles","packed_mask_tiles_total":2908,"plan_cache":{"builtin_loads":13,"hits":6,"loads":13,"misses":32,"payload_scan_bytes":0,"rejected":0,"revision":"967005ee422f912c39464b07fc4c366acb1c3b33fb2e972b2449e0dd8eb4a19f"},"precomputed_layers_total":19,"redrawn_tiles":130,"reused_tiles_total":9,"solid_tiles_total":0,"texture_pool":{"capacity_bytes":4194304,"evictions":0,"full_uploads":17,"partial_uploads":126,"resident_bytes":3603200,"resident_windows":17,"reuses":80,"staged_copy_bytes":44688,"upload_bytes":16287888,"upload_calls":248},"texture_reuses_total":80,"texture_uploads_total":143,"tile_fills_total":1191,"total_hw_jobs":7581,"update_kind":"tiles"},"render_error":null,"snapshot_time":3053.10955518},"step":18}
+^CBOAYO_MOTION_STOPPED restored
+INCR11_a1143fc4_RC:130
+oryukdo# 

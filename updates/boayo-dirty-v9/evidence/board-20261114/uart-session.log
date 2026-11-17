@@ -1,0 +1,2962 @@
+G
+
+OpenSBI v1.8.1
+   ____                    _____ ____ _____
+  / __ \                  / ____|  _ \_   _|
+ | |  | |_ __   ___ _ __ | (___ | |_) || |
+ | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
+ | |__| | |_) |  __/ | | |____) | |_) || |_
+  \____/| .__/ \___|_| |_|_____/|____/_____|
+        | |
+        |_|
+
+Platform Name               : HAEBANCHEON 3d5i L1-16K DMA3
+Platform Features           : medeleg
+Platform HART Count         : 1
+Platform HART Protection    : ---
+Platform IPI Device         : ---
+Platform Timer Device       : aclint-mtimer @ 50000000Hz
+Platform Console Device     : uart8250
+Platform HSM Device         : ---
+Platform PMU Device         : ---
+Platform Reboot Device      : ---
+Platform Shutdown Device    : ---
+Platform Suspend Device     : ---
+Platform CPPC Device        : ---
+Firmware Base               : 0x80000000
+Firmware Size               : 309 KB
+Firmware RW Offset          : 0x40000
+Firmware RW Size            : 53 KB
+Firmware Heap Offset        : 0x44000
+Firmware Heap Size          : 37 KB (total), 0 KB (reserved), 9 KB (used), 26 KB (free)
+Firmware Scratch Size       : 4096 B (total), 228 B (used), 3868 B (free)
+Runtime SBI Version         : 3.0
+Standard SBI Extensions     : time,rfnc,ipi,base,hsm,pmu,dbcn,fwft,legacy,sse
+Experimental SBI Extensions : none
+
+Domain0 Name                : root
+Domain0 Boot HART           : 0
+Domain0 HARTs               : 0*
+Domain0 Region00            : 0x80040000-0x8004ffff M: (F,R,W) S/U: ()
+Domain0 Region01            : 0x80000000-0x8003ffff M: (F,R,X) S/U: ()
+Domain0 Region02            : 0x02004000-0x02004007 M: (I,R,W) S/U: ()
+Domain0 Region03            : 0x0200bff8-0x0200bfff M: (I,R,W) S/U: ()
+Domain0 Region04            : 0x10000000-0x10000fff M: (I,R,W) S/U: (R,W)
+Domain0 Region05            : 0x00000000-0xffffffff M: () S/U: (R,W,X)
+Domain0 Next Address        : 0x80400000
+Domain0 Next Arg1           : 0x87f00000
+Domain0 Next Mode           : S-mode
+Domain0 SysReset            : yes
+Domain0 SysSuspend          : yes
+
+Boot HART ID                : 0
+Boot HART Domain            : root
+Boot HART Priv Version      : v1.11
+Boot HART Base ISA          : rv32ima
+Boot HART ISA Extensions    : zicntr,svade
+Boot HART PMP Count         : 0
+Boot HART PMP Granularity   : 0 bits
+Boot HART PMP Address Bits  : 0
+Boot HART MHPM Info         : 0 (0x00000000)
+Boot HART Debug Triggers    : 0 triggers
+Boot HART MIDELEG           : 0x00000222
+Boot HART MEDELEG           : 0x0000b109
+Linux version 6.12.0-haebancheon-dirty9 (haebancheon@kfb) (riscv64-linux-gnu-gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, GNU ld (GNU Binutils for Ubuntu) 2.42) #1 2026-11-14 00:00:00 UTC
+OF: fdt: Ignoring memory range 0x80000000 - 0x80400000
+Machine model: HAEBANCHEON 3d5i L1-16K DMA3
+SBI specification v3.0 detected
+SBI implementation ID=0x1 Version=0x10008
+SBI TIME extension detected
+SBI IPI extension detected
+SBI RFENCE extension detected
+SBI DBCN extension detected
+earlycon: sbi0 at I/O port 0x0 (options '')
+printk: legacy bootconsole [sbi0] enabled
+printk: debug: ignoring loglevel setting.
+printk: debug: skip boot console de-registration.
+OF: reserved mem: 0x80000000..0x8003ffff (256 KiB) nomap non-reusable mmode_resv1@80000000
+OF: reserved mem: 0x80040000..0x8004ffff (64 KiB) nomap non-reusable mmode_resv0@80040000
+OF: reserved mem: 0xbd000000..0xbdffffff (16384 KiB) nomap non-reusable dma-pool@bd000000
+OF: reserved mem: 0xbf800000..0xbfffffff (8192 KiB) nomap non-reusable framebuffer@bf800000
+Zone ranges:
+  Normal   [mem 0x0000000080400000-0x00000000bfffffff]
+Movable zone start for each node
+Early memory node ranges
+  node   0: [mem 0x0000000080400000-0x00000000bcffffff]
+  node   0: [mem 0x00000000bd000000-0x00000000bdffffff]
+  node   0: [mem 0x00000000be000000-0x00000000bf7fffff]
+  node   0: [mem 0x00000000bf800000-0x00000000bfffffff]
+Initmem setup node 0 [mem 0x0000000080400000-0x00000000bfffffff]
+riscv: base ISA extensions aim
+riscv: ELF capabilities aim
+pcpu-alloc: s0 r0 d32768 u32768 alloc=1*32768
+pcpu-alloc: [0] 0 
+Kernel command line: earlycon=sbi console=hvc0 loglevel=7 nokaslr lpj=1000000 rdinit=/init initcall_debug ignore_loglevel keep_bootcon printk.time=1
+[    0.000000] Dentry cache hash table entries: 131072 (order: 7, 524288 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 65536 (order: 6, 262144 bytes, linear)
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 261120
+[    0.000000] mem auto-init: stack:all(zero), heap alloc:off, heap free:off
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    0.000000] NR_IRQS: 64, nr_irqs: 64, preallocated irqs: 0
+[    0.000000] riscv-intc: 32 local interrupts mapped
+[    0.000000] clocksource: riscv_clocksource: mask: 0xffffffffffffffff max_cycles: 0xb8812736b, max_idle_ns: 440795202655 ns
+[    0.000291] sched_clock: 64 bits at 50MHz, resolution 20ns, wraps every 4398046511100ns
+[    0.027031] Calibrating delay loop (skipped) preset value.. 200.00 BogoMIPS (lpj=1000000)
+[    0.047651] pid_max: default: 32768 minimum: 301
+[    0.101498] Mount-cache hash table entries: 2048 (order: 1, 8192 bytes, linear)
+[    0.120098] Mountpoint-cache hash table entries: 2048 (order: 1, 8192 bytes, linear)
+[    0.254639] ORY_BOOT kernel_init_freeable enter
+[    0.406126] calling  0xc028e084 @ 1
+[    0.417364] ASID allocator disabled (0 bits)
+[    0.429095] initcall 0xc028e084 returned 0 after 10000 usecs
+[    0.443612] calling  0xc028e7d4 @ 1
+[    0.481765] initcall 0xc028e7d4 returned 0 after 30000 usecs
+[    0.496380] calling  0xc0290d34 @ 1
+[    0.507600] initcall 0xc0290d34 returned 0 after 0 usecs
+[    0.521551] calling  0xc0291e80 @ 1
+[    0.533050] initcall 0xc0291e80 returned 0 after 0 usecs
+[    0.546916] calling  0xc0294cbc @ 1
+[    0.555741] initcall 0xc0294cbc returned 0 after 0 usecs
+[    0.575953] Memory: 970084K/1044480K available (2592K kernel code, 489K rwdata, 301K rodata, 34715K init, 186K bss, 72848K reserved, 0K cma-reserved)
+[    0.659853] devtmpfs: initialized
+[    1.043425] calling  0xc029aee0 @ 1
+[    1.055037] initcall 0xc029aee0 returned 0 after 0 usecs
+[    1.086075] calling  0xc028eea0 @ 1
+[    1.115179] initcall 0xc028eea0 returned 0 after 10000 usecs
+[    1.132749] calling  0xc028fd60 @ 1
+[    1.149276] initcall 0xc028fd60 returned 0 after 10000 usecs
+[    1.164074] calling  0xc029185c @ 1
+[    1.175824] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+[    1.196264] initcall 0xc029185c returned 0 after 20000 usecs
+[    1.210554] calling  0xc0291d78 @ 1
+[    1.222279] futex hash table entries: 256 (order: -1, 3072 bytes, linear)
+[    1.239404] initcall 0xc0291d78 returned 0 after 20000 usecs
+[    1.253618] calling  0xc029992c @ 1
+[    1.270080] initcall 0xc029992c returned 0 after 10000 usecs
+[    1.284871] calling  0xc0299a14 @ 1
+[    1.296134] initcall 0xc0299a14 returned 0 after 0 usecs
+[    1.309973] calling  0xc0299a40 @ 1
+[    1.321203] initcall 0xc0299a40 returned 0 after 0 usecs
+[    1.335061] calling  0xc01cf000 @ 1
+[    1.346654] initcall 0xc01cf000 returned 0 after 0 usecs
+[    1.360453] calling  0xc02a2114 @ 1
+[    1.391200] initcall 0xc02a2114 returned 0 after 20000 usecs
+[    1.405894] calling  0xc02a21d8 @ 1
+[    1.417064] initcall 0xc02a21d8 returned 0 after 0 usecs
+[    1.431025] calling  0xc02a21ec @ 1
+[    1.443176] initcall 0xc02a21ec returned 0 after 10000 usecs
+[    1.457797] calling  0xc02a2678 @ 1
+[    1.469425] initcall 0xc02a2678 returned 0 after 10000 usecs
+[    1.483728] calling  0xc02a3148 @ 1
+[    1.747457] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+[    1.768329] initcall 0xc02a3148 returned 0 after 180000 usecs
+[    1.786350] calling  0xc02a3350 @ 1
+[    1.800180] initcall 0xc02a3350 returned 0 after 10000 usecs
+[    1.830015] calling  0xc0290f0c @ 1
+[    1.857670] initcall 0xc0290f0c returned 0 after 10000 usecs
+[    1.872554] calling  0xc0292254 @ 1
+[    1.889703] initcall 0xc0292254 returned 0 after 10000 usecs
+[    1.904088] calling  0xc02922a4 @ 1
+[    1.917524] initcall 0xc02922a4 returned 0 after 10000 usecs
+[    1.931965] calling  0xc0295558 @ 1
+[    1.943686] initcall 0xc0295558 returned 0 after 10000 usecs
+[    1.958040] calling  0xc029d194 @ 1
+[    1.973223] initcall 0xc029d194 returned 0 after 10000 usecs
+[    1.987506] calling  0xc029e17c @ 1
+[    2.002711] initcall 0xc029e17c returned 0 after 10000 usecs
+[    2.017004] calling  0xc029e9fc @ 1
+[    2.029801] initcall 0xc029e9fc returned 0 after 10000 usecs
+[    2.044104] calling  0xc02a3a0c @ 1
+[    2.056477] initcall 0xc02a3a0c returned 0 after 10000 usecs
+[    2.086387] calling  0xc028c064 @ 1
+[    2.098166] initcall 0xc028c064 returned 0 after 0 usecs
+[    2.111907] calling  0xc028d454 @ 1
+[    2.123090] initcall 0xc028d454 returned 0 after 0 usecs
+[    2.137425] calling  0xc0004b64 @ 1
+[    3.917633] cpu0: Ratio of byte access time to unaligned word access is 0.00, unaligned accesses are slow
+[    3.940403] initcall 0xc0004b64 returned 0 after 1510000 usecs
+[    3.955269] calling  0xc029d0a4 @ 1
+[    3.973202] initcall 0xc029d0a4 returned 0 after 10000 usecs
+[    3.987873] calling  0xc029cecc @ 1
+[    4.011839] initcall 0xc029cecc returned 0 after 10000 usecs
+[    4.026378] calling  0xc01bb7bc @ 1
+[    4.062092] initcall 0xc01bb7bc returned 0 after 20000 usecs
+[    4.076665] calling  0xc028d2c4 @ 1
+[    4.089234] initcall 0xc028d2c4 returned 0 after 0 usecs
+[    4.106411] calling  0xc0004aec @ 1
+[    4.115422] initcall 0xc0004aec returned 0 after 0 usecs
+[    4.129242] calling  0xc029fd7c @ 1
+[    4.807296] initcall 0xc029fd7c returned 0 after 540000 usecs
+[    4.839750] calling  0xc028ed1c @ 1
+[    4.852469] initcall 0xc028ed1c returned 0 after 0 usecs
+[    4.866365] calling  0xc028f870 @ 1
+[    4.878780] initcall 0xc028f870 returned 0 after 10000 usecs
+[    4.893689] calling  0xc029007c @ 1
+[    4.904901] initcall 0xc029007c returned 0 after 0 usecs
+[    4.918637] calling  0xc0290468 @ 1
+[    4.927502] initcall 0xc0290468 returned 0 after 0 usecs
+[    4.941321] calling  0xc0291ef4 @ 1
+[    4.975047] initcall 0xc0291ef4 returned 0 after 20000 usecs
+[    4.989513] calling  0xc0292148 @ 1
+[    5.001036] initcall 0xc0292148 returned 0 after 0 usecs
+[    5.015028] calling  0xc0292260 @ 1
+[    5.068109] initcall 0xc0292260 returned 0 after 40000 usecs
+[    5.082655] calling  0xc0293d28 @ 1
+[    5.091649] initcall 0xc0293d28 returned 0 after 0 usecs
+[    5.105509] calling  0xc0294cf8 @ 1
+[    5.116942] initcall 0xc0294cf8 returned 0 after 0 usecs
+[    5.130929] calling  0xc007bf98 @ 1
+[    5.142051] initcall 0xc007bf98 returned 0 after 0 usecs
+[    5.156027] calling  0xc007bf70 @ 1
+[    5.167460] initcall 0xc007bf70 returned 0 after 0 usecs
+[    5.181318] calling  0xc0297f64 @ 1
+[    5.194705] initcall 0xc0297f64 returned 0 after 0 usecs
+[    5.209580] calling  0xc0298028 @ 1
+[    5.221318] initcall 0xc0298028 returned 0 after 0 usecs
+[    5.235075] calling  0xc029af38 @ 1
+[    5.246366] initcall 0xc029af38 returned 0 after 0 usecs
+[    5.260336] calling  0xc029b068 @ 1
+[    5.285958] initcall 0xc029b068 returned 0 after 10000 usecs
+[    5.300547] calling  0xc029b1f0 @ 1
+[    5.313582] initcall 0xc029b1f0 returned 0 after 0 usecs
+[    5.327915] calling  0xc029b258 @ 1
+[    5.339257] initcall 0xc029b258 returned 0 after 0 usecs
+[    5.353213] calling  0xc029b308 @ 1
+[    5.402043] initcall 0xc029b308 returned 0 after 30000 usecs
+[    5.416430] calling  0xc029e0a8 @ 1
+[    5.436224] initcall 0xc029e0a8 returned 0 after 10000 usecs
+[    5.450538] calling  0xc01cf034 @ 1
+[    5.462862] initcall 0xc01cf034 returned 0 after 10000 usecs
+[    5.477776] calling  0xc029f3ec @ 1
+[    5.515081] initcall 0xc029f3ec returned 0 after 30000 usecs
+[    5.530005] calling  0xc02a21e0 @ 1
+[    5.541956] initcall 0xc02a21e0 returned 0 after 10000 usecs
+[    5.556360] calling  0xc02a26e0 @ 1
+[    5.677015] initcall 0xc02a26e0 returned 0 after 100000 usecs
+[    5.691957] calling  0xc02a29f4 @ 1
+[    5.704150] initcall 0xc02a29f4 returned 0 after 10000 usecs
+[    5.719541] calling  0xc02a2e48 @ 1
+[    5.731286] initcall 0xc02a2e48 returned 0 after 0 usecs
+[    5.745647] calling  0xc02a2e88 @ 1
+[    5.769961] initcall 0xc02a2e88 returned 0 after 20000 usecs
+[    5.784305] calling  0xc02a339c @ 1
+[    5.991861] initcall 0xc02a339c returned 0 after 170000 usecs
+[    6.006707] calling  0xc02a3c04 @ 1
+[    6.017832] initcall 0xc02a3c04 returned 0 after 0 usecs
+[    6.049189] calling  0xc028e8f4 @ 1
+[    6.065858] initcall 0xc028e8f4 returned 0 after 0 usecs
+[    6.079963] calling  0xc02917a8 @ 1
+[C0]
+[C1]
+[C2]
+[T0]
+[T1]
+[N0]
+[X0]
+[X1]
+[X2]
+[X3]
+[X4]
+[X5]
+[T0]
+[T1]
+[N1]
+[    6.112928] clocksource: Switched to clocksource riscv_clocksource
+[T0]
+[T1]
+[C3]
+[C4]
+[    6.131425] initcall 0xc02917a8 returned 0 after 37511 usecs
+[    6.147916] calling  0xc029864c @ 1
+[    6.167796] initcall 0xc029864c returned 0 after 8356 usecs
+[    6.182449] calling  0xc0299758 @ 1
+[    6.199587] initcall 0xc0299758 returned 0 after 5966 usecs
+[    6.216787] calling  0xc029986c @ 1
+[    6.236278] initcall 0xc029986c returned 0 after 8281 usecs
+[    6.250727] calling  0xc02998ec @ 1
+[    6.262457] initcall 0xc02998ec returned 0 after 696 usecs
+[    6.279244] calling  0xc0299ad0 @ 1
+[    6.302348] initcall 0xc0299ad0 returned 0 after 11972 usecs
+[    6.319559] calling  0xc0299aec @ 1
+[    6.343069] initcall 0xc0299aec returned 0 after 12322 usecs
+[    6.359837] calling  0xc0299e3c @ 1
+[    6.371891] initcall 0xc0299e3c returned 0 after 687 usecs
+[    6.388582] calling  0xc0299e98 @ 1
+[    6.400351] initcall 0xc0299e98 returned 0 after 733 usecs
+[    6.416752] calling  0xc0299ed8 @ 1
+[    6.428994] initcall 0xc0299ed8 returned 0 after 724 usecs
+[    6.443255] calling  0xc0299f10 @ 1
+[    6.457893] initcall 0xc0299f10 returned 0 after 1368 usecs
+[    6.473325] calling  0xc0299f5c @ 1
+[    6.487941] initcall 0xc0299f5c returned 0 after 742 usecs
+[    6.502246] calling  0xc0299f9c @ 1
+[    6.516265] initcall 0xc0299f9c returned 0 after 2994 usecs
+[    6.531058] calling  0xc0299fe4 @ 1
+[    6.542888] initcall 0xc0299fe4 returned 0 after 743 usecs
+[    6.559572] calling  0xc029a02c @ 1
+[    6.571413] initcall 0xc029a02c returned 0 after 682 usecs
+[    6.588434] calling  0xc029a064 @ 1
+[    6.600176] initcall 0xc029a064 returned 0 after 708 usecs
+[    6.616664] calling  0xc029a0ac @ 1
+[    6.628447] initcall 0xc029a0ac returned 0 after 749 usecs
+[    6.643105] calling  0xc029a0f4 @ 1
+[    6.657073] initcall 0xc029a0f4 returned 0 after 720 usecs
+[    6.671357] calling  0xc029a27c @ 1
+[    6.683173] initcall 0xc029a27c returned 0 after 673 usecs
+[    6.700034] calling  0xc029a2b4 @ 1
+[    6.712441] initcall 0xc029a2b4 returned 0 after 1376 usecs
+[    6.729012] calling  0xc029aed0 @ 1
+[    6.740350] initcall 0xc029aed0 returned 0 after 267 usecs
+[    6.757323] calling  0xc029dd94 @ 1
+[    6.968659] initcall 0xc029dd94 returned 0 after 200134 usecs
+[    6.983653] calling  0xc02a3084 @ 1
+[    6.996948] initcall 0xc02a3084 returned 0 after 88 usecs
+[    7.011191] calling  0xc02a3414 @ 1
+[    7.028883] NET: Registered PF_UNIX/PF_LOCAL protocol family
+[    7.047008] initcall 0xc02a3414 returned 0 after 24674 usecs
+[    7.061462] calling  0xc028bb78 @ 1
+[    7.073764] initcall 0xc028bb78 returned 0 after 1178 usecs
+[    7.108292] calling  0xc028cd8c @ 1
+[    7.119500] initcall 0xc028cd8c returned 0 after 70 usecs
+[    7.133765] calling  0xc028e524 @ 1
+[    7.148064] initcall 0xc028e524 returned 0 after 707 usecs
+[    7.163349] calling  0xc028e560 @ 1
+[    7.176910] initcall 0xc028e560 returned 0 after 70 usecs
+[    7.191012] calling  0xc028e878 @ 1
+[    7.203370] initcall 0xc028e878 returned 0 after 1238 usecs
+[    7.220519] calling  0xc0291390 @ 1
+[    7.231773] initcall 0xc0291390 returned 0 after 107 usecs
+[    7.248219] calling  0xc02916c0 @ 1
+[    7.290594] initcall 0xc02916c0 returned 0 after 31242 usecs
+[    7.307247] calling  0xc0291880 @ 1
+[    7.319410] initcall 0xc0291880 returned 0 after 787 usecs
+[    7.336021] calling  0xc02918cc @ 1
+[    7.357418] initcall 0xc02918cc returned 0 after 10342 usecs
+[    7.372361] calling  0xc0291930 @ 1
+[    7.387589] initcall 0xc0291930 returned 0 after 4164 usecs
+[    7.402034] calling  0xc0291990 @ 1
+[    7.443214] initcall 0xc0291990 returned 0 after 30001 usecs
+[    7.459891] calling  0xc0291a20 @ 1
+[    7.471071] initcall 0xc0291a20 returned 0 after 102 usecs
+[    7.488093] calling  0xc0291e18 @ 1
+[    7.499899] initcall 0xc0291e18 returned 0 after 743 usecs
+[    7.516402] calling  0xc0292094 @ 1
+[    7.570017] ORY_BOOT rootfs begin compressed_bytes=35412992
+[    7.611575] initcall 0xc0292094 returned 0 after 83768 usecs
+[    7.628221] calling  0xc0294b80 @ 1
+[    7.639652] workingset: timestamp_bits=30 max_order=18 bucket_order=0
+[    7.657386] initcall 0xc0294b80 returned 0 after 17731 usecs
+[    7.672266] calling  0xc0294dec @ 1
+[    7.686494] initcall 0xc0294dec returned 0 after 3007 usecs
+[    7.701287] calling  0xc0297ff0 @ 1
+[    7.713202] initcall 0xc0297ff0 returned 0 after 736 usecs
+[    7.730639] calling  0xc02986b8 @ 1
+[    7.746072] initcall 0xc02986b8 returned 0 after 1948 usecs
+[    7.761019] calling  0xc029896c @ 1
+[    7.772891] initcall 0xc029896c returned 0 after 789 usecs
+[    7.789585] calling  0xc0298d58 @ 1
+[    7.800930] initcall 0xc0298d58 returned 0 after 256 usecs
+[    7.817678] calling  0xc0299a6c @ 1
+[    7.830817] initcall 0xc0299a6c returned 0 after 1956 usecs
+[    7.847657] calling  0xc029a494 @ 1
+[    7.858974] initcall 0xc029a494 returned 0 after 306 usecs
+[    7.873496] calling  0xc029a85c @ 1
+[    7.931844] initcall 0xc029a85c returned 0 after 45012 usecs
+[    7.948612] calling  0xc029ad48 @ 1
+[    7.971613] initcall 0xc029ad48 returned 0 after 11964 usecs
+[    7.988587] calling  0xc029b04c @ 1
+[    8.006899] initcall 0xc029b04c returned 0 after 7219 usecs
+[    8.021364] calling  0xc029b370 @ 1
+[    8.036454] initcall 0xc029b370 returned 0 after 1362 usecs
+[    8.051021] calling  0xc029bb00 @ 1
+[    8.062193] io scheduler mq-deadline registered
+[    8.073787] initcall 0xc029bb00 returned 0 after 11612 usecs
+[    8.090643] calling  0xc029bb10 @ 1
+[    8.101771] io scheduler kyber registered
+[    8.112848] initcall 0xc029bb10 returned 0 after 11127 usecs
+[    8.129614] calling  0xc029bb20 @ 1
+[    8.147372] io scheduler bfq registered
+[    8.158191] initcall 0xc029bb20 returned 0 after 17175 usecs
+[    8.172702] calling  0xc029bbcc @ 1
+[    8.186025] initcall 0xc029bbcc returned 0 after 76 usecs
+[    8.200503] calling  0xc029bdcc @ 1
+[    8.226443] initcall 0xc029bdcc returned 0 after 14736 usecs
+[    8.241041] calling  0xc029c8e8 @ 1
+[    8.267250] initcall 0xc029c8e8 returned 0 after 15038 usecs
+[    8.281829] calling  0xc029c8f8 @ 1
+[    8.370295] riscv-plic: interrupt-controller@c000000: mapped 4 interrupts with 1 handlers for 2 contexts.
+[    8.407672] probe of c000000.interrupt-controller returned 0 after 108760 usecs
+[    8.438475] initcall 0xc029c8f8 returned 0 after 145490 usecs
+[    8.456420] calling  0xc029c914 @ 1
+[    8.492732] probe of soc returned 0 after 21695 usecs
+[    8.526180] initcall 0xc029c914 returned 0 after 56291 usecs
+[    8.540988] calling  0xc029ce0c @ 1
+[    8.566881] initcall 0xc029ce0c returned 0 after 14711 usecs
+[    8.581321] calling  0xc029ce64 @ 1
+[    8.607390] initcall 0xc029ce64 returned 0 after 14997 usecs
+[    8.621968] calling  0xc029cebc @ 1
+[    8.648945] initcall 0xc029cebc returned 0 after 15828 usecs
+[    8.666034] calling  0xc029d184 @ 1
+[    8.747063] probe of 10009000.dma-controller returned 0 after 66384 usecs
+[    8.828649] probe of 1000a000.dma-controller returned 0 after 65071 usecs
+[    8.912507] probe of 1000b000.dma-controller returned 0 after 65065 usecs
+[    8.937993] initcall 0xc029d184 returned 0 after 260754 usecs
+[    8.953170] calling  0xc029d2f0 @ 1
+[    8.966526] initcall 0xc029d2f0 returned 0 after 90 usecs
+[    8.980800] calling  0xc029d318 @ 1
+[   10.460646] initcall 0xc029d318 returned 0 after 1468675 usecs
+[   10.477716] calling  0xc029d590 @ 1
+[   10.489885] initcall 0xc029d590 returned 0 after 771 usecs
+[   10.506580] calling  0xc029d600 @ 1
+[   11.018575] printk: legacy console [hvc0] enabled
+[   11.018575] printk: legacy console [hvc0] enabled
+[   11.042535] initcall 0xc029d600 returned 0 after 524768 usecs
+[   11.042535] initcall 0xc029d600 returned 0 after 524768 usecs
+[   11.072220] calling  0xc029e950 @ 1
+[   11.072220] calling  0xc029e950 @ 1
+[   11.109179] initcall 0xc029e950 returned 0 after 16706 usecs
+[   11.109179] initcall 0xc029e950 returned 0 after 16706 usecs
+[   11.138583] calling  0xc029e9d0 @ 1
+[   11.138583] calling  0xc029e9d0 @ 1
+[   11.199233] initcall 0xc029e9d0 returned 0 after 40275 usecs
+[   11.199233] initcall 0xc029e9d0 returned 0 after 40275 usecs
+[   11.228173] calling  0xc029f2c8 @ 1
+[   11.228173] calling  0xc029f2c8 @ 1
+[   11.871339] bosio-kfb 20000000.bosio: BOSIO ABI3: dual projectors + BS25, DMA copy/fill/upload/RGB-user, 16MiB arena
+[   11.871339] bosio-kfb 20000000.bosio: BOSIO ABI3: dual projectors + BS25, DMA copy/fill/upload/RGB-user, 16MiB arena
+[   11.928132] probe of 20000000.bosio returned 0 after 674703 usecs
+[   11.928132] probe of 20000000.bosio returned 0 after 674703 usecs
+[   11.963244] initcall 0xc029f2c8 returned 0 after 714634 usecs
+[   11.963244] initcall 0xc029f2c8 returned 0 after 714634 usecs
+[   11.992925] calling  0xc029f36c @ 1
+[   11.992925] calling  0xc029f36c @ 1
+[   12.017498] initcall 0xc029f36c returned 0 after 3972 usecs
+[   12.017498] initcall 0xc029f36c returned 0 after 3972 usecs
+[   12.046440] calling  0xc029f430 @ 1
+[   12.046440] calling  0xc029f430 @ 1
+[   12.079427] initcall 0xc029f430 returned 0 after 12351 usecs
+[   12.079427] initcall 0xc029f430 returned 0 after 12351 usecs
+[   12.109374] calling  0xc029f440 @ 1
+[   12.109374] calling  0xc029f440 @ 1
+[   12.142408] initcall 0xc029f440 returned 0 after 12362 usecs
+[   12.142408] initcall 0xc029f440 returned 0 after 12362 usecs
+[   12.171377] calling  0xc029f450 @ 1
+[   12.171377] calling  0xc029f450 @ 1
+[   12.216765] initcall 0xc029f450 returned 0 after 24864 usecs
+[   12.216765] initcall 0xc029f450 returned 0 after 24864 usecs
+[   12.243772] calling  0xc029f57c @ 1
+[   12.243772] calling  0xc029f57c @ 1
+[   12.836235] probe of 10008000.mmc returned 0 after 566804 usecs
+[   12.836235] probe of 10008000.mmc returned 0 after 566804 usecs
+[   12.872754] initcall 0xc029f57c returned 0 after 606413 usecs
+[   12.872754] initcall 0xc029f57c returned 0 after 606413 usecs
+[   12.902211] calling  0xc02a2d90 @ 1
+[   12.902211] calling  0xc02a2d90 @ 1
+[   12.927682] initcall 0xc02a2d90 returned 0 after 5330 usecs
+[   12.927682] initcall 0xc02a2d90 returned 0 after 5330 usecs
+[   12.971631] calling  0xc028e568 @ 1
+[   12.971631] calling  0xc028e568 @ 1
+[   12.993306] initcall 0xc028e568 returned 0 after 1069 usecs
+[   12.993306] initcall 0xc028e568 returned 0 after 1069 usecs
+[   13.022043] calling  0xc028e7a4 @ 1
+[   13.022043] calling  0xc028e7a4 @ 1
+[   13.043662] initcall 0xc028e7a4 returned 0 after 1084 usecs
+[   13.043662] initcall 0xc028e7a4 returned 0 after 1084 usecs
+[   13.072641] calling  0xc028f99c @ 1
+[   13.072641] calling  0xc028f99c @ 1
+[   13.370092] initcall 0xc028f99c returned 0 after 276851 usecs
+[   13.370092] initcall 0xc028f99c returned 0 after 276851 usecs
+[   13.400171] calling  0xc028ffd8 @ 1
+[   13.400171] calling  0xc028ffd8 @ 1
+[   13.422627] initcall 0xc028ffd8 returned 0 after 2222 usecs
+[   13.422627] initcall 0xc028ffd8 returned 0 after 2222 usecs
+[   13.451898] calling  0xc0290d78 @ 1
+[   13.451898] calling  0xc0290d78 @ 1
+[   13.472424] initcall 0xc0290d78 returned 0 after 296 usecs
+[   13.472424] initcall 0xc0290d78 returned 0 after 296 usecs
+[   13.500993] calling  0xc0297cf4 @ 1
+[   13.500993] calling  0xc0297cf4 @ 1
+[   15.636415] initcall 0xc0297cf4 returned 0 after 2115000 usecs
+[   15.636415] initcall 0xc0297cf4 returned 0 after 2115000 usecs
+[   15.666551] calling  0xc0297fe8 @ 1
+[   15.666551] calling  0xc0297fe8 @ 1
+[   15.686774] initcall 0xc0297fe8 returned 0 after 70 usecs
+[   15.686774] initcall 0xc0297fe8 returned 0 after 70 usecs
+[   15.712885] calling  0xc02980a8 @ 1
+[   15.712885] calling  0xc02980a8 @ 1
+[   15.733517] initcall 0xc02980a8 returned 0 after 117 usecs
+[   15.733517] initcall 0xc02980a8 returned 0 after 117 usecs
+[   15.762125] calling  0xc029aef4 @ 1
+[   15.762125] calling  0xc029aef4 @ 1
+[   15.783454] initcall 0xc029aef4 returned 0 after 745 usecs
+[   15.783454] initcall 0xc029aef4 returned 0 after 745 usecs
+[   15.812059] calling  0xc029b244 @ 1
+[   15.812059] calling  0xc029b244 @ 1
+[   15.832724] initcall 0xc029b244 returned 0 after 74 usecs
+[   15.832724] initcall 0xc029b244 returned 0 after 74 usecs
+[   15.861071] calling  0xc01c18ec @ 1
+[   15.861071] calling  0xc01c18ec @ 1
+[   15.881655] initcall 0xc01c18ec returned 0 after 128 usecs
+[   15.881655] initcall 0xc01c18ec returned 0 after 128 usecs
+[   15.910111] calling  0xc01c59f8 @ 1
+[   15.910111] calling  0xc01c59f8 @ 1
+[   19.219439] initcall 0xc01c59f8 returned 0 after 3289220 usecs
+[   19.219439] initcall 0xc01c59f8 returned 0 after 3289220 usecs
+[   19.249849] calling  0xc029ff28 @ 1
+[   19.249849] calling  0xc029ff28 @ 1
+[   19.292597] initcall 0xc029ff28 returned 0 after 22627 usecs
+[   19.292597] initcall 0xc029ff28 returned 0 after 22627 usecs
+[   19.321909] calling  0xc022a1f4 @ 1
+[   19.321909] calling  0xc022a1f4 @ 1
+[   19.342274] initcall 0xc022a1f4 returned 0 after 72 usecs
+[   19.342274] initcall 0xc022a1f4 returned 0 after 72 usecs
+[   19.371062] calling  0xc02a2d88 @ 1
+[   19.371062] calling  0xc02a2d88 @ 1
+[   19.391384] initcall 0xc02a2d88 returned 0 after 73 usecs
+[   19.391384] initcall 0xc02a2d88 returned 0 after 73 usecs
+[   19.419513] calling  0xc02a2e80 @ 1
+[   19.419513] calling  0xc02a2e80 @ 1
+[   19.440147] initcall 0xc02a2e80 returned 0 after 71 usecs
+[   19.440147] initcall 0xc02a2e80 returned 0 after 71 usecs
+[   19.468537] calling  0xc029cabc @ 1
+[   19.468537] calling  0xc029cabc @ 1
+[   19.489145] clk: Disabling unused clocks
+[   19.489145] clk: Disabling unused clocks
+[   19.509407] initcall 0xc029cabc returned 0 after 20248 usecs
+[   19.509407] initcall 0xc029cabc returned 0 after 20248 usecs
+[   19.538410] calling  0xc029fd60 @ 1
+[   19.538410] calling  0xc029fd60 @ 1
+[   19.559239] initcall 0xc029fd60 returned 0 after 131 usecs
+[   19.559239] initcall 0xc029fd60 returned 0 after 131 usecs
+[   19.587913] ORY_BOOT wait_for_initramfs enter
+[   19.587913] ORY_BOOT wait_for_initramfs enter
+[   20.139780] mmc0: host does not support reading read-only switch, assuming write-enable
+[   20.139780] mmc0: host does not support reading read-only switch, assuming write-enable
+[   20.239062] mmc0: new SDHC card at address 0001
+[   20.239062] mmc0: new SDHC card at address 0001
+[   20.512298] mmcblk0: mmc0:0001 SD 14.6 GiB
+[   20.512298] mmcblk0: mmc0:0001 SD 14.6 GiB
+[   21.212561]  mmcblk0: p1 p2
+[   21.212561]  mmcblk0: p1 p2
+[   21.439349] probe of mmc0:0001 returned 0 after 1141124 usecs
+[   21.439349] probe of mmc0:0001 returned 0 after 1141124 usecs
+[   56.787153] ORY_BOOT rootfs unpack returned error=none extracted_bytes=0
+[   56.787153] ORY_BOOT rootfs unpack returned error=none extracted_bytes=0
+[   56.827734] ORY_BOOT wait_for_initramfs done
+[   56.827734] ORY_BOOT wait_for_initramfs done
+[   56.848875] ORY_BOOT console_on_rootfs enter
+[   56.848875] ORY_BOOT console_on_rootfs enter
+[   56.886784] ORY_BOOT console_on_rootfs done
+[   56.886784] ORY_BOOT console_on_rootfs done
+[   56.908809] ORY_BOOT kernel_init_freeable done
+[   56.908809] ORY_BOOT kernel_init_freeable done
+[   64.949720] Freeing unused kernel image (initmem) memory: 34712K
+[   64.949720] Freeing unused kernel image (initmem) memory: 34712K
+[   64.978852] Kernel memory protection not selected by kernel config.
+[   64.978852] Kernel memory protection not selected by kernel config.
+[   65.008301] Run /init as init process
+[   65.008301] Run /init as init process
+[   65.028009]   with arguments:
+[   65.028009]   with arguments:
+[   65.043426]     /init
+[   65.043426]     /init
+[   65.059547]   with environment:
+[   65.059547]   with environment:
+[   65.077603]     HOME=/
+[   65.077603]     HOME=/
+[   65.091454]     TERM=linux
+[   65.091454]     TERM=linux
+[   68.900147] EXT4-fs (mmcblk0p2): mounted filesystem ecbb470a-55e7-4bed-be87-b4484297597f r/w with ordered data mode. Quota mode: disabled.
+[   68.900147] EXT4-fs (mmcblk0p2): mounted filesystem ecbb470a-55e7-4bed-be87-b4484297597f r/w with ordered data mode. Quota mode: disabled.
+ORYUKDO: SD ext4 /data mounted
+ORYUKDO BusyBox serial console
+
+
+BusyBox v1.37.0 (2026-11-07 10:24:46 KST) built-in shell (ash)
+Enter 'help' for a list of built-in commands.
+
+oryukdo# uname -r; cat /etc/oryukdo-image; cat /proc/mounts; sha256sum /usr/bin/
+boayo-native; echo DIRTY9_c4808cba_RC:$?
+6.12.0-haebancheon-dirty9
+HAEBANCHEON-BoAYO-dirty-v9 / L1-16K DMA3 / persistent window textures and dirty rectangles / physical verification pending
+rootfs / rootfs rw 0 0
+devtmpfs /dev devtmpfs rw,relatime 0 0
+/dev/mmcblk0p2 /data ext4 rw,relatime 0 0
+proc /proc proc rw,relatime 0 0
+sysfs /sys sysfs rw,relatime 0 0
+sh: sha256sum: not found
+DIRTY9_c4808cba_RC:127
+oryukdo# uname -r; cat /etc/oryukdo-image; cat /proc/mounts; ls -l /usr/bin/boay
+o-native; echo DIRTY9_b01d6180_RC:$?
+6.12.0-haebancheon-dirty9
+HAEBANCHEON-BoAYO-dirty-v9 / L1-16K DMA3 / persistent window textures and dirty rectangles / physical verification pending
+rootfs / rootfs rw 0 0
+devtmpfs /dev devtmpfs rw,relatime 0 0
+/dev/mmcblk0p2 /data ext4 rw,relatime 0 0
+proc /proc proc rw,relatime 0 0
+sysfs /sys sysfs rw,relatime 0 0
+-rwxr-xr-x    1   2059060 /usr/bin/boayo-native
+DIRTY9_b01d6180_RC:0
+oryukdo# boayo-start; echo DIRTY9_c20abb49_RC:$?
+BoAYO C++ service started; initialization continues. boayo-status / boayo-keys / boayo-stop
+{"features":["windows","pointer","input-injection","button-events","scene-stream","spatial-workspace","pointer-capture"],"headless":false,"m":32,"mock_backend":false,"runtime":"C++17","version":2}
+BOAYO_INITTRACE n=1 event=desktop.begin wall_us=26366 cpu_us=8500 value=0
+BOAYO_INITTRACE n=2 event=window.create.begin wall_us=160829 cpu_us=67494 value=0
+DIRTY9_c20abb49_RC:0
+oryukdo# BOAYO_INITTRACE n=3 event=window.create.end wall_us=556859 cpu_us=288447 value=1
+BOAYO_INITTRACE n=4 event=window.configure.begin wall_us=585331 cpu_us=312230 value=0
+BOAYO_INITTRACE n=5 event=window.configure.end wall_us=711000 cpu_us=407872 value=1
+BOAYO_INITTRACE n=6 event=asset.map.begin wall_us=770107 cpu_us=458931 value=0
+BOAYO_INITTRACE n=7 event=asset.loaded wall_us=839205 cpu_us=507298 value=921600
+BOAYO_INITTRACE n=8 event=desktop.end wall_us=897181 cpu_us=549689 value=1
+BOAYO_INITTRACE n=9 event=desktop.scope_exit wall_us=925050 cpu_us=573015 value=0
+BOAYO_FRAME_TRACE n=1 event=frame.begin wall_us=14118 cpu_us=10758 value=0
+BOAYO_FRAME_TRACE n=2 event=plan.load.begin wall_us=82824 cpu_us=65619 value=0
+BOAYO_FRAME_TRACE n=3 event=plan.load.end wall_us=363387 cpu_us=286858 value=1
+BOAYO_FRAME_TRACE n=4 event=ready.prepare.begin wall_us=752024 cpu_us=590889 value=0
+BOAYO_FRAME_TRACE n=5 event=ready.prepare.end wall_us=1143092 cpu_us=887184 value=96
+BOAYO_FRAME_TRACE n=6 event=texture.upload.begin wall_us=1182385 cpu_us=916212 value=230400
+BOAYO_FRAME_TRACE n=7 event=texture.upload.end wall_us=2453172 cpu_us=1804265 value=230400
+BOAYO_FRAME_TRACE n=8 event=projectors.begin wall_us=2487721 cpu_us=1832276 value=96
+BOAYO_FRAME_TRACE n=9 event=projectors.end wall_us=3546815 cpu_us=2554590 value=96
+BOAYO_FRAME_TRACE n=10 event=output.upload.begin wall_us=3574063 cpu_us=2579583 value=0
+BOAYO_FRAME_TRACE n=11 event=output.versions.begin wall_us=3603251 cpu_us=2602047 value=0
+BOAYO_FRAME_TRACE n=12 event=output.versions.end wall_us=3642454 cpu_us=2636523 value=0
+BOAYO_FRAME_TRACE n=13 event=output.publish.begin wall_us=3680915 cpu_us=2663887 value=0
+BOAYO_FRAME_TRACE n=14 event=publish.user_copy_us wall_us=3850581 cpu_us=2790628 value=6468
+BOAYO_FRAME_TRACE n=15 event=publish.validate_us wall_us=3893642 cpu_us=2816864 value=36707
+BOAYO_FRAME_TRACE n=16 event=publish.upload_us wall_us=3927259 cpu_us=2847178 value=51244
+BOAYO_FRAME_TRACE n=17 event=publish.configure_us wall_us=3958322 cpu_us=2870262 value=88
+BOAYO_FRAME_TRACE n=18 event=publish.select_us wall_us=3989055 cpu_us=2893576 value=105
+BOAYO_FRAME_TRACE n=19 event=publish.wait_us wall_us=4028432 cpu_us=2924402 value=30264
+BOAYO_FRAME_TRACE n=20 event=publish.finish_us wall_us=4059844 cpu_us=2947784 value=6463
+BOAYO_FRAME_TRACE n=21 event=output.publish.end wall_us=4101255 cpu_us=2974764 value=0
+BOAYO_FRAME_TRACE n=22 event=output.present.done wall_us=4131954 cpu_us=3001291 value=0
+BOAYO_FRAME_TRACE n=23 event=output.upload.end wall_us=4161874 cpu_us=3026154 value=0
+boayo-statuBOAYO_FRAME_TRACE n=24 event=frame.scope_exit wall_us=4708169 cpu_us=3350115 value=0
+s; echo DIRTY9_87a2cc38_RC:$?
+{
+  "app_error": null,
+  "assets": {
+    "cache_hits": 0,
+    "format": "raw-mapped-00RRGGBB",
+    "loads": 1,
+    "misses": 0,
+    "rejected": 0,
+    "rgb_materializations": 0
+  },
+  "buttons": {
+    "available": false,
+    "last_event_id": 0,
+    "state": 0
+  },
+  "compositor": "cpp-native",
+  "focused_window": 1,
+  "generation": 4,
+  "motion": {
+    "active": false,
+    "next_step": 0,
+    "phase": "idle",
+    "steps": 25,
+    "target_generation": 0,
+    "view": {
+      "pitch": 0.0,
+      "roll": 0.0,
+      "yaw": 0.0
+    },
+    "windows": []
+  },
+  "output": {
+    "abi": 3,
+    "active_bank": 1,
+    "active_base": 3175415808,
+    "antialias": false,
+    "backend": "kfb-linux-frame-atomic-output",
+    "capability": 1146373681,
+    "commits": 2,
+    "dma_copied_words": 0,
+    "max_jobs": 64,
+    "max_scene_words": 1084816,
+    "memory_dma": {
+      "available": true,
+      "copy_bytes": 979072,
+      "copy_ops": 328,
+      "errors": 0,
+      "features": 255,
+      "fill_bytes": 45056,
+      "fill_ops": 44,
+      "quarantined": 0,
+      "timeouts": 0,
+      "upload_bytes": 957408,
+      "upload_ops": 3,
+      "upload_threshold": 4096
+    },
+    "metadata_only": false,
+    "mock_backend": false,
+    "poisoned": 0,
+    "publish_profile": {
+      "backend": "kernel",
+      "command": 1,
+      "configure_us": 88,
+      "finish_us": 6463,
+      "select_us": 105,
+      "upload_ranges": 1,
+      "upload_us": 51244,
+      "uploaded_words": 4476,
+      "user_copy_us": 6468,
+      "validate_us": 36707,
+      "wait_us": 30264
+    },
+    "sensor_available": false,
+    "shadow_copied_words": 0,
+    "signature": 1112748597,
+    "status": 15138819,
+    "uploaded_words": 8952
+  },
+  "performance": {
+    "frame_limit": 2.0,
+    "full_update_count": 1,
+    "last_compose_ms": 4633.225660000008,
+    "last_upload_ms": 0.0,
+    "no_op_update_count": 0,
+    "patch_update_count": 1,
+    "render_count": 1,
+    "rendered_generation": 4,
+    "update_words": 4480,
+    "uptime_seconds": 7.531060839999995
+  },
+  "pointer": {
+    "azimuth": 0.0,
+    "buttons": [],
+    "cancel_serial": 0,
+    "captured_window": null,
+    "dragging": false,
+    "elevation": 0.0,
+    "last_left_press": null,
+    "last_left_release": null,
+    "left_press_serial": 0,
+    "left_release_serial": 0,
+    "scroll_delta": 0.0,
+    "scroll_serial": 0,
+    "visible": false,
+    "window_id": 1,
+    "zone": "content"
+  },
+  "projection": {
+    "cpu_output_shadow_words": 4480,
+    "cpu_result_download_words": 0,
+    "cpu_scene_words": 0,
+    "device_ready_frames": 1,
+    "dirty_tiles": 160,
+    "fallback_frames": 0,
+    "geometry_tiles_evaluated_total": 0,
+    "hardware_frames": 1,
+    "jobs_per_core": [
+      48,
+      48
+    ],
+    "lazy_copied_tiles_total": 0,
+    "mask_samples_evaluated_total": 0,
+    "masked_tiles_total": 44,
+    "mode": "ddr-resident-dirty-tiles",
+    "packed_mask_tiles_total": 44,
+    "plan_cache": {
+      "builtin_loads": 1,
+      "hits": 0,
+      "loads": 1,
+      "misses": 0,
+      "payload_scan_bytes": 0,
+      "rejected": 0,
+      "revision": "c830e2bae43593f8c188620447b4ce808ce4894a826a073b44f12b949ad54b7e"
+    },
+    "precomputed_layers_total": 1,
+    "redrawn_tiles": 96,
+    "reused_tiles_total": 0,
+    "solid_tiles_total": 0,
+    "texture_pool": {
+      "capacity_bytes": 4194304,
+      "evictions": 0,
+      "full_uploads": 1,
+      "partial_uploads": 0,
+      "resident_bytes": 921600,
+      "resident_windows": 1,
+      "reuses": 0,
+      "staged_copy_bytes": 0,
+      "upload_bytes": 921600,
+      "upload_calls": 1
+    },
+    "texture_reuses_total": 0,
+    "texture_uploads_total": 1,
+    "tile_fills_total": 44,
+    "total_hw_jobs": 96,
+    "update_kind": "tiles"
+  },
+  "render_error": null,
+  "runtime": "C++17",
+  "scene_owner": null,
+  "service": {
+    "phase": "apps",
+    "queued_requests": 0,
+    "snapshot_age_seconds": 1.979999939999999,
+    "state_is_snapshot": true
+  },
+  "view": {
+    "pitch": 0.0,
+    "roll": 0.0,
+    "yaw": 0.0
+  },
+  "windows": [
+    {
+      "always_on_top": true,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": true,
+      "height_deg": 30.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "boayo-desktop",
+      "roll": 0.0,
+      "shape": [
+        [
+          51.2,
+          36.0,
+          537.6,
+          252.0,
+          18.0
+        ]
+      ],
+      "surface_height": 360,
+      "surface_width": 640,
+      "title": "BoAYO Launcher",
+      "width_deg": 42.0,
+      "window_id": 1,
+      "workspace": {},
+      "z": 0
+    }
+  ]
+}
+DIRTY9_87a2cc38_RC:0
+oryukdo# boayo-native app telemetry; echo DIRTY9_eee4463b_RC:$?
+sh: boayo-native: not found
+DIRTY9_eee4463b_RC:127
+oryukdo# /usr/bin/boayo-native app telemetry; echo DIRTY9_5987dbb4_RC:$?
+BOAYO_APP_READY window=2
+DIRTY9_5987dbb4_RC:0
+oryukdo# boayo-status; echo DIRTY9_47ca5234_RC:$?
+{
+  "app_error": null,
+  "assets": {
+    "cache_hits": 5,
+    "format": "raw-mapped-00RRGGBB",
+    "loads": 11,
+    "misses": 0,
+    "rejected": 0,
+    "rgb_materializations": 0
+  },
+  "buttons": {
+    "available": false,
+    "last_event_id": 0,
+    "state": 0
+  },
+  "compositor": "cpp-native",
+  "focused_window": 2,
+  "generation": 19,
+  "motion": {
+    "active": false,
+    "next_step": 0,
+    "phase": "idle",
+    "steps": 25,
+    "target_generation": 0,
+    "view": {
+      "pitch": 0.0,
+      "roll": 0.0,
+      "yaw": 0.0
+    },
+    "windows": []
+  },
+  "output": {
+    "abi": 3,
+    "active_bank": 0,
+    "active_base": 3170959360,
+    "antialias": false,
+    "backend": "kfb-linux-frame-atomic-output",
+    "capability": 1146373681,
+    "commits": 5,
+    "dma_copied_words": 17920,
+    "max_jobs": 64,
+    "max_scene_words": 1084816,
+    "memory_dma": {
+      "available": true,
+      "copy_bytes": 1709736,
+      "copy_ops": 1285,
+      "errors": 0,
+      "features": 255,
+      "fill_bytes": 113664,
+      "fill_ops": 111,
+      "quarantined": 0,
+      "timeouts": 0,
+      "upload_bytes": 1581408,
+      "upload_ops": 13,
+      "upload_threshold": 4096
+    },
+    "metadata_only": false,
+    "mock_backend": false,
+    "poisoned": 0,
+    "publish_profile": {
+      "backend": "kernel",
+      "command": 2,
+      "configure_us": 87,
+      "finish_us": 6393,
+      "select_us": 152191,
+      "upload_ranges": 0,
+      "upload_us": 49337,
+      "uploaded_words": 0,
+      "user_copy_us": 9686,
+      "validate_us": 37141,
+      "wait_us": 8628
+    },
+    "sensor_available": false,
+    "shadow_copied_words": 0,
+    "signature": 1112748597,
+    "status": 177602563,
+    "uploaded_words": 9066
+  },
+  "performance": {
+    "frame_limit": 2.0,
+    "full_update_count": 1,
+    "last_compose_ms": 1611.3362600000016,
+    "last_upload_ms": 0.0,
+    "no_op_update_count": 0,
+    "patch_update_count": 4,
+    "render_count": 4,
+    "rendered_generation": 19,
+    "update_words": 4480,
+    "uptime_seconds": 90.09448768
+  },
+  "pointer": {
+    "azimuth": 0.0,
+    "buttons": [],
+    "cancel_serial": 0,
+    "captured_window": null,
+    "dragging": false,
+    "elevation": 0.0,
+    "last_left_press": null,
+    "last_left_release": null,
+    "left_press_serial": 0,
+    "left_release_serial": 0,
+    "scroll_delta": 0.0,
+    "scroll_serial": 0,
+    "visible": false,
+    "window_id": 2,
+    "zone": "content"
+  },
+  "projection": {
+    "cpu_output_shadow_words": 4480,
+    "cpu_result_download_words": 0,
+    "cpu_scene_words": 0,
+    "device_ready_frames": 1,
+    "dirty_tiles": 28,
+    "fallback_frames": 0,
+    "geometry_tiles_evaluated_total": 0,
+    "hardware_frames": 4,
+    "jobs_per_core": [
+      16,
+      16
+    ],
+    "lazy_copied_tiles_total": 70,
+    "mask_samples_evaluated_total": 0,
+    "masked_tiles_total": 133,
+    "mode": "ddr-resident-dirty-tiles",
+    "packed_mask_tiles_total": 133,
+    "plan_cache": {
+      "builtin_loads": 5,
+      "hits": 0,
+      "loads": 5,
+      "misses": 0,
+      "payload_scan_bytes": 0,
+      "rejected": 0,
+      "revision": "c830e2bae43593f8c188620447b4ce808ce4894a826a073b44f12b949ad54b7e"
+    },
+    "precomputed_layers_total": 5,
+    "redrawn_tiles": 28,
+    "reused_tiles_total": 0,
+    "solid_tiles_total": 0,
+    "texture_pool": {
+      "capacity_bytes": 4194304,
+      "evictions": 0,
+      "full_uploads": 5,
+      "partial_uploads": 2,
+      "resident_bytes": 1430400,
+      "resident_windows": 5,
+      "reuses": 2,
+      "staged_copy_bytes": 0,
+      "upload_bytes": 1545600,
+      "upload_calls": 11
+    },
+    "texture_reuses_total": 2,
+    "texture_uploads_total": 7,
+    "tile_fills_total": 111,
+    "total_hw_jobs": 272,
+    "update_kind": "tiles"
+  },
+  "render_error": null,
+  "runtime": "C++17",
+  "scene_owner": null,
+  "service": {
+    "phase": "apps",
+    "queued_requests": 0,
+    "snapshot_age_seconds": 1.3874060800000052,
+    "state_is_snapshot": true
+  },
+  "view": {
+    "pitch": 0.0,
+    "roll": 0.0,
+    "yaw": 0.0
+  },
+  "windows": [
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": true,
+      "height_deg": 26.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          14.0
+        ]
+      ],
+      "surface_height": 300,
+      "surface_width": 400,
+      "title": "Telemetry",
+      "width_deg": 36.0,
+      "window_id": 2,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 0
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 30.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "boayo-desktop",
+      "roll": 0.0,
+      "shape": [
+        [
+          51.2,
+          36.0,
+          537.6,
+          252.0,
+          18.0
+        ]
+      ],
+      "surface_height": 360,
+      "surface_width": 640,
+      "title": "BoAYO Launcher",
+      "width_deg": 42.0,
+      "window_id": 1,
+      "workspace": {},
+      "z": 1
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -16.47105751657935,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: Telemetry",
+      "width_deg": 2.88,
+      "window_id": 3,
+      "workspace": {
+        "control": "move",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 2
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": -10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 4,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 3
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": 10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": -3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 5,
+      "workspace": {
+        "control": "close",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 4
+    }
+  ]
+}
+DIRTY9_47ca5234_RC:0
+oryukdo# stty -echo; cp /bin/ddrcheck /tmp/view-rx && : > /tmp/view-rx; echo; ec
+ho BODMA_4e69020e_RC:$?
+
+BODMA_4e69020e_RC:0
+oryukdo# 
+BODMA_60d58400_RC:0
+oryukdo# 
+BODMA_6a8d3dc2_RC:0
+oryukdo# 
+BODMA_b47c9d07_RC:0
+oryukdo# 
+BODMA_9e3d6445_RC:0
+oryukdo# 
+BODMA_8b3a8f70_RC:0
+oryukdo# 
+BODMA_9a061968_RC:0
+oryukdo# 
+BODMA_f401c90d_RC:0
+oryukdo# 
+BODMA_10365ae5_RC:0
+oryukdo# 
+BODMA_131d762d_RC:0
+oryukdo# 
+BODMA_166fcebc_RC:0
+oryukdo# 
+BODMA_d14fcabd_RC:0
+oryukdo# 
+BODMA_406207d8_RC:0
+oryukdo# 
+BODMA_805c3722_RC:0
+oryukdo# 
+BODMA_2d540497_RC:0
+oryukdo# 
+BODMA_5b22fa67_RC:0
+oryukdo# 
+BODMA_acf68275_RC:0
+oryukdo# 
+BODMA_a0a9eaea_RC:0
+oryukdo# 
+BODMA_3cd816ef_RC:0
+oryukdo# 
+BODMA_404f184a_RC:0
+oryukdo# 
+BODMA_b3193979_RC:0
+oryukdo# 
+BODMA_0c29993f_RC:0
+oryukdo# 
+BODMA_12c92856_RC:0
+oryukdo# 
+BODMA_d02f6c6f_RC:0
+oryukdo# 
+BODMA_13eb4bc9_RC:0
+oryukdo# 
+BODMA_03b5d52a_RC:0
+oryukdo# 
+BODMA_5b9dcd11_RC:0
+oryukdo# 
+BODMA_9f452dd0_RC:0
+oryukdo# 
+BODMA_e7a8ec2f_RC:0
+oryukdo# 
+BODMA_191dabd3_RC:0
+oryukdo# 
+BODMA_c226c812_RC:0
+oryukdo# 
+BODMA_61c47adb_RC:0
+oryukdo# 
+BODMA_396b0c6c_RC:0
+oryukdo# 
+BODMA_551143f5_RC:0
+oryukdo# 
+BODMA_d3a2fc58_RC:0
+oryukdo# 
+BODMA_00ae3e39_RC:0
+oryukdo# 
+BODMA_9f634fef_RC:0
+oryukdo# 
+BODMA_172fd5d7_RC:0
+oryukdo# 
+BODMA_30749c0c_RC:0
+oryukdo# 
+BODMA_c25a0736_RC:0
+oryukdo# 
+BODMA_e970134c_RC:0
+oryukdo# 
+BODMA_8897549b_RC:0
+oryukdo# 
+BODMA_b0f8ce95_RC:0
+oryukdo# /tmp/view-rx /tmp/d9-peek; echo RX_EXIT:$?
+RX_READY
+RX_ACK 00000100 de78ecbf
+RX_ACK 00000200 26829ac1
+RX_ACK 00000300 005c2882
+RX_ACK 00000400 19763f1c
+RX_ACK 00000500 31873b84
+RX_ACK 00000600 06850c80
+RX_ACK 00000700 fa2cfc65
+RX_ACK 00000800 55a05414
+RX_ACK 00000900 3679def0
+RX_ACK 00000a00 d9c36ecd
+RX_ACK 00000b00 93538cb9
+RX_ACK 00000c00 ff76f5ed
+RX_ACK 00000d00 267c1bd9
+RX_ACK 00000d38 1ab02663
+RX_DONE
+RX_EXIT:0
+oryukdo# /tmp/d9-peek 12; echo DIRTY9_635090de_RC:$?
+BENCH_SAMPLE {"compose_ms":2569.6710999999937,"renders":28,"uptime":226.12540098,"generation":43,"commits":29,"dma_errors":0,"dma_upload_bytes":2480608,"pool_upload_bytes":2444800,"partial_uploads":26,"full_uploads":5,"phase":"apps","snapshot_age":3.340305839999985,"render_error":null,"app_error":null}
+BENCH_SAMPLE {"compose_ms":2569.6710999999937,"renders":28,"uptime":226.12540098,"generation":43,"commits":29,"dma_errors":0,"dma_upload_bytes":2480608,"pool_upload_bytes":2444800,"partial_uploads":26,"full_uploads":5,"phase":"composing","snapshot_age":7.6346143600000005,"render_error":null,"app_error":null}
+BENCH_SAMPLE {"compose_ms":2472.753339999997,"renders":29,"uptime":236.21217156,"generation":44,"commits":30,"dma_errors":0,"dma_upload_bytes":2519008,"pool_upload_bytes":2483200,"partial_uploads":27,"full_uploads":5,"phase":"apps","snapshot_age":1.9769935399999667,"render_error":null,"app_error":null}
+BENCH_SAMPLE {"compose_ms":2354.0392399999632,"renders":30,"uptime":241.96363716000002,"generation":45,"commits":31,"dma_errors":0,"dma_upload_bytes":2557408,"pool_upload_bytes":2521600,"partial_uploads":28,"full_uploads":5,"phase":"command","snapshot_age":0.4209726799999771,"render_error":null,"app_error":null}
+BENCH_SAMPLE {"compose_ms":2354.0392399999632,"renders":30,"uptime":244.97330172,"generation":45,"commits":31,"dma_errors":0,"dma_upload_bytes":2557408,"pool_upload_bytes":2521600,"partial_uploads":28,"full_uploads":5,"phase":"apps","snapshot_age":1.5099883800000384,"render_error":null,"app_error":null}
+BENCH_SAMPLE {"compose_ms":2354.0392399999632,"renders":30,"uptime":244.97330172,"generation":45,"commits":31,"dma_errors":0,"dma_upload_bytes":2557408,"pool_upload_bytes":2521600,"partial_uploads":28,"full_uploads":5,"phase":"composing","snapshot_age":5.587553040000046,"render_error":null,"app_error":null}
+BENCH_SAMPLE {"compose_ms":2179.81481999999,"renders":31,"uptime":253.73129188000001,"generation":46,"commits":32,"dma_errors":0,"dma_upload_bytes":2595808,"pool_upload_bytes":2560000,"partial_uploads":29,"full_uploads":5,"phase":"apps","snapshot_age":0.9508372999999892,"render_error":null,"app_error":null}
+BENCH_SAMPLE {"compose_ms":2179.81481999999,"renders":31,"uptime":253.73129188000001,"generation":46,"commits":32,"dma_errors":0,"dma_upload_bytes":2595808,"pool_upload_bytes":2560000,"partial_uploads":29,"full_uploads":5,"phase":"composing","snapshot_age":5.1457110599999965,"render_error":null,"app_error":null}
+BENCH_SAMPLE {"compose_ms":1661.675099999968,"renders":32,"uptime":262.44451848,"generation":47,"commits":33,"dma_errors":0,"dma_upload_bytes":2634208,"pool_upload_bytes":2598400,"partial_uploads":30,"full_uploads":5,"phase":"command","snapshot_age":0.4339204000000336,"render_error":null,"app_error":null}
+BENCH_SAMPLE {"compose_ms":1661.675099999968,"renders":32,"uptime":263.8627367,"generation":47,"commits":33,"dma_errors":0,"dma_upload_bytes":2634208,"pool_upload_bytes":2598400,"partial_uploads":30,"full_uploads":5,"phase":"composing","snapshot_age":2.9914920200000097,"render_error":null,"app_error":null}
+BENCH_SAMPLE {"compose_ms":2659.448820000023,"renders":33,"uptime":271.13977236,"generation":48,"commits":34,"dma_errors":0,"dma_upload_bytes":2672608,"pool_upload_bytes":2636800,"partial_uploads":31,"full_uploads":5,"phase":"command","snapshot_age":0.09862476000000697,"render_error":null,"app_error":null}
+BENCH_SAMPLE {"compose_ms":2659.448820000023,"renders":33,"uptime":272.94601398000003,"generation":48,"commits":34,"dma_errors":0,"dma_upload_bytes":2672608,"pool_upload_bytes":2636800,"partial_uploads":31,"full_uploads":5,"phase":"apps","snapshot_age":2.105389299999956,"render_error":null,"app_error":null}
+DIRTY9_635090de_RC:0
+oryukdo# /tmp/view-rx /tmp/d9-apply; echo RX_EXIT:$?
+RX_READY
+RX_ACK 00000100 1f8d0b02
+RX_ACK 00000200 15d0ae96
+RX_ACK 00000300 0f4eee23
+RX_ACK 00000400 7f9bf71a
+RX_ACK 00000500 307778f2
+RX_ACK 00000600 eaffcb4f
+RX_ACK 00000700 59d48262
+RX_ACK 00000800 1b046406
+RX_ACK 00000900 7647065e
+RX_ACK 00000998 51a2a74d
+RX_DONE
+RX_EXIT:0
+oryukdo# /tmp/view-rx /tmp/d9-baseline.delta; echo RX_EXIT:$?
+RX_READY
+RX_ACK 00000100 b03c9e50
+RX_ACK 00000200 0613226a
+RX_ACK 00000300 31df0c81
+RX_ACK 00000400 371be203
+RX_ACK 00000500 98d67614
+RX_ACK 00000600 7676ef8e
+RX_ACK 00000700 cd969a9e
+RX_ACK 00000800 b253287b
+RX_ACK 00000900 e1298a28
+RX_ACK 00000a00 1b058e4b
+RX_ACK 00000b00 cfb9cbb1
+RX_ACK 00000c00 ed92bfb0
+RX_ACK 00000d00 014c584e
+RX_ACK 00000e00 438b32ac
+RX_ACK 00000f00 7f27d0a2
+RX_ACK 00001000 0451ef42
+RX_ACK 00001100 a30df026
+RX_ACK 00001200 76e1f222
+RX_ACK 00001300 6d4db4dd
+RX_ACK 00001400 1e6e88a4
+RX_ACK 00001500 efd2e1de
+RX_ACK 00001600 9f6404a1
+RX_ACK 00001700 1666cb71
+RX_ACK 00001800 dec8dfed
+RX_ACK 00001900 c4dfe4e3
+RX_ACK 00001a00 42c3d0d6
+RX_ACK 00001b00 0cebf54e
+RX_ACK 00001c00 51655838
+RX_ACK 00001d00 4f05c017
+RX_ACK 00001e00 77446fee
+RX_ACK 00001f00 d4113184
+RX_ACK 00002000 e73182eb
+RX_ACK 00002100 d7ad73cc
+RX_ACK 00002200 42776a12
+RX_ACK 00002300 2ed1b5d4
+RX_ACK 00002400 82ae741a
+RX_ACK 00002500 6ef07c1b
+RX_ACK 00002600 1ce3789a
+RX_ACK 00002700 677f3cc1
+RX_ACK 00002800 9e0ab388
+RX_ACK 00002900 710266c2
+RX_ACK 00002a00 e74de47e
+RX_ACK 00002b00 20cab492
+RX_ACK 00002c00 234240e3
+RX_ACK 00002d00 ba33bead
+RX_ACK 00002e00 0129f5a1
+RX_ACK 00002f00 8b52d842
+RX_ACK 00003000 bb1efa4c
+RX_ACK 00003100 89ab5884
+RX_ACK 00003200 36f3810e
+RX_ACK 00003300 72105b95
+RX_ACK 00003400 2ded3b49
+RX_ACK 00003500 436330ed
+RX_ACK 00003600 b81a04fa
+RX_ACK 00003700 83753e27
+RX_ACK 00003800 d547b2fe
+RX_ACK 00003900 99084437
+RX_ACK 00003a00 e85909e4
+RX_ACK 00003b00 77011c21
+RX_ACK 00003c00 1ede0d90
+RX_ACK 00003d00 393840b9
+RX_ACK 00003e00 305f15fe
+RX_ACK 00003f00 d973413f
+RX_ACK 00004000 3c0c91cb
+RX_ACK 00004100 1732d46e
+RX_ACK 00004200 5a2858e5
+RX_ACK 00004300 ae5e6c1b
+RX_ACK 00004400 b8a33f9e
+RX_ACK 00004500 056aa962
+RX_ACK 00004600 66b036e3
+RX_ACK 00004700 40610373
+RX_ACK 00004800 ee2b3407
+RX_ACK 00004900 38b6b384
+RX_ACK 00004a00 def65896
+RX_ACK 00004b00 aca70a4f
+RX_ACK 00004c00 254f4495
+RX_ACK 00004d00 3e2e3e04
+RX_ACK 00004e00 8312d93f
+RX_ACK 00004f00 8b7579db
+RX_ACK 00005000 d011d4ff
+RX_ACK 00005100 30d43733
+RX_ACK 00005200 074bdd76
+RX_ACK 00005300 83b0ce3d
+RX_ACK 00005400 14dd1781
+RX_ACK 00005500 c8ce21c3
+RX_ACK 00005600 845db2c4
+RX_ACK 00005700 6772d963
+RX_ACK 00005800 4921a53c
+RX_ACK 00005900 04ee03af
+RX_ACK 00005a00 69c92e39
+RX_ACK 00005b00 343093b1
+RX_ACK 00005c00 d171a110
+RX_ACK 00005d00 406b5879
+RX_ACK 00005e00 0b7359b0
+RX_ACK 00005f00 8a6494fa
+RX_ACK 00006000 5594195a
+RX_ACK 00006100 d28e8a6a
+RX_ACK 00006200 b2db4226
+RX_ACK 00006300 2299d860
+RX_ACK 00006400 40ed2a06
+RX_ACK 00006500 29ce2e76
+RX_ACK 00006600 309acd8d
+RX_ACK 00006700 82d183b0
+RX_ACK 00006800 96275c67
+RX_ACK 00006900 30ce3a2a
+RX_ACK 00006a00 5ef97f15
+RX_ACK 00006b00 cf97b226
+RX_ACK 00006c00 3691f484
+RX_ACK 00006d00 72b5c161
+RX_ACK 00006e00 c33a4a6d
+RX_ACK 00006f00 39ecd308
+RX_ACK 00007000 00d988bb
+RX_ACK 00007100 00932a41
+RX_ACK 00007200 07164a12
+RX_ACK 00007300 1b09f369
+RX_ACK 00007400 2dcd6921
+RX_ACK 00007500 0d659e16
+RX_ACK 00007600 919b3282
+RX_ACK 00007700 797140a5
+RX_ACK 00007800 7ff5a9fe
+RX_ACK 00007900 e119cee0
+RX_ACK 00007a00 be160bca
+RX_ACK 00007b00 882ddd7c
+RX_ACK 00007c00 d63ad080
+RX_ACK 00007d00 428a1aeb
+RX_ACK 00007e00 9ca92b64
+RX_ACK 00007f00 b5290612
+RX_ACK 00008000 0f44aa97
+RX_ACK 00008100 73d7c041
+RX_ACK 00008200 4628bc17
+RX_ACK 00008300 6d688d87
+RX_ACK 00008400 e1a37b47
+RX_ACK 00008500 ccb32163
+RX_ACK 00008600 981a6223
+RX_ACK 00008700 54701aa2
+RX_ACK 00008800 dd05fa4e
+RX_ACK 00008900 db85d44a
+RX_ACK 00008a00 63c5b611
+RX_ACK 00008b00 36581048
+RX_ACK 00008c00 4cc90887
+RX_ACK 00008d00 86d1875f
+RX_ACK 00008e00 43a4fbbe
+RX_ACK 00008f00 2b2cac13
+RX_ACK 00009000 3e2d0086
+RX_ACK 00009100 42d878b1
+RX_ACK 00009200 70e6a722
+RX_ACK 00009300 6cc7aa30
+RX_ACK 00009400 baacf187
+RX_ACK 00009500 15d72c1f
+RX_ACK 00009600 5a87f3d9
+RX_ACK 00009700 b7ad873a
+RX_ACK 00009800 0a9de078
+RX_ACK 00009900 71f49f95
+RX_ACK 00009a00 09fb63d9
+RX_ACK 00009b00 e02ebde1
+RX_ACK 00009c00 ab663f5c
+RX_ACK 00009d00 0caebe49
+RX_ACK 00009e00 cece7d70
+RX_ACK 00009f00 1cbc57a4
+RX_ACK 0000a000 09419f01
+RX_ACK 0000a100 b860e42a
+RX_ACK 0000a200 4146d014
+RX_ACK 0000a300 601f03f8
+RX_ACK 0000a400 38d38f5e
+RX_ACK 0000a500 b4979d61
+RX_ACK 0000a600 24a1c3a2
+RX_ACK 0000a700 cfc81769
+RX_ACK 0000a800 779b4555
+RX_ACK 0000a900 8b4632be
+RX_ACK 0000aa00 cdca6a02
+RX_ACK 0000ab00 2ac0e48b
+RX_ACK 0000ac00 64b407ed
+RX_ACK 0000ad00 58304917
+RX_ACK 0000ae00 46694c5f
+RX_ACK 0000af00 f72b6714
+RX_ACK 0000b000 0e43250d
+RX_ACK 0000b100 af5ecb0f
+RX_ACK 0000b200 b83cdfd0
+RX_ACK 0000b300 bb7a9940
+RX_ACK 0000b400 2c432562
+RX_ACK 0000b500 c0ce1a4b
+RX_ACK 0000b600 1a0d68eb
+RX_ACK 0000b700 e97d41f9
+RX_ACK 0000b800 62e36cd8
+RX_ACK 0000b900 c29ed558
+RX_ACK 0000ba00 9411dac2
+RX_ACK 0000bb00 3f4db233
+RX_ACK 0000bc00 d644c90e
+RX_ACK 0000bd00 458ff02f
+RX_ACK 0000be00 36f3357d
+RX_ACK 0000bf00 636ef480
+RX_ACK 0000c000 a1b08f6e
+RX_ACK 0000c100 e1854fe1
+RX_ACK 0000c200 8829b352
+RX_ACK 0000c300 89867eed
+RX_ACK 0000c400 b0a3e2cb
+RX_ACK 0000c500 40e5be63
+RX_ACK 0000c600 904ded01
+RX_ACK 0000c700 ec4958ed
+RX_ACK 0000c800 1182f5cf
+RX_ACK 0000c900 5551be8d
+RX_ACK 0000ca00 3ee6096e
+RX_ACK 0000cb00 10f44f7a
+RX_ACK 0000cc00 87f8666e
+RX_ACK 0000cd00 7fecc1ef
+RX_ACK 0000ce00 7ce8e5be
+RX_ACK 0000cf00 5f1425eb
+RX_ACK 0000d000 c7d2850a
+RX_ACK 0000d100 bb92d5e4
+RX_ACK 0000d200 ebd6dc7c
+RX_ACK 0000d300 c05ef14b
+RX_ACK 0000d400 fc051990
+RX_ACK 0000d500 ddf70e60
+RX_ACK 0000d600 f7d4ef45
+RX_ACK 0000d700 3860f0d9
+RX_ACK 0000d800 c736811f
+RX_ACK 0000d900 1ce14271
+RX_ACK 0000da00 e208f91a
+RX_ACK 0000db00 bee196e6
+RX_ACK 0000dc00 a11a30e5
+RX_ACK 0000dd00 6f1aed4a
+RX_ACK 0000de00 832fb118
+RX_ACK 0000df00 4f266186
+RX_ACK 0000e000 fb3a68ea
+RX_ACK 0000e100 094c53f9
+RX_ACK 0000e200 49ab16b1
+RX_ACK 0000e300 59bfa4da
+RX_ACK 0000e400 cc0a7214
+RX_ACK 0000e500 5784beb6
+RX_ACK 0000e600 1711bf54
+RX_ACK 0000e700 e69c7d37
+RX_ACK 0000e800 feb7bec0
+RX_ACK 0000e900 4c8c0d14
+RX_ACK 0000ea00 805bd957
+RX_ACK 0000eb00 070d8607
+RX_ACK 0000ec00 2b944c2e
+RX_ACK 0000ed00 36327c2d
+RX_ACK 0000ee00 8195a002
+RX_ACK 0000ef00 99496c6c
+RX_ACK 0000f000 cdd1b20b
+RX_ACK 0000f100 934b9579
+RX_ACK 0000f200 11fa9479
+RX_ACK 0000f300 aec6a384
+RX_ACK 0000f400 2dab0ade
+RX_ACK 0000f500 102e5433
+RX_ACK 0000f600 ee4ec907
+RX_ACK 0000f700 ddbfdba6
+RX_ACK 0000f800 b943dcbc
+RX_ACK 0000f900 3bb228d3
+RX_ACK 0000fa00 1b37378c
+RX_ACK 0000fb00 e8d3f689
+RX_ACK 0000fc00 cd4cd8e5
+RX_ACK 0000fd00 3339d7b1
+RX_ACK 0000fe00 61c0a748
+RX_ACK 0000ff00 27d53cdb
+RX_ACK 00010000 41661c62
+RX_ACK 00010100 e8955039
+RX_ACK 00010200 ea0508fe
+RX_ACK 00010300 152234b9
+RX_ACK 00010400 00c0fb5f
+RX_ACK 00010500 38001f36
+RX_ACK 00010600 431e4a76
+RX_ACK 00010700 98794eed
+RX_ACK 00010800 758d34fc
+RX_ACK 00010900 a209eb17
+RX_ACK 00010a00 b3dd70fa
+RX_ACK 00010b00 ed4d35e6
+RX_ACK 00010c00 a716547f
+RX_ACK 00010d00 ffb79298
+RX_ACK 00010e00 8106a1fa
+RX_ACK 00010f00 47bf97e5
+RX_ACK 00011000 2a847014
+RX_ACK 00011100 406103ac
+RX_ACK 00011200 89398067
+RX_ACK 00011300 375147cc
+RX_ACK 00011400 a06e91a8
+RX_ACK 00011500 8440ea66
+RX_ACK 00011600 b35bb0c2
+RX_ACK 00011700 776c043c
+RX_ACK 00011800 d9d8219b
+RX_ACK 00011900 eded1615
+RX_ACK 00011a00 6ba62425
+RX_ACK 00011b00 3ea7fe0d
+RX_ACK 00011c00 71ff65d0
+RX_ACK 00011d00 33fbf105
+RX_ACK 00011e00 3ce0e702
+RX_ACK 00011f00 b87d27ed
+RX_ACK 00012000 74b3dd2d
+RX_ACK 00012100 0a4ce416
+RX_ACK 00012200 c354c63f
+RX_ACK 00012300 fc37a0d3
+RX_ACK 00012400 97dd0b47
+RX_ACK 00012500 2c7d2eaf
+RX_ACK 00012600 2b409a66
+RX_ACK 00012700 0eccad57
+RX_ACK 00012800 dacbc9fa
+RX_ACK 00012900 3a373cf8
+RX_ACK 00012a00 ac3e8d44
+RX_ACK 00012b00 5e90f359
+RX_ACK 00012c00 58975e36
+RX_ACK 00012d00 000438fb
+RX_ACK 00012e00 33fd3519
+RX_ACK 00012f00 27039fb8
+RX_ACK 00013000 2e0a3715
+RX_ACK 00013100 d4a0dfc5
+RX_ACK 00013200 5eab985d
+RX_ACK 00013300 37e24e3e
+RX_ACK 00013400 d071e8e8
+RX_ACK 00013500 d172cc13
+RX_ACK 00013600 6a80ece2
+RX_ACK 00013700 1cdd4093
+RX_ACK 00013800 4c956574
+RX_ACK 00013900 3bbb3360
+RX_ACK 00013a00 3b027328
+RX_ACK 00013b00 e639d6b8
+RX_ACK 00013c00 ca39c168
+RX_ACK 00013d00 1acefb72
+RX_ACK 00013e00 7bb72d73
+RX_ACK 00013f00 c7d65ffc
+RX_ACK 00014000 e73f0c4f
+RX_ACK 00014100 7440b153
+RX_ACK 00014200 62301565
+RX_ACK 00014300 633e7a52
+RX_ACK 00014400 e6315f8d
+RX_ACK 00014500 f584d1bb
+RX_ACK 00014600 7ca1f823
+RX_ACK 00014700 982ecb51
+RX_ACK 00014800 d75d5755
+RX_ACK 00014900 fcc56bf2
+RX_ACK 00014a00 665b01ef
+RX_ACK 00014b00 8ca79f4e
+RX_ACK 00014c00 e7e5f550
+RX_ACK 00014d00 dbccb624
+RX_ACK 00014e00 a1b894f1
+RX_ACK 00014f00 bcb77c33
+RX_ACK 00015000 414e1a81
+RX_ACK 00015100 42778c0c
+RX_ACK 00015200 6c787547
+RX_ACK 00015300 c58d836e
+RX_ACK 00015400 b5d4181a
+RX_ACK 00015500 8de784b2
+RX_ACK 00015600 4f9606e1
+RX_ACK 00015700 df235847
+RX_ACK 00015800 5a055b73
+RX_ACK 00015900 15b20f1f
+RX_ACK 00015a00 da15ba03
+RX_ACK 00015b00 fcf26291
+RX_ACK 00015c00 bc0e5386
+RX_ACK 00015d00 ec763dd1
+RX_ACK 00015e00 cd7fdad7
+RX_ACK 00015f00 edab0a7b
+RX_ACK 00016000 34d74e3f
+RX_ACK 00016100 13197e54
+RX_ACK 00016200 6083b062
+RX_ACK 00016300 77e21c27
+RX_ACK 00016400 e9ab93b0
+RX_ACK 00016500 1293e9d2
+RX_ACK 00016600 dad6408f
+RX_ACK 00016700 7e945e61
+RX_ACK 00016800 b0742b98
+RX_ACK 00016900 9e2e28cc
+RX_ACK 00016a00 5e369616
+RX_ACK 00016b00 2ea5d1c0
+RX_ACK 00016c00 d47020fc
+RX_ACK 00016d00 29a2438d
+RX_ACK 00016e00 c9d366b5
+RX_ACK 00016f00 e8a2d42c
+RX_ACK 00017000 e12d9758
+RX_ACK 00017100 a911f4c3
+RX_ACK 00017200 42fed784
+RX_ACK 00017300 a7f8333d
+RX_ACK 00017400 b9eb9537
+RX_ACK 00017500 24406d88
+RX_ACK 00017600 3e8efda6
+RX_ACK 00017700 da8f282a
+RX_ACK 00017800 29d7499f
+RX_ACK 00017900 ff6fc825
+RX_ACK 00017a00 dc9bf33d
+RX_ACK 00017b00 7f485542
+RX_ACK 00017c00 60659354
+RX_ACK 00017d00 2b781af9
+RX_ACK 00017e00 09760d03
+RX_ACK 00017f00 f6fdf6b9
+RX_ACK 00018000 3a0882c5
+RX_ACK 00018100 0c0a1339
+RX_ACK 00018200 35ecc1a4
+RX_ACK 00018300 45411c8d
+RX_ACK 00018400 a6f98ea0
+RX_ACK 00018500 e6a18617
+RX_ACK 00018600 b30f95f7
+RX_ACK 00018700 c86f94cf
+RX_ACK 00018800 432488ac
+RX_ACK 00018900 ffd1e4a1
+RX_ACK 00018a00 f8cad601
+RX_ACK 00018b00 c1b51d27
+RX_ACK 00018c00 803f7aa5
+RX_ACK 00018d00 a2dde228
+RX_ACK 00018e00 9c0eccb9
+RX_ACK 00018f00 b9b00e38
+RX_ACK 00019000 0110811b
+RX_ACK 00019100 703101eb
+RX_ACK 00019200 3668dec2
+RX_ACK 00019300 c5a2842f
+RX_ACK 00019400 8b6a3a5e
+RX_ACK 00019500 5a758730
+RX_ACK 00019600 6ff7e5d2
+RX_ACK 00019700 a8ee11a5
+RX_ACK 00019800 61427efa
+RX_ACK 00019900 461f30b9
+RX_ACK 00019a00 8441c42f
+RX_ACK 00019b00 4b95d520
+RX_ACK 00019c00 a5fdc91e
+RX_ACK 00019d00 75e13f84
+RX_ACK 00019e00 27eb32e5
+RX_ACK 00019f00 cbc66f27
+RX_ACK 0001a000 f2cf2e6d
+RX_ACK 0001a100 228ab7a6
+RX_ACK 0001a200 0125b2dc
+RX_ACK 0001a300 4d8700a8
+RX_ACK 0001a400 315a565a
+RX_ACK 0001a500 b04b2e00
+RX_ACK 0001a600 59a02442
+RX_ACK 0001a700 af1a9ad0
+RX_ACK 0001a800 d79364e0
+RX_ACK 0001a900 4c81872b
+RX_ACK 0001aa00 bd5cd3bb
+RX_ACK 0001ab00 d7e2ca2d
+RX_ACK 0001ac00 30d6a76b
+RX_ACK 0001ad00 005229de
+RX_ACK 0001ae00 972ef2ab
+RX_ACK 0001af00 56a3d07c
+RX_ACK 0001b000 63505d9b
+RX_ACK 0001b100 77490672
+RX_ACK 0001b200 74ab9b96
+RX_ACK 0001b300 53a0c70a
+RX_ACK 0001b400 405ad674
+RX_ACK 0001b500 3cb898e8
+RX_ACK 0001b600 d82e6650
+RX_ACK 0001b700 a287166c
+RX_ACK 0001b800 6261d017
+RX_ACK 0001b900 bd44a574
+RX_ACK 0001ba00 4eb6903b
+RX_ACK 0001bb00 381ec4ad
+RX_ACK 0001bc00 80dd7757
+RX_ACK 0001bd00 5326ce00
+RX_ACK 0001be00 d541efa1
+RX_ACK 0001bf00 a8f15843
+RX_ACK 0001c000 fa0508c5
+RX_ACK 0001c100 3f0a8138
+RX_ACK 0001c200 4db75aa9
+RX_ACK 0001c300 49d59e4e
+RX_ACK 0001c400 90463df5
+RX_ACK 0001c500 284efe03
+RX_ACK 0001c600 a707c7cc
+RX_ACK 0001c700 338fff5c
+RX_ACK 0001c800 56ba1a5f
+RX_ACK 0001c900 f84750f6
+RX_ACK 0001ca00 0f243cc3
+RX_ACK 0001cb00 606a3113
+RX_ACK 0001cc00 0fad2910
+RX_ACK 0001cd00 d5d25baa
+RX_ACK 0001ce00 0bc9e258
+RX_ACK 0001cf00 c101b6bf
+RX_ACK 0001d000 c7b35dd0
+RX_ACK 0001d100 b028eae5
+RX_ACK 0001d200 9527b9ec
+RX_ACK 0001d300 9ee76c74
+RX_ACK 0001d400 46842335
+RX_ACK 0001d500 6e662a95
+RX_ACK 0001d600 d8786876
+RX_ACK 0001d700 beb57ae2
+RX_ACK 0001d800 e75b1067
+RX_ACK 0001d900 2a19e1fc
+RX_ACK 0001da00 95d1409b
+RX_ACK 0001db00 9d975e24
+RX_ACK 0001dc00 bfee9314
+RX_ACK 0001dd00 0d4a2bc1
+RX_ACK 0001de00 9e290655
+RX_ACK 0001df00 9243bf85
+RX_ACK 0001e000 f5847b4e
+RX_ACK 0001e100 a03db708
+RX_ACK 0001e200 348674a2
+RX_ACK 0001e300 2b2cc9e4
+RX_ACK 0001e400 ed00ba53
+RX_ACK 0001e500 6c9e73a5
+RX_ACK 0001e600 96790615
+RX_ACK 0001e700 05cc9207
+RX_ACK 0001e800 a77f27c8
+RX_ACK 0001e900 0bf08871
+RX_ACK 0001ea00 35274ba9
+RX_ACK 0001eb00 229d9c21
+RX_ACK 0001ec00 fd57a4fc
+RX_ACK 0001ed00 eb1e6426
+RX_ACK 0001ee00 0a259e82
+RX_ACK 0001ef00 dd9d33a4
+RX_ACK 0001f000 1f9119b5
+RX_ACK 0001f100 7d0bb3b7
+RX_ACK 0001f200 ee1dbcf5
+RX_ACK 0001f300 42da5107
+RX_ACK 0001f400 2e3c0ee8
+RX_ACK 0001f500 87d6c129
+RX_ACK 0001f600 22e4e059
+RX_ACK 0001f700 078cacdb
+RX_ACK 0001f800 311e4be0
+RX_ACK 0001f900 eb16c9c3
+RX_ACK 0001fa00 f788f0ca
+RX_ACK 0001fb00 97c796a6
+RX_ACK 0001fc00 03c8004c
+RX_ACK 0001fd00 28f62085
+RX_ACK 0001fe00 5ca5edfc
+RX_ACK 0001ff00 97e51d72
+RX_ACK 00020000 05055a4c
+RX_ACK 00020100 26157811
+RX_ACK 00020200 2f5cd337
+RX_ACK 00020300 bf79d9d6
+RX_ACK 00020400 b8e3159f
+RX_ACK 00020500 b2585dc7
+RX_ACK 00020600 0aa0a75e
+RX_ACK 00020700 387d89f6
+RX_ACK 00020800 6391fe94
+RX_ACK 00020900 c14d871e
+RX_ACK 00020a00 124d47b7
+RX_ACK 00020b00 c64348ff
+RX_ACK 00020c00 17d456f4
+RX_ACK 00020d00 909ce161
+RX_ACK 00020e00 b4a8b342
+RX_ACK 00020f00 8767191e
+RX_ACK 00021000 bcd6a356
+RX_ACK 00021100 0fbbae27
+RX_ACK 00021200 e5dbd01f
+RX_ACK 00021300 ff96f3ec
+RX_ACK 00021400 5d059c4e
+RX_ACK 00021500 b7c9005d
+RX_ACK 00021600 476f04cf
+RX_ACK 00021700 422e38e7
+RX_ACK 00021800 876d507b
+RX_ACK 00021900 5243ec67
+RX_ACK 00021a00 d086519c
+RX_ACK 00021b00 97c4b75f
+RX_ACK 00021c00 4b484b1c
+RX_ACK 00021d00 b2acaa67
+RX_ACK 00021e00 58755a27
+RX_ACK 00021f00 393d3c33
+RX_ACK 00022000 bf1c132b
+RX_ACK 00022100 ece595ef
+RX_ACK 00022200 7782abb6
+RX_ACK 00022300 cee39d64
+RX_ACK 00022400 89292c15
+RX_ACK 00022500 dace5ff1
+RX_ACK 00022600 013b6439
+RX_ACK 00022700 685b4816
+RX_ACK 00022800 51a1d696
+RX_ACK 00022900 f1f62141
+RX_ACK 00022a00 115719ac
+RX_ACK 00022b00 be2097be
+RX_ACK 00022c00 a3bd22af
+RX_ACK 00022d00 4383482f
+RX_ACK 00022e00 d4a45c13
+RX_ACK 00022f00 97727014
+RX_ACK 00023000 4d1db287
+RX_ACK 00023100 61efc3aa
+RX_ACK 00023200 c62bff91
+RX_ACK 00023300 fbe65dab
+RX_ACK 00023400 6ce3317f
+RX_ACK 00023500 dc5046a8
+RX_ACK 00023600 10aec824
+RX_ACK 00023700 2c591173
+RX_ACK 00023800 d9b37499
+RX_ACK 00023900 226940c3
+RX_ACK 00023a00 b529817e
+RX_ACK 00023b00 ff230c01
+RX_ACK 00023c00 5a8ba6af
+RX_ACK 00023d00 31d306b3
+RX_ACK 00023e00 06659f1f
+RX_ACK 00023f00 af4a71d9
+RX_ACK 00024000 438bae4f
+RX_ACK 00024100 79d9fb54
+RX_ACK 00024200 ecbcfed2
+RX_ACK 00024300 edf2445a
+RX_ACK 00024400 9c0f2c8f
+RX_ACK 00024500 b7bf33d5
+RX_ACK 00024600 27544a63
+RX_ACK 00024700 dcf296e2
+RX_ACK 00024800 5d063a88
+RX_ACK 00024900 c64766be
+RX_ACK 00024a00 2bc30c7f
+RX_ACK 00024b00 5473ae79
+RX_ACK 00024c00 2101e5ce
+RX_ACK 00024d00 7e1f4eba
+RX_ACK 00024e00 f4d92ceb
+RX_ACK 00024f00 17d8c09e
+RX_ACK 00025000 26992644
+RX_ACK 00025100 85112148
+RX_ACK 00025200 1cd98940
+RX_ACK 00025300 8d8ead63
+RX_ACK 00025400 a30b5bbd
+RX_ACK 00025500 ab96268d
+RX_ACK 00025600 e5fa619e
+RX_ACK 00025700 617f69b9
+RX_ACK 00025800 8a308569
+RX_ACK 00025900 0b59f358
+RX_ACK 00025a00 450167fe
+RX_ACK 00025b00 7271669d
+RX_ACK 00025c00 fbd9451b
+RX_ACK 00025d00 8d941852
+RX_ACK 00025e00 f2c8bc3d
+RX_ACK 00025f00 b38c448a
+RX_ACK 00026000 c87fefe1
+RX_ACK 00026100 aba54142
+RX_ACK 00026200 eff1d622
+RX_ACK 00026300 c19cfa08
+RX_ACK 00026400 8eb44c85
+RX_ACK 00026500 3f406f4d
+RX_ACK 00026600 d0299dda
+RX_ACK 00026700 92c77fd3
+RX_ACK 00026800 c1501304
+RX_ACK 00026900 b0a0ee61
+RX_ACK 00026a00 aa2fbf43
+RX_ACK 00026b00 a2ddbbbc
+RX_ACK 00026c00 717c0e77
+RX_ACK 00026d00 f7417833
+RX_ACK 00026e00 f1542615
+RX_ACK 00026f00 3b97b81e
+RX_ACK 00027000 91c448d8
+RX_ACK 00027100 44a36c1f
+RX_ACK 00027200 7be0f096
+RX_ACK 00027300 51f689a8
+RX_ACK 00027400 c815442c
+RX_ACK 00027500 b2345f4a
+RX_ACK 00027600 c1186055
+RX_ACK 00027700 d8963e77
+RX_ACK 00027800 1f8c9008
+RX_ACK 00027900 3f491d12
+RX_ACK 00027a00 2b41f437
+RX_ACK 00027b00 e6901f48
+RX_ACK 00027c00 15618ddc
+RX_ACK 00027d00 599a0db5
+RX_ACK 00027e00 0c1f8c34
+RX_ACK 00027f00 3e43aecc
+RX_ACK 00028000 4c280cac
+RX_ACK 00028100 892b02f3
+RX_ACK 00028200 c8d2e231
+RX_ACK 00028300 a0af0db4
+RX_ACK 00028400 666e743f
+RX_ACK 00028500 4c77afb9
+RX_ACK 00028600 626afe7b
+RX_ACK 00028700 9d62694a
+RX_ACK 00028800 60841dcb
+RX_ACK 00028900 a64b72fd
+RX_ACK 00028a00 34f41884
+RX_ACK 00028b00 39f0184e
+RX_ACK 00028c00 e288cd96
+RX_ACK 00028d00 476bf463
+RX_ACK 00028e00 f23d10b6
+RX_ACK 00028f00 a3412150
+RX_ACK 00029000 d32c5bf9
+RX_ACK 00029100 d89f6506
+RX_ACK 00029200 f1aed438
+RX_ACK 00029300 8cbc3841
+RX_ACK 00029400 2aed442e
+RX_ACK 00029500 e8d26a86
+RX_ACK 00029600 41ba51e0
+RX_ACK 00029700 4b3ae7fa
+RX_ACK 00029800 9ac64dcc
+RX_ACK 00029900 2a9abb49
+RX_ACK 00029a00 75c1baa5
+RX_ACK 00029b00 76b8b1e5
+RX_ACK 00029c00 8c1c962f
+RX_ACK 00029d00 5838ab6f
+RX_ACK 00029e00 4555bf98
+RX_ACK 00029f00 ba3b64ff
+RX_ACK 0002a000 7970dda0
+RX_ACK 0002a100 9637a8cc
+RX_ACK 0002a200 901a2d99
+RX_ACK 0002a300 360a8af0
+RX_ACK 0002a400 180f56d3
+RX_ACK 0002a500 0e1b3a0c
+RX_ACK 0002a600 f42c55bc
+RX_ACK 0002a700 b3f3b28b
+RX_ACK 0002a800 156519a5
+RX_ACK 0002a900 cb4438be
+RX_ACK 0002aa00 8b116e61
+RX_ACK 0002ab00 5a7e8667
+RX_ACK 0002ac00 11ae4d0f
+RX_ACK 0002ad00 5053a5ca
+RX_ACK 0002ae00 3ecc056d
+RX_ACK 0002af00 24a10842
+RX_ACK 0002b000 7badfabb
+RX_ACK 0002b100 2749a353
+RX_ACK 0002b200 1f23662e
+RX_ACK 0002b300 b93f9fe1
+RX_ACK 0002b400 0bcd73b8
+RX_ACK 0002b500 68b5e689
+RX_ACK 0002b600 7997080b
+RX_ACK 0002b700 5a1ca7d2
+RX_ACK 0002b800 df4b1dae
+RX_ACK 0002b900 bb3bb902
+RX_ACK 0002ba00 f6e88af2
+RX_ACK 0002bb00 95bf45a4
+RX_ACK 0002bc00 ee5d3703
+RX_ACK 0002bd00 bb873165
+RX_ACK 0002be00 e01496fd
+RX_ACK 0002bf00 f590d6bd
+RX_ACK 0002c000 4fbd1141
+RX_ACK 0002c100 a5640850
+RX_ACK 0002c200 8e1efdeb
+RX_ACK 0002c300 244e0622
+RX_ACK 0002c400 ca5bf573
+RX_ACK 0002c500 d675aa4b
+RX_ACK 0002c600 49c84333
+RX_ACK 0002c700 dfcc0314
+RX_ACK 0002c800 ef439c38
+RX_ACK 0002c900 cdadc94c
+RX_ACK 0002ca00 efd86d69
+RX_ACK 0002cb00 a9d183ba
+RX_ACK 0002cc00 47ac0aba
+RX_ACK 0002cd00 450291ba
+RX_ACK 0002ce00 11d518ba
+RX_ACK 0002cf00 61b55475
+RX_ACK 0002d000 7a005bb2
+RX_ACK 0002d100 070e7384
+RX_ACK 0002d200 ccb416d9
+RX_ACK 0002d300 879962dc
+RX_ACK 0002d400 1e505e3a
+RX_ACK 0002d500 3ae992b9
+RX_ACK 0002d600 c6382216
+RX_ACK 0002d700 fb7a01bf
+RX_ACK 0002d800 ea957194
+RX_ACK 0002d900 9b9feb42
+RX_ACK 0002da00 fe5955a9
+RX_ACK 0002db00 9a5b7ba2
+RX_ACK 0002dc00 b6d8357d
+RX_ACK 0002dd00 4ded70ff
+RX_ACK 0002de00 bf9abd95
+RX_ACK 0002df00 606a9813
+RX_ACK 0002e000 c25dd2ab
+RX_ACK 0002e100 2a817770
+RX_ACK 0002e200 377b834b
+RX_ACK 0002e300 1d999cc0
+RX_ACK 0002e400 5c8ef210
+RX_ACK 0002e500 379a0aab
+RX_ACK 0002e600 9c2166fc
+RX_ACK 0002e700 01b0b95e
+RX_ACK 0002e800 807f3a2b
+RX_ACK 0002e900 0d99154f
+RX_ACK 0002ea00 742416bb
+RX_ACK 0002eb00 77b498d1
+RX_ACK 0002ec00 7e2a4cde
+RX_ACK 0002ed00 aa7ab44f
+RX_ACK 0002ee00 ae8de0bb
+RX_ACK 0002ef00 91facc78
+RX_ACK 0002f000 033ea518
+RX_ACK 0002f100 8f38ff95
+RX_ACK 0002f200 4c4ac894
+RX_ACK 0002f300 49036014
+RX_ACK 0002f400 426ecce4
+RX_ACK 0002f500 eec0f9b6
+RX_ACK 0002f600 b48103f0
+RX_ACK 0002f700 16a387b0
+RX_ACK 0002f800 2efd7a26
+RX_ACK 0002f900 00c014e3
+RX_ACK 0002fa00 c5d32465
+RX_ACK 0002fb00 23fad867
+RX_ACK 0002fc00 134b79fe
+RX_ACK 0002fd00 abe5b362
+RX_ACK 0002fe00 809ee151
+RX_ACK 0002ff00 e03e2c12
+RX_ACK 00030000 22eb4ebb
+RX_ACK 00030100 2b3686f0
+RX_ACK 00030200 fe2fb72e
+RX_ACK 00030300 0bc23ebb
+RX_ACK 00030400 a97d6772
+RX_ACK 00030500 5e7837b8
+RX_ACK 00030600 ddd0e28e
+RX_ACK 00030700 127bd5fb
+RX_ACK 00030800 a2bdf4b0
+RX_ACK 00030900 ca81f1c6
+RX_ACK 00030a00 2cb92250
+RX_ACK 00030b00 a719993c
+RX_ACK 00030c00 0a2f40dd
+RX_ACK 00030d00 3f5de961
+RX_ACK 00030e00 d04e2696
+RX_ACK 00030f00 67777d19
+RX_ACK 00031000 3e3ae8d0
+RX_ACK 00031100 f7d21c8e
+RX_ACK 00031200 81c363b6
+RX_ACK 00031300 0ab83a84
+RX_ACK 00031400 604c9f1b
+RX_ACK 00031500 804789dc
+RX_ACK 00031600 77e7a283
+RX_ACK 00031700 618977cf
+RX_ACK 00031800 630b415c
+RX_ACK 00031900 149e8f3e
+RX_ACK 00031a00 33829463
+RX_ACK 00031b00 4413b8ed
+RX_ACK 00031c00 c5b0819d
+RX_ACK 00031d00 9f973c0c
+RX_ACK 00031e00 e4539603
+RX_ACK 00031f00 2acc2d02
+RX_ACK 00032000 b98ed51d
+RX_ACK 00032100 aac98161
+RX_ACK 00032200 ff2ef369
+RX_ACK 00032300 4660df5c
+RX_ACK 00032400 84a5d291
+RX_ACK 00032500 4c878ae4
+RX_ACK 00032600 551f4e03
+RX_ACK 00032700 0cc30abf
+RX_ACK 00032800 793c1c88
+RX_ACK 00032900 720df16e
+RX_ACK 00032a00 9bcb1e1a
+RX_ACK 00032b00 e64f6420
+RX_ACK 00032c00 22f68665
+RX_ACK 00032d00 dd0845b2
+RX_ACK 00032e00 f0a7df5f
+RX_ACK 00032f00 73116314
+RX_ACK 00033000 84bffc5f
+RX_ACK 00033100 ca2f915f
+RX_ACK 00033200 7bf92e79
+RX_ACK 00033300 ba0f61f2
+RX_ACK 00033400 221d826b
+RX_ACK 00033500 7636228c
+RX_ACK 00033600 53368e53
+RX_ACK 00033700 b31bc623
+RX_ACK 00033800 0561e149
+RX_ACK 00033900 4907e020
+RX_ACK 00033a00 a41953b3
+RX_ACK 00033b00 dee59e48
+RX_ACK 00033c00 b1697ccc
+RX_ACK 00033d00 51378f60
+RX_ACK 00033e00 8f785bd3
+RX_ACK 00033f00 cd122853
+RX_ACK 00034000 565bb679
+RX_ACK 00034100 b5100380
+RX_ACK 00034200 467d5016
+RX_ACK 00034300 9da8c6cc
+RX_ACK 00034400 752fc5e4
+RX_ACK 00034500 ec3bde6e
+RX_ACK 00034600 916b0a1b
+RX_ACK 00034700 6cf33890
+RX_ACK 00034800 6be997eb
+RX_ACK 00034900 0fb9b0f8
+RX_ACK 00034a00 5d7f51dc
+RX_ACK 00034b00 a64c9705
+RX_ACK 00034c00 202f4eb0
+RX_ACK 00034d00 d1e046a4
+RX_ACK 00034e00 ab516e59
+RX_ACK 00034f00 9c4aa635
+RX_ACK 00035000 b76a74bf
+RX_ACK 00035100 1445f82b
+RX_ACK 00035200 7aa61ecf
+RX_ACK 00035300 112cd1de
+RX_ACK 00035400 e783eb83
+RX_ACK 00035500 3e32200c
+RX_ACK 00035600 397abb01
+RX_ACK 00035700 e199aafe
+RX_ACK 00035800 d601d764
+RX_ACK 00035900 b3940cf8
+RX_ACK 00035a00 118cf1c1
+RX_ACK 00035b00 ee76dcec
+RX_ACK 00035c00 411a3229
+RX_ACK 00035d00 13566d17
+RX_ACK 00035e00 36a4deec
+RX_ACK 00035f00 37fc12a9
+RX_ACK 00036000 234073fd
+RX_ACK 00036100 bef5c322
+RX_ACK 00036200 d846249e
+RX_ACK 00036300 78c46452
+RX_ACK 00036400 4b1702c8
+RX_ACK 00036500 732ea6cf
+RX_ACK 00036600 a2f12ab3
+RX_ACK 00036700 94233a32
+RX_ACK 00036800 75f8b004
+RX_ACK 00036900 d22cbe2e
+RX_ACK 00036a00 0cfed228
+RX_ACK 00036b00 0ea90ee0
+RX_ACK 00036c00 8e689495
+RX_ACK 00036d00 72c419c1
+RX_ACK 00036e00 385a92bb
+RX_ACK 00036f00 d4d1c7ed
+RX_ACK 00037000 b2ca7141
+RX_ACK 00037100 59198ea0
+RX_ACK 00037200 32557aad
+RX_ACK 00037300 71c2378f
+RX_ACK 00037400 d116669e
+RX_ACK 00037500 88be7795
+RX_ACK 00037600 af4dad2b
+RX_ACK 00037700 a84d972c
+RX_ACK 00037800 e679c449
+RX_ACK 00037900 f0c36dd5
+RX_ACK 00037a00 beb5a9a3
+RX_ACK 00037b00 c1eb91d7
+RX_ACK 00037c00 08da98e4
+RX_ACK 00037d00 caf03cf6
+RX_ACK 00037e00 4239fc30
+RX_ACK 00037f00 0ae19420
+RX_ACK 00038000 f0b1c688
+RX_ACK 00038100 94aa2330
+RX_ACK 00038200 5cc25a9e
+RX_ACK 00038300 a92e743c
+RX_ACK 00038400 0b427c97
+RX_ACK 00038500 fa93fe90
+RX_ACK 00038600 2bbf8a20
+RX_ACK 000386c3 9f464340
+RX_DONE
+RX_EXIT:0
+oryukdo# /tmp/d9-apply /usr/bin/boayo-native /tmp/d9-baseline.delta /tmp/boayo-v
+8-baseline; echo DIRTY9_e12b2e9c_RC:$?
+PATCH_OK
+DIRTY9_e12b2e9c_RC:0
+oryukdo# /tmp/d9-peek 1; sleep 30; /tmp/d9-peek 1; echo DIRTY9_766824e1_RC:$?
+BENCH_SAMPLE {"compose_ms":1330.32154,"renders":94,"uptime":778.31950526,"generation":109,"commits":95,"dma_errors":0,"dma_upload_bytes":4947808,"pool_upload_bytes":4912000,"partial_uploads":92,"full_uploads":5,"phase":"apps","snapshot_age":2.4509507199999234,"render_error":null,"app_error":null}
+BENCH_SAMPLE {"compose_ms":1662.9619200000434,"renders":100,"uptime":811.0637867,"generation":115,"commits":101,"dma_errors":0,"dma_upload_bytes":5178208,"pool_upload_bytes":5142400,"partial_uploads":98,"full_uploads":5,"phase":"composing","snapshot_age":3.7578013600000304,"render_error":null,"app_error":null}
+DIRTY9_766824e1_RC:0
+oryukdo# boayo-stop; echo DIRTY9_b649347c_RC:$?
+DIRTY9_b649347c_RC:0
+oryukdo# BOAYO_INIT_TRACE=0 /tmp/boayo-v8-baseline start; echo DIRTY9_cb382f98_R
+C:$?
+WM socket exists; inspect boayo-status first
+DIRTY9_cb382f98_RC:1
+oryukdo# ps; ls -l /tmp/bosio-wm.sock; cat /tmp/boayo-wm.log | tail -n 5; echo D
+IRTY9_4ed0619d_RC:$?
+    1 root       192 S    /init.console
+    2 root         0 SW   [kthreadd]
+    3 root         0 SW   [pool_workqueue_]
+    4 root         0 IW<  [kworker/R-slub_]
+    5 root         0 IW   [kworker/0:0-eve]
+    6 root         0 IW<  [kworker/0:0H]
+    7 root         0 IW   [kworker/u4:0-ev]
+    8 root         0 IW<  [kworker/R-mm_pe]
+    9 root         0 SW   [ksoftirqd/0]
+   10 root         0 SW   [kdevtmpfs]
+   11 root         0 SW   [oom_reaper]
+   12 root         0 IW<  [kworker/R-write]
+   13 root         0 IW<  [kworker/R-kbloc]
+   14 root         0 SW   [kswapd0]
+   15 root         0 IW   [kworker/u4:1-ev]
+   16 root         0 IW   [kworker/0:1-eve]
+   17 root         0 SW   [khvcd]
+   18 root         0 IW   [kworker/u4:2-ev]
+   20 root         0 IW<  [kworker/R-mmc_c]
+   21 root         0 IW<  [kworker/0:1H-kb]
+   26 root         0 SW   [jbd2/mmcblk0p2-]
+   27 root         0 IW<  [kworker/R-ext4-]
+   29 root       496 S    sh -i
+   56 root       504 R    {ps} sh -i
+ls: /tmp/bosio-wm.sock: No such file or directory
+sh: tail: not found
+DIRTY9_4ed0619d_RC:127
+oryukdo# BOAYO_INIT_TRACE=0 /tmp/boayo-v8-baseline start; echo DIRTY9_59046191_R
+C:$?
+BoAYO C++ service started; initialization continues. boayo-status / boayo-keys / boayo-stop
+{"features":["windows","pointer","input-injection","button-events","scene-stream","spatial-workspace","pointer-capture"],"headless":false,"m":32,"mock_backend":false,"runtime":"C++17","version":2}
+DIRTY9_59046191_RC:0
+oryukdo# sleep 12; /tmp/boayo-v8-baseline app telemetry; echo DIRTY9_1b812347_RC
+:$?
+BOAYO_APP_READY window=2
+DIRTY9_1b812347_RC:0
+oryukdo# sleep 20; echo DIRTY9_8eed60f7_RC:$?
+[ 1024.772462] random: crng init done
+[ 1024.772462] random: crng init done
+DIRTY9_8eed60f7_RC:0
+oryukdo# /tmp/d9-peek 12; echo DIRTY9_e6ff128f_RC:$?
+BENCH_SAMPLE {"compose_ms":4140.8120199999985,"renders":3,"uptime":39.329696640000066,"generation":19,"commits":4,"dma_errors":0,"dma_upload_bytes":7271008,"pool_upload_bytes":null,"partial_uploads":null,"full_uploads":null,"phase":"composing","snapshot_age":5.721077900000182,"render_error":null,"app_error":null}
+BENCH_SAMPLE {"compose_ms":6118.818840000131,"renders":4,"uptime":48.66325826000002,"generation":20,"commits":5,"dma_errors":0,"dma_upload_bytes":7818208,"pool_upload_bytes":null,"partial_uploads":null,"full_uploads":null,"phase":"command","snapshot_age":0.7939125000000331,"render_error":null,"app_error":null}
+BENCH_SAMPLE {"compose_ms":6118.818840000131,"renders":4,"uptime":50.04497212000001,"generation":20,"commits":5,"dma_errors":0,"dma_upload_bytes":7818208,"pool_upload_bytes":null,"partial_uploads":null,"full_uploads":null,"phase":"composing","snapshot_age":3.4648369999999886,"render_error":null,"app_error":null}
+BENCH_SAMPLE {"compose_ms":6118.818840000131,"renders":4,"uptime":50.04497212000001,"generation":20,"commits":5,"dma_errors":0,"dma_upload_bytes":7818208,"pool_upload_bytes":null,"partial_uploads":null,"full_uploads":null,"phase":"composing","snapshot_age":8.32366505999994,"render_error":null,"app_error":null}
+BENCH_SAMPLE {"compose_ms":4873.383119999971,"renders":5,"uptime":61.84397839999997,"generation":21,"commits":6,"dma_errors":0,"dma_upload_bytes":8365408,"pool_upload_bytes":null,"partial_uploads":null,"full_uploads":null,"phase":"apps","snapshot_age":0.8162051399999655,"render_error":null,"app_error":null}
+BENCH_SAMPLE {"compose_ms":4873.383119999971,"renders":5,"uptime":61.84397839999997,"generation":21,"commits":6,"dma_errors":0,"dma_upload_bytes":8365408,"pool_upload_bytes":null,"partial_uploads":null,"full_uploads":null,"phase":"composing","snapshot_age":5.071148539999967,"render_error":null,"app_error":null}
+BENCH_SAMPLE {"compose_ms":4950.6081800000175,"renders":6,"uptime":70.74194697999997,"generation":22,"commits":7,"dma_errors":0,"dma_upload_bytes":8912608,"pool_upload_bytes":null,"partial_uploads":null,"full_uploads":null,"phase":"command","snapshot_age":0.3456821199999922,"render_error":null,"app_error":null}
+BENCH_SAMPLE {"compose_ms":4950.6081800000175,"renders":6,"uptime":74.83939856000006,"generation":22,"commits":7,"dma_errors":0,"dma_upload_bytes":8912608,"pool_upload_bytes":null,"partial_uploads":null,"full_uploads":null,"phase":"apps","snapshot_age":0.41507885999999417,"render_error":null,"app_error":null}
+BENCH_SAMPLE {"compose_ms":4950.6081800000175,"renders":6,"uptime":74.83939856000006,"generation":22,"commits":7,"dma_errors":0,"dma_upload_bytes":8912608,"pool_upload_bytes":null,"partial_uploads":null,"full_uploads":null,"phase":"composing","snapshot_age":4.68889850000005,"render_error":null,"app_error":null}
+BENCH_SAMPLE {"compose_ms":4833.584040000005,"renders":7,"uptime":83.66303489999996,"generation":23,"commits":8,"dma_errors":0,"dma_upload_bytes":9459808,"pool_upload_bytes":null,"partial_uploads":null,"full_uploads":null,"phase":"command","snapshot_age":0.21926123999992342,"render_error":null,"app_error":null}
+BENCH_SAMPLE {"compose_ms":4833.584040000005,"renders":7,"uptime":87.73317083999996,"generation":23,"commits":8,"dma_errors":0,"dma_upload_bytes":9459808,"pool_upload_bytes":null,"partial_uploads":null,"full_uploads":null,"phase":"apps","snapshot_age":0.21425152000006165,"render_error":null,"app_error":null}
+BENCH_SAMPLE {"compose_ms":4833.584040000005,"renders":7,"uptime":87.73317083999996,"generation":23,"commits":8,"dma_errors":0,"dma_upload_bytes":9459808,"pool_upload_bytes":null,"partial_uploads":null,"full_uploads":null,"phase":"composing","snapshot_age":4.393713739999839,"render_error":null,"app_error":null}
+DIRTY9_e6ff128f_RC:0
+oryukdo# /tmp/d9-peek 1; sleep 30; /tmp/d9-peek 1; echo DIRTY9_54601394_RC:$?
+BENCH_SAMPLE {"compose_ms":4833.584040000005,"renders":7,"uptime":87.73317083999996,"generation":23,"commits":8,"dma_errors":0,"dma_upload_bytes":9459808,"pool_upload_bytes":null,"partial_uploads":null,"full_uploads":null,"phase":"composing","snapshot_age":8.783874799999921,"render_error":null,"app_error":null}
+BENCH_SAMPLE {"compose_ms":3898.727640000061,"renders":11,"uptime":124.55009309999991,"generation":27,"commits":12,"dma_errors":0,"dma_upload_bytes":11648608,"pool_upload_bytes":null,"partial_uploads":null,"full_uploads":null,"phase":"composing","snapshot_age":5.660819120000042,"render_error":null,"app_error":null}
+DIRTY9_54601394_RC:0
+oryukdo# boayo-status; echo DIRTY9_1877f3d0_RC:$?
+{
+  "app_error": null,
+  "assets": {
+    "cache_hits": 13,
+    "format": "raw-mapped-00RRGGBB",
+    "loads": 27,
+    "misses": 0,
+    "rejected": 0,
+    "rgb_materializations": 0
+  },
+  "buttons": {
+    "available": false,
+    "last_event_id": 0,
+    "state": 0
+  },
+  "compositor": "cpp-native",
+  "focused_window": 2,
+  "generation": 28,
+  "motion": {
+    "active": false,
+    "next_step": 0,
+    "phase": "idle",
+    "steps": 25,
+    "target_generation": 0,
+    "view": {
+      "pitch": 0.0,
+      "roll": 0.0,
+      "yaw": 0.0
+    },
+    "windows": []
+  },
+  "output": {
+    "abi": 3,
+    "active_bank": 0,
+    "active_base": 3170959360,
+    "antialias": false,
+    "backend": "kfb-linux-frame-atomic-output",
+    "capability": 1146373681,
+    "commits": 13,
+    "dma_copied_words": 2304,
+    "max_jobs": 64,
+    "max_scene_words": 1084816,
+    "memory_dma": {
+      "available": true,
+      "copy_bytes": 13102552,
+      "copy_ops": 24880,
+      "errors": 0,
+      "features": 255,
+      "fill_bytes": 1427456,
+      "fill_ops": 1394,
+      "quarantined": 0,
+      "timeouts": 0,
+      "upload_bytes": 12195808,
+      "upload_ops": 272,
+      "upload_threshold": 4096
+    },
+    "metadata_only": false,
+    "mock_backend": false,
+    "poisoned": 0,
+    "publish_profile": {
+      "backend": "kernel",
+      "command": 2,
+      "configure_us": 89,
+      "finish_us": 4152,
+      "select_us": 151549,
+      "upload_ranges": 0,
+      "upload_us": 50211,
+      "uploaded_words": 0,
+      "user_copy_us": 9002,
+      "validate_us": 35455,
+      "wait_us": 267875
+    },
+    "sensor_available": false,
+    "shadow_copied_words": 0,
+    "signature": 1112748597,
+    "status": 1895497731,
+    "uploaded_words": 228
+  },
+  "performance": {
+    "frame_limit": 2.0,
+    "full_update_count": 1,
+    "last_compose_ms": 4895.314239999834,
+    "last_upload_ms": 0.0,
+    "no_op_update_count": 0,
+    "patch_update_count": 12,
+    "render_count": 12,
+    "rendered_generation": 28,
+    "update_words": 4480,
+    "uptime_seconds": 135.70212818000005
+  },
+  "pointer": {
+    "azimuth": 0.0,
+    "buttons": [],
+    "cancel_serial": 0,
+    "captured_window": null,
+    "dragging": false,
+    "elevation": 0.0,
+    "last_left_press": null,
+    "last_left_release": null,
+    "left_press_serial": 0,
+    "left_release_serial": 0,
+    "scroll_delta": 0.0,
+    "scroll_serial": 0,
+    "visible": false,
+    "window_id": 2,
+    "zone": "content"
+  },
+  "projection": {
+    "cpu_output_shadow_words": 4480,
+    "cpu_result_download_words": 0,
+    "cpu_scene_words": 0,
+    "device_ready_frames": 1,
+    "dirty_tiles": 89,
+    "fallback_frames": 0,
+    "geometry_tiles_evaluated_total": 0,
+    "hardware_frames": 12,
+    "jobs_per_core": [
+      53,
+      50
+    ],
+    "lazy_copied_tiles_total": 9,
+    "mask_samples_evaluated_total": 0,
+    "masked_tiles_total": 669,
+    "mode": "ddr-resident-dirty-tiles",
+    "packed_mask_tiles_total": 669,
+    "plan_cache": {
+      "builtin_loads": 5,
+      "hits": 0,
+      "loads": 5,
+      "misses": 0,
+      "payload_scan_bytes": 0,
+      "rejected": 0,
+      "revision": "c830e2bae43593f8c188620447b4ce808ce4894a826a073b44f12b949ad54b7e"
+    },
+    "precomputed_layers_total": 5,
+    "redrawn_tiles": 89,
+    "reused_tiles_total": 0,
+    "solid_tiles_total": 0,
+    "texture_reuses_total": 0,
+    "texture_uploads_total": 45,
+    "tile_fills_total": 515,
+    "total_hw_jobs": 1238,
+    "update_kind": "tiles"
+  },
+  "render_error": null,
+  "runtime": "C++17",
+  "scene_owner": null,
+  "service": {
+    "phase": "apps",
+    "queued_requests": 0,
+    "snapshot_age_seconds": 0.38102334000018345,
+    "state_is_snapshot": true
+  },
+  "view": {
+    "pitch": 0.0,
+    "roll": 0.0,
+    "yaw": 0.0
+  },
+  "windows": [
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": true,
+      "height_deg": 26.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          14.0
+        ]
+      ],
+      "surface_height": 300,
+      "surface_width": 400,
+      "title": "Telemetry",
+      "width_deg": 36.0,
+      "window_id": 2,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 0
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 30.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "boayo-desktop",
+      "roll": 0.0,
+      "shape": [
+        [
+          51.2,
+          36.0,
+          537.6,
+          252.0,
+          18.0
+        ]
+      ],
+      "surface_height": 360,
+      "surface_width": 640,
+      "title": "BoAYO Launcher",
+      "width_deg": 42.0,
+      "window_id": 1,
+      "workspace": {},
+      "z": 1
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -16.47105751657935,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: Telemetry",
+      "width_deg": 2.88,
+      "window_id": 3,
+      "workspace": {
+        "control": "move",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 2
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": -10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 4,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 3
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": 10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": -3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 5,
+      "workspace": {
+        "control": "close",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 4
+    }
+  ]
+}
+DIRTY9_1877f3d0_RC:0
+oryukdo# /tmp/boayo-v8-baseline stop && while test -S /tmp/bosio-wm.sock; do sle
+ep 1; done; echo DIRTY9_4cfe2f6d_RC:$?
+DIRTY9_4cfe2f6d_RC:0
+oryukdo# BOAYO_INIT_TRACE=0 /usr/bin/boayo-native start; echo DIRTY9_59675c69_RC
+:$?
+BoAYO C++ service started; initialization continues. boayo-status / boayo-keys / boayo-stop
+{"features":["windows","pointer","input-injection","button-events","scene-stream","spatial-workspace","pointer-capture"],"headless":false,"m":32,"mock_backend":false,"runtime":"C++17","version":2}
+DIRTY9_59675c69_RC:0
+oryukdo# sleep 12; /usr/bin/boayo-native app telemetry; echo DIRTY9_60f2af05_RC:
+$?
+BOAYO_APP_READY window=2
+DIRTY9_60f2af05_RC:0
+oryukdo# sleep 20; echo DIRTY9_878aca2e_RC:$?
+DIRTY9_878aca2e_RC:0
+oryukdo# /tmp/d9-peek 1; sleep 30; /tmp/d9-peek 1; echo DIRTY9_55803d6f_RC:$?
+BENCH_SAMPLE {"compose_ms":1621.869199999992,"renders":4,"uptime":41.218309020000106,"generation":19,"commits":5,"dma_errors":0,"dma_upload_bytes":14288608,"pool_upload_bytes":1545600,"partial_uploads":2,"full_uploads":5,"phase":"apps","snapshot_age":3.080472480000026,"render_error":null,"app_error":null}
+BENCH_SAMPLE {"compose_ms":1620.2917400000842,"renders":10,"uptime":73.69084545999999,"generation":25,"commits":11,"dma_errors":0,"dma_upload_bytes":14519008,"pool_upload_bytes":1776000,"partial_uploads":8,"full_uploads":5,"phase":"composing","snapshot_age":4.2945658000001,"render_error":null,"app_error":null}
+DIRTY9_55803d6f_RC:0
+oryukdo# boayo-status; echo DIRTY9_f3e11502_RC:$?
+{
+  "app_error": null,
+  "assets": {
+    "cache_hits": 12,
+    "format": "raw-mapped-00RRGGBB",
+    "loads": 25,
+    "misses": 0,
+    "rejected": 0,
+    "rgb_materializations": 0
+  },
+  "buttons": {
+    "available": false,
+    "last_event_id": 0,
+    "state": 0
+  },
+  "compositor": "cpp-native",
+  "focused_window": 2,
+  "generation": 26,
+  "motion": {
+    "active": false,
+    "next_step": 0,
+    "phase": "idle",
+    "steps": 25,
+    "target_generation": 0,
+    "view": {
+      "pitch": 0.0,
+      "roll": 0.0,
+      "yaw": 0.0
+    },
+    "windows": []
+  },
+  "output": {
+    "abi": 3,
+    "active_bank": 1,
+    "active_base": 3175415808,
+    "antialias": false,
+    "backend": "kfb-linux-frame-atomic-output",
+    "capability": 1146373681,
+    "commits": 12,
+    "dma_copied_words": 17920,
+    "max_jobs": 64,
+    "max_scene_words": 1084816,
+    "memory_dma": {
+      "available": true,
+      "copy_bytes": 15647356,
+      "copy_ops": 28024,
+      "errors": 0,
+      "features": 255,
+      "fill_bytes": 1641472,
+      "fill_ops": 1603,
+      "quarantined": 0,
+      "timeouts": 0,
+      "upload_bytes": 14557408,
+      "upload_ops": 303,
+      "upload_threshold": 4096
+    },
+    "metadata_only": false,
+    "mock_backend": false,
+    "poisoned": 0,
+    "publish_profile": {
+      "backend": "kernel",
+      "command": 2,
+      "configure_us": 86,
+      "finish_us": 6463,
+      "select_us": 151906,
+      "upload_ranges": 0,
+      "upload_us": 49890,
+      "uploaded_words": 0,
+      "user_copy_us": 9861,
+      "validate_us": 35492,
+      "wait_us": 21179
+    },
+    "sensor_available": false,
+    "shadow_copied_words": 0,
+    "signature": 1112748597,
+    "status": 2086076419,
+    "uploaded_words": 228
+  },
+  "performance": {
+    "frame_limit": 2.0,
+    "full_update_count": 1,
+    "last_compose_ms": 2012.1259800000644,
+    "last_upload_ms": 0.0,
+    "no_op_update_count": 0,
+    "patch_update_count": 11,
+    "render_count": 11,
+    "rendered_generation": 26,
+    "update_words": 4480,
+    "uptime_seconds": 80.92944469999998
+  },
+  "pointer": {
+    "azimuth": 0.0,
+    "buttons": [],
+    "cancel_serial": 0,
+    "captured_window": null,
+    "dragging": false,
+    "elevation": 0.0,
+    "last_left_press": null,
+    "last_left_release": null,
+    "left_press_serial": 0,
+    "left_release_serial": 0,
+    "scroll_delta": 0.0,
+    "scroll_serial": 0,
+    "visible": false,
+    "window_id": 2,
+    "zone": "content"
+  },
+  "projection": {
+    "cpu_output_shadow_words": 4480,
+    "cpu_result_download_words": 0,
+    "cpu_scene_words": 0,
+    "device_ready_frames": 1,
+    "dirty_tiles": 28,
+    "fallback_frames": 0,
+    "geometry_tiles_evaluated_total": 0,
+    "hardware_frames": 11,
+    "jobs_per_core": [
+      16,
+      16
+    ],
+    "lazy_copied_tiles_total": 70,
+    "mask_samples_evaluated_total": 0,
+    "masked_tiles_total": 217,
+    "mode": "ddr-resident-dirty-tiles",
+    "packed_mask_tiles_total": 217,
+    "plan_cache": {
+      "builtin_loads": 5,
+      "hits": 0,
+      "loads": 5,
+      "misses": 0,
+      "payload_scan_bytes": 0,
+      "rejected": 0,
+      "revision": "c830e2bae43593f8c188620447b4ce808ce4894a826a073b44f12b949ad54b7e"
+    },
+    "precomputed_layers_total": 5,
+    "redrawn_tiles": 28,
+    "reused_tiles_total": 0,
+    "solid_tiles_total": 0,
+    "texture_pool": {
+      "capacity_bytes": 4194304,
+      "evictions": 0,
+      "full_uploads": 5,
+      "partial_uploads": 9,
+      "resident_bytes": 1430400,
+      "resident_windows": 5,
+      "reuses": 9,
+      "staged_copy_bytes": 0,
+      "upload_bytes": 1814400,
+      "upload_calls": 25
+    },
+    "texture_reuses_total": 9,
+    "texture_uploads_total": 14,
+    "tile_fills_total": 167,
+    "total_hw_jobs": 496,
+    "update_kind": "tiles"
+  },
+  "render_error": null,
+  "runtime": "C++17",
+  "scene_owner": null,
+  "service": {
+    "phase": "apps",
+    "queued_requests": 0,
+    "snapshot_age_seconds": 3.0036618999999973,
+    "state_is_snapshot": true
+  },
+  "view": {
+    "pitch": 0.0,
+    "roll": 0.0,
+    "yaw": 0.0
+  },
+  "windows": [
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": true,
+      "height_deg": 26.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          14.0
+        ]
+      ],
+      "surface_height": 300,
+      "surface_width": 400,
+      "title": "Telemetry",
+      "width_deg": 36.0,
+      "window_id": 2,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 0
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 30.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "boayo-desktop",
+      "roll": 0.0,
+      "shape": [
+        [
+          51.2,
+          36.0,
+          537.6,
+          252.0,
+          18.0
+        ]
+      ],
+      "surface_height": 360,
+      "surface_width": 640,
+      "title": "BoAYO Launcher",
+      "width_deg": 42.0,
+      "window_id": 1,
+      "workspace": {},
+      "z": 1
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -16.47105751657935,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: Telemetry",
+      "width_deg": 2.88,
+      "window_id": 3,
+      "workspace": {
+        "control": "move",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 2
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": -10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 4,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 3
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": 10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": -3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 5,
+      "workspace": {
+        "control": "close",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 4
+    }
+  ]
+}
+DIRTY9_f3e11502_RC:0
+oryukdo# /tmp/d9-peek 1; echo HAEBANCHEON_DIRTY_V9_RUNNING; echo DIRTY9_9e4eb3ed
+_RC:$?
+BENCH_SAMPLE {"compose_ms":1667.7585800000543,"renders":32,"uptime":188.05932452000002,"generation":47,"commits":33,"dma_errors":0,"dma_upload_bytes":15341408,"pool_upload_bytes":2598400,"partial_uploads":30,"full_uploads":5,"phase":"apps","snapshot_age":2.153723500000069,"render_error":null,"app_error":null}
+HAEBANCHEON_DIRTY_V9_RUNNING
+DIRTY9_9e4eb3ed_RC:0
+oryukdo# 

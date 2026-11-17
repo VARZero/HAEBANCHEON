@@ -1,0 +1,19 @@
+{
+  "result": "PASS_QEMU_ONLY",
+  "image": "/var/tmp/haebancheon-incremental-v11/release/image/HAEBANCHEON-KFB-BoAYO-incremental-v11.img",
+  "image_sha256": "5df06750b6a5a419aac07bf127133fda6b2fd793b24e69b00b146f9c6b5099af",
+  "hardware": false,
+  "rtl": false,
+  "mock_backend": true,
+  "checks": [
+    "BusyBox shell",
+    "cat /etc/oryukdo-image",
+    "/bin/storage-check --identity",
+    "test -x /bin/bosio-dma-check",
+    "test -r /usr/share/boayo/assets/a0ebce13.bui",
+    "test ! -L /usr/bin/python && test ! -e /usr/bin/python3 && test ! -d /usr/lib/python3.12",
+    "echo $((19+23))",
+    "ddrcheck",
+    "boayo-selftest"
+  ]
+}

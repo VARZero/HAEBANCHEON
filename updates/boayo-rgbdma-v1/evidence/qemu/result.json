@@ -1,0 +1,88 @@
+{
+  "result": "PASS_QEMU_ONLY",
+  "image": "/var/tmp/oryukdo-boayo-rgbdma-v1/release/image/ORYUKDO-KFB-BoAYO-rgbdma-v1.img",
+  "image_sha256": "559e5b45f161b0f045ddf73ce6ec82394c4414ad70f762ddc4cb52f862104519",
+  "hardware": false,
+  "rtl": false,
+  "mock_backend": true,
+  "checks": [
+    "BusyBox shell",
+    "cat /etc/oryukdo-image",
+    "/bin/storage-check --identity",
+    "test -x /bin/bosio-dma-check",
+    "test ! -L /usr/bin/python && test ! -e /usr/bin/python3 && test ! -d /usr/lib/python3.12",
+    "echo $((19+23))",
+    "ddrcheck",
+    "boayo-selftest",
+    "boayo-dual-selftest",
+    "boayo-start --mock",
+    "boayo-status",
+    "boayo-app dashboard",
+    "boayo-status",
+    "boayo-app telemetry",
+    "boayo-status",
+    "boayo-app pulse",
+    "boayo-status",
+    "echo KEYS_SHELL_RESTORED",
+    "boayo-status",
+    "boayo-stop"
+  ],
+  "final_projection": {
+    "active_tiles": 131,
+    "changed_tiles": 0,
+    "dirty_tiles": 23,
+    "fallback_frames": 0,
+    "hardware_frames": 11,
+    "jobs_per_core": [
+      12,
+      11
+    ],
+    "mode": "kfb-dual-projectors+cpu-tile-composition",
+    "output_words": 0,
+    "projected_windows": [
+      6
+    ],
+    "reused_window_tiles": 405,
+    "sampling": "fixed-point bilinear RGB332",
+    "texture_upload_words": 120000,
+    "total_hw_jobs": 989,
+    "update_kind": "patch",
+    "windows": [
+      2,
+      6,
+      10,
+      11,
+      12,
+      13
+    ],
+    "written_cells_per_core": [
+      12288,
+      11264
+    ]
+  },
+  "final_output": {
+    "abi": 3,
+    "active_bank": 1,
+    "active_base": 0,
+    "antialias": false,
+    "backend": "kfb-linux-frame-atomic-output",
+    "capability": 0,
+    "commits": 10,
+    "dma_copied_words": 134021,
+    "max_jobs": 64,
+    "max_scene_words": 1084816,
+    "memory_dma": {
+      "available": true,
+      "copy_ops": 806,
+      "fill_ops": 176
+    },
+    "metadata_only": false,
+    "mock_backend": true,
+    "poisoned": 0,
+    "sensor_available": false,
+    "shadow_copied_words": 1190281,
+    "signature": 0,
+    "status": 983043,
+    "uploaded_words": 134021
+  }
+}

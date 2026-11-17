@@ -1,0 +1,483 @@
+{
+  "result": "PASS_QEMU_ONLY",
+  "image": "/var/tmp/haebancheon-motion-v7/release/image/HAEBANCHEON-KFB-BoAYO-motion-v7.img",
+  "image_sha256": "6722a17182f0965b602559a0532263090a81cfbcbda51d8e92d8899c54d1cf7b",
+  "hardware": false,
+  "rtl": false,
+  "mock_backend": true,
+  "checks": [
+    "BusyBox shell",
+    "cat /etc/oryukdo-image",
+    "/bin/storage-check --identity",
+    "test -x /bin/bosio-dma-check",
+    "test -r /usr/share/boayo/assets/a0ebce13.bui",
+    "test ! -L /usr/bin/python && test ! -e /usr/bin/python3 && test ! -d /usr/lib/python3.12",
+    "echo $((19+23))",
+    "ddrcheck",
+    "boayo-selftest",
+    "test -x /bin/boayo-motion",
+    "boayo-start --mock",
+    "boayo-motion 1 0",
+    "boayo-status",
+    "boayo-stop",
+    "25 RV32 mixed-pose/window-move/resize/overlap/close-caption stages completed; original scene restored"
+  ],
+  "motion_steps": [
+    {
+      "output_complete": true,
+      "phase": "view-axis",
+      "seconds": 0.44072909999999865,
+      "step": 1,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "view-axis",
+      "seconds": 0.6590908400000046,
+      "step": 2,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": -12.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "view-axis",
+      "seconds": 0.44054966000000206,
+      "step": 3,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 12.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "view-axis",
+      "seconds": 0.43922576000000646,
+      "step": 4,
+      "view": {
+        "pitch": -8.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "view-axis",
+      "seconds": 0.6498501199999964,
+      "step": 5,
+      "view": {
+        "pitch": 8.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "view-axis",
+      "seconds": 0.43987143999999745,
+      "step": 6,
+      "view": {
+        "pitch": 0.0,
+        "roll": -20.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "view-axis",
+      "seconds": 0.6499042999999958,
+      "step": 7,
+      "view": {
+        "pitch": 0.0,
+        "roll": 20.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "view-mixed",
+      "seconds": 0.43982154000000406,
+      "step": 8,
+      "view": {
+        "pitch": 6.0,
+        "roll": -15.0,
+        "yaw": -8.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "view-mixed",
+      "seconds": 0.6498966199999998,
+      "step": 9,
+      "view": {
+        "pitch": -6.0,
+        "roll": 15.0,
+        "yaw": 8.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "view-axis",
+      "seconds": 0.4398733200000038,
+      "step": 10,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "window-azimuth-elevation",
+      "seconds": 0.6598841799999988,
+      "step": 11,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "window-azimuth-elevation",
+      "seconds": 0.649873460000002,
+      "step": 12,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "window-azimuth-elevation",
+      "seconds": 0.6498557800000029,
+      "step": 13,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "window-width-height",
+      "seconds": 0.6498909399999988,
+      "step": 14,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "window-width-height",
+      "seconds": 0.43989294,
+      "step": 15,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "overlap",
+      "seconds": 0.64985918,
+      "step": 16,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "front-back",
+      "seconds": 0.44074758,
+      "step": 17,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "front-back",
+      "seconds": 0.6490868600000042,
+      "step": 18,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "second-window-move",
+      "seconds": 0.6498430199999987,
+      "step": 19,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "second-window-move",
+      "seconds": 0.4398332399999987,
+      "step": 20,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "view-mixed",
+      "seconds": 0.6698773999999972,
+      "step": 21,
+      "view": {
+        "pitch": 4.0,
+        "roll": 15.0,
+        "yaw": 6.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "view-reset",
+      "seconds": 0.43988650000000007,
+      "step": 22,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "close-caption",
+      "seconds": 0.47987048000000243,
+      "step": 23,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "close-caption",
+      "seconds": 0.6498273799999978,
+      "step": 24,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "close-caption",
+      "seconds": 0.43989956000000063,
+      "step": 25,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    }
+  ],
+  "final_state": {
+    "app_error": null,
+    "assets": {
+      "cache_hits": 412,
+      "format": "raw-mapped-00RRGGBB",
+      "loads": 236,
+      "misses": 33,
+      "rejected": 0,
+      "rgb_materializations": 3
+    },
+    "buttons": {
+      "available": false,
+      "last_event_id": 0,
+      "state": 0
+    },
+    "compositor": "cpp-native",
+    "focused_window": 1,
+    "generation": 468,
+    "motion": {
+      "active": false,
+      "next_step": 25,
+      "phase": "restored",
+      "steps": 25,
+      "target_generation": 468,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      },
+      "windows": [
+        2,
+        6,
+        10
+      ]
+    },
+    "output": {
+      "abi": 3,
+      "active_bank": 0,
+      "active_base": 0,
+      "antialias": false,
+      "backend": "kfb-linux-frame-atomic-output",
+      "capability": 0,
+      "commits": 29,
+      "dma_copied_words": 28416,
+      "max_jobs": 64,
+      "max_scene_words": 1084816,
+      "memory_dma": {
+        "available": true,
+        "copy_ops": 47,
+        "fill_ops": 1388
+      },
+      "metadata_only": false,
+      "mock_backend": true,
+      "poisoned": 0,
+      "publish_profile": {
+        "backend": "mock"
+      },
+      "sensor_available": false,
+      "shadow_copied_words": 0,
+      "signature": 0,
+      "status": 2818051,
+      "uploaded_words": 9630
+    },
+    "performance": {
+      "frame_limit": 2.0,
+      "full_update_count": 1,
+      "last_compose_ms": 8.41187999999704,
+      "last_upload_ms": 0.0,
+      "no_op_update_count": 0,
+      "patch_update_count": 28,
+      "render_count": 28,
+      "rendered_generation": 468,
+      "update_words": 4480,
+      "uptime_seconds": 15.348127400000003
+    },
+    "pointer": {
+      "azimuth": 0.0,
+      "buttons": [],
+      "cancel_serial": 0,
+      "captured_window": null,
+      "dragging": false,
+      "elevation": 0.0,
+      "last_left_press": {
+        "azimuth": 18.91361728563541,
+        "elevation": 11.136823482150847,
+        "window_id": 5
+      },
+      "last_left_release": {
+        "azimuth": 18.91361728563541,
+        "elevation": 11.136823482150847
+      },
+      "left_press_serial": 11,
+      "left_release_serial": 11,
+      "scroll_delta": 0.0,
+      "scroll_serial": 0,
+      "visible": false,
+      "window_id": 1,
+      "zone": "content"
+    },
+    "projection": {
+      "cpu_output_shadow_words": 4480,
+      "cpu_result_download_words": 0,
+      "cpu_scene_words": 0,
+      "device_ready_frames": 1,
+      "dirty_tiles": 160,
+      "fallback_frames": 0,
+      "geometry_tiles_evaluated_total": 84400,
+      "hardware_frames": 28,
+      "jobs_per_core": [
+        48,
+        48
+      ],
+      "lazy_copied_tiles_total": 111,
+      "mask_samples_evaluated_total": 859136,
+      "masked_tiles_total": 3321,
+      "mode": "ddr-resident-dirty-tiles",
+      "packed_mask_tiles_total": 3321,
+      "plan_cache": {
+        "builtin_loads": 10,
+        "hits": 9,
+        "loads": 10,
+        "misses": 40,
+        "payload_scan_bytes": 0,
+        "rejected": 0,
+        "revision": "c830e2bae43593f8c188620447b4ce808ce4894a826a073b44f12b949ad54b7e"
+      },
+      "precomputed_layers_total": 19,
+      "redrawn_tiles": 96,
+      "reused_tiles_total": 37,
+      "solid_tiles_total": 0,
+      "texture_reuses_total": 0,
+      "texture_uploads_total": 148,
+      "tile_fills_total": 1354,
+      "total_hw_jobs": 7680,
+      "update_kind": "tiles"
+    },
+    "render_error": null,
+    "runtime": "C++17",
+    "scene_owner": null,
+    "service": {
+      "phase": "ready",
+      "queued_requests": 0,
+      "snapshot_age_seconds": 0.8108884800000027,
+      "state_is_snapshot": true
+    },
+    "view": {
+      "pitch": 0.0,
+      "roll": 0.0,
+      "yaw": 0.0
+    },
+    "windows": [
+      {
+        "always_on_top": true,
+        "azimuth": 0.0,
+        "decorated": false,
+        "elevation": 0.0,
+        "focused": true,
+        "height_deg": 30.0,
+        "input_enabled": true,
+        "mapped": true,
+        "owner": "boayo-desktop",
+        "roll": 0.0,
+        "shape": [
+          [
+            51.2,
+            36.0,
+            537.6,
+            252.0,
+            18.0
+          ]
+        ],
+        "surface_height": 360,
+        "surface_width": 640,
+        "title": "BoAYO Launcher",
+        "width_deg": 42.0,
+        "window_id": 1,
+        "workspace": {},
+        "z": 0
+      }
+    ]
+  }
+}

@@ -1,0 +1,6 @@
+BOAYO_NATIVE_SERVICE /tmp/tmpjpjbc317/wm.sock initializing; query boayo-status
+BOAYO_NATIVE_INIT backend=MOCK
+BOAYO_BLANK_METADATA_READY words=4480 tile_composition=0 projection_jobs=0
+BOAYO_NATIVE_READY blank_committed_launcher_pending
+BOAYO_FIRST_FRAME_COMPOSE_BEGIN
+BOAYO_FIRST_FRAME_PRESENT_DONE

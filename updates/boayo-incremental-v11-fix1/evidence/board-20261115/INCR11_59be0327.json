@@ -1,0 +1,8 @@
+{
+  "command": "boayo-stop; sync",
+  "seconds": 6.301,
+  "rc": 0,
+  "uart": "boayo-stop; sync; echo INCR11_59be0327_RC:$?\r\r\nINCR11_59be0327_RC:0\r\r\n",
+  "observed_at": "2026-11-15T00:51:52.526464",
+  "log_start": 406886
+}

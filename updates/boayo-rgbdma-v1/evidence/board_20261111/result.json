@@ -1,0 +1,36 @@
+{
+  "result": "PASS_BOARD_RGB_DMA_AND_LAUNCHER_BACKGROUND",
+  "stage": "launcher_drawing",
+  "hardware": true,
+  "hdmi_verified": false,
+  "kernel_verified": true,
+  "basic_dma": "PASS",
+  "rgb_dma": "PASS",
+  "rgb_times": [
+    [
+      "4",
+      "691200",
+      "4872"
+    ],
+    [
+      "8",
+      "691200",
+      "2317"
+    ],
+    [
+      "4092",
+      "691200",
+      "2272"
+    ]
+  ],
+  "launcher_verified": false,
+  "background_wall_seconds": 11.503544,
+  "background_cpu_seconds": 6.001869,
+  "baseline_wall_seconds": 311.61357,
+  "wall_reduction_percent": 96.308394400154,
+  "program_done": true,
+  "program_crc_error": false,
+  "recorded_at": "2026-11-11T00:43:47.300817",
+  "last_trace": "BOAYO_INITTRACE n=14 event=rounded.begin wall_us=80280239 cpu_us=36143314 value=0",
+  "source_identity": "local input bitstream hash, board kernel release and SD identifier checked; full SD readback hash not measured"
+}

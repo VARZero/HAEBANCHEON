@@ -1,0 +1,4309 @@
+UART_CAPTURE_OPEN COM4 115200
+G
+
+OpenSBI v1.8.1
+   ____                    _____ ____ _____
+  / __ \                  / ____|  _ \_   _|
+ | |  | |_ __   ___ _ __ | (___ | |_) || |
+ | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
+ | |__| | |_) |  __/ | | |____) | |_) || |_
+  \____/| .__/ \___|_| |_|_____/|____/_____|
+        | |
+        |_|
+
+Platform Name               : HAEBANCHEON 3d5i L1-16K DMA3
+Platform Features           : medeleg
+Platform HART Count         : 1
+Platform HART Protection    : ---
+Platform IPI Device         : ---
+Platform Timer Device       : aclint-mtimer @ 50000000Hz
+Platform Console Device     : uart8250
+Platform HSM Device         : ---
+Platform PMU Device         : ---
+Platform Reboot Device      : ---
+Platform Shutdown Device    : ---
+Platform Suspend Device     : ---
+Platform CPPC Device        : ---
+Firmware Base               : 0x80000000
+Firmware Size               : 309 KB
+Firmware RW Offset          : 0x40000
+Firmware RW Size            : 53 KB
+Firmware Heap Offset        : 0x44000
+Firmware Heap Size          : 37 KB (total), 0 KB (reserved), 9 KB (used), 26 KB (free)
+Firmware Scratch Size       : 4096 B (total), 228 B (used), 3868 B (free)
+Runtime SBI Version         : 3.0
+Standard SBI Extensions     : time,rfnc,ipi,base,hsm,pmu,dbcn,fwft,legacy,sse
+Experimental SBI Extensions : none
+
+Domain0 Name                : root
+Domain0 Boot HART           : 0
+Domain0 HARTs               : 0*
+Domain0 Region00            : 0x80040000-0x8004ffff M: (F,R,W) S/U: ()
+Domain0 Region01            : 0x80000000-0x8003ffff M: (F,R,X) S/U: ()
+Domain0 Region02            : 0x02004000-0x02004007 M: (I,R,W) S/U: ()
+Domain0 Region03            : 0x0200bff8-0x0200bfff M: (I,R,W) S/U: ()
+Domain0 Region04            : 0x10000000-0x10000fff M: (I,R,W) S/U: (R,W)
+Domain0 Region05            : 0x00000000-0xffffffff M: () S/U: (R,W,X)
+Domain0 Next Address        : 0x80400000
+Domain0 Next Arg1           : 0x87f00000
+Domain0 Next Mode           : S-mode
+Domain0 SysReset            : yes
+Domain0 SysSuspend          : yes
+
+Boot HART ID                : 0
+Boot HART Domain            : root
+Boot HART Priv Version      : v1.11
+Boot HART Base ISA          : rv32ima
+Boot HART ISA Extensions    : zicntr,svade
+Boot HART PMP Count         : 0
+Boot HART PMP Granularity   : 0 bits
+Boot HART PMP Address Bits  : 0
+Boot HART MHPM Info         : 0 (0x00000000)
+Boot HART Debug Triggers    : 0 triggers
+Boot HART MIDELEG           : 0x00000222
+Boot HART MEDELEG           : 0x0000b109
+Linux version 6.12.0-haebancheon-tilebatch14 (haebancheon@kfb) (riscv64-linux-gnu-gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, GNU ld (GNU Binutils for Ubuntu) 2.42) #1 2026-11-15 00:00:00 UTC
+OF: fdt: Ignoring memory range 0x80000000 - 0x80400000
+Machine model: HAEBANCHEON 3d5i L1-16K DMA3
+SBI specification v3.0 detected
+SBI implementation ID=0x1 Version=0x10008
+SBI TIME extension detected
+SBI IPI extension detected
+SBI RFENCE extension detected
+SBI DBCN extension detected
+earlycon: sbi0 at I/O port 0x0 (options '')
+printk: legacy bootconsole [sbi0] enabled
+printk: debug: ignoring loglevel setting.
+printk: debug: skip boot console de-registration.
+OF: reserved mem: 0x80000000..0x8003ffff (256 KiB) nomap non-reusable mmode_resv1@80000000
+OF: reserved mem: 0x80040000..0x8004ffff (64 KiB) nomap non-reusable mmode_resv0@80040000
+OF: reserved mem: 0xbd000000..0xbdffffff (16384 KiB) nomap non-reusable dma-pool@bd000000
+OF: reserved mem: 0xbf800000..0xbfffffff (8192 KiB) nomap non-reusable framebuffer@bf800000
+Zone ranges:
+  Normal   [mem 0x0000000080400000-0x00000000bfffffff]
+Movable zone start for each node
+Early memory node ranges
+  node   0: [mem 0x0000000080400000-0x00000000bcffffff]
+  node   0: [mem 0x00000000bd000000-0x00000000bdffffff]
+  node   0: [mem 0x00000000be000000-0x00000000bf7fffff]
+  node   0: [mem 0x00000000bf800000-0x00000000bfffffff]
+Initmem setup node 0 [mem 0x0000000080400000-0x00000000bfffffff]
+riscv: base ISA extensions aim
+riscv: ELF capabilities aim
+pcpu-alloc: s0 r0 d32768 u32768 alloc=1*32768
+pcpu-alloc: [0] 0 
+Kernel command line: earlycon=sbi console=hvc0 loglevel=7 nokaslr lpj=1000000 rdinit=/init initcall_debug ignore_loglevel keep_bootcon printk.time=1
+[    0.000000] Dentry cache hash table entries: 131072 (order: 7, 524288 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 65536 (order: 6, 262144 bytes, linear)
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 261120
+[    0.000000] mem auto-init: stack:all(zero), heap alloc:off, heap free:off
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    0.000000] NR_IRQS: 64, nr_irqs: 64, preallocated irqs: 0
+[    0.000000] riscv-intc: 32 local interrupts mapped
+[    0.000000] clocksource: riscv_clocksource: mask: 0xffffffffffffffff max_cycles: 0xb8812736b, max_idle_ns: 440795202655 ns
+[    0.000291] sched_clock: 64 bits at 50MHz, resolution 20ns, wraps every 4398046511100ns
+[    0.027159] Calibrating delay loop (skipped) preset value.. 200.00 BogoMIPS (lpj=1000000)
+[    0.048068] pid_max: default: 32768 minimum: 301
+[    0.101622] Mount-cache hash table entries: 2048 (order: 1, 8192 bytes, linear)
+[    0.119892] Mountpoint-cache hash table entries: 2048 (order: 1, 8192 bytes, linear)
+[    0.254145] ORY_BOOT kernel_init_freeable enter
+[    0.405814] calling  0xc028eb44 @ 1
+[    0.416922] ASID allocator disabled (0 bits)
+[    0.428494] initcall 0xc028eb44 returned 0 after 0 usecs
+[    0.442489] calling  0xc028f298 @ 1
+[    0.480489] initcall 0xc028f298 returned 0 after 30000 usecs
+[    0.494815] calling  0xc02917f8 @ 1
+[    0.506099] initcall 0xc02917f8 returned 0 after 10000 usecs
+[    0.520587] calling  0xc0292944 @ 1
+[    0.529448] initcall 0xc0292944 returned 0 after 0 usecs
+[    0.543747] calling  0xc0295784 @ 1
+[    0.554829] initcall 0xc0295784 returned 0 after 0 usecs
+[    0.575282] Memory: 967948K/1044480K available (2595K kernel code, 493K rwdata, 301K rodata, 36845K init, 186K bss, 74984K reserved, 0K cma-reserved)
+[    0.659864] devtmpfs: initialized
+[    1.042333] calling  0xc029b9a8 @ 1
+[    1.053547] initcall 0xc029b9a8 returned 0 after 0 usecs
+[    1.085061] calling  0xc028f964 @ 1
+[    1.113846] initcall 0xc028f964 returned 0 after 10000 usecs
+[    1.131866] calling  0xc0290824 @ 1
+[    1.148450] initcall 0xc0290824 returned 0 after 10000 usecs
+[    1.163023] calling  0xc0292320 @ 1
+[    1.174759] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+[    1.195650] initcall 0xc0292320 returned 0 after 20000 usecs
+[    1.209955] calling  0xc029283c @ 1
+[    1.221300] futex hash table entries: 256 (order: -1, 3072 bytes, linear)
+[    1.238481] initcall 0xc029283c returned 0 after 20000 usecs
+[    1.253120] calling  0xc029a3f4 @ 1
+[    1.269701] initcall 0xc029a3f4 returned 0 after 10000 usecs
+[    1.284268] calling  0xc029a4dc @ 1
+[    1.295605] initcall 0xc029a4dc returned 0 after 0 usecs
+[    1.309355] calling  0xc029a508 @ 1
+[    1.320935] initcall 0xc029a508 returned 0 after 0 usecs
+[    1.334904] calling  0xc01cf000 @ 1
+[    1.346144] initcall 0xc01cf000 returned 0 after 0 usecs
+[    1.360126] calling  0xc02a2bf4 @ 1
+[    1.391078] initcall 0xc02a2bf4 returned 0 after 20000 usecs
+[    1.405636] calling  0xc02a2cb8 @ 1
+[    1.417106] initcall 0xc02a2cb8 returned 0 after 0 usecs
+[    1.431089] calling  0xc02a2ccc @ 1
+[    1.443265] initcall 0xc02a2ccc returned 0 after 10000 usecs
+[    1.457629] calling  0xc02a3158 @ 1
+[    1.469492] initcall 0xc02a3158 returned 0 after 10000 usecs
+[    1.483748] calling  0xc02a3c28 @ 1
+[    1.747849] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+[    1.768437] initcall 0xc02a3c28 returned 0 after 180000 usecs
+[    1.786835] calling  0xc02a3e30 @ 1
+[    1.800611] initcall 0xc02a3e30 returned 0 after 10000 usecs
+[    1.830757] calling  0xc02919d0 @ 1
+[    1.858623] initcall 0xc02919d0 returned 0 after 10000 usecs
+[    1.873176] calling  0xc0292d18 @ 1
+[    1.890715] initcall 0xc0292d18 returned 0 after 10000 usecs
+[    1.904950] calling  0xc0292d68 @ 1
+[    1.918000] initcall 0xc0292d68 returned 0 after 10000 usecs
+[    1.932676] calling  0xc0296020 @ 1
+[    1.944407] initcall 0xc0296020 returned 0 after 10000 usecs
+[    1.958781] calling  0xc029dc64 @ 1
+[    1.973553] initcall 0xc029dc64 returned 0 after 10000 usecs
+[    1.988414] calling  0xc029ec4c @ 1
+[    2.003646] initcall 0xc029ec4c returned 0 after 10000 usecs
+[    2.018034] calling  0xc029f4cc @ 1
+[    2.030606] initcall 0xc029f4cc returned 0 after 10000 usecs
+[    2.045494] calling  0xc02a44ec @ 1
+[    2.057919] initcall 0xc02a44ec returned 0 after 10000 usecs
+[    2.087455] calling  0xc028cb24 @ 1
+[    2.099480] initcall 0xc028cb24 returned 0 after 0 usecs
+[    2.113464] calling  0xc028df14 @ 1
+[    2.124803] initcall 0xc028df14 returned 0 after 10000 usecs
+[    2.139159] calling  0xc0004b64 @ 1
+[    3.924119] cpu0: Ratio of byte access time to unaligned word access is 0.00, unaligned accesses are slow
+[    3.946950] initcall 0xc0004b64 returned 0 after 1510000 usecs
+[    3.961567] calling  0xc029db74 @ 1
+[    3.979409] initcall 0xc029db74 returned 0 after 10000 usecs
+[    3.993920] calling  0xc029d99c @ 1
+[    4.018109] initcall 0xc029d99c returned 0 after 10000 usecs
+[    4.032636] calling  0xc01bb7bc @ 1
+[    4.068540] initcall 0xc01bb7bc returned 0 after 20000 usecs
+[    4.083114] calling  0xc028dd84 @ 1
+[    4.095280] initcall 0xc028dd84 returned 0 after 0 usecs
+[    4.112826] calling  0xc0004aec @ 1
+[    4.121937] initcall 0xc0004aec returned 0 after 0 usecs
+[    4.135889] calling  0xc02a085c @ 1
+[    4.817699] initcall 0xc02a085c returned 0 after 550000 usecs
+[    4.847932] calling  0xc028f7e0 @ 1
+[    4.860579] initcall 0xc028f7e0 returned 0 after 0 usecs
+[    4.874582] calling  0xc0290334 @ 1
+[    4.887426] initcall 0xc0290334 returned 0 after 10000 usecs
+[    4.901950] calling  0xc0290b40 @ 1
+[    4.913154] initcall 0xc0290b40 returned 0 after 0 usecs
+[    4.926948] calling  0xc0290f2c @ 1
+[    4.938441] initcall 0xc0290f2c returned 0 after 0 usecs
+[    4.952415] calling  0xc02929b8 @ 1
+[    4.983135] initcall 0xc02929b8 returned 0 after 20000 usecs
+[    4.997956] calling  0xc0292c0c @ 1
+[    5.009045] initcall 0xc0292c0c returned 0 after 0 usecs
+[    5.023004] calling  0xc0292d24 @ 1
+[    5.078275] initcall 0xc0292d24 returned 0 after 40000 usecs
+[    5.093145] calling  0xc02947f0 @ 1
+[    5.102006] initcall 0xc02947f0 returned 0 after 0 usecs
+[    5.115822] calling  0xc02957c0 @ 1
+[    5.127013] initcall 0xc02957c0 returned 0 after 0 usecs
+[    5.140744] calling  0xc007bf98 @ 1
+[    5.152188] initcall 0xc007bf98 returned 0 after 0 usecs
+[    5.166172] calling  0xc007bf70 @ 1
+[    5.177400] initcall 0xc007bf70 returned 0 after 0 usecs
+[    5.191366] calling  0xc0298a2c @ 1
+[    5.205048] initcall 0xc0298a2c returned 0 after 0 usecs
+[    5.222260] calling  0xc0298af0 @ 1
+[    5.231272] initcall 0xc0298af0 returned 0 after 0 usecs
+[    5.244984] calling  0xc029ba00 @ 1
+[    5.256721] initcall 0xc029ba00 returned 0 after 0 usecs
+[    5.270695] calling  0xc029bb30 @ 1
+[    5.295881] initcall 0xc029bb30 returned 0 after 10000 usecs
+[    5.310808] calling  0xc029bcb8 @ 1
+[    5.323850] initcall 0xc029bcb8 returned 0 after 0 usecs
+[    5.337735] calling  0xc029bd20 @ 1
+[    5.348993] initcall 0xc029bd20 returned 0 after 0 usecs
+[    5.363290] calling  0xc029bdd0 @ 1
+[    5.412210] initcall 0xc029bdd0 returned 0 after 30000 usecs
+[    5.426836] calling  0xc029eb78 @ 1
+[    5.446253] initcall 0xc029eb78 returned 0 after 10000 usecs
+[    5.460967] calling  0xc01cf034 @ 1
+[    5.473311] initcall 0xc01cf034 returned 0 after 10000 usecs
+[    5.487857] calling  0xc029febc @ 1
+[    5.525531] initcall 0xc029febc returned 0 after 30000 usecs
+[    5.539858] calling  0xc02a2cc0 @ 1
+[    5.551699] initcall 0xc02a2cc0 returned 0 after 10000 usecs
+[    5.566398] calling  0xc02a31c0 @ 1
+[    5.687154] initcall 0xc02a31c0 returned 0 after 100000 usecs
+[    5.701868] calling  0xc02a34d4 @ 1
+[    5.714068] initcall 0xc02a34d4 returned 0 after 10000 usecs
+[    5.729346] calling  0xc02a3928 @ 1
+[    5.741341] initcall 0xc02a3928 returned 0 after 0 usecs
+[    5.755365] calling  0xc02a3968 @ 1
+[    5.779829] initcall 0xc02a3968 returned 0 after 20000 usecs
+[    5.794497] calling  0xc02a3e7c @ 1
+[    6.001507] initcall 0xc02a3e7c returned 0 after 170000 usecs
+[    6.016213] calling  0xc02a46e4 @ 1
+[    6.027322] initcall 0xc02a46e4 returned 0 after 0 usecs
+[    6.058894] calling  0xc028f3b8 @ 1
+[    6.075524] initcall 0xc028f3b8 returned 0 after 0 usecs
+[    6.089630] calling  0xc029226c @ 1
+[C0]
+[C1]
+[C2]
+[T0]
+[T1]
+[N0]
+[X0]
+[X1]
+[X2]
+[X3]
+[X4]
+[X5]
+[T0]
+[T1]
+[N1]
+[    6.122588] clocksource: Switched to clocksource riscv_clocksource
+[T0]
+[T1]
+[C3]
+[C4]
+[    6.141261] initcall 0xc029226c returned 0 after 37734 usecs
+[    6.158217] calling  0xc0299114 @ 1
+[    6.177725] initcall 0xc0299114 returned 0 after 8332 usecs
+[    6.192186] calling  0xc029a220 @ 1
+[    6.209540] initcall 0xc029a220 returned 0 after 3709 usecs
+[    6.226227] calling  0xc029a334 @ 1
+[    6.243282] initcall 0xc029a334 returned 0 after 5994 usecs
+[    6.260241] calling  0xc029a3b4 @ 1
+[    6.272027] initcall 0xc029a3b4 returned 0 after 691 usecs
+[    6.288543] calling  0xc029a598 @ 1
+[    6.311908] initcall 0xc029a598 returned 0 after 11975 usecs
+[    6.328736] calling  0xc029a5b4 @ 1
+[    6.352263] initcall 0xc029a5b4 returned 0 after 12349 usecs
+[    6.369127] calling  0xc029a904 @ 1
+[    6.380976] initcall 0xc029a904 returned 0 after 680 usecs
+[    6.397669] calling  0xc029a960 @ 1
+[    6.409909] initcall 0xc029a960 returned 0 after 725 usecs
+[    6.426574] calling  0xc029a9a0 @ 1
+[    6.438344] initcall 0xc029a9a0 returned 0 after 713 usecs
+[    6.452559] calling  0xc029a9d8 @ 1
+[    6.467535] initcall 0xc029a9d8 returned 0 after 1360 usecs
+[    6.483143] calling  0xc029aa24 @ 1
+[    6.497357] initcall 0xc029aa24 returned 0 after 732 usecs
+[    6.511573] calling  0xc029aa64 @ 1
+[    6.525908] initcall 0xc029aa64 returned 0 after 2936 usecs
+[    6.540457] calling  0xc029aaac @ 1
+[    6.552248] initcall 0xc029aaac returned 0 after 731 usecs
+[    6.569153] calling  0xc029aaf4 @ 1
+[    6.581008] initcall 0xc029aaf4 returned 0 after 674 usecs
+[    6.597674] calling  0xc029ab2c @ 1
+[    6.609536] initcall 0xc029ab2c returned 0 after 702 usecs
+[    6.626567] calling  0xc029ab74 @ 1
+[    6.638475] initcall 0xc029ab74 returned 0 after 738 usecs
+[    6.652916] calling  0xc029abbc @ 1
+[    6.667034] initcall 0xc029abbc returned 0 after 706 usecs
+[    6.681722] calling  0xc029ad44 @ 1
+[    6.695661] initcall 0xc029ad44 returned 0 after 663 usecs
+[    6.709858] calling  0xc029ad7c @ 1
+[    6.722272] initcall 0xc029ad7c returned 0 after 1358 usecs
+[    6.739414] calling  0xc029b998 @ 1
+[    6.750719] initcall 0xc029b998 returned 0 after 267 usecs
+[    6.767354] calling  0xc029e864 @ 1
+[    6.979778] initcall 0xc029e864 returned 0 after 201378 usecs
+[    6.996638] calling  0xc02a3b64 @ 1
+[    7.008239] initcall 0xc02a3b64 returned 0 after 88 usecs
+[    7.022508] calling  0xc02a3ef4 @ 1
+[    7.040122] NET: Registered PF_UNIX/PF_LOCAL protocol family
+[    7.058147] initcall 0xc02a3ef4 returned 0 after 22227 usecs
+[    7.073087] calling  0xc028c638 @ 1
+[    7.088092] initcall 0xc028c638 returned 0 after 1587 usecs
+[    7.120139] calling  0xc028d84c @ 1
+[    7.131779] initcall 0xc028d84c returned 0 after 76 usecs
+[    7.148054] calling  0xc028efe4 @ 1
+[    7.159941] initcall 0xc028efe4 returned 0 after 710 usecs
+[    7.177740] calling  0xc028f020 @ 1
+[    7.189073] initcall 0xc028f020 returned 0 after 69 usecs
+[    7.203378] calling  0xc028f33c @ 1
+[    7.217936] initcall 0xc028f33c returned 0 after 1223 usecs
+[    7.232863] calling  0xc0291e54 @ 1
+[    7.246384] initcall 0xc0291e54 returned 0 after 104 usecs
+[    7.260809] calling  0xc0292184 @ 1
+[    7.303251] initcall 0xc0292184 returned 0 after 31223 usecs
+[    7.320089] calling  0xc0292344 @ 1
+[    7.332021] initcall 0xc0292344 returned 0 after 788 usecs
+[    7.348883] calling  0xc0292390 @ 1
+[    7.370463] initcall 0xc0292390 returned 0 after 10392 usecs
+[    7.387021] calling  0xc02923f4 @ 1
+[    7.400516] initcall 0xc02923f4 returned 0 after 1949 usecs
+[    7.417090] calling  0xc0292454 @ 1
+[    7.458342] initcall 0xc0292454 returned 0 after 30057 usecs
+[    7.472870] calling  0xc02924e4 @ 1
+[    7.486380] initcall 0xc02924e4 returned 0 after 103 usecs
+[    7.500687] calling  0xc02928dc @ 1
+[    7.512482] initcall 0xc02928dc returned 0 after 737 usecs
+[    7.529512] calling  0xc0292b58 @ 1
+[    7.586487] ORY_BOOT rootfs begin compressed_bytes=37593600
+[    7.610484] initcall 0xc0292b58 returned 0 after 69790 usecs
+[    7.627669] calling  0xc0295648 @ 1
+[    7.638709] workingset: timestamp_bits=30 max_order=18 bucket_order=0
+[    7.656505] initcall 0xc0295648 returned 0 after 17791 usecs
+[    7.671037] calling  0xc02958b4 @ 1
+[    7.682987] initcall 0xc02958b4 returned 0 after 758 usecs
+[    7.700451] calling  0xc0298ab8 @ 1
+[    7.712369] initcall 0xc0298ab8 returned 0 after 727 usecs
+[    7.730047] calling  0xc0299180 @ 1
+[    7.743208] initcall 0xc0299180 returned 0 after 1947 usecs
+[    7.760367] calling  0xc0299434 @ 1
+[    7.772295] initcall 0xc0299434 returned 0 after 787 usecs
+[    7.788984] calling  0xc0299820 @ 1
+[    7.800760] initcall 0xc0299820 returned 0 after 257 usecs
+[    7.817419] calling  0xc029a534 @ 1
+[    7.830402] initcall 0xc029a534 returned 0 after 1946 usecs
+[    7.847071] calling  0xc029af5c @ 1
+[    7.858900] initcall 0xc029af5c returned 0 after 305 usecs
+[    7.873325] calling  0xc029b324 @ 1
+[    7.931482] initcall 0xc029b324 returned 0 after 44888 usecs
+[    7.948083] calling  0xc029b810 @ 1
+[    7.971542] initcall 0xc029b810 returned 0 after 12272 usecs
+[    7.988270] calling  0xc029bb14 @ 1
+[    8.006566] initcall 0xc029bb14 returned 0 after 7214 usecs
+[    8.021354] calling  0xc029be38 @ 1
+[    8.036023] initcall 0xc029be38 returned 0 after 3583 usecs
+[    8.050467] calling  0xc029c5c8 @ 1
+[    8.061678] io scheduler mq-deadline registered
+[    8.076030] initcall 0xc029c5c8 returned 0 after 11833 usecs
+[    8.090577] calling  0xc029c5d8 @ 1
+[    8.101663] io scheduler kyber registered
+[    8.112763] initcall 0xc029c5d8 returned 0 after 11149 usecs
+[    8.129607] calling  0xc029c5e8 @ 1
+[    8.147004] io scheduler bfq registered
+[    8.157920] initcall 0xc029c5e8 returned 0 after 17283 usecs
+[    8.172203] calling  0xc029c694 @ 1
+[    8.185976] initcall 0xc029c694 returned 0 after 75 usecs
+[    8.200052] calling  0xc029c894 @ 1
+[    8.225866] initcall 0xc029c894 returned 0 after 14731 usecs
+[    8.240796] calling  0xc029d3b0 @ 1
+[    8.266700] initcall 0xc029d3b0 returned 0 after 14684 usecs
+[    8.281130] calling  0xc029d3c0 @ 1
+[    8.370197] riscv-plic: interrupt-controller@c000000: mapped 4 interrupts with 1 handlers for 2 contexts.
+[    8.408412] probe of c000000.interrupt-controller returned 0 after 109695 usecs
+[    8.438381] initcall 0xc029d3c0 returned 0 after 145942 usecs
+[    8.456767] calling  0xc029d3dc @ 1
+[    8.492825] probe of soc returned 0 after 21441 usecs
+[    8.526519] initcall 0xc029d3dc returned 0 after 58520 usecs
+[    8.541075] calling  0xc029d8dc @ 1
+[    8.567206] initcall 0xc029d8dc returned 0 after 15062 usecs
+[    8.581589] calling  0xc029d934 @ 1
+[    8.607186] initcall 0xc029d934 returned 0 after 14528 usecs
+[    8.622113] calling  0xc029d98c @ 1
+[    8.648953] initcall 0xc029d98c returned 0 after 15760 usecs
+[    8.663322] calling  0xc029dc54 @ 1
+[    8.747024] probe of 10009000.dma-controller returned 0 after 66520 usecs
+[    8.828719] probe of 1000a000.dma-controller returned 0 after 65153 usecs
+[    8.912414] probe of 1000b000.dma-controller returned 0 after 65161 usecs
+[    8.938004] initcall 0xc029dc54 returned 0 after 260933 usecs
+[    8.952668] calling  0xc029ddc0 @ 1
+[    8.966132] initcall 0xc029ddc0 returned 0 after 90 usecs
+[    8.980638] calling  0xc029dde8 @ 1
+[   10.462088] initcall 0xc029dde8 returned 0 after 1470227 usecs
+[   10.479303] calling  0xc029e060 @ 1
+[   10.491124] initcall 0xc029e060 returned 0 after 767 usecs
+[   10.508027] calling  0xc029e0d0 @ 1
+[   11.036542] printk: legacy console [hvc0] enabled
+[   11.036542] printk: legacy console [hvc0] enabled
+[   11.060462] initcall 0xc029e0d0 returned 0 after 541238 usecs
+[   11.060462] initcall 0xc029e0d0 returned 0 after 541238 usecs
+[   11.090402] calling  0xc029f420 @ 1
+[   11.090402] calling  0xc029f420 @ 1
+[   11.127265] initcall 0xc029f420 returned 0 after 16768 usecs
+[   11.127265] initcall 0xc029f420 returned 0 after 16768 usecs
+[   11.156555] calling  0xc029f4a0 @ 1
+[   11.156555] calling  0xc029f4a0 @ 1
+[   11.217377] initcall 0xc029f4a0 returned 0 after 40560 usecs
+[   11.217377] initcall 0xc029f4a0 returned 0 after 40560 usecs
+[   11.246433] calling  0xc029fd98 @ 1
+[   11.246433] calling  0xc029fd98 @ 1
+[   11.889051] bosio-kfb 20000000.bosio: BOSIO ABI3: dual projectors + BS25, DMA copy/fill/upload/RGB-user, 16MiB arena
+[   11.889051] bosio-kfb 20000000.bosio: BOSIO ABI3: dual projectors + BS25, DMA copy/fill/upload/RGB-user, 16MiB arena
+[   11.946426] probe of 20000000.bosio returned 0 after 674673 usecs
+[   11.946426] probe of 20000000.bosio returned 0 after 674673 usecs
+[   11.981595] initcall 0xc029fd98 returned 0 after 714631 usecs
+[   11.981595] initcall 0xc029fd98 returned 0 after 714631 usecs
+[   12.011236] calling  0xc029fe3c @ 1
+[   12.011236] calling  0xc029fe3c @ 1
+[   12.035876] initcall 0xc029fe3c returned 0 after 3954 usecs
+[   12.035876] initcall 0xc029fe3c returned 0 after 3954 usecs
+[   12.062589] calling  0xc029ff00 @ 1
+[   12.062589] calling  0xc029ff00 @ 1
+[   12.097816] initcall 0xc029ff00 returned 0 after 14506 usecs
+[   12.097816] initcall 0xc029ff00 returned 0 after 14506 usecs
+[   12.128193] calling  0xc029ff10 @ 1
+[   12.128193] calling  0xc029ff10 @ 1
+[   12.160965] initcall 0xc029ff10 returned 0 after 12365 usecs
+[   12.160965] initcall 0xc029ff10 returned 0 after 12365 usecs
+[   12.190254] calling  0xc029ff20 @ 1
+[   12.190254] calling  0xc029ff20 @ 1
+[   12.233197] initcall 0xc029ff20 returned 0 after 22628 usecs
+[   12.233197] initcall 0xc029ff20 returned 0 after 22628 usecs
+[   12.262813] calling  0xc02a004c @ 1
+[   12.262813] calling  0xc02a004c @ 1
+[   12.842500] probe of 10008000.mmc returned 0 after 554025 usecs
+[   12.842500] probe of 10008000.mmc returned 0 after 554025 usecs
+[   12.881323] initcall 0xc02a004c returned 0 after 598247 usecs
+[   12.881323] initcall 0xc02a004c returned 0 after 598247 usecs
+[   12.910915] calling  0xc02a3870 @ 1
+[   12.910915] calling  0xc02a3870 @ 1
+[   12.936566] initcall 0xc02a3870 returned 0 after 4956 usecs
+[   12.936566] initcall 0xc02a3870 returned 0 after 4956 usecs
+[   12.980972] calling  0xc028f028 @ 1
+[   12.980972] calling  0xc028f028 @ 1
+[   13.002406] initcall 0xc028f028 returned 0 after 1063 usecs
+[   13.002406] initcall 0xc028f028 returned 0 after 1063 usecs
+[   13.031451] calling  0xc028f268 @ 1
+[   13.031451] calling  0xc028f268 @ 1
+[   13.052800] initcall 0xc028f268 returned 0 after 1093 usecs
+[   13.052800] initcall 0xc028f268 returned 0 after 1093 usecs
+[   13.082108] calling  0xc0290460 @ 1
+[   13.082108] calling  0xc0290460 @ 1
+[   13.379397] initcall 0xc0290460 returned 0 after 276919 usecs
+[   13.379397] initcall 0xc0290460 returned 0 after 276919 usecs
+[   13.409172] calling  0xc0290a9c @ 1
+[   13.409172] calling  0xc0290a9c @ 1
+[   13.431583] initcall 0xc0290a9c returned 0 after 2206 usecs
+[   13.431583] initcall 0xc0290a9c returned 0 after 2206 usecs
+[   13.460886] calling  0xc029183c @ 1
+[   13.460886] calling  0xc029183c @ 1
+[   13.481388] initcall 0xc029183c returned 0 after 301 usecs
+[   13.481388] initcall 0xc029183c returned 0 after 301 usecs
+[   13.510085] calling  0xc02987bc @ 1
+[   13.510085] calling  0xc02987bc @ 1
+[   15.652315] initcall 0xc02987bc returned 0 after 2121981 usecs
+[   15.652315] initcall 0xc02987bc returned 0 after 2121981 usecs
+[   15.682538] calling  0xc0298ab0 @ 1
+[   15.682538] calling  0xc0298ab0 @ 1
+[   15.702846] initcall 0xc0298ab0 returned 0 after 74 usecs
+[   15.702846] initcall 0xc0298ab0 returned 0 after 74 usecs
+[   15.731338] calling  0xc0298b70 @ 1
+[   15.731338] calling  0xc0298b70 @ 1
+[   15.751664] initcall 0xc0298b70 returned 0 after 115 usecs
+[   15.751664] initcall 0xc0298b70 returned 0 after 115 usecs
+[   15.780704] calling  0xc029b9bc @ 1
+[   15.780704] calling  0xc029b9bc @ 1
+[   15.801773] initcall 0xc029b9bc returned 0 after 741 usecs
+[   15.801773] initcall 0xc029b9bc returned 0 after 741 usecs
+[   15.830543] calling  0xc029bd0c @ 1
+[   15.830543] calling  0xc029bd0c @ 1
+[   15.850679] initcall 0xc029bd0c returned 0 after 73 usecs
+[   15.850679] initcall 0xc029bd0c returned 0 after 73 usecs
+[   15.879327] calling  0xc01c18ec @ 1
+[   15.879327] calling  0xc01c18ec @ 1
+[   15.899781] initcall 0xc01c18ec returned 0 after 133 usecs
+[   15.899781] initcall 0xc01c18ec returned 0 after 133 usecs
+[   15.928433] calling  0xc01c59f8 @ 1
+[   15.928433] calling  0xc01c59f8 @ 1
+[   19.292182] initcall 0xc01c59f8 returned 0 after 3343114 usecs
+[   19.292182] initcall 0xc01c59f8 returned 0 after 3343114 usecs
+[   19.322467] calling  0xc02a0a08 @ 1
+[   19.322467] calling  0xc02a0a08 @ 1
+[   19.367609] initcall 0xc02a0a08 returned 0 after 24743 usecs
+[   19.367609] initcall 0xc02a0a08 returned 0 after 24743 usecs
+[   19.397782] calling  0xc022acec @ 1
+[   19.397782] calling  0xc022acec @ 1
+[   19.418211] initcall 0xc022acec returned 0 after 71 usecs
+[   19.418211] initcall 0xc022acec returned 0 after 71 usecs
+[   19.446866] calling  0xc02a3868 @ 1
+[   19.446866] calling  0xc02a3868 @ 1
+[   19.467050] initcall 0xc02a3868 returned 0 after 72 usecs
+[   19.467050] initcall 0xc02a3868 returned 0 after 72 usecs
+[   19.493518] calling  0xc02a3960 @ 1
+[   19.493518] calling  0xc02a3960 @ 1
+[   19.516548] initcall 0xc02a3960 returned 0 after 70 usecs
+[   19.516548] initcall 0xc02a3960 returned 0 after 70 usecs
+[   19.543087] calling  0xc029d58c @ 1
+[   19.543087] calling  0xc029d58c @ 1
+[   19.563248] clk: Disabling unused clocks
+[   19.563248] clk: Disabling unused clocks
+[   19.585656] initcall 0xc029d58c returned 0 after 20222 usecs
+[   19.585656] initcall 0xc029d58c returned 0 after 20222 usecs
+[   19.613000] calling  0xc02a0840 @ 1
+[   19.613000] calling  0xc02a0840 @ 1
+[   19.636262] initcall 0xc02a0840 returned 0 after 132 usecs
+[   19.636262] initcall 0xc02a0840 returned 0 after 132 usecs
+[   19.662920] ORY_BOOT wait_for_initramfs enter
+[   19.662920] ORY_BOOT wait_for_initramfs enter
+[   20.257912] mmc0: host does not support reading read-only switch, assuming write-enable
+[   20.257912] mmc0: host does not support reading read-only switch, assuming write-enable
+[   20.348657] mmc0: new SDHC card at address 0001
+[   20.348657] mmc0: new SDHC card at address 0001
+[   20.616327] mmcblk0: mmc0:0001 SD 14.6 GiB
+[   20.616327] mmcblk0: mmc0:0001 SD 14.6 GiB
+[   21.260260]  mmcblk0: p1 p2
+[   21.260260]  mmcblk0: p1 p2
+[   21.481646] probe of mmc0:0001 returned 0 after 1074793 usecs
+[   21.481646] probe of mmc0:0001 returned 0 after 1074793 usecs
+[   58.249454] ORY_BOOT rootfs unpack returned error=none extracted_bytes=0
+[   58.249454] ORY_BOOT rootfs unpack returned error=none extracted_bytes=0
+[   58.290517] ORY_BOOT wait_for_initramfs done
+[   58.290517] ORY_BOOT wait_for_initramfs done
+[   58.311752] ORY_BOOT console_on_rootfs enter
+[   58.311752] ORY_BOOT console_on_rootfs enter
+[   58.349559] ORY_BOOT console_on_rootfs done
+[   58.349559] ORY_BOOT console_on_rootfs done
+[   58.371583] ORY_BOOT kernel_init_freeable done
+[   58.371583] ORY_BOOT kernel_init_freeable done
+[   66.951302] Freeing unused kernel image (initmem) memory: 36844K
+[   66.951302] Freeing unused kernel image (initmem) memory: 36844K
+[   66.980928] Kernel memory protection not selected by kernel config.
+[   66.980928] Kernel memory protection not selected by kernel config.
+[   67.010401] Run /init as init process
+[   67.010401] Run /init as init process
+[   67.030072]   with arguments:
+[   67.030072]   with arguments:
+[   67.047715]     /init
+[   67.047715]     /init
+[   67.061285]   with environment:
+[   67.061285]   with environment:
+[   67.079728]     HOME=/
+[   67.079728]     HOME=/
+[   67.095817]     TERM=linux
+[   67.095817]     TERM=linux
+[   70.879452] EXT4-fs (mmcblk0p2): mounted filesystem a2067c60-23b9-41d4-b494-33beb8f6b553 r/w with ordered data mode. Quota mode: disabled.
+[   70.879452] EXT4-fs (mmcblk0p2): mounted filesystem a2067c60-23b9-41d4-b494-33beb8f6b553 r/w with ordered data mode. Quota mode: disabled.
+ORYUKDO: SD ext4 /data mounted
+ORYUKDO BusyBox serial console
+
+
+BusyBox v1.37.0 (2026-11-07 10:24:46 KST) built-in shell (ash)
+Enter 'help' for a list of built-in commands.
+
+oryukdo# cat /etc/oryukdo-image; uname -r; cat /proc/mounts; ps; echo V14_9a604e
+0f_RC:$?
+HAEBANCHEON-BoAYO-tilebatch-v14 / L1-16K DMA3 / 32x32 source damage, cached assets, batched copies, rectangular app bodies
+6.12.0-haebancheon-tilebatch14
+rootfs / rootfs rw 0 0
+devtmpfs /dev devtmpfs rw,relatime 0 0
+/dev/mmcblk0p2 /data ext4 rw,relatime 0 0
+proc /proc proc rw,relatime 0 0
+sysfs /sys sysfs rw,relatime 0 0
+    1 root       192 S    /init.console
+    2 root         0 SW   [kthreadd]
+    3 root         0 SW   [pool_workqueue_]
+    4 root         0 IW<  [kworker/R-slub_]
+    5 root         0 IW   [kworker/0:0-eve]
+    6 root         0 IW<  [kworker/0:0H]
+    7 root         0 IW   [kworker/u4:0-ev]
+    8 root         0 IW<  [kworker/R-mm_pe]
+    9 root         0 SW   [ksoftirqd/0]
+   10 root         0 SW   [kdevtmpfs]
+   11 root         0 SW   [oom_reaper]
+   12 root         0 IW<  [kworker/R-write]
+   13 root         0 IW<  [kworker/R-kbloc]
+   14 root         0 SW   [kswapd0]
+   15 root         0 IW   [kworker/u4:1-ev]
+   16 root         0 IW   [kworker/0:1-eve]
+   17 root         0 SW   [khvcd]
+   18 root         0 IW   [kworker/u4:2-ev]
+   19 root         0 IW   [kworker/0:2-eve]
+   20 root         0 IW   [kworker/0:3-eve]
+   21 root         0 IW<  [kworker/R-mmc_c]
+   22 root         0 IW<  [kworker/0:1H-mm]
+   26 root         0 SW   [jbd2/mmcblk0p2-]
+   27 root         0 IW<  [kworker/R-ext4-]
+   29 root       496 S    sh -i
+   33 root       504 R    {ps} sh -i
+V14_9a604e0f_RC:0
+oryukdo# BOAYO_PROFILE=0 BOAYO_INIT_TRACE=0 /usr/bin/boayo-native start; echo V1
+4_49ba3dc9_RC:$?
+BoAYO C++ service started; initialization continues. boayo-status / boayo-keys / boayo-stop
+{"features":["windows","pointer","input-injection","button-events","scene-stream","spatial-workspace","pointer-capture"],"headless":false,"m":32,"mock_backend":false,"runtime":"C++17","version":2}
+V14_49ba3dc9_RC:0
+oryukdo# sleep 12; echo V14_97ccc1d5_RC:$?
+V14_97ccc1d5_RC:0
+oryukdo# boayo-status; echo V14_c01a7532_RC:$?
+{
+  "app_error": null,
+  "assets": {
+    "cache_hits": 0,
+    "format": "raw-mapped-00RRGGBB",
+    "loads": 1,
+    "misses": 0,
+    "rejected": 0,
+    "rgb_materializations": 0
+  },
+  "buttons": {
+    "available": false,
+    "last_event_id": 0,
+    "state": 0
+  },
+  "compositor": "cpp-native",
+  "driver_profile": {
+    "available": true,
+    "enabled": false,
+    "fast_paths": true
+  },
+  "focused_window": 1,
+  "generation": 4,
+  "motion": {
+    "active": false,
+    "next_step": 0,
+    "phase": "idle",
+    "steps": 25,
+    "target_generation": 0,
+    "view": {
+      "pitch": 0.0,
+      "roll": 0.0,
+      "yaw": 0.0
+    },
+    "windows": []
+  },
+  "output": {
+    "abi": 3,
+    "active_bank": 1,
+    "active_base": 3175415808,
+    "antialias": false,
+    "backend": "kfb-linux-frame-atomic-output",
+    "capability": 1146373681,
+    "commits": 2,
+    "dma_copied_words": 0,
+    "max_jobs": 64,
+    "max_scene_words": 1084816,
+    "memory_dma": {
+      "available": true,
+      "copy_bytes": 974296,
+      "copy_ops": 41,
+      "errors": 0,
+      "features": 255,
+      "fill_bytes": 45056,
+      "fill_ops": 44,
+      "quarantined": 0,
+      "timeouts": 0,
+      "upload_bytes": 957408,
+      "upload_ops": 3,
+      "upload_threshold": 4096
+    },
+    "metadata_only": false,
+    "mock_backend": false,
+    "poisoned": 0,
+    "publish_profile": {
+      "backend": "kernel",
+      "command": 1,
+      "configure_us": 88,
+      "finish_us": 6856,
+      "select_us": 105,
+      "upload_ranges": 1,
+      "upload_us": 52124,
+      "uploaded_words": 4476,
+      "user_copy_us": 8743,
+      "validate_us": 36070,
+      "wait_us": 42615
+    },
+    "sensor_available": false,
+    "shadow_copied_words": 0,
+    "signature": 1112748597,
+    "status": 13828099,
+    "uploaded_words": 8952
+  },
+  "performance": {
+    "frame_interval_ms": 0.0,
+    "frame_limit": 2.0,
+    "frame_pacing": "start-to-start",
+    "full_update_count": 1,
+    "last_apps_ms": 229.3047200000018,
+    "last_compose_ms": 3850.3939599999912,
+    "last_upload_ms": 0.0,
+    "no_op_update_count": 0,
+    "patch_update_count": 1,
+    "render_count": 1,
+    "rendered_generation": 4,
+    "update_words": 4480,
+    "uptime_seconds": 6.464108300000007
+  },
+  "pointer": {
+    "azimuth": 0.0,
+    "buttons": [],
+    "cancel_serial": 0,
+    "captured_window": null,
+    "dragging": false,
+    "elevation": 0.0,
+    "last_left_press": null,
+    "last_left_release": null,
+    "left_press_serial": 0,
+    "left_release_serial": 0,
+    "scroll_delta": 0.0,
+    "scroll_serial": 0,
+    "visible": false,
+    "window_id": 1,
+    "zone": "content"
+  },
+  "profile": {
+    "enabled": false,
+    "nested": true,
+    "units": "microseconds"
+  },
+  "projection": {
+    "cpu_output_shadow_words": 4480,
+    "cpu_result_download_words": 0,
+    "cpu_scene_words": 0,
+    "device_ready_frames": 1,
+    "dirty_tiles": 160,
+    "fallback_frames": 0,
+    "geometry_builds": 0,
+    "geometry_cull_us_total": 0,
+    "geometry_descriptor_us_total": 0,
+    "geometry_insert_us_total": 0,
+    "geometry_prepare_us_total": 0,
+    "geometry_tiles_evaluated_total": 0,
+    "hardware_frames": 1,
+    "jobs_per_core": [
+      48,
+      48
+    ],
+    "lazy_copied_tiles_total": 0,
+    "mask_build_us_total": 0,
+    "mask_builds": 0,
+    "mask_fast_tiles_total": 0,
+    "mask_integer_samples_total": 0,
+    "mask_precise_samples_total": 0,
+    "mask_samples_evaluated_total": 0,
+    "masked_tiles_total": 44,
+    "mode": "ddr-resident-dirty-tiles",
+    "packed_mask_tiles_total": 44,
+    "plan_cache": {
+      "builtin_loads": 1,
+      "hits": 0,
+      "loads": 1,
+      "misses": 0,
+      "payload_scan_bytes": 0,
+      "rejected": 0,
+      "revision": "9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5"
+    },
+    "precomputed_layers_total": 1,
+    "redrawn_tiles": 96,
+    "reused_tiles_total": 0,
+    "solid_tiles_total": 0,
+    "texture_pool": {
+      "asset_cache_evictions": 0,
+      "asset_cache_hits": 0,
+      "asset_cache_misses": 0,
+      "asset_cache_upload_bytes": 0,
+      "asset_copy_batches": 0,
+      "asset_copy_bytes": 0,
+      "asset_copy_requests": 0,
+      "asset_resident_bytes": 0,
+      "capacity_bytes": 4194304,
+      "evictions": 0,
+      "full_uploads": 1,
+      "partial_uploads": 0,
+      "resident_bytes": 921600,
+      "resident_windows": 1,
+      "reuses": 0,
+      "source_tile_size": 32,
+      "source_tiles_updated": 240,
+      "staged_copy_bytes": 0,
+      "total_resident_bytes": 921600,
+      "upload_bytes": 921600,
+      "upload_calls": 1
+    },
+    "texture_reuses_total": 0,
+    "texture_uploads_total": 1,
+    "tile_fills_total": 44,
+    "total_hw_jobs": 96,
+    "update_kind": "tiles"
+  },
+  "render_error": null,
+  "runtime": "C++17",
+  "scene_owner": null,
+  "service": {
+    "phase": "apps",
+    "queued_requests": 0,
+    "snapshot_age_seconds": 10.294067920000003,
+    "state_is_snapshot": true
+  },
+  "view": {
+    "pitch": 0.0,
+    "roll": 0.0,
+    "yaw": 0.0
+  },
+  "windows": [
+    {
+      "always_on_top": true,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": true,
+      "height_deg": 30.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "boayo-desktop",
+      "roll": 0.0,
+      "shape": [
+        [
+          51.2,
+          36.0,
+          537.6,
+          252.0,
+          18.0
+        ]
+      ],
+      "surface_height": 360,
+      "surface_width": 640,
+      "title": "BoAYO Launcher",
+      "width_deg": 42.0,
+      "window_id": 1,
+      "workspace": {},
+      "z": 0
+    }
+  ]
+}
+V14_c01a7532_RC:0
+oryukdo# /usr/bin/boayo-native app telemetry; sleep 20; echo V14_83826376_RC:$?
+BOAYO_APP_READY window=2
+V14_83826376_RC:0
+oryukdo# boayo-status; echo V14_b2985154_RC:$?
+{
+  "app_error": null,
+  "assets": {
+    "cache_hits": 7,
+    "format": "raw-mapped-00RRGGBB",
+    "loads": 15,
+    "misses": 0,
+    "rejected": 0,
+    "rgb_materializations": 0
+  },
+  "buttons": {
+    "available": false,
+    "last_event_id": 0,
+    "state": 0
+  },
+  "compositor": "cpp-native",
+  "driver_profile": {
+    "available": true,
+    "enabled": false,
+    "fast_paths": true
+  },
+  "focused_window": 2,
+  "generation": 21,
+  "motion": {
+    "active": false,
+    "next_step": 0,
+    "phase": "idle",
+    "steps": 25,
+    "target_generation": 0,
+    "view": {
+      "pitch": 0.0,
+      "roll": 0.0,
+      "yaw": 0.0
+    },
+    "windows": []
+  },
+  "output": {
+    "abi": 3,
+    "active_bank": 0,
+    "active_base": 3170959360,
+    "antialias": false,
+    "backend": "kfb-linux-frame-atomic-output",
+    "capability": 1146373681,
+    "commits": 7,
+    "dma_copied_words": 18176,
+    "max_jobs": 64,
+    "max_scene_words": 1084816,
+    "memory_dma": {
+      "available": true,
+      "copy_bytes": 1955616,
+      "copy_ops": 128,
+      "errors": 0,
+      "features": 255,
+      "fill_bytes": 131072,
+      "fill_ops": 128,
+      "quarantined": 0,
+      "timeouts": 0,
+      "upload_bytes": 1658208,
+      "upload_ops": 17,
+      "upload_threshold": 4096
+    },
+    "metadata_only": false,
+    "mock_backend": false,
+    "poisoned": 0,
+    "publish_profile": {
+      "backend": "kernel",
+      "command": 2,
+      "configure_us": 88,
+      "finish_us": 270,
+      "select_us": 23904,
+      "upload_ranges": 0,
+      "upload_us": 45605,
+      "uploaded_words": 0,
+      "user_copy_us": 14097,
+      "validate_us": 33396,
+      "wait_us": 10753
+    },
+    "sensor_available": false,
+    "shadow_copied_words": 0,
+    "signature": 1112748597,
+    "status": 107216899,
+    "uploaded_words": 9066
+  },
+  "performance": {
+    "frame_interval_ms": 3159.5444600000064,
+    "frame_limit": 2.0,
+    "frame_pacing": "start-to-start",
+    "full_update_count": 1,
+    "last_apps_ms": 622.8402200000005,
+    "last_compose_ms": 1706.2963600000103,
+    "last_upload_ms": 0.0,
+    "no_op_update_count": 0,
+    "patch_update_count": 6,
+    "render_count": 6,
+    "rendered_generation": 21,
+    "update_words": 4480,
+    "uptime_seconds": 54.12728036
+  },
+  "pointer": {
+    "azimuth": 0.0,
+    "buttons": [],
+    "cancel_serial": 0,
+    "captured_window": null,
+    "dragging": false,
+    "elevation": 0.0,
+    "last_left_press": null,
+    "last_left_release": null,
+    "left_press_serial": 0,
+    "left_release_serial": 0,
+    "scroll_delta": 0.0,
+    "scroll_serial": 0,
+    "visible": false,
+    "window_id": 2,
+    "zone": "content"
+  },
+  "profile": {
+    "enabled": false,
+    "nested": true,
+    "units": "microseconds"
+  },
+  "projection": {
+    "cpu_output_shadow_words": 4480,
+    "cpu_result_download_words": 0,
+    "cpu_scene_words": 0,
+    "device_ready_frames": 1,
+    "dirty_tiles": 28,
+    "fallback_frames": 0,
+    "geometry_builds": 0,
+    "geometry_cull_us_total": 0,
+    "geometry_descriptor_us_total": 0,
+    "geometry_insert_us_total": 0,
+    "geometry_prepare_us_total": 0,
+    "geometry_tiles_evaluated_total": 0,
+    "hardware_frames": 6,
+    "jobs_per_core": [
+      16,
+      16
+    ],
+    "lazy_copied_tiles_total": 71,
+    "mask_build_us_total": 0,
+    "mask_builds": 0,
+    "mask_fast_tiles_total": 0,
+    "mask_integer_samples_total": 0,
+    "mask_precise_samples_total": 0,
+    "mask_samples_evaluated_total": 0,
+    "masked_tiles_total": 158,
+    "mode": "ddr-resident-dirty-tiles",
+    "packed_mask_tiles_total": 158,
+    "plan_cache": {
+      "builtin_loads": 5,
+      "hits": 0,
+      "loads": 5,
+      "misses": 0,
+      "payload_scan_bytes": 0,
+      "rejected": 0,
+      "revision": "9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5"
+    },
+    "precomputed_layers_total": 5,
+    "redrawn_tiles": 28,
+    "reused_tiles_total": 0,
+    "solid_tiles_total": 0,
+    "texture_pool": {
+      "asset_cache_evictions": 0,
+      "asset_cache_hits": 0,
+      "asset_cache_misses": 10,
+      "asset_cache_upload_bytes": 192000,
+      "asset_copy_batches": 10,
+      "asset_copy_bytes": 192000,
+      "asset_copy_requests": 10,
+      "asset_resident_bytes": 192000,
+      "capacity_bytes": 4194304,
+      "evictions": 0,
+      "full_uploads": 5,
+      "partial_uploads": 4,
+      "resident_bytes": 1430400,
+      "resident_windows": 5,
+      "reuses": 4,
+      "source_tile_size": 32,
+      "source_tiles_updated": 542,
+      "staged_copy_bytes": 0,
+      "total_resident_bytes": 1622400,
+      "upload_bytes": 1622400,
+      "upload_calls": 15
+    },
+    "texture_reuses_total": 4,
+    "texture_uploads_total": 9,
+    "tile_fills_total": 128,
+    "total_hw_jobs": 337,
+    "update_kind": "tiles"
+  },
+  "render_error": null,
+  "runtime": "C++17",
+  "scene_owner": null,
+  "service": {
+    "phase": "composing",
+    "queued_requests": 0,
+    "snapshot_age_seconds": 3.1211585999999727,
+    "state_is_snapshot": true
+  },
+  "view": {
+    "pitch": 0.0,
+    "roll": 0.0,
+    "yaw": 0.0
+  },
+  "windows": [
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": true,
+      "height_deg": 26.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          0.0
+        ]
+      ],
+      "surface_height": 300,
+      "surface_width": 400,
+      "title": "Telemetry",
+      "width_deg": 36.0,
+      "window_id": 2,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 0
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 30.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "boayo-desktop",
+      "roll": 0.0,
+      "shape": [
+        [
+          51.2,
+          36.0,
+          537.6,
+          252.0,
+          18.0
+        ]
+      ],
+      "surface_height": 360,
+      "surface_width": 640,
+      "title": "BoAYO Launcher",
+      "width_deg": 42.0,
+      "window_id": 1,
+      "workspace": {},
+      "z": 1
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -16.47105751657935,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: Telemetry",
+      "width_deg": 2.88,
+      "window_id": 3,
+      "workspace": {
+        "control": "move",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 2
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": -10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 4,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 3
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": 10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": -3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 5,
+      "workspace": {
+        "control": "close",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 4
+    }
+  ]
+}
+V14_b2985154_RC:0
+oryukdo# /usr/bin/boayo-native profile; sleep 45; /usr/bin/boayo-native profile;
+ echo V14_5321af94_RC:$?
+{"app_error":null,"driver_profile":{"available":true,"enabled":false,"fast_paths":true},"output_profile":{"backend":"kernel","command":2,"configure_us":89,"finish_us":271,"select_us":25571,"upload_ranges":0,"upload_us":43909,"uploaded_words":0,"user_copy_us":8645,"validate_us":36261,"wait_us":12905},"performance":{"frame_interval_ms":6408.543500000007,"frame_limit":2.0,"frame_pacing":"start-to-start","full_update_count":1,"last_apps_ms":1396.2562799999887,"last_compose_ms":3598.882279999998,"last_upload_ms":0.0,"no_op_update_count":0,"patch_update_count":8,"render_count":8,"rendered_generation":23,"update_words":4480,"uptime_seconds":67.4786946},"phase":"composing","profile":{"enabled":false,"nested":true,"units":"microseconds"},"projection":{"cpu_output_shadow_words":4480,"cpu_result_download_words":0,"cpu_scene_words":0,"device_ready_frames":1,"dirty_tiles":28,"fallback_frames":0,"geometry_builds":0,"geometry_cull_us_total":0,"geometry_descriptor_us_total":0,"geometry_insert_us_total":0,"geometry_prepare_us_total":0,"geometry_tiles_evaluated_total":0,"hardware_frames":8,"jobs_per_core":[16,16],"lazy_copied_tiles_total":71,"mask_build_us_total":0,"mask_builds":0,"mask_fast_tiles_total":0,"mask_integer_samples_total":0,"mask_precise_samples_total":0,"mask_samples_evaluated_total":0,"masked_tiles_total":182,"mode":"ddr-resident-dirty-tiles","packed_mask_tiles_total":182,"plan_cache":{"builtin_loads":5,"hits":0,"loads":5,"misses":0,"payload_scan_bytes":0,"rejected":0,"revision":"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5"},"precomputed_layers_total":5,"redrawn_tiles":28,"reused_tiles_total":0,"solid_tiles_total":0,"texture_pool":{"asset_cache_evictions":1,"asset_cache_hits":0,"asset_cache_misses":14,"asset_cache_upload_bytes":268800,"asset_copy_batches":14,"asset_copy_bytes":268800,"asset_copy_requests":14,"asset_resident_bytes":246400,"capacity_bytes":4194304,"evictions":0,"full_uploads":5,"partial_uploads":6,"resident_bytes":1430400,"resident_windows":5,"reuses":6,"source_tile_size":32,"source_tiles_updated":620,"staged_copy_bytes":0,"total_resident_bytes":1676800,"upload_bytes":1699200,"upload_calls":19},"texture_reuses_total":6,"texture_uploads_total":11,"tile_fills_total":144,"total_hw_jobs":401,"update_kind":"tiles"},"render_error":null,"snapshot_time":165.37885538}
+{"app_error":null,"driver_profile":{"available":true,"enabled":false,"fast_paths":true},"output_profile":{"backend":"kernel","command":2,"configure_us":88,"finish_us":266,"select_us":26083,"upload_ranges":0,"upload_us":43199,"uploaded_words":0,"user_copy_us":11090,"validate_us":35701,"wait_us":43694},"performance":{"frame_interval_ms":3160.0939999999864,"frame_limit":2.0,"frame_pacing":"start-to-start","full_update_count":1,"last_apps_ms":641.2352000000112,"last_compose_ms":1959.6493200000111,"last_upload_ms":0.0,"no_op_update_count":0,"patch_update_count":24,"render_count":24,"rendered_generation":39,"update_words":4480,"uptime_seconds":125.68052970000001},"phase":"apps","profile":{"enabled":false,"nested":true,"units":"microseconds"},"projection":{"cpu_output_shadow_words":4480,"cpu_result_download_words":0,"cpu_scene_words":0,"device_ready_frames":1,"dirty_tiles":28,"fallback_frames":0,"geometry_builds":0,"geometry_cull_us_total":0,"geometry_descriptor_us_total":0,"geometry_insert_us_total":0,"geometry_prepare_us_total":0,"geometry_tiles_evaluated_total":0,"hardware_frames":24,"jobs_per_core":[16,16],"lazy_copied_tiles_total":85,"mask_build_us_total":0,"mask_builds":0,"mask_fast_tiles_total":0,"mask_integer_samples_total":0,"mask_precise_samples_total":0,"mask_samples_evaluated_total":0,"masked_tiles_total":368,"mode":"ddr-resident-dirty-tiles","packed_mask_tiles_total":368,"plan_cache":{"builtin_loads":5,"hits":0,"loads":5,"misses":0,"payload_scan_bytes":0,"rejected":0,"revision":"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5"},"precomputed_layers_total":5,"redrawn_tiles":28,"reused_tiles_total":0,"solid_tiles_total":0,"texture_pool":{"asset_cache_evictions":31,"asset_cache_hits":1,"asset_cache_misses":44,"asset_cache_upload_bytes":838400,"asset_copy_batches":45,"asset_copy_bytes":860800,"asset_copy_requests":45,"asset_resident_bytes":246400,"capacity_bytes":4194304,"evictions":0,"full_uploads":5,"partial_uploads":22,"resident_bytes":1430400,"resident_windows":5,"reuses":22,"source_tile_size":32,"source_tiles_updated":1218,"staged_copy_bytes":0,"total_resident_bytes":1676800,"upload_bytes":2268800,"upload_calls":49},"texture_reuses_total":22,"texture_uploads_total":27,"tile_fills_total":268,"total_hw_jobs":897,"update_kind":"tiles"},"render_error":null,"snapshot_time":223.93666948}
+V14_5321af94_RC:0
+oryukdo# boayo-status; echo V14_9c97b2cf_RC:$?
+{
+  "app_error": null,
+  "assets": {
+    "cache_hits": 28,
+    "format": "raw-mapped-00RRGGBB",
+    "loads": 51,
+    "misses": 0,
+    "rejected": 0,
+    "rgb_materializations": 0
+  },
+  "buttons": {
+    "available": false,
+    "last_event_id": 0,
+    "state": 0
+  },
+  "compositor": "cpp-native",
+  "driver_profile": {
+    "available": true,
+    "enabled": false,
+    "fast_paths": true
+  },
+  "focused_window": 2,
+  "generation": 40,
+  "motion": {
+    "active": false,
+    "next_step": 0,
+    "phase": "idle",
+    "steps": 25,
+    "target_generation": 0,
+    "view": {
+      "pitch": 0.0,
+      "roll": 0.0,
+      "yaw": 0.0
+    },
+    "windows": []
+  },
+  "output": {
+    "abi": 3,
+    "active_bank": 1,
+    "active_base": 3175415808,
+    "antialias": false,
+    "backend": "kfb-linux-frame-atomic-output",
+    "capability": 1146373681,
+    "commits": 26,
+    "dma_copied_words": 21760,
+    "max_jobs": 64,
+    "max_scene_words": 1084816,
+    "memory_dma": {
+      "available": true,
+      "copy_bytes": 3373476,
+      "copy_ops": 292,
+      "errors": 0,
+      "features": 255,
+      "fill_bytes": 282624,
+      "fill_ops": 276,
+      "quarantined": 0,
+      "timeouts": 0,
+      "upload_bytes": 2343008,
+      "upload_ops": 53,
+      "upload_threshold": 4096
+    },
+    "metadata_only": false,
+    "mock_backend": false,
+    "poisoned": 0,
+    "publish_profile": {
+      "backend": "kernel",
+      "command": 2,
+      "configure_us": 87,
+      "finish_us": 268,
+      "select_us": 25856,
+      "upload_ranges": 0,
+      "upload_us": 43835,
+      "uploaded_words": 0,
+      "user_copy_us": 9987,
+      "validate_us": 33036,
+      "wait_us": 323065
+    },
+    "sensor_available": false,
+    "shadow_copied_words": 0,
+    "signature": 1112748597,
+    "status": 260767747,
+    "uploaded_words": 9066
+  },
+  "performance": {
+    "frame_interval_ms": 4636.896640000004,
+    "frame_limit": 2.0,
+    "frame_pacing": "start-to-start",
+    "full_update_count": 1,
+    "last_apps_ms": 958.5908599999868,
+    "last_compose_ms": 3092.417179999984,
+    "last_upload_ms": 0.0,
+    "no_op_update_count": 0,
+    "patch_update_count": 25,
+    "render_count": 25,
+    "rendered_generation": 40,
+    "update_words": 4480,
+    "uptime_seconds": 132.07108083999998
+  },
+  "pointer": {
+    "azimuth": 0.0,
+    "buttons": [],
+    "cancel_serial": 0,
+    "captured_window": null,
+    "dragging": false,
+    "elevation": 0.0,
+    "last_left_press": null,
+    "last_left_release": null,
+    "left_press_serial": 0,
+    "left_release_serial": 0,
+    "scroll_delta": 0.0,
+    "scroll_serial": 0,
+    "visible": false,
+    "window_id": 2,
+    "zone": "content"
+  },
+  "profile": {
+    "enabled": false,
+    "nested": true,
+    "units": "microseconds"
+  },
+  "projection": {
+    "cpu_output_shadow_words": 4480,
+    "cpu_result_download_words": 0,
+    "cpu_scene_words": 0,
+    "device_ready_frames": 1,
+    "dirty_tiles": 28,
+    "fallback_frames": 0,
+    "geometry_builds": 0,
+    "geometry_cull_us_total": 0,
+    "geometry_descriptor_us_total": 0,
+    "geometry_insert_us_total": 0,
+    "geometry_prepare_us_total": 0,
+    "geometry_tiles_evaluated_total": 0,
+    "hardware_frames": 25,
+    "jobs_per_core": [
+      16,
+      16
+    ],
+    "lazy_copied_tiles_total": 85,
+    "mask_build_us_total": 0,
+    "mask_builds": 0,
+    "mask_fast_tiles_total": 0,
+    "mask_integer_samples_total": 0,
+    "mask_precise_samples_total": 0,
+    "mask_samples_evaluated_total": 0,
+    "masked_tiles_total": 380,
+    "mode": "ddr-resident-dirty-tiles",
+    "packed_mask_tiles_total": 380,
+    "plan_cache": {
+      "builtin_loads": 5,
+      "hits": 0,
+      "loads": 5,
+      "misses": 0,
+      "payload_scan_bytes": 0,
+      "rejected": 0,
+      "revision": "9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5"
+    },
+    "precomputed_layers_total": 5,
+    "redrawn_tiles": 28,
+    "reused_tiles_total": 0,
+    "solid_tiles_total": 0,
+    "texture_pool": {
+      "asset_cache_evictions": 33,
+      "asset_cache_hits": 1,
+      "asset_cache_misses": 46,
+      "asset_cache_upload_bytes": 876800,
+      "asset_copy_batches": 47,
+      "asset_copy_bytes": 899200,
+      "asset_copy_requests": 47,
+      "asset_resident_bytes": 246400,
+      "capacity_bytes": 4194304,
+      "evictions": 0,
+      "full_uploads": 5,
+      "partial_uploads": 23,
+      "resident_bytes": 1430400,
+      "resident_windows": 5,
+      "reuses": 23,
+      "source_tile_size": 32,
+      "source_tiles_updated": 1257,
+      "staged_copy_bytes": 0,
+      "total_resident_bytes": 1676800,
+      "upload_bytes": 2307200,
+      "upload_calls": 51
+    },
+    "texture_reuses_total": 23,
+    "texture_uploads_total": 28,
+    "tile_fills_total": 276,
+    "total_hw_jobs": 929,
+    "update_kind": "tiles"
+  },
+  "render_error": null,
+  "runtime": "C++17",
+  "scene_owner": null,
+  "service": {
+    "phase": "composing",
+    "queued_requests": 0,
+    "snapshot_age_seconds": 3.860023919999975,
+    "state_is_snapshot": true
+  },
+  "view": {
+    "pitch": 0.0,
+    "roll": 0.0,
+    "yaw": 0.0
+  },
+  "windows": [
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": true,
+      "height_deg": 26.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          0.0
+        ]
+      ],
+      "surface_height": 300,
+      "surface_width": 400,
+      "title": "Telemetry",
+      "width_deg": 36.0,
+      "window_id": 2,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 0
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 30.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "boayo-desktop",
+      "roll": 0.0,
+      "shape": [
+        [
+          51.2,
+          36.0,
+          537.6,
+          252.0,
+          18.0
+        ]
+      ],
+      "surface_height": 360,
+      "surface_width": 640,
+      "title": "BoAYO Launcher",
+      "width_deg": 42.0,
+      "window_id": 1,
+      "workspace": {},
+      "z": 1
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -16.47105751657935,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: Telemetry",
+      "width_deg": 2.88,
+      "window_id": 3,
+      "workspace": {
+        "control": "move",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 2
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": -10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 4,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 3
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": 10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": -3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 5,
+      "workspace": {
+        "control": "close",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 4
+    }
+  ]
+}
+V14_9c97b2cf_RC:0
+oryukdo# boayo-stop && while test -S /tmp/bosio-wm.sock; do sleep 1; done; echo 
+V14_3264d01f_RC:$?
+V14_3264d01f_RC:0
+oryukdo# cp /bin/ddrcheck /tmp/view-rx && : > /tmp/view-rx; echo V14_13e6fe2c_RC
+:$?
+V14_13e6fe2c_RC:0
+oryukdo# printf '\177\105\114\106\001\001\001\000\000\000\000\000\000\000\000\00
+0\002\000\363\000\001\000\000\000\224\000\001\000\064\000\000\000\224\006\000\00
+0\000\000\000\000\064\000\040\000\003\000\050\000' >> /tmp/view-rx; echo V14_59d
+248fd_RC:$?
+V14_59d248fd_RC:0
+oryukdo# printf '\007\000\006\000\003\000\000\160\377\005\000\000\000\000\000\00
+0\000\000\000\000\127\000\000\000\000\000\000\000\004\000\000\000\001\000\000\00
+0\001\000\000\000\000\000\000\000\000\000\001\000' >> /tmp/view-rx; echo V14_0cd
+a1004_RC:$?
+V14_0cda1004_RC:0
+oryukdo# printf '\000\000\001\000\334\005\000\000\334\005\000\000\005\000\000\00
+0\000\020\000\000\121\345\164\144\000\000\000\000\000\000\000\000\000\000\000\00
+0\000\000\000\000\000\000\000\000\006\000\000\000' >> /tmp/view-rx; echo V14_928
+63b66_RC:$?
+V14_92863b66_RC:0
+oryukdo# printf '\020\000\000\000\023\005\001\000\227\000\000\000\347\200\000\03
+2\223\010\320\005\163\000\000\000\223\007\005\000\023\205\007\000\223\006\000\00
+0\223\010\000\004\163\000\000\000\143\134\240\000' >> /tmp/view-rx; echo V14_a85
+6ec93_RC:$?
+V14_a856ec93_RC:0
+oryukdo# printf '\063\006\246\100\263\205\245\000\343\022\006\376\023\005\000\00
+0\147\200\000\000\023\005\360\377\147\200\000\000\267\006\001\000\023\007\300\00
+1\223\206\206\114\023\006\300\377\263\327\345\000' >> /tmp/view-rx; echo V14_d47
+d2934_RC:$?
+V14_d47d2934_RC:0
+oryukdo# printf '\223\367\367\000\263\207\366\000\203\307\007\000\023\007\307\37
+7\023\005\025\000\243\017\365\376\343\022\307\376\147\200\000\000\023\001\001\20
+0\023\210\005\000\023\226\025\000\223\005\001\000' >> /tmp/view-rx; echo V14_7d5
+677a0_RC:$?
+V14_7d5677a0_RC:0
+oryukdo# printf '\023\003\005\000\223\007\000\000\023\207\005\000\023\016\360\00
+0\023\005\000\000\223\006\000\000\223\010\360\003\163\000\000\000\143\110\005\00
+0\143\032\005\000\223\207\027\000\343\222\307\377' >> /tmp/view-rx; echo V14_c95
+599c5_RC:$?
+V14_c95599c5_RC:0
+oryukdo# printf '\023\005\360\377\157\000\300\010\063\006\246\100\263\205\245\00
+0\143\006\006\000\223\007\000\000\157\360\237\374\023\005\220\000\223\010\120\00
+0\023\016\360\377\203\106\007\000\223\207\006\375' >> /tmp/view-rx; echo V14_9f0
+d4a17_RC:$?
+V14_9f0d4a17_RC:0
+oryukdo# printf '\223\365\367\017\143\174\265\000\223\205\366\371\223\365\365\01
+7\223\007\360\377\143\344\270\000\223\207\226\372\203\105\027\000\223\206\005\37
+5\223\376\366\017\143\172\325\001\223\206\365\371' >> /tmp/view-rx; echo V14_a8d
+cf4aa_RC:$?
+V14_a8dcf4aa_RC:0
+oryukdo# printf '\223\366\366\017\343\356\330\370\223\206\225\372\343\212\307\37
+1\223\227\107\000\263\005\303\000\263\347\327\000\043\200\365\000\023\006\026\00
+0\023\007\047\000\343\020\310\372\023\005\000\000' >> /tmp/view-rx; echo V14_d07
+eef78_RC:$?
+V14_d07eef78_RC:0
+oryukdo# printf '\267\022\000\000\223\202\002\200\063\001\121\000\147\200\000\00
+0\223\007\000\000\263\006\365\000\063\207\365\000\143\024\366\000\147\200\000\00
+0\003\107\007\000\223\207\027\000\023\167\367\017' >> /tmp/view-rx; echo V14_f25
+78097_RC:$?
+V14_f2578097_RC:0
+oryukdo# printf '\043\200\346\000\157\360\037\376\063\006\305\000\223\007\005\00
+0\223\365\365\017\143\224\307\000\147\200\000\000\043\200\267\000\223\207\027\00
+0\157\360\037\377\003\047\005\000\023\001\001\346' >> /tmp/view-rx; echo V14_a52
+0e00b_RC:$?
+V14_a520e00b_RC:0
+oryukdo# printf '\043\054\201\030\043\056\021\030\043\052\221\030\043\050\041\03
+1\043\046\061\031\043\044\101\031\043\042\121\031\043\040\141\031\223\007\040\00
+0\023\004\040\000\143\020\367\016\267\125\000\000' >> /tmp/view-rx; echo V14_9d8
+f0c64_RC:$?
+V14_9d8f0c64_RC:0
+oryukdo# printf '\223\004\005\000\223\205\025\100\023\005\000\000\023\006\201\00
+3\223\006\000\000\223\010\320\001\163\000\000\000\023\004\060\000\143\114\005\01
+2\223\005\201\003\023\006\100\002\023\005\301\005' >> /tmp/view-rx; echo V14_355
+722f1_RC:$?
+V14_355722f1_RC:0
+oryukdo# printf '\227\000\000\000\347\200\000\365\223\007\100\001\267\125\000\00
+0\043\056\001\004\043\040\001\006\043\044\001\006\043\031\361\006\023\005\000\00
+0\223\205\045\100\023\006\301\005\223\006\000\000' >> /tmp/view-rx; echo V14_d6a
+f0622_RC:$?
+V14_d6af0622_RC:0
+oryukdo# printf '\223\010\320\001\163\000\000\000\023\004\100\000\143\106\005\00
+6\267\005\001\000\223\205\105\117\023\006\220\000\023\005\020\000\227\000\000\00
+0\347\200\200\333\223\005\000\001\023\005\301\000' >> /tmp/view-rx; echo V14_e95
+13608_RC:$?
+V14_e9513608_RC:0
+oryukdo# printf '\227\000\000\000\347\200\000\341\143\006\005\006\023\004\020\00
+0\267\125\000\000\023\005\000\000\223\205\045\100\023\006\201\003\223\006\000\00
+0\223\010\320\001\163\000\000\000\143\010\004\030' >> /tmp/view-rx; echo V14_ca6
+88bb0_RC:$?
+V14_ca688bb0_RC:0
+oryukdo# printf '\267\005\001\000\223\205\305\115\023\006\200\000\023\005\020\00
+0\227\000\000\000\347\200\200\326\203\040\301\031\023\005\004\000\003\044\201\03
+1\203\044\101\031\003\051\001\031\203\051\301\030' >> /tmp/view-rx; echo V14_71d
+4e493_RC:$?
+V14_71d4e493_RC:0
+oryukdo# printf '\003\052\201\030\203\052\101\030\003\053\001\030\023\001\001\03
+2\147\200\000\000\003\047\301\000\267\127\130\061\223\207\047\044\343\026\367\37
+0\203\047\001\001\067\007\200\000\223\206\367\377' >> /tmp/view-rx; echo V14_e10
+0ff9a_RC:$?
+V14_e100ff9a_RC:0
+oryukdo# printf '\343\376\346\366\003\047\201\001\223\307\367\377\343\030\367\36
+6\203\245\204\000\023\005\300\371\023\006\020\044\223\006\320\036\223\010\200\00
+3\163\000\000\000\023\011\005\000\343\110\005\364' >> /tmp/view-rx; echo V14_3d2
+795cb_RC:$?
+V14_3d2795cb_RC:0
+oryukdo# printf '\267\244\034\201\067\012\000\001\223\204\124\334\223\011\000\00
+0\223\012\000\020\023\012\072\031\067\013\001\000\003\044\001\001\143\352\211\00
+0\003\044\101\001\063\004\224\100\063\064\200\000' >> /tmp/view-rx; echo V14_19e
+60b04_RC:$?
+V14_19e60b04_RC:0
+oryukdo# printf '\157\000\000\013\063\004\064\101\143\364\212\000\023\004\000\02
+0\223\005\004\000\023\005\001\010\227\000\000\000\347\200\200\320\143\026\005\01
+0\223\007\000\000\023\007\001\010\063\007\367\000' >> /tmp/view-rx; echo V14_db1
+d40b8_RC:$?
+V14_db1d40b8_RC:0
+oryukdo# printf '\003\107\007\000\223\207\027\000\063\107\227\000\263\004\107\00
+3\343\024\364\376\023\006\004\000\223\005\001\010\023\005\011\000\227\000\000\00
+0\347\200\200\306\143\032\005\004\023\006\240\001' >> /tmp/view-rx; echo V14_739
+1dee4_RC:$?
+V14_7391dee4_RC:0
+oryukdo# printf '\223\005\013\120\023\005\301\001\227\000\000\000\347\200\200\33
+1\263\211\211\000\223\205\011\000\023\005\061\002\227\000\000\000\347\200\000\30
+7\223\205\004\000\023\005\301\002\227\000\000\000' >> /tmp/view-rx; echo V14_3b9
+66e1f_RC:$?
+V14_3b966e1f_RC:0
+oryukdo# printf '\347\200\000\306\023\006\220\001\223\005\301\001\023\005\020\00
+0\227\000\000\000\347\200\200\301\343\002\005\364\023\004\020\000\023\005\011\00
+0\223\005\000\000\023\006\000\000\223\006\000\000' >> /tmp/view-rx; echo V14_aab
+c7a1a_RC:$?
+V14_aabc7a1a_RC:0
+oryukdo# printf '\223\010\220\003\163\000\000\000\157\360\237\345\267\005\001\00
+0\223\205\205\116\157\360\137\347\060\061\062\063\064\065\066\067\070\071\141\14
+2\143\144\145\146\000\000\000\000\122\130\137\106' >> /tmp/view-rx; echo V14_df5
+8f14f_RC:$?
+V14_df58f14f_RC:0
+oryukdo# printf '\101\111\114\012\000\000\000\000\122\130\137\104\117\116\105\01
+2\000\000\000\000\122\130\137\122\105\101\104\131\012\000\000\000\122\130\137\10
+1\103\113\040\060\060\060\060\060\060\060\060\040' >> /tmp/view-rx; echo V14_f9e
+2e064_RC:$?
+V14_f9e2e064_RC:0
+oryukdo# printf '\060\060\060\060\060\060\060\060\012\000\000\000\020\000\000\00
+0\000\000\000\000\003\172\122\000\001\174\001\001\033\014\002\000\020\000\000\00
+0\030\000\000\000\160\373\377\377\064\000\000\000' >> /tmp/view-rx; echo V14_104
+28cd3_RC:$?
+V14_10428cd3_RC:0
+oryukdo# printf '\000\000\000\000\020\000\000\000\054\000\000\000\220\373\377\37
+7\064\000\000\000\000\000\000\000\030\000\000\000\100\000\000\000\260\373\377\37
+7\340\000\000\000\000\104\016\200\020\002\330\016' >> /tmp/view-rx; echo V14_c81
+743d7_RC:$?
+V14_c81743d7_RC:0
+oryukdo# printf '\000\000\000\000\020\000\000\000\134\000\000\000\164\374\377\37
+7\050\000\000\000\000\000\000\000\020\000\000\000\160\000\000\000\210\374\377\37
+7\040\000\000\000\000\000\000\000\074\000\000\000' >> /tmp/view-rx; echo V14_34b
+e05ca_RC:$?
+V14_34be05ca_RC:0
+oryukdo# printf '\204\000\000\000\224\374\377\377\220\002\000\000\000\110\016\24
+0\003\140\210\002\201\001\211\003\222\004\223\005\224\006\225\007\226\010\002\35
+4\012\301\110\310\104\311\104\322\104\323\104\324' >> /tmp/view-rx; echo V14_67f
+f8816_RC:$?
+V14_67ff8816_RC:0
+oryukdo# printf '\104\325\104\326\104\016\000\104\013\000\000\000\107\103\103\07
+2\040\050\102\165\151\154\144\162\157\157\164\040\062\060\062\065\056\060\062\05
+6\061\071\051\040\061\063\056\064\056\060\000\101' >> /tmp/view-rx; echo V14_04f
+cab94_RC:$?
+V14_04fcab94_RC:0
+oryukdo# printf '\126\000\000\000\162\151\163\143\166\000\001\114\000\000\000\00
+4\020\005\162\166\063\062\151\062\160\061\137\155\062\160\060\137\141\062\160\06
+1\137\172\151\143\163\162\062\160\060\137\172\151' >> /tmp/view-rx; echo V14_2e8
+32d6c_RC:$?
+V14_2e832d6c_RC:0
+oryukdo# printf '\146\145\156\143\145\151\062\160\060\137\172\155\155\165\154\06
+1\160\060\137\172\141\141\155\157\061\160\060\137\172\141\154\162\163\143\061\16
+0\060\000\000\056\163\150\163\164\162\164\141\142' >> /tmp/view-rx; echo V14_c7d
+53631_RC:$?
+V14_c7d53631_RC:0
+oryukdo# printf '\000\056\164\145\170\164\000\056\162\157\144\141\164\141\000\05
+6\145\150\137\146\162\141\155\145\000\056\143\157\155\155\145\156\164\000\056\16
+2\151\163\143\166\056\141\164\164\162\151\142\165' >> /tmp/view-rx; echo V14_73a
+3afd6_RC:$?
+V14_73a3afd6_RC:0
+oryukdo# printf '\164\145\163\000\000\000\000\000\000\000\000\000\000\000\000\00
+0\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\00
+0\000\000\000\000\000\000\000\000\013\000\000\000' >> /tmp/view-rx; echo V14_5a6
+d9689_RC:$?
+V14_5a6d9689_RC:0
+oryukdo# printf '\001\000\000\000\006\000\000\000\224\000\001\000\224\000\000\00
+0\064\004\000\000\000\000\000\000\000\000\000\000\004\000\000\000\000\000\000\00
+0\021\000\000\000\001\000\000\000\062\000\000\000' >> /tmp/view-rx; echo V14_693
+93f1b_RC:$?
+V14_69393f1b_RC:0
+oryukdo# printf '\310\004\001\000\310\004\000\000\122\000\000\000\000\000\000\00
+0\000\000\000\000\004\000\000\000\001\000\000\000\031\000\000\000\001\000\000\00
+0\002\000\000\000\034\005\001\000\034\005\000\000' >> /tmp/view-rx; echo V14_bcc
+f9c9d_RC:$?
+V14_bccf9c9d_RC:0
+oryukdo# printf '\300\000\000\000\000\000\000\000\000\000\000\000\004\000\000\00
+0\000\000\000\000\043\000\000\000\001\000\000\000\060\000\000\000\000\000\000\00
+0\334\005\000\000\043\000\000\000\000\000\000\000' >> /tmp/view-rx; echo V14_4a8
+55f65_RC:$?
+V14_4a855f65_RC:0
+oryukdo# printf '\000\000\000\000\001\000\000\000\001\000\000\000\054\000\000\00
+0\003\000\000\160\000\000\000\000\000\000\000\000\377\005\000\000\127\000\000\00
+0\000\000\000\000\000\000\000\000\001\000\000\000' >> /tmp/view-rx; echo V14_8a4
+ff52a_RC:$?
+V14_8a4ff52a_RC:0
+oryukdo# printf '\000\000\000\000\001\000\000\000\003\000\000\000\000\000\000\00
+0\000\000\000\000\126\006\000\000\076\000\000\000\000\000\000\000\000\000\000\00
+0\001\000\000\000\000\000\000\000' >> /tmp/view-rx; echo V14_30a20d51_RC:$?
+V14_30a20d51_RC:0
+oryukdo# /tmp/view-rx /tmp/v14-apply; echo RX_EXIT:$?
+RX_READY
+RX_ACK 00000100 1f8d0b02
+RX_ACK 00000200 15d0ae96
+RX_ACK 00000300 0f4eee23
+RX_ACK 00000400 7f9bf71a
+RX_ACK 00000500 307778f2
+RX_ACK 00000600 eaffcb4f
+RX_ACK 00000700 59d48262
+RX_ACK 00000800 1b046406
+RX_ACK 00000900 7647065e
+RX_ACK 00000998 51a2a74d
+RX_DONE
+RX_EXIT:0
+oryukdo# /tmp/view-rx /tmp/reference.delta; echo RX_EXIT:$?
+RX_READY
+RX_ACK 00000100 34540fd3
+RX_ACK 00000200 4bf03cf5
+RX_ACK 00000300 015127c8
+RX_ACK 00000400 fa6f87d0
+RX_ACK 00000500 b32250ac
+RX_ACK 00000600 e7642b20
+RX_ACK 00000700 944c1d1d
+RX_ACK 00000800 e15d86dd
+RX_ACK 00000900 ef940375
+RX_ACK 00000a00 7b4cde45
+RX_ACK 00000b00 706047ed
+RX_ACK 00000c00 3e970e12
+RX_ACK 00000d00 09a3957a
+RX_ACK 00000e00 cb69f558
+RX_ACK 00000f00 658591c6
+RX_ACK 00001000 b81e2ee0
+RX_ACK 00001100 76c852ee
+RX_ACK 00001200 907c01d6
+RX_ACK 00001300 416df617
+RX_ACK 00001400 3bbba8cc
+RX_ACK 00001500 e1a41019
+RX_ACK 00001600 4bb04d38
+RX_ACK 00001700 e8dabdb7
+RX_ACK 00001800 6acf568c
+RX_ACK 00001900 9181d314
+RX_ACK 00001a00 51c44ce0
+RX_ACK 00001b00 318f5f18
+RX_ACK 00001c00 9d04a6aa
+RX_ACK 00001d00 a112673b
+RX_ACK 00001e00 cab2247a
+RX_ACK 00001f00 e4f2be54
+RX_ACK 00002000 66b75910
+RX_ACK 00002100 08eeda62
+RX_ACK 00002200 c18b4e97
+RX_ACK 00002300 85fcf1c6
+RX_ACK 00002400 5cb9ece7
+RX_ACK 00002500 07af4506
+RX_ACK 00002600 9feccbc9
+RX_ACK 00002700 cd61797d
+RX_ACK 00002800 087b008b
+RX_ACK 00002900 7d553a98
+RX_ACK 00002a00 c1fd073a
+RX_ACK 00002b00 fe90545f
+RX_ACK 00002c00 2702f0b7
+RX_ACK 00002d00 434e12ea
+RX_ACK 00002e00 ec3749bc
+RX_ACK 00002f00 b4ead0ff
+RX_ACK 00003000 4135501f
+RX_ACK 00003100 a51d74fc
+RX_ACK 00003200 4e2218ae
+RX_ACK 00003300 041c5404
+RX_ACK 00003400 733bbbbf
+RX_ACK 00003500 8e239a65
+RX_ACK 00003600 ba776009
+RX_ACK 00003700 90b784e9
+RX_ACK 00003800 706733fe
+RX_ACK 00003900 a22979e3
+RX_ACK 00003a00 5123a18e
+RX_ACK 00003b00 cfb633d2
+RX_ACK 00003c00 bfcd0441
+RX_ACK 00003d00 fc9d446e
+RX_ACK 00003e00 dd850536
+RX_ACK 00003f00 2f17b447
+RX_ACK 00004000 c7f258ff
+RX_ACK 00004100 11310e0a
+RX_ACK 00004200 3184b9f5
+RX_ACK 00004300 ec6a7d4d
+RX_ACK 00004400 f4f2e002
+RX_ACK 00004500 c7f8db3c
+RX_ACK 00004600 4f78131d
+RX_ACK 00004700 70124344
+RX_ACK 00004800 2db25a25
+RX_ACK 00004900 5844e98d
+RX_ACK 00004a00 ddd96e9a
+RX_ACK 00004b00 c68909fb
+RX_ACK 00004c00 7853b522
+RX_ACK 00004d00 1076e449
+RX_ACK 00004e00 ae17c180
+RX_ACK 00004f00 a3167278
+RX_ACK 00005000 13814124
+RX_ACK 00005100 023c2f3c
+RX_ACK 00005200 652091b2
+RX_ACK 00005300 cfa5d6d2
+RX_ACK 00005400 920caf40
+RX_ACK 00005500 5ea6f5c6
+RX_ACK 00005600 c63725be
+RX_ACK 00005700 bea855cd
+RX_ACK 00005800 30ec2cac
+RX_ACK 00005900 1937a97e
+RX_ACK 00005a00 be974ddd
+RX_ACK 00005b00 3d49cc82
+RX_ACK 00005c00 8f8502f1
+RX_ACK 00005d00 ea185c03
+RX_ACK 00005e00 656aa7f3
+RX_ACK 00005f00 af025ed8
+RX_ACK 00006000 bdaf1e06
+RX_ACK 00006100 2704b934
+RX_ACK 00006200 457b40b1
+RX_ACK 00006300 ed1a8233
+RX_ACK 00006400 8e8afb30
+RX_ACK 00006500 e6c13be0
+RX_ACK 00006600 6f277422
+RX_ACK 00006700 6de306a7
+RX_ACK 00006800 897d7b8a
+RX_ACK 00006900 638bdcd7
+RX_ACK 00006a00 88736374
+RX_ACK 00006b00 1bc8acb5
+RX_ACK 00006c00 ad987b8e
+RX_ACK 00006d00 b8f180a5
+RX_ACK 00006e00 4b1a955a
+RX_ACK 00006f00 a62f6b8d
+RX_ACK 00007000 59dea0f2
+RX_ACK 00007100 1804de52
+RX_ACK 00007200 fb8542bc
+RX_ACK 00007300 37bbccef
+RX_ACK 00007400 43df723a
+RX_ACK 00007500 af457f65
+RX_ACK 00007600 c0ed0076
+RX_ACK 00007700 1eb36ac8
+RX_ACK 00007800 b59717b3
+RX_ACK 00007900 801785a9
+RX_ACK 00007a00 c588326f
+RX_ACK 00007b00 ea23d15a
+RX_ACK 00007c00 f5d9f9aa
+RX_ACK 00007d00 a7578fcb
+RX_ACK 00007e00 bca8dba4
+RX_ACK 00007f00 124c588f
+RX_ACK 00008000 dee49790
+RX_ACK 00008100 9de2c894
+RX_ACK 00008200 0edbe76d
+RX_ACK 00008300 27e06a42
+RX_ACK 00008400 5524f52c
+RX_ACK 00008500 2eeafcab
+RX_ACK 00008600 16b9b18d
+RX_ACK 00008700 b14360cb
+RX_ACK 00008800 d2a22a4d
+RX_ACK 00008900 5ea6eee8
+RX_ACK 00008a00 82c1394b
+RX_ACK 00008b00 d470a23a
+RX_ACK 00008c00 8dd44e67
+RX_ACK 00008d00 4d1cbbcc
+RX_ACK 00008e00 1c6c24dd
+RX_ACK 00008f00 cd450ea0
+RX_ACK 00009000 2cae7e81
+RX_ACK 00009100 5b2fdc48
+RX_ACK 00009200 ef42942c
+RX_ACK 00009300 f2f24fdb
+RX_ACK 00009400 af83ccae
+RX_ACK 00009500 864c003a
+RX_ACK 00009600 c5fe9d05
+RX_ACK 00009700 b05c1aed
+RX_ACK 00009800 92921a18
+RX_ACK 00009900 550aa398
+RX_ACK 00009a00 85855ad2
+RX_ACK 00009b00 c7383f58
+RX_ACK 00009c00 f45d54a8
+RX_ACK 00009d00 90ac55da
+RX_ACK 00009e00 0f75844e
+RX_ACK 00009f00 16a52f49
+RX_ACK 0000a000 ae3720ec
+RX_ACK 0000a100 f7f1047b
+RX_ACK 0000a200 7aa992d6
+RX_ACK 0000a300 7eebdafc
+RX_ACK 0000a400 7db4fd46
+RX_ACK 0000a500 9be0b329
+RX_ACK 0000a600 3b935f9f
+RX_ACK 0000a700 43e49e15
+RX_ACK 0000a800 84c42731
+RX_ACK 0000a900 efcee820
+RX_ACK 0000aa00 fda7b9e2
+RX_ACK 0000ab00 c4426a7b
+RX_ACK 0000ac00 788bac58
+RX_ACK 0000ad00 0b441254
+RX_ACK 0000ae00 bafc0b05
+RX_ACK 0000af00 e310da10
+RX_ACK 0000b000 e505eb20
+RX_ACK 0000b100 b9f47669
+RX_ACK 0000b200 22fd8191
+RX_ACK 0000b300 3a64b545
+RX_ACK 0000b400 5139c9c6
+RX_ACK 0000b500 c0e2fce9
+RX_ACK 0000b600 e4089ab9
+RX_ACK 0000b700 e5ec1fcc
+RX_ACK 0000b800 fc32a2d4
+RX_ACK 0000b900 453bee63
+RX_ACK 0000ba00 a30030d8
+RX_ACK 0000bb00 2018e4f8
+RX_ACK 0000bc00 f9226110
+RX_ACK 0000bd00 54f7c2bf
+RX_ACK 0000be00 b96aecc2
+RX_ACK 0000bf00 09ad2e8f
+RX_ACK 0000c000 16a5ae4e
+RX_ACK 0000c100 ff43d060
+RX_ACK 0000c200 b3020c6c
+RX_ACK 0000c300 b74f4698
+RX_ACK 0000c400 f871a54e
+RX_ACK 0000c500 44166914
+RX_ACK 0000c600 6b243b64
+RX_ACK 0000c700 675d8c0e
+RX_ACK 0000c800 1dea96d8
+RX_ACK 0000c900 c6c3e1ab
+RX_ACK 0000ca00 fc1ff4ef
+RX_ACK 0000cb00 02d13548
+RX_ACK 0000cc00 a93a11b1
+RX_ACK 0000cd00 d094fbb7
+RX_ACK 0000ce00 0a8b153a
+RX_ACK 0000cf00 3a9976f7
+RX_ACK 0000d000 4f510e46
+RX_ACK 0000d100 9ff59e39
+RX_ACK 0000d200 ff20a2ea
+RX_ACK 0000d300 20bdae03
+RX_ACK 0000d400 d24e9013
+RX_ACK 0000d500 4eebf441
+RX_ACK 0000d600 683c9317
+RX_ACK 0000d700 0daba69d
+RX_ACK 0000d800 dd333f69
+RX_ACK 0000d900 297c1bde
+RX_ACK 0000da00 afb1042a
+RX_ACK 0000db00 efe0d6d7
+RX_ACK 0000dc00 e8047e72
+RX_ACK 0000dd00 4068c4ee
+RX_ACK 0000de00 4384d8d3
+RX_ACK 0000df00 6484759f
+RX_ACK 0000e000 f4546f13
+RX_ACK 0000e100 a01137bf
+RX_ACK 0000e200 b6c97201
+RX_ACK 0000e300 0a82205f
+RX_ACK 0000e400 30e69823
+RX_ACK 0000e500 374d62ad
+RX_ACK 0000e600 e35a17c1
+RX_ACK 0000e700 372e1c68
+RX_ACK 0000e800 2362ba10
+RX_ACK 0000e900 a78b2523
+RX_ACK 0000ea00 3d06bd87
+RX_ACK 0000eb00 58b37656
+RX_ACK 0000ec00 74c4ff87
+RX_ACK 0000ed00 cbf085c5
+RX_ACK 0000ee00 c18eb31f
+RX_ACK 0000ef00 50e4aaf0
+RX_ACK 0000f000 de541baa
+RX_ACK 0000f100 bb4f1216
+RX_ACK 0000f200 3e09ce96
+RX_ACK 0000f300 7908bd20
+RX_ACK 0000f400 7590745f
+RX_ACK 0000f500 c557d7fd
+RX_ACK 0000f600 d8274dec
+RX_ACK 0000f700 0ee4c9e0
+RX_ACK 0000f800 f3dc1ff2
+RX_ACK 0000f900 283fe6c5
+RX_ACK 0000fa00 264212e2
+RX_ACK 0000fb00 74e08a4c
+RX_ACK 0000fc00 e499709a
+RX_ACK 0000fd00 2b62df47
+RX_ACK 0000fe00 c6cf6630
+RX_ACK 0000ff00 d240d3b3
+RX_ACK 00010000 5ca12587
+RX_ACK 00010100 51420801
+RX_ACK 00010200 835322e4
+RX_ACK 00010300 77829537
+RX_ACK 00010400 fb2b76be
+RX_ACK 00010500 3ae1d24a
+RX_ACK 00010600 397102b9
+RX_ACK 00010700 2f73585e
+RX_ACK 00010800 5120da2c
+RX_ACK 00010900 a0d60af9
+RX_ACK 00010a00 2533c1e4
+RX_ACK 00010b00 a05e0e71
+RX_ACK 00010c00 8eab895c
+RX_ACK 00010d00 c13ded63
+RX_ACK 00010e00 ab3f0ba2
+RX_ACK 00010f00 0b55d217
+RX_ACK 00011000 d30824ac
+RX_ACK 00011100 497ae574
+RX_ACK 00011200 a6ae521f
+RX_ACK 00011300 b3bd2b76
+RX_ACK 00011400 ca7caaf5
+RX_ACK 00011500 821cbc42
+RX_ACK 00011600 538faa60
+RX_ACK 00011700 ec290d2e
+RX_ACK 00011800 15198592
+RX_ACK 00011900 7c47f645
+RX_ACK 00011a00 ac10bb49
+RX_ACK 00011b00 4fcdd946
+RX_ACK 00011c00 1bc5e1fb
+RX_ACK 00011d00 115912ad
+RX_ACK 00011e00 935af5e9
+RX_ACK 00011f00 915dde72
+RX_ACK 00012000 a259f91b
+RX_ACK 00012100 e1770474
+RX_ACK 00012200 d223c627
+RX_ACK 00012300 22b0bcd9
+RX_ACK 00012400 dd1c0269
+RX_ACK 00012500 2fd4ec63
+RX_ACK 00012600 a7ee8ce4
+RX_ACK 00012700 7d888fad
+RX_ACK 00012800 96c31b8f
+RX_ACK 00012900 46935769
+RX_ACK 00012a00 b526ced6
+RX_ACK 00012b00 1a1a1a42
+RX_ACK 00012c00 5c0cbeb0
+RX_ACK 00012d00 3290b9b5
+RX_ACK 00012e00 a5e2d0a7
+RX_ACK 00012f00 28b1c088
+RX_ACK 00013000 55697044
+RX_ACK 00013100 29bce31f
+RX_ACK 00013200 ad29aa96
+RX_ACK 00013300 a6708c1e
+RX_ACK 00013400 a9d67d90
+RX_ACK 00013500 aca04371
+RX_ACK 00013600 873344af
+RX_ACK 00013700 ccfafa1b
+RX_ACK 00013800 1810d90a
+RX_ACK 00013900 442c98f9
+RX_ACK 00013a00 44d3cc99
+RX_ACK 00013b00 09c74a32
+RX_ACK 00013c00 e681b566
+RX_ACK 00013d00 aa081a0d
+RX_ACK 00013e00 537041c4
+RX_ACK 00013f00 752108eb
+RX_ACK 00014000 e8ab1e8e
+RX_ACK 00014100 1ebc739e
+RX_ACK 00014200 f3e40925
+RX_ACK 00014300 0dd6dfd5
+RX_ACK 00014400 81d0ed12
+RX_ACK 00014500 c41be3af
+RX_ACK 00014600 475a23cf
+RX_ACK 00014700 9905f59d
+RX_ACK 00014800 5e2ff927
+RX_ACK 00014900 5370aaa7
+RX_ACK 00014a00 fc8ac852
+RX_ACK 00014b00 56754654
+RX_ACK 00014c00 17231916
+RX_ACK 00014d00 25c9c9fa
+RX_ACK 00014e00 cae178b9
+RX_ACK 00014f00 577976c0
+RX_ACK 00015000 a0bd4b0c
+RX_ACK 00015100 69b23632
+RX_ACK 00015200 89c1e85d
+RX_ACK 00015300 f20fa08d
+RX_ACK 00015400 a709ecf2
+RX_ACK 00015500 4fac2884
+RX_ACK 00015600 fdf43a77
+RX_ACK 00015700 ab5d6da4
+RX_ACK 00015800 3dde8ec5
+RX_ACK 00015900 4b075143
+RX_ACK 00015a00 7f1bada0
+RX_ACK 00015b00 69106048
+RX_ACK 00015c00 3c8f3a96
+RX_ACK 00015d00 9cb28406
+RX_ACK 00015e00 b8436a42
+RX_ACK 00015f00 3df2f47c
+RX_ACK 00016000 94d245cf
+RX_ACK 00016100 ff800d9e
+RX_ACK 00016200 267f4470
+RX_ACK 00016300 668fc4a8
+RX_ACK 00016400 12bb6261
+RX_ACK 00016500 798d9f3c
+RX_ACK 00016600 17cbbbcb
+RX_ACK 00016700 f6967a10
+RX_ACK 00016800 a0fe42e9
+RX_ACK 00016900 227d5ca6
+RX_ACK 00016a00 52854db6
+RX_ACK 00016b00 834aaf86
+RX_ACK 00016c00 54c93f53
+RX_ACK 00016d00 ddecdef5
+RX_ACK 00016e00 6692d754
+RX_ACK 00016f00 89f4bdaa
+RX_ACK 00017000 a11a5d73
+RX_ACK 00017100 479957ce
+RX_ACK 00017200 c9d7430e
+RX_ACK 00017300 8075ee25
+RX_ACK 00017400 3f3a0617
+RX_ACK 00017500 a1418500
+RX_ACK 00017600 7c672fba
+RX_ACK 00017700 0c703d4c
+RX_ACK 00017800 d482f64c
+RX_ACK 00017900 2fdda493
+RX_ACK 00017a00 d86e824b
+RX_ACK 00017b00 35ba9d21
+RX_ACK 00017c00 99a62c05
+RX_ACK 00017d00 e4b529bd
+RX_ACK 00017e00 dea6c3bc
+RX_ACK 00017f00 eb49aba6
+RX_ACK 00018000 b7d44c27
+RX_ACK 00018100 e0a32364
+RX_ACK 00018200 8a3ec771
+RX_ACK 00018300 0c1bda78
+RX_ACK 00018400 a93f63f3
+RX_ACK 00018500 8889a9b1
+RX_ACK 00018600 38d42105
+RX_ACK 00018700 4bd36edb
+RX_ACK 00018800 fc966e63
+RX_ACK 00018900 4cf0ecac
+RX_ACK 00018a00 179bcf72
+RX_ACK 00018b00 b6c510e4
+RX_ACK 00018c00 f3fee406
+RX_ACK 00018d00 11e63ccf
+RX_ACK 00018e00 5eee3b77
+RX_ACK 00018f00 1759cd5e
+RX_ACK 00019000 1aa0aee0
+RX_ACK 00019100 555b1a8a
+RX_ACK 00019200 9c7dadfc
+RX_ACK 00019300 e8d970b3
+RX_ACK 00019400 16bc3451
+RX_ACK 00019500 0e37f002
+RX_ACK 00019600 5d67d470
+RX_ACK 00019700 5de1f8c9
+RX_ACK 00019800 161bec0d
+RX_ACK 00019900 b8d0cdc9
+RX_ACK 00019a00 bc453ad1
+RX_ACK 00019b00 9c650ef2
+RX_ACK 00019c00 2408b67c
+RX_ACK 00019d00 fec3a714
+RX_ACK 00019e00 1cf9f5dd
+RX_ACK 00019f00 f6ad0829
+RX_ACK 0001a000 b13aa0a2
+RX_ACK 0001a100 75af3c97
+RX_ACK 0001a200 bae42f2d
+RX_ACK 0001a300 3aba9226
+RX_ACK 0001a400 7942be4c
+RX_ACK 0001a500 34f67fc8
+RX_ACK 0001a600 e0f119f7
+RX_ACK 0001a700 b9cfbe92
+RX_ACK 0001a800 03da5586
+RX_ACK 0001a900 69f66b08
+RX_ACK 0001aa00 4a9fe00a
+RX_ACK 0001ab00 fd3a618b
+RX_ACK 0001ac00 5ddb88c2
+RX_ACK 0001ad00 cfbea878
+RX_ACK 0001ae00 105e8327
+RX_ACK 0001af00 110cfee8
+RX_ACK 0001b000 933d2108
+RX_ACK 0001b100 6a11f586
+RX_ACK 0001b200 1e78e24e
+RX_ACK 0001b300 e28ffc34
+RX_ACK 0001b400 f174633a
+RX_ACK 0001b500 ccf5951b
+RX_ACK 0001b600 1d73e2bf
+RX_ACK 0001b700 ec1b43e5
+RX_ACK 0001b800 58780083
+RX_ACK 0001b900 d827c67a
+RX_ACK 0001ba00 abc57832
+RX_ACK 0001bb00 080da34b
+RX_ACK 0001bc00 9b119110
+RX_ACK 0001bd00 d0de1b59
+RX_ACK 0001be00 283d5911
+RX_ACK 0001bf00 d91182cb
+RX_ACK 0001c000 07a1eff3
+RX_ACK 0001c100 ed4d4701
+RX_ACK 0001c200 fac3e145
+RX_ACK 0001c300 e2e11aab
+RX_ACK 0001c400 03c1453d
+RX_ACK 0001c500 4cbe82b7
+RX_ACK 0001c600 561d66cf
+RX_ACK 0001c700 31af3891
+RX_ACK 0001c800 c668eb4c
+RX_ACK 0001c900 9d61c328
+RX_ACK 0001ca00 50ad7f96
+RX_ACK 0001cb00 46a1064b
+RX_ACK 0001cc00 160c8222
+RX_ACK 0001cd00 3036dc3d
+RX_ACK 0001ce00 104dc7c9
+RX_ACK 0001cf00 e7693fd0
+RX_ACK 0001d000 252580e1
+RX_ACK 0001d100 c2490044
+RX_ACK 0001d200 4c089581
+RX_ACK 0001d300 3e903ed8
+RX_ACK 0001d400 31e3aa17
+RX_ACK 0001d500 c09228b3
+RX_ACK 0001d600 f4a52576
+RX_ACK 0001d700 b4a943c0
+RX_ACK 0001d800 c1fafec4
+RX_ACK 0001d900 dd3e21f8
+RX_ACK 0001da00 1cff4301
+RX_ACK 0001db00 9da35816
+RX_ACK 0001dc00 78d2bd00
+RX_ACK 0001dd00 97030004
+RX_ACK 0001de00 4af5aede
+RX_ACK 0001df00 6c7941fc
+RX_ACK 0001e000 6c61168b
+RX_ACK 0001e100 09211195
+RX_ACK 0001e200 a9f61caa
+RX_ACK 0001e300 1214b7fe
+RX_ACK 0001e400 9a652d10
+RX_ACK 0001e500 e45363ff
+RX_ACK 0001e600 27a4f3d2
+RX_ACK 0001e700 af6d7837
+RX_ACK 0001e800 90b8fe65
+RX_ACK 0001e900 4dcf982f
+RX_ACK 0001ea00 d992e77f
+RX_ACK 0001eb00 e2b3f1e4
+RX_ACK 0001ec00 e733bc48
+RX_ACK 0001ed00 434477e7
+RX_ACK 0001ee00 045fe8e8
+RX_ACK 0001ef00 6cc8d7cc
+RX_ACK 0001f000 42d6c76c
+RX_ACK 0001f100 c56c5331
+RX_ACK 0001f200 435ce664
+RX_ACK 0001f300 e0da2ac6
+RX_ACK 0001f400 9987e5b6
+RX_ACK 0001f500 3f955412
+RX_ACK 0001f600 e461ab28
+RX_ACK 0001f700 a4ea2382
+RX_ACK 0001f800 810fa601
+RX_ACK 0001f900 aeeed682
+RX_ACK 0001fa00 a492c761
+RX_ACK 0001fb00 7dae6f3b
+RX_ACK 0001fc00 5b796ac8
+RX_ACK 0001fd00 0bcc4b45
+RX_ACK 0001fe00 a01cead7
+RX_ACK 0001ff00 726312b0
+RX_ACK 00020000 3e4b67af
+RX_ACK 00020100 060b0589
+RX_ACK 00020200 5bbf5aeb
+RX_ACK 00020300 4ccef9c7
+RX_ACK 00020400 8203543b
+RX_ACK 00020500 2d7dd060
+RX_ACK 00020600 de3eeb96
+RX_ACK 00020700 46867a49
+RX_ACK 00020800 35b362ee
+RX_ACK 00020900 d3712a95
+RX_ACK 00020a00 9850bc98
+RX_ACK 00020b00 e19d4a0c
+RX_ACK 00020c00 2edccbd1
+RX_ACK 00020d00 34bf1959
+RX_ACK 00020e00 1370d899
+RX_ACK 00020f00 02319eb2
+RX_ACK 00021000 ec859274
+RX_ACK 00021100 a2583108
+RX_ACK 00021200 4b42b0fe
+RX_ACK 00021300 63968039
+RX_ACK 00021400 6bb7382a
+RX_ACK 00021500 0a39fbf0
+RX_ACK 00021600 d80db395
+RX_ACK 00021700 c7827597
+RX_ACK 00021800 14304bdb
+RX_ACK 00021900 b9e422d7
+RX_ACK 00021a00 0cc053fd
+RX_ACK 00021b00 8d7b960a
+RX_ACK 00021c00 b6fc12ba
+RX_ACK 00021d00 b334ee91
+RX_ACK 00021e00 f3b69a8e
+RX_ACK 00021f00 489ebd3a
+RX_ACK 00022000 7c253535
+RX_ACK 00022100 fe8771ae
+RX_ACK 00022200 cd6b643a
+RX_ACK 00022300 3c4b678c
+RX_ACK 00022400 5b172e87
+RX_ACK 00022500 ca6127dc
+RX_ACK 00022600 222e68f7
+RX_ACK 00022700 ebc3021c
+RX_ACK 00022800 ec03a23d
+RX_ACK 00022900 7317fab5
+RX_ACK 00022a00 5af4bf58
+RX_ACK 00022b00 59810ef5
+RX_ACK 00022c00 e0915dfa
+RX_ACK 00022d00 8f920e7f
+RX_ACK 00022e00 11503019
+RX_ACK 00022f00 09ee9590
+RX_ACK 00023000 8824da0b
+RX_ACK 00023100 082eb8fc
+RX_ACK 00023200 70d9b073
+RX_ACK 00023300 6b55ab05
+RX_ACK 00023400 888b9944
+RX_ACK 00023500 855e9140
+RX_ACK 00023600 5d7b1ad8
+RX_ACK 00023700 d8410273
+RX_ACK 00023800 6573c9fa
+RX_ACK 00023900 31384ea6
+RX_ACK 00023a00 81892382
+RX_ACK 00023b00 123bf7e0
+RX_ACK 00023c00 8f763f7d
+RX_ACK 00023d00 3e13e165
+RX_ACK 00023e00 61af0083
+RX_ACK 00023f00 ea916854
+RX_ACK 00024000 c85c2dab
+RX_ACK 00024100 1d2464b0
+RX_ACK 00024200 d52d5a7c
+RX_ACK 00024300 5e609570
+RX_ACK 00024400 050f3081
+RX_ACK 00024500 c929583e
+RX_ACK 00024600 821c6bf6
+RX_ACK 00024700 2dda8be0
+RX_ACK 00024800 096ecefe
+RX_ACK 00024900 bde2fc96
+RX_ACK 00024a00 bb2b7ec7
+RX_ACK 00024b00 ed102778
+RX_ACK 00024c00 03a6c838
+RX_ACK 00024d00 13403a10
+RX_ACK 00024e00 fd66c556
+RX_ACK 00024f00 35eed460
+RX_ACK 00025000 da4200c7
+RX_ACK 00025100 3988c0d6
+RX_ACK 00025200 7993c2d2
+RX_ACK 00025300 18d14b87
+RX_ACK 00025400 8acea138
+RX_ACK 00025500 35ef8707
+RX_ACK 00025600 78d0788e
+RX_ACK 00025700 453527a9
+RX_ACK 00025800 11bcb1e4
+RX_ACK 00025900 1b29e0e8
+RX_ACK 00025a00 b8d5b75d
+RX_ACK 00025b00 fcea9c37
+RX_ACK 00025c00 3c4e1a18
+RX_ACK 00025d00 d19c4e2d
+RX_ACK 00025e00 8750f6c3
+RX_ACK 00025f00 09b253f3
+RX_ACK 00026000 257d7018
+RX_ACK 00026100 0e1b6300
+RX_ACK 00026200 81235018
+RX_ACK 00026300 6ddd1bc9
+RX_ACK 00026400 86406952
+RX_ACK 00026500 df277024
+RX_ACK 00026600 05544a0d
+RX_ACK 00026700 169671c5
+RX_ACK 00026800 99a4d69a
+RX_ACK 00026900 b7637710
+RX_ACK 00026a00 cf1cf15b
+RX_ACK 00026b00 8eff2711
+RX_ACK 00026c00 c63d1c57
+RX_ACK 00026d00 631ebf19
+RX_ACK 00026e00 980325c5
+RX_ACK 00026f00 8a2db356
+RX_ACK 00027000 4ccc828a
+RX_ACK 00027100 83e3d55e
+RX_ACK 00027200 6cd2132a
+RX_ACK 00027300 9e8e31a3
+RX_ACK 00027400 a9d72ade
+RX_ACK 00027500 26d9f96f
+RX_ACK 00027600 c78dac26
+RX_ACK 00027700 9e2fef20
+RX_ACK 00027800 5f9ee904
+RX_ACK 00027900 b3617d54
+RX_ACK 00027a00 de74bddf
+RX_ACK 00027b00 c3665fd0
+RX_ACK 00027c00 cd952f76
+RX_ACK 00027d00 aa160f73
+RX_ACK 00027e00 054a7f47
+RX_ACK 00027f00 8f69d61d
+RX_ACK 00028000 a9577613
+RX_ACK 00028100 0de8ceba
+RX_ACK 00028200 26e59f86
+RX_ACK 00028300 3e5fdc20
+RX_ACK 00028400 9ec01c55
+RX_ACK 00028500 50774aee
+RX_ACK 00028600 b2dad355
+RX_ACK 00028700 4446be06
+RX_ACK 00028800 dd9777e4
+RX_ACK 00028900 5e6201b6
+RX_ACK 00028a00 b885bd43
+RX_ACK 00028b00 444b5063
+RX_ACK 00028c00 753ef2a8
+RX_ACK 00028d00 8f7fdf98
+RX_ACK 00028e00 96e1833b
+RX_ACK 00028f00 33abf32e
+RX_ACK 00029000 db90d80f
+RX_ACK 00029100 1933458e
+RX_ACK 00029200 40537625
+RX_ACK 00029300 1d03a2e5
+RX_ACK 00029400 72e87cfc
+RX_ACK 00029500 43db44b9
+RX_ACK 00029600 d26714c0
+RX_ACK 00029700 dde3e541
+RX_ACK 00029800 68178f7a
+RX_ACK 00029900 2046da8f
+RX_ACK 00029a00 2475c646
+RX_ACK 00029b00 183c9f48
+RX_ACK 00029c00 fe245a3c
+RX_ACK 00029d00 9acdf985
+RX_ACK 00029e00 a5167507
+RX_ACK 00029f00 157bbbc3
+RX_ACK 0002a000 8b4101ef
+RX_ACK 0002a100 3668bdfe
+RX_ACK 0002a200 1caf45aa
+RX_ACK 0002a300 18789521
+RX_ACK 0002a400 f482d391
+RX_ACK 0002a500 afebd438
+RX_ACK 0002a600 d269e5ee
+RX_ACK 0002a700 bc8b465d
+RX_ACK 0002a800 a2a63f54
+RX_ACK 0002a900 98bf5b9e
+RX_ACK 0002aa00 16516ab5
+RX_ACK 0002ab00 cbf45d2a
+RX_ACK 0002ac00 d7c909f7
+RX_ACK 0002ad00 509dcac8
+RX_ACK 0002ae00 e0c81c90
+RX_ACK 0002af00 0ff17216
+RX_ACK 0002b000 76636e14
+RX_ACK 0002b100 d474a21f
+RX_ACK 0002b200 dab03f22
+RX_ACK 0002b300 0242ca12
+RX_ACK 0002b400 d4294002
+RX_ACK 0002b500 8b63c753
+RX_ACK 0002b600 04c5d61e
+RX_ACK 0002b700 4a613bcf
+RX_ACK 0002b800 a72afe58
+RX_ACK 0002b900 f66f6a8b
+RX_ACK 0002ba00 ff3a7137
+RX_ACK 0002bb00 e4650235
+RX_ACK 0002bc00 05eb6e60
+RX_ACK 0002bd00 85f7155e
+RX_ACK 0002be00 67dce549
+RX_ACK 0002bf00 cd45a011
+RX_ACK 0002c000 81b69d67
+RX_ACK 0002c100 9dbf7e14
+RX_ACK 0002c200 dcb71088
+RX_ACK 0002c300 3b6fdb6b
+RX_ACK 0002c400 5cd0b386
+RX_ACK 0002c500 0900e06e
+RX_ACK 0002c600 cef5dc2d
+RX_ACK 0002c700 8e472aba
+RX_ACK 0002c800 b56a2c57
+RX_ACK 0002c900 cba42010
+RX_ACK 0002ca00 178635c0
+RX_ACK 0002cb00 929a8793
+RX_ACK 0002cc00 dcf41d57
+RX_ACK 0002cd00 2158fad1
+RX_ACK 0002ce00 fb4f0003
+RX_ACK 0002cf00 9dc21567
+RX_ACK 0002d000 cb83c5a1
+RX_ACK 0002d100 8bc297ce
+RX_ACK 0002d200 495166f7
+RX_ACK 0002d300 ce8b29c8
+RX_ACK 0002d400 95825c57
+RX_ACK 0002d500 484586e2
+RX_ACK 0002d600 9ad6aa19
+RX_ACK 0002d700 ef504624
+RX_ACK 0002d800 3104f6b8
+RX_ACK 0002d900 672a3619
+RX_ACK 0002da00 b810b60f
+RX_ACK 0002db00 b22d832c
+RX_ACK 0002dc00 b6d4d1ad
+RX_ACK 0002dd00 849c581d
+RX_ACK 0002de00 f8a0c4b2
+RX_ACK 0002df00 efada735
+RX_ACK 0002e000 771bebe7
+RX_ACK 0002e100 e43ebcb9
+RX_ACK 0002e200 6b3c5dec
+RX_ACK 0002e300 274664bc
+RX_ACK 0002e400 f658d3c9
+RX_ACK 0002e500 73118e98
+RX_ACK 0002e600 1641876a
+RX_ACK 0002e700 b1a3e558
+RX_ACK 0002e800 448928f4
+RX_ACK 0002e900 e10c253f
+RX_ACK 0002ea00 0b74a8fd
+RX_ACK 0002eb00 e19ee29e
+RX_ACK 0002ec00 023fd135
+RX_ACK 0002ed00 c96e66f0
+RX_ACK 0002ee00 4cf9205b
+RX_ACK 0002ef00 b1d5f287
+RX_ACK 0002f000 2a246f24
+RX_ACK 0002f100 edd1b2d8
+RX_ACK 0002f200 75eb3014
+RX_ACK 0002f300 84564665
+RX_ACK 0002f400 b5e6e80e
+RX_ACK 0002f500 08a2ee97
+RX_ACK 0002f600 bdfcb9b9
+RX_ACK 0002f700 96d98dde
+RX_ACK 0002f800 7104044c
+RX_ACK 0002f900 033d35ca
+RX_ACK 0002fa00 33ef1d14
+RX_ACK 0002fb00 05b8bfc6
+RX_ACK 0002fc00 a8c9f6c6
+RX_ACK 0002fd00 84172dc6
+RX_ACK 0002fe00 07a064c6
+RX_ACK 0002ff00 a3659bc6
+RX_ACK 00030000 4b41bbda
+RX_ACK 00030100 3ea7596f
+RX_ACK 00030200 9557d1b4
+RX_ACK 00030300 f82a9b96
+RX_ACK 00030400 bce1a790
+RX_ACK 00030500 f376c9cf
+RX_ACK 00030600 768c7b2d
+RX_ACK 00030700 5afa3583
+RX_ACK 00030800 96173b37
+RX_ACK 00030900 c1dff22e
+RX_ACK 00030a00 7504690d
+RX_ACK 00030b00 fa4e1d1a
+RX_ACK 00030c00 5da3069e
+RX_ACK 00030d00 ca447e7a
+RX_ACK 00030e00 88ec1fcc
+RX_ACK 00030f00 2f478024
+RX_ACK 00031000 7c3ebc80
+RX_ACK 00031100 98e9655c
+RX_ACK 00031200 68ca4ea5
+RX_ACK 00031300 e78d476b
+RX_ACK 00031400 e3011301
+RX_ACK 00031500 3b33eac9
+RX_ACK 00031600 f448b4cf
+RX_ACK 00031700 fa47b135
+RX_ACK 00031800 deec4189
+RX_ACK 00031900 b0144201
+RX_ACK 00031a00 09abf42e
+RX_ACK 00031b00 31b4f17e
+RX_ACK 00031c00 5bd39c1d
+RX_ACK 00031d00 b51b801d
+RX_ACK 00031e00 fc9233b8
+RX_ACK 00031f00 a63517bf
+RX_ACK 00032000 f48ea346
+RX_ACK 00032100 0a01c0fa
+RX_ACK 00032200 20490a17
+RX_ACK 00032300 84d8e89c
+RX_ACK 00032400 5f137834
+RX_ACK 00032500 5ca2d62e
+RX_ACK 00032600 3fe8416a
+RX_ACK 00032700 215c8606
+RX_ACK 00032800 e28b1a5e
+RX_ACK 00032900 00f36bf3
+RX_ACK 00032a00 3c31ce1e
+RX_ACK 00032b00 9f3f6b9b
+RX_ACK 00032c00 ce2f4025
+RX_ACK 00032d00 4e278e38
+RX_ACK 00032e00 0eee40e3
+RX_ACK 00032f00 3d70247c
+RX_ACK 00033000 1a1345f3
+RX_ACK 00033100 be760b32
+RX_ACK 00033200 71369f1e
+RX_ACK 00033300 1503fee9
+RX_ACK 00033400 056707c5
+RX_ACK 00033500 8920c4d8
+RX_ACK 00033600 146d9122
+RX_ACK 00033700 a8228b9b
+RX_ACK 00033800 5511a60c
+RX_ACK 00033900 1103171f
+RX_ACK 00033a00 21204232
+RX_ACK 00033b00 ccd2d107
+RX_ACK 00033c00 ccc9309c
+RX_ACK 00033d00 1f8cda5a
+RX_ACK 00033e00 bfed6898
+RX_ACK 00033f00 341b6fc1
+RX_ACK 00034000 c3f207c8
+RX_ACK 00034100 0bfbc383
+RX_ACK 00034200 e0315f71
+RX_ACK 00034300 806f8a61
+RX_ACK 00034400 1276fe65
+RX_ACK 00034500 06123eb8
+RX_ACK 00034600 68d9e4c9
+RX_ACK 00034700 c5770c4e
+RX_ACK 00034800 71b1d529
+RX_ACK 00034900 4668f161
+RX_ACK 00034a00 349fcb68
+RX_ACK 00034b00 643b32b2
+RX_ACK 00034c00 0f1c39b5
+RX_ACK 00034d00 e0f95a2f
+RX_ACK 00034e00 d3af57e6
+RX_ACK 00034f00 5b4dded6
+RX_ACK 00035000 80942429
+RX_ACK 00035100 119369a6
+RX_ACK 00035200 82b5ba3d
+RX_ACK 00035300 c84fb591
+RX_ACK 00035400 03441973
+RX_ACK 00035500 e7267eec
+RX_ACK 00035600 31e0f7c6
+RX_ACK 00035700 40e3d82b
+RX_ACK 00035800 4a37d979
+RX_ACK 00035900 4cb8095f
+RX_ACK 00035a00 38fe55d6
+RX_ACK 00035b00 848c361c
+RX_ACK 00035c00 a42906b0
+RX_ACK 00035d00 31142887
+RX_ACK 00035e00 11de2aec
+RX_ACK 00035f00 f4aef976
+RX_ACK 00036000 bdb20400
+RX_ACK 00036100 6e2a2df7
+RX_ACK 00036200 7d490d78
+RX_ACK 00036300 a85f0522
+RX_ACK 00036400 1f8f0ce3
+RX_ACK 00036500 f2b7da33
+RX_ACK 00036600 7304511a
+RX_ACK 00036700 4e9c0695
+RX_ACK 00036800 1c700960
+RX_ACK 00036900 db2903a8
+RX_ACK 00036a00 78381d38
+RX_ACK 00036b00 5b2e2699
+RX_ACK 00036c00 093cdb4a
+RX_ACK 00036d00 1c02b0ca
+RX_ACK 00036e00 d83fd2b9
+RX_ACK 00036f00 ab8f2175
+RX_ACK 00037000 2e5fa1e7
+RX_ACK 00037100 9d017fdc
+RX_ACK 00037200 c7416a79
+RX_ACK 00037300 0e0d2a0f
+RX_ACK 00037400 d0f5b34d
+RX_ACK 00037500 4858306d
+RX_ACK 00037600 05f2a0e1
+RX_ACK 00037700 8a30cd39
+RX_ACK 00037800 5923f558
+RX_ACK 00037900 0e6608a7
+RX_ACK 00037a00 4ceafe6b
+RX_ACK 00037b00 e9f14d55
+RX_ACK 00037c00 e780cf23
+RX_ACK 00037d00 66430c3f
+RX_ACK 00037e00 5317cf57
+RX_ACK 00037f00 2d33087f
+RX_ACK 00038000 27ce13ab
+RX_ACK 00038100 930dbcfa
+RX_ACK 00038200 f4ff92f7
+RX_ACK 00038300 285671e3
+RX_ACK 00038400 2b8fdd38
+RX_ACK 00038500 d66fe9e1
+RX_ACK 00038600 ce6261af
+RX_ACK 00038700 e04132ce
+RX_ACK 00038800 fb0ff496
+RX_ACK 00038900 cc4deb7e
+RX_ACK 00038a00 b600a03a
+RX_ACK 00038b00 1495e31d
+RX_ACK 00038c00 e5832606
+RX_ACK 00038d00 eb91f4a7
+RX_ACK 00038e00 8f62824f
+RX_ACK 00038f00 520bcd0a
+RX_ACK 00039000 a7750a02
+RX_ACK 00039100 9e430e92
+RX_ACK 00039200 f793b798
+RX_ACK 00039300 e5ba028c
+RX_ACK 00039400 81922cd9
+RX_ACK 00039500 464fb5e2
+RX_ACK 00039600 b5d0cd7e
+RX_ACK 00039700 8d7f0301
+RX_ACK 00039800 7b06a128
+RX_ACK 00039900 9827e5a9
+RX_ACK 00039a00 9926c799
+RX_ACK 00039b00 ac6d5cf6
+RX_ACK 00039c00 edbbb6b1
+RX_ACK 00039d00 3f763753
+RX_ACK 00039e00 c7dae9b5
+RX_ACK 00039f00 4b329809
+RX_ACK 0003a000 3901931f
+RX_ACK 0003a100 75753447
+RX_ACK 0003a200 c87177da
+RX_ACK 0003a300 de8c7675
+RX_ACK 0003a400 a9deeee8
+RX_ACK 0003a500 b5a6b19e
+RX_ACK 0003a600 c610f26d
+RX_ACK 0003a700 6b22f7a8
+RX_ACK 0003a800 c5091ad7
+RX_ACK 0003a900 476ebd60
+RX_ACK 0003aa00 438add95
+RX_ACK 0003ab00 070bda37
+RX_ACK 0003ac00 fc3ba80b
+RX_ACK 0003ad00 5bdfd990
+RX_ACK 0003ae00 85552f0e
+RX_ACK 0003af00 d2f3c50d
+RX_ACK 0003b000 1961b7bf
+RX_ACK 0003b100 8c02cfa9
+RX_ACK 0003b200 98186c97
+RX_ACK 0003b300 2a2ca26b
+RX_ACK 0003b400 5842a512
+RX_ACK 0003b500 ec595f63
+RX_ACK 0003b600 d93b4e6c
+RX_ACK 0003b700 d8430b08
+RX_ACK 0003b800 c0e2a749
+RX_ACK 0003b900 0d32bab4
+RX_ACK 0003ba00 f6ecc3af
+RX_ACK 0003bb00 237f107b
+RX_ACK 0003bc00 225aaa0c
+RX_ACK 0003bd00 4a9a3c05
+RX_ACK 0003be00 94e7b0b6
+RX_ACK 0003bf00 fae9168e
+RX_ACK 0003c000 b369f319
+RX_ACK 0003c0e3 3d50fdf7
+RX_DONE
+RX_EXIT:0
+oryukdo# /tmp/v14-apply /usr/bin/boayo-native /tmp/reference.delta /tmp/boayo-re
+ference; echo V14_b92d1463_RC:$?
+PATCH_OK
+V14_b92d1463_RC:0
+oryukdo# BOAYO_PROFILE=0 BOAYO_INIT_TRACE=0 /tmp/boayo-reference start; echo V14
+_f7f71fd0_RC:$?
+BoAYO C++ service started; initialization continues. boayo-status / boayo-keys / boayo-stop
+{"features":["windows","pointer","input-injection","button-events","scene-stream","spatial-workspace","pointer-capture"],"headless":false,"m":32,"mock_backend":false,"runtime":"C++17","version":2}
+V14_f7f71fd0_RC:0
+oryukdo# sleep 12; /tmp/boayo-reference app telemetry; sleep 30; echo V14_1febea
+95_RC:$?
+BOAYO_APP_READY window=2
+V14_1febea95_RC:0
+oryukdo# /tmp/boayo-reference profile > /tmp/measure-a; sleep 60; /tmp/boayo-ref
+erence profile > /tmp/measure-b; cat /tmp/measure-a; cat /tmp/measure-b; echo V1
+4_17daaa27_RC:$?
+{"app_error":null,"driver_profile":{"available":true,"enabled":false,"fast_paths":true},"output_profile":{"backend":"kernel","command":2,"configure_us":92,"finish_us":268,"select_us":25618,"upload_ranges":0,"upload_us":48174,"uploaded_words":0,"user_copy_us":8463,"validate_us":33992,"wait_us":154567},"performance":{"frame_interval_ms":2803.704580000044,"frame_limit":2.0,"frame_pacing":"start-to-start","full_update_count":1,"last_apps_ms":610.8911000000035,"last_compose_ms":3068.7582599999814,"last_upload_ms":0.0,"no_op_update_count":0,"patch_update_count":12,"render_count":12,"rendered_generation":27,"update_words":4480,"uptime_seconds":56.40352288000008},"phase":"apps","profile":{"enabled":false,"nested":true,"units":"microseconds"},"projection":{"cpu_output_shadow_words":4480,"cpu_result_download_words":0,"cpu_scene_words":0,"device_ready_frames":1,"dirty_tiles":28,"fallback_frames":0,"geometry_builds":0,"geometry_cull_us_total":0,"geometry_descriptor_us_total":0,"geometry_insert_us_total":0,"geometry_prepare_us_total":0,"geometry_tiles_evaluated_total":0,"hardware_frames":12,"jobs_per_core":[16,16],"lazy_copied_tiles_total":71,"mask_build_us_total":0,"mask_builds":0,"mask_fast_tiles_total":0,"mask_integer_samples_total":0,"mask_precise_samples_total":0,"mask_samples_evaluated_total":0,"masked_tiles_total":230,"mode":"ddr-resident-dirty-tiles","packed_mask_tiles_total":230,"plan_cache":{"builtin_loads":5,"hits":0,"loads":5,"misses":0,"payload_scan_bytes":0,"rejected":0,"revision":"967005ee422f912c39464b07fc4c366acb1c3b33fb2e972b2449e0dd8eb4a19f"},"precomputed_layers_total":5,"redrawn_tiles":28,"reused_tiles_total":0,"solid_tiles_total":0,"texture_pool":{"capacity_bytes":4194304,"evictions":0,"full_uploads":5,"partial_uploads":10,"resident_bytes":1430400,"resident_windows":5,"reuses":10,"staged_copy_bytes":0,"upload_bytes":1852800,"upload_calls":27},"texture_reuses_total":10,"texture_uploads_total":15,"tile_fills_total":176,"total_hw_jobs":529,"update_kind":"tiles"},"render_error":null,"snapshot_time":657.75924172}
+{"app_error":null,"driver_profile":{"available":true,"enabled":false,"fast_paths":true},"output_profile":{"backend":"kernel","command":2,"configure_us":94,"finish_us":267,"select_us":25522,"upload_ranges":0,"upload_us":43825,"uploaded_words":0,"user_copy_us":6176,"validate_us":36497,"wait_us":23181},"performance":{"frame_interval_ms":2478.7757599999622,"frame_limit":2.0,"frame_pacing":"start-to-start","full_update_count":1,"last_apps_ms":396.4976999999408,"last_compose_ms":1320.9509600000047,"last_upload_ms":0.0,"no_op_update_count":0,"patch_update_count":37,"render_count":37,"rendered_generation":52,"update_words":4480,"uptime_seconds":121.75245400000006},"phase":"composing","profile":{"enabled":false,"nested":true,"units":"microseconds"},"projection":{"cpu_output_shadow_words":4480,"cpu_result_download_words":0,"cpu_scene_words":0,"device_ready_frames":1,"dirty_tiles":28,"fallback_frames":0,"geometry_builds":0,"geometry_cull_us_total":0,"geometry_descriptor_us_total":0,"geometry_insert_us_total":0,"geometry_prepare_us_total":0,"geometry_tiles_evaluated_total":0,"hardware_frames":37,"jobs_per_core":[16,16],"lazy_copied_tiles_total":85,"mask_build_us_total":0,"mask_builds":0,"mask_fast_tiles_total":0,"mask_integer_samples_total":0,"mask_precise_samples_total":0,"mask_samples_evaluated_total":0,"masked_tiles_total":524,"mode":"ddr-resident-dirty-tiles","packed_mask_tiles_total":524,"plan_cache":{"builtin_loads":5,"hits":0,"loads":5,"misses":0,"payload_scan_bytes":0,"rejected":0,"revision":"967005ee422f912c39464b07fc4c366acb1c3b33fb2e972b2449e0dd8eb4a19f"},"precomputed_layers_total":5,"redrawn_tiles":28,"reused_tiles_total":0,"solid_tiles_total":0,"texture_pool":{"capacity_bytes":4194304,"evictions":0,"full_uploads":5,"partial_uploads":35,"resident_bytes":1430400,"resident_windows":5,"reuses":35,"staged_copy_bytes":0,"upload_bytes":2790400,"upload_calls":76},"texture_reuses_total":35,"texture_uploads_total":40,"tile_fills_total":372,"total_hw_jobs":1313,"update_kind":"tiles"},"render_error":null,"snapshot_time":723.19968744}
+V14_17daaa27_RC:0
+oryukdo# boayo-status; echo V14_663d837f_RC:$?
+{
+  "app_error": null,
+  "assets": {
+    "cache_hits": 42,
+    "format": "raw-mapped-00RRGGBB",
+    "loads": 79,
+    "misses": 0,
+    "rejected": 0,
+    "rgb_materializations": 0
+  },
+  "buttons": {
+    "available": false,
+    "last_event_id": 0,
+    "state": 0
+  },
+  "compositor": "cpp-native",
+  "driver_profile": {
+    "available": true,
+    "enabled": false,
+    "fast_paths": true
+  },
+  "focused_window": 2,
+  "generation": 54,
+  "motion": {
+    "active": false,
+    "next_step": 0,
+    "phase": "idle",
+    "steps": 25,
+    "target_generation": 0,
+    "view": {
+      "pitch": 0.0,
+      "roll": 0.0,
+      "yaw": 0.0
+    },
+    "windows": []
+  },
+  "output": {
+    "abi": 3,
+    "active_bank": 1,
+    "active_base": 3175415808,
+    "antialias": false,
+    "backend": "kfb-linux-frame-atomic-output",
+    "capability": 1146373681,
+    "commits": 40,
+    "dma_copied_words": 21760,
+    "max_jobs": 64,
+    "max_scene_words": 1084816,
+    "memory_dma": {
+      "available": true,
+      "copy_bytes": 7077496,
+      "copy_ops": 742,
+      "errors": 0,
+      "features": 255,
+      "fill_bytes": 753664,
+      "fill_ops": 736,
+      "quarantined": 0,
+      "timeouts": 0,
+      "upload_bytes": 5555808,
+      "upload_ops": 151,
+      "upload_threshold": 4096
+    },
+    "metadata_only": false,
+    "mock_backend": false,
+    "poisoned": 0,
+    "publish_profile": {
+      "backend": "kernel",
+      "command": 2,
+      "configure_us": 89,
+      "finish_us": 267,
+      "select_us": 24018,
+      "upload_ranges": 0,
+      "upload_us": 45854,
+      "uploaded_words": 0,
+      "user_copy_us": 11065,
+      "validate_us": 32889,
+      "wait_us": 8664
+    },
+    "sensor_available": false,
+    "shadow_copied_words": 0,
+    "signature": 1112748597,
+    "status": 597819395,
+    "uploaded_words": 228
+  },
+  "performance": {
+    "frame_interval_ms": 6083.663460000025,
+    "frame_limit": 2.0,
+    "frame_pacing": "start-to-start",
+    "full_update_count": 1,
+    "last_apps_ms": 838.8000600000396,
+    "last_compose_ms": 1828.1701399999974,
+    "last_upload_ms": 0.0,
+    "no_op_update_count": 0,
+    "patch_update_count": 39,
+    "render_count": 39,
+    "rendered_generation": 54,
+    "update_words": 4480,
+    "uptime_seconds": 132.41484486000002
+  },
+  "pointer": {
+    "azimuth": 0.0,
+    "buttons": [],
+    "cancel_serial": 0,
+    "captured_window": null,
+    "dragging": false,
+    "elevation": 0.0,
+    "last_left_press": null,
+    "last_left_release": null,
+    "left_press_serial": 0,
+    "left_release_serial": 0,
+    "scroll_delta": 0.0,
+    "scroll_serial": 0,
+    "visible": false,
+    "window_id": 2,
+    "zone": "content"
+  },
+  "profile": {
+    "enabled": false,
+    "nested": true,
+    "units": "microseconds"
+  },
+  "projection": {
+    "cpu_output_shadow_words": 4480,
+    "cpu_result_download_words": 0,
+    "cpu_scene_words": 0,
+    "device_ready_frames": 1,
+    "dirty_tiles": 28,
+    "fallback_frames": 0,
+    "geometry_builds": 0,
+    "geometry_cull_us_total": 0,
+    "geometry_descriptor_us_total": 0,
+    "geometry_insert_us_total": 0,
+    "geometry_prepare_us_total": 0,
+    "geometry_tiles_evaluated_total": 0,
+    "hardware_frames": 39,
+    "jobs_per_core": [
+      16,
+      16
+    ],
+    "lazy_copied_tiles_total": 85,
+    "mask_build_us_total": 0,
+    "mask_builds": 0,
+    "mask_fast_tiles_total": 0,
+    "mask_integer_samples_total": 0,
+    "mask_precise_samples_total": 0,
+    "mask_samples_evaluated_total": 0,
+    "masked_tiles_total": 548,
+    "mode": "ddr-resident-dirty-tiles",
+    "packed_mask_tiles_total": 548,
+    "plan_cache": {
+      "builtin_loads": 5,
+      "hits": 0,
+      "loads": 5,
+      "misses": 0,
+      "payload_scan_bytes": 0,
+      "rejected": 0,
+      "revision": "967005ee422f912c39464b07fc4c366acb1c3b33fb2e972b2449e0dd8eb4a19f"
+    },
+    "precomputed_layers_total": 5,
+    "redrawn_tiles": 28,
+    "reused_tiles_total": 0,
+    "solid_tiles_total": 0,
+    "texture_pool": {
+      "capacity_bytes": 4194304,
+      "evictions": 0,
+      "full_uploads": 5,
+      "partial_uploads": 37,
+      "resident_bytes": 1430400,
+      "resident_windows": 5,
+      "reuses": 37,
+      "staged_copy_bytes": 0,
+      "upload_bytes": 2867200,
+      "upload_calls": 80
+    },
+    "texture_reuses_total": 37,
+    "texture_uploads_total": 42,
+    "tile_fills_total": 388,
+    "total_hw_jobs": 1377,
+    "update_kind": "tiles"
+  },
+  "render_error": null,
+  "runtime": "C++17",
+  "scene_owner": null,
+  "service": {
+    "phase": "composing",
+    "queued_requests": 0,
+    "snapshot_age_seconds": 2.4208496400000286,
+    "state_is_snapshot": true
+  },
+  "view": {
+    "pitch": 0.0,
+    "roll": 0.0,
+    "yaw": 0.0
+  },
+  "windows": [
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": true,
+      "height_deg": 26.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          0.0
+        ]
+      ],
+      "surface_height": 300,
+      "surface_width": 400,
+      "title": "Telemetry",
+      "width_deg": 36.0,
+      "window_id": 2,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 0
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 30.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "boayo-desktop",
+      "roll": 0.0,
+      "shape": [
+        [
+          51.2,
+          36.0,
+          537.6,
+          252.0,
+          18.0
+        ]
+      ],
+      "surface_height": 360,
+      "surface_width": 640,
+      "title": "BoAYO Launcher",
+      "width_deg": 42.0,
+      "window_id": 1,
+      "workspace": {},
+      "z": 1
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -16.47105751657935,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: Telemetry",
+      "width_deg": 2.88,
+      "window_id": 3,
+      "workspace": {
+        "control": "move",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 2
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": -10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 4,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 3
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": 10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": -3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 5,
+      "workspace": {
+        "control": "close",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 4
+    }
+  ]
+}
+V14_663d837f_RC:0
+oryukdo# boayo-stop && while test -S /tmp/bosio-wm.sock; do sleep 1; done; echo 
+V14_e13c8e92_RC:$?
+V14_e13c8e92_RC:0
+oryukdo# BOAYO_PROFILE=0 BOAYO_INIT_TRACE=0 /usr/bin/boayo-native start; echo V1
+4_d5f4857a_RC:$?
+BoAYO C++ service started; initialization continues. boayo-status / boayo-keys / boayo-stop
+{"features":["windows","pointer","input-injection","button-events","scene-stream","spatial-workspace","pointer-capture"],"headless":false,"m":32,"mock_backend":false,"runtime":"C++17","version":2}
+V14_d5f4857a_RC:0
+oryukdo# sleep 12; /usr/bin/boayo-native app telemetry; sleep 30; echo V14_bb4c6
+3c8_RC:$?
+BOAYO_APP_READY window=2
+V14_bb4c63c8_RC:0
+oryukdo# /usr/bin/boayo-native profile > /tmp/measure-a; sleep 60; /usr/bin/boay
+o-native profile > /tmp/measure-b; cat /tmp/measure-a; cat /tmp/measure-b; echo 
+V14_f84ad2e0_RC:$?
+{"app_error":null,"driver_profile":{"available":true,"enabled":false,"fast_paths":true},"output_profile":{"backend":"kernel","command":2,"configure_us":87,"finish_us":267,"select_us":23213,"upload_ranges":0,"upload_us":46282,"uploaded_words":0,"user_copy_us":6169,"validate_us":37053,"wait_us":21151},"performance":{"frame_interval_ms":3207.854740000016,"frame_limit":2.0,"frame_pacing":"start-to-start","full_update_count":1,"last_apps_ms":634.1936000000032,"last_compose_ms":1760.1595600000337,"last_upload_ms":0.0,"no_op_update_count":0,"patch_update_count":9,"render_count":9,"rendered_generation":24,"update_words":4480,"uptime_seconds":52.08876124000005},"phase":"composing","profile":{"enabled":false,"nested":true,"units":"microseconds"},"projection":{"cpu_output_shadow_words":4480,"cpu_result_download_words":0,"cpu_scene_words":0,"device_ready_frames":1,"dirty_tiles":28,"fallback_frames":0,"geometry_builds":0,"geometry_cull_us_total":0,"geometry_descriptor_us_total":0,"geometry_insert_us_total":0,"geometry_prepare_us_total":0,"geometry_tiles_evaluated_total":0,"hardware_frames":9,"jobs_per_core":[16,16],"lazy_copied_tiles_total":71,"mask_build_us_total":0,"mask_builds":0,"mask_fast_tiles_total":0,"mask_integer_samples_total":0,"mask_precise_samples_total":0,"mask_samples_evaluated_total":0,"masked_tiles_total":194,"mode":"ddr-resident-dirty-tiles","packed_mask_tiles_total":194,"plan_cache":{"builtin_loads":5,"hits":0,"loads":5,"misses":0,"payload_scan_bytes":0,"rejected":0,"revision":"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5"},"precomputed_layers_total":5,"redrawn_tiles":28,"reused_tiles_total":0,"solid_tiles_total":0,"texture_pool":{"asset_cache_evictions":3,"asset_cache_hits":0,"asset_cache_misses":16,"asset_cache_upload_bytes":307200,"asset_copy_batches":16,"asset_copy_bytes":307200,"asset_copy_requests":16,"asset_resident_bytes":246400,"capacity_bytes":4194304,"evictions":0,"full_uploads":5,"partial_uploads":7,"resident_bytes":1430400,"resident_windows":5,"reuses":7,"source_tile_size":32,"source_tiles_updated":659,"staged_copy_bytes":0,"total_resident_bytes":1676800,"upload_bytes":1737600,"upload_calls":21},"texture_reuses_total":7,"texture_uploads_total":12,"tile_fills_total":152,"total_hw_jobs":433,"update_kind":"tiles"},"render_error":null,"snapshot_time":813.98423214}
+{"app_error":null,"driver_profile":{"available":true,"enabled":false,"fast_paths":true},"output_profile":{"backend":"kernel","command":2,"configure_us":91,"finish_us":268,"select_us":23313,"upload_ranges":0,"upload_us":43973,"uploaded_words":0,"user_copy_us":10051,"validate_us":33280,"wait_us":28122},"performance":{"frame_interval_ms":2943.5963199999833,"frame_limit":2.0,"frame_pacing":"start-to-start","full_update_count":1,"last_apps_ms":561.7047200000798,"last_compose_ms":2230.3732999999966,"last_upload_ms":0.0,"no_op_update_count":0,"patch_update_count":30,"render_count":30,"rendered_generation":45,"update_words":4480,"uptime_seconds":124.10201831999996},"phase":"composing","profile":{"enabled":false,"nested":true,"units":"microseconds"},"projection":{"cpu_output_shadow_words":4480,"cpu_result_download_words":0,"cpu_scene_words":0,"device_ready_frames":1,"dirty_tiles":28,"fallback_frames":0,"geometry_builds":0,"geometry_cull_us_total":0,"geometry_descriptor_us_total":0,"geometry_insert_us_total":0,"geometry_prepare_us_total":0,"geometry_tiles_evaluated_total":0,"hardware_frames":30,"jobs_per_core":[16,16],"lazy_copied_tiles_total":85,"mask_build_us_total":0,"mask_builds":0,"mask_fast_tiles_total":0,"mask_integer_samples_total":0,"mask_precise_samples_total":0,"mask_samples_evaluated_total":0,"masked_tiles_total":440,"mode":"ddr-resident-dirty-tiles","packed_mask_tiles_total":440,"plan_cache":{"builtin_loads":5,"hits":0,"loads":5,"misses":0,"payload_scan_bytes":0,"rejected":0,"revision":"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5"},"precomputed_layers_total":5,"redrawn_tiles":28,"reused_tiles_total":0,"solid_tiles_total":0,"texture_pool":{"asset_cache_evictions":43,"asset_cache_hits":1,"asset_cache_misses":56,"asset_cache_upload_bytes":1068800,"asset_copy_batches":57,"asset_copy_bytes":1091200,"asset_copy_requests":57,"asset_resident_bytes":246400,"capacity_bytes":4194304,"evictions":0,"full_uploads":5,"partial_uploads":28,"resident_bytes":1430400,"resident_windows":5,"reuses":28,"source_tile_size":32,"source_tiles_updated":1452,"staged_copy_bytes":0,"total_resident_bytes":1676800,"upload_bytes":2499200,"upload_calls":61},"texture_reuses_total":28,"texture_uploads_total":33,"tile_fills_total":316,"total_hw_jobs":1089,"update_kind":"tiles"},"render_error":null,"snapshot_time":886.29882948}
+V14_f84ad2e0_RC:0
+oryukdo# boayo-status; echo V14_9c93cf7f_RC:$?
+{
+  "app_error": null,
+  "assets": {
+    "cache_hits": 34,
+    "format": "raw-mapped-00RRGGBB",
+    "loads": 63,
+    "misses": 0,
+    "rejected": 0,
+    "rgb_materializations": 0
+  },
+  "buttons": {
+    "available": false,
+    "last_event_id": 0,
+    "state": 0
+  },
+  "compositor": "cpp-native",
+  "driver_profile": {
+    "available": true,
+    "enabled": false,
+    "fast_paths": true
+  },
+  "focused_window": 2,
+  "generation": 46,
+  "motion": {
+    "active": false,
+    "next_step": 0,
+    "phase": "idle",
+    "steps": 25,
+    "target_generation": 0,
+    "view": {
+      "pitch": 0.0,
+      "roll": 0.0,
+      "yaw": 0.0
+    },
+    "windows": []
+  },
+  "output": {
+    "abi": 3,
+    "active_bank": 1,
+    "active_base": 3175415808,
+    "antialias": false,
+    "backend": "kfb-linux-frame-atomic-output",
+    "capability": 1146373681,
+    "commits": 32,
+    "dma_copied_words": 21760,
+    "max_jobs": 64,
+    "max_scene_words": 1084816,
+    "memory_dma": {
+      "available": true,
+      "copy_bytes": 11027408,
+      "copy_ops": 1619,
+      "errors": 0,
+      "features": 255,
+      "fill_bytes": 1114112,
+      "fill_ops": 1088,
+      "quarantined": 0,
+      "timeouts": 0,
+      "upload_bytes": 8224608,
+      "upload_ops": 221,
+      "upload_threshold": 4096
+    },
+    "metadata_only": false,
+    "mock_backend": false,
+    "poisoned": 0,
+    "publish_profile": {
+      "backend": "kernel",
+      "command": 2,
+      "configure_us": 89,
+      "finish_us": 269,
+      "select_us": 23203,
+      "upload_ranges": 0,
+      "upload_us": 46285,
+      "uploaded_words": 0,
+      "user_copy_us": 9920,
+      "validate_us": 33619,
+      "wait_us": 145259
+    },
+    "sensor_available": false,
+    "shadow_copied_words": 0,
+    "signature": 1112748597,
+    "status": 900333571,
+    "uploaded_words": 228
+  },
+  "performance": {
+    "frame_interval_ms": 4899.027359999991,
+    "frame_limit": 2.0,
+    "frame_pacing": "start-to-start",
+    "full_update_count": 1,
+    "last_apps_ms": 1060.929920000035,
+    "last_compose_ms": 3626.4155399999254,
+    "last_upload_ms": 0.0,
+    "no_op_update_count": 0,
+    "patch_update_count": 31,
+    "render_count": 31,
+    "rendered_generation": 46,
+    "update_words": 4480,
+    "uptime_seconds": 131.46748993999995
+  },
+  "pointer": {
+    "azimuth": 0.0,
+    "buttons": [],
+    "cancel_serial": 0,
+    "captured_window": null,
+    "dragging": false,
+    "elevation": 0.0,
+    "last_left_press": null,
+    "last_left_release": null,
+    "left_press_serial": 0,
+    "left_release_serial": 0,
+    "scroll_delta": 0.0,
+    "scroll_serial": 0,
+    "visible": false,
+    "window_id": 2,
+    "zone": "content"
+  },
+  "profile": {
+    "enabled": false,
+    "nested": true,
+    "units": "microseconds"
+  },
+  "projection": {
+    "cpu_output_shadow_words": 4480,
+    "cpu_result_download_words": 0,
+    "cpu_scene_words": 0,
+    "device_ready_frames": 1,
+    "dirty_tiles": 28,
+    "fallback_frames": 0,
+    "geometry_builds": 0,
+    "geometry_cull_us_total": 0,
+    "geometry_descriptor_us_total": 0,
+    "geometry_insert_us_total": 0,
+    "geometry_prepare_us_total": 0,
+    "geometry_tiles_evaluated_total": 0,
+    "hardware_frames": 31,
+    "jobs_per_core": [
+      16,
+      16
+    ],
+    "lazy_copied_tiles_total": 85,
+    "mask_build_us_total": 0,
+    "mask_builds": 0,
+    "mask_fast_tiles_total": 0,
+    "mask_integer_samples_total": 0,
+    "mask_precise_samples_total": 0,
+    "mask_samples_evaluated_total": 0,
+    "masked_tiles_total": 452,
+    "mode": "ddr-resident-dirty-tiles",
+    "packed_mask_tiles_total": 452,
+    "plan_cache": {
+      "builtin_loads": 5,
+      "hits": 0,
+      "loads": 5,
+      "misses": 0,
+      "payload_scan_bytes": 0,
+      "rejected": 0,
+      "revision": "9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5"
+    },
+    "precomputed_layers_total": 5,
+    "redrawn_tiles": 28,
+    "reused_tiles_total": 0,
+    "solid_tiles_total": 0,
+    "texture_pool": {
+      "asset_cache_evictions": 45,
+      "asset_cache_hits": 1,
+      "asset_cache_misses": 58,
+      "asset_cache_upload_bytes": 1107200,
+      "asset_copy_batches": 59,
+      "asset_copy_bytes": 1129600,
+      "asset_copy_requests": 59,
+      "asset_resident_bytes": 246400,
+      "capacity_bytes": 4194304,
+      "evictions": 0,
+      "full_uploads": 5,
+      "partial_uploads": 29,
+      "resident_bytes": 1430400,
+      "resident_windows": 5,
+      "reuses": 29,
+      "source_tile_size": 32,
+      "source_tiles_updated": 1491,
+      "staged_copy_bytes": 0,
+      "total_resident_bytes": 1676800,
+      "upload_bytes": 2537600,
+      "upload_calls": 63
+    },
+    "texture_reuses_total": 29,
+    "texture_uploads_total": 34,
+    "tile_fills_total": 324,
+    "total_hw_jobs": 1121,
+    "update_kind": "tiles"
+  },
+  "render_error": null,
+  "runtime": "C++17",
+  "scene_owner": null,
+  "service": {
+    "phase": "composing",
+    "queued_requests": 0,
+    "snapshot_age_seconds": 4.87148508000007,
+    "state_is_snapshot": true
+  },
+  "view": {
+    "pitch": 0.0,
+    "roll": 0.0,
+    "yaw": 0.0
+  },
+  "windows": [
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": true,
+      "height_deg": 26.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          0.0
+        ]
+      ],
+      "surface_height": 300,
+      "surface_width": 400,
+      "title": "Telemetry",
+      "width_deg": 36.0,
+      "window_id": 2,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 0
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 30.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "boayo-desktop",
+      "roll": 0.0,
+      "shape": [
+        [
+          51.2,
+          36.0,
+          537.6,
+          252.0,
+          18.0
+        ]
+      ],
+      "surface_height": 360,
+      "surface_width": 640,
+      "title": "BoAYO Launcher",
+      "width_deg": 42.0,
+      "window_id": 1,
+      "workspace": {},
+      "z": 1
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -16.47105751657935,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: Telemetry",
+      "width_deg": 2.88,
+      "window_id": 3,
+      "workspace": {
+        "control": "move",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 2
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": -10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 4,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 3
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": 10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": -3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 5,
+      "workspace": {
+        "control": "close",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 4
+    }
+  ]
+}
+V14_9c93cf7f_RC:0
+oryukdo# boayo-stop && while test -S /tmp/bosio-wm.sock; do sleep 1; done; echo 
+V14_a48b7ce6_RC:$?
+V14_a48b7ce6_RC:0
+oryukdo# BOAYO_PROFILE=0 BOAYO_INIT_TRACE=0 /tmp/boayo-reference start; echo V14
+_b48e4c00_RC:$?
+BoAYO C++ service started; initialization continues. boayo-status / boayo-keys / boayo-stop
+{"features":["windows","pointer","input-injection","button-events","scene-stream","spatial-workspace","pointer-capture"],"headless":false,"m":32,"mock_backend":false,"runtime":"C++17","version":2}
+V14_b48e4c00_RC:0
+oryukdo# sleep 12; /tmp/boayo-reference app dashboard; sleep 30; echo V14_115f71
+e8_RC:$?
+BOAYO_APP_READY window=2
+V14_115f71e8_RC:0
+oryukdo# /tmp/boayo-reference profile > /tmp/measure-a; sleep 60; /tmp/boayo-ref
+erence profile > /tmp/measure-b; cat /tmp/measure-a; cat /tmp/measure-b; echo V1
+4_4030646b_RC:$?
+{"app_error":null,"driver_profile":{"available":true,"enabled":false,"fast_paths":true},"output_profile":{"backend":"kernel","command":1,"configure_us":88,"finish_us":4127,"select_us":3403,"upload_ranges":19,"upload_us":51973,"uploaded_words":135,"user_copy_us":9658,"validate_us":33196,"wait_us":31448},"performance":{"frame_interval_ms":18915.695919999962,"frame_limit":2.0,"frame_pacing":"start-to-start","full_update_count":1,"last_apps_ms":1724.143779999963,"last_compose_ms":7618.481940000038,"last_upload_ms":0.0,"no_op_update_count":0,"patch_update_count":2,"render_count":2,"rendered_generation":17,"update_words":4480,"uptime_seconds":30.25033271999996},"phase":"apps","profile":{"enabled":false,"nested":true,"units":"microseconds"},"projection":{"cpu_output_shadow_words":4480,"cpu_result_download_words":0,"cpu_scene_words":0,"device_ready_frames":1,"dirty_tiles":160,"fallback_frames":0,"geometry_builds":0,"geometry_cull_us_total":0,"geometry_descriptor_us_total":0,"geometry_insert_us_total":0,"geometry_prepare_us_total":0,"geometry_tiles_evaluated_total":0,"hardware_frames":2,"jobs_per_core":[76,72],"lazy_copied_tiles_total":0,"mask_build_us_total":0,"mask_builds":0,"mask_fast_tiles_total":0,"mask_integer_samples_total":0,"mask_precise_samples_total":0,"mask_samples_evaluated_total":0,"masked_tiles_total":121,"mode":"ddr-resident-dirty-tiles","packed_mask_tiles_total":121,"plan_cache":{"builtin_loads":5,"hits":0,"loads":5,"misses":0,"payload_scan_bytes":0,"rejected":0,"revision":"967005ee422f912c39464b07fc4c366acb1c3b33fb2e972b2449e0dd8eb4a19f"},"precomputed_layers_total":5,"redrawn_tiles":135,"reused_tiles_total":0,"solid_tiles_total":0,"texture_pool":{"capacity_bytes":4194304,"evictions":0,"full_uploads":5,"partial_uploads":0,"resident_bytes":2076800,"resident_windows":5,"reuses":0,"staged_copy_bytes":6272,"upload_bytes":2083072,"upload_calls":7},"texture_reuses_total":0,"texture_uploads_total":5,"tile_fills_total":108,"total_hw_jobs":244,"update_kind":"tiles"},"render_error":null,"snapshot_time":954.71834466}
+{"app_error":null,"driver_profile":{"available":true,"enabled":false,"fast_paths":true},"output_profile":{"backend":"kernel","command":1,"configure_us":88,"finish_us":4127,"select_us":3403,"upload_ranges":19,"upload_us":51973,"uploaded_words":135,"user_copy_us":9658,"validate_us":33196,"wait_us":31448},"performance":{"frame_interval_ms":18915.695919999962,"frame_limit":2.0,"frame_pacing":"start-to-start","full_update_count":1,"last_apps_ms":561.8336999999656,"last_compose_ms":7618.481940000038,"last_upload_ms":0.0,"no_op_update_count":0,"patch_update_count":2,"render_count":2,"rendered_generation":17,"update_words":4480,"uptime_seconds":61.44823752000002},"phase":"apps","profile":{"enabled":false,"nested":true,"units":"microseconds"},"projection":{"cpu_output_shadow_words":4480,"cpu_result_download_words":0,"cpu_scene_words":0,"device_ready_frames":1,"dirty_tiles":160,"fallback_frames":0,"geometry_builds":0,"geometry_cull_us_total":0,"geometry_descriptor_us_total":0,"geometry_insert_us_total":0,"geometry_prepare_us_total":0,"geometry_tiles_evaluated_total":0,"hardware_frames":2,"jobs_per_core":[76,72],"lazy_copied_tiles_total":0,"mask_build_us_total":0,"mask_builds":0,"mask_fast_tiles_total":0,"mask_integer_samples_total":0,"mask_precise_samples_total":0,"mask_samples_evaluated_total":0,"masked_tiles_total":121,"mode":"ddr-resident-dirty-tiles","packed_mask_tiles_total":121,"plan_cache":{"builtin_loads":5,"hits":0,"loads":5,"misses":0,"payload_scan_bytes":0,"rejected":0,"revision":"967005ee422f912c39464b07fc4c366acb1c3b33fb2e972b2449e0dd8eb4a19f"},"precomputed_layers_total":5,"redrawn_tiles":135,"reused_tiles_total":0,"solid_tiles_total":0,"texture_pool":{"capacity_bytes":4194304,"evictions":0,"full_uploads":5,"partial_uploads":0,"resident_bytes":2076800,"resident_windows":5,"reuses":0,"staged_copy_bytes":6272,"upload_bytes":2083072,"upload_calls":7},"texture_reuses_total":0,"texture_uploads_total":5,"tile_fills_total":108,"total_hw_jobs":244,"update_kind":"tiles"},"render_error":null,"snapshot_time":985.91879278}
+V14_4030646b_RC:0
+oryukdo# boayo-stop && while test -S /tmp/bosio-wm.sock; do sleep 1; done; echo 
+V14_1be1ea3a_RC:$?
+V14_1be1ea3a_RC:0
+oryukdo# BOAYO_PROFILE=0 BOAYO_INIT_TRACE=0 /tmp/boayo-reference start; echo V14
+_688d9250_RC:$?
+BoAYO C++ service started; initialization continues. boayo-status / boayo-keys / boayo-stop
+{"features":["windows","pointer","input-injection","button-events","scene-stream","spatial-workspace","pointer-capture"],"headless":false,"m":32,"mock_backend":false,"runtime":"C++17","version":2}
+V14_688d9250_RC:0
+oryukdo# sleep 12; /tmp/boayo-reference app pulse; sleep 30; echo V14_532e5399_R
+C:$?
+BOAYO_APP_READY window=2
+V14_532e5399_RC:0
+oryukdo# /tmp/boayo-reference profile > /tmp/measure-a; sleep 60; /tmp/boayo-ref
+erence profile > /tmp/measure-b; cat /tmp/measure-a; cat /tmp/measure-b; echo V1
+4_5fe63822_RC:$?
+{"app_error":null,"driver_profile":{"available":true,"enabled":false,"fast_paths":true},"output_profile":{"backend":"kernel","command":2,"configure_us":89,"finish_us":268,"select_us":26100,"upload_ranges":0,"upload_us":43646,"uploaded_words":0,"user_copy_us":9192,"validate_us":36147,"wait_us":24883},"performance":{"frame_interval_ms":2286.922680000089,"frame_limit":2.0,"frame_pacing":"start-to-start","full_update_count":1,"last_apps_ms":335.0383800000145,"last_compose_ms":1812.5508199998421,"last_upload_ms":0.0,"no_op_update_count":0,"patch_update_count":12,"render_count":12,"rendered_generation":27,"update_words":4480,"uptime_seconds":53.539234020000094},"phase":"composing","profile":{"enabled":false,"nested":true,"units":"microseconds"},"projection":{"cpu_output_shadow_words":4480,"cpu_result_download_words":0,"cpu_scene_words":0,"device_ready_frames":1,"dirty_tiles":14,"fallback_frames":0,"geometry_builds":0,"geometry_cull_us_total":0,"geometry_descriptor_us_total":0,"geometry_insert_us_total":0,"geometry_prepare_us_total":0,"geometry_tiles_evaluated_total":0,"hardware_frames":12,"jobs_per_core":[8,7],"lazy_copied_tiles_total":107,"mask_build_us_total":0,"mask_builds":0,"mask_fast_tiles_total":0,"mask_integer_samples_total":0,"mask_precise_samples_total":0,"mask_samples_evaluated_total":0,"masked_tiles_total":166,"mode":"ddr-resident-dirty-tiles","packed_mask_tiles_total":166,"plan_cache":{"builtin_loads":5,"hits":0,"loads":5,"misses":0,"payload_scan_bytes":0,"rejected":0,"revision":"967005ee422f912c39464b07fc4c366acb1c3b33fb2e972b2449e0dd8eb4a19f"},"precomputed_layers_total":5,"redrawn_tiles":14,"reused_tiles_total":0,"solid_tiles_total":0,"texture_pool":{"capacity_bytes":4194304,"evictions":0,"full_uploads":5,"partial_uploads":10,"resident_bytes":1430400,"resident_windows":5,"reuses":10,"staged_copy_bytes":3528,"upload_bytes":1856328,"upload_calls":18},"texture_reuses_total":10,"texture_uploads_total":15,"tile_fills_total":147,"total_hw_jobs":376,"update_kind":"tiles"},"render_error":null,"snapshot_time":1146.84824064}
+{"app_error":null,"driver_profile":{"available":true,"enabled":false,"fast_paths":true},"output_profile":{"backend":"kernel","command":2,"configure_us":89,"finish_us":268,"select_us":25663,"upload_ranges":0,"upload_us":43985,"uploaded_words":0,"user_copy_us":6176,"validate_us":36672,"wait_us":22531},"performance":{"frame_interval_ms":2211.1494200000834,"frame_limit":2.0,"frame_pacing":"start-to-start","full_update_count":1,"last_apps_ms":329.3044800000189,"last_compose_ms":1118.9296800000648,"last_upload_ms":0.0,"no_op_update_count":0,"patch_update_count":40,"render_count":40,"rendered_generation":55,"update_words":4480,"uptime_seconds":120.81040069999995},"phase":"composing","profile":{"enabled":false,"nested":true,"units":"microseconds"},"projection":{"cpu_output_shadow_words":4480,"cpu_result_download_words":0,"cpu_scene_words":0,"device_ready_frames":1,"dirty_tiles":14,"fallback_frames":0,"geometry_builds":0,"geometry_cull_us_total":0,"geometry_descriptor_us_total":0,"geometry_insert_us_total":0,"geometry_prepare_us_total":0,"geometry_tiles_evaluated_total":0,"hardware_frames":40,"jobs_per_core":[8,7],"lazy_copied_tiles_total":107,"mask_build_us_total":0,"mask_builds":0,"mask_fast_tiles_total":0,"mask_integer_samples_total":0,"mask_precise_samples_total":0,"mask_samples_evaluated_total":0,"masked_tiles_total":306,"mode":"ddr-resident-dirty-tiles","packed_mask_tiles_total":306,"plan_cache":{"builtin_loads":5,"hits":0,"loads":5,"misses":0,"payload_scan_bytes":0,"rejected":0,"revision":"967005ee422f912c39464b07fc4c366acb1c3b33fb2e972b2449e0dd8eb4a19f"},"precomputed_layers_total":5,"redrawn_tiles":14,"reused_tiles_total":0,"solid_tiles_total":0,"texture_pool":{"capacity_bytes":4194304,"evictions":0,"full_uploads":5,"partial_uploads":38,"resident_bytes":1430400,"resident_windows":5,"reuses":38,"staged_copy_bytes":3528,"upload_bytes":2931528,"upload_calls":46},"texture_reuses_total":38,"texture_uploads_total":43,"tile_fills_total":259,"total_hw_jobs":796,"update_kind":"tiles"},"render_error":null,"snapshot_time":1213.79886678}
+V14_5fe63822_RC:0
+oryukdo# boayo-status; echo V14_b76d98e1_RC:$?
+{
+  "app_error": null,
+  "assets": {
+    "cache_hits": 156,
+    "format": "raw-mapped-00RRGGBB",
+    "loads": 16,
+    "misses": 0,
+    "rejected": 0,
+    "rgb_materializations": 0
+  },
+  "buttons": {
+    "available": false,
+    "last_event_id": 0,
+    "state": 0
+  },
+  "compositor": "cpp-native",
+  "driver_profile": {
+    "available": true,
+    "enabled": false,
+    "fast_paths": true
+  },
+  "focused_window": 2,
+  "generation": 57,
+  "motion": {
+    "active": false,
+    "next_step": 0,
+    "phase": "idle",
+    "steps": 25,
+    "target_generation": 0,
+    "view": {
+      "pitch": 0.0,
+      "roll": 0.0,
+      "yaw": 0.0
+    },
+    "windows": []
+  },
+  "output": {
+    "abi": 3,
+    "active_bank": 0,
+    "active_base": 3170959360,
+    "antialias": false,
+    "backend": "kfb-linux-frame-atomic-output",
+    "capability": 1146373681,
+    "commits": 43,
+    "dma_copied_words": 27392,
+    "max_jobs": 64,
+    "max_scene_words": 1084816,
+    "memory_dma": {
+      "available": true,
+      "copy_bytes": 16639992,
+      "copy_ops": 2871,
+      "errors": 0,
+      "features": 255,
+      "fill_bytes": 1530880,
+      "fill_ops": 1495,
+      "quarantined": 0,
+      "timeouts": 0,
+      "upload_bytes": 13469608,
+      "upload_ops": 284,
+      "upload_threshold": 4096
+    },
+    "metadata_only": false,
+    "mock_backend": false,
+    "poisoned": 0,
+    "publish_profile": {
+      "backend": "kernel",
+      "command": 2,
+      "configure_us": 93,
+      "finish_us": 303,
+      "select_us": 26192,
+      "upload_ranges": 0,
+      "upload_us": 43334,
+      "uploaded_words": 0,
+      "user_copy_us": 8802,
+      "validate_us": 36056,
+      "wait_us": 44871
+    },
+    "sensor_available": false,
+    "shadow_copied_words": 0,
+    "signature": 1112748597,
+    "status": 1528627203,
+    "uploaded_words": 293
+  },
+  "performance": {
+    "frame_interval_ms": 4457.094700000198,
+    "frame_limit": 2.0,
+    "frame_pacing": "start-to-start",
+    "full_update_count": 1,
+    "last_apps_ms": 767.575959999931,
+    "last_compose_ms": 2772.36326000002,
+    "last_upload_ms": 0.0,
+    "no_op_update_count": 0,
+    "patch_update_count": 42,
+    "render_count": 42,
+    "rendered_generation": 57,
+    "update_words": 4480,
+    "uptime_seconds": 130.38227456000004
+  },
+  "pointer": {
+    "azimuth": 0.0,
+    "buttons": [],
+    "cancel_serial": 0,
+    "captured_window": null,
+    "dragging": false,
+    "elevation": 0.0,
+    "last_left_press": null,
+    "last_left_release": null,
+    "left_press_serial": 0,
+    "left_release_serial": 0,
+    "scroll_delta": 0.0,
+    "scroll_serial": 0,
+    "visible": false,
+    "window_id": 2,
+    "zone": "content"
+  },
+  "profile": {
+    "enabled": false,
+    "nested": true,
+    "units": "microseconds"
+  },
+  "projection": {
+    "cpu_output_shadow_words": 4480,
+    "cpu_result_download_words": 0,
+    "cpu_scene_words": 0,
+    "device_ready_frames": 1,
+    "dirty_tiles": 14,
+    "fallback_frames": 0,
+    "geometry_builds": 0,
+    "geometry_cull_us_total": 0,
+    "geometry_descriptor_us_total": 0,
+    "geometry_insert_us_total": 0,
+    "geometry_prepare_us_total": 0,
+    "geometry_tiles_evaluated_total": 0,
+    "hardware_frames": 42,
+    "jobs_per_core": [
+      8,
+      7
+    ],
+    "lazy_copied_tiles_total": 107,
+    "mask_build_us_total": 0,
+    "mask_builds": 0,
+    "mask_fast_tiles_total": 0,
+    "mask_integer_samples_total": 0,
+    "mask_precise_samples_total": 0,
+    "mask_samples_evaluated_total": 0,
+    "masked_tiles_total": 316,
+    "mode": "ddr-resident-dirty-tiles",
+    "packed_mask_tiles_total": 316,
+    "plan_cache": {
+      "builtin_loads": 5,
+      "hits": 0,
+      "loads": 5,
+      "misses": 0,
+      "payload_scan_bytes": 0,
+      "rejected": 0,
+      "revision": "967005ee422f912c39464b07fc4c366acb1c3b33fb2e972b2449e0dd8eb4a19f"
+    },
+    "precomputed_layers_total": 5,
+    "redrawn_tiles": 14,
+    "reused_tiles_total": 0,
+    "solid_tiles_total": 0,
+    "texture_pool": {
+      "capacity_bytes": 4194304,
+      "evictions": 0,
+      "full_uploads": 5,
+      "partial_uploads": 40,
+      "resident_bytes": 1430400,
+      "resident_windows": 5,
+      "reuses": 40,
+      "staged_copy_bytes": 3528,
+      "upload_bytes": 3008328,
+      "upload_calls": 48
+    },
+    "texture_reuses_total": 40,
+    "texture_uploads_total": 45,
+    "tile_fills_total": 267,
+    "total_hw_jobs": 826,
+    "update_kind": "tiles"
+  },
+  "render_error": null,
+  "runtime": "C++17",
+  "scene_owner": null,
+  "service": {
+    "phase": "composing",
+    "queued_requests": 0,
+    "snapshot_age_seconds": 3.7704053800000565,
+    "state_is_snapshot": true
+  },
+  "view": {
+    "pitch": 0.0,
+    "roll": 0.0,
+    "yaw": 0.0
+  },
+  "windows": [
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": true,
+      "height_deg": 28.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-sdk-pulse-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          0.0
+        ]
+      ],
+      "surface_height": 300,
+      "surface_width": 400,
+      "title": "SDK Pulse",
+      "width_deg": 38.0,
+      "window_id": 2,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 0
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 30.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "boayo-desktop",
+      "roll": 0.0,
+      "shape": [
+        [
+          51.2,
+          36.0,
+          537.6,
+          252.0,
+          18.0
+        ]
+      ],
+      "surface_height": 360,
+      "surface_width": 640,
+      "title": "BoAYO Launcher",
+      "width_deg": 42.0,
+      "window_id": 1,
+      "workspace": {},
+      "z": 1
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -17.264823078656832,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-sdk-pulse-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: SDK Pulse",
+      "width_deg": 2.88,
+      "window_id": 3,
+      "workspace": {
+        "control": "move",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 2
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 17.264823078656832,
+      "decorated": false,
+      "elevation": -11.129687987414206,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-sdk-pulse-2",
+      "roll": 3.433190255028393,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: SDK Pulse",
+      "width_deg": 4.0,
+      "window_id": 4,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 3
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 17.264823078656832,
+      "decorated": false,
+      "elevation": 11.129687987414204,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-sdk-pulse-2",
+      "roll": -3.433190255028393,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: SDK Pulse",
+      "width_deg": 4.0,
+      "window_id": 5,
+      "workspace": {
+        "control": "close",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 4
+    }
+  ]
+}
+V14_b76d98e1_RC:0
+oryukdo# boayo-stop && while test -S /tmp/bosio-wm.sock; do sleep 1; done; echo 
+V14_a793d211_RC:$?
+V14_a793d211_RC:0
+oryukdo# BOAYO_PROFILE=0 BOAYO_INIT_TRACE=0 /usr/bin/boayo-native start; echo V1
+4_b47773ad_RC:$?
+BoAYO C++ service started; initialization continues. boayo-status / boayo-keys / boayo-stop
+{"features":["windows","pointer","input-injection","button-events","scene-stream","spatial-workspace","pointer-capture"],"headless":false,"m":32,"mock_backend":false,"runtime":"C++17","version":2}
+V14_b47773ad_RC:0
+oryukdo# sleep 12; /usr/bin/boayo-native app pulse; sleep 30; echo V14_ae0ac703_
+RC:$?
+BOAYO_APP_READY window=2
+V14_ae0ac703_RC:0
+oryukdo# /usr/bin/boayo-native profile > /tmp/measure-a; sleep 60; /usr/bin/boay
+o-native profile > /tmp/measure-b; cat /tmp/measure-a; cat /tmp/measure-b; echo 
+V14_29efe25f_RC:$?
+{"app_error":null,"driver_profile":{"available":true,"enabled":false,"fast_paths":true},"output_profile":{"backend":"kernel","command":2,"configure_us":89,"finish_us":268,"select_us":23271,"upload_ranges":0,"upload_us":46333,"uploaded_words":0,"user_copy_us":10005,"validate_us":38117,"wait_us":151572},"performance":{"frame_interval_ms":3342.0701800000643,"frame_limit":2.0,"frame_pacing":"start-to-start","full_update_count":1,"last_apps_ms":1002.7745400000185,"last_compose_ms":3210.911200000055,"last_upload_ms":0.0,"no_op_update_count":0,"patch_update_count":11,"render_count":11,"rendered_generation":26,"update_words":4480,"uptime_seconds":56.87967755999989},"phase":"composing","profile":{"enabled":false,"nested":true,"units":"microseconds"},"projection":{"cpu_output_shadow_words":4480,"cpu_result_download_words":0,"cpu_scene_words":0,"device_ready_frames":1,"dirty_tiles":14,"fallback_frames":0,"geometry_builds":0,"geometry_cull_us_total":0,"geometry_descriptor_us_total":0,"geometry_insert_us_total":0,"geometry_prepare_us_total":0,"geometry_tiles_evaluated_total":0,"hardware_frames":11,"jobs_per_core":[8,7],"lazy_copied_tiles_total":107,"mask_build_us_total":0,"mask_builds":0,"mask_fast_tiles_total":0,"mask_integer_samples_total":0,"mask_precise_samples_total":0,"mask_samples_evaluated_total":0,"masked_tiles_total":161,"mode":"ddr-resident-dirty-tiles","packed_mask_tiles_total":161,"plan_cache":{"builtin_loads":5,"hits":0,"loads":5,"misses":0,"payload_scan_bytes":0,"rejected":0,"revision":"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5"},"precomputed_layers_total":5,"redrawn_tiles":14,"reused_tiles_total":0,"solid_tiles_total":0,"texture_pool":{"asset_cache_evictions":5,"asset_cache_hits":1,"asset_cache_misses":11,"asset_cache_upload_bytes":385764,"asset_copy_batches":11,"asset_copy_bytes":387528,"asset_copy_requests":52,"asset_resident_bytes":230400,"capacity_bytes":4194304,"evictions":0,"full_uploads":5,"partial_uploads":9,"resident_bytes":1430400,"resident_windows":5,"reuses":9,"source_tile_size":32,"source_tiles_updated":620,"staged_copy_bytes":0,"total_resident_bytes":1660800,"upload_bytes":1816164,"upload_calls":16},"texture_reuses_total":9,"texture_uploads_total":14,"tile_fills_total":143,"total_hw_jobs":361,"update_kind":"tiles"},"render_error":null,"snapshot_time":1307.1030725}
+{"app_error":null,"driver_profile":{"available":true,"enabled":false,"fast_paths":true},"output_profile":{"backend":"kernel","command":2,"configure_us":90,"finish_us":269,"select_us":24067,"upload_ranges":0,"upload_us":45874,"uploaded_words":0,"user_copy_us":10134,"validate_us":33750,"wait_us":29150},"performance":{"frame_interval_ms":2554.3294200001583,"frame_limit":2.0,"frame_pacing":"start-to-start","full_update_count":1,"last_apps_ms":480.3254199998719,"last_compose_ms":1590.8607599999414,"last_upload_ms":0.0,"no_op_update_count":0,"patch_update_count":33,"render_count":33,"rendered_generation":48,"update_words":4480,"uptime_seconds":123.47629149999989},"phase":"apps","profile":{"enabled":false,"nested":true,"units":"microseconds"},"projection":{"cpu_output_shadow_words":4480,"cpu_result_download_words":0,"cpu_scene_words":0,"device_ready_frames":1,"dirty_tiles":14,"fallback_frames":0,"geometry_builds":0,"geometry_cull_us_total":0,"geometry_descriptor_us_total":0,"geometry_insert_us_total":0,"geometry_prepare_us_total":0,"geometry_tiles_evaluated_total":0,"hardware_frames":33,"jobs_per_core":[8,7],"lazy_copied_tiles_total":107,"mask_build_us_total":0,"mask_builds":0,"mask_fast_tiles_total":0,"mask_integer_samples_total":0,"mask_precise_samples_total":0,"mask_samples_evaluated_total":0,"masked_tiles_total":271,"mode":"ddr-resident-dirty-tiles","packed_mask_tiles_total":271,"plan_cache":{"builtin_loads":5,"hits":0,"loads":5,"misses":0,"payload_scan_bytes":0,"rejected":0,"revision":"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5"},"precomputed_layers_total":5,"redrawn_tiles":14,"reused_tiles_total":0,"solid_tiles_total":0,"texture_pool":{"asset_cache_evictions":27,"asset_cache_hits":1,"asset_cache_misses":33,"asset_cache_upload_bytes":1230564,"asset_copy_batches":33,"asset_copy_bytes":1232328,"asset_copy_requests":74,"asset_resident_bytes":230400,"capacity_bytes":4194304,"evictions":0,"full_uploads":5,"partial_uploads":31,"resident_bytes":1430400,"resident_windows":5,"reuses":31,"source_tile_size":32,"source_tiles_updated":1192,"staged_copy_bytes":0,"total_resident_bytes":1660800,"upload_bytes":2660964,"upload_calls":38},"texture_reuses_total":31,"texture_uploads_total":36,"tile_fills_total":231,"total_hw_jobs":691,"update_kind":"tiles"},"render_error":null,"snapshot_time":1373.74794892}
+V14_29efe25f_RC:0
+oryukdo# boayo-status; echo V14_b78e5f15_RC:$?
+{
+  "app_error": null,
+  "assets": {
+    "cache_hits": 128,
+    "format": "raw-mapped-00RRGGBB",
+    "loads": 16,
+    "misses": 0,
+    "rejected": 0,
+    "rgb_materializations": 0
+  },
+  "buttons": {
+    "available": false,
+    "last_event_id": 0,
+    "state": 0
+  },
+  "compositor": "cpp-native",
+  "driver_profile": {
+    "available": true,
+    "enabled": false,
+    "fast_paths": true
+  },
+  "focused_window": 2,
+  "generation": 50,
+  "motion": {
+    "active": false,
+    "next_step": 0,
+    "phase": "idle",
+    "steps": 25,
+    "target_generation": 0,
+    "view": {
+      "pitch": 0.0,
+      "roll": 0.0,
+      "yaw": 0.0
+    },
+    "windows": []
+  },
+  "output": {
+    "abi": 3,
+    "active_bank": 1,
+    "active_base": 3175415808,
+    "antialias": false,
+    "backend": "kfb-linux-frame-atomic-output",
+    "capability": 1146373681,
+    "commits": 36,
+    "dma_copied_words": 27392,
+    "max_jobs": 64,
+    "max_scene_words": 1084816,
+    "memory_dma": {
+      "available": true,
+      "copy_bytes": 21015416,
+      "copy_ops": 3433,
+      "errors": 0,
+      "features": 255,
+      "fill_bytes": 1792000,
+      "fill_ops": 1750,
+      "quarantined": 0,
+      "timeouts": 0,
+      "upload_bytes": 16360972,
+      "upload_ops": 328,
+      "upload_threshold": 4096
+    },
+    "metadata_only": false,
+    "mock_backend": false,
+    "poisoned": 0,
+    "publish_profile": {
+      "backend": "kernel",
+      "command": 2,
+      "configure_us": 89,
+      "finish_us": 278,
+      "select_us": 25871,
+      "upload_ranges": 0,
+      "upload_us": 43741,
+      "uploaded_words": 0,
+      "user_copy_us": 11464,
+      "validate_us": 36641,
+      "wait_us": 143579
+    },
+    "sensor_available": false,
+    "shadow_copied_words": 0,
+    "signature": 1112748597,
+    "status": 1836187651,
+    "uploaded_words": 316
+  },
+  "performance": {
+    "frame_interval_ms": 6476.476840000032,
+    "frame_limit": 2.0,
+    "frame_pacing": "start-to-start",
+    "full_update_count": 1,
+    "last_apps_ms": 660.9002000000146,
+    "last_compose_ms": 2640.414039999996,
+    "last_upload_ms": 0.0,
+    "no_op_update_count": 0,
+    "patch_update_count": 35,
+    "render_count": 35,
+    "rendered_generation": 50,
+    "update_words": 4480,
+    "uptime_seconds": 135.24130698
+  },
+  "pointer": {
+    "azimuth": 0.0,
+    "buttons": [],
+    "cancel_serial": 0,
+    "captured_window": null,
+    "dragging": false,
+    "elevation": 0.0,
+    "last_left_press": null,
+    "last_left_release": null,
+    "left_press_serial": 0,
+    "left_release_serial": 0,
+    "scroll_delta": 0.0,
+    "scroll_serial": 0,
+    "visible": false,
+    "window_id": 2,
+    "zone": "content"
+  },
+  "profile": {
+    "enabled": false,
+    "nested": true,
+    "units": "microseconds"
+  },
+  "projection": {
+    "cpu_output_shadow_words": 4480,
+    "cpu_result_download_words": 0,
+    "cpu_scene_words": 0,
+    "device_ready_frames": 1,
+    "dirty_tiles": 14,
+    "fallback_frames": 0,
+    "geometry_builds": 0,
+    "geometry_cull_us_total": 0,
+    "geometry_descriptor_us_total": 0,
+    "geometry_insert_us_total": 0,
+    "geometry_prepare_us_total": 0,
+    "geometry_tiles_evaluated_total": 0,
+    "hardware_frames": 35,
+    "jobs_per_core": [
+      8,
+      7
+    ],
+    "lazy_copied_tiles_total": 107,
+    "mask_build_us_total": 0,
+    "mask_builds": 0,
+    "mask_fast_tiles_total": 0,
+    "mask_integer_samples_total": 0,
+    "mask_precise_samples_total": 0,
+    "mask_samples_evaluated_total": 0,
+    "masked_tiles_total": 281,
+    "mode": "ddr-resident-dirty-tiles",
+    "packed_mask_tiles_total": 281,
+    "plan_cache": {
+      "builtin_loads": 5,
+      "hits": 0,
+      "loads": 5,
+      "misses": 0,
+      "payload_scan_bytes": 0,
+      "rejected": 0,
+      "revision": "9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5"
+    },
+    "precomputed_layers_total": 5,
+    "redrawn_tiles": 14,
+    "reused_tiles_total": 0,
+    "solid_tiles_total": 0,
+    "texture_pool": {
+      "asset_cache_evictions": 29,
+      "asset_cache_hits": 1,
+      "asset_cache_misses": 35,
+      "asset_cache_upload_bytes": 1307364,
+      "asset_copy_batches": 35,
+      "asset_copy_bytes": 1309128,
+      "asset_copy_requests": 76,
+      "asset_resident_bytes": 230400,
+      "capacity_bytes": 4194304,
+      "evictions": 0,
+      "full_uploads": 5,
+      "partial_uploads": 33,
+      "resident_bytes": 1430400,
+      "resident_windows": 5,
+      "reuses": 33,
+      "source_tile_size": 32,
+      "source_tiles_updated": 1244,
+      "staged_copy_bytes": 0,
+      "total_resident_bytes": 1660800,
+      "upload_bytes": 2737764,
+      "upload_calls": 40
+    },
+    "texture_reuses_total": 33,
+    "texture_uploads_total": 38,
+    "tile_fills_total": 239,
+    "total_hw_jobs": 721,
+    "update_kind": "tiles"
+  },
+  "render_error": null,
+  "runtime": "C++17",
+  "scene_owner": null,
+  "service": {
+    "phase": "composing",
+    "queued_requests": 0,
+    "snapshot_age_seconds": 0.24527284000009786,
+    "state_is_snapshot": true
+  },
+  "view": {
+    "pitch": 0.0,
+    "roll": 0.0,
+    "yaw": 0.0
+  },
+  "windows": [
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": true,
+      "height_deg": 28.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-sdk-pulse-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          0.0
+        ]
+      ],
+      "surface_height": 300,
+      "surface_width": 400,
+      "title": "SDK Pulse",
+      "width_deg": 38.0,
+      "window_id": 2,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 0
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 30.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "boayo-desktop",
+      "roll": 0.0,
+      "shape": [
+        [
+          51.2,
+          36.0,
+          537.6,
+          252.0,
+          18.0
+        ]
+      ],
+      "surface_height": 360,
+      "surface_width": 640,
+      "title": "BoAYO Launcher",
+      "width_deg": 42.0,
+      "window_id": 1,
+      "workspace": {},
+      "z": 1
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -17.264823078656832,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-sdk-pulse-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: SDK Pulse",
+      "width_deg": 2.88,
+      "window_id": 3,
+      "workspace": {
+        "control": "move",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 2
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 17.264823078656832,
+      "decorated": false,
+      "elevation": -11.129687987414206,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-sdk-pulse-2",
+      "roll": 3.433190255028393,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: SDK Pulse",
+      "width_deg": 4.0,
+      "window_id": 4,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 3
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 17.264823078656832,
+      "decorated": false,
+      "elevation": 11.129687987414204,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-sdk-pulse-2",
+      "roll": -3.433190255028393,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: SDK Pulse",
+      "width_deg": 4.0,
+      "window_id": 5,
+      "workspace": {
+        "control": "close",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 4
+    }
+  ]
+}
+V14_b78e5f15_RC:0
+oryukdo# 

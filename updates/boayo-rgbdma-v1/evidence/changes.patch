@@ -1,0 +1,379 @@
+--- boayo-launchtrace-v1/software/boayo/native/src/backend.cpp
++++ boayo-rgbdma-v1/software/boayo/native/src/backend.cpp
+@@ -4,7 +4,37 @@
+ #include <unistd.h>
+ #include <cerrno>
+ #include <cstring>
++#include "init_trace.hpp"
+ namespace boayo {
++static_assert(sizeof(bo_rgb_fill)==24, "BOSIO RGB DMA ABI layout");
++bool LinuxDevice::rgb_fill(uint8_t *p,size_t n,const std::array<uint8_t,3> &color) {
++  if(!(dma_features & BO_DMA_RGB_USER))return false;
++  require(n<=BO_RGB_MAX_BYTES && !(n&3) && !(uintptr_t(p)&3),"RGB DMA bounds");
++  bo_rgb_fill f{};f.data=uintptr_t(p);f.bytes=n;
++  f.color=uint32_t(color[0])|(uint32_t(color[1])<<8)|(uint32_t(color[2])<<16);
++  init_trace::mark("rgb.dma.begin",n);
++  if(ioctl(fd,BO_RGB_FILL,&f)<0) {
++    int error=errno;
++    if(error==ETIMEDOUT) {
++      // The kernel retains these pinned pages for a possible late write.
++      // Exit the whole process without freeing/reusing the user allocation.
++      static const char message[]="BOAYO_RGB_DMA_TIMEOUT_RESET_REQUIRED\n";
++      const auto written=::write(STDERR_FILENO,message,sizeof(message)-1);
++      (void)written;
++      _exit(74);
++    }
++    throw std::runtime_error("BOSIO RGB DMA: "+std::string(strerror(error)));
++  }
++  init_trace::mark("rgb.dma.end",n);
++  return true;
++}
++bool MockDevice::rgb_fill(uint8_t *p,size_t n,const std::array<uint8_t,3> &color) {
++  if(!dma_enabled)return false;
++  check();
++  for(size_t i=0;i<n;i++)p[i]=color[i%3];
++  ++dma_fills;
++  return true;
++}
+ static_assert(sizeof(bo_info) == 36 && sizeof(bo_upload) == 24 && sizeof(bo_run) == 40 &&
+                   sizeof(bo_present) == 736 && sizeof(bo_pose) == 724,
+               "BOSIO ABI layout");
+--- boayo-launchtrace-v1/software/boayo/native/src/backend.hpp
++++ boayo-rgbdma-v1/software/boayo/native/src/backend.hpp
+@@ -19,6 +19,7 @@
+   virtual bool copy(unsigned,unsigned,unsigned,unsigned,size_t) { return false; }
+   virtual bool fill(unsigned,unsigned,size_t,unsigned) { return false; }
+   virtual J dma_status() { return J::object(); }
++  virtual bool rgb_fill(uint8_t *, size_t, const std::array<uint8_t,3> &) { return false; }
+ };
+ struct LinuxDevice : Device {
+   int fd = -1;
+@@ -35,6 +36,7 @@
+   bool copy(unsigned,unsigned,unsigned,unsigned,size_t) override;
+   bool fill(unsigned,unsigned,size_t,unsigned) override;
+   J dma_status() override;
++  bool rgb_fill(uint8_t *, size_t, const std::array<uint8_t,3> &) override;
+ };
+ struct MockDevice : Device {
+   std::array<Words, 6> regions;
+@@ -57,6 +59,7 @@
+   bool copy(unsigned,unsigned,unsigned,unsigned,size_t) override;
+   bool fill(unsigned,unsigned,size_t,unsigned) override;
+   J dma_status() override;
++  bool rgb_fill(uint8_t *, size_t, const std::array<uint8_t,3> &) override;
+ };
+ struct Output {
+   Device &dev;
+--- boayo-launchtrace-v1/software/boayo/native/src/main.cpp
++++ boayo-rgbdma-v1/software/boayo/native/src/main.cpp
+@@ -4,6 +4,7 @@
+ #include "backend.hpp"
+ #include "apps.hpp"
+ #include "runtime.hpp"
++#include "rgb_fill.hpp"
+ #include <iostream>
+ using namespace boayo;
+ int main(int argc, char **argv) {
+@@ -11,6 +12,12 @@
+     if (argc < 2 || std::string(argv[1]) != "--rpc")
+       return runtime_main(argc, argv);
+     WM wm;
++    MockDevice rgb_mock;
++    RgbFillScope rgb_scope({&rgb_mock, [](void *d,uint8_t *p,size_t n,
++                                         const std::array<uint8_t,3> &c) {
++      const char *enabled=std::getenv("BOAYO_TEST_RGB_DMA");
++      return enabled && std::string(enabled)=="1" && static_cast<MockDevice *>(d)->rgb_fill(p,n,c);
++    }});
+     Geometry geometry;
+     std::unique_ptr<MockDevice> mock;
+     std::unique_ptr<Projectors> projectors;
+@@ -27,7 +34,9 @@
+           id = r.value("id", J(nullptr));
+           std::string op = r.at("op");
+           J result;
+-          if (op == "test_camera") {
++          if (op == "test_rgb_dma_stats") {
++            result={{"calls",rgb_mock.dma_fills}};
++          } else if (op == "test_camera") {
+             auto a = r.at("args");
+             result = geometry.camera(a.value("yaw", 0.), a.value("pitch", 0.), a.value("roll", 0.));
+           } else if (op == "test_descriptors") {
+--- boayo-launchtrace-v1/software/boayo/native/src/rgb_fill.hpp
++++ boayo-rgbdma-v1/software/boayo/native/src/rgb_fill.hpp
+@@ -0,0 +1,28 @@
++#pragma once
++#include "common.hpp"
++namespace boayo {
++// Only the render thread owns the mutable surfaces and the exclusive device.
++struct RgbFillHook {
++  void *context = nullptr;
++  bool (*fill)(void *, uint8_t *, size_t, const std::array<uint8_t, 3> &) = nullptr;
++};
++inline thread_local RgbFillHook rgb_fill_hook;
++struct RgbFillScope {
++  RgbFillHook previous;
++  explicit RgbFillScope(RgbFillHook hook) : previous(rgb_fill_hook) { rgb_fill_hook = hook; }
++  ~RgbFillScope() { rgb_fill_hook = previous; }
++  RgbFillScope(const RgbFillScope &) = delete;
++  RgbFillScope &operator=(const RgbFillScope &) = delete;
++};
++inline void fill_rgb(uint8_t *dst, size_t bytes, const std::array<uint8_t, 3> &color) {
++  if (bytes >= 4096 && !(reinterpret_cast<uintptr_t>(dst) & 3) && !(bytes & 3) &&
++      rgb_fill_hook.fill && rgb_fill_hook.fill(rgb_fill_hook.context, dst, bytes, color))
++    return;
++  // Small/unaligned buffers and old kernels retain an exact CPU fallback.
++  size_t i = 0;
++  for (; i + 3 <= bytes; i += 3) {
++    dst[i] = color[0]; dst[i+1] = color[1]; dst[i+2] = color[2];
++  }
++  for (size_t k = 0; i < bytes; ++i, ++k) dst[i] = color[k];
++}
++} // namespace boayo
+--- boayo-launchtrace-v1/software/boayo/native/src/runtime.cpp
++++ boayo-rgbdma-v1/software/boayo/native/src/runtime.cpp
+@@ -1,6 +1,7 @@
+ #include "runtime.hpp"
+ #include "apps.hpp"
+ #include "backend.hpp"
++#include "rgb_fill.hpp"
+ #include <sys/socket.h>
+ #include <sys/un.h>
+ #include <sys/file.h>
+@@ -143,6 +144,10 @@
+   b.phase("device_open");
+   std::unique_ptr<Device> dev =
+       mock ? std::unique_ptr<Device>(new MockDevice) : std::unique_ptr<Device>(new LinuxDevice);
++  RgbFillScope rgb_scope({dev.get(), [](void *d,uint8_t *p,size_t n,
++                                      const std::array<uint8_t,3> &c) {
++    return static_cast<Device *>(d)->rgb_fill(p,n,c);
++  }});
+   Projectors projectors(*dev);
+   b.phase("compositor_allocation");
+   Compositor compositor(geometry, projectors, true);
+--- boayo-launchtrace-v1/software/boayo/native/src/ui.cpp
++++ boayo-rgbdma-v1/software/boayo/native/src/ui.cpp
+@@ -1,13 +1,13 @@
+ #include "ui.hpp"
+ #include "init_trace.hpp"
+ #include "font.hpp"
++#include "rgb_fill.hpp"
+ #include <cctype>
+ #include <cstdio>
+ namespace boayo {
+ void Surface::clear(Color c) {
+   init_trace::mark("surface.clear.begin", pixels.size());
+-  for (size_t i = 0; i < pixels.size(); i++)
+-    pixels[i] = c[i % 3];
++  fill_rgb(pixels.data(), pixels.size(), c);
+   init_trace::mark("surface.clear.end", pixels.size());
+ }
+ void Surface::blend(int x, int y, unsigned n, Color c) {
+--- boayo-launchtrace-v1/software/boayo/native/src/wm.cpp
++++ boayo-rgbdma-v1/software/boayo/native/src/wm.cpp
+@@ -1,4 +1,5 @@
+ #include "wm.hpp"
++#include "rgb_fill.hpp"
+ namespace boayo {
+ static J nullable(int id) {
+   return id ? J(id) : J(nullptr);
+@@ -323,11 +324,7 @@
+               {"workspace", workspace_validate(a.value("workspace", J::object()))},
+               {"shape", shape_validate(a.value("shape", J::array()), sw, sh)}};
+     w.surface.resize(size_t(sw) * sh * 3);
+-    for (size_t p = 0; p < w.surface.size(); p += 3) {
+-      w.surface[p] = 16;
+-      w.surface[p + 1] = 24;
+-      w.surface[p + 2] = 32;
+-    }
++    fill_rgb(w.surface.data(), w.surface.size(), {16,24,32});
+     w.dirty = {0, 0, sw, sh};
+     windows[id] = std::move(w);
+     if (windows[id].data["always_on_top"].get<bool>())
+@@ -405,8 +402,8 @@
+       for (auto &v : c)
+         require(v.is_number_integer() && v.get<int>() >= 0 && v.get<int>() <= 255,
+                 "rgb must contain three bytes");
+-      for (size_t p = 0; p < w.surface.size(); p++)
+-        w.surface[p] = c[p % 3];
++      fill_rgb(w.surface.data(), w.surface.size(),
++               {c[0].get<uint8_t>(),c[1].get<uint8_t>(),c[2].get<uint8_t>()});
+       w.dirty = {0, 0, sw, sh};
+     } else {
+       x = a.at("x");
+--- boayo-launchtrace-v1/software/bosio/driver/bosio_kfb.c
++++ boayo-rgbdma-v1/software/bosio/driver/bosio_kfb.c
+@@ -26,6 +26,12 @@
+     struct sg_table table;
+     unsigned int mapped;
+ };
++struct bo_rgb_mapping {
++    struct page **pages;
++    unsigned int pinned, mapped;
++    struct sg_table table;
++};
++#define BO_RGB_PATTERN_BYTES 12288u
+ #ifdef MODULE
+ #error "BOSIO must be built in: outstanding DMA must survive close and timeout"
+ #endif
+@@ -41,6 +47,11 @@
+     struct bo_dma_wait dma_wait;
+     struct bo_dma_info dma_info;
+     struct bo_upload_mapping *held_upload;
++    struct bo_rgb_mapping *held_rgb;
++    void *rgb_pattern;
++    dma_addr_t rgb_dma;
++    __u32 rgb_color;
++    bool rgb_valid;
+ };
+ static int bosio_mem_transfer(struct bosio_device *d,dma_addr_t dst,
+                              dma_addr_t src,unsigned int bytes,int fill,int value)
+@@ -106,6 +117,7 @@
+ release:
+     d->held_upload=NULL;bosio_unmap_upload(d,m);return ret;
+ }
++#include "bosio_rgb_dma.h"
+ static int hw_read(void *opaque,unsigned int core,__u32 reg,__u32 *value)
+ { struct bosio_device *d=opaque;*value=readl(d->regs[core]+reg);return 0; }
+ static int hw_write(void *opaque,unsigned int core,__u32 reg,__u32 value)
+@@ -211,6 +223,11 @@
+         d->dma_info.quarantined=d->dma_wait.quarantined;
+         if(copy_to_user(u,&d->dma_info,sizeof(d->dma_info)))ret=-EFAULT;
+         break;
++    case BO_RGB_FILL: {
++        struct bo_rgb_fill f;
++        if(copy_from_user(&f,u,sizeof(f))){ret=-EFAULT;break;}
++        ret=bosio_rgb_user(d,&f);break;
++    }
+     default: ret=-ENOTTY;
+     }
+     mutex_unlock(&d->mutex);return ret;
+@@ -246,7 +263,7 @@
+     if(!dma_has_cap(DMA_MEMCPY,d->channel->device->cap_mask) ||
+        !dma_has_cap(DMA_MEMSET,d->channel->device->cap_mask)){ret=-EINVAL;goto release_channel;}
+     init_completion(&d->dma_wait.done);
+-    d->dma_info.version=1;d->dma_info.features=BO_DMA_COPY|BO_DMA_FILL|BO_DMA_UPLOAD;
++    d->dma_info.version=1;d->dma_info.features=BO_DMA_COPY|BO_DMA_FILL|BO_DMA_UPLOAD|BO_DMA_RGB_USER;
+     d->dma_info.upload_threshold=BO_UPLOAD_DMA_THRESHOLD;
+     ret=of_reserved_mem_device_init(dev);if(ret)goto release_channel;
+     d->arena=dma_alloc_coherent(dev,BO_ARENA_BYTES,&d->dma,GFP_KERNEL);
+@@ -263,10 +280,16 @@
+      * initialization uses BO_MEM_FILL; never clear displayed memory here. */
+     mutex_init(&d->mutex);
+     d->misc=(struct miscdevice){.minor=MISC_DYNAMIC_MINOR,.name="bosio0",.fops=&bosio_fops,.parent=dev,.mode=0600};
+-    ret=misc_register(&d->misc);if(ret)goto free_dma;
++    d->rgb_pattern=dma_alloc_coherent(dmaengine_get_dma_device(d->channel),
++                        BO_RGB_PATTERN_BYTES,&d->rgb_dma,GFP_KERNEL);
++    if(!d->rgb_pattern){ret=-ENOMEM;goto free_dma;}
++    ret=misc_register(&d->misc);if(ret)goto free_rgb;
+     platform_set_drvdata(pdev,d);
+-    dev_info(dev,"BOSIO ABI3: dual projectors + BS25, DMA copy/fill/upload, 16MiB arena\n");
++    dev_info(dev,"BOSIO ABI3: dual projectors + BS25, DMA copy/fill/upload/RGB-user, 16MiB arena\n");
+     return 0;
++free_rgb:
++    dma_free_coherent(dmaengine_get_dma_device(d->channel),BO_RGB_PATTERN_BYTES,
++                       d->rgb_pattern,d->rgb_dma);
+ free_dma:
+     dma_free_coherent(dev,BO_ARENA_BYTES,d->arena,d->dma);
+ release_pool:
+--- boayo-launchtrace-v1/software/bosio/driver/bosio_rgb_dma.h
++++ boayo-rgbdma-v1/software/bosio/driver/bosio_rgb_dma.h
+@@ -0,0 +1,77 @@
++/* Included after bosio_mem_transfer. All operations hold the device mutex.
++ * No userspace address is ever used as a DMA/bus address. */
++static void bosio_rgb_release(struct bosio_device *d,struct bo_rgb_mapping *m)
++{
++    if(m->mapped)dma_unmap_sg(dmaengine_get_dma_device(d->channel),m->table.sgl,
++                              m->table.orig_nents,DMA_FROM_DEVICE);
++    if(m->table.sgl)sg_free_table(&m->table);
++    if(m->pinned)unpin_user_pages_dirty_lock(m->pages,m->pinned,true);
++    kvfree(m->pages);kfree(m);
++}
++static int bosio_rgb_pattern(struct bosio_device *d,__u32 color)
++{
++    unsigned int i,filled=12;
++    int ret;
++    if(d->rgb_valid && d->rgb_color==color)return 0;
++    d->rgb_valid=false;
++    for(i=0;i<12;i++)((u8 *)d->rgb_pattern)[i]=color>>(8*(i%3));
++    dma_wmb();
++    while(filled<BO_RGB_PATTERN_BYTES) {
++        unsigned int n=min(filled,BO_RGB_PATTERN_BYTES-filled);
++        ret=bosio_mem_transfer(d,d->rgb_dma+filled,d->rgb_dma,n,0,0);
++        if(ret)return ret;
++        filled+=n;
++    }
++    d->rgb_color=color;d->rgb_valid=true;return 0;
++}
++static int bosio_rgb_user(struct bosio_device *d,const struct bo_rgb_fill *f)
++{
++    struct bo_rgb_mapping *m;
++    struct scatterlist *sg;
++    unsigned long address=(unsigned long)f->data;
++    unsigned int count,i,done=0;
++    long pinned;
++    int ret;
++    if(d->engine.poisoned || d->dma_wait.quarantined)return -EIO;
++    if(f->reserved[0] || f->reserved[1] || f->color>0xffffff ||
++       f->data>ULONG_MAX || !f->bytes || f->bytes>BO_RGB_MAX_BYTES ||
++       ((address|f->bytes)&3) || address>ULONG_MAX-f->bytes)return -EINVAL;
++    if(!access_ok(u64_to_user_ptr(f->data),f->bytes))return -EFAULT;
++    count=DIV_ROUND_UP(offset_in_page(address)+f->bytes,PAGE_SIZE);
++    m=kzalloc(sizeof(*m),GFP_KERNEL);if(!m)return -ENOMEM;
++    m->pages=kvcalloc(count,sizeof(*m->pages),GFP_KERNEL);
++    if(!m->pages){kfree(m);return -ENOMEM;}
++    /* FOLL_WRITE resolves COW before handing memory to the device. */
++    pinned=pin_user_pages_fast(address & PAGE_MASK,count,FOLL_WRITE|FOLL_LONGTERM,m->pages);
++    if(pinned>0)m->pinned=pinned;
++    if(pinned!=count){ret=pinned<0?pinned:-EFAULT;goto release;}
++    ret=sg_alloc_table_from_pages(&m->table,m->pages,count,offset_in_page(address),
++                                  f->bytes,GFP_KERNEL);
++    if(ret)goto release;
++    m->mapped=dma_map_sg(dmaengine_get_dma_device(d->channel),m->table.sgl,
++                          m->table.orig_nents,DMA_FROM_DEVICE);
++    if(!m->mapped){ret=-EIO;goto release;}
++    d->held_rgb=m;
++    ret=bosio_rgb_pattern(d,f->color);if(ret)goto failed;
++    for_each_sg(m->table.sgl,sg,m->mapped,i) {
++        unsigned int offset=0,size=sg_dma_len(sg);
++        if((sg_dma_address(sg)|size)&3){ret=-EIO;goto failed;}
++        while(offset<size) {
++            /* Adding 4 preserves DMA alignment and advances RGB phase by 1. */
++            unsigned int phase=4*(done%3);
++            unsigned int n=min(size-offset,BO_RGB_PATTERN_BYTES-phase);
++            ret=bosio_mem_transfer(d,sg_dma_address(sg)+offset,d->rgb_dma+phase,n,0,0);
++            if(ret)goto failed;
++            offset+=n;done+=n;
++        }
++    }
++    ret=0;goto release;
++failed:
++    if(done)d->engine.poisoned=1;
++    /* Do not release any destination pages or their DMA mappings on timeout.
++     * The application exits without unwinding/reusing its buffer. The device
++     * is built in, cannot unbind and remains poisoned until board reset. */
++    if(d->dma_wait.quarantined)return -ETIMEDOUT;
++release:
++    d->held_rgb=NULL;bosio_rgb_release(d,m);return ret;
++}
+--- boayo-launchtrace-v1/software/bosio/include/bosio_uapi.h
++++ boayo-rgbdma-v1/software/bosio/include/bosio_uapi.h
+@@ -31,6 +31,13 @@
+ #define BO_DMA_COPY 1u
+ #define BO_DMA_FILL 2u
+ #define BO_DMA_UPLOAD 4u
++#define BO_DMA_RGB_USER 8u
++#define BO_RGB_MAX_BYTES (3u * 1024u * 1024u)
++/* Synchronous RGB24 fill of writable, 4-byte-aligned user memory.
++ * The caller must not access/reuse/unmap the range until return. On ETIMEDOUT
++ * it must terminate: pages remain pinned until reset for a possible late DMA.
++ * color is R | G<<8 | B<<16, independent of host byte order. */
++struct bo_rgb_fill { __aligned_u64 data; __u32 bytes, color, reserved[2]; };
+ struct bo_mem_copy {
+     __u32 src_region, src_offset, dst_region, dst_offset, bytes, reserved;
+ };
+@@ -51,4 +58,5 @@
+ #define BO_MEM_COPY _IOW('B', 0x47, struct bo_mem_copy)
+ #define BO_MEM_FILL _IOW('B', 0x48, struct bo_mem_fill)
+ #define BO_GET_DMA_INFO _IOR('B', 0x49, struct bo_dma_info)
++#define BO_RGB_FILL _IOW('B', 0x4a, struct bo_rgb_fill)
+ #endif

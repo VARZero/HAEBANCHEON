@@ -1,0 +1,61 @@
+{
+  "result": "PASS",
+  "binary": "/var/tmp/haebancheon-components-v6/host/boayo-native-host",
+  "binary_sha256": "1ba6293bb51b64f38bdb798d140347250a2898b0a14a5e18720e3e6469ca1be1",
+  "tests": [
+    {
+      "test": "test_core.py",
+      "result": "PASS",
+      "seconds": 1.18,
+      "exit_code": 0
+    },
+    {
+      "test": "test_ui.py",
+      "result": "PASS",
+      "seconds": 0.89,
+      "exit_code": 0
+    },
+    {
+      "test": "test_apps.py",
+      "result": "PASS",
+      "seconds": 0.76,
+      "exit_code": 0
+    },
+    {
+      "test": "test_compositor.py",
+      "result": "PASS",
+      "seconds": 1.23,
+      "exit_code": 0
+    },
+    {
+      "test": "test_fallback.py",
+      "result": "PASS",
+      "seconds": 2.62,
+      "exit_code": 0
+    },
+    {
+      "test": "test_runtime.py",
+      "result": "PASS",
+      "seconds": 2.83,
+      "exit_code": 0
+    },
+    {
+      "test": "test_responsive.py",
+      "result": "PASS",
+      "seconds": 3.19,
+      "exit_code": 0
+    },
+    {
+      "test": "selftest",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "test": "dual-selftest",
+      "result": "PASS",
+      "exit_code": 0
+    }
+  ],
+  "scope": "host Python differential plus explicit mock backend",
+  "hardware": false
+}

@@ -1,0 +1,8 @@
+{
+  "command": "boayo-native app telemetry",
+  "seconds": 1.783,
+  "rc": 127,
+  "uart": "boayo-native app telemetry; echo DIRTY9_eee4463b_RC:$?\r\r\nsh: boayo-native: not found\r\r\nDIRTY9_eee4463b_RC:127\r\r\n",
+  "observed_at": "2026-11-14T20:48:36.602723",
+  "log_start": 171982
+}

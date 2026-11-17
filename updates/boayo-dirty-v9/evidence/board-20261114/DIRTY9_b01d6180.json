@@ -1,0 +1,8 @@
+{
+  "command": "uname -r; cat /etc/oryukdo-image; cat /proc/mounts; ls -l /usr/bin/boayo-native",
+  "seconds": 2.275,
+  "rc": 0,
+  "uart": "uname -r; cat /etc/oryukdo-image; cat /proc/mounts; ls -l /usr/bin/boay\r\r\r\no-native; echo DIRTY9_b01d6180_RC:$?\r\r\n6.12.0-haebancheon-dirty9\r\r\nHAEBANCHEON-BoAYO-dirty-v9 / L1-16K DMA3 / persistent window textures and dirty rectangles / physical verification pending\r\r\nrootfs / rootfs rw 0 0\r\r\ndevtmpfs /dev devtmpfs rw,relatime 0 0\r\r\n/dev/mmcblk0p2 /data ext4 rw,relatime 0 0\r\r\nproc /proc proc rw,relatime 0 0\r\r\nsysfs /sys sysfs rw,relatime 0 0\r\r\n-rwxr-xr-x    1   2059060 /usr/bin/boayo-native\r\r\nDIRTY9_b01d6180_RC:0\r\r\n",
+  "observed_at": "2026-11-14T20:47:51.298471",
+  "log_start": 163164
+}

@@ -1,0 +1,33 @@
+{
+  "status": "PASS_ISOLATED_COMPARISON",
+  "reference_source": "D:\\ORYUKDO-Gen3_AB_integrated_unverified\\ORYUKDO-Gen3\\work\\ORYUKDO-3d5i_BOSIO_SoC\\variants\\l1-16k-dma3\\soc\\bosio\\or_l1_cache.sv",
+  "reference_sha256": "cabf68fff85f54299607a8082707b4ec498732fb19c460820124e13db5f3eb3e",
+  "experimental_sha256": "751dfcf220186d0270793363e57e5438cd4cdffc585a1df3b2386e87b7e12258",
+  "cycle_miter": {
+    "seeds": [
+      1,
+      7,
+      23
+    ],
+    "initial_lru": "All ones in candidate, reset-to-zero in reference",
+    "comparison": "All CPU handshake cycles, valid CPU results, and every AXI request field",
+    "logs": {
+      "1": "862ecb2e539741ca92ba95130da1de4af6d07f0bb6bc2f4423088bb4ee914688",
+      "7": "4f5d654428992fc44d1c15ae5e16f9b8d1ac6a33b1e4d5846dc63ef3a8412680",
+      "23": "6a63384dd62810c2b981b19f81a2402afbef62958cbbf246b2cb84990f87f7bb"
+    }
+  },
+  "standalone_synthesis": {
+    "reference": {
+      "lut": 6037.0,
+      "ff": 2031.0,
+      "bram36": 8.0
+    },
+    "compact": {
+      "lut": 5222.0,
+      "ff": 1485.0,
+      "bram36": 8.0
+    }
+  },
+  "full_board_result": "See board_manifest.json; full implementation passed, physical board untested."
+}

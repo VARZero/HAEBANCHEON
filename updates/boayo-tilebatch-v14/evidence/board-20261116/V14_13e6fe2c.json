@@ -1,0 +1,8 @@
+{
+  "command": "cp /bin/ddrcheck /tmp/view-rx && : > /tmp/view-rx",
+  "seconds": 1.03,
+  "rc": 0,
+  "uart": "cp /bin/ddrcheck /tmp/view-rx && : > /tmp/view-rx; echo V14_13e6fe2c_RC\r\r\r\n:$?\r\r\nV14_13e6fe2c_RC:0\r\r\n",
+  "observed_at": "2026-11-16T21:49:34.539580",
+  "log_start": 60960
+}

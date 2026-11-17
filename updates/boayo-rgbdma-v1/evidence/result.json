@@ -1,0 +1,19 @@
+{
+  "result": "PASS_LOCAL_RGB_DMA_IMAGE_HARDWARE_PENDING",
+  "image": "/mnt/d/temp/gen3bosio/boayo-rgbdma-v1/ORYUKDO-KFB-BoAYO-rgbdma-v1.img",
+  "image_sha256": "559e5b45f161b0f045ddf73ce6ec82394c4414ad70f762ddc4cb52f862104519",
+  "bytes": 276824064,
+  "kernel": "6.12.0-oryukdo-rgbdma1",
+  "host_regression_tests": 9,
+  "pixel_and_scene_equivalence": "PASS",
+  "trace_events": 67,
+  "qemu_uart_trace": "PASS",
+  "qemu_boayo": "PASS_MOCK_BACKEND",
+  "sd_rtl": "PASS_MOCK_DDR",
+  "bitstream_changed": false,
+  "hardware_tested": false,
+  "performance_measured": false,
+  "rgb_dma_driver_boundary_model": "PASS_480_CASES_AND_FAILURE_PATHS",
+  "rgb_dma_scope": "Surface::clear, WM create_window and fill; CPU vector zeroing and shape drawing remain",
+  "bitstream_sha256": "fe1ce8e52f30f1b9bd7bad944a0bf6f981eef9bba01438c0d26b40da6126fdf0"
+}

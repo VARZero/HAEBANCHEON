@@ -1,0 +1,6 @@
+{
+  "changed_files_vs_v11": [
+    "boayo/native/src/ui.cpp"
+  ],
+  "driver_and_all_other_software_identical": true
+}

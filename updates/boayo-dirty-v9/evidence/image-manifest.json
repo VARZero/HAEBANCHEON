@@ -1,0 +1,12 @@
+{
+  "image": "/var/tmp/haebancheon-dirty-v9/release/image/HAEBANCHEON-KFB-BoAYO-dirty-v9.img",
+  "sha256": "e46eca4935109652ad9acb63b3e500b56d505b5dc48b946f6d8bcfc356e51efa",
+  "bytes": 309329920,
+  "boot_lba": 2048,
+  "data_lba": 79872,
+  "data_sectors": 524288,
+  "data_fs": "ext4",
+  "mount": "/data",
+  "hardware_tested": false,
+  "requires": "HAEBANCHEON-KFB-L1-16K-DMA3-v1.bit, unchanged RTL"
+}

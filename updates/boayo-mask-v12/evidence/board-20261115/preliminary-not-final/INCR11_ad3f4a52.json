@@ -1,0 +1,8 @@
+{
+  "command": "test -x /tmp/boayo-fix1 && test -x /tmp/view-rx && test -x /tmp/v11-apply; cat /etc/oryukdo-image",
+  "seconds": 4.343,
+  "rc": 0,
+  "uart": "test -x /tmp/boayo-fix1 && test -x /tmp/view-rx && test -x /tmp/v11-app\r\r\r\nly; cat /etc/oryukdo-image; echo INCR11_ad3f4a52_RC:$?\r\r\nHAEBANCHEON-BoAYO-incremental-v11 / L1-16K DMA3 / incremental state and profiled boundary driver\r\r\nINCR11_ad3f4a52_RC:0\r\r\n",
+  "observed_at": "2026-11-15T01:26:58.067068",
+  "log_start": 479458
+}

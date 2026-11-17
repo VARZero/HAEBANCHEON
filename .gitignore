@@ -9,3 +9,16 @@ __pycache__/
 *.wdb
 *.vcd
 *.fst
+# Current hardware publication: obtain external HDMI IP separately; keep wrappers,
+# constraints, pinned origin manifest and MIG generation settings in Git.
+/variants/l1-*/soc/board/vendor/hdmi/
+/variants/l1-*/soc/board/vendor/digilent_rgb2dvi/src/
+/variants/l1-*/soc/board/vendor/digilent_rgb2dvi/component.xml
+*.bit
+*.dcp
+*.img
+*.xci
+*.wcfg
+ip_user_files/
+*.runs/
+*.gen/

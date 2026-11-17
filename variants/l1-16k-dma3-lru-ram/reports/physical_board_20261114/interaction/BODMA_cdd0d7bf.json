@@ -1,0 +1,7 @@
+{
+  "command": "/usr/bin/boayo-native view -12 4",
+  "seconds": 15.82,
+  "rc": 0,
+  "uart": "/usr/bin/boayo-native view -12 4; echo BODMA_cdd0d7bf_RC:$?\r\r\n{\"pitch\":4.0,\"yaw\":-6.0}\r\r\nBODMA_cdd0d7bf_RC:0\r\r\n",
+  "observed_at": "2026-11-14T09:21:32.835898"
+}

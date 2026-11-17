@@ -1,0 +1,62 @@
+#-----------------------------------------------------------
+# Vivado v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 05:00:03 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Sat Nov 14 09:15:52 2026
+# Process ID: 18184
+# Current directory: D:/temp/haebancheon-l1-16k-dma3/board_trial_20261114_v1
+# Command line: vivado.exe -mode batch -source D:\temp\haebancheon-l1-16k-dma3\board_trial_20261114_v1\program.tcl -log D:\temp\haebancheon-l1-16k-dma3\board_trial_20261114_v1\vivado.log -nojournal
+# Log file: D:/temp/haebancheon-l1-16k-dma3/board_trial_20261114_v1/vivado.log
+# Journal file: 
+# Running On: VieupE-Desk, OS: Windows, CPU Frequency: 3793 MHz, CPU Physical cores: 16, Host memory: 33412 MB
+#-----------------------------------------------------------
+source {D:\temp\haebancheon-l1-16k-dma3\board_trial_20261114_v1\program.tcl}
+# open_hw_manager
+open_hw_manager: Time (s): cpu = 00:00:04 ; elapsed = 00:00:06 . Memory (MB): peak = 577.098 ; gain = 160.699
+# connect_hw_server -url localhost:3121
+INFO: [Labtools 27-2285] Connecting to hw_server url TCP:localhost:3121
+INFO: [Labtools 27-3415] Connecting to cs_server url TCP:localhost:0
+INFO: [Labtools 27-3417] Launching cs_server...
+INFO: [Labtools 27-2221] Launch Output:
+Cannot send datagram packet to /172.16.83.255
+OSError: [WinError 10051] 연결할 수 없는 네트워크에서 소켓 작업을 시도했습니다
+  File "chipscopy\tcf\services\local\LocatorService.py", line 704, in __sendDatagramPacket
+
+
+******** Xilinx cs_server v2022.2.0
+  ****** Build date   : Oct 05 2022-08:25:37
+    **** Build number : 2022.2.1664925937
+      ** Copyright 2017-2026 Xilinx, Inc. All Rights Reserved.
+
+
+
+# set targets [get_hw_targets -quiet */Digilent/210251249581]
+# if {[llength $targets] != 1} {error "Expected one identified Digilent target"}
+# current_hw_target [lindex $targets 0]
+# open_hw_target
+INFO: [Labtoolstcl 44-466] Opening hw_target localhost:3121/xilinx_tcf/Digilent/210251249581
+# set devices [get_hw_devices -quiet]
+# if {[llength $devices] != 1} {error "Expected one FPGA"}
+# set dev [lindex $devices 0]
+# if {[get_property PART $dev] ne "xc7a200t"} {error "Unexpected FPGA part"}
+# current_hw_device $dev
+# set_property PROGRAM.FILE {D:/temp/haebancheon-l1-16k-dma3/HAEBANCHEON-KFB-L1-16K-DMA3-v1.bit} $dev
+# puts "PROGRAM_BEGIN_MS=[clock milliseconds]"
+PROGRAM_BEGIN_MS=1794615366961
+# program_hw_devices $dev
+INFO: [Labtools 27-3164] End of startup status: HIGH
+# puts "PROGRAM_END_MS=[clock milliseconds]"
+PROGRAM_END_MS=1794615370589
+# refresh_hw_device $dev
+INFO: [Labtools 27-1434] Device xc7a200t (JTAG device index = 0) is programmed with a design that has no supported debug core(s) in it.
+# puts "CONFIG_DONE=[get_property REGISTER.CONFIG_STATUS.BIT14_DONE_PIN $dev]"
+CONFIG_DONE=1
+# puts "CRC_ERROR=[get_property REGISTER.CONFIG_STATUS.BIT00_CRC_ERROR $dev]"
+CRC_ERROR=0
+# puts "PROGRAM_COMPLETED"
+PROGRAM_COMPLETED
+# close_hw_target
+INFO: [Labtoolstcl 44-464] Closing hw_target localhost:3121/xilinx_tcf/Digilent/210251249581
+# disconnect_hw_server
+# close_hw_manager
+INFO: [Common 17-206] Exiting Vivado at Sat Nov 14 09:16:13 2026...

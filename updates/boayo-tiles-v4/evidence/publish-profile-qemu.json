@@ -1,0 +1,21 @@
+{
+  "environment": "qemu",
+  "hardware": false,
+  "outer": {
+    "output.versions": {
+      "wall_us": 283,
+      "cpu_us": 284
+    },
+    "output.publish": {
+      "wall_us": 68,
+      "cpu_us": 68
+    },
+    "output.upload": {
+      "wall_us": 497,
+      "cpu_us": 497
+    }
+  },
+  "driver_us": {},
+  "driver_profile_complete": false,
+  "note": "Driver value fields are measured durations; outer intervals include trace output overhead. QEMU/host values do not predict FPGA speed."
+}

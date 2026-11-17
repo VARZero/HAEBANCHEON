@@ -1,0 +1,61 @@
+{
+  "result": "PASS",
+  "binary": "/var/tmp/oryukdo-bosio-dma-v1/apps-final/boayo-native-host",
+  "binary_sha256": "0e9b0906675deb9dc176c00449e64c0dac11f3008cb425535b409b1eb6293a3d",
+  "tests": [
+    {
+      "test": "test_core.py",
+      "result": "PASS",
+      "seconds": 1.57,
+      "exit_code": 0
+    },
+    {
+      "test": "test_ui.py",
+      "result": "PASS",
+      "seconds": 1.23,
+      "exit_code": 0
+    },
+    {
+      "test": "test_apps.py",
+      "result": "PASS",
+      "seconds": 1.02,
+      "exit_code": 0
+    },
+    {
+      "test": "test_compositor.py",
+      "result": "PASS",
+      "seconds": 1.59,
+      "exit_code": 0
+    },
+    {
+      "test": "test_fallback.py",
+      "result": "PASS",
+      "seconds": 3.59,
+      "exit_code": 0
+    },
+    {
+      "test": "test_runtime.py",
+      "result": "PASS",
+      "seconds": 3.11,
+      "exit_code": 0
+    },
+    {
+      "test": "test_responsive.py",
+      "result": "PASS",
+      "seconds": 3.2,
+      "exit_code": 0
+    },
+    {
+      "test": "selftest",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "test": "dual-selftest",
+      "result": "PASS",
+      "exit_code": 0
+    }
+  ],
+  "scope": "host Python differential plus explicit mock backend",
+  "hardware": false
+}

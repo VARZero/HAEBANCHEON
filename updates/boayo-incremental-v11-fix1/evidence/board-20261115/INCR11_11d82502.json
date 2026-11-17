@@ -1,0 +1,8 @@
+{
+  "command": "for t in /proc/62/task/*; do echo $t; cat $t/stat; cat $t/wchan; done; cat /proc/62/io",
+  "seconds": 7.091,
+  "rc": 1,
+  "uart": "for t in /proc/62/task/*; do echo $t; cat $t/stat; cat $t/wchan; done; \r\r\r\ncat /proc/62/io; echo INCR11_11d82502_RC:$?\r\r\n/proc/62/task/62\r\r\n62 (boayo-native) S 1 62 62 0 -1 4194368 65 0 0 0 1961 5381 0 0 20 0 2 0 34768 10481664 1577 4294967295 65536 2141613 2639527136 0 0 0 0 4096 16386 1 0 0 17 0 0 0 0 0 0 2142272 2156360 16302080 2639527777 2639527805 2639527805 2639527910 0\r\r\ncat: can't open '/proc/62/task/62/wchan': No such file or directory\r\r\n/proc/62/task/63\r\r\n63 (boayo-native) R 1 62 62 0 -1 4194624 1268 0 0 0 25078 2471 0 0 20 0 2 0 34792 10481664 1577 4294967295 65536 2141613 2639527136 0 0 0 0 4096 16386 0 0 0 -1 0 0 0 0 0 0 2142272 2156360 16302080 2639527777 2639527805 2639527805 2639527910 0\r\r\ncat: can't open '/proc/62/task/63/wchan': No such file or directory\r\r\ncat: can't open '/proc/62/io': No such file or directory\r\r\nINCR11_11d82502_RC:1\r\r\n",
+  "observed_at": "2026-11-15T00:44:11.474691",
+  "log_start": 394116
+}

@@ -1,0 +1,8 @@
+make: Entering directory '/var/tmp/oryukdo-bosio-dma-v1/release/linux'
+make[1]: Entering directory '/var/tmp/oryukdo-bosio-dma-v1/release/kernel'
+  GEN     Makefile
+#
+# No change to .config
+#
+make[1]: Leaving directory '/var/tmp/oryukdo-bosio-dma-v1/release/kernel'
+make: Leaving directory '/var/tmp/oryukdo-bosio-dma-v1/release/linux'

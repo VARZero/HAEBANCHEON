@@ -1,0 +1,7 @@
+{
+  "command": "/usr/bin/boayo-native view 6 -4; /usr/bin/boayo-native app dashboard",
+  "seconds": 76.2,
+  "rc": 0,
+  "uart": "/usr/bin/boayo-native view 6 -4; /usr/bin/boayo-native app dashboard; e\r\r\r\ncho BODMA_05aa59b1_RC:$?\r\r\n{\"pitch\":0.0,\"yaw\":0.0}\r\r\nBOAYO_APP_READY window=2\r\r\nBODMA_05aa59b1_RC:0\r\r\n",
+  "observed_at": "2026-11-14T09:22:58.903619"
+}

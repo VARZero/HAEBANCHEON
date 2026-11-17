@@ -1,0 +1,6 @@
+PASS memory policy: ABI, active destination, active source, overlap, bounds, alignment, poison
+PASS actual DMA wait/upload functions: kmalloc/vmalloc SG, fill/copy, mapping/prep/submit/completion errors, partial SG failure, timeout pinning and late completion
+PASS RGB DMA actual driver: 480 color/size/page-phase/scatter-merged cases, canaries, cached seed, invalid/pin/map/error/timeout/late-write lifetime model
+PASS DIRECT actual-driver source-page DMA: 36 size/alignment/SG cases, no FOLL_WRITE/dirty pages, invalid/pin/map/partial/error/timeout/late-read lifetime
+PASS RGB dispatch thresholds alignment tails colors canaries scope error propagation
+{"result": "PASS_HOST_KERNEL_BOUNDARY_MODEL", "driver_sha256": "336bf70c49756a468ff896c9bc35d2e4074efad0591d529bbeb197597e0c7f04", "hardware": false}

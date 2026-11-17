@@ -1,0 +1,2 @@
+PASS_BUILD_PLAN p_d522a90b.bgp 160 58496
+PASS kernel/image build; bitstream unchanged; diagnostic trace physical test pending

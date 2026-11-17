@@ -1,0 +1,9 @@
+{
+  "source": "D:/temp/haebancheon-motion-v7/board-trial-20261114/apply_delta",
+  "target": "/tmp/v14-apply",
+  "bytes": 2456,
+  "fnv1a": 1369614157,
+  "sha256": "1e5f771190cb9883d477bbaebf9df70d7a8bb1ca644a88f0be2981c465ad5818",
+  "seconds": 1.57,
+  "result": "PASS_TRANSFER_FNV"
+}

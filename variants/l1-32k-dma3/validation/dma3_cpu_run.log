@@ -1,0 +1,19 @@
+/usr/lib/gcc/riscv64-unknown-elf/13.2.0/../../../riscv64-unknown-elf/bin/ld: warning: validation/cpu_storage.elf has a LOAD segment with RWX permissions
+[0] %Warning: xpm_cdc.sv:257: TOP.tb_cpu_storage.dut.snoop_cdc.completion_path.completion_sync.sim_check.sim_xil_check: Vivado Simulator does not currently support the SystemVerilog Assertion syntax used within XPM_CDC.  
+Messages related to potential misuse will not be reported.
+PASS THREE_DMA concurrent engines, independent PLIC sources, cached destinations coherent
+PASS CPU self-modifying code FENCE.I, AMO, cached DMA destination
+PASS CPU SD read/write/roundtrip, DMA MMIO copy/fill payloads, PLIC M/S claim/complete, CDC, precise external interrupts cycles=706519 retired=16855 M=7 S=3 snoops=3584
+- soc/tests/tb_cpu_storage.sv:61: Verilog $finish
+[0] %Warning: xpm_cdc.sv:257: TOP.tb_cpu_storage.dut.snoop_cdc.completion_path.completion_sync.sim_check.sim_xil_check: Vivado Simulator does not currently support the SystemVerilog Assertion syntax used within XPM_CDC.  
+Messages related to potential misuse will not be reported.
+PASS THREE_DMA concurrent engines, independent PLIC sources, cached destinations coherent
+PASS CPU self-modifying code FENCE.I, AMO, cached DMA destination
+PASS CPU SD read/write/roundtrip, DMA MMIO copy/fill payloads, PLIC M/S claim/complete, CDC, precise external interrupts cycles=706516 retired=16855 M=7 S=3 snoops=3584
+- soc/tests/tb_cpu_storage.sv:61: Verilog $finish
+[0] %Warning: xpm_cdc.sv:257: TOP.tb_cpu_storage.dut.snoop_cdc.completion_path.completion_sync.sim_check.sim_xil_check: Vivado Simulator does not currently support the SystemVerilog Assertion syntax used within XPM_CDC.  
+Messages related to potential misuse will not be reported.
+PASS THREE_DMA concurrent engines, independent PLIC sources, cached destinations coherent
+PASS CPU self-modifying code FENCE.I, AMO, cached DMA destination
+PASS CPU SD read/write/roundtrip, DMA MMIO copy/fill payloads, PLIC M/S claim/complete, CDC, precise external interrupts cycles=706517 retired=16855 M=7 S=3 snoops=3584
+- soc/tests/tb_cpu_storage.sv:61: Verilog $finish

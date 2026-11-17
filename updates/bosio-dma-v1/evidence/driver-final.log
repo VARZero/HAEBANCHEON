@@ -1,0 +1,3 @@
+PASS memory policy: ABI, active destination, active source, overlap, bounds, alignment, poison
+PASS actual DMA wait/upload functions: kmalloc/vmalloc SG, fill/copy, mapping/prep/submit/completion errors, partial SG failure, timeout pinning and late completion
+{"result": "PASS_HOST_KERNEL_BOUNDARY_MODEL", "driver_sha256": "b05d1bd1c4574880cd36bc2f57d52b80da80ae155993d219075a387e81b62031", "hardware": false}

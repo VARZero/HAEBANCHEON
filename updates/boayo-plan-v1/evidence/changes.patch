@@ -1,0 +1,445 @@
+--- boayo-rawdma-v1/software/boayo/native/build.sh
++++ boayo-plan-v1/software/boayo/native/build.sh
+@@ -3,6 +3,7 @@
+ here=$(cd -- "$(dirname -- "$0")" && pwd)
+ out=${1:-/var/tmp/oryukdo-boayo-native}
+ mode=${2:-host}
++python3 "$here/plan_revision.py"
+ mkdir -p "$out"
+ snapshot=$(mktemp -d "$out/source-$mode-XXXXXX")
+ source="$snapshot/software/boayo/native"
+@@ -18,6 +19,6 @@
+  flags+=(-static -march=rv32ima_zicsr_zifencei -mabi=ilp32 -ffunction-sections -fdata-sections -Wl,--gc-sections)
+ fi
+ if [[ "$mode" == sanitize ]]; then flags+=(-fsanitize=address,undefined -fno-omit-frame-pointer); fi
+-"$compiler" "${flags[@]}" "$source/src/assets.cpp" "$source/src/geometry.cpp" "$source/src/wm.cpp" "$source/src/ui.cpp" "$source/src/backend.cpp" "$source/src/apps.cpp" "$source/src/runtime.cpp" "$source/src/selftest.cpp" "$source/src/main.cpp" "$source/reference/wm/native/bosio_compositor.cpp" -o "$out/boayo-native-$mode"
++"$compiler" "${flags[@]}" "$source/src/plan.cpp" "$source/src/assets.cpp" "$source/src/geometry.cpp" "$source/src/wm.cpp" "$source/src/ui.cpp" "$source/src/backend.cpp" "$source/src/apps.cpp" "$source/src/runtime.cpp" "$source/src/selftest.cpp" "$source/src/main.cpp" "$source/reference/wm/native/bosio_compositor.cpp" -o "$out/boayo-native-$mode"
+ python3 "$here/build_manifest.py" "$source" "$out/boayo-native-$mode"
+ echo "BUILD_OK $out/boayo-native-$mode"
+--- boayo-rawdma-v1/software/boayo/native/plan_revision.py
++++ boayo-plan-v1/software/boayo/native/plan_revision.py
+@@ -0,0 +1,7 @@
++from pathlib import Path
++import hashlib
++s=Path(__file__).resolve().parent/'src'
++h=hashlib.sha256()
++for name in ('geometry.cpp','geometry.hpp','fixed_geometry.inc','common.hpp','wm.cpp','backend.cpp','backend.hpp','plan.cpp','plan.hpp'):
++ h.update(name.encode()+b'\0'+(s/name).read_bytes())
++(s/'plan_revision.hpp').write_bytes(('#pragma once\n#define BOAYO_PLAN_REV "'+h.hexdigest()+'"\n').encode())
+--- boayo-rawdma-v1/software/boayo/native/src/backend.cpp
++++ boayo-plan-v1/software/boayo/native/src/backend.cpp
+@@ -5,6 +5,7 @@
+ #include <cerrno>
+ #include <cstring>
+ #include "init_trace.hpp"
++#include "frame_trace.hpp"
+ namespace boayo {
+ static_assert(sizeof(bo_rgb_fill)==24, "BOSIO RGB DMA ABI layout");
+ bool LinuxDevice::rgb_fill(uint8_t *p,size_t n,const std::array<uint8_t,3> &color) {
+@@ -417,10 +418,13 @@
+     require(!immutable || immutable->data()==texture.data() && immutable->size()==texture.size(),"immutable texture identity");
+     if(!immutable || resident_texture!=immutable) {
+       resident_texture.reset();
++      frame_trace::mark("texture.upload.begin",texture.size());
+       if(immutable)dev.upload_direct(0,0,texture.data(),texture.size());
+       else dev.upload(0, 0, texture.data(), texture.size());
+       resident_texture=immutable;++texture_uploads;
++      frame_trace::mark("texture.upload.end",texture.size());
+     } else ++texture_reuses;
++    frame_trace::mark("projectors.begin",desc.size());
+     for (size_t first = 0; first < desc.size(); first += 128) {
+       unsigned n = std::min(size_t(128), desc.size() - first);
+       std::array<Words, 2> queues;
+@@ -452,6 +456,7 @@
+     failed = true;
+     throw;
+   }
++  frame_trace::mark("projectors.end",desc.size());
+   return total;
+ }
+ static int64_t upper(const std::array<int64_t, 4> &p) {
+@@ -486,10 +491,12 @@
+ }
+ void Compositor::allocate_scene() {
+   if (!scene.empty()) return;
++  frame_trace::mark("scene.allocate.begin",scene_words);
+   scene.assign(scene_words, 0);
+   for (unsigned k = 0; k < 256; k++)
+     scene[k] = palette(k);
+   std::fill(scene.begin() + 256, scene.begin() + header, 0xffffffff);
++  frame_trace::mark("scene.allocate.end",scene_words);
+ }
+ static J geometry_key(const Window &w) {
+   auto &d = w.data;
+@@ -499,6 +506,15 @@
+ Layer Compositor::make_layer(const Window &w) {
+   Layer c;
+   c.key = geometry_key(w);
++  frame_trace::mark("plan.load.begin");
++  c.plan=load_projection_plan(c.key,w.data["shape"]);
++  frame_trace::mark("plan.load.end",bool(c.plan));
++  if(c.plan){
++    c.ids=c.plan->ids;c.desc=c.plan->descriptors;c.mask_kinds=c.plan->kinds;c.shape=w.data["shape"];
++    for(unsigned i=0;i<c.ids.size();++i){c.lookup[c.ids[i]]=i;c.invalid.insert(i);}
++    c.pixels.resize(c.ids.size()*256);++precomputed_layers;return c;
++  }
++  frame_trace::mark("geometry.compute.begin");geometry_tiles_evaluated+=tiles;
+   auto &v = w.data;
+   Geometry::Projection projection(v["surface_width"], v["surface_height"], v["azimuth"],
+                                   v["elevation"], v["roll"], v["width_deg"], v["height_deg"]);
+@@ -512,7 +528,41 @@
+     c.desc.push_back(d);
+   }
+   c.pixels.resize(c.ids.size() * 256);
++  frame_trace::mark("geometry.compute.end",c.ids.size());
+   return c;
++}
++void Compositor::prepare_masks(Layer &c,const Window &w){
++  c.shape=w.data["shape"];
++  auto plan=load_projection_plan(c.key,c.shape);
++  if(plan && plan->ids==c.ids && plan->descriptors==c.desc){
++    c.plan=plan;c.mask_kinds=plan->kinds;c.masks.clear();++precomputed_layers;return;
++  }
++  c.plan.reset();frame_trace::mark("mask.compute.begin",c.ids.size());
++  c.masks.assign(c.ids.size(),Bytes(1024));c.mask_kinds.assign(c.ids.size(),2);
++  mask_samples_evaluated+=c.ids.size()*1024;
++  for(unsigned i=0;i<c.ids.size();++i){bool any=false,all=true;
++    for(unsigned cell=0;cell<1024;++cell){auto q=coordinates(c.desc[i],cell);
++      bool v=covered(c.desc[i],q) && (c.shape.empty() || shape_contains(c.shape,q[2]>0?double(q[0])/q[2]:0,q[2]>0?double(q[1])/q[2]:0));
++      c.masks[i][cell]=v;any|=v;all&=v;
++    }
++    c.mask_kinds[i]=!any?0:all?1:2;
++  }
++  frame_trace::mark("mask.compute.end",c.ids.size());
++}
++J Compositor::export_plan(const Window &w,const std::string &path){
++  // Build tool sets BOAYO_PLANS=0; export uses the uncached algorithm.
++  auto c=make_layer(w);prepare_masks(c,w);require(!c.plan,"export requires BOAYO_PLANS=0");
++  Words records(c.ids.size()*21);Bytes masks;
++  unsigned full=0,empty=0,boundary=0;
++  for(unsigned i=0;i<c.ids.size();++i){auto *r=records.data()+i*21;r[0]=c.ids[i];r[1]=c.mask_kinds[i];
++    if(r[1]==2){r[2]=records.size()*4+masks.size();masks.insert(masks.end(),c.masks[i].begin(),c.masks[i].end());++boundary;}
++    else if(r[1]==1)++full;else ++empty;
++    std::copy(c.desc[i].begin(),c.desc[i].end(),r+3);
++  }
++  Bytes body(records.size()*4+masks.size());std::memcpy(body.data(),records.data(),records.size()*4);
++  std::copy(masks.begin(),masks.end(),body.begin()+records.size()*4);write_bytes(path,body.data(),body.size());
++  return {{"key",projection_plan_key(c.key,w.data["shape"])},{"count",c.ids.size()},{"bytes",body.size()},
++          {"full",full},{"empty",empty},{"boundary",boundary},{"geometry",c.key},{"shape",w.data["shape"]}};
+ }
+ void Compositor::source_changes(Layer &c, const Window &w) {
+   if (c.revision == w.revision)
+@@ -575,7 +625,11 @@
+       metrics = {{"mode", "cpp-scalar-fallback"},
+                  {"reason", "decoration or dimensions require native renderer"},
+                  {"jobs_per_core", {0, 0}},
+-                 {"hardware_frames", frames},
++                 {"geometry_tiles_evaluated_total",geometry_tiles_evaluated},
++             {"mask_samples_evaluated_total",mask_samples_evaluated},
++             {"precomputed_layers_total",precomputed_layers},
++             {"plan_cache",projection_plan_stats()},
++             {"hardware_frames", frames},
+                  {"fallback_frames", fallback_frames}};
+       return r;
+     }
+@@ -615,22 +669,18 @@
+     }
+     auto &c = layers[id];
+     if (c.shape != w.data["shape"]) {
+-      c.shape = w.data["shape"];
+-      c.masks.assign(c.ids.size(), Bytes(1024));
+-      for (unsigned i = 0; i < c.ids.size(); i++)
+-        for (unsigned cell = 0; cell < 1024; cell++) {
+-          auto q = coordinates(c.desc[i], cell);
+-          c.masks[i][cell] =
+-              covered(c.desc[i], q) &&
+-              (c.shape.empty() || shape_contains(c.shape, q[2] > 0 ? double(q[0]) / q[2] : 0,
+-                                                 q[2] > 0 ? double(q[1]) / q[2] : 0));
+-        }
++      auto previous_mask_kinds=c.mask_kinds;
++      prepare_masks(c,w);
++      for(unsigned i=0;i<c.ids.size();++i)
++        if(i>=previous_mask_kinds.size() || (!previous_mask_kinds[i] && c.mask_kinds[i]))c.invalid.insert(i);
+       dirty.insert(c.ids.begin(), c.ids.end());
+     }
+     source_changes(c, w);
+     if (std::find(previous_order.begin(), previous_order.end(), id) == previous_order.end())
+       dirty.insert(c.ids.begin(), c.ids.end());
+     reused += c.ids.size() - c.invalid.size();
++    // Fully clipped tiles need no projection. Revealing them invalidates above.
++    for(auto i=c.invalid.begin();i!=c.invalid.end();)if(!c.mask_kinds[*i])i=c.invalid.erase(i);else ++i;
+     std::vector<Descriptor> todo;
+     for (auto i : c.invalid) {
+       dirty.insert(c.ids[i]);
+@@ -714,6 +764,7 @@
+     pointer_key = pk;
+   } else
+     pointer_tiles = previous_pointer_tiles;
++  frame_trace::mark("tile.compose.begin",dirty.size());
+   std::vector<unsigned> changed;
+   for (unsigned t : dirty) {
+     std::array<uint8_t, 1024> data;
+@@ -724,9 +775,11 @@
+       if (index < 0)
+         continue;
+       auto *p = reinterpret_cast<const uint8_t *>(c.pixels.data() + index * 256);
+-      for (unsigned cell = 0; cell < 1024; cell++)
+-        if (c.masks[index][cell])
+-          data[cell] = p[cell];
++      unsigned kind=c.mask_kinds[index];
++      if(kind==0)continue;
++      if(kind==1){std::copy_n(p,1024,data.begin());continue;}
++      const auto *mask=c.mask(index);
++      for(unsigned cell=0;cell<1024;++cell)if(mask[cell])data[cell]=p[cell];
+     }
+     for (auto p : pointer_outer)
+       if (p / 1024 == t)
+@@ -743,6 +796,7 @@
+       changed.push_back(t);
+     }
+   }
++  frame_trace::mark("tile.compose.end",changed.size());
+   previous_order = order;
+   previous_tiles = std::move(footprints);
+   previous_bg = bg;
+@@ -772,6 +826,10 @@
+   }
+   ++frames;
+   metrics = {{"mode", "kfb-dual-projectors+cpu-tile-composition"},
++             {"geometry_tiles_evaluated_total",geometry_tiles_evaluated},
++             {"mask_samples_evaluated_total",mask_samples_evaluated},
++             {"precomputed_layers_total",precomputed_layers},
++             {"plan_cache",projection_plan_stats()},
+              {"hardware_frames", frames},
+              {"fallback_frames", fallback_frames},
+              {"windows", order},
+--- boayo-rawdma-v1/software/boayo/native/src/backend.hpp
++++ boayo-plan-v1/software/boayo/native/src/backend.hpp
+@@ -2,6 +2,7 @@
+ #include "geometry.hpp"
+ #include "wm.hpp"
+ #include "fallback.hpp"
++#include "plan.hpp"
+ #include "../../../bosio/include/bosio_uapi.h"
+ #include <memory>
+ #include "texture.hpp"
+@@ -104,6 +105,9 @@
+   std::vector<unsigned> ids;
+   std::vector<Descriptor> desc;
+   std::vector<Bytes> masks;
++  std::vector<unsigned> mask_kinds;
++  std::shared_ptr<const ProjectionPlan> plan;
++  const uint8_t *mask(unsigned i) const{return plan?plan->masks[i]:masks[i].data();}
+   Words pixels, source;
+   std::shared_ptr<const Texture> prepared_source;
+   std::set<unsigned> invalid;
+@@ -131,12 +135,15 @@
+   J pointer_key, metrics;
+   int previous_bg = -1;
+   uint64_t total_jobs = 0, frames = 0;
++  uint64_t geometry_tiles_evaluated=0,mask_samples_evaluated=0,precomputed_layers=0;
+   std::unique_ptr<NativeRenderer> fallback;
+   uint64_t fallback_frames = 0;
+   bool last_hardware = false;
+   Compositor(const Geometry &g, Projectors &p, bool defer_scene = false);
+   void allocate_scene();
+   Layer make_layer(const Window &w);
++  void prepare_masks(Layer &c,const Window &w);
++  J export_plan(const Window &w,const std::string &path);
+   void source_changes(Layer &c, const Window &w);
+   Composition update(WM &wm, bool full = false);
+   void ack() { valid = last_hardware; }
+--- boayo-rawdma-v1/software/boayo/native/src/frame_trace.hpp
++++ boayo-plan-v1/software/boayo/native/src/frame_trace.hpp
+@@ -0,0 +1,21 @@
++#pragma once
++#include "init_trace.hpp"
++namespace boayo::frame_trace {
++inline thread_local bool active=false;
++inline thread_local unsigned sequence=0;
++inline thread_local long long wall_start=0,cpu_start=0;
++inline thread_local int uart=-1;
++inline void mark(const char *event,long long value=0){
++ if(!active || sequence>=64)return;int saved=errno;
++ char line[224];auto w=init_trace::clock_us(CLOCK_MONOTONIC),c=init_trace::clock_us(CLOCK_THREAD_CPUTIME_ID);
++ int n=std::snprintf(line,sizeof(line),"BOAYO_FRAME_TRACE n=%u event=%s wall_us=%lld cpu_us=%lld value=%lld\n",++sequence,event,w-wall_start,c-cpu_start,value);
++ if(n>0 && n<int(sizeof(line))){(void)!write(STDERR_FILENO,line,n);if(uart>=0)(void)!write(uart,line,n);}errno=saved;
++}
++struct Scope{
++ bool owner=false;
++ explicit Scope(bool first){const char *v=getenv("BOAYO_INIT_TRACE");if(!first || active || !v || std::strcmp(v,"1"))return;
++  owner=active=true;sequence=0;wall_start=init_trace::clock_us(CLOCK_MONOTONIC);cpu_start=init_trace::clock_us(CLOCK_THREAD_CPUTIME_ID);
++  const char *console=getenv("BOAYO_INIT_TRACE_UART");if(console && !std::strcmp(console,"1"))uart=open("/dev/console",O_WRONLY|O_CLOEXEC);mark("frame.begin");}
++ ~Scope(){if(!owner)return;mark("frame.scope_exit");if(uart>=0)close(uart);uart=-1;active=false;}
++};
++}
+--- boayo-rawdma-v1/software/boayo/native/src/main.cpp
++++ boayo-plan-v1/software/boayo/native/src/main.cpp
+@@ -6,6 +6,7 @@
+ #include "runtime.hpp"
+ #include "rgb_fill.hpp"
+ #include "assets.hpp"
++#include "frame_trace.hpp"
+ #include <iostream>
+ using namespace boayo;
+ int main(int argc, char **argv) {
+@@ -40,6 +41,9 @@
+           } else if (op == "test_surface_storage") {
+             auto &w=wm.window(r.at("args").at("window_id"));
+             result={{"rgb_bytes",w.surface.size()},{"mapped_words",w.prepared?w.prepared->size():0}};
++          } else if(op=="test_plan_export"){
++            MockDevice device;Projectors project(device);Compositor c(geometry,project,true);
++            result=c.export_plan(wm.window(r.at("args").at("window_id")),r.at("args").at("path"));
+           } else if (op == "test_rgb_dma_stats") {
+             result={{"calls",rgb_mock.dma_fills}};
+           } else if (op == "test_camera") {
+@@ -108,6 +112,7 @@
+               desktop = std::make_unique<Desktop>(wm);
+             result = desktop->action(r.at("args"), r.at("args").value("now", 0.));
+           } else if (op == "test_render") {
++            frame_trace::Scope frame_scope(!mock);
+             if (!mock) {
+               mock = std::make_unique<MockDevice>();
+               projectors = std::make_unique<Projectors>(*mock);
+--- boayo-rawdma-v1/software/boayo/native/src/plan.cpp
++++ boayo-plan-v1/software/boayo/native/src/plan.cpp
+@@ -0,0 +1,69 @@
++#include "plan.hpp"
++#include "plan_revision.hpp"
++#include <list>
++#include <fcntl.h>
++#include <sys/stat.h>
++#include <unistd.h>
++#include <cstdio>
++#include <cstdlib>
++namespace boayo {
++namespace {
++thread_local uint64_t loads=0,hits=0,misses=0,rejected=0;
++struct Entry {std::string key;std::shared_ptr<const ProjectionPlan> plan;};
++thread_local std::list<Entry> cache;
++uint32_t word(const uint8_t *p){return uint32_t(p[0])|(uint32_t(p[1])<<8)|(uint32_t(p[2])<<16)|(uint32_t(p[3])<<24);}
++uint32_t crc(const uint8_t *p,size_t n,uint32_t c=~0u){
++  static const auto table=[] {std::array<uint32_t,256> t{};for(unsigned i=0;i<256;++i){uint32_t v=i;for(int j=0;j<8;++j)v=(v>>1)^((v&1)?0xedb88320u:0);t[i]=v;}return t;}();
++  for(size_t i=0;i<n;++i)c=table[(c^p[i])&255]^(c>>8);return c;
++}
++std::shared_ptr<const ProjectionPlan> read_plan(const std::string &path,const std::string &key,unsigned width,unsigned height){
++  int fd=open(path.c_str(),O_RDONLY|O_CLOEXEC);if(fd<0)return {};
++  struct Close {int fd;~Close(){close(fd);}} closer{fd};
++  std::array<uint8_t,4096> h{};struct stat st{};
++  require(!fstat(fd,&st) && S_ISREG(st.st_mode) && pread(fd,h.data(),h.size(),0)==ssize_t(h.size()),"plan header");
++  require(std::equal(h.begin(),h.begin()+8,"BOGPLN01"),"plan format");
++  unsigned n=word(h.data()+8),bytes=word(h.data()+12),k=word(h.data()+16);
++  require(n && n<=tiles && bytes>=n*84 && bytes<=tiles*(84+1024) && !(bytes&3) &&
++          k==key.size() && k<=4096-28 && uint64_t(st.st_size)==4096ull+bytes,"plan bounds");
++  require(std::equal(key.begin(),key.end(),h.begin()+28) &&
++          ~crc(h.data()+28,k,crc(h.data(),24))==word(h.data()+24),"plan metadata CRC/key/revision");
++  void *mapped=mmap(nullptr,bytes,PROT_READ,MAP_PRIVATE,fd,4096);require(mapped!=MAP_FAILED,"plan mmap");
++  std::shared_ptr<const Texture> storage;
++  try{storage=std::make_shared<Texture>(static_cast<const uint32_t *>(mapped),bytes/4);}
++  catch(...){munmap(mapped,bytes);throw;}
++  auto body=static_cast<const uint8_t *>(mapped);
++  require(~crc(body,bytes)==word(h.data()+20),"plan payload CRC");
++  auto plan=std::make_shared<ProjectionPlan>();plan->storage=std::move(storage);
++  unsigned cursor=n*84;
++  for(unsigned i=0;i<n;++i){auto record=body+i*84;
++    unsigned id=word(record),kind=word(record+4),offset=word(record+8);
++    require(id<tiles && (!i || id>plan->ids.back()) && kind<=2,"plan tile order/type");
++    Descriptor d{};for(unsigned j=0;j<18;++j)d[j]=word(record+12+j*4);
++    require(d[0]==0 && d[1]==id*256 && d[2]==width && d[3]==height && d[4]==width && d[5]==1,"plan descriptor bounds");
++    const uint8_t *mask=nullptr;
++    if(kind==2){require(offset==cursor && bytes-cursor>=1024,"plan mask offset");mask=body+offset;
++      bool zero=false,one=false;for(unsigned j=0;j<1024;++j){require(mask[j]<=1,"plan mask value");zero|=mask[j]==0;one|=mask[j]==1;}
++      require(zero && one,"plan mask classification");cursor+=1024;
++    }else require(!offset,"plan uniform mask offset");
++    plan->ids.push_back(id);plan->kinds.push_back(kind);plan->descriptors.push_back(d);plan->masks.push_back(mask);
++  }
++  require(cursor==bytes,"plan trailing data");return plan;
++}
++}
++std::string projection_plan_key(const J &geometry,const J &shape){return J({{"geometry",geometry},{"shape",shape},{"revision",BOAYO_PLAN_REV}}).dump();}
++std::shared_ptr<const ProjectionPlan> load_projection_plan(const J &geometry,const J &shape){
++  const char *mode=getenv("BOAYO_PLANS");if(mode && std::string(mode)=="0")return {};
++  auto key=projection_plan_key(geometry,shape);
++  for(auto i=cache.begin();i!=cache.end();++i)if(i->key==key){++hits;cache.splice(cache.begin(),cache,i);return cache.front().plan;}
++  uint32_t hash=2166136261u;for(unsigned char b:key){hash^=b;hash*=16777619u;}
++  char name[32];std::snprintf(name,sizeof(name),"/p_%08x.bgp",hash);
++  const char *dir=getenv("BOAYO_PLAN_DIR");
++  std::vector<std::string> dirs=dir?std::vector<std::string>{dir}:std::vector<std::string>{"/usr/share/boayo/plans","/data/boayo-plans"};
++  for(auto &d:dirs){try{auto plan=read_plan(d+name,key,geometry[0],geometry[1]);if(!plan)continue;
++    ++loads;cache.push_front({key,plan});size_t bytes=0;for(auto i=cache.begin();i!=cache.end();){bytes+=i->plan->storage->size()*4;
++      if(bytes>16u*1024*1024 && i!=cache.begin())i=cache.erase(i);else ++i;}return plan;
++  }catch(const std::runtime_error &e){if(std::string(e.what()).find("plan ")!=0)throw;++rejected;std::fprintf(stderr,"BOAYO_PLAN_REJECT %s: %s\n",name,e.what());}}
++  ++misses;return {};
++}
++J projection_plan_stats(){return {{"loads",loads},{"hits",hits},{"misses",misses},{"rejected",rejected},{"revision",BOAYO_PLAN_REV}};}
++}
+--- boayo-rawdma-v1/software/boayo/native/src/plan.hpp
++++ boayo-plan-v1/software/boayo/native/src/plan.hpp
+@@ -0,0 +1,14 @@
++#pragma once
++#include "geometry.hpp"
++#include "texture.hpp"
++namespace boayo {
++struct ProjectionPlan {
++  std::shared_ptr<const Texture> storage;
++  std::vector<unsigned> ids,kinds;
++  std::vector<Descriptor> descriptors;
++  std::vector<const uint8_t *> masks;
++};
++std::string projection_plan_key(const J &geometry,const J &shape);
++std::shared_ptr<const ProjectionPlan> load_projection_plan(const J &geometry,const J &shape);
++J projection_plan_stats();
++}
+--- boayo-rawdma-v1/software/boayo/native/src/plan_revision.hpp
++++ boayo-plan-v1/software/boayo/native/src/plan_revision.hpp
+@@ -0,0 +1,2 @@
++#pragma once
++#define BOAYO_PLAN_REV "f1c8dad30f9e9a87cfdb3fb0cd2f191edc5527bbef8055c71b4f4f8b5429782f"
+--- boayo-rawdma-v1/software/boayo/native/src/runtime.cpp
++++ boayo-plan-v1/software/boayo/native/src/runtime.cpp
+@@ -1,4 +1,5 @@
+ #include "runtime.hpp"
++#include "frame_trace.hpp"
+ #include "apps.hpp"
+ #include "backend.hpp"
+ #include "rgb_fill.hpp"
+@@ -330,6 +331,7 @@
+         now - last_render >= 1 / fps) {
+       uint64_t gen = wm.generation;
+       try {
++        frame_trace::Scope frame_scope(render_count==0);
+         b.phase("composing");
+         if (!render_count) std::cout << "BOAYO_FIRST_FRAME_COMPOSE_BEGIN" << std::endl;
+         b.mock_delay(mock);
+@@ -350,6 +352,7 @@
+         auto middle = seconds();
+         b.phase("uploading");
+         if (!render_count) std::cout << "BOAYO_FIRST_FRAME_UPLOAD_BEGIN" << std::endl;
++        frame_trace::mark("output.upload.begin");
+         if (c.patch) {
+           output.patch(c.data());
+           if (c.data().empty())
+@@ -363,6 +366,7 @@
+           compositor.ack();
+           ++full_count;
+         }
++        frame_trace::mark("output.upload.end");
+         compose_ms = (middle - start) * 1000;
+         upload_ms = (seconds() - middle) * 1000;
+         words += c.data().size();
+--- boayo-rawdma-v1/software/boayo/native/tests/test_compositor.py
++++ boayo-plan-v1/software/boayo/native/tests/test_compositor.py
+@@ -26,8 +26,12 @@
+   got=request('test_render',dict(path=str(Path(tmp)/'frame')))
+   np.testing.assert_array_equal(np.fromfile(Path(tmp)/'frame.scene',dtype='<u4'),hw.scene)
+   np.testing.assert_array_equal(np.fromfile(Path(tmp)/'frame.update',dtype='<u4'),expected)
+-  for key in ('jobs_per_core','written_cells_per_core','reused_window_tiles','dirty_tiles','changed_tiles','total_hw_jobs','active_tiles','update_kind'):
++  # Clipped tiles now skip projection. Keep the Python renderer unchanged as
++  # the pixel oracle; scheduling/work counters intentionally differ.
++  for key in ('changed_tiles','active_tiles','update_kind'):
+    assert got['projection'][key]==hw.metrics[key],(label,key,got['projection'][key],hw.metrics[key])
++  assert sum(got['projection']['jobs_per_core'])<=sum(hw.metrics['jobs_per_core'])
++  assert sum(got['projection']['written_cells_per_core'])<=sum(hw.metrics['written_cells_per_core'])
+   hw.ack_presented();checks.append(dict(case=label,jobs=got['projection']['jobs_per_core'],kind=kind,words=len(expected)))
+  render('empty')
+  for i,(az,el) in enumerate([(0,0),(10,3),(-170,28)]):

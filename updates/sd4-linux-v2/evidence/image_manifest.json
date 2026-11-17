@@ -1,0 +1,12 @@
+{
+  "image": "/var/tmp/oryukdo-sd4-linux-v2/image/ORYUKDO-KFB-SD4-DMA-v2.img",
+  "sha256": "6a6b92f300faeb80c89108d94d3411c28438b185abaaca8f71dac06216ca2424",
+  "bytes": 275775488,
+  "boot_lba": 2048,
+  "data_lba": 14336,
+  "data_sectors": 524288,
+  "data_fs": "ext4",
+  "mount": "/data",
+  "hardware_tested": false,
+  "requires": "SD4 native bitstream; incompatible with SPI-only runtime"
+}

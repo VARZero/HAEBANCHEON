@@ -1,0 +1,2 @@
+PASS driver request/IRQ functions: 49 cases (SG, SDHC/SDSC, split, partial/error/timeout, SCR)
+driver_sha256=94078a234e6a8baa0f3f846747ef4f7b3b4fece0c5abf113fe5f18d958d42cd5

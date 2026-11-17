@@ -1,0 +1,8 @@
+{
+  "command": "sleep 12; /tmp/boayo-v8-baseline app telemetry",
+  "seconds": 21.325,
+  "rc": 0,
+  "uart": "sleep 12; /tmp/boayo-v8-baseline app telemetry; echo DIRTY9_1b812347_RC\r\r\r\n:$?\r\r\nBOAYO_APP_READY window=2\r\r\nDIRTY9_1b812347_RC:0\r\r\n",
+  "observed_at": "2026-11-14T21:02:51.683157",
+  "log_start": 212723
+}

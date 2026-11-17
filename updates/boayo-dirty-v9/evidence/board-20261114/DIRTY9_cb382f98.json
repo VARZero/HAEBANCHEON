@@ -1,0 +1,8 @@
+{
+  "command": "BOAYO_INIT_TRACE=0 /tmp/boayo-v8-baseline start",
+  "seconds": 5.283,
+  "rc": 1,
+  "uart": "oryukdo# BOAYO_INIT_TRACE=0 /tmp/boayo-v8-baseline start; echo DIRTY9_cb382f98_R\r\r\r\nC:$?\r\r\nWM socket exists; inspect boayo-status first\r\r\nDIRTY9_cb382f98_RC:1\r\r\n",
+  "observed_at": "2026-11-14T21:01:41.445710",
+  "log_start": 210902
+}

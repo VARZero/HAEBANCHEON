@@ -1,0 +1,552 @@
+{
+  "result": "PASS_RESIDENT_TILES",
+  "hardware": false,
+  "scenes": [
+    {
+      "name": "launcher",
+      "projection": {
+        "cpu_output_shadow_words": 4480,
+        "cpu_result_download_words": 0,
+        "cpu_scene_words": 0,
+        "dirty_tiles": 160,
+        "fallback_frames": 0,
+        "geometry_tiles_evaluated_total": 0,
+        "hardware_frames": 1,
+        "jobs_per_core": [
+          48,
+          48
+        ],
+        "mask_samples_evaluated_total": 0,
+        "masked_tiles_total": 44,
+        "mode": "ddr-resident-dirty-tiles",
+        "plan_cache": {
+          "hits": 0,
+          "loads": 1,
+          "misses": 0,
+          "rejected": 0,
+          "revision": "746089fe5e66eb1cf0d915a35257922c1192742b73d0ede1d099181cbfb03cdc"
+        },
+        "precomputed_layers_total": 1,
+        "texture_reuses_total": 0,
+        "texture_uploads_total": 1,
+        "tile_fills_total": 44,
+        "total_hw_jobs": 96,
+        "update_kind": "tiles"
+      }
+    },
+    {
+      "name": "unchanged",
+      "projection": {
+        "cpu_output_shadow_words": 4480,
+        "cpu_result_download_words": 0,
+        "cpu_scene_words": 0,
+        "dirty_tiles": 0,
+        "fallback_frames": 0,
+        "geometry_tiles_evaluated_total": 0,
+        "hardware_frames": 2,
+        "jobs_per_core": [
+          0,
+          0
+        ],
+        "mask_samples_evaluated_total": 0,
+        "masked_tiles_total": 44,
+        "mode": "ddr-resident-dirty-tiles",
+        "plan_cache": {
+          "hits": 0,
+          "loads": 1,
+          "misses": 0,
+          "rejected": 0,
+          "revision": "746089fe5e66eb1cf0d915a35257922c1192742b73d0ede1d099181cbfb03cdc"
+        },
+        "precomputed_layers_total": 1,
+        "texture_reuses_total": 0,
+        "texture_uploads_total": 1,
+        "tile_fills_total": 44,
+        "total_hw_jobs": 96,
+        "update_kind": "none"
+      }
+    },
+    {
+      "name": "pixel_edit",
+      "projection": {
+        "cpu_output_shadow_words": 4480,
+        "cpu_result_download_words": 0,
+        "cpu_scene_words": 0,
+        "dirty_tiles": 96,
+        "fallback_frames": 0,
+        "geometry_tiles_evaluated_total": 0,
+        "hardware_frames": 3,
+        "jobs_per_core": [
+          48,
+          48
+        ],
+        "mask_samples_evaluated_total": 0,
+        "masked_tiles_total": 88,
+        "mode": "ddr-resident-dirty-tiles",
+        "plan_cache": {
+          "hits": 0,
+          "loads": 1,
+          "misses": 0,
+          "rejected": 0,
+          "revision": "746089fe5e66eb1cf0d915a35257922c1192742b73d0ede1d099181cbfb03cdc"
+        },
+        "precomputed_layers_total": 1,
+        "texture_reuses_total": 0,
+        "texture_uploads_total": 2,
+        "tile_fills_total": 88,
+        "total_hw_jobs": 192,
+        "update_kind": "tiles"
+      }
+    },
+    {
+      "name": "move",
+      "projection": {
+        "cpu_output_shadow_words": 4480,
+        "cpu_result_download_words": 0,
+        "cpu_scene_words": 0,
+        "dirty_tiles": 198,
+        "fallback_frames": 0,
+        "geometry_tiles_evaluated_total": 4220,
+        "hardware_frames": 4,
+        "jobs_per_core": [
+          50,
+          49
+        ],
+        "mask_samples_evaluated_total": 161792,
+        "masked_tiles_total": 135,
+        "mode": "ddr-resident-dirty-tiles",
+        "plan_cache": {
+          "hits": 0,
+          "loads": 1,
+          "misses": 2,
+          "rejected": 0,
+          "revision": "746089fe5e66eb1cf0d915a35257922c1192742b73d0ede1d099181cbfb03cdc"
+        },
+        "precomputed_layers_total": 1,
+        "texture_reuses_total": 0,
+        "texture_uploads_total": 3,
+        "tile_fills_total": 135,
+        "total_hw_jobs": 291,
+        "update_kind": "tiles"
+      }
+    },
+    {
+      "name": "restore",
+      "projection": {
+        "cpu_output_shadow_words": 4480,
+        "cpu_result_download_words": 0,
+        "cpu_scene_words": 0,
+        "dirty_tiles": 198,
+        "fallback_frames": 0,
+        "geometry_tiles_evaluated_total": 4220,
+        "hardware_frames": 5,
+        "jobs_per_core": [
+          48,
+          48
+        ],
+        "mask_samples_evaluated_total": 161792,
+        "masked_tiles_total": 179,
+        "mode": "ddr-resident-dirty-tiles",
+        "plan_cache": {
+          "hits": 1,
+          "loads": 1,
+          "misses": 2,
+          "rejected": 0,
+          "revision": "746089fe5e66eb1cf0d915a35257922c1192742b73d0ede1d099181cbfb03cdc"
+        },
+        "precomputed_layers_total": 2,
+        "texture_reuses_total": 0,
+        "texture_uploads_total": 4,
+        "tile_fills_total": 179,
+        "total_hw_jobs": 387,
+        "update_kind": "tiles"
+      }
+    },
+    {
+      "name": "reveal",
+      "projection": {
+        "cpu_output_shadow_words": 4480,
+        "cpu_result_download_words": 0,
+        "cpu_scene_words": 0,
+        "dirty_tiles": 160,
+        "fallback_frames": 0,
+        "geometry_tiles_evaluated_total": 4220,
+        "hardware_frames": 6,
+        "jobs_per_core": [
+          79,
+          79
+        ],
+        "mask_samples_evaluated_total": 325632,
+        "masked_tiles_total": 179,
+        "mode": "ddr-resident-dirty-tiles",
+        "plan_cache": {
+          "hits": 1,
+          "loads": 1,
+          "misses": 3,
+          "rejected": 0,
+          "revision": "746089fe5e66eb1cf0d915a35257922c1192742b73d0ede1d099181cbfb03cdc"
+        },
+        "precomputed_layers_total": 2,
+        "texture_reuses_total": 0,
+        "texture_uploads_total": 5,
+        "tile_fills_total": 241,
+        "total_hw_jobs": 545,
+        "update_kind": "tiles"
+      }
+    },
+    {
+      "name": "shape_restore",
+      "projection": {
+        "cpu_output_shadow_words": 4480,
+        "cpu_result_download_words": 0,
+        "cpu_scene_words": 0,
+        "dirty_tiles": 160,
+        "fallback_frames": 0,
+        "geometry_tiles_evaluated_total": 4220,
+        "hardware_frames": 7,
+        "jobs_per_core": [
+          48,
+          48
+        ],
+        "mask_samples_evaluated_total": 325632,
+        "masked_tiles_total": 223,
+        "mode": "ddr-resident-dirty-tiles",
+        "plan_cache": {
+          "hits": 2,
+          "loads": 1,
+          "misses": 3,
+          "rejected": 0,
+          "revision": "746089fe5e66eb1cf0d915a35257922c1192742b73d0ede1d099181cbfb03cdc"
+        },
+        "precomputed_layers_total": 3,
+        "texture_reuses_total": 0,
+        "texture_uploads_total": 6,
+        "tile_fills_total": 285,
+        "total_hw_jobs": 641,
+        "update_kind": "tiles"
+      }
+    },
+    {
+      "name": "roll_fov",
+      "projection": {
+        "cpu_output_shadow_words": 4480,
+        "cpu_result_download_words": 0,
+        "cpu_scene_words": 0,
+        "dirty_tiles": 190,
+        "fallback_frames": 0,
+        "geometry_tiles_evaluated_total": 8440,
+        "hardware_frames": 8,
+        "jobs_per_core": [
+          58,
+          57
+        ],
+        "mask_samples_evaluated_total": 509952,
+        "masked_tiles_total": 280,
+        "mode": "ddr-resident-dirty-tiles",
+        "plan_cache": {
+          "hits": 2,
+          "loads": 1,
+          "misses": 5,
+          "rejected": 0,
+          "revision": "746089fe5e66eb1cf0d915a35257922c1192742b73d0ede1d099181cbfb03cdc"
+        },
+        "precomputed_layers_total": 3,
+        "texture_reuses_total": 0,
+        "texture_uploads_total": 7,
+        "tile_fills_total": 342,
+        "total_hw_jobs": 756,
+        "update_kind": "tiles"
+      }
+    },
+    {
+      "name": "roll_restore",
+      "projection": {
+        "cpu_output_shadow_words": 4480,
+        "cpu_result_download_words": 0,
+        "cpu_scene_words": 0,
+        "dirty_tiles": 190,
+        "fallback_frames": 0,
+        "geometry_tiles_evaluated_total": 8440,
+        "hardware_frames": 9,
+        "jobs_per_core": [
+          48,
+          48
+        ],
+        "mask_samples_evaluated_total": 509952,
+        "masked_tiles_total": 324,
+        "mode": "ddr-resident-dirty-tiles",
+        "plan_cache": {
+          "hits": 3,
+          "loads": 1,
+          "misses": 5,
+          "rejected": 0,
+          "revision": "746089fe5e66eb1cf0d915a35257922c1192742b73d0ede1d099181cbfb03cdc"
+        },
+        "precomputed_layers_total": 4,
+        "texture_reuses_total": 0,
+        "texture_uploads_total": 8,
+        "tile_fills_total": 386,
+        "total_hw_jobs": 852,
+        "update_kind": "tiles"
+      }
+    },
+    {
+      "name": "overlap",
+      "projection": {
+        "cpu_output_shadow_words": 4480,
+        "cpu_result_download_words": 0,
+        "cpu_scene_words": 0,
+        "dirty_tiles": 160,
+        "fallback_frames": 0,
+        "geometry_tiles_evaluated_total": 12660,
+        "hardware_frames": 10,
+        "jobs_per_core": [
+          67,
+          67
+        ],
+        "mask_samples_evaluated_total": 550912,
+        "masked_tiles_total": 368,
+        "mode": "ddr-resident-dirty-tiles",
+        "plan_cache": {
+          "hits": 3,
+          "loads": 1,
+          "misses": 7,
+          "rejected": 0,
+          "revision": "746089fe5e66eb1cf0d915a35257922c1192742b73d0ede1d099181cbfb03cdc"
+        },
+        "precomputed_layers_total": 4,
+        "texture_reuses_total": 0,
+        "texture_uploads_total": 10,
+        "tile_fills_total": 430,
+        "total_hw_jobs": 986,
+        "update_kind": "tiles"
+      }
+    },
+    {
+      "name": "rounded_overlap",
+      "projection": {
+        "cpu_output_shadow_words": 4480,
+        "cpu_result_download_words": 0,
+        "cpu_scene_words": 0,
+        "dirty_tiles": 40,
+        "fallback_frames": 0,
+        "geometry_tiles_evaluated_total": 12660,
+        "hardware_frames": 11,
+        "jobs_per_core": [
+          39,
+          39
+        ],
+        "mask_samples_evaluated_total": 591872,
+        "masked_tiles_total": 394,
+        "mode": "ddr-resident-dirty-tiles",
+        "plan_cache": {
+          "hits": 3,
+          "loads": 1,
+          "misses": 8,
+          "rejected": 0,
+          "revision": "746089fe5e66eb1cf0d915a35257922c1192742b73d0ede1d099181cbfb03cdc"
+        },
+        "precomputed_layers_total": 4,
+        "texture_reuses_total": 0,
+        "texture_uploads_total": 12,
+        "tile_fills_total": 430,
+        "total_hw_jobs": 1064,
+        "update_kind": "tiles"
+      }
+    },
+    {
+      "name": "hide",
+      "projection": {
+        "cpu_output_shadow_words": 4480,
+        "cpu_result_download_words": 0,
+        "cpu_scene_words": 0,
+        "dirty_tiles": 160,
+        "fallback_frames": 0,
+        "geometry_tiles_evaluated_total": 12660,
+        "hardware_frames": 12,
+        "jobs_per_core": [
+          48,
+          48
+        ],
+        "mask_samples_evaluated_total": 591872,
+        "masked_tiles_total": 438,
+        "mode": "ddr-resident-dirty-tiles",
+        "plan_cache": {
+          "hits": 3,
+          "loads": 1,
+          "misses": 8,
+          "rejected": 0,
+          "revision": "746089fe5e66eb1cf0d915a35257922c1192742b73d0ede1d099181cbfb03cdc"
+        },
+        "precomputed_layers_total": 4,
+        "texture_reuses_total": 0,
+        "texture_uploads_total": 13,
+        "tile_fills_total": 474,
+        "total_hw_jobs": 1160,
+        "update_kind": "tiles"
+      }
+    },
+    {
+      "name": "show",
+      "projection": {
+        "cpu_output_shadow_words": 4480,
+        "cpu_result_download_words": 0,
+        "cpu_scene_words": 0,
+        "dirty_tiles": 160,
+        "fallback_frames": 0,
+        "geometry_tiles_evaluated_total": 12660,
+        "hardware_frames": 13,
+        "jobs_per_core": [
+          67,
+          67
+        ],
+        "mask_samples_evaluated_total": 591872,
+        "masked_tiles_total": 508,
+        "mode": "ddr-resident-dirty-tiles",
+        "plan_cache": {
+          "hits": 3,
+          "loads": 1,
+          "misses": 8,
+          "rejected": 0,
+          "revision": "746089fe5e66eb1cf0d915a35257922c1192742b73d0ede1d099181cbfb03cdc"
+        },
+        "precomputed_layers_total": 4,
+        "texture_reuses_total": 0,
+        "texture_uploads_total": 15,
+        "tile_fills_total": 518,
+        "total_hw_jobs": 1294,
+        "update_kind": "tiles"
+      }
+    },
+    {
+      "name": "remove",
+      "projection": {
+        "cpu_output_shadow_words": 4480,
+        "cpu_result_download_words": 0,
+        "cpu_scene_words": 0,
+        "dirty_tiles": 160,
+        "fallback_frames": 0,
+        "geometry_tiles_evaluated_total": 12660,
+        "hardware_frames": 14,
+        "jobs_per_core": [
+          48,
+          48
+        ],
+        "mask_samples_evaluated_total": 591872,
+        "masked_tiles_total": 552,
+        "mode": "ddr-resident-dirty-tiles",
+        "plan_cache": {
+          "hits": 3,
+          "loads": 1,
+          "misses": 8,
+          "rejected": 0,
+          "revision": "746089fe5e66eb1cf0d915a35257922c1192742b73d0ede1d099181cbfb03cdc"
+        },
+        "precomputed_layers_total": 4,
+        "texture_reuses_total": 0,
+        "texture_uploads_total": 16,
+        "tile_fills_total": 562,
+        "total_hw_jobs": 1390,
+        "update_kind": "tiles"
+      }
+    },
+    {
+      "name": "pointer",
+      "projection": {
+        "cpu_output_shadow_words": 4480,
+        "cpu_result_download_words": 0,
+        "cpu_scene_words": 0,
+        "dirty_tiles": 0,
+        "fallback_frames": 0,
+        "geometry_tiles_evaluated_total": 12660,
+        "hardware_frames": 15,
+        "jobs_per_core": [
+          0,
+          0
+        ],
+        "mask_samples_evaluated_total": 591872,
+        "masked_tiles_total": 552,
+        "mode": "ddr-resident-dirty-tiles",
+        "plan_cache": {
+          "hits": 3,
+          "loads": 1,
+          "misses": 8,
+          "rejected": 0,
+          "revision": "746089fe5e66eb1cf0d915a35257922c1192742b73d0ede1d099181cbfb03cdc"
+        },
+        "precomputed_layers_total": 4,
+        "texture_reuses_total": 0,
+        "texture_uploads_total": 16,
+        "tile_fills_total": 562,
+        "total_hw_jobs": 1390,
+        "update_kind": "none"
+      }
+    },
+    {
+      "name": "pointer_move",
+      "projection": {
+        "cpu_output_shadow_words": 4480,
+        "cpu_result_download_words": 0,
+        "cpu_scene_words": 0,
+        "dirty_tiles": 0,
+        "fallback_frames": 0,
+        "geometry_tiles_evaluated_total": 12660,
+        "hardware_frames": 16,
+        "jobs_per_core": [
+          0,
+          0
+        ],
+        "mask_samples_evaluated_total": 591872,
+        "masked_tiles_total": 552,
+        "mode": "ddr-resident-dirty-tiles",
+        "plan_cache": {
+          "hits": 3,
+          "loads": 1,
+          "misses": 8,
+          "rejected": 0,
+          "revision": "746089fe5e66eb1cf0d915a35257922c1192742b73d0ede1d099181cbfb03cdc"
+        },
+        "precomputed_layers_total": 4,
+        "texture_reuses_total": 0,
+        "texture_uploads_total": 16,
+        "tile_fills_total": 562,
+        "total_hw_jobs": 1390,
+        "update_kind": "none"
+      }
+    },
+    {
+      "name": "remove_launcher",
+      "projection": {
+        "cpu_output_shadow_words": 4480,
+        "cpu_result_download_words": 0,
+        "cpu_scene_words": 0,
+        "dirty_tiles": 160,
+        "fallback_frames": 0,
+        "geometry_tiles_evaluated_total": 12660,
+        "hardware_frames": 17,
+        "jobs_per_core": [
+          0,
+          0
+        ],
+        "mask_samples_evaluated_total": 591872,
+        "masked_tiles_total": 552,
+        "mode": "ddr-resident-dirty-tiles",
+        "plan_cache": {
+          "hits": 3,
+          "loads": 1,
+          "misses": 8,
+          "rejected": 0,
+          "revision": "746089fe5e66eb1cf0d915a35257922c1192742b73d0ede1d099181cbfb03cdc"
+        },
+        "precomputed_layers_total": 4,
+        "texture_reuses_total": 0,
+        "texture_uploads_total": 16,
+        "tile_fills_total": 562,
+        "total_hw_jobs": 1390,
+        "update_kind": "tiles"
+      }
+    }
+  ],
+  "candidate_sha256": "84611202802110f669c9c64dd7ec9d1c4a6777c25c9df26562da2ed812cc275d",
+  "baseline_sha256": "e2b94ce1e7c21dc4f9de6acda792aaa82b4e5749d9f57fdb0b05b1f1dfb3289e"
+}

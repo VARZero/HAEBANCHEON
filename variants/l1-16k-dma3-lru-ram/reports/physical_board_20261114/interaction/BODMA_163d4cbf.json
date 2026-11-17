@@ -1,0 +1,7 @@
+{
+  "command": "/usr/bin/boayo-native app telemetry",
+  "seconds": 130.56,
+  "rc": 1,
+  "uart": "/usr/bin/boayo-native app telemetry; echo BODMA_163d4cbf_RC:$?\r\r\nBOAYO_APP_READY window=WM reply failed or timed out\r\r\nBODMA_163d4cbf_RC:1\r\r\n",
+  "observed_at": "2026-11-14T09:26:51.385898"
+}

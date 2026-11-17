@@ -1,0 +1,2 @@
+PASS L1_16K_2WAY capacity I/D, LRU, byte stores, DMA visibility, refill races, independent responses, errors, random checks=4469 cycles=97983
+- soc/tests/lru_reference/tb_l1.sv:118: Verilog $finish

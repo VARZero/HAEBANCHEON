@@ -1,0 +1,8 @@
+{
+  "command": "cat /etc/oryukdo-image",
+  "seconds": 0.767,
+  "rc": 0,
+  "uart": "cat /etc/oryukdo-image; echo INCR11_14b1071b_RC:$?\r\r\nHAEBANCHEON-BoAYO-incremental-v11 / L1-16K DMA3 / incremental state and profiled boundary driver\r\r\nINCR11_14b1071b_RC:0\r\r\n",
+  "observed_at": "2026-11-15T00:33:23.855459",
+  "log_start": 342975
+}

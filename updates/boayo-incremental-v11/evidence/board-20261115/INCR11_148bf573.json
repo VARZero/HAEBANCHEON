@@ -1,0 +1,8 @@
+{
+  "command": "cat /tmp/boayo-wm.log",
+  "seconds": 2.79,
+  "rc": 0,
+  "uart": "cat /tmp/boayo-wm.log; echo INCR11_148bf573_RC:$?\r\r\nBOAYO_NATIVE_SERVICE /tmp/bosio-wm.sock initializing; query boayo-status\r\r\nBOAYO_NATIVE_INIT backend=BOSIO_ABI3\r\r\nBOAYO_BLANK_METADATA_READY words=4480 tile_composition=0 projection_jobs=0\r\r\nBOAYO_NATIVE_READY blank_committed_launcher_pending\r\r\nBOAYO_FIRST_FRAME_COMPOSE_BEGIN\r\r\nBOAYO_FIRST_FRAME_PRESENT_DONE\r\r\nBOAYO_NATIVE_SERVICE /tmp/bosio-wm.sock initializing; query boayo-status\r\r\nBOAYO_NATIVE_INIT backend=BOSIO_ABI3\r\r\nBOAYO_BLANK_METADATA_READY words=4480 tile_composition=0 projection_jobs=0\r\r\nBOAYO_NATIVE_READY blank_committed_launcher_pending\r\r\nBOAYO_FIRST_FRAME_COMPOSE_BEGIN\r\r\nBOAYO_FIRST_FRAME_PRESENT_DONE\r\r\nBOAYO_NATIVE_SERVICE /tmp/bosio-wm.sock initializing; query boayo-status\r\r\nBOAYO_NATIVE_INIT backend=BOSIO_ABI3\r\r\nBOAYO_BLANK_METADATA_READY words=4480 tile_composition=0 projection_jobs=0\r\r\nBOAYO_NATIVE_READY blank_committed_launcher_pending\r\r\nBOAYO_FIRST_FRAME_COMPOSE_BEGIN\r\r\nBOAYO_FIRST_FRAME_PRESENT_DONE\r\r\nINCR11_148bf573_RC:0\r\r\n",
+  "observed_at": "2026-11-15T00:43:30.255916",
+  "log_start": 391849
+}

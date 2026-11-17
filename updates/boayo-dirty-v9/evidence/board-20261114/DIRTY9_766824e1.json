@@ -1,0 +1,8 @@
+{
+  "command": "/tmp/d9-peek 1; sleep 30; /tmp/d9-peek 1",
+  "seconds": 40.14,
+  "rc": 0,
+  "uart": "/tmp/d9-peek 1; sleep 30; /tmp/d9-peek 1; echo DIRTY9_766824e1_RC:$?\r\r\nBENCH_SAMPLE {\"compose_ms\":1330.32154,\"renders\":94,\"uptime\":778.31950526,\"generation\":109,\"commits\":95,\"dma_errors\":0,\"dma_upload_bytes\":4947808,\"pool_upload_bytes\":4912000,\"partial_uploads\":92,\"full_uploads\":5,\"phase\":\"apps\",\"snapshot_age\":2.4509507199999234,\"render_error\":null,\"app_error\":null}\r\r\nBENCH_SAMPLE {\"compose_ms\":1662.9619200000434,\"renders\":100,\"uptime\":811.0637867,\"generation\":115,\"commits\":101,\"dma_errors\":0,\"dma_upload_bytes\":5178208,\"pool_upload_bytes\":5142400,\"partial_uploads\":98,\"full_uploads\":5,\"phase\":\"composing\",\"snapshot_age\":3.7578013600000304,\"render_error\":null,\"app_error\":null}\r\r\nDIRTY9_766824e1_RC:0\r\r\n",
+  "observed_at": "2026-11-14T21:01:31.884363",
+  "log_start": 210121
+}

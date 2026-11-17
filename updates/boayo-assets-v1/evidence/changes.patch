@@ -1,0 +1,445 @@
+--- boayo-rgbdma-v1/software/boayo/native/build.sh
++++ boayo-assets-v1/software/boayo/native/build.sh
+@@ -18,6 +18,6 @@
+  flags+=(-static -march=rv32ima_zicsr_zifencei -mabi=ilp32 -ffunction-sections -fdata-sections -Wl,--gc-sections)
+ fi
+ if [[ "$mode" == sanitize ]]; then flags+=(-fsanitize=address,undefined -fno-omit-frame-pointer); fi
+-"$compiler" "${flags[@]}" "$source/src/geometry.cpp" "$source/src/wm.cpp" "$source/src/ui.cpp" "$source/src/backend.cpp" "$source/src/apps.cpp" "$source/src/runtime.cpp" "$source/src/selftest.cpp" "$source/src/main.cpp" "$source/reference/wm/native/bosio_compositor.cpp" -o "$out/boayo-native-$mode"
++"$compiler" "${flags[@]}" "$source/src/assets.cpp" "$source/src/geometry.cpp" "$source/src/wm.cpp" "$source/src/ui.cpp" "$source/src/backend.cpp" "$source/src/apps.cpp" "$source/src/runtime.cpp" "$source/src/selftest.cpp" "$source/src/main.cpp" "$source/reference/wm/native/bosio_compositor.cpp" -o "$out/boayo-native-$mode"
+ python3 "$here/build_manifest.py" "$source" "$out/boayo-native-$mode"
+ echo "BUILD_OK $out/boayo-native-$mode"
+--- boayo-rgbdma-v1/software/boayo/native/src/apps.cpp
++++ boayo-assets-v1/software/boayo/native/src/apps.cpp
+@@ -6,7 +6,8 @@
+   auto &w = wm.window(id);
+   require(w.surface.size() == s.pixels.size(), "surface size mismatch");
+   int x0 = s.width, y0 = s.height, x1 = -1, y1 = -1;
+-  for (int y = 0; y < s.height; y++) {
++  if(first) {x0=0;y0=0;x1=s.width-1;y1=s.height-1;}
++  for (int y = 0; !first && y < s.height; y++) {
+     if (init_trace::active && (y == 0 || y == s.height/2 || y == s.height-1)) init_trace::mark("surface.scan.row", y);
+     for (int x = 0; x < s.width; x++) {
+       size_t p = (size_t(y) * s.width + x) * 3;
+@@ -24,6 +25,7 @@
+     return;
+   init_trace::mark("surface.copy.begin", s.pixels.size());
+   w.surface = s.pixels;
++  w.prepared = s.prepared;
+   init_trace::mark("surface.copy.end", s.pixels.size());
+   if (w.dirty[2]) {
+     x0 = std::min(x0, w.dirty[0]);
+@@ -35,6 +37,17 @@
+   ++w.revision;
+   ++wm.generation;
+   init_trace::mark("surface.publish.end", id);
++}
++void publish(WM &wm,int id,Surface &&s,bool first) {
++  if(!first && !s.prepared){publish(wm,id,static_cast<const Surface &>(s),false);return;}
++  auto &w=wm.window(id);
++  require(w.surface.size()==s.pixels.size(),"surface size mismatch");
++  if(!first && w.prepared==s.prepared)return;
++  // Immutable UI states replace the surface without a pixel comparison/copy.
++  // Mark the full window dirty; hardware reprojects it in the existing order.
++  w.surface=std::move(s.pixels);w.prepared=std::move(s.prepared);
++  w.dirty={0,0,s.width,s.height};++w.revision;++wm.generation;
++  init_trace::mark("surface.publish.move",id);
+ }
+ std::pair<double, double> gaze(double az, double el, double w, double h, double u, double v) {
+   auto a = axes(az, el);
+--- boayo-rgbdma-v1/software/boayo/native/src/apps.hpp
++++ boayo-assets-v1/software/boayo/native/src/apps.hpp
+@@ -4,6 +4,7 @@
+ #include <memory>
+ namespace boayo {
+ void publish(WM &wm, int id, const Surface &s, bool first = false);
++void publish(WM &wm, int id, Surface &&s, bool first = false);
+ std::pair<double, double> gaze(double az, double el, double w, double h, double u, double v);
+ J storage_layout(const J &windows, double el = -42, double w = 16, double h = 5);
+ struct App {
+--- boayo-rgbdma-v1/software/boayo/native/src/assets.cpp
++++ boayo-assets-v1/software/boayo/native/src/assets.cpp
+@@ -0,0 +1,85 @@
++#include "assets.hpp"
++#include "init_trace.hpp"
++#include "rgb_fill.hpp"
++#include <cstdlib>
++#include <cstdio>
++#include <list>
++namespace boayo {
++namespace {
++struct Entry {std::string key;int w,h;Bytes pixels;std::shared_ptr<const Words> texture;};
++thread_local std::list<Entry> cache;
++thread_local uint64_t hits=0,loads=0,misses=0,rejected=0;
++uint32_t word(const uint8_t *p) {
++  return uint32_t(p[0])|(uint32_t(p[1])<<8)|(uint32_t(p[2])<<16)|(uint32_t(p[3])<<24);
++}
++uint32_t crc(const uint8_t *header,const Bytes &b) {
++  static const auto table=[] {
++    std::array<uint32_t,256> t{};
++    for(unsigned i=0;i<256;++i) {uint32_t c=i;for(int j=0;j<8;++j)c=(c>>1)^((c&1)?0xedb88320u:0);t[i]=c;}
++    return t;
++  }();
++  uint32_t c=~0u;
++  for(unsigned i=0;i<24;++i)c=table[(c^header[i])&255]^(c>>8);
++  for(auto v:b)c=table[(c^v)&255]^(c>>8);return ~c;
++}
++std::optional<Entry> read(const std::string &path,const std::string &key) {
++  std::ifstream f(path,std::ios::binary);if(!f)return {};
++  uint8_t header[28];f.read(reinterpret_cast<char *>(header),sizeof(header));
++  require(f.gcount()==sizeof(header) && std::equal(header,header+8,"BUIRLE01"),"asset header");
++  uint32_t w=word(header+8),h=word(header+12),k=word(header+16),runs=word(header+20);
++  require(w && h && uint64_t(w)*h<=1024*1024 && k==key.size() && k<=4096 &&
++          runs && runs<=uint64_t(w)*h,"asset dimensions");
++  Bytes body(k+size_t(runs)*8);f.read(reinterpret_cast<char *>(body.data()),body.size());
++  require(size_t(f.gcount())==body.size() && f.peek()==EOF && crc(header,body)==word(header+24),"asset length/CRC");
++  require(std::equal(key.begin(),key.end(),body.begin()),"asset key collision/version mismatch");
++  size_t count=size_t(w)*h,sum=0;
++  for(unsigned i=0;i<runs;++i) {
++    auto p=body.data()+k+i*8;auto n=word(p),color=word(p+4);
++    require(n && n<=count-sum && !(color&0xff000000u),"asset run range");sum+=n;
++  }
++  require(sum==count,"asset incomplete pixels");
++  Entry e{key,int(w),int(h),Bytes(count*3),{}};
++  auto texture=std::make_shared<Words>(count);size_t pos=0;
++  for(unsigned i=0;i<runs;++i) {
++    auto p=body.data()+k+i*8;auto n=word(p),color=word(p+4);
++    std::fill_n(texture->data()+pos,n,color);
++    fill_rgb(e.pixels.data()+pos*3,size_t(n)*3,
++             {uint8_t(color>>16),uint8_t(color>>8),uint8_t(color)});
++    pos+=n;
++  }
++  e.texture=std::move(texture);return e;
++}
++} // namespace
++std::optional<Surface> asset_surface(const J &request) {
++  const char *mode=std::getenv("BOAYO_ASSETS");if(mode && std::string(mode)=="0")return {};
++  std::string key=request.dump();
++  for(auto i=cache.begin();i!=cache.end();++i)if(i->key==key) {
++    ++hits;cache.splice(cache.begin(),cache,i);auto &e=cache.front();
++    init_trace::mark("asset.cache",e.pixels.size());
++    return Surface(e.w,e.h,e.pixels,e.texture);
++  }
++  uint32_t hash=2166136261u;for(unsigned char c:key){hash^=c;hash*=16777619u;}
++  char name[32];std::snprintf(name,sizeof(name),"/%08x.bui",hash);
++  const char *dir=std::getenv("BOAYO_ASSET_DIR");
++  std::vector<std::string> dirs=dir?std::vector<std::string>{dir}:
++      std::vector<std::string>{"/usr/share/boayo/assets","/data/boayo-assets"};
++  for(const auto &d:dirs) {
++    std::optional<Entry> entry;
++    // Malformed/missing assets fall back; DMA errors during expansion propagate.
++    try {entry=read(d+name,key);} catch(const std::runtime_error &error) {
++      if(std::string(error.what()).find("asset ")!=0)throw;
++      ++rejected;std::fprintf(stderr,"BOAYO_ASSET_REJECT %s: %s\n",name,error.what());continue;
++    }
++    if(!entry)continue;
++    ++loads;cache.push_front(std::move(*entry));
++    size_t memory=0;for(auto i=cache.begin();i!=cache.end();) {
++      memory+=i->pixels.size()+i->texture->size()*4;
++      if(memory>24u*1024*1024 && i!=cache.begin())i=cache.erase(i);else ++i;
++    }
++    auto &e=cache.front();init_trace::mark("asset.loaded",e.pixels.size());
++    return Surface(e.w,e.h,e.pixels,e.texture);
++  }
++  ++misses;return {};
++}
++J asset_status(){return {{"loads",loads},{"cache_hits",hits},{"misses",misses},{"rejected",rejected}};}
++} // namespace boayo
+--- boayo-rgbdma-v1/software/boayo/native/src/assets.hpp
++++ boayo-assets-v1/software/boayo/native/src/assets.hpp
+@@ -0,0 +1,7 @@
++#pragma once
++#include "ui.hpp"
++#include <optional>
++namespace boayo {
++std::optional<Surface> asset_surface(const J &key);
++J asset_status();
++} // namespace boayo
+--- boayo-rgbdma-v1/software/boayo/native/src/backend.cpp
++++ boayo-assets-v1/software/boayo/native/src/backend.cpp
+@@ -383,7 +383,7 @@
+           {"sensor_available", false},
+           {"antialias", false}};
+ }
+-bo_run Projectors::run(const Words &texture, const std::vector<Descriptor> &desc, Words &scene) {
++bo_run Projectors::run(const Words &texture, const std::vector<Descriptor> &desc, Words &scene, std::shared_ptr<const Words> immutable) {
+   require(!failed, "previous projection failed; restart required");
+   require(!texture.empty() && texture.size() <= 0x100000, "invalid texture allocation");
+   std::vector<unsigned> dest;
+@@ -402,7 +402,12 @@
+   if (desc.empty())
+     return total;
+   try {
+-    dev.upload(0, 0, texture.data(), texture.size());
++    require(!immutable || immutable.get()==&texture,"immutable texture identity");
++    if(!immutable || resident_texture!=immutable) {
++      resident_texture.reset();
++      dev.upload(0, 0, texture.data(), texture.size());
++      resident_texture=immutable;++texture_uploads;
++    } else ++texture_reuses;
+     for (size_t first = 0; first < desc.size(); first += 128) {
+       unsigned n = std::min(size_t(128), desc.size() - first);
+       std::array<Words, 2> queues;
+@@ -430,6 +435,7 @@
+       }
+     }
+   } catch (...) {
++    resident_texture.reset();
+     failed = true;
+     throw;
+   }
+@@ -498,6 +504,17 @@
+ void Compositor::source_changes(Layer &c, const Window &w) {
+   if (c.revision == w.revision)
+     return;
++  if(w.prepared) {
++    require(w.prepared->size()*3==w.surface.size(),"prepared texture size");
++    if(c.prepared_source!=w.prepared) {
++      auto r=w.dirty;
++      for(unsigned i=0;i<c.ids.size();++i)
++        if(!c.prepared_source || !r[2] || affected(c.desc[i],r[0],r[1],r[2],r[3]))c.invalid.insert(i);
++    }
++    c.prepared_source=w.prepared;c.revision=w.revision;
++    return;
++  }
++  if(c.prepared_source) {c.prepared_source.reset();c.source.clear();}
+   int width = w.data["surface_width"], height = w.data["surface_height"];
+   bool fresh = c.source.size() != size_t(width) * height;
+   if (fresh) {
+@@ -572,6 +589,9 @@
+     if (found == layers.end() || found->second.key != geometry_key(w)) {
+       dirty.insert(previous_tiles[id].begin(), previous_tiles[id].end());
+       auto c = make_layer(w);
++      if(found!=layers.end() && found->second.prepared_source) {
++        c.prepared_source=found->second.prepared_source;c.revision=found->second.revision;
++      }
+       if (found != layers.end() && found->second.source.size() == w.surface.size() / 3) {
+         c.source = std::move(found->second.source);
+         c.revision = found->second.revision;
+@@ -606,7 +626,9 @@
+     }
+     if (!todo.empty()) {
+       Words result(todo.size() * 256);
+-      auto timing = projectors.run(c.source, todo, result);
++      const auto &texture=c.prepared_source?*c.prepared_source:c.source;
++      auto previous_uploads=projectors.texture_uploads;
++      auto timing = projectors.run(texture, todo, result,c.prepared_source);
+       unsigned j = 0;
+       for (auto i : c.invalid) {
+         std::copy_n(result.begin() + j * 256, 256, c.pixels.begin() + i * 256);
+@@ -618,7 +640,7 @@
+         cells[core] += timing.cells[core];
+         total_jobs += timing.jobs[core];
+       }
+-      uploaded += c.source.size();
++      if(projectors.texture_uploads!=previous_uploads)uploaded += texture.size();
+       projected.push_back(id);
+     }
+     footprints[id] = {c.ids.begin(), c.ids.end()};
+@@ -743,6 +765,8 @@
+              {"jobs_per_core", jobs},
+              {"written_cells_per_core", cells},
+              {"texture_upload_words", uploaded},
++             {"texture_uploads_total", projectors.texture_uploads},
++             {"texture_reuses_total", projectors.texture_reuses},
+              {"reused_window_tiles", reused},
+              {"dirty_tiles", dirty.size()},
+              {"changed_tiles", changed.size()},
+--- boayo-rgbdma-v1/software/boayo/native/src/backend.hpp
++++ boayo-assets-v1/software/boayo/native/src/backend.hpp
+@@ -88,8 +88,11 @@
+ struct Projectors {
+   Device &dev;
+   bool failed = false;
++  std::shared_ptr<const Words> resident_texture;
++  uint64_t texture_uploads = 0, texture_reuses = 0;
+   explicit Projectors(Device &d) : dev(d) {}
+-  bo_run run(const Words &texture, const std::vector<Descriptor> &desc, Words &scene);
++  bo_run run(const Words &texture, const std::vector<Descriptor> &desc, Words &scene,
++             std::shared_ptr<const Words> immutable = {});
+ };
+ struct Layer {
+   J key, shape;
+@@ -98,6 +101,7 @@
+   std::vector<Descriptor> desc;
+   std::vector<Bytes> masks;
+   Words pixels, source;
++  std::shared_ptr<const Words> prepared_source;
+   std::set<unsigned> invalid;
+   std::array<int, tiles> lookup;
+   Layer() { lookup.fill(-1); }
+--- boayo-rgbdma-v1/software/boayo/native/src/main.cpp
++++ boayo-assets-v1/software/boayo/native/src/main.cpp
+@@ -5,6 +5,7 @@
+ #include "apps.hpp"
+ #include "runtime.hpp"
+ #include "rgb_fill.hpp"
++#include "assets.hpp"
+ #include <iostream>
+ using namespace boayo;
+ int main(int argc, char **argv) {
+@@ -34,7 +35,9 @@
+           id = r.value("id", J(nullptr));
+           std::string op = r.at("op");
+           J result;
+-          if (op == "test_rgb_dma_stats") {
++          if (op == "test_asset_stats") {
++            result=asset_status();
++          } else if (op == "test_rgb_dma_stats") {
+             result={{"calls",rgb_mock.dma_fills}};
+           } else if (op == "test_camera") {
+             auto a = r.at("args");
+--- boayo-rgbdma-v1/software/boayo/native/src/rgb_fill.hpp
++++ boayo-assets-v1/software/boayo/native/src/rgb_fill.hpp
+@@ -1,5 +1,6 @@
+ #pragma once
+ #include "common.hpp"
++#include <cstring>
+ namespace boayo {
+ // Only the render thread owns the mutable surfaces and the exclusive device.
+ struct RgbFillHook {
+@@ -19,10 +20,12 @@
+       rgb_fill_hook.fill && rgb_fill_hook.fill(rgb_fill_hook.context, dst, bytes, color))
+     return;
+   // Small/unaligned buffers and old kernels retain an exact CPU fallback.
+-  size_t i = 0;
+-  for (; i + 3 <= bytes; i += 3) {
+-    dst[i] = color[0]; dst[i+1] = color[1]; dst[i+2] = color[2];
++  size_t filled=std::min(bytes,size_t(12));
++  for(size_t i=0;i<filled;++i)dst[i]=color[i%3];
++  while(filled<bytes) {
++    size_t n=std::min(filled,bytes-filled);
++    // Each completed prefix is a multiple of the RGB period; ranges do not overlap.
++    std::memcpy(dst+filled,dst,n);filled+=n;
+   }
+-  for (size_t k = 0; i < bytes; ++i, ++k) dst[i] = color[k];
+ }
+ } // namespace boayo
+--- boayo-rgbdma-v1/software/boayo/native/src/ui.cpp
++++ boayo-assets-v1/software/boayo/native/src/ui.cpp
+@@ -2,15 +2,18 @@
+ #include "init_trace.hpp"
+ #include "font.hpp"
+ #include "rgb_fill.hpp"
++#include "assets.hpp"
+ #include <cctype>
+ #include <cstdio>
+ namespace boayo {
+ void Surface::clear(Color c) {
++  prepared.reset();
+   init_trace::mark("surface.clear.begin", pixels.size());
+   fill_rgb(pixels.data(), pixels.size(), c);
+   init_trace::mark("surface.clear.end", pixels.size());
+ }
+ void Surface::blend(int x, int y, unsigned n, Color c) {
++  prepared.reset();
+   if (x < 0 || y < 0 || x >= width || y >= height)
+     return;
+   size_t p = (size_t(y) * width + x) * 3;
+@@ -18,6 +21,7 @@
+     pixels[p + k] = (pixels[p + k] * (16 - n) + c[k] * n + 8) / 16;
+ }
+ void Surface::rect(double x, double y, double w, double h, Color c, bool fill, int stroke) {
++  prepared.reset();
+   int x0 = std::max(0, int(x)), y0 = std::max(0, int(y)), x1 = std::min(width, int(x + w)),
+       y1 = std::min(height, int(y + h)), s = std::max(1, stroke);
+   for (int yy = y0; yy < y1; yy++)
+@@ -112,6 +116,7 @@
+   }
+ }
+ void Surface::blit(const Surface &s, int x, int y) {
++  prepared.reset();
+   for (int yy = 0; yy < s.height; yy++)
+     for (int xx = 0; xx < s.width; xx++)
+       if (x + xx >= 0 && x + xx < width && y + yy >= 0 && y + yy < height)
+@@ -119,6 +124,7 @@
+                     pixels.data() + (size_t(y + yy) * width + x + xx) * 3);
+ }
+ Surface caption_image(const std::string &name, bool selected, int height) {
++  if(auto image=asset_surface(J::array({"caption",name,selected,height})))return std::move(*image);
+   Surface c(40, height);
+   c.rounded(0, 0, 40, height, 8, selected ? focus_color : edge);
+   Color fill = name == "close" ? danger : (selected ? Color{96, 128, 160} : Color{64, 64, 64});
+@@ -144,6 +150,7 @@
+ }
+ Surface launcher_image(const J &apps, int selected, int hovered, int offset, bool visible,
+                        bool active, int width, int height) {
++  if(auto image=asset_surface(J::array({"launcher",apps,selected,hovered,offset,visible,active,width,height})))return std::move(*image);
+   init_trace::mark("launcher.allocate.begin", static_cast<long long>(width)*height*3);
+   Surface c(width, height);
+   init_trace::mark("launcher.allocate.end", c.pixels.size());
+@@ -198,6 +205,7 @@
+ }
+ Surface app_frame(const std::string &title, int w, int h, bool focused, const std::string &hovered,
+                   bool external) {
++  if(auto image=asset_surface(J::array({"frame",title,w,h,focused,hovered,external})))return std::move(*image);
+   require(w >= 240 && h >= 170, "app surface too small");
+   Surface c(w, h);
+   int sx = 48, sy = 4, sw = w - 96, sh = h - 12, cx = 50, cy = 48, cw = w - 100, ch = h - 82;
+@@ -237,6 +245,7 @@
+   return c;
+ }
+ Surface storage_image(const std::string &title, bool selected, bool dim, bool closing) {
++  if(auto image=asset_surface(J::array({"storage",title,selected,dim,closing})))return std::move(*image);
+   Surface c(320, 96);
+   Color b = closing ? danger : (selected ? focus_color : edge), v = selected ? raised : chrome;
+   if (dim) {
+@@ -256,6 +265,7 @@
+   return c;
+ }
+ Surface feedback_image(const std::string &name, const std::string &label, Color color) {
++  if(auto image=asset_surface(J::array({"feedback",name,label,color})))return std::move(*image);
+   Surface c(320, name == "preview" ? 240 : 96);
+   c.rounded(0, 0, c.width, c.height, 12, color);
+   c.rounded(4, 4, c.width - 8, c.height - 8, 9, chrome);
+@@ -275,6 +285,7 @@
+                       : app == "telemetry" ? "Telemetry"
+                                            : "SDK Pulse";
+   auto c = app_frame(title, w, h, focused, s.value("hovered", std::string()), true);
++  c.prepared.reset(); // Dynamic contents no longer match the immutable frame texture.
+   auto chrome_pixels = c.pixels;
+   int x = 50, y = 48, cw = w - 100, ch = h - 82;
+   char buf[128];
+--- boayo-rgbdma-v1/software/boayo/native/src/ui.hpp
++++ boayo-assets-v1/software/boayo/native/src/ui.hpp
+@@ -1,5 +1,6 @@
+ #pragma once
+ #include "common.hpp"
++#include <memory>
+ namespace boayo {
+ using Color = std::array<uint8_t, 3>;
+ inline constexpr Color black = {3, 5, 8}, white = {250, 250, 249}, ink = {22, 29, 40},
+@@ -10,6 +11,9 @@
+ struct Surface {
+   int width, height;
+   Bytes pixels;
++  std::shared_ptr<const Words> prepared;
++  Surface(int w, int h, Bytes data, std::shared_ptr<const Words> texture)
++      : width(w), height(h), pixels(std::move(data)), prepared(std::move(texture)) {}
+   Surface(int w = 640, int h = 360, Color color = black)
+       : width(w), height(h), pixels(size_t(w) * h * 3) {
+     clear(color);
+--- boayo-rgbdma-v1/software/boayo/native/src/wm.cpp
++++ boayo-assets-v1/software/boayo/native/src/wm.cpp
+@@ -394,6 +394,7 @@
+   if (op == "fill" || op == "update_surface") {
+     auto &w = window(id, &owner);
+     int sw = w.data["surface_width"], sh = w.data["surface_height"];
++    w.prepared.reset();
+     int x = 0, y = 0, ww = sw, hh = sh;
+     Bytes raw;
+     if (op == "fill") {
+--- boayo-rgbdma-v1/software/boayo/native/src/wm.hpp
++++ boayo-assets-v1/software/boayo/native/src/wm.hpp
+@@ -1,10 +1,12 @@
+ #pragma once
+ #include "common.hpp"
+ #include <functional>
++#include <memory>
+ namespace boayo {
+ struct Window {
+   J data;
+   Bytes surface;
++  std::shared_ptr<const Words> prepared;
+   uint64_t revision = 1;
+   std::array<int, 4> dirty{};
+ };

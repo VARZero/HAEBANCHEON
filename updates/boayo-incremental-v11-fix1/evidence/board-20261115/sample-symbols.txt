@@ -1,0 +1,24 @@
+__subsf3
+/var/tmp/oryukdo-boayo/runtime/build/host-gcc-final-13.4.0/build/riscv32-buildroot-linux-musl/libgcc/../../../libgcc/soft-fp/subsf3.c:44 (discriminator 194)
+rintf
+??:?
+__eqsf2
+/var/tmp/oryukdo-boayo/runtime/build/host-gcc-final-13.4.0/build/riscv32-buildroot-linux-musl/libgcc/../../../libgcc/soft-fp/eqsf2.c:47
+rintf
+??:?
+__subsf3
+/var/tmp/oryukdo-boayo/runtime/build/host-gcc-final-13.4.0/build/riscv32-buildroot-linux-musl/libgcc/../../../libgcc/soft-fp/subsf3.c:45 (discriminator 63)
+__addsf3
+/var/tmp/oryukdo-boayo/runtime/build/host-gcc-final-13.4.0/build/riscv32-buildroot-linux-musl/libgcc/../../../libgcc/soft-fp/addsf3.c:42 (discriminator 2)
+std::nearbyint(float)
+/var/tmp/oryukdo-boayo/runtime/host/riscv32-buildroot-linux-musl/include/c++/13.4.0/cmath:2399
+__floatsisf
+/var/tmp/oryukdo-boayo/runtime/build/host-gcc-final-13.4.0/build/riscv32-buildroot-linux-musl/libgcc/../../../libgcc/soft-fp/floatsisf.c:41
+__subsf3
+/var/tmp/oryukdo-boayo/runtime/build/host-gcc-final-13.4.0/build/riscv32-buildroot-linux-musl/libgcc/../../../libgcc/soft-fp/subsf3.c:44 (discriminator 364)
+nearbyintf
+??:?
+boayo::app_frame(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, int, int, bool, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool)
+/var/tmp/haebancheon-incremental-v11/rv32/source-rv32-GXec1q/software/boayo/native/src/ui.cpp:234 (discriminator 1)
+boayo::app_frame(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, int, int, bool, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool)
+/var/tmp/haebancheon-incremental-v11/rv32/source-rv32-GXec1q/software/boayo/native/src/ui.cpp:236

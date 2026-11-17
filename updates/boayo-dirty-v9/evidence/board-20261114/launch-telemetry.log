@@ -1,0 +1,9 @@
+{"command": "boayo-native app telemetry", "seconds": 1.783, "rc": 127, "uart": "boayo-native app telemetry; echo DIRTY9_eee4463b_RC:$?\r\r\nsh: boayo-native: not found\r\r\nDIRTY9_eee4463b_RC:127\r\r\n", "observed_at": "2026-11-14T20:48:36.602723", "log_start": 171982}
+Traceback (most recent call last):
+  File "D:\temp\haebancheon-dirty-v9\board-trial\board_io.py", line 32, in <module>
+    command(sys.argv[1],int(sys.argv[2]) if len(sys.argv)>2 else 300)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\temp\haebancheon-dirty-v9\board-trial\board_io.py", line 22, in command
+    assert rc==0,report
+           ^^^^^
+AssertionError: {'command': 'boayo-native app telemetry', 'seconds': 1.783, 'rc': 127, 'uart': 'boayo-native app telemetry; echo DIRTY9_eee4463b_RC:$?\r\r\nsh: boayo-native: not found\r\r\nDIRTY9_eee4463b_RC:127\r\r\n', 'observed_at': '2026-11-14T20:48:36.602723', 'log_start': 171982}

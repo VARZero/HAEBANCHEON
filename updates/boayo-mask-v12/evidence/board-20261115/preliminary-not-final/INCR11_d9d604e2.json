@@ -1,0 +1,8 @@
+{
+  "command": "sleep 12; /tmp/boayo-v12 app telemetry; sleep 20",
+  "seconds": 41.643,
+  "rc": 0,
+  "uart": "sleep 12; /tmp/boayo-v12 app telemetry; sleep 20; echo INCR11_d9d604e2_\r\r\r\nRC:$?\r\r\nBOAYO_APP_READY window=2\r\r\nINCR11_d9d604e2_RC:0\r\r\n",
+  "observed_at": "2026-11-15T01:34:56.782352",
+  "log_start": 504835
+}

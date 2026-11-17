@@ -1,0 +1,11 @@
+{"command": "/tmp/boayo-v12c stop && while test -S /tmp/bosio-wm.sock; do sleep 1; done", "seconds": 11.32, "rc": 0, "uart": "/tmp/boayo-v12c stop && while test -S /tmp/bosio-wm.sock; do sleep 1; d\r\r\r\none; echo INCR11_e47d9430_RC:$?\r\r\nINCR11_e47d9430_RC:0\r\r\n", "observed_at": "2026-11-15T02:23:55.315134", "log_start": 587436}
+/tmp/mask-bench.delta: 39168/96673 bytes; 20.0s
+/tmp/mask-bench.delta: 77056/96673 bytes; 40.1s
+{"source": "D:\\temp\\haebancheon-mask-v12\\board-trial\\bench.delta", "target": "/tmp/mask-bench.delta", "bytes": 96673, "fnv1a": 3119190568, "sha256": "f0c0264d3de34ce523c9317178dfea22e499e5a24e89c11a05ce72ed87793aaf", "seconds": 49.71, "result": "PASS_TRANSFER_FNV"}
+{"command": "/tmp/v11-apply /tmp/boayo-v12c /tmp/mask-bench.delta /tmp/mask-bench", "seconds": 28.578, "rc": 0, "uart": "/tmp/v11-apply /tmp/boayo-v12c /tmp/mask-bench.delta /tmp/mask-bench; e\r\r\r\ncho INCR11_f3616dca_RC:$?\r\r\nPATCH_OK\r\r\nINCR11_f3616dca_RC:0\r\r\n", "observed_at": "2026-11-15T02:25:14.257237", "log_start": 597500}
+{"command": "/tmp/mask-bench", "seconds": 31.573, "rc": 0, "uart": "/tmp/mask-bench; echo INCR11_0fb66f77_RC:$?\r\r\n{\"fast_first_us\":2400705,\"fast_second_us\":2220317,\"integer_samples\":11956,\"pixels\":16384,\"precise_samples\":93,\"reference_us\":25056008,\"result\":\"PASS_RV32_MASK_BENCHMARK\",\"tiles\":16}\r\r\nINCR11_0fb66f77_RC:0\r\r\n", "observed_at": "2026-11-15T02:25:45.830964", "log_start": 597646}
+Traceback (most recent call last):
+  File "D:\temp\haebancheon-mask-v12\board-trial\benchmark_after_motion.py", line 17, in <module>
+    assert 'PASS_RV32_MASK_BENCHMARK' in r['uart']
+                                         ~^^^^^^^^
+TypeError: string indices must be integers, not 'str'

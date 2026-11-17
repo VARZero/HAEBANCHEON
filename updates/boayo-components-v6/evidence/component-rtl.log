@@ -1,0 +1,5 @@
+PASS_COMPONENT_SCENE phase=0 samples=12660
+PASS_COMPONENT_SCENE phase=1 samples=12660
+PASS_COMPONENT_SCENE phase=2 samples=12660
+PASS_COMPONENT_SCENES 3 scenes 37980 sampled cells
+- /mnt/d/ORYUKDO-Gen3_AB_integrated_unverified/ORYUKDO-Gen3/work/ORYUKDO-3d5i_BOSIO_SoC/updates/boayo-components-v6/tests/tb_component_scenes.sv:62: Verilog $finish

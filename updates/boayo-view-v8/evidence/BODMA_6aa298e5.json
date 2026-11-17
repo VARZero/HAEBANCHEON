@@ -1,0 +1,7 @@
+{
+  "command": "/tmp/boayo-view-v8 view-status",
+  "seconds": 5.8,
+  "rc": 0,
+  "uart": "/tmp/boayo-view-v8 view-status; echo BODMA_6aa298e5_RC:$?\r\r\n{\"active\":true,\"error\":\"\",\"max_submit_ms\":72.4312600000303,\"mode\":\"camera-only; window updates paused\",\"period_ms\":50.0,\"pitch\":3.582,\"roll\":8.419,\"skipped\":179,\"submit_ms\":55.84262000002127,\"submitted\":239,\"yaw\":8.314}\r\r\nBODMA_6aa298e5_RC:0\r\r\n",
+  "observed_at": "2026-11-14T19:16:17.699079"
+}

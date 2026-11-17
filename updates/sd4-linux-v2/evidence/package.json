@@ -1,0 +1,15 @@
+{
+  "result": "PASS_PACKAGE",
+  "driver_sha256": "94078a234e6a8baa0f3f846747ef4f7b3b4fece0c5abf113fe5f18d958d42cd5",
+  "image_sha256": "6a6b92f300faeb80c89108d94d3411c28438b185abaaca8f71dac06216ca2424",
+  "bytes": 275775488,
+  "preserved_root_regular_files": 35,
+  "changed_root_files": [
+    "init",
+    "etc/oryukdo-image"
+  ],
+  "busybox_sha256": "317d847c48b0d1177993f5721ee0438c70ac0d0ee6284ceaade31eac7b5a84cf",
+  "firmware_dts_preserved": true,
+  "bitstream_changed": false,
+  "hardware_v2_tested": false
+}

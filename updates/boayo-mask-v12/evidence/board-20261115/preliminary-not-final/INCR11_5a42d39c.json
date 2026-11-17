@@ -1,0 +1,8 @@
+{
+  "command": "/tmp/v11-apply /tmp/boayo-fix1 /tmp/mask12.delta /tmp/boayo-v12",
+  "seconds": 59.66,
+  "rc": 0,
+  "uart": "oryukdo# /tmp/v11-apply /tmp/boayo-fix1 /tmp/mask12.delta /tmp/boayo-v12; echo I\r\r\r\nNCR11_5a42d39c_RC:$?\r\r\nPATCH_OK\r\r\nINCR11_5a42d39c_RC:0\r\r\n",
+  "observed_at": "2026-11-15T01:34:11.605858",
+  "log_start": 504270
+}

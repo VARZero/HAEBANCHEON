@@ -1,0 +1,12 @@
+{
+  "result": "PASS_IDENTICAL_SOURCE",
+  "source_files": 41,
+  "host_rv32_sanitize_identical": true,
+  "uapi_identical": true,
+  "app_sha256": "cb542ae1df9ae4f2ea7af736e4ab8fa0bcf12eaf5eed0e3f7410f08b1e89b929",
+  "image_sha256": "5df06750b6a5a419aac07bf127133fda6b2fd793b24e69b00b146f9c6b5099af",
+  "kernel_sha256": "e087cd27fbc79c1d9e6901c100406d6ed8bf74c491cac6a24a783e1110cdf9df",
+  "driver_sha256": "b8b17db680f95f5b7c1bb0fa3ce5f2618924b45e258e56b214162b76001f675f",
+  "physical_new_driver_tested": true,
+  "physical_evidence": "board-20261115/result-summary.json"
+}

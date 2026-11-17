@@ -1,0 +1,37 @@
+{
+  "environment": "qemu",
+  "hardware": false,
+  "frame_to_present_seconds": 0.00931,
+  "daemon_to_present_seconds": null,
+  "phases_seconds": {
+    "plan.load": {
+      "wall_us": 0.000371,
+      "cpu_us": 0.00037
+    },
+    "ready.prepare": {
+      "wall_us": 0.000448,
+      "cpu_us": 0.000446
+    },
+    "texture.upload": {
+      "wall_us": 0.000306,
+      "cpu_us": 0.000306
+    },
+    "projectors": {
+      "wall_us": 0.007149,
+      "cpu_us": 0.007151
+    },
+    "output.versions": {
+      "wall_us": 5.3e-05,
+      "cpu_us": 5.4e-05
+    },
+    "output.publish": {
+      "wall_us": 7.2e-05,
+      "cpu_us": 7.4e-05
+    },
+    "output.upload": {
+      "wall_us": 0.000276,
+      "cpu_us": 0.000275
+    }
+  },
+  "note": "Frame begins after daemon/desktop setup. This is not Linux boot time or complete daemon startup time. Output.upload includes versions and publish; do not sum nested spans. Host/QEMU time is not FPGA performance."
+}

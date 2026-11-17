@@ -1,0 +1,1 @@
+PASS_INCREMENTAL_SERVICE: create, metadata, pixels, map, focus, capture, deletion, disconnect; complete public snapshots

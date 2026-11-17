@@ -1,0 +1,1 @@
+{"result": "PASS_MIXED_POSE", "hardware": false, "poses": 26, "coefficients": 4680, "binary_sha256": "7f52c8a6175acbffe8a6d09823d1032971d4a294ca2c3afefd528567a35b62b6", "checks": ["Python exact coefficients through WM/Output/device", "wrap/clamp/reset", "invalid and failed device requests leave pose unchanged"]}

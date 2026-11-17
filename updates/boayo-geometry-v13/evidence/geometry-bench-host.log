@@ -1,0 +1,9 @@
+GEOMETRY_STAGE {"candidates":992,"case":0,"coefficients_us":5,"cull_us":21,"encode_visibility_us":35,"masks_signature_us":410,"mode":"v12","prepare_us":465,"project_us":34,"scale_us":12,"scratch_us":140,"total_us":1126,"visible":141}
+GEOMETRY_STAGE {"candidates":768,"case":1,"coefficients_us":4,"cull_us":7,"encode_visibility_us":27,"masks_signature_us":43,"mode":"v12","prepare_us":0,"project_us":6,"scale_us":8,"scratch_us":63,"total_us":161,"visible":11}
+GEOMETRY_STAGE {"candidates":640,"case":2,"coefficients_us":3,"cull_us":6,"encode_visibility_us":22,"masks_signature_us":29,"mode":"v12","prepare_us":0,"project_us":5,"scale_us":7,"scratch_us":2,"total_us":76,"visible":8}
+GEOMETRY_STAGE {"candidates":736,"case":3,"coefficients_us":3,"cull_us":5,"encode_visibility_us":26,"masks_signature_us":34,"mode":"v12","prepare_us":0,"project_us":6,"scale_us":8,"scratch_us":2,"total_us":87,"visible":10}
+GEOMETRY_STAGE {"candidates":228,"case":0,"coefficients_us":1,"cull_us":13,"encode_visibility_us":8,"masks_signature_us":400,"mode":"v13","prepare_us":0,"project_us":1,"scale_us":0,"scratch_us":1,"total_us":426,"visible":141}
+GEOMETRY_STAGE {"candidates":96,"case":1,"coefficients_us":0,"cull_us":8,"encode_visibility_us":3,"masks_signature_us":42,"mode":"v13","prepare_us":0,"project_us":0,"scale_us":0,"scratch_us":0,"total_us":56,"visible":11}
+GEOMETRY_STAGE {"candidates":76,"case":2,"coefficients_us":0,"cull_us":6,"encode_visibility_us":2,"masks_signature_us":28,"mode":"v13","prepare_us":0,"project_us":0,"scale_us":0,"scratch_us":0,"total_us":40,"visible":8}
+GEOMETRY_STAGE {"candidates":84,"case":3,"coefficients_us":0,"cull_us":6,"encode_visibility_us":2,"masks_signature_us":33,"mode":"v13","prepare_us":0,"project_us":0,"scale_us":0,"scratch_us":1,"total_us":45,"visible":10}
+PASS_RV32_GEOMETRY_STAGES_EXACT

@@ -1,0 +1,7 @@
+{
+  "command": "bosio-dma-check",
+  "seconds": 4.31,
+  "rc": 0,
+  "uart": "bosio-dma-check; echo BODMA_03a41122_RC:$?\r\r\nPASS BOSIO_DMA upload=4096 copy=4096 fill=4096 overlap_rejected irq_completion\r\r\ncopy_ops=2 fill_ops=1 upload_ops=1\r\r\nBODMA_03a41122_RC:0\r\r\n",
+  "observed_at": "2026-11-11T00:40:11.815093"
+}

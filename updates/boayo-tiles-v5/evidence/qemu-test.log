@@ -1,0 +1,25 @@
+PASS_QEMU cat /etc/oryukdo-image
+PASS_QEMU /bin/storage-check --identity
+PASS_QEMU test -x /bin/bosio-dma-check
+PASS_QEMU test -r /usr/share/boayo/assets/a0ebce13.bui
+PASS_QEMU test ! -L /usr/bin/python && test ! -e /usr/bin/python3 && test ! -d /usr/lib/python3.12
+PASS_QEMU echo $((19+23))
+PASS_QEMU ddrcheck
+PASS_QEMU boayo-selftest
+PASS_QEMU printf '{"op":"test_desktop","args":{"op":"tick","now":0},"app":"boayo-desktop"}\n{"op":"test_plan_export","args":{"window_id":1,"path":"/tmp/plan-body"},"app":"boayo-desktop"}\n' | BOAYO_PLANS=0 /usr/bin/boayo-native --rpc
+PASS_QEMU stty -opost -echo
+PASS_QEMU printf '__PLAN_BEGIN__'; cat /tmp/plan-body; printf '__PLAN_END__\n'
+PASS_QEMU stty opost echo
+PASS_QEMU boayo-dual-selftest
+PASS_QEMU boayo-start --mock
+PASS_QEMU boayo-status
+PASS_QEMU boayo-app dashboard
+PASS_QEMU boayo-status
+PASS_QEMU boayo-app telemetry
+PASS_QEMU boayo-status
+PASS_QEMU boayo-app pulse
+PASS_QEMU boayo-status
+PASS_QEMU echo KEYS_SHELL_RESTORED
+PASS_QEMU boayo-status
+PASS_QEMU boayo-stop
+{"result": "PASS_QEMU_ONLY", "image": "/var/tmp/oryukdo-boayo-tiles-v5/release/image/ORYUKDO-KFB-BoAYO-tiles-v5.img", "image_sha256": "c5ee89eeac1236963b1b9eac2cd09a4940472011004eca81e3153e0778df6d65", "hardware": false, "rtl": false, "mock_backend": true, "checks": ["BusyBox shell", "cat /etc/oryukdo-image", "/bin/storage-check --identity", "test -x /bin/bosio-dma-check", "test -r /usr/share/boayo/assets/a0ebce13.bui", "test ! -L /usr/bin/python && test ! -e /usr/bin/python3 && test ! -d /usr/lib/python3.12", "echo $((19+23))", "ddrcheck", "boayo-selftest", "printf '{\"op\":\"test_desktop\",\"args\":{\"op\":\"tick\",\"now\":0},\"app\":\"boayo-desktop\"}\\n{\"op\":\"test_plan_export\",\"args\":{\"window_id\":1,\"path\":\"/tmp/plan-body\"},\"app\":\"boayo-desktop\"}\\n' | BOAYO_PLANS=0 /usr/bin/boayo-native --rpc", "stty -opost -echo", "printf '__PLAN_BEGIN__'; cat /tmp/plan-body; printf '__PLAN_END__\\n'", "stty opost echo", "uncached RV32 descriptor/mask bytes exactly match PC-generated plan", "boayo-dual-selftest", "boayo-start --mock", "boayo-status", "boayo-app dashboard", "boayo-status", "boayo-app telemetry", "boayo-status", "boayo-app pulse", "boayo-status", "echo KEYS_SHELL_RESTORED", "boayo-status", "boayo-stop", "prebuilt first launcher loaded without CPU rounded/circle drawing"], "rv32_plan_payload_sha256": "54ef7ba06c10718792ca21258032cbe235c34e83c36ae067ca514371774cf8ce", "rv32_transport": "SBI console: each LF encoded as CR LF; exact encoded comparison", "first_projection": {"cpu_output_shadow_words": 4480, "cpu_result_download_words": 0, "cpu_scene_words": 0, "device_ready_frames": 1, "dirty_tiles": 160, "fallback_frames": 0, "geometry_tiles_evaluated_total": 0, "hardware_frames": 1, "jobs_per_core": [48, 48], "lazy_copied_tiles_total": 0, "mask_samples_evaluated_total": 0, "masked_tiles_total": 44, "mode": "ddr-resident-dirty-tiles", "packed_mask_tiles_total": 44, "plan_cache": {"builtin_loads": 1, "hits": 0, "loads": 1, "misses": 0, "payload_scan_bytes": 0, "rejected": 0, "revision": "7177fdc43e0e2f9a5d566432fd5372146d7b6ad4c71c518e3f2ec4d773973bef"}, "precomputed_layers_total": 1, "redrawn_tiles": 96, "reused_tiles_total": 0, "solid_tiles_total": 0, "texture_reuses_total": 0, "texture_uploads_total": 1, "tile_fills_total": 44, "total_hw_jobs": 96, "update_kind": "tiles"}, "final_projection": {"cpu_output_shadow_words": 4480, "cpu_result_download_words": 0, "cpu_scene_words": 0, "device_ready_frames": 1, "dirty_tiles": 8, "fallback_frames": 0, "geometry_tiles_evaluated_total": 50640, "hardware_frames": 11, "jobs_per_core": [12, 12], "lazy_copied_tiles_total": 236, "mask_samples_evaluated_total": 495616, "masked_tiles_total": 407, "mode": "ddr-resident-dirty-tiles", "packed_mask_tiles_total": 407, "plan_cache": {"builtin_loads": 1, "hits": 0, "loads": 1, "misses": 24, "payload_scan_bytes": 0, "rejected": 0, "revision": "7177fdc43e0e2f9a5d566432fd5372146d7b6ad4c71c518e3f2ec4d773973bef"}, "precomputed_layers_total": 1, "redrawn_tiles": 8, "reused_tiles_total": 17, "solid_tiles_total": 0, "texture_reuses_total": 0, "texture_uploads_total": 35, "tile_fills_total": 206, "total_hw_jobs": 1125, "update_kind": "tiles"}, "final_output": {"abi": 3, "active_bank": 1, "active_base": 0, "antialias": false, "backend": "kfb-linux-frame-atomic-output", "capability": 0, "commits": 12, "dma_copied_words": 60416, "max_jobs": 64, "max_scene_words": 1084816, "memory_dma": {"available": true, "copy_ops": 55, "fill_ops": 380}, "metadata_only": false, "mock_backend": true, "poisoned": 0, "publish_profile": {"backend": "mock"}, "sensor_available": false, "shadow_copied_words": 0, "signature": 0, "status": 1114115, "uploaded_words": 9136}}

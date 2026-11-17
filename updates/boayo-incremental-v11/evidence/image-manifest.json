@@ -1,0 +1,12 @@
+{
+  "image": "/var/tmp/haebancheon-incremental-v11/release/image/HAEBANCHEON-KFB-BoAYO-incremental-v11.img",
+  "sha256": "5df06750b6a5a419aac07bf127133fda6b2fd793b24e69b00b146f9c6b5099af",
+  "bytes": 311427072,
+  "boot_lba": 2048,
+  "data_lba": 83968,
+  "data_sectors": 524288,
+  "data_fs": "ext4",
+  "mount": "/data",
+  "hardware_tested": false,
+  "requires": "HAEBANCHEON-KFB-L1-16K-DMA3-v1.bit, unchanged RTL"
+}

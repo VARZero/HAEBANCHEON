@@ -1,0 +1,7 @@
+PASS TILE actual-kernel helper 1024 masks/paint/copy, stale data, guards, active-bank exclusion, timeout poison
+PASS memory policy: ABI, active destination, active source, overlap, bounds, alignment, poison
+PASS actual DMA wait/upload functions: kmalloc/vmalloc SG, fill/copy, mapping/prep/submit/completion errors, partial SG failure, timeout pinning and late completion
+PASS RGB DMA actual driver: 480 color/size/page-phase/scatter-merged cases, canaries, cached seed, invalid/pin/map/error/timeout/late-write lifetime model
+PASS DIRECT actual-driver source-page DMA: 36 size/alignment/SG cases, no FOLL_WRITE/dirty pages, invalid/pin/map/partial/error/timeout/late-read lifetime
+PASS RGB dispatch thresholds alignment tails colors canaries scope error propagation
+{"result": "PASS_HOST_KERNEL_BOUNDARY_MODEL", "driver_sha256": "082e5cac482d7e81497fb2262d62389a50758e12fb8384c77a918a8844624a23", "hardware": false}

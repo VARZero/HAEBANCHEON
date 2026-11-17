@@ -1,0 +1,54 @@
+{
+  "result": "PARTIAL_BOARD_TRACE_CPU_LAUNCHER_PREPARATION_SLOW",
+  "kernel": "6.12.0-oryukdo-launchtrace1",
+  "configuration_done": true,
+  "configuration_crc_error": false,
+  "last_event": {
+    "n": 10,
+    "event": "rounded.begin",
+    "wall_us": 432079317,
+    "cpu_us": 212612808,
+    "value": 0,
+    "observed_at": "2026-11-11T00:09:19.431495",
+    "since_previous_wall_us": 460382,
+    "since_previous_cpu_us": 241100
+  },
+  "window_create": {
+    "wall_us": 92436601,
+    "cpu_us": 42877062
+  },
+  "window_configure": {
+    "wall_us": 4717525,
+    "cpu_us": 2375923
+  },
+  "image_zero_allocation": {
+    "wall_us": 17826679,
+    "cpu_us": 9114444
+  },
+  "image_rgb_background_fill": {
+    "wall_us": 311613570,
+    "cpu_us": 156175275
+  },
+  "buffer": {
+    "width": 640,
+    "height": 360,
+    "bytes": 691200,
+    "rgb": [
+      3,
+      5,
+      8
+    ],
+    "scope": "CPU-side launcher source texture, not full DDR or BOSIO reset"
+  },
+  "observed_progress": true,
+  "launcher_present_verified": false,
+  "hdmi_verified": false,
+  "root_cause_fully_determined": false,
+  "notes": [
+    "Trace includes its own logging overhead and scheduler time.",
+    "Per-byte loop uses REMU, LBU, SB and pointer/size loads; no floating point in the observed background fill loop.",
+    "Divider RTL is bounded 32-step; remainder latency alone is not a demonstrated explanation of total elapsed time.",
+    "The initial programming command configured the FPGA, but its status query property name was wrong. A corrected read-only query verified DONE=1 and CRC_ERROR=0 without reprogramming."
+  ],
+  "snapshot_observed_at": "2026-11-11T00:11:38.972385"
+}

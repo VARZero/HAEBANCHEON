@@ -1,0 +1,21 @@
+{
+  "result": "PASS_LOCAL_ONLY",
+  "hardware_tested": false,
+  "rtl_changed": false,
+  "driver_changed": false,
+  "scene_comparisons": 107,
+  "checks": {
+    "resident": "PASS_RESIDENT_TILES",
+    "motion-pixels": "PASS_MOTION_PIXELS",
+    "no-assets": "PASS_MOTION_PIXELS",
+    "app-traffic": "PASS_APP_TRAFFIC",
+    "qemu": "PASS_QEMU_ONLY"
+  },
+  "image_sha256": "e46eca4935109652ad9acb63b3e500b56d505b5dc48b946f6d8bcfc356e51efa",
+  "image_bytes": 309329920,
+  "limitations": [
+    "No physical-board or HDMI timing measurement",
+    "QEMU uses extracted SD payloads; it does not model the SD controller or BOSIO hardware",
+    "First image load still required; 4MiB texture pool; existing compose rate cap retained"
+  ]
+}

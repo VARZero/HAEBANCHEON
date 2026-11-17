@@ -1,0 +1,6 @@
+{
+  "result": "PASS_IDENTICAL_HOST_RV32",
+  "source_files": 44,
+  "image_sha256": "a14cb702636b07bce056261778d432abe92703604291f7b543be9515cfb63d90",
+  "physical_sd_boot": false
+}

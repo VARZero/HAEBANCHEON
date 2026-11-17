@@ -1,0 +1,36 @@
+{
+  "format": "BOGPLN01",
+  "plans": [
+    {
+      "boundary": 44,
+      "bytes": 58496,
+      "count": 160,
+      "empty": 64,
+      "full": 52,
+      "geometry": [
+        640,
+        360,
+        0.0,
+        0.0,
+        0.0,
+        42.0,
+        30.0
+      ],
+      "key": "{\"geometry\":[640,360,0.0,0.0,0.0,42.0,30.0],\"revision\":\"3f8a44283801c8d4bcc42b54948530feea3dfdf4bf18f2beb51cdc20f98c8dbe\",\"shape\":[[51.2,36.0,537.6,252.0,18.0]]}",
+      "shape": [
+        [
+          51.2,
+          36.0,
+          537.6,
+          252.0,
+          18.0
+        ]
+      ],
+      "file": "p_d522a90b.bgp",
+      "sha256": "0527cd84240dec8407290b7fd6168c264b7d297cb9c0c241eafc53b744274ec7",
+      "file_bytes": 62592
+    }
+  ],
+  "bootstrap": "p_d522a90b.bgp",
+  "generator_binary_sha256": "22ded84b1fe5a47cefe62396bccb8eebbd4df1580956d46305965f5932ea7e0b"
+}

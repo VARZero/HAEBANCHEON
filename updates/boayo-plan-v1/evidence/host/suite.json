@@ -1,0 +1,61 @@
+{
+  "result": "PASS",
+  "binary": "/var/tmp/oryukdo-boayo-plan-v1/host/boayo-native-host",
+  "binary_sha256": "e2b94ce1e7c21dc4f9de6acda792aaa82b4e5749d9f57fdb0b05b1f1dfb3289e",
+  "tests": [
+    {
+      "test": "test_core.py",
+      "result": "PASS",
+      "seconds": 0.71,
+      "exit_code": 0
+    },
+    {
+      "test": "test_ui.py",
+      "result": "PASS",
+      "seconds": 0.72,
+      "exit_code": 0
+    },
+    {
+      "test": "test_apps.py",
+      "result": "PASS",
+      "seconds": 0.38,
+      "exit_code": 0
+    },
+    {
+      "test": "test_compositor.py",
+      "result": "PASS",
+      "seconds": 0.93,
+      "exit_code": 0
+    },
+    {
+      "test": "test_fallback.py",
+      "result": "PASS",
+      "seconds": 2.49,
+      "exit_code": 0
+    },
+    {
+      "test": "test_runtime.py",
+      "result": "PASS",
+      "seconds": 2.71,
+      "exit_code": 0
+    },
+    {
+      "test": "test_responsive.py",
+      "result": "PASS",
+      "seconds": 3.16,
+      "exit_code": 0
+    },
+    {
+      "test": "selftest",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "test": "dual-selftest",
+      "result": "PASS",
+      "exit_code": 0
+    }
+  ],
+  "scope": "host Python differential plus explicit mock backend",
+  "hardware": false
+}

@@ -1,0 +1,10 @@
+{
+  "result": "PASS_IDENTICAL_HOST_RV32",
+  "source_files": 41,
+  "image_sha256": "f70ea24862d6a8923b123f98a2c27add7a2b67b4d7509b8f67049366422b2d04",
+  "physical_image_boot": false,
+  "physical_app_tested": true,
+  "physical_kernel": "v11, identical driver source",
+  "physical_functional_result": "PARTIAL_DYNAMIC_GEOMETRY_DELAY",
+  "physical_evidence": "board-20261115/result-summary.json"
+}

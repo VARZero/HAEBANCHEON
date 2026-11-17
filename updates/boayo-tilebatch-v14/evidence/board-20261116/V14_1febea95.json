@@ -1,0 +1,8 @@
+{
+  "command": "sleep 12; /tmp/boayo-reference app telemetry; sleep 30",
+  "seconds": 51.912,
+  "rc": 0,
+  "uart": "oryukdo# sleep 12; /tmp/boayo-reference app telemetry; sleep 30; echo V14_1febea\r\r\r\n95_RC:$?\r\r\nBOAYO_APP_READY window=2\r\r\nV14_1febea95_RC:0\r\r\n",
+  "observed_at": "2026-11-16T21:55:53.281221",
+  "log_start": 98760
+}

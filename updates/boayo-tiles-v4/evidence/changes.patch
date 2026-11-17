@@ -1,0 +1,445 @@
+--- boayo-tiles-v3/software/boayo/native/src/backend.cpp
++++ boayo-tiles-v4/software/boayo/native/src/backend.cpp
+@@ -339,8 +339,7 @@
+   require(!failed,"previous upload failed; restart required");
+   unsigned target=active<0?0:unsigned(active)^1;
+   try {
+-    dev.upload(3+target,0,metadata.data(),header);uploaded_words+=header;
+-    dev.present(target,metadata.size(),2,camera);active=target;++commits;
++    uploaded_words+=dev.publish(target,metadata.size(),2,camera,metadata);active=target;++commits;
+     // No eager mirror: the resident scheduler prepares the other bank on demand.
+     shadow=std::move(metadata);blank_only=true;
+   }catch(...){failed=true;throw;}
+@@ -401,7 +400,7 @@
+           {"max_scene_words", i.max_scene_words},
+           {"backend", "kfb-linux-frame-atomic-output"},
+           {"commits", commits},
+-          {"uploaded_words", uploaded_words},
++          {"publish_profile",dev.publish_stats()},{"uploaded_words", uploaded_words},
+           {"shadow_copied_words", shadow_copied_words},
+           {"dma_copied_words", dma_copied_words},
+           {"memory_dma", dev.dma_status()},
+@@ -551,12 +550,12 @@
+     c.plan=plan;c.mask_kinds=plan->kinds;c.masks.clear();++precomputed_layers;return;
+   }
+   c.plan.reset();frame_trace::mark("mask.compute.begin",c.ids.size());
+-  c.masks.assign(c.ids.size(),Bytes(1024));c.mask_kinds.assign(c.ids.size(),2);
++  c.masks.assign(c.ids.size(),Bytes(1024));c.packed_masks.assign(c.ids.size(),{});c.mask_kinds.assign(c.ids.size(),2);
+   mask_samples_evaluated+=c.ids.size()*1024;
+   for(unsigned i=0;i<c.ids.size();++i){bool any=false,all=true;
+     for(unsigned cell=0;cell<1024;++cell){auto q=coordinates(c.desc[i],cell);
+       bool v=covered(c.desc[i],q) && (c.shape.empty() || shape_contains(c.shape,q[2]>0?double(q[0])/q[2]:0,q[2]>0?double(q[1])/q[2]:0));
+-      c.masks[i][cell]=v;any|=v;all&=v;
++      c.masks[i][cell]=v;if(v)c.packed_masks[i][cell/32]|=1u<<(cell%32);any|=v;all&=v;
+     }
+     c.mask_kinds[i]=!any?0:all?1:2;
+   }
+@@ -568,7 +567,8 @@
+   Words records(c.ids.size()*21);Bytes masks;
+   unsigned full=0,empty=0,boundary=0;
+   for(unsigned i=0;i<c.ids.size();++i){auto *r=records.data()+i*21;r[0]=c.ids[i];r[1]=c.mask_kinds[i];
+-    if(r[1]==2){r[2]=records.size()*4+masks.size();masks.insert(masks.end(),c.masks[i].begin(),c.masks[i].end());++boundary;}
++    if(r[1]==2){r[2]=records.size()*4+masks.size();masks.insert(masks.end(),c.masks[i].begin(),c.masks[i].end());
++      for(uint32_t bits:c.packed_masks[i])for(unsigned byte=0;byte<4;++byte)masks.push_back(uint8_t(bits>>(byte*8)));++boundary;}
+     else if(r[1]==1)++full;else ++empty;
+     std::copy(c.desc[i].begin(),c.desc[i].end(),r+3);
+   }
+--- boayo-tiles-v3/software/boayo/native/src/backend.hpp
++++ boayo-tiles-v4/software/boayo/native/src/backend.hpp
+@@ -17,6 +17,8 @@
+                      std::array<unsigned, 2> jobs, unsigned bank=2) = 0;
+   virtual void present(unsigned bank, unsigned count, unsigned resolution,
+                        const std::array<int32_t, 180> &camera) = 0;
++  virtual unsigned publish(unsigned,unsigned,unsigned,const std::array<int32_t,180> &,const Words &);
++  virtual J publish_stats(){return J::object();}
+   virtual void pose(const std::array<int32_t, 180> &camera) = 0;
+   virtual void stop() = 0;
+   virtual void batch(const std::vector<bo_batch_entry> &);
+@@ -29,6 +31,7 @@
+ struct LinuxDevice : Device {
+   int fd = -1;
+   unsigned dma_features = 0;
++  bo_publish_profile last_publish{};
+   explicit LinuxDevice(const std::string &path = "/dev/bosio0");
+   ~LinuxDevice();
+   bo_info info() override;
+@@ -37,6 +40,8 @@
+   Words download(unsigned, unsigned) override;
+   bo_run run(unsigned, unsigned, std::array<unsigned, 2>, unsigned bank=2) override;
+   void present(unsigned, unsigned, unsigned, const std::array<int32_t, 180> &) override;
++  unsigned publish(unsigned,unsigned,unsigned,const std::array<int32_t,180> &,const Words &) override;
++  J publish_stats() override;
+   void pose(const std::array<int32_t, 180> &) override;
+   void stop() override;
+   void batch(const std::vector<bo_batch_entry> &) override;
+@@ -65,6 +70,8 @@
+   Words download(unsigned, unsigned) override;
+   bo_run run(unsigned, unsigned, std::array<unsigned, 2>, unsigned bank=2) override;
+   void present(unsigned, unsigned, unsigned, const std::array<int32_t, 180> &) override;
++  unsigned publish(unsigned,unsigned,unsigned,const std::array<int32_t,180> &,const Words &) override;
++  J publish_stats() override;
+   void pose(const std::array<int32_t, 180> &) override;
+   void stop() override;
+   void batch(const std::vector<bo_batch_entry> &) override;
+@@ -115,6 +122,8 @@
+   std::vector<unsigned> ids;
+   std::vector<Descriptor> desc;
+   std::vector<Bytes> masks;
++  std::vector<std::array<uint32_t,32>> packed_masks;
++  const uint32_t *packed_mask(unsigned i) const{return plan?plan->packed_masks[i].data():packed_masks[i].data();}
+   std::vector<unsigned> mask_kinds;
+   std::shared_ptr<const ProjectionPlan> plan;
+   const uint8_t *mask(unsigned i) const{return plan?plan->masks[i]:masks[i].data();}
+--- boayo-tiles-v3/software/boayo/native/src/plan.cpp
++++ boayo-tiles-v4/software/boayo/native/src/plan.cpp
+@@ -21,9 +21,9 @@
+   struct Close {int fd;~Close(){close(fd);}} closer{fd};
+   std::array<uint8_t,4096> h{};struct stat st{};
+   require(!fstat(fd,&st) && S_ISREG(st.st_mode) && pread(fd,h.data(),h.size(),0)==ssize_t(h.size()),"plan header");
+-  require(std::equal(h.begin(),h.begin()+8,"BOGPLN01"),"plan format");
++  require(std::equal(h.begin(),h.begin()+8,"BOGPLN02"),"plan format");
+   unsigned n=word(h.data()+8),bytes=word(h.data()+12),k=word(h.data()+16);
+-  require(n && n<=tiles && bytes>=n*84 && bytes<=tiles*(84+1024) && !(bytes&3) &&
++  require(n && n<=tiles && bytes>=n*84 && bytes<=tiles*(84+1152) && !(bytes&3) &&
+           k==key.size() && k<=4096-28 && uint64_t(st.st_size)==4096ull+bytes,"plan bounds");
+   require(std::equal(key.begin(),key.end(),h.begin()+28) &&
+           ~crc(h.data()+28,k,crc(h.data(),24))==word(h.data()+24),"plan metadata CRC/key/revision");
+@@ -43,12 +43,15 @@
+     require(id<tiles && (!i || id>plan->ids.back()) && kind<=2,"plan tile order/type");
+     Descriptor d{};for(unsigned j=0;j<18;++j)d[j]=word(record+12+j*4);
+     require(d[0]==0 && d[1]==id*256 && d[2]==width && d[3]==height && d[4]==width && d[5]==1,"plan descriptor bounds");
+-    const uint8_t *mask=nullptr;
+-    if(kind==2){require(offset==cursor && bytes-cursor>=1024,"plan mask offset");mask=body+offset;
++    const uint8_t *mask=nullptr;std::array<uint32_t,32> packed{};
++    if(kind==2){require(offset==cursor && bytes-cursor>=1152,"plan mask offset");mask=body+offset;
+       if(!builtin){bool zero=false,one=false;for(unsigned j=0;j<1024;++j){require(mask[j]<=1,"plan mask value");zero|=mask[j]==0;one|=mask[j]==1;}
+-        require(zero && one,"plan mask classification");}cursor+=1024;
++        require(zero && one,"plan mask classification");}
++      for(unsigned j=0;j<32;++j)packed[j]=word(mask+1024+j*4);
++      if(!builtin)for(unsigned j=0;j<1024;++j)require(((packed[j/32]>>(j%32))&1)==mask[j],"plan packed mask mismatch");
++      cursor+=1152;
+     }else require(!offset,"plan uniform mask offset");
+-    plan->ids.push_back(id);plan->kinds.push_back(kind);plan->descriptors.push_back(d);plan->masks.push_back(mask);
++    plan->ids.push_back(id);plan->kinds.push_back(kind);plan->descriptors.push_back(d);plan->masks.push_back(mask);plan->packed_masks.push_back(packed);
+   }
+   require(cursor==bytes,"plan trailing data");return plan;
+ }
+--- boayo-tiles-v3/software/boayo/native/src/plan.hpp
++++ boayo-tiles-v4/software/boayo/native/src/plan.hpp
+@@ -7,6 +7,7 @@
+   std::vector<unsigned> ids,kinds;
+   std::vector<Descriptor> descriptors;
+   std::vector<const uint8_t *> masks;
++  std::vector<std::array<uint32_t,32>> packed_masks;
+ };
+ std::string projection_plan_key(const J &geometry,const J &shape);
+ std::shared_ptr<const ProjectionPlan> load_projection_plan(const J &geometry,const J &shape);
+--- boayo-tiles-v3/software/boayo/native/src/plan_revision.hpp
++++ boayo-tiles-v4/software/boayo/native/src/plan_revision.hpp
+@@ -1,2 +1,2 @@
+ #pragma once
+-#define BOAYO_PLAN_REV "3f8a44283801c8d4bcc42b54948530feea3dfdf4bf18f2beb51cdc20f98c8dbe"
++#define BOAYO_PLAN_REV "8621bddb4cdc64a515d709706b347bc0d0bc58a8487c8ead6e79951b8e17ab7e"
+--- boayo-tiles-v3/software/boayo/native/src/resident.cpp
++++ boayo-tiles-v4/software/boayo/native/src/resident.cpp
+@@ -2,6 +2,37 @@
+ #include "frame_trace.hpp"
+ #include <sys/ioctl.h>
+ namespace boayo {
++unsigned Device::publish(unsigned bank,unsigned count,unsigned res,const std::array<int32_t,180> &camera,const Words &metadata){
++  require(metadata.size()>=header,"publish metadata length");upload(3+bank,0,metadata.data(),header);present(bank,count,res,camera);return header;
++}
++unsigned LinuxDevice::publish(unsigned bank,unsigned count,unsigned res,const std::array<int32_t,180> &camera,const Words &metadata){
++  require(dma_features&BO_DMA_PUBLISH,"metadata publish driver required");require(metadata.size()>=header,"publish metadata length");
++  bo_publish p{};p.present.bank=bank;p.present.scene_words=count;p.present.resolution=res;p.present.timeout_ms=30000;
++  std::copy(camera.begin(),camera.end(),p.present.camera);p.words=header;p.metadata=reinterpret_cast<uintptr_t>(metadata.data());
++  require(ioctl(fd,BO_PUBLISH,&p)==0,"metadata publish ioctl failed");last_publish=p.profile;
++  frame_trace::mark("publish.user_copy_us",p.profile.user_copy_us);
++  frame_trace::mark("publish.validate_us",p.profile.validate_us);
++  frame_trace::mark("publish.upload_us",p.profile.upload_us);
++  frame_trace::mark("publish.configure_us",p.profile.configure_us);
++  frame_trace::mark("publish.select_us",p.profile.select_us);
++  frame_trace::mark("publish.wait_us",p.profile.wait_us);
++  frame_trace::mark("publish.finish_us",p.profile.finish_us);
++  return p.profile.uploaded_words;
++}
++J LinuxDevice::publish_stats(){return {{"backend","kernel"},{"user_copy_us",last_publish.user_copy_us},{"validate_us",last_publish.validate_us},
++  {"upload_us",last_publish.upload_us},{"configure_us",last_publish.configure_us},{"select_us",last_publish.select_us},
++  {"wait_us",last_publish.wait_us},{"finish_us",last_publish.finish_us},{"uploaded_words",last_publish.uploaded_words},{"upload_ranges",last_publish.upload_ranges},{"command",last_publish.command}};}
++unsigned MockDevice::publish(unsigned bank,unsigned count,unsigned res,const std::array<int32_t,180> &camera,const Words &metadata){
++  check();require(bank<2 && int(bank)!=active && metadata.size()>=header,"mock publish bounds");
++  unsigned words=0;trace.push_back({{"op","publish"},{"bank",bank}});
++  for(unsigned i=0;i<header;){
++    if(regions[3+bank][i]==metadata[i]){++i;continue;}unsigned first=i++;
++    while(i<header && regions[3+bank][i]!=metadata[i])++i;
++    upload(3+bank,first,metadata.data()+first,i-first);words+=i-first;
++  }
++  present(bank,count,res,camera);return words;
++}
++J MockDevice::publish_stats(){return {{"backend","mock"}};}
+ // The fallback preserves the scalar API for other Device implementations.
+ void Device::batch(const std::vector<bo_batch_entry> &entries){
+   for(auto &b:entries){
+@@ -69,8 +100,7 @@
+     std::vector<bo_batch_entry> blends;
+     if(!direct)for(unsigned i=0;i<n;++i){unsigned index=todo[first+i];bo_tile_blend b{};
+       b.bank=bank;b.tile=c.ids[index];b.scratch_word=header+i*256;
+-      const uint8_t *mask=c.mask(index);
+-      for(unsigned cell=0;cell<1024;++cell)if(mask[cell])b.mask[cell/32]|=1u<<(cell%32);
++      std::copy_n(c.packed_mask(index),32,b.mask);++packed_mask_tiles;
+       queue_blend(blends,b);++blended_tiles;
+     }
+     dev.batch(blends);
+@@ -124,7 +154,7 @@
+     // Only the directory/palette are represented on the CPU.
+     output.shadow.resize((header+15)&~15u);
+     if(!valid)std::fill(output.shadow.begin()+256,output.shadow.begin()+header,0xffffffffu);
+-    if(!generation && output.active>=0)bank_metadata[output.active]=output.shadow;
++
+     ++generation;
+     frame_trace::mark("tiles.prepare.begin",dirty.size());
+     std::vector<bo_batch_entry> prepare;
+@@ -183,24 +213,20 @@
+       std::vector<bo_batch_entry> paints;for(auto &[t,b]:paint)queue_blend(paints,b);dev.batch(paints);
+     }
+     if(any || !valid){frame_trace::mark("output.upload.begin");
++      frame_trace::mark("output.versions.begin");
+       // Record a version only once all ordered layers and pointer writes finish.
+       for(unsigned t:redraw){stored[bank][t]=wanted[t];tile_keys[bank][t]=std::move(new_keys.at(t));}
+       for(unsigned t=0;t<tiles;++t)require(!wanted[t] || stored[bank][t]==wanted[t],"incomplete scene");
+-      auto &meta=bank_metadata[bank];
+-      for(unsigned i=0;i<header;){
+-        if(meta.size()>=header && meta[i]==output.shadow[i]){++i;continue;}
+-        unsigned first=i++;
+-        while(i<header && (meta.size()<header || meta[i]!=output.shadow[i]))++i;
+-        dev.upload(3+bank,first,output.shadow.data()+first,i-first);output.uploaded_words+=i-first;
+-      }
+-      meta.assign(output.shadow.begin(),output.shadow.begin()+header);
+-      dev.present(bank,scene_words,2,output.camera);output.active=bank;++output.commits;frame_trace::mark("output.present.done");
++      frame_trace::mark("output.versions.end");
++      frame_trace::mark("output.publish.begin");
++      output.uploaded_words+=dev.publish(bank,scene_words,2,output.camera,output.shadow);
++      frame_trace::mark("output.publish.end");output.active=bank;++output.commits;frame_trace::mark("output.present.done");
+       output.blank_only=false;frame_trace::mark("output.upload.end");
+     }
+   }catch(...){output.failed=true;p.projectors.resident_texture.reset();throw;}
+   for(int id:order){auto &c=p.layers[id];c.invalid.clear();wm.windows[id].dirty={};p.previous_tiles[id]={c.ids.begin(),c.ids.end()};}
+   p.previous_order=order;valid=true;++frames;
+-  metrics={{"redrawn_tiles",redraw.size()},{"reused_tiles_total",reused_tiles},{"lazy_copied_tiles_total",lazy_copied_tiles},{"solid_tiles_total",solid_tiles},{"mode","ddr-resident-dirty-tiles"},{"hardware_frames",frames},{"fallback_frames",0},
++  metrics={{"packed_mask_tiles_total",packed_mask_tiles},{"redrawn_tiles",redraw.size()},{"reused_tiles_total",reused_tiles},{"lazy_copied_tiles_total",lazy_copied_tiles},{"solid_tiles_total",solid_tiles},{"mode","ddr-resident-dirty-tiles"},{"hardware_frames",frames},{"fallback_frames",0},
+     {"geometry_tiles_evaluated_total",p.geometry_tiles_evaluated},{"mask_samples_evaluated_total",p.mask_samples_evaluated},
+     {"precomputed_layers_total",p.precomputed_layers},{"plan_cache",projection_plan_stats()},
+     {"jobs_per_core",jobs},{"total_hw_jobs",total_jobs},{"dirty_tiles",dirty.size()},
+--- boayo-tiles-v3/software/boayo/native/src/resident.hpp
++++ boayo-tiles-v4/software/boayo/native/src/resident.hpp
+@@ -11,11 +11,10 @@
+   uint64_t generation=0,solid_tiles=0,lazy_copied_tiles=0;
+   std::array<uint64_t,tiles> wanted{};
+   std::array<std::array<uint64_t,tiles>,2> stored{};
+-  std::array<Words,2> bank_metadata;
+   // Exact ordered integer tuples; no hash collisions or per-tile JSON.
+   std::array<std::array<std::vector<uint64_t>,tiles>,2> tile_keys;
+   uint64_t pointer_version=0;
+-  uint64_t reused_tiles=0;
++  uint64_t reused_tiles=0,packed_mask_tiles=0;
+   J metrics=J::object();
+   ResidentCompositor(const Geometry &g,Projectors &p,Output &o):planner(g,p,true,true),output(o),dev(p.dev){}
+   static bool supported(const WM &wm);
+--- boayo-tiles-v3/software/bosio/README.md
++++ boayo-tiles-v4/software/bosio/README.md
+@@ -1,3 +1,5 @@
++> **tiles-v4 추가 인터페이스:** `BO_PUBLISH`(ABI3 기능 비트 128)는 4,476워드 CPU 메타데이터 스냅샷을 한 번 받아 검증·변경 구간 업로드·화면 전환을 같은 잠금 안에서 처리한다. DDR 출력 메타데이터를 재읽지 않으며 활성 버퍼 쓰기를 금지한다. 기존 쓰기 요청은 대상 메타데이터 사본을 보수적으로 무효화한다. 단계별 시간은 반환 profile에 마이크로초로 기록된다. 기존 ioctl은 유지한다. [상세 설명](../../README_KO.md).
++
+ # ORYUKDO Linux BOSIO 드라이버 · 코어 구동 SW
+ 
+ 현재 소스는 **ABI 3**이며 기준은 [UAPI 헤더](include/bosio_uapi.h)와 [공통 제어 엔진](common/bosio_engine.c)이다.
+--- boayo-tiles-v3/software/bosio/common/bosio_engine.c
++++ boayo-tiles-v4/software/bosio/common/bosio_engine.c
+@@ -63,6 +63,10 @@
+     if(e->poisoned)return -EIO;
+     if(region>=BO_REGIONS || (offset|bytes)&3 || !bytes || offset>bo_sizes[region] || bytes>bo_sizes[region]-offset)return -EINVAL;
+     if(region>=BO_SCENE0 && region<=BO_SCENE1 && (int)(region-BO_SCENE0)==e->active)return -EBUSY;
++    /* Every legacy writer passes this gate. Invalidate conservatively before
++     * a possible header write; failed validation may lose cache efficiency only. */
++    if(region>=BO_SCENE0 && region<=BO_SCENE1 && offset<BO_HEADER_WORDS*4)
++        e->bank_metadata_valid[region-BO_SCENE0]=0;
+     return 0;
+ }
+ int bo_download_check(struct bo_engine *e,unsigned int region,__u32 offset,__u32 bytes)
+@@ -156,9 +160,9 @@
+         if(expired(e,end))return poison(e,-ETIMEDOUT);
+     }
+ }
+-int bo_present(struct bo_engine *e,const struct bo_present *p,const __u32 *scene)
+-{
+-    unsigned int n;__u32 status,base,command;__u64 end;
++static int present_check(struct bo_engine *e,const struct bo_present *p,const __u32 *scene)
++{
++    unsigned n;
+     if(e->poisoned)return -EIO;
+     if(p->bank>1 || !scene_ok(p->scene_words) || p->resolution>2 || !timeout_ok(p->timeout_ms))return -EINVAL;
+     if((int)p->bank==e->active)return -EBUSY;
+@@ -166,18 +170,25 @@
+         (__u64)scene[n]+(64u<<(2*p->resolution))>(p->scene_words-BO_HEADER_WORDS)*4u)return -EINVAL;
+     /* Changing pose/resolution while running needs a separate atomic transaction. */
+     if(e->configured && (p->resolution!=e->resolution || memcmp(p->camera,e->camera,sizeof(e->camera))))return -EBUSY;
++    return 0;
++}
++static int present_execute(struct bo_engine *e,const struct bo_present *p,const __u32 *scene)
++{
++    unsigned n;__u32 status,base,command;__u64 end,begin=e->io.now_us(e->io.opaque);
+     if(!e->configured){
+         if(bo_stop(e,p->timeout_ms))return -EIO;
+         if(wr(e,2,0x78,0)||wr(e,2,0x1c,0)||wr(e,2,0x5c,p->resolution)||wr(e,2,0x60,0))return poison(e,-EIO);
+         for(n=0;n<180;n++)if(wr(e,2,0x64,p->camera[n]))return poison(e,-EIO);
+         if(wr(e,2,0x68,1))return poison(e,-EIO);
+     }
++    e->profile.configure_us=e->io.now_us(e->io.opaque)-begin;begin=e->io.now_us(e->io.opaque);
+     e->io.memory_fence(e->io.opaque);
+     base=e->dma_base+bo_offsets[BO_SCENE0+p->bank];
+     /* Patch retains BS25's current metadata, so exact equality is required.
+      * Only 4476 metadata words are inspected, never inactive cell data. */
+     command=e->configured && e->metadata_valid && e->metadata_words==p->scene_words &&
+         !memcmp(e->metadata,scene,sizeof(e->metadata)) ? 2 : 1;
++    e->profile.select_us=e->io.now_us(e->io.opaque)-begin;e->profile.command=command;begin=e->io.now_us(e->io.opaque);
+     if(wr(e,2,8,base)||wr(e,2,0x0c,p->scene_words)||wr(e,2,0x6c,command))return poison(e,-EIO);
+     end=deadline(e,p->timeout_ms);
+     /* Wait for metadata loaded before first enable; pending is NOT completion. */
+@@ -196,8 +207,43 @@
+         if(active==base && (status&2) && !(status&0x14))break;
+         if(expired(e,end))return poison(e,-ETIMEDOUT);
+     }
++    e->profile.wait_us=e->io.now_us(e->io.opaque)-begin;begin=e->io.now_us(e->io.opaque);
+     memcpy(e->metadata,scene,sizeof(e->metadata));
+     e->metadata_words=p->scene_words;e->metadata_valid=1;
+     e->active=p->bank;e->configured=1;e->resolution=p->resolution;
+-    memcpy(e->camera,p->camera,sizeof(e->camera));return 0;
+-}
++    memcpy(e->camera,p->camera,sizeof(e->camera));
++    e->profile.finish_us=e->io.now_us(e->io.opaque)-begin;return 0;
++}
++
++int bo_present(struct bo_engine *e,const struct bo_present *p,const __u32 *scene)
++{
++    int ret;__u64 begin=e->io.now_us(e->io.opaque);
++    memset(&e->profile,0,sizeof(e->profile));ret=present_check(e,p,scene);
++    e->profile.validate_us=e->io.now_us(e->io.opaque)-begin;
++    return ret?ret:present_execute(e,p,scene);
++}
++int bo_publish(struct bo_engine *e,const struct bo_present *p,const __u32 *metadata,
++               int (*upload)(void *,unsigned,__u32,const __u32 *,__u32),void *opaque)
++{
++    unsigned i,first,bank;int ret,valid;__u64 begin=e->io.now_us(e->io.opaque);
++    memset(&e->profile,0,sizeof(e->profile));
++    ret=present_check(e,p,metadata);
++    e->profile.validate_us=e->io.now_us(e->io.opaque)-begin;
++    if(ret)return ret;
++    bank=p->bank;valid=e->bank_metadata_valid[bank];
++    e->bank_metadata_valid[bank]=0;begin=e->io.now_us(e->io.opaque);
++    /* Compare CPU snapshots, never the write-combined scanout mapping. */
++    for(i=0;i<BO_HEADER_WORDS;){
++        if(valid && e->bank_metadata[bank][i]==metadata[i]){i++;continue;}
++        first=i++;
++        while(i<BO_HEADER_WORDS && (!valid || e->bank_metadata[bank][i]!=metadata[i]))i++;
++        ret=upload(opaque,BO_SCENE0+bank,first,metadata+first,i-first);
++        if(ret)return poison(e,ret); /* accepted earlier writes cannot be undone */
++        e->profile.uploaded_words+=i-first;e->profile.upload_ranges++;
++    }
++    memcpy(e->bank_metadata[bank],metadata,sizeof(e->bank_metadata[bank]));
++    e->bank_metadata_valid[bank]=1;
++    e->profile.upload_us=e->io.now_us(e->io.opaque)-begin;
++    /* Snapshot stays alive through acknowledgment. No DDR metadata reread. */
++    return present_execute(e,p,metadata);
++}
+--- boayo-tiles-v3/software/bosio/common/bosio_engine.h
++++ boayo-tiles-v4/software/bosio/common/bosio_engine.h
+@@ -17,6 +17,9 @@
+     /* Last successfully committed BS25 metadata; never a cell-data shadow. */
+     __u32 metadata[BO_HEADER_WORDS], metadata_words;
+     int metadata_valid;
++    __u32 bank_metadata[2][BO_HEADER_WORDS];
++    int bank_metadata_valid[2];
++    struct bo_publish_profile profile;
+ };
+ extern const __u32 bo_offsets[BO_REGIONS], bo_sizes[BO_REGIONS];
+ void bo_init(struct bo_engine *, const struct bo_io *, __u32);
+@@ -27,6 +30,8 @@
+ int bo_fill_check(struct bo_engine *, const struct bo_mem_fill *);
+ int bo_run(struct bo_engine *, struct bo_run *, const __u32 *, const __u32 *);
+ int bo_present(struct bo_engine *, const struct bo_present *, const __u32 *);
++int bo_publish(struct bo_engine *,const struct bo_present *,const __u32 *,
++               int (*upload)(void *,unsigned,__u32,const __u32 *,__u32),void *);
+ int bo_stop(struct bo_engine *, unsigned int);
+ int bo_set_pose(struct bo_engine *, const struct bo_pose *);
+ #endif
+--- boayo-tiles-v3/software/bosio/driver/bosio_kfb.c
++++ boayo-tiles-v4/software/bosio/driver/bosio_kfb.c
+@@ -158,6 +158,16 @@
+     d->opened=false;
+     mutex_unlock(&d->mutex);return 0;
+ }
++static int publish_upload(void *opaque,unsigned region,__u32 offset,const __u32 *data,__u32 words)
++{
++    struct bosio_device *d=opaque;unsigned bytes=words*4;
++    if(bytes>=BO_UPLOAD_DMA_THRESHOLD){void *copy=kvmalloc(bytes,GFP_KERNEL);
++        if(!copy)return -ENOMEM;
++        memcpy(copy,data,bytes);
++        return bosio_upload_dma(d,copy,d->dma+bo_offsets[region]+offset*4,bytes);
++    }
++    memcpy(d->arena+bo_offsets[region]+offset*4,data,bytes);dma_wmb();return 0;
++}
+ static long bosio_ioctl(struct file *file,unsigned int cmd,unsigned long arg)
+ {
+     struct bosio_device *d=file->private_data;
+@@ -228,6 +238,21 @@
+         if(copy_to_user(u,&run,sizeof(run)))ret=-EFAULT;
+         break;
+     }
++    case BO_PUBLISH: {
++        struct bo_publish *p;__u32 *metadata;__u64 begin=ktime_to_us(ktime_get()),copy_us;
++        p=memdup_user(u,sizeof(*p));if(IS_ERR(p)){ret=PTR_ERR(p);break;}
++        if(p->reserved || p->words!=BO_HEADER_WORDS || !p->metadata || p->metadata>ULONG_MAX){ret=-EINVAL;goto publish_free;}
++        if(!d->channel){ret=-ENODEV;goto publish_free;}
++        metadata=vmemdup_user(u64_to_user_ptr(p->metadata),BO_HEADER_WORDS*4);
++        if(IS_ERR(metadata)){ret=PTR_ERR(metadata);goto publish_free;}
++        copy_us=ktime_to_us(ktime_get())-begin;
++        ret=bo_publish(&d->engine,&p->present,metadata,publish_upload,d);
++        kvfree(metadata);
++        p->profile=d->engine.profile;p->profile.user_copy_us=copy_us;
++        if(!ret && copy_to_user(u,p,sizeof(*p)))ret=-EFAULT;
++    publish_free:
++        kfree(p);break;
++    }
+     case BO_PRESENT: {
+         struct bo_present *present=memdup_user(u,sizeof(*present));
+         if(IS_ERR(present)){ret=PTR_ERR(present);break;}
+@@ -301,7 +326,7 @@
+     if(!dma_has_cap(DMA_MEMCPY,d->channel->device->cap_mask) ||
+        !dma_has_cap(DMA_MEMSET,d->channel->device->cap_mask)){ret=-EINVAL;goto release_channel;}
+     init_completion(&d->dma_wait.done);
+-    d->dma_info.version=1;d->dma_info.features=BO_DMA_COPY|BO_DMA_FILL|BO_DMA_UPLOAD|BO_DMA_RGB_USER|BO_DMA_DIRECT_USER|BO_DMA_TILE_BLEND|BO_DMA_BATCH;
++    d->dma_info.version=1;d->dma_info.features=BO_DMA_COPY|BO_DMA_FILL|BO_DMA_UPLOAD|BO_DMA_RGB_USER|BO_DMA_DIRECT_USER|BO_DMA_TILE_BLEND|BO_DMA_BATCH|BO_DMA_PUBLISH;
+     d->dma_info.upload_threshold=BO_UPLOAD_DMA_THRESHOLD;
+     /* Board-specific, exclusive no-map DDR; map with the same WC attribute
+      * used by the old coherent pool, without its unconditional 16MiB memset.
+--- boayo-tiles-v3/software/bosio/include/bosio_uapi.h
++++ boayo-tiles-v4/software/bosio/include/bosio_uapi.h
+@@ -86,4 +86,18 @@
+ };
+ struct bo_batch { __u32 count, reserved; __aligned_u64 entries; };
+ #define BO_BATCH _IOW('B', 0x4d, struct bo_batch)
++/* Full immutable CPU metadata snapshot; driver writes only changed ranges and
++ * commits under the same mutex. No caller-supplied dirty mask or bus address. */
++#define BO_DMA_PUBLISH 128u
++struct bo_publish_profile {
++    __aligned_u64 validate_us, upload_us, configure_us, select_us, wait_us, finish_us, user_copy_us;
++    __u32 uploaded_words, upload_ranges, command, reserved;
++};
++struct bo_publish {
++    struct bo_present present;
++    __aligned_u64 metadata;
++    __u32 words, reserved;
++    struct bo_publish_profile profile;
++};
++#define BO_PUBLISH _IOWR('B', 0x4e, struct bo_publish)
+ #endif

@@ -1,0 +1,512 @@
+{
+  "stage": "complete",
+  "physical_board": true,
+  "image": "HAEBANCHEON-L1-16K-DMA3-v1",
+  "shell_received": {
+    "utc": "2026-11-14T09:17:13.330632+09:00",
+    "monotonic_ns": 12732211153700,
+    "offset": 29560,
+    "length": 8
+  },
+  "kernel_received": {
+    "utc": "2026-11-14T09:16:16.487095+09:00",
+    "monotonic_ns": 12675367616800,
+    "offset": 2537,
+    "length": 195
+  },
+  "first_uart": {
+    "utc": "2026-11-14T09:16:15.006189+09:00",
+    "monotonic_ns": 12673886927500,
+    "offset": 0,
+    "length": 1
+  },
+  "program_end_epoch_ms": 1794615370589,
+  "program_to_shell_seconds": 62.74163198471069,
+  "kernel_banner_to_shell_seconds": 56.8435369,
+  "start_command_monotonic_ns": 12773186038000,
+  "start_command_utc": "2026-11-14T09:17:54.305522+09:00",
+  "init_trace": [
+    {
+      "n": 1,
+      "event": "desktop.begin",
+      "wall_us": 44251,
+      "cpu_us": 12182,
+      "value": 0
+    },
+    {
+      "n": 2,
+      "event": "window.create.begin",
+      "wall_us": 212883,
+      "cpu_us": 87462,
+      "value": 0
+    },
+    {
+      "n": 3,
+      "event": "window.create.end",
+      "wall_us": 578102,
+      "cpu_us": 298324,
+      "value": 1
+    },
+    {
+      "n": 4,
+      "event": "window.configure.begin",
+      "wall_us": 619428,
+      "cpu_us": 325427,
+      "value": 0
+    },
+    {
+      "n": 5,
+      "event": "window.configure.end",
+      "wall_us": 735641,
+      "cpu_us": 420566,
+      "value": 1
+    },
+    {
+      "n": 6,
+      "event": "asset.map.begin",
+      "wall_us": 814267,
+      "cpu_us": 478852,
+      "value": 0
+    },
+    {
+      "n": 7,
+      "event": "asset.loaded",
+      "wall_us": 884485,
+      "cpu_us": 531736,
+      "value": 921600
+    },
+    {
+      "n": 8,
+      "event": "surface.publish.move",
+      "wall_us": 920189,
+      "cpu_us": 566931,
+      "value": 1
+    },
+    {
+      "n": 9,
+      "event": "desktop.end",
+      "wall_us": 962715,
+      "cpu_us": 596081,
+      "value": 1
+    },
+    {
+      "n": 10,
+      "event": "desktop.scope_exit",
+      "wall_us": 988021,
+      "cpu_us": 616681,
+      "value": 0
+    }
+  ],
+  "latest_init_trace": {
+    "n": 10,
+    "event": "desktop.scope_exit",
+    "wall_us": 988021,
+    "cpu_us": 616681,
+    "value": 0
+  },
+  "frame_trace": [
+    {
+      "n": 1,
+      "event": "frame.begin",
+      "wall_us": 11761,
+      "cpu_us": 12337,
+      "value": 0
+    },
+    {
+      "n": 2,
+      "event": "plan.load.begin",
+      "wall_us": 79329,
+      "cpu_us": 61383,
+      "value": 0
+    },
+    {
+      "n": 3,
+      "event": "plan.load.end",
+      "wall_us": 377673,
+      "cpu_us": 290527,
+      "value": 1
+    },
+    {
+      "n": 4,
+      "event": "ready.prepare.begin",
+      "wall_us": 759328,
+      "cpu_us": 590435,
+      "value": 0
+    },
+    {
+      "n": 5,
+      "event": "ready.prepare.end",
+      "wall_us": 1157484,
+      "cpu_us": 885914,
+      "value": 96
+    },
+    {
+      "n": 6,
+      "event": "texture.upload.begin",
+      "wall_us": 1190903,
+      "cpu_us": 910876,
+      "value": 230400
+    },
+    {
+      "n": 7,
+      "event": "texture.upload.end",
+      "wall_us": 2448483,
+      "cpu_us": 1814304,
+      "value": 230400
+    },
+    {
+      "n": 8,
+      "event": "projectors.begin",
+      "wall_us": 2478986,
+      "cpu_us": 1840864,
+      "value": 96
+    },
+    {
+      "n": 9,
+      "event": "projectors.end",
+      "wall_us": 3540169,
+      "cpu_us": 2587523,
+      "value": 96
+    },
+    {
+      "n": 10,
+      "event": "output.upload.begin",
+      "wall_us": 3569495,
+      "cpu_us": 2612183,
+      "value": 0
+    },
+    {
+      "n": 11,
+      "event": "output.versions.begin",
+      "wall_us": 3599410,
+      "cpu_us": 2637545,
+      "value": 0
+    },
+    {
+      "n": 12,
+      "event": "output.versions.end",
+      "wall_us": 3638376,
+      "cpu_us": 2672070,
+      "value": 0
+    },
+    {
+      "n": 13,
+      "event": "output.publish.begin",
+      "wall_us": 3676116,
+      "cpu_us": 2697812,
+      "value": 0
+    },
+    {
+      "n": 14,
+      "event": "publish.user_copy_us",
+      "wall_us": 3826712,
+      "cpu_us": 2818438,
+      "value": 6171
+    },
+    {
+      "n": 15,
+      "event": "publish.validate_us",
+      "wall_us": 3865953,
+      "cpu_us": 2846866,
+      "value": 36814
+    },
+    {
+      "n": 16,
+      "event": "publish.upload_us",
+      "wall_us": 3901281,
+      "cpu_us": 2872600,
+      "value": 51355
+    },
+    {
+      "n": 17,
+      "event": "publish.configure_us",
+      "wall_us": 3935472,
+      "cpu_us": 2902088,
+      "value": 88
+    },
+    {
+      "n": 18,
+      "event": "publish.select_us",
+      "wall_us": 3966809,
+      "cpu_us": 2926430,
+      "value": 106
+    },
+    {
+      "n": 19,
+      "event": "publish.wait_us",
+      "wall_us": 4006150,
+      "cpu_us": 2954341,
+      "value": 9197
+    },
+    {
+      "n": 20,
+      "event": "publish.finish_us",
+      "wall_us": 4037228,
+      "cpu_us": 2977608,
+      "value": 6363
+    },
+    {
+      "n": 21,
+      "event": "output.publish.end",
+      "wall_us": 4081773,
+      "cpu_us": 3008406,
+      "value": 0
+    },
+    {
+      "n": 22,
+      "event": "output.present.done",
+      "wall_us": 4111315,
+      "cpu_us": 3030680,
+      "value": 0
+    },
+    {
+      "n": 23,
+      "event": "output.upload.end",
+      "wall_us": 4141678,
+      "cpu_us": 3058495,
+      "value": 0
+    },
+    {
+      "n": 24,
+      "event": "frame.scope_exit",
+      "wall_us": 4511174,
+      "cpu_us": 3321173,
+      "value": 0
+    }
+  ],
+  "latest_frame_trace": {
+    "n": 24,
+    "event": "frame.scope_exit",
+    "wall_us": 4511174,
+    "cpu_us": 3321173,
+    "value": 0
+  },
+  "present_received": {
+    "utc": "2026-11-14T09:18:03.664464+09:00",
+    "monotonic_ns": 12782544986500,
+    "offset": 33164,
+    "length": 2
+  },
+  "start_to_present_seconds": 9.3589485,
+  "status": {
+    "app_error": null,
+    "buttons": {
+      "available": false,
+      "last_event_id": 0,
+      "state": 0
+    },
+    "compositor": "cpp-native",
+    "focused_window": 1,
+    "generation": 4,
+    "output": {
+      "abi": 3,
+      "active_bank": 1,
+      "active_base": 3175415808,
+      "antialias": false,
+      "backend": "kfb-linux-frame-atomic-output",
+      "capability": 1146373681,
+      "commits": 2,
+      "dma_copied_words": 0,
+      "max_jobs": 64,
+      "max_scene_words": 1084816,
+      "memory_dma": {
+        "available": true,
+        "copy_bytes": 979072,
+        "copy_ops": 328,
+        "errors": 0,
+        "features": 255,
+        "fill_bytes": 45056,
+        "fill_ops": 44,
+        "quarantined": 0,
+        "timeouts": 0,
+        "upload_bytes": 957408,
+        "upload_ops": 3,
+        "upload_threshold": 4096
+      },
+      "metadata_only": false,
+      "mock_backend": false,
+      "poisoned": 0,
+      "publish_profile": {
+        "backend": "kernel",
+        "command": 1,
+        "configure_us": 88,
+        "finish_us": 6363,
+        "select_us": 106,
+        "upload_ranges": 1,
+        "upload_us": 51355,
+        "uploaded_words": 4476,
+        "user_copy_us": 6171,
+        "validate_us": 36814,
+        "wait_us": 9197
+      },
+      "sensor_available": false,
+      "shadow_copied_words": 0,
+      "signature": 1112748597,
+      "status": 14483459,
+      "uploaded_words": 8952
+    },
+    "performance": {
+      "frame_limit": 2.0,
+      "full_update_count": 1,
+      "last_compose_ms": 4458.98188000001,
+      "last_upload_ms": 0.0,
+      "no_op_update_count": 0,
+      "patch_update_count": 1,
+      "render_count": 1,
+      "update_words": 4480,
+      "uptime_seconds": 6.847966619999994
+    },
+    "pointer": {
+      "azimuth": 0.0,
+      "buttons": [],
+      "cancel_serial": 0,
+      "captured_window": null,
+      "dragging": false,
+      "elevation": 0.0,
+      "last_left_press": null,
+      "last_left_release": null,
+      "left_press_serial": 0,
+      "left_release_serial": 0,
+      "scroll_delta": 0.0,
+      "scroll_serial": 0,
+      "visible": false,
+      "window_id": 1,
+      "zone": "content"
+    },
+    "projection": {
+      "cpu_output_shadow_words": 4480,
+      "cpu_result_download_words": 0,
+      "cpu_scene_words": 0,
+      "device_ready_frames": 1,
+      "dirty_tiles": 160,
+      "fallback_frames": 0,
+      "geometry_tiles_evaluated_total": 0,
+      "hardware_frames": 1,
+      "jobs_per_core": [
+        48,
+        48
+      ],
+      "lazy_copied_tiles_total": 0,
+      "mask_samples_evaluated_total": 0,
+      "masked_tiles_total": 44,
+      "mode": "ddr-resident-dirty-tiles",
+      "packed_mask_tiles_total": 44,
+      "plan_cache": {
+        "builtin_loads": 1,
+        "hits": 0,
+        "loads": 1,
+        "misses": 0,
+        "payload_scan_bytes": 0,
+        "rejected": 0,
+        "revision": "7177fdc43e0e2f9a5d566432fd5372146d7b6ad4c71c518e3f2ec4d773973bef"
+      },
+      "precomputed_layers_total": 1,
+      "redrawn_tiles": 96,
+      "reused_tiles_total": 0,
+      "solid_tiles_total": 0,
+      "texture_reuses_total": 0,
+      "texture_uploads_total": 1,
+      "tile_fills_total": 44,
+      "total_hw_jobs": 96,
+      "update_kind": "tiles"
+    },
+    "render_error": null,
+    "runtime": "C++17",
+    "scene_owner": null,
+    "service": {
+      "phase": "apps",
+      "queued_requests": 0,
+      "snapshot_age_seconds": 2.703111739999997,
+      "state_is_snapshot": true
+    },
+    "windows": [
+      {
+        "always_on_top": true,
+        "azimuth": 0.0,
+        "decorated": false,
+        "elevation": 0.0,
+        "focused": true,
+        "height_deg": 30.0,
+        "input_enabled": true,
+        "mapped": true,
+        "owner": "boayo-desktop",
+        "roll": 0.0,
+        "shape": [
+          [
+            51.2,
+            36.0,
+            537.6,
+            252.0,
+            18.0
+          ]
+        ],
+        "surface_height": 360,
+        "surface_width": 640,
+        "title": "BoAYO Launcher",
+        "width_deg": 42.0,
+        "window_id": 1,
+        "workspace": {},
+        "z": 0
+      }
+    ]
+  },
+  "hdmi_first_nonblank": {
+    "frame": 206,
+    "path": "frame_000206.png",
+    "monotonic_ns": 12784233938100,
+    "utc": "2026-11-14T09:18:05.353424+09:00",
+    "mean": [
+      16.225260416666668,
+      18.14019097222222,
+      43.565104166666664
+    ],
+    "stddev": [
+      24.636824658881284,
+      29.47809714134616,
+      52.837047362125396
+    ]
+  },
+  "hdmi_last_blank": {
+    "frame": 205,
+    "path": "frame_000205.png",
+    "monotonic_ns": 12783737175600,
+    "utc": "2026-11-14T09:18:04.856663+09:00",
+    "mean": [
+      7.0,
+      7.0,
+      7.0
+    ],
+    "stddev": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "first_frame_stage_seconds": {
+    "plan.load": 0.298344,
+    "ready.prepare": 0.398156,
+    "texture.upload": 1.25758,
+    "projectors": 1.061183,
+    "output.versions": 0.038966,
+    "output.publish": 0.405657,
+    "output.upload": 0.572183
+  },
+  "start_to_hdmi_first_nonblank_seconds": 11.0479001,
+  "hdmi_sample_period_seconds": 0.5,
+  "baseline": {
+    "path": "D:\\temp\\gen3bosio\\boayo-tiles-v4\\board_trial_20261113_005919",
+    "image": "tiles-v4 / no L1 / one DMA",
+    "kernel_banner_to_shell_seconds": 194.5778027,
+    "daemon_to_uart_present_seconds": 291.411221,
+    "frame_seconds": 188.212956
+  },
+  "comparison": {
+    "kernel_banner_to_shell_speedup": 3.4230417970349767,
+    "daemon_to_uart_present_speedup": 31.137175399565454,
+    "daemon_to_uart_present_reduction_percent": 96.78840489810788,
+    "scope": "Combined L1/DMA3 hardware and tiles-v5 software change. Cache-only effect not isolated."
+  },
+  "hdmi_verified": true,
+  "result": "PASS_BOARD_LINUX_AND_BOAYO_FIRST_SCREEN",
+  "hdmi_visual_observation": "BoAYO launcher visible with DASHBOARD, TELEMETRY, SDK PULSE. Fine edge/text speckling visible; full image-quality correctness not asserted."
+}

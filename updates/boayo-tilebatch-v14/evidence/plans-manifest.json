@@ -1,0 +1,1255 @@
+{
+  "format": "BOGPLN02",
+  "plans": [
+    {
+      "boundary": 44,
+      "bytes": 64128,
+      "count": 160,
+      "empty": 64,
+      "full": 52,
+      "geometry": [
+        640,
+        360,
+        0.0,
+        0.0,
+        0.0,
+        42.0,
+        30.0
+      ],
+      "key": "{\"geometry\":[640,360,0.0,0.0,0.0,42.0,30.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[51.2,36.0,537.6,252.0,18.0]]}",
+      "shape": [
+        [
+          51.2,
+          36.0,
+          537.6,
+          252.0,
+          18.0
+        ]
+      ],
+      "file": "p_f67a8c0f.bgp",
+      "sha256": "8612a5ac6496688c344a375da75223440f94ebeae846ab4d8fbc2192f87f3e87",
+      "file_bytes": 68224,
+      "title": "BoAYO Launcher",
+      "ready_file": "p_f67a8c0f.bgp.ready",
+      "ready_sha256": "9a7af304b1bddcd758122e27e3c148a4cbc7be35d0faa99fc6c7e70a6109ce4b"
+    },
+    {
+      "boundary": 53,
+      "bytes": 73152,
+      "count": 144,
+      "empty": 20,
+      "full": 71,
+      "geometry": [
+        640,
+        440,
+        0.0,
+        0.0,
+        0.0,
+        38.0,
+        28.0
+      ],
+      "key": "{\"geometry\":[640,440,0.0,0.0,0.0,38.0,28.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[48.0,4.0,544.0,428.0,0.0]]}",
+      "shape": [
+        [
+          48.0,
+          4.0,
+          544.0,
+          428.0,
+          0.0
+        ]
+      ],
+      "file": "p_ef5c457b.bgp",
+      "sha256": "307c8103297a7a8f87e0a36d505a4b3c438a126b2c1ca6a1e9d17d49e7be7671",
+      "file_bytes": 77248,
+      "title": "Dashboard",
+      "ready_file": "p_ef5c457b.bgp.ready",
+      "ready_sha256": "6a08b629afffd5fb258d9e9006432ffa7a6251061200df14051a4c849a4aea1c"
+    },
+    {
+      "boundary": 11,
+      "bytes": 13680,
+      "count": 12,
+      "empty": 1,
+      "full": 0,
+      "geometry": [
+        40,
+        100,
+        -18.91361728563541,
+        0.0,
+        0.0,
+        2.88,
+        10.0
+      ],
+      "key": "{\"geometry\":[40,100,-18.91361728563541,0.0,0.0,2.88,10.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[0.0,0.0,40.0,100.0,8.0]]}",
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "file": "p_192d26a5.bgp",
+      "sha256": "f6e0882c77deaad000b0898f5ef7a2bae4f06c54bda6b6708b58f5afc18991de",
+      "file_bytes": 17776,
+      "title": "move: Dashboard",
+      "ready_file": "p_192d26a5.bgp.ready",
+      "ready_sha256": "ad319ac5ca70e33302ba4771689a46e859341728361cbc37174cb17e62595393"
+    },
+    {
+      "boundary": 7,
+      "bytes": 8736,
+      "count": 8,
+      "empty": 1,
+      "full": 0,
+      "geometry": [
+        40,
+        40,
+        18.91361728563541,
+        -11.136823482150845,
+        3.7864391911801647,
+        4.0,
+        4.0
+      ],
+      "key": "{\"geometry\":[40,40,18.91361728563541,-11.136823482150845,3.7864391911801647,4.0,4.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[0.0,0.0,40.0,40.0,8.0]]}",
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "file": "p_6e1af754.bgp",
+      "sha256": "f01b3d0ded7ee98e1bad987b7f3db18f4056be6ccacb6bbd00499fd71a2bffc2",
+      "file_bytes": 12832,
+      "title": "resize_right: Dashboard",
+      "ready_file": "p_6e1af754.bgp.ready",
+      "ready_sha256": "86c3f9b32ee3555827ff5ef7368ddeeb781e7383416dfd82b9b508d5293d853a"
+    },
+    {
+      "boundary": 6,
+      "bytes": 7584,
+      "count": 8,
+      "empty": 2,
+      "full": 0,
+      "geometry": [
+        40,
+        40,
+        18.91361728563541,
+        11.136823482150847,
+        -3.7864391911801647,
+        4.0,
+        4.0
+      ],
+      "key": "{\"geometry\":[40,40,18.91361728563541,11.136823482150847,-3.7864391911801647,4.0,4.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[0.0,0.0,40.0,40.0,8.0]]}",
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "file": "p_4aff2450.bgp",
+      "sha256": "68ee65ff47d5a411592e821c113111f43f73648cfdbe6ec6c0f694f918cec0fa",
+      "file_bytes": 11680,
+      "title": "close: Dashboard",
+      "ready_file": "p_4aff2450.bgp.ready",
+      "ready_sha256": "8b5c224159e9cda717ec422f2272758374ebad313503c22fa34ea3f50b4291d8"
+    },
+    {
+      "boundary": 51,
+      "bytes": 70512,
+      "count": 140,
+      "empty": 20,
+      "full": 69,
+      "geometry": [
+        640,
+        440,
+        -12.0,
+        0.0,
+        0.0,
+        38.0,
+        28.0
+      ],
+      "key": "{\"geometry\":[640,440,-12.0,0.0,0.0,38.0,28.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[48.0,4.0,544.0,428.0,0.0]]}",
+      "shape": [
+        [
+          48.0,
+          4.0,
+          544.0,
+          428.0,
+          0.0
+        ]
+      ],
+      "file": "p_18917b63.bgp",
+      "sha256": "128f16a844a11fd72625efc1f2d4939dff864a9fe2b5ab8741735910ebd6feea",
+      "file_bytes": 74608,
+      "title": "Dashboard",
+      "ready_file": "p_18917b63.bgp.ready",
+      "ready_sha256": "a05f22c8994b39c113fec82084280f0746c8f7a2b6932e547b722b22c41f17c1"
+    },
+    {
+      "boundary": 11,
+      "bytes": 13848,
+      "count": 14,
+      "empty": 3,
+      "full": 0,
+      "geometry": [
+        40,
+        100,
+        -30.91361728563541,
+        0.0,
+        0.0,
+        2.88,
+        10.0
+      ],
+      "key": "{\"geometry\":[40,100,-30.91361728563541,0.0,0.0,2.88,10.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[0.0,0.0,40.0,100.0,8.0]]}",
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "file": "p_6f642123.bgp",
+      "sha256": "936d5777e19a1ebc7881c49870451420d35b3e1f3e4dfcad9dfedcb73888e609",
+      "file_bytes": 17944,
+      "title": "move: Dashboard",
+      "ready_file": "p_6f642123.bgp.ready",
+      "ready_sha256": "fdf05b061885499b71f2b5f9c132d58b914b32a1c78801f4215c9d3fa309246f"
+    },
+    {
+      "boundary": 4,
+      "bytes": 5112,
+      "count": 6,
+      "empty": 2,
+      "full": 0,
+      "geometry": [
+        40,
+        40,
+        6.913617285635411,
+        -11.136823482150849,
+        3.7864391911801647,
+        4.0,
+        4.0
+      ],
+      "key": "{\"geometry\":[40,40,6.913617285635411,-11.136823482150849,3.7864391911801647,4.0,4.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[0.0,0.0,40.0,40.0,8.0]]}",
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "file": "p_6e1bab9c.bgp",
+      "sha256": "a23eec5cc65584860a7b48c39b58c975cdb7146972c6ffa97761c8f639b26d7d",
+      "file_bytes": 9208,
+      "title": "resize_right: Dashboard",
+      "ready_file": "p_6e1bab9c.bgp.ready",
+      "ready_sha256": "aba7e1ca3779aff7ab82a4b25fd2cb6b063c663387657b2b4c70513c5d9b61b8"
+    },
+    {
+      "boundary": 6,
+      "bytes": 7584,
+      "count": 8,
+      "empty": 2,
+      "full": 0,
+      "geometry": [
+        40,
+        40,
+        6.913617285635411,
+        11.136823482150849,
+        -3.7864391911801647,
+        4.0,
+        4.0
+      ],
+      "key": "{\"geometry\":[40,40,6.913617285635411,11.136823482150849,-3.7864391911801647,4.0,4.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[0.0,0.0,40.0,40.0,8.0]]}",
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "file": "p_bcc5cb3e.bgp",
+      "sha256": "b0a51a673e4b01e8be7bb7bafeb7e157e7858fb7640652af3a597be8f7ecb972",
+      "file_bytes": 11680,
+      "title": "close: Dashboard",
+      "ready_file": "p_bcc5cb3e.bgp.ready",
+      "ready_sha256": "9f21871b1615320482e14b9e0e702ad367c503b3882655701a51688ad2f9d7d2"
+    },
+    {
+      "boundary": 48,
+      "bytes": 67056,
+      "count": 140,
+      "empty": 23,
+      "full": 69,
+      "geometry": [
+        640,
+        440,
+        12.0,
+        0.0,
+        0.0,
+        38.0,
+        28.0
+      ],
+      "key": "{\"geometry\":[640,440,12.0,0.0,0.0,38.0,28.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[48.0,4.0,544.0,428.0,0.0]]}",
+      "shape": [
+        [
+          48.0,
+          4.0,
+          544.0,
+          428.0,
+          0.0
+        ]
+      ],
+      "file": "p_e683a894.bgp",
+      "sha256": "3b495ca370c584a1a880f8f375b55c5e735752a700e89e26ef2dbc46f05a2e1a",
+      "file_bytes": 71152,
+      "title": "Dashboard",
+      "ready_file": "p_e683a894.bgp.ready",
+      "ready_sha256": "35da7a24f3708d3fb5d1767eac93b94a2855c490c633876d89883756a6d947b5"
+    },
+    {
+      "boundary": 12,
+      "bytes": 14832,
+      "count": 12,
+      "empty": 0,
+      "full": 0,
+      "geometry": [
+        40,
+        100,
+        -6.913617285635411,
+        0.0,
+        0.0,
+        2.88,
+        10.0
+      ],
+      "key": "{\"geometry\":[40,100,-6.913617285635411,0.0,0.0,2.88,10.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[0.0,0.0,40.0,100.0,8.0]]}",
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "file": "p_ff0bfb01.bgp",
+      "sha256": "149c8be2519ecfd503d68fd82d3d918233109dce241f26051fcdd177f5b21bba",
+      "file_bytes": 18928,
+      "title": "move: Dashboard",
+      "ready_file": "p_ff0bfb01.bgp.ready",
+      "ready_sha256": "8b5998bbfad9894a17c4becf2f4694cc7abdb8eb7a9d99b10b8b0f7c0fee4b36"
+    },
+    {
+      "boundary": 5,
+      "bytes": 6264,
+      "count": 6,
+      "empty": 1,
+      "full": 0,
+      "geometry": [
+        40,
+        40,
+        30.91361728563541,
+        -11.136823482150849,
+        3.7864391911801647,
+        4.0,
+        4.0
+      ],
+      "key": "{\"geometry\":[40,40,30.91361728563541,-11.136823482150849,3.7864391911801647,4.0,4.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[0.0,0.0,40.0,40.0,8.0]]}",
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "file": "p_9c48a74e.bgp",
+      "sha256": "b3be5bcc2b81ea4e165c415a913f7c71e7f84aadbf34241674b499c241810e95",
+      "file_bytes": 10360,
+      "title": "resize_right: Dashboard",
+      "ready_file": "p_9c48a74e.bgp.ready",
+      "ready_sha256": "397b6491fde41b6641bcb5356be7089eec385451ed1f264d4e52d9a4dc28b3e1"
+    },
+    {
+      "boundary": 4,
+      "bytes": 5112,
+      "count": 6,
+      "empty": 2,
+      "full": 0,
+      "geometry": [
+        40,
+        40,
+        30.91361728563541,
+        11.136823482150849,
+        -3.7864391911801647,
+        4.0,
+        4.0
+      ],
+      "key": "{\"geometry\":[40,40,30.91361728563541,11.136823482150849,-3.7864391911801647,4.0,4.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[0.0,0.0,40.0,40.0,8.0]]}",
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "file": "p_22a31120.bgp",
+      "sha256": "8b4c88774fa57bf6ac8a1915a8518a23b78b5f3aef43d4e4292a103327ef6626",
+      "file_bytes": 9208,
+      "title": "close: Dashboard",
+      "ready_file": "p_22a31120.bgp.ready",
+      "ready_sha256": "a353f6cd77cfc4cd66716474f8f33c06a89ad8f6cde3a6bb9eae67f7a515716e"
+    },
+    {
+      "boundary": 43,
+      "bytes": 59028,
+      "count": 113,
+      "empty": 23,
+      "full": 47,
+      "geometry": [
+        400,
+        300,
+        0.0,
+        0.0,
+        0.0,
+        36.0,
+        26.0
+      ],
+      "key": "{\"geometry\":[400,300,0.0,0.0,0.0,36.0,26.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[48.0,4.0,304.0,288.0,0.0]]}",
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          0.0
+        ]
+      ],
+      "file": "p_ffb677a4.bgp",
+      "sha256": "999551c1e4d6f224bc3b7556027111647b9c49649194babfa4cc6ac0825c9bef",
+      "file_bytes": 63124,
+      "title": "Telemetry",
+      "ready_file": "p_ffb677a4.bgp.ready",
+      "ready_sha256": "4a01375802bcd5d105af3e38ff6c9bd0dc95c2adbe9c278c781e7e342250a18a"
+    },
+    {
+      "boundary": 10,
+      "bytes": 12528,
+      "count": 12,
+      "empty": 2,
+      "full": 0,
+      "geometry": [
+        40,
+        100,
+        -16.47105751657935,
+        0.0,
+        0.0,
+        2.88,
+        10.0
+      ],
+      "key": "{\"geometry\":[40,100,-16.47105751657935,0.0,0.0,2.88,10.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[0.0,0.0,40.0,100.0,8.0]]}",
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "file": "p_0fd3d1d5.bgp",
+      "sha256": "0e43f7eed1344a29ff84c70692fc351ae4fd686b9c70fbb4c17e548c119c538a",
+      "file_bytes": 16624,
+      "title": "move: Telemetry",
+      "ready_file": "p_0fd3d1d5.bgp.ready",
+      "ready_sha256": "6860b0fe4895357ceceea7d4e0745d7e730093431f149861f9b23907450a1dcf"
+    },
+    {
+      "boundary": 7,
+      "bytes": 8736,
+      "count": 8,
+      "empty": 1,
+      "full": 0,
+      "geometry": [
+        40,
+        40,
+        16.47105751657935,
+        -10.236460295605365,
+        3.007712876227515,
+        4.0,
+        4.0
+      ],
+      "key": "{\"geometry\":[40,40,16.47105751657935,-10.236460295605365,3.007712876227515,4.0,4.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[0.0,0.0,40.0,40.0,8.0]]}",
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "file": "p_8354521c.bgp",
+      "sha256": "4ee93be57c374da43f6ca4e1dc097ea49ec86f244c49e2f7adf47145e3fa727b",
+      "file_bytes": 12832,
+      "title": "resize_right: Telemetry",
+      "ready_file": "p_8354521c.bgp.ready",
+      "ready_sha256": "ed7bae6337f3ef75127f3e1990aaf52cdf3a911d9df1c85b1ef3faa12deb8fc6"
+    },
+    {
+      "boundary": 6,
+      "bytes": 7584,
+      "count": 8,
+      "empty": 2,
+      "full": 0,
+      "geometry": [
+        40,
+        40,
+        16.47105751657935,
+        10.236460295605365,
+        -3.007712876227515,
+        4.0,
+        4.0
+      ],
+      "key": "{\"geometry\":[40,40,16.47105751657935,10.236460295605365,-3.007712876227515,4.0,4.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[0.0,0.0,40.0,40.0,8.0]]}",
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "file": "p_65a48724.bgp",
+      "sha256": "ba36139da6a9249eae15c3bcb004323c43832ffa5cd62cb6b2bab6c06345515d",
+      "file_bytes": 11680,
+      "title": "close: Telemetry",
+      "ready_file": "p_65a48724.bgp.ready",
+      "ready_sha256": "82ba632d716f35d29985a4f807a2ec3a746f28c86fb77a2084bb0be90d137275"
+    },
+    {
+      "boundary": 43,
+      "bytes": 59616,
+      "count": 120,
+      "empty": 31,
+      "full": 46,
+      "geometry": [
+        400,
+        300,
+        -12.0,
+        0.0,
+        0.0,
+        36.0,
+        26.0
+      ],
+      "key": "{\"geometry\":[400,300,-12.0,0.0,0.0,36.0,26.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[48.0,4.0,304.0,288.0,0.0]]}",
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          0.0
+        ]
+      ],
+      "file": "p_35c04e50.bgp",
+      "sha256": "b7166fc3c11901847ac6ae44a7a4d63390b159c40edd97d0316d8010d45789dc",
+      "file_bytes": 63712,
+      "title": "Telemetry",
+      "ready_file": "p_35c04e50.bgp.ready",
+      "ready_sha256": "8827cae88f53fa94f2c14a6efd7eebb8d6b3c071b33c5a22c69acca37afec0e8"
+    },
+    {
+      "boundary": 13,
+      "bytes": 16152,
+      "count": 14,
+      "empty": 1,
+      "full": 0,
+      "geometry": [
+        40,
+        100,
+        -28.47105751657935,
+        0.0,
+        0.0,
+        2.88,
+        10.0
+      ],
+      "key": "{\"geometry\":[40,100,-28.47105751657935,0.0,0.0,2.88,10.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[0.0,0.0,40.0,100.0,8.0]]}",
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "file": "p_2efb6b14.bgp",
+      "sha256": "00a344f7890640272a6f279dfe38416251dc40a38169d8631fd9095969f54270",
+      "file_bytes": 20248,
+      "title": "move: Telemetry",
+      "ready_file": "p_2efb6b14.bgp.ready",
+      "ready_sha256": "3caab99ff9b00416c8bf4a58ce704e0d227ce69a965e7317b9eb0d5a446b9710"
+    },
+    {
+      "boundary": 6,
+      "bytes": 7416,
+      "count": 6,
+      "empty": 0,
+      "full": 0,
+      "geometry": [
+        40,
+        40,
+        4.47105751657935,
+        -10.236460295605367,
+        3.007712876227515,
+        4.0,
+        4.0
+      ],
+      "key": "{\"geometry\":[40,40,4.47105751657935,-10.236460295605367,3.007712876227515,4.0,4.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[0.0,0.0,40.0,40.0,8.0]]}",
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "file": "p_aee066c9.bgp",
+      "sha256": "fbd3ebed9804136b57644058d8220ede35a6b9d22ec6f00720b9478af49459f0",
+      "file_bytes": 11512,
+      "title": "resize_right: Telemetry",
+      "ready_file": "p_aee066c9.bgp.ready",
+      "ready_sha256": "6a9b457ae7e038e4fbccbd1cf3de4ee14822dedcecb4d69cbd93238550e55001"
+    },
+    {
+      "boundary": 6,
+      "bytes": 7584,
+      "count": 8,
+      "empty": 2,
+      "full": 0,
+      "geometry": [
+        40,
+        40,
+        4.47105751657935,
+        10.236460295605367,
+        -3.007712876227515,
+        4.0,
+        4.0
+      ],
+      "key": "{\"geometry\":[40,40,4.47105751657935,10.236460295605367,-3.007712876227515,4.0,4.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[0.0,0.0,40.0,40.0,8.0]]}",
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "file": "p_e928e8b1.bgp",
+      "sha256": "9a5ea8aebfc254de9c14eb99bf30a94270b5171d9851ad527625450d3bc773ab",
+      "file_bytes": 11680,
+      "title": "close: Telemetry",
+      "ready_file": "p_e928e8b1.bgp.ready",
+      "ready_sha256": "faf60decc39b2aca7e27bc6ae427f30420e2e089dead9bbcbb07a1274df431dc"
+    },
+    {
+      "boundary": 41,
+      "bytes": 57312,
+      "count": 120,
+      "empty": 31,
+      "full": 48,
+      "geometry": [
+        400,
+        300,
+        12.0,
+        0.0,
+        0.0,
+        36.0,
+        26.0
+      ],
+      "key": "{\"geometry\":[400,300,12.0,0.0,0.0,36.0,26.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[48.0,4.0,304.0,288.0,0.0]]}",
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          0.0
+        ]
+      ],
+      "file": "p_dfd3d581.bgp",
+      "sha256": "76b58a3795d8c7377cff8eda9dc4fffb28d7809cd7072f05fbc2e8ffa98ff1d1",
+      "file_bytes": 61408,
+      "title": "Telemetry",
+      "ready_file": "p_dfd3d581.bgp.ready",
+      "ready_sha256": "5ca52d8daabed72bd3395acd8d21d29bdbc720728f2fe139497cc1e1871747d5"
+    },
+    {
+      "boundary": 8,
+      "bytes": 10224,
+      "count": 12,
+      "empty": 4,
+      "full": 0,
+      "geometry": [
+        40,
+        100,
+        -4.47105751657935,
+        0.0,
+        0.0,
+        2.88,
+        10.0
+      ],
+      "key": "{\"geometry\":[40,100,-4.47105751657935,0.0,0.0,2.88,10.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[0.0,0.0,40.0,100.0,8.0]]}",
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "file": "p_aa7336b0.bgp",
+      "sha256": "f7fe63e90c72e14c910962bd3ff259e9ab911c87914d80a34bd5ce4cb5e68108",
+      "file_bytes": 14320,
+      "title": "move: Telemetry",
+      "ready_file": "p_aa7336b0.bgp.ready",
+      "ready_sha256": "7fc7d3368caf167694ee810d7fb216e20ebce834bd4fadc7acf2ac06dde60579"
+    },
+    {
+      "boundary": 5,
+      "bytes": 6264,
+      "count": 6,
+      "empty": 1,
+      "full": 0,
+      "geometry": [
+        40,
+        40,
+        28.47105751657935,
+        -10.236460295605367,
+        3.007712876227515,
+        4.0,
+        4.0
+      ],
+      "key": "{\"geometry\":[40,40,28.47105751657935,-10.236460295605367,3.007712876227515,4.0,4.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[0.0,0.0,40.0,40.0,8.0]]}",
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "file": "p_305101dd.bgp",
+      "sha256": "6ffe67bb6a28959b994e99e0f6e0d313f8742acf3334f4cbff53a4eb5739e36e",
+      "file_bytes": 10360,
+      "title": "resize_right: Telemetry",
+      "ready_file": "p_305101dd.bgp.ready",
+      "ready_sha256": "d3a19e32601e263b3d771165f337ae53dbe4b817f1d6907f1589c9bac23d1ac8"
+    },
+    {
+      "boundary": 4,
+      "bytes": 5112,
+      "count": 6,
+      "empty": 2,
+      "full": 0,
+      "geometry": [
+        40,
+        40,
+        28.47105751657935,
+        10.236460295605367,
+        -3.007712876227515,
+        4.0,
+        4.0
+      ],
+      "key": "{\"geometry\":[40,40,28.47105751657935,10.236460295605367,-3.007712876227515,4.0,4.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[0.0,0.0,40.0,40.0,8.0]]}",
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "file": "p_fe5eb335.bgp",
+      "sha256": "294f8d64881b0a204d2b955e37c2012342ba961a0bb4258eccba7e9509361ffe",
+      "file_bytes": 9208,
+      "title": "close: Telemetry",
+      "ready_file": "p_fe5eb335.bgp.ready",
+      "ready_sha256": "d255fe6c3f6469f8e1e2aaacf21e1404de8aabc4c5c7386665773dabd78f405d"
+    },
+    {
+      "boundary": 48,
+      "bytes": 67392,
+      "count": 144,
+      "empty": 38,
+      "full": 58,
+      "geometry": [
+        400,
+        300,
+        0.0,
+        0.0,
+        0.0,
+        38.0,
+        28.0
+      ],
+      "key": "{\"geometry\":[400,300,0.0,0.0,0.0,38.0,28.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[48.0,4.0,304.0,288.0,0.0]]}",
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          0.0
+        ]
+      ],
+      "file": "p_d23e4284.bgp",
+      "sha256": "b74960da0669eeafd5b724d9417dd7d22f65ab4eedaa2a2e937fcf9fad680a77",
+      "file_bytes": 71488,
+      "title": "SDK Pulse",
+      "ready_file": "p_d23e4284.bgp.ready",
+      "ready_sha256": "552a72509bc7fc26d18b54f9098c47986adc9ba1a2513560eda7d6affc4a53aa"
+    },
+    {
+      "boundary": 11,
+      "bytes": 13680,
+      "count": 12,
+      "empty": 1,
+      "full": 0,
+      "geometry": [
+        40,
+        100,
+        -17.264823078656832,
+        0.0,
+        0.0,
+        2.88,
+        10.0
+      ],
+      "key": "{\"geometry\":[40,100,-17.264823078656832,0.0,0.0,2.88,10.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[0.0,0.0,40.0,100.0,8.0]]}",
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "file": "p_9b589b81.bgp",
+      "sha256": "86766a987a6f121962c7c27d5fb1ee86956171c5cb5d108ed22889c5509f387f",
+      "file_bytes": 17776,
+      "title": "move: SDK Pulse",
+      "ready_file": "p_9b589b81.bgp.ready",
+      "ready_sha256": "56aba4d8efef42e46d9349f2a27db77691c2bca9c0116c5757e7175ad391468d"
+    },
+    {
+      "boundary": 7,
+      "bytes": 8736,
+      "count": 8,
+      "empty": 1,
+      "full": 0,
+      "geometry": [
+        40,
+        40,
+        17.264823078656832,
+        -11.129687987414206,
+        3.433190255028393,
+        4.0,
+        4.0
+      ],
+      "key": "{\"geometry\":[40,40,17.264823078656832,-11.129687987414206,3.433190255028393,4.0,4.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[0.0,0.0,40.0,40.0,8.0]]}",
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "file": "p_b58ba6d8.bgp",
+      "sha256": "4e3448ef18481a2709c7e309a796001e2b179680a3ff20a6c2d3facb45c09cb8",
+      "file_bytes": 12832,
+      "title": "resize_right: SDK Pulse",
+      "ready_file": "p_b58ba6d8.bgp.ready",
+      "ready_sha256": "d6b01e2bd1e588db4453a4feb5cda7dba519c50e8018307cd64deb451d76adca"
+    },
+    {
+      "boundary": 6,
+      "bytes": 7500,
+      "count": 7,
+      "empty": 1,
+      "full": 0,
+      "geometry": [
+        40,
+        40,
+        17.264823078656832,
+        11.129687987414204,
+        -3.433190255028393,
+        4.0,
+        4.0
+      ],
+      "key": "{\"geometry\":[40,40,17.264823078656832,11.129687987414204,-3.433190255028393,4.0,4.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[0.0,0.0,40.0,40.0,8.0]]}",
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "file": "p_ed02af3c.bgp",
+      "sha256": "aa5ba2afe374d3a2456d60f788358cb02095ca564bd17ff7a2d2768b97c19eca",
+      "file_bytes": 11596,
+      "title": "close: SDK Pulse",
+      "ready_file": "p_ed02af3c.bgp.ready",
+      "ready_sha256": "40ad3c4fcb35796f532985e24519eb2e403255406a0d8b66c9d2d87d9e463c94"
+    },
+    {
+      "boundary": 47,
+      "bytes": 65904,
+      "count": 140,
+      "empty": 33,
+      "full": 60,
+      "geometry": [
+        400,
+        300,
+        -12.0,
+        0.0,
+        0.0,
+        38.0,
+        28.0
+      ],
+      "key": "{\"geometry\":[400,300,-12.0,0.0,0.0,38.0,28.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[48.0,4.0,304.0,288.0,0.0]]}",
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          0.0
+        ]
+      ],
+      "file": "p_eb5f5130.bgp",
+      "sha256": "aca4fd03009cd19638076f288b3be212b58bd88e1a0cff24e7f3ad236f58f96c",
+      "file_bytes": 70000,
+      "title": "SDK Pulse",
+      "ready_file": "p_eb5f5130.bgp.ready",
+      "ready_sha256": "0e36254084b4a443e07a9f10e1b879bf985a0e5286a486cc0bf6feaa54c5a403"
+    },
+    {
+      "boundary": 12,
+      "bytes": 14916,
+      "count": 13,
+      "empty": 1,
+      "full": 0,
+      "geometry": [
+        40,
+        100,
+        -29.264823078656832,
+        0.0,
+        0.0,
+        2.88,
+        10.0
+      ],
+      "key": "{\"geometry\":[40,100,-29.264823078656832,0.0,0.0,2.88,10.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[0.0,0.0,40.0,100.0,8.0]]}",
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "file": "p_28e783c2.bgp",
+      "sha256": "2f8b643fdb8fa4eb75a13105fcc9e5d881076bf14f84bfe4e7c873cdc3e94cac",
+      "file_bytes": 19012,
+      "title": "move: SDK Pulse",
+      "ready_file": "p_28e783c2.bgp.ready",
+      "ready_sha256": "570c6433d2531988d9389741d4216d67744f48b904ede6f5c43b6bd5dd2df004"
+    },
+    {
+      "boundary": 5,
+      "bytes": 6180,
+      "count": 5,
+      "empty": 0,
+      "full": 0,
+      "geometry": [
+        40,
+        40,
+        5.264823078656832,
+        -11.129687987414208,
+        3.433190255028393,
+        4.0,
+        4.0
+      ],
+      "key": "{\"geometry\":[40,40,5.264823078656832,-11.129687987414208,3.433190255028393,4.0,4.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[0.0,0.0,40.0,40.0,8.0]]}",
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "file": "p_547be5c3.bgp",
+      "sha256": "145b4830da2327f6651e6f06bbcbb8bc4970a62d2f3fd6c0efe5026b473ca81b",
+      "file_bytes": 10276,
+      "title": "resize_right: SDK Pulse",
+      "ready_file": "p_547be5c3.bgp.ready",
+      "ready_sha256": "9f25d01941af3fb504bd456f0c144a4a5169f0e236531572792766f0207d2723"
+    },
+    {
+      "boundary": 4,
+      "bytes": 5112,
+      "count": 6,
+      "empty": 2,
+      "full": 0,
+      "geometry": [
+        40,
+        40,
+        5.264823078656832,
+        11.129687987414208,
+        -3.433190255028393,
+        4.0,
+        4.0
+      ],
+      "key": "{\"geometry\":[40,40,5.264823078656832,11.129687987414208,-3.433190255028393,4.0,4.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[0.0,0.0,40.0,40.0,8.0]]}",
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "file": "p_ee1c1215.bgp",
+      "sha256": "b0bf386c4ab5a15e65e51a77a57c3793f61b65e0208f3db333e389fcf26de98f",
+      "file_bytes": 9208,
+      "title": "close: SDK Pulse",
+      "ready_file": "p_ee1c1215.bgp.ready",
+      "ready_sha256": "8fd331f6183dfe5c060407d37ecbf3af8175b3f06ef61377a1f96c7a91999d90"
+    },
+    {
+      "boundary": 45,
+      "bytes": 63600,
+      "count": 140,
+      "empty": 36,
+      "full": 59,
+      "geometry": [
+        400,
+        300,
+        12.0,
+        0.0,
+        0.0,
+        38.0,
+        28.0
+      ],
+      "key": "{\"geometry\":[400,300,12.0,0.0,0.0,38.0,28.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[48.0,4.0,304.0,288.0,0.0]]}",
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          0.0
+        ]
+      ],
+      "file": "p_c0dbef25.bgp",
+      "sha256": "8e049b955e62bd77147493aefc885bff1d5db4c04a85860cc457cea065170dcd",
+      "file_bytes": 67696,
+      "title": "SDK Pulse",
+      "ready_file": "p_c0dbef25.bgp.ready",
+      "ready_sha256": "bfad880c6e7c2614b504d0bf1c1c342b92827b6d6f152ebf5bb49e91bd9ece49"
+    },
+    {
+      "boundary": 11,
+      "bytes": 13848,
+      "count": 14,
+      "empty": 3,
+      "full": 0,
+      "geometry": [
+        40,
+        100,
+        -5.264823078656832,
+        0.0,
+        0.0,
+        2.88,
+        10.0
+      ],
+      "key": "{\"geometry\":[40,100,-5.264823078656832,0.0,0.0,2.88,10.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[0.0,0.0,40.0,100.0,8.0]]}",
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "file": "p_d0685fde.bgp",
+      "sha256": "4fed82f58f15c2847c5f4d16c7384f43ee1dcf762067347ee85e0f70a7134ec6",
+      "file_bytes": 17944,
+      "title": "move: SDK Pulse",
+      "ready_file": "p_d0685fde.bgp.ready",
+      "ready_sha256": "20ef153c5da397b16153488073dea49032186996574099a4f46234ac32a0d8ac"
+    },
+    {
+      "boundary": 4,
+      "bytes": 5112,
+      "count": 6,
+      "empty": 2,
+      "full": 0,
+      "geometry": [
+        40,
+        40,
+        29.264823078656832,
+        -11.129687987414206,
+        3.433190255028393,
+        4.0,
+        4.0
+      ],
+      "key": "{\"geometry\":[40,40,29.264823078656832,-11.129687987414206,3.433190255028393,4.0,4.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[0.0,0.0,40.0,40.0,8.0]]}",
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "file": "p_461dbc69.bgp",
+      "sha256": "5ffc2a5a3dfe78a174aea17da12f3421a780e6e62632cfc4cc08e233fe46beea",
+      "file_bytes": 9208,
+      "title": "resize_right: SDK Pulse",
+      "ready_file": "p_461dbc69.bgp.ready",
+      "ready_sha256": "73cbab047ea5d7d1d7459d94286d07f2a6d9e4cc40ac42d3801bcd1d0505ff50"
+    },
+    {
+      "boundary": 7,
+      "bytes": 8736,
+      "count": 8,
+      "empty": 1,
+      "full": 0,
+      "geometry": [
+        40,
+        40,
+        29.264823078656832,
+        11.129687987414204,
+        -3.433190255028393,
+        4.0,
+        4.0
+      ],
+      "key": "{\"geometry\":[40,40,29.264823078656832,11.129687987414204,-3.433190255028393,4.0,4.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[0.0,0.0,40.0,40.0,8.0]]}",
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "file": "p_ed7ec7ad.bgp",
+      "sha256": "871bcc04221e0c8f5e0526bc4e19cbd7abddd929af2a02865cb25d27954274b2",
+      "file_bytes": 12832,
+      "title": "close: SDK Pulse",
+      "ready_file": "p_ed7ec7ad.bgp.ready",
+      "ready_sha256": "37f20ccea820c42dbeba92ffb9fdb67b412b3d24b6774549d751735c8b5b29df"
+    }
+  ],
+  "catalog": {
+    "version": 1,
+    "owner": "HAEBANCHEON / BoAYO",
+    "applications": [
+      {
+        "kind": "dashboard",
+        "placements": [
+          [
+            0,
+            0
+          ],
+          [
+            -12,
+            0
+          ],
+          [
+            12,
+            0
+          ]
+        ]
+      },
+      {
+        "kind": "telemetry",
+        "placements": [
+          [
+            0,
+            0
+          ],
+          [
+            -12,
+            0
+          ],
+          [
+            12,
+            0
+          ]
+        ]
+      },
+      {
+        "kind": "sdk-pulse",
+        "placements": [
+          [
+            0,
+            0
+          ],
+          [
+            -12,
+            0
+          ],
+          [
+            12,
+            0
+          ]
+        ]
+      }
+    ],
+    "shared_components": [
+      "move",
+      "resize_right",
+      "close"
+    ],
+    "fallback": "Uncatalogued geometry remains functional through CPU computation. No angle snapping or feature removal."
+  },
+  "generator_binary_sha256": "9833d0106b6d2163e1e8a34d24a5a14a8b6fb9ab99be6c9842d9dd7039c73d32",
+  "bootstrap": "p_f67a8c0f.bgp",
+  "total_bytes": 1047424
+}

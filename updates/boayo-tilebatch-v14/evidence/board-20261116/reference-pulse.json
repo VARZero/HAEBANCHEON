@@ -1,0 +1,35 @@
+{
+  "result": "PASS_PHYSICAL_UPDATES",
+  "label": "reference-pulse",
+  "executable": "/tmp/boayo-reference",
+  "app": "pulse",
+  "profile": 0,
+  "frames": 28,
+  "seconds_per_update": 2.3910937907142835,
+  "snapshot_span": 66.95062613999994,
+  "cache_before": {
+    "capacity_bytes": 4194304,
+    "evictions": 0,
+    "full_uploads": 5,
+    "partial_uploads": 10,
+    "resident_bytes": 1430400,
+    "resident_windows": 5,
+    "reuses": 10,
+    "staged_copy_bytes": 3528,
+    "upload_bytes": 1856328,
+    "upload_calls": 18
+  },
+  "cache_after": {
+    "capacity_bytes": 4194304,
+    "evictions": 0,
+    "full_uploads": 5,
+    "partial_uploads": 38,
+    "resident_bytes": 1430400,
+    "resident_windows": 5,
+    "reuses": 38,
+    "staged_copy_bytes": 3528,
+    "upload_bytes": 2931528,
+    "upload_calls": 46
+  },
+  "software": {}
+}

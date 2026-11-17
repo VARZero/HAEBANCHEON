@@ -1,0 +1,2 @@
+#pragma once
+#define BOAYO_PLAN_REV "746089fe5e66eb1cf0d915a35257922c1192742b73d0ede1d099181cbfb03cdc"

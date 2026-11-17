@@ -1,0 +1,2 @@
+PASS dirty texture pool: pixel oracle, 100 random recipes, 60 CPU edits, skipped updates, multiwindow reuse, eviction, failure
+{"capacity_bytes":32768,"evictions":2,"full_uploads":4,"partial_uploads":126,"resident_bytes":0,"resident_windows":0,"reuses":10,"staged_copy_bytes":37476,"upload_bytes":157984,"upload_calls":1681}

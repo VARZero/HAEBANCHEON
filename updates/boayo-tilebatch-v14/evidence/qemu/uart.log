@@ -1,0 +1,2977 @@
+
+OpenSBI v1.8.1
+   ____                    _____ ____ _____
+  / __ \                  / ____|  _ \_   _|
+ | |  | |_ __   ___ _ __ | (___ | |_) || |
+ | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
+ | |__| | |_) |  __/ | | |____) | |_) || |_
+  \____/| .__/ \___|_| |_|_____/|____/_____|
+        | |
+        |_|
+
+Platform Name               : HAEBANCHEON 3d5i L1-16K DMA3
+Platform Features           : medeleg
+Platform HART Count         : 1
+Platform HART Protection    : pmp
+Platform IPI Device         : ---
+Platform Timer Device       : aclint-mtimer @ 50000000Hz
+Platform Console Device     : uart8250
+Platform HSM Device         : ---
+Platform PMU Device         : ---
+Platform Reboot Device      : ---
+Platform Shutdown Device    : ---
+Platform Suspend Device     : ---
+Platform CPPC Device        : ---
+Firmware Base               : 0x80000000
+Firmware Size               : 309 KB
+Firmware RW Offset          : 0x40000
+Firmware RW Size            : 53 KB
+Firmware Heap Offset        : 0x44000
+Firmware Heap Size          : 37 KB (total), 0 KB (reserved), 10 KB (used), 26 KB (free)
+Firmware Scratch Size       : 4096 B (total), 232 B (used), 3864 B (free)
+Runtime SBI Version         : 3.0
+Standard SBI Extensions     : time,rfnc,ipi,base,hsm,pmu,dbcn,fwft,legacy,dbtr,sse
+Experimental SBI Extensions : none
+
+Domain0 Name                : root
+Domain0 Boot HART           : 0
+Domain0 HARTs               : 0*
+Domain0 Region00            : 0x80040000-0x8004ffff M: (F,R,W) S/U: ()
+Domain0 Region01            : 0x80000000-0x8003ffff M: (F,R,X) S/U: ()
+Domain0 Region02            : 0x02004000-0x02004007 M: (I,R,W) S/U: ()
+Domain0 Region03            : 0x0200bff8-0x0200bfff M: (I,R,W) S/U: ()
+Domain0 Region04            : 0x10000000-0x10000fff M: (I,R,W) S/U: (R,W)
+Domain0 Region05            : 0x00000000-0xffffffff M: () S/U: (R,W,X)
+Domain0 Next Address        : 0x80400000
+Domain0 Next Arg1           : 0x87f00000
+Domain0 Next Mode           : S-mode
+Domain0 SysReset            : yes
+Domain0 SysSuspend          : yes
+
+Boot HART ID                : 0
+Boot HART Domain            : root
+Boot HART Priv Version      : v1.12
+Boot HART Base ISA          : rv32imah
+Boot HART ISA Extensions    : sstc,zicntr,zihpm,sdtrig,svade
+Boot HART PMP Count         : 16
+Boot HART PMP Granularity   : 2 bits
+Boot HART PMP Address Bits  : 32
+Boot HART MHPM Info         : 16 (0x0007fff8)
+Boot HART Debug Triggers    : 2 triggers
+Boot HART MIDELEG           : 0x00001666
+Boot HART MEDELEG           : 0x00f0b509
+Linux version 6.12.0-haebancheon-tilebatch14 (haebancheon@kfb) (riscv64-linux-gnu-gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, GNU ld (GNU Binutils for Ubuntu) 2.42) #1 2026-11-15 00:00:00 UTC
+OF: fdt: Ignoring memory range 0x80000000 - 0x80400000
+Machine model: HAEBANCHEON 3d5i L1-16K DMA3
+SBI specification v3.0 detected
+SBI implementation ID=0x1 Version=0x10008
+SBI TIME extension detected
+SBI IPI extension detected
+SBI RFENCE extension detected
+SBI DBCN extension detected
+earlycon: sbi0 at I/O port 0x0 (options '')
+printk: legacy bootconsole [sbi0] enabled
+printk: debug: ignoring loglevel setting.
+printk: debug: skip boot console de-registration.
+OF: reserved mem: 0x80000000..0x8003ffff (256 KiB) nomap non-reusable mmode_resv1@80000000
+OF: reserved mem: 0x80040000..0x8004ffff (64 KiB) nomap non-reusable mmode_resv0@80040000
+OF: reserved mem: 0xbd000000..0xbdffffff (16384 KiB) nomap non-reusable dma-pool@bd000000
+OF: reserved mem: 0xbf800000..0xbfffffff (8192 KiB) nomap non-reusable framebuffer@bf800000
+Zone ranges:
+  Normal   [mem 0x0000000080400000-0x00000000bfffffff]
+Movable zone start for each node
+Early memory node ranges
+  node   0: [mem 0x0000000080400000-0x00000000bcffffff]
+  node   0: [mem 0x00000000bd000000-0x00000000bdffffff]
+  node   0: [mem 0x00000000be000000-0x00000000bf7fffff]
+  node   0: [mem 0x00000000bf800000-0x00000000bfffffff]
+Initmem setup node 0 [mem 0x0000000080400000-0x00000000bfffffff]
+riscv: base ISA extensions aim
+riscv: ELF capabilities aim
+pcpu-alloc: s0 r0 d32768 u32768 alloc=1*32768
+pcpu-alloc: [0] 0 
+Kernel command line: earlycon=sbi console=hvc0 loglevel=7 nokaslr lpj=1000000 rdinit=/init initcall_debug ignore_loglevel keep_bootcon printk.time=1
+[    0.000000] Dentry cache hash table entries: 131072 (order: 7, 524288 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 65536 (order: 6, 262144 bytes, linear)
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 261120
+[    0.000000] mem auto-init: stack:all(zero), heap alloc:off, heap free:off
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    0.000000] NR_IRQS: 64, nr_irqs: 64, preallocated irqs: 0
+[    0.000000] riscv-intc: 32 local interrupts mapped
+[    0.000000] clocksource: riscv_clocksource: mask: 0xffffffffffffffff max_cycles: 0xb8812736b, max_idle_ns: 440795202655 ns
+[    0.000018] sched_clock: 64 bits at 50MHz, resolution 20ns, wraps every 4398046511100ns
+[    0.000717] Calibrating delay loop (skipped) preset value.. 200.00 BogoMIPS (lpj=1000000)
+[    0.000762] pid_max: default: 32768 minimum: 301
+[    0.001097] Mount-cache hash table entries: 2048 (order: 1, 8192 bytes, linear)
+[    0.001131] Mountpoint-cache hash table entries: 2048 (order: 1, 8192 bytes, linear)
+[    0.002508] ORY_BOOT kernel_init_freeable enter
+[    0.003086] calling  0xc028eb44 @ 1
+[    0.003149] ASID allocator using 9 bits (512 entries)
+[    0.003183] initcall 0xc028eb44 returned 0 after 0 usecs
+[    0.003209] calling  0xc028f298 @ 1
+[    0.003320] initcall 0xc028f298 returned 0 after 0 usecs
+[    0.003359] calling  0xc02917f8 @ 1
+[    0.003397] initcall 0xc02917f8 returned 0 after 0 usecs
+[    0.003422] calling  0xc0292944 @ 1
+[    0.003442] initcall 0xc0292944 returned 0 after 0 usecs
+[    0.003466] calling  0xc0295784 @ 1
+[    0.003487] initcall 0xc0295784 returned 0 after 0 usecs
+[    0.003591] Memory: 967948K/1044480K available (2595K kernel code, 493K rwdata, 301K rodata, 36845K init, 186K bss, 74984K reserved, 0K cma-reserved)
+[    0.004385] devtmpfs: initialized
+[    0.005163] calling  0xc029b9a8 @ 1
+[    0.005185] initcall 0xc029b9a8 returned 0 after 0 usecs
+[    0.005211] calling  0xc028f964 @ 1
+[    0.005245] initcall 0xc028f964 returned 0 after 0 usecs
+[    0.005268] calling  0xc0290824 @ 1
+[    0.005297] initcall 0xc0290824 returned 0 after 0 usecs
+[    0.005318] calling  0xc0292320 @ 1
+[    0.005341] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+[    0.005378] initcall 0xc0292320 returned 0 after 0 usecs
+[    0.005398] calling  0xc029283c @ 1
+[    0.005419] futex hash table entries: 256 (order: -1, 3072 bytes, linear)
+[    0.005450] initcall 0xc029283c returned 0 after 0 usecs
+[    0.005472] calling  0xc029a3f4 @ 1
+[    0.005505] initcall 0xc029a3f4 returned 0 after 0 usecs
+[    0.005529] calling  0xc029a4dc @ 1
+[    0.005551] initcall 0xc029a4dc returned 0 after 0 usecs
+[    0.005572] calling  0xc029a508 @ 1
+[    0.005589] initcall 0xc029a508 returned 0 after 0 usecs
+[    0.005609] calling  0xc01cf000 @ 1
+[    0.005627] initcall 0xc01cf000 returned 0 after 0 usecs
+[    0.005647] calling  0xc02a2bf4 @ 1
+[    0.005701] initcall 0xc02a2bf4 returned 0 after 0 usecs
+[    0.005724] calling  0xc02a2cb8 @ 1
+[    0.005740] initcall 0xc02a2cb8 returned 0 after 0 usecs
+[    0.005760] calling  0xc02a2ccc @ 1
+[    0.005781] initcall 0xc02a2ccc returned 0 after 0 usecs
+[    0.005801] calling  0xc02a3158 @ 1
+[    0.005828] initcall 0xc02a3158 returned 0 after 0 usecs
+[    0.005855] calling  0xc02a3c28 @ 1
+[    0.005971] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+[    0.006184] initcall 0xc02a3c28 returned 0 after 0 usecs
+[    0.006209] calling  0xc02a3e30 @ 1
+[    0.006308] initcall 0xc02a3e30 returned 0 after 0 usecs
+[    0.006335] calling  0xc02919d0 @ 1
+[    0.006381] initcall 0xc02919d0 returned 0 after 0 usecs
+[    0.006406] calling  0xc0292d18 @ 1
+[    0.006442] initcall 0xc0292d18 returned 0 after 0 usecs
+[    0.006464] calling  0xc0292d68 @ 1
+[    0.006485] initcall 0xc0292d68 returned 0 after 0 usecs
+[    0.006506] calling  0xc0296020 @ 1
+[    0.006570] initcall 0xc0296020 returned 0 after 0 usecs
+[    0.006593] calling  0xc029dc64 @ 1
+[    0.006613] initcall 0xc029dc64 returned 0 after 0 usecs
+[    0.006638] calling  0xc029ec4c @ 1
+[    0.006688] initcall 0xc029ec4c returned 0 after 0 usecs
+[    0.006710] calling  0xc029f4cc @ 1
+[    0.006730] initcall 0xc029f4cc returned 0 after 0 usecs
+[    0.006751] calling  0xc02a44ec @ 1
+[    0.006779] initcall 0xc02a44ec returned 0 after 0 usecs
+[    0.006804] calling  0xc028cb24 @ 1
+[    0.006836] initcall 0xc028cb24 returned 0 after 0 usecs
+[    0.006857] calling  0xc028df14 @ 1
+[    0.006881] initcall 0xc028df14 returned 0 after 0 usecs
+[    0.006902] calling  0xc0004b64 @ 1
+[    0.060741] cpu0: Ratio of byte access time to unaligned word access is 3.88, unaligned accesses are fast
+[    0.060832] initcall 0xc0004b64 returned 0 after 60000 usecs
+[    0.060858] calling  0xc029db74 @ 1
+[    0.060923] initcall 0xc029db74 returned 0 after 0 usecs
+[    0.060946] calling  0xc029d99c @ 1
+[    0.060978] initcall 0xc029d99c returned 0 after 0 usecs
+[    0.060999] calling  0xc01bb7bc @ 1
+[    0.061131] initcall 0xc01bb7bc returned 0 after 0 usecs
+[    0.061156] calling  0xc028dd84 @ 1
+[    0.061242] initcall 0xc028dd84 returned 0 after 0 usecs
+[    0.061266] calling  0xc0004aec @ 1
+[    0.061289] initcall 0xc0004aec returned 0 after 0 usecs
+[    0.061309] calling  0xc02a085c @ 1
+[    0.062135] initcall 0xc02a085c returned 0 after 0 usecs
+[    0.062210] calling  0xc028f7e0 @ 1
+[    0.062241] initcall 0xc028f7e0 returned 0 after 0 usecs
+[    0.062262] calling  0xc0290334 @ 1
+[    0.062283] initcall 0xc0290334 returned 0 after 0 usecs
+[    0.062304] calling  0xc0290b40 @ 1
+[    0.062324] initcall 0xc0290b40 returned 0 after 0 usecs
+[    0.062344] calling  0xc0290f2c @ 1
+[    0.062368] initcall 0xc0290f2c returned 0 after 0 usecs
+[    0.062388] calling  0xc02929b8 @ 1
+[    0.062435] initcall 0xc02929b8 returned 0 after 0 usecs
+[    0.062458] calling  0xc0292c0c @ 1
+[    0.062476] initcall 0xc0292c0c returned 0 after 0 usecs
+[    0.062497] calling  0xc0292d24 @ 1
+[    0.062575] initcall 0xc0292d24 returned 0 after 0 usecs
+[    0.062598] calling  0xc02947f0 @ 1
+[    0.062615] initcall 0xc02947f0 returned 0 after 0 usecs
+[    0.062635] calling  0xc02957c0 @ 1
+[    0.062650] initcall 0xc02957c0 returned 0 after 0 usecs
+[    0.062670] calling  0xc007bf98 @ 1
+[    0.062689] initcall 0xc007bf98 returned 0 after 0 usecs
+[    0.062709] calling  0xc007bf70 @ 1
+[    0.062726] initcall 0xc007bf70 returned 0 after 0 usecs
+[    0.062746] calling  0xc0298a2c @ 1
+[    0.062770] initcall 0xc0298a2c returned 0 after 0 usecs
+[    0.062792] calling  0xc0298af0 @ 1
+[    0.062816] initcall 0xc0298af0 returned 0 after 0 usecs
+[    0.062838] calling  0xc029ba00 @ 1
+[    0.062900] initcall 0xc029ba00 returned 0 after 0 usecs
+[    0.062924] calling  0xc029bb30 @ 1
+[    0.063028] initcall 0xc029bb30 returned 0 after 0 usecs
+[    0.063051] calling  0xc029bcb8 @ 1
+[    0.063073] initcall 0xc029bcb8 returned 0 after 0 usecs
+[    0.063095] calling  0xc029bd20 @ 1
+[    0.063116] initcall 0xc029bd20 returned 0 after 0 usecs
+[    0.063137] calling  0xc029bdd0 @ 1
+[    0.063199] initcall 0xc029bdd0 returned 0 after 0 usecs
+[    0.063222] calling  0xc029eb78 @ 1
+[    0.063289] initcall 0xc029eb78 returned 0 after 0 usecs
+[    0.063316] calling  0xc01cf034 @ 1
+[    0.063341] initcall 0xc01cf034 returned 0 after 0 usecs
+[    0.063362] calling  0xc029febc @ 1
+[    0.063397] initcall 0xc029febc returned 0 after 0 usecs
+[    0.063418] calling  0xc02a2cc0 @ 1
+[    0.063438] initcall 0xc02a2cc0 returned 0 after 0 usecs
+[    0.063460] calling  0xc02a31c0 @ 1
+[    0.064153] initcall 0xc02a31c0 returned 0 after 0 usecs
+[    0.064182] calling  0xc02a34d4 @ 1
+[    0.064205] initcall 0xc02a34d4 returned 0 after 0 usecs
+[    0.064226] calling  0xc02a3928 @ 1
+[    0.064243] initcall 0xc02a3928 returned 0 after 0 usecs
+[    0.064263] calling  0xc02a3968 @ 1
+[    0.064567] initcall 0xc02a3968 returned 0 after 0 usecs
+[    0.064592] calling  0xc02a3e7c @ 1
+[    0.064676] initcall 0xc02a3e7c returned 0 after 0 usecs
+[    0.064699] calling  0xc02a46e4 @ 1
+[    0.064721] initcall 0xc02a46e4 returned 0 after 0 usecs
+[    0.064747] calling  0xc028f3b8 @ 1
+[    0.064800] initcall 0xc028f3b8 returned 0 after 0 usecs
+[    0.064823] calling  0xc029226c @ 1
+[C0]
+[C1]
+[C2]
+[N0]
+[X0]
+[X1]
+[X2]
+[X3]
+[X4]
+[X5]
+[N1]
+[    0.064939] clocksource: Switched to clocksource riscv_clocksource
+[C3]
+[C4]
+[    0.064989] initcall 0xc029226c returned 0 after 83 usecs
+[    0.065019] calling  0xc0299114 @ 1
+[    0.065053] initcall 0xc0299114 returned 0 after 18 usecs
+[    0.065078] calling  0xc029a220 @ 1
+[    0.065119] initcall 0xc029a220 returned 0 after 24 usecs
+[    0.065143] calling  0xc029a334 @ 1
+[    0.065176] initcall 0xc029a334 returned 0 after 16 usecs
+[    0.065201] calling  0xc029a3b4 @ 1
+[    0.065224] initcall 0xc029a3b4 returned 0 after 7 usecs
+[    0.065247] calling  0xc029a598 @ 1
+[    0.065281] initcall 0xc029a598 returned 0 after 18 usecs
+[    0.065304] calling  0xc029a5b4 @ 1
+[    0.065333] initcall 0xc029a5b4 returned 0 after 14 usecs
+[    0.065354] calling  0xc029a904 @ 1
+[    0.065373] initcall 0xc029a904 returned 0 after 4 usecs
+[    0.065395] calling  0xc029a960 @ 1
+[    0.065413] initcall 0xc029a960 returned 0 after 3 usecs
+[    0.065433] calling  0xc029a9a0 @ 1
+[    0.065455] initcall 0xc029a9a0 returned 0 after 7 usecs
+[    0.065476] calling  0xc029a9d8 @ 1
+[    0.065496] initcall 0xc029a9d8 returned 0 after 4 usecs
+[    0.065517] calling  0xc029aa24 @ 1
+[    0.065537] initcall 0xc029aa24 returned 0 after 3 usecs
+[    0.065565] calling  0xc029aa64 @ 1
+[    0.065586] initcall 0xc029aa64 returned 0 after 4 usecs
+[    0.065606] calling  0xc029aaac @ 1
+[    0.065625] initcall 0xc029aaac returned 0 after 4 usecs
+[    0.065645] calling  0xc029aaf4 @ 1
+[    0.065664] initcall 0xc029aaf4 returned 0 after 3 usecs
+[    0.065685] calling  0xc029ab2c @ 1
+[    0.065702] initcall 0xc029ab2c returned 0 after 3 usecs
+[    0.065722] calling  0xc029ab74 @ 1
+[    0.065740] initcall 0xc029ab74 returned 0 after 3 usecs
+[    0.065761] calling  0xc029abbc @ 1
+[    0.065782] initcall 0xc029abbc returned 0 after 3 usecs
+[    0.065802] calling  0xc029ad44 @ 1
+[    0.065822] initcall 0xc029ad44 returned 0 after 5 usecs
+[    0.065844] calling  0xc029ad7c @ 1
+[    0.065864] initcall 0xc029ad7c returned 0 after 4 usecs
+[    0.065885] calling  0xc029b998 @ 1
+[    0.065901] initcall 0xc029b998 returned 0 after 1 usecs
+[    0.065922] calling  0xc029e864 @ 1
+[    0.066339] initcall 0xc029e864 returned 0 after 402 usecs
+[    0.066365] calling  0xc02a3b64 @ 1
+[    0.066385] initcall 0xc02a3b64 returned 0 after 5 usecs
+[    0.066409] calling  0xc02a3ef4 @ 1
+[    0.066437] NET: Registered PF_UNIX/PF_LOCAL protocol family
+[    0.066474] initcall 0xc02a3ef4 returned 0 after 50 usecs
+[    0.066496] calling  0xc028c638 @ 1
+[    0.066571] initcall 0xc028c638 returned 0 after 59 usecs
+[    0.066596] calling  0xc028d84c @ 1
+[    0.066613] initcall 0xc028d84c returned 0 after 1 usecs
+[    0.066635] calling  0xc028efe4 @ 1
+[    0.066657] initcall 0xc028efe4 returned 0 after 6 usecs
+[    0.066678] calling  0xc028f020 @ 1
+[    0.066694] initcall 0xc028f020 returned 0 after 1 usecs
+[    0.066714] calling  0xc028f33c @ 1
+[    0.066733] initcall 0xc028f33c returned 0 after 5 usecs
+[    0.066754] calling  0xc0291e54 @ 1
+[    0.066774] initcall 0xc0291e54 returned 0 after 2 usecs
+[    0.066794] calling  0xc0292184 @ 1
+[    0.066833] initcall 0xc0292184 returned 0 after 23 usecs
+[    0.066856] calling  0xc0292344 @ 1
+[    0.066875] initcall 0xc0292344 returned 0 after 4 usecs
+[    0.066896] calling  0xc0292390 @ 1
+[    0.066946] initcall 0xc0292390 returned 0 after 35 usecs
+[    0.066969] calling  0xc02923f4 @ 1
+[    0.066992] initcall 0xc02923f4 returned 0 after 7 usecs
+[    0.067013] calling  0xc0292454 @ 1
+[    0.067047] initcall 0xc0292454 returned 0 after 19 usecs
+[    0.067069] calling  0xc02924e4 @ 1
+[    0.067086] initcall 0xc02924e4 returned 0 after 2 usecs
+[    0.067107] calling  0xc02928dc @ 1
+[    0.067128] initcall 0xc02928dc returned 0 after 7 usecs
+[    0.067150] calling  0xc0292b58 @ 1
+[    0.067282] ORY_BOOT rootfs begin compressed_bytes=37593600
+[    0.070810] initcall 0xc0292b58 returned 0 after 3644 usecs
+[    0.070852] calling  0xc0295648 @ 1
+[    0.070873] workingset: timestamp_bits=30 max_order=18 bucket_order=0
+[    0.070904] initcall 0xc0295648 returned 0 after 37 usecs
+[    0.070925] calling  0xc02958b4 @ 1
+[    0.070949] initcall 0xc02958b4 returned 0 after 9 usecs
+[    0.070970] calling  0xc0298ab8 @ 1
+[    0.070989] initcall 0xc0298ab8 returned 0 after 3 usecs
+[    0.071012] calling  0xc0299180 @ 1
+[    0.071036] initcall 0xc0299180 returned 0 after 9 usecs
+[    0.071057] calling  0xc0299434 @ 1
+[    0.071080] initcall 0xc0299434 returned 0 after 5 usecs
+[    0.071104] calling  0xc0299820 @ 1
+[    0.071128] initcall 0xc0299820 returned 0 after 8 usecs
+[    0.071149] calling  0xc029a534 @ 1
+[    0.071170] initcall 0xc029a534 returned 0 after 6 usecs
+[    0.071192] calling  0xc029af5c @ 1
+[    0.071209] initcall 0xc029af5c returned 0 after 2 usecs
+[    0.071229] calling  0xc029b324 @ 1
+[    0.071324] initcall 0xc029b324 returned 0 after 80 usecs
+[    0.071348] calling  0xc029b810 @ 1
+[    0.071394] initcall 0xc029b810 returned 0 after 31 usecs
+[    0.071416] calling  0xc029bb14 @ 1
+[    0.071440] initcall 0xc029bb14 returned 0 after 9 usecs
+[    0.071462] calling  0xc029be38 @ 1
+[    0.071482] initcall 0xc029be38 returned 0 after 5 usecs
+[    0.071502] calling  0xc029c5c8 @ 1
+[    0.071527] io scheduler mq-deadline registered
+[    0.071546] initcall 0xc029c5c8 returned 0 after 29 usecs
+[    0.071569] calling  0xc029c5d8 @ 1
+[    0.071593] io scheduler kyber registered
+[    0.071610] initcall 0xc029c5d8 returned 0 after 25 usecs
+[    0.071631] calling  0xc029c5e8 @ 1
+[    0.071655] io scheduler bfq registered
+[    0.071673] initcall 0xc029c5e8 returned 0 after 30 usecs
+[    0.071694] calling  0xc029c694 @ 1
+[    0.071708] initcall 0xc029c694 returned 0 after 1 usecs
+[    0.071727] calling  0xc029c894 @ 1
+[    0.071762] initcall 0xc029c894 returned 0 after 18 usecs
+[    0.071784] calling  0xc029d3b0 @ 1
+[    0.071807] initcall 0xc029d3b0 returned 0 after 9 usecs
+[    0.071829] calling  0xc029d3c0 @ 1
+[    0.072256] riscv-plic: interrupt-controller@c000000: mapped 4 interrupts with 1 handlers for 2 contexts.
+[    0.072431] probe of c000000.interrupt-controller returned 0 after 560 usecs
+[    0.072478] initcall 0xc029d3c0 returned 0 after 634 usecs
+[    0.072501] calling  0xc029d3dc @ 1
+[    0.072550] probe of soc returned 0 after 27 usecs
+[    0.072579] initcall 0xc029d3dc returned 0 after 62 usecs
+[    0.072600] calling  0xc029d8dc @ 1
+[    0.072624] initcall 0xc029d8dc returned 0 after 8 usecs
+[    0.072645] calling  0xc029d934 @ 1
+[    0.072672] initcall 0xc029d934 returned 0 after 9 usecs
+[    0.072693] calling  0xc029d98c @ 1
+[    0.072717] initcall 0xc029d98c returned 0 after 8 usecs
+[    0.072738] calling  0xc029dc54 @ 1
+[    0.073098] probe of 10009000.dma-controller returned 0 after 340 usecs
+[    0.073182] probe of 1000a000.dma-controller returned 0 after 52 usecs
+[    0.073255] probe of 1000b000.dma-controller returned 0 after 43 usecs
+[    0.073287] initcall 0xc029dc54 returned 0 after 534 usecs
+[    0.073313] calling  0xc029ddc0 @ 1
+[    0.073333] initcall 0xc029ddc0 returned 0 after 6 usecs
+[    0.073354] calling  0xc029dde8 @ 1
+[    0.073593] initcall 0xc029dde8 returned 0 after 223 usecs
+[    0.073620] calling  0xc029e060 @ 1
+[    0.073642] initcall 0xc029e060 returned 0 after 6 usecs
+[    0.073664] calling  0xc029e0d0 @ 1
+[    0.085193] printk: legacy console [hvc0] enabled
+[    0.085193] printk: legacy console [hvc0] enabled
+[    0.085273] initcall 0xc029e0d0 returned 0 after 11594 usecs
+[    0.085273] initcall 0xc029e0d0 returned 0 after 11594 usecs
+[    0.085319] calling  0xc029f420 @ 1
+[    0.085319] calling  0xc029f420 @ 1
+[    0.085365] initcall 0xc029f420 returned 0 after 19 usecs
+[    0.085365] initcall 0xc029f420 returned 0 after 19 usecs
+[    0.085405] calling  0xc029f4a0 @ 1
+[    0.085405] calling  0xc029f4a0 @ 1
+[    0.085607] initcall 0xc029f4a0 returned 0 after 176 usecs
+[    0.085607] initcall 0xc029f4a0 returned 0 after 176 usecs
+[    0.085651] calling  0xc029fd98 @ 1
+[    0.085651] calling  0xc029fd98 @ 1
+[    0.086372] probe of 20000000.bosio returned 19 after 679 usecs
+[    0.086372] probe of 20000000.bosio returned 19 after 679 usecs
+[    0.086430] initcall 0xc029fd98 returned 0 after 747 usecs
+[    0.086430] initcall 0xc029fd98 returned 0 after 747 usecs
+[    0.086470] calling  0xc029fe3c @ 1
+[    0.086470] calling  0xc029fe3c @ 1
+[    0.086547] initcall 0xc029fe3c returned 0 after 51 usecs
+[    0.086547] initcall 0xc029fe3c returned 0 after 51 usecs
+[    0.086596] calling  0xc029ff00 @ 1
+[    0.086596] calling  0xc029ff00 @ 1
+[    0.086639] initcall 0xc029ff00 returned 0 after 13 usecs
+[    0.086639] initcall 0xc029ff00 returned 0 after 13 usecs
+[    0.086681] calling  0xc029ff10 @ 1
+[    0.086681] calling  0xc029ff10 @ 1
+[    0.086719] initcall 0xc029ff10 returned 0 after 10 usecs
+[    0.086719] initcall 0xc029ff10 returned 0 after 10 usecs
+[    0.086760] calling  0xc029ff20 @ 1
+[    0.086760] calling  0xc029ff20 @ 1
+[    0.086824] initcall 0xc029ff20 returned 0 after 37 usecs
+[    0.086824] initcall 0xc029ff20 returned 0 after 37 usecs
+[    0.086865] calling  0xc02a004c @ 1
+[    0.086865] calling  0xc02a004c @ 1
+[    0.087012] probe of 10008000.mmc returned 19 after 116 usecs
+[    0.087012] probe of 10008000.mmc returned 19 after 116 usecs
+[    0.087063] initcall 0xc02a004c returned 0 after 172 usecs
+[    0.087063] initcall 0xc02a004c returned 0 after 172 usecs
+[    0.087102] calling  0xc02a3870 @ 1
+[    0.087102] calling  0xc02a3870 @ 1
+[    0.087185] initcall 0xc02a3870 returned 0 after 56 usecs
+[    0.087185] initcall 0xc02a3870 returned 0 after 56 usecs
+[    0.087229] calling  0xc028f028 @ 1
+[    0.087229] calling  0xc028f028 @ 1
+[    0.087266] initcall 0xc028f028 returned 0 after 10 usecs
+[    0.087266] initcall 0xc028f028 returned 0 after 10 usecs
+[    0.087306] calling  0xc028f268 @ 1
+[    0.087306] calling  0xc028f268 @ 1
+[    0.087334] initcall 0xc028f268 returned 0 after 3 usecs
+[    0.087334] initcall 0xc028f268 returned 0 after 3 usecs
+[    0.087372] calling  0xc0290460 @ 1
+[    0.087372] calling  0xc0290460 @ 1
+[    0.087576] initcall 0xc0290460 returned 0 after 178 usecs
+[    0.087576] initcall 0xc0290460 returned 0 after 178 usecs
+[    0.087630] calling  0xc0290a9c @ 1
+[    0.087630] calling  0xc0290a9c @ 1
+[    0.087667] initcall 0xc0290a9c returned 0 after 9 usecs
+[    0.087667] initcall 0xc0290a9c returned 0 after 9 usecs
+[    0.087706] calling  0xc029183c @ 1
+[    0.087706] calling  0xc029183c @ 1
+[    0.087745] initcall 0xc029183c returned 0 after 14 usecs
+[    0.087745] initcall 0xc029183c returned 0 after 14 usecs
+[    0.087789] calling  0xc02987bc @ 1
+[    0.087789] calling  0xc02987bc @ 1
+[    0.088454] initcall 0xc02987bc returned 0 after 640 usecs
+[    0.088454] initcall 0xc02987bc returned 0 after 640 usecs
+[    0.088501] calling  0xc0298ab0 @ 1
+[    0.088501] calling  0xc0298ab0 @ 1
+[    0.088528] initcall 0xc0298ab0 returned 0 after 1 usecs
+[    0.088528] initcall 0xc0298ab0 returned 0 after 1 usecs
+[    0.088565] calling  0xc0298b70 @ 1
+[    0.088565] calling  0xc0298b70 @ 1
+[    0.088593] initcall 0xc0298b70 returned 0 after 3 usecs
+[    0.088593] initcall 0xc0298b70 returned 0 after 3 usecs
+[    0.088632] calling  0xc029b9bc @ 1
+[    0.088632] calling  0xc029b9bc @ 1
+[    0.088666] initcall 0xc029b9bc returned 0 after 6 usecs
+[    0.088666] initcall 0xc029b9bc returned 0 after 6 usecs
+[    0.088706] calling  0xc029bd0c @ 1
+[    0.088706] calling  0xc029bd0c @ 1
+[    0.088734] initcall 0xc029bd0c returned 0 after 1 usecs
+[    0.088734] initcall 0xc029bd0c returned 0 after 1 usecs
+[    0.088772] calling  0xc01c18ec @ 1
+[    0.088772] calling  0xc01c18ec @ 1
+[    0.088801] initcall 0xc01c18ec returned 0 after 2 usecs
+[    0.088801] initcall 0xc01c18ec returned 0 after 2 usecs
+[    0.088838] calling  0xc01c59f8 @ 1
+[    0.088838] calling  0xc01c59f8 @ 1
+[    0.089225] initcall 0xc01c59f8 returned 0 after 355 usecs
+[    0.089225] initcall 0xc01c59f8 returned 0 after 355 usecs
+[    0.089269] calling  0xc02a0a08 @ 1
+[    0.089269] calling  0xc02a0a08 @ 1
+[    0.089304] initcall 0xc02a0a08 returned 0 after 10 usecs
+[    0.089304] initcall 0xc02a0a08 returned 0 after 10 usecs
+[    0.089342] calling  0xc022acec @ 1
+[    0.089342] calling  0xc022acec @ 1
+[    0.089370] initcall 0xc022acec returned 0 after 3 usecs
+[    0.089370] initcall 0xc022acec returned 0 after 3 usecs
+[    0.089407] calling  0xc02a3868 @ 1
+[    0.089407] calling  0xc02a3868 @ 1
+[    0.089432] initcall 0xc02a3868 returned 0 after 1 usecs
+[    0.089432] initcall 0xc02a3868 returned 0 after 1 usecs
+[    0.089466] calling  0xc02a3960 @ 1
+[    0.089466] calling  0xc02a3960 @ 1
+[    0.089493] initcall 0xc02a3960 returned 0 after 0 usecs
+[    0.089493] initcall 0xc02a3960 returned 0 after 0 usecs
+[    0.089528] calling  0xc029d58c @ 1
+[    0.089528] calling  0xc029d58c @ 1
+[    0.089555] clk: Disabling unused clocks
+[    0.089555] clk: Disabling unused clocks
+[    0.089603] initcall 0xc029d58c returned 0 after 50 usecs
+[    0.089603] initcall 0xc029d58c returned 0 after 50 usecs
+[    0.089642] calling  0xc02a0840 @ 1
+[    0.089642] calling  0xc02a0840 @ 1
+[    0.089671] initcall 0xc02a0840 returned 0 after 3 usecs
+[    0.089671] initcall 0xc02a0840 returned 0 after 3 usecs
+[    0.089713] ORY_BOOT wait_for_initramfs enter
+[    0.089713] ORY_BOOT wait_for_initramfs enter
+[    0.090111] ORY_BOOT rootfs unpack returned error=none extracted_bytes=0
+[    0.090111] ORY_BOOT rootfs unpack returned error=none extracted_bytes=0
+[    0.090197] ORY_BOOT wait_for_initramfs done
+[    0.090197] ORY_BOOT wait_for_initramfs done
+[    0.090232] ORY_BOOT console_on_rootfs enter
+[    0.090232] ORY_BOOT console_on_rootfs enter
+[    0.090693] ORY_BOOT console_on_rootfs done
+[    0.090693] ORY_BOOT console_on_rootfs done
+[    0.090760] ORY_BOOT kernel_init_freeable done
+[    0.090760] ORY_BOOT kernel_init_freeable done
+[    0.095703] Freeing unused kernel image (initmem) memory: 36844K
+[    0.095703] Freeing unused kernel image (initmem) memory: 36844K
+[    0.095767] Kernel memory protection not selected by kernel config.
+[    0.095767] Kernel memory protection not selected by kernel config.
+[    0.095815] Run /init as init process
+[    0.095815] Run /init as init process
+[    0.095843]   with arguments:
+[    0.095843]   with arguments:
+[    0.095868]     /init
+[    0.095868]     /init
+[    0.095886]   with environment:
+[    0.095886]   with environment:
+[    0.095911]     HOME=/
+[    0.095911]     HOME=/
+[    0.095964]     TERM=linux
+[    0.095964]     TERM=linux
+[   20.295558] /dev/mmcblk0p2: Can't lookup blockdev
+[   20.295558] /dev/mmcblk0p2: Can't lookup blockdev
+mount: mounting /dev/mmcblk0p2 on /data failed: No such file or directory
+ORYUKDO: /data unavailable; storage repair required
+ORYUKDO BusyBox serial console
+
+
+BusyBox v1.37.0 (2026-11-07 10:24:46 KST) built-in shell (ash)
+Enter 'help' for a list of built-in commands.
+
+oryukdo# cat /etc/oryukdo-image; echo __NATIVE_RC:$?
+HAEBANCHEON-BoAYO-tilebatch-v14 / L1-16K DMA3 / 32x32 source damage, cached assets, batched copies, rectangular app bodies
+__NATIVE_RC:0
+oryukdo# /bin/storage-check --identity; echo __NATIVE_RC:$?
+IDENTITY bytes=4584 fnv1a=139061550
+__NATIVE_RC:0
+oryukdo# test -x /bin/bosio-dma-check; echo __NATIVE_RC:$?
+__NATIVE_RC:0
+oryukdo# test -r /usr/share/boayo/assets/a0ebce13.bui; echo __NATIVE_RC:$?
+__NATIVE_RC:0
+oryukdo# test ! -L /usr/bin/python && test ! -e /usr/bin/python3 && test ! -d /u
+sr/lib/python3.12; echo __NATIVE_RC:$?
+__NATIVE_RC:0
+oryukdo# echo $((19+23)); echo __NATIVE_RC:$?
+42
+__NATIVE_RC:0
+oryukdo# ddrcheck; echo __NATIVE_RC:$?
+DDR_HIGH_OK pages=16 first_pa=0xbee00000 last_pa=0xbef0bffc
+__NATIVE_RC:0
+oryukdo# boayo-selftest; echo __NATIVE_RC:$?
+BOAYO_NATIVE_SELFTEST_PASS {"python_golden_geometry":true,"python_golden_pixels":true,"wm_input":true,"hardware_tested":false}
+__NATIVE_RC:0
+oryukdo# printf '{"op":"test_desktop","args":{"op":"tick","now":0},"app":"boayo-
+desktop"}\n{"op":"test_plan_export","args":{"window_id":1,"path":"/tmp/plan-body
+"},"app":"boayo-desktop"}\n' | BOAYO_PLANS=0 /usr/bin/boayo-native --rpc; echo _
+_NATIVE_RC:$?
+{"id":null,"ok":true,"result":true}
+{"id":null,"ok":true,"result":{"boundary":44,"bytes":64128,"count":160,"empty":64,"full":52,"geometry":[640,360,0.0,0.0,0.0,42.0,30.0],"key":"{\"geometry\":[640,360,0.0,0.0,0.0,42.0,30.0],\"revision\":\"9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5\",\"shape\":[[51.2,36.0,537.6,252.0,18.0]]}","shape":[[51.2,36.0,537.6,252.0,18.0]]}}
+__NATIVE_RC:0
+oryukdo# stty -opost -echo; echo __NATIVE_RC:$?
+__NATIVE_RC:0
+oryukdo# __PLAN_BEGIN__	                	  €  h  €     *å
+­óÿ†ƒ Ôœ
+ š&,ÿ© pşÿ#!úÿu4
+     ÆıÿÿBÿÿÿ
+                
+  €  h  €     ^¨ÎöR z|ìÿ,cõÿ`bç Wóïÿî İŞ ¥î	     :  ¾                     €  h  €     ÚšU
+­óÿ†ƒ Ôœ
+ Ú(úş© pşÿ#!úÿ)í	     ÆıÿÿBÿÿÿ                  €  h  €     -?öR z|ìÿ,cõÿ dµ Wóïÿî İŞ Y§	     :  ¾                     €  h  €     ªÆ
+­óÿ†ƒ Ôœ
+ +Èş© pşÿ#!úÿİ¥	     ÆıÿÿBÿÿÿ                  €  h  €     ı‰¯öR z|ìÿ,cõÿßfƒ Wóïÿî İŞ `	     :  ¾         €4         €  h  €     JËZ
+­óÿ†ƒ Ôœ
+ ¸»-© pşÿ#!úÿu4
+     ÆıÿÿBÿÿÿ       9         €  h  €     IDöR z|ìÿ,cõÿ~÷èWóïÿî İŞ ¥î	     :  ¾         €=         €  h  €     <Ë
+­óÿ†ƒ Ôœ
+ ø½û © pşÿ#!úÿ)í	     ÆıÿÿBÿÿÿ       B         €  h  €     mº´öR z|ìÿ,cõÿ½ù¶Wóïÿî İŞ Y§	     :  ¾         €F         €  h  €     ê¬;
+­óÿ†ƒ Ôœ
+ 8ÀÉ © pşÿ#!úÿİ¥	     ÆıÿÿBÿÿÿ                  €  h  €     =+%öR z|ìÿ,cõÿıû„Wóïÿî İŞ `	     :  ¾                     €  h  €     ¹¬
+­óÿ†ƒ Ôœ
+ wÂ— © pşÿ#!úÿ‘^	     ÆıÿÿBÿÿÿ                 €  h  €     ŠlĞ
+­óÿ†ƒ Ôœ
+ ÖP/© pşÿ#!úÿu4
+     ÆıÿÿBÿÿÿ                 €  h  €     İê¹öR z|ìÿ,cõÿ›ŒêWóïÿî İŞ ¥î	     :  ¾                    €  h  €     Zİ@
+­óÿ†ƒ Ôœ
+ Sı© pşÿ#!úÿ)í	     ÆıÿÿBÿÿÿ                 €  h  €     ­[*öR z|ìÿ,cõÿÛ¸Wóïÿî İŞ Y§	     :  ¾                    €  h  €     *N±
+­óÿ†ƒ Ôœ
+ UUË© pşÿ#!úÿİ¥	     ÆıÿÿBÿÿÿ       K         €  h  €     }ÌšöR z|ìÿ,cõÿ‘†Wóïÿî İŞ `	     :  ¾                     €  h  €     ù¾!
+­óÿ†ƒ Ôœ
+ •W™© pşÿ#!úÿ‘^	     ÆıÿÿBÿÿÿ                    €  h  €     L=öR z|ìÿ,cõÿZ“TWóïÿî İŞ Á	     :  ¾   $               $  €  h  €     ÊF
+­óÿ†ƒ Ôœ
+ ôå0© pşÿ#!úÿu4
+     ÆıÿÿBÿÿÿ%               %  €  h  €     Œ/öR z|ìÿ,cõÿ¹!ìWóïÿî İŞ ¥î	     :  ¾   &               &  €  h  €     š~¶
+­óÿ†ƒ Ôœ
+ 3èş© pşÿ#!úÿ)í	     ÆıÿÿBÿÿÿ'               '  €  h  €     íüŸöR z|ìÿ,cõÿù#ºWóïÿî İŞ Y§	     :  ¾   (               (  €  h  €     iï&
+­óÿ†ƒ Ôœ
+ sêÌ© pşÿ#!úÿİ¥	     ÆıÿÿBÿÿÿ)               )  €  h  €     ½möR z|ìÿ,cõÿ8&ˆWóïÿî İŞ `	     :  ¾   *      €O       *  €  h  €     9`—
+­óÿ†ƒ Ôœ
+ ³ìš© pşÿ#!úÿ‘^	     ÆıÿÿBÿÿÿ+                +  €  h  €     ŒŞ€öR z|ìÿ,cõÿx(VWóïÿî İŞ Á	     :  ¾   ,                ,  €  h  €     	Ñ
+­óÿ†ƒ Ôœ
+ òîh© pşÿ#!úÿE	     ÆıÿÿBÿÿÿ1               1  €  h  €     
+¯»
+­óÿ†ƒ Ôœ
+ {2© pşÿ#!úÿu4
+     ÆıÿÿBÿÿÿ2               2  €  h  €     ” bZçÿ' ¨9 ^ hR  $àüÿFBôÿêh     ‹ûÿÿ„şÿÿ3               3  €  h  €     ÎöR z|ìÿ,cõÿõKï
+Wóïÿî İŞ ¥î	     :  ¾   4               4  €  h  €     Á¡
+­óÿ†ƒ Ôœ
+ o	© pşÿ#!úÿ)í	     ÆıÿÿBÿÿÿ5       T       5  €  h  €     ãMZçÿ' ¨9 šJkR  $àüÿFBôÿêh     ‹ûÿÿ„şÿÿ6      €X       6  €  h  €     ºß ì¥ óøØÿXÆêÿ%Âá®æßÿÜ º½ Jİ     u  |  7       ]       7  €  h  €     ³Ä.Zçÿ' ¨9 OR  $àüÿFBôÿRÚ     ‹ûÿÿ„şÿÿ8      €a       8  €  h  €     ¬à öR z|ìÿ,cõÿRã¾Wóïÿî İŞ Y§	     :  ¾   9       f       9  €  h  €     )Ó‡
+­óÿ†ƒ Ôœ
+ Ì©Ñ
+© pşÿ#!úÿİ¥	     ÆıÿÿBÿÿÿ:                :  €  h  €     “%9Zçÿ' ¨9 ÕtnR  $àüÿFBôÿêh     ‹ûÿÿ„şÿÿ;                ;  €  h  €     	öR z|ìÿ,cõÿ0vòWóïÿî İŞ ¥î	     :  ¾   <                <  €  h  €     2Zçÿ' ¨9 Uy
+R  $àüÿFBôÿRÚ     ‹ûÿÿ„şÿÿ=                =  €  h  €     ìvöR z|ìÿ,cõÿpxÀWóïÿî İŞ Y§	     :  ¾   >                >  €  h  €     itı
+­óÿ†ƒ Ôœ
+ ê>Ó© pşÿ#!úÿİ¥	     ÆıÿÿBÿÿÿ?                ?  €  h  €     ¼òæöR z|ìÿ,cõÿ¯zWóïÿî İŞ `	     :  ¾   @                @  €  h  €     8åm
+­óÿ†ƒ Ôœ
+ *A¡© pşÿ#!úÿ‘^	     ÆıÿÿBÿÿÿ¥                ¥  €  h  €     áKK—È
+ êìîÿÆ¶öÿá¼òìôñÿğ] # (     ó  ¦   ¦                ¦  €  h  €     Xı~i7õÿ :I	 ”èn ¢şÿÿÜúÿ>¾     şÿÿZÿÿÿ§                §  €  h  €     +é(—È
+ êìîÿÆ¶öÿézìôñÿğ] # ‹¿     ó  ¦   ¨                ¨  €  h  €     ¢š\i7õÿ :I	 œ¦š ¢şÿÿÜúÿ ü     şÿÿZÿÿÿ©                ©  €  h  €     u†—È
+ êìîÿÆ¶öÿò8Jìôñÿğ] # íı     ó  ¦   ª                ª  €  h  €     í7:i7õÿ :I	 ¥dÆ ¢şÿÿÜúÿ;	     şÿÿZÿÿÿ«                «  €  h  €     À#ä—È
+ êìîÿÆ¶öÿúöuìôñÿğ] # P<	     ó  ¦   ¯                ¯  €  h  €     @Øi7õÿ :I	 †­	 ¢şÿÿÜúÿ>¾     şÿÿZÿÿÿ°                °  €  h  €     ü—È
+ êìîÿÆ¶öÿo]ìôñÿğ] # ‹¿     ó  ¦   ±                ±  €  h  €     Š­µi7õÿ :I	 "DÙ	 ¢şÿÿÜúÿ ü     şÿÿZÿÿÿ²      €j       ²  €  h  €     ]™_—È
+ êìîÿÆ¶öÿxÖˆìôñÿğ] # íı     ó  ¦   ³       o       ³  €  h  €     ÕJ“i7õÿ :I	 +
+ ¢şÿÿÜúÿ;	     şÿÿZÿÿÿ´      €s       ´  €  h  €     ¨6=—È
+ êìîÿÆ¶öÿ€”´ìôñÿğ] # P<	     ó  ¦   µ       x       µ  €  h  €     èpi7õÿ :I	 3À0
+ ¢şÿÿÜúÿey	     şÿÿZÿÿÿ¶      €|       ¶  €  h  €     òÓ—È
+ êìîÿÆ¶öÿˆRàìôñÿğ] # ²z	     ó  ¦   »                »  €  h  €     ûÛ—È
+ êìîÿÆ¶öÿõµ›	ìôñÿğ] # ‹¿     ó  ¦   ¼                ¼  €  h  €     sÀi7õÿ :I	 ¨á ¢şÿÿÜúÿ ü     şÿÿZÿÿÿ½              ½  €  h  €     F¬¸—È
+ êìîÿÆ¶öÿşsÇ	ìôñÿğ] # íı     ó  ¦   ¾      €…       ¾  €  h  €     ½]ìi7õÿ :I	 ±ŸC ¢şÿÿÜúÿ;	     şÿÿZÿÿÿ¿               ¿  €  h  €     I–—È
+ êìîÿÆ¶öÿ2ó	ìôñÿğ] # P<	     ó  ¦   À               À  €  h  €     ûÉi7õÿ :I	 ¹]o ¢şÿÿÜúÿey	     şÿÿZÿÿÿÁ               Á  €  h  €     Úæs—È
+ êìîÿÆ¶öÿğ
+ìôñÿğ] # ²z	     ó  ¦   Â               Â  €  h  €     Q˜§i7õÿ :I	 Á› ¢şÿÿÜúÿÈ·	     şÿÿZÿÿÿÃ               Ã  €  h  €     %„Q—È
+ êìîÿÆ¶öÿ®J
+ìôñÿğ] # ¹	     ó  ¦   É                É  €  h  €     [Ógi7õÿ :I	 .V ¢şÿÿÜúÿ ü     şÿÿZÿÿÿÊ                Ê  €  h  €     .¿—È
+ êìîÿÆ¶öÿ„ìôñÿğ] # íı     ó  ¦   Ë       Š       Ë  €  h  €     ¥pEi7õÿ :I	 7=‚ ¢şÿÿÜúÿ;	     şÿÿZÿÿÿÌ               Ì  €  h  €     x\ï—È
+ êìîÿÆ¶öÿŒÏ1ìôñÿğ] # P<	     ó  ¦   Í               Í  €  h  €     ï#i7õÿ :I	 ?û­ ¢şÿÿÜúÿey	     şÿÿZÿÿÿÎ               Î  €  h  €     ÂùÌ—È
+ êìîÿÆ¶öÿ”]ìôñÿğ] # ²z	     ó  ¦   Ï               Ï  €  h  €     :« i7õÿ :I	 G¹Ù ¢şÿÿÜúÿÈ·	     şÿÿZÿÿÿĞ               Ğ  €  h  €     —ª—È
+ êìîÿÆ¶öÿœK‰ìôñÿğ] # ¹	     ó  ¦   Ñ               Ñ  €  h  €     „HŞi7õÿ :I	 Pw ¢şÿÿÜúÿ*ö	     şÿÿZÿÿÿÒ               Ò  €  h  €     W4ˆ—È
+ êìîÿÆ¶öÿ¥	µìôñÿğ] # w÷	     ó  ¦   à               à €  h  €     nnnıŠ€ ŠÙÍÿUÈæÿ‘—D.9# $àüÿ§7óÿÀ u  ‹ûÿÿıÿÿá               á €  h  €     ùöN »?óÿ; Õ› Ñm¿icîÿî ,d İ¥	 Æıÿÿ:  |  â               â €  h  €     1=³Š€ ŠÙÍÿUÈæÿ“¨.9# $àüÿ§7óÿ²N u  ‹ûÿÿıÿÿã               ã €  h  €     Z^q»?óÿ; Õ› ‘kñicîÿî ,d )í	 Æıÿÿ:  |  ä               ä €  h  €     óø	Š€ ŠÙÍÿUÈæÿ’.9# $àüÿ§7óÿJİ u  ‹ûÿÿıÿÿå               å €  h  €     ¼Å“»?óÿ; Õ› Ri#icîÿî ,d u4
+ Æıÿÿ:  |  è               è €  h  €     °Ümıvæÿv&2 «7 æµÒÆÜÿÜ YÈ "½ ‹ûÿÿu  ø  é               é €  h  €     ï+ƒ Š€ ŠÙÍÿUÈæÿUmA.9# $àüÿ§7óÿÀ u  ‹ûÿÿıÿÿê     €       ê €  h  €     r«²væÿv&2 «7 g±{ÒÆÜÿÜ YÈ ºK ‹ûÿÿu  ø  ë      “       ë €  h  €     ±úÇŠ€ ŠÙÍÿUÈæÿÖh¥.9# $àüÿ§7óÿ²N u  ‹ûÿÿıÿÿì     €—       ì €  h  €     5z÷	væÿv&2 «7 ç¬ßÒÆÜÿÜ YÈ RÚ ‹ûÿÿu  ø  í      œ       í €  h  €     tÉŠ€ ŠÙÍÿUÈæÿVd	.9# $àüÿ§7óÿJİ u  ‹ûÿÿıÿÿî     €        î €  h  €     ÷H<væÿv&2 «7 h¨CÒÆÜÿÜ YÈ êh ‹ûÿÿu  ø  ò               ò €  h  €     ­SıŠ€ ŠÙÍÿUÈæÿ™GÚ.9# $àüÿ§7óÿƒ1 u  ‹ûÿÿıÿÿó               ó €  h  €     0š‚ væÿv&2 «7 «‹ÒÆÜÿÜ YÈ "½ ‹ûÿÿu  ø  ô      ¥       ô €  h  €     oé—Š€ ŠÙÍÿUÈæÿC>.9# $àüÿ§7óÿÀ u  ‹ûÿÿıÿÿõ     €©       õ €  h  €     óhÇvæÿv&2 «7 +‡xÒÆÜÿÜ YÈ ºK ‹ûÿÿu  ø  ö              ö €  h  €     2¸Ü	Š€ ŠÙÍÿUÈæÿš>¢.9# $àüÿ§7óÿ²N u  ‹ûÿÿıÿÿ÷              ÷ €  h  €     µ7væÿv&2 «7 ¬‚ÜÒÆÜÿÜ YÈ RÚ ‹ûÿÿu  ø  ø              ø €  h  €     ô†!Š€ ŠÙÍÿUÈæÿ:.9# $àüÿ§7óÿJİ u  ‹ûÿÿıÿÿù              ù €  h  €     xQvæÿv&2 «7 -~@ÒÆÜÿÜ YÈ êh ‹ûÿÿu  ø  ş               ş €  h  €     îˆRıvæÿv&2 «7 îe­ÒÆÜÿÜ YÈ Š. ‹ûÿÿu  ø  ÿ               ÿ €  h  €     -Øg Š€ ŠÙÍÿUÈæÿ]×.9# $àüÿ§7óÿƒ1 u  ‹ûÿÿıÿÿ       ®         €  h  €     °W—væÿv&2 «7 oaÒÆÜÿÜ YÈ "½ ‹ûÿÿu  ø       €²        €  h  €     ï¦¬Š€ ŠÙÍÿUÈæÿŞ;.9# $àüÿ§7óÿÀ u  ‹ûÿÿıÿÿ               €  h  €     s&Ü	væÿv&2 «7 ğ\uÒÆÜÿÜ YÈ ºK ‹ûÿÿu  ø                 €  h  €     ²uñŠ€ ŠÙÍÿUÈæÿ_Ÿ.9# $àüÿ§7óÿ²N u  ‹ûÿÿıÿÿ               €  h  €     5õ væÿv&2 «7 pXÙÒÆÜÿÜ YÈ RÚ ‹ûÿÿu  ø                 €  h  €     tD6Š€ ŠÙÍÿUÈæÿß.9# $àüÿ§7óÿJİ u  ‹ûÿÿıÿÿ               €  h  €     øÃevæÿv&2 «7 ñS=ÒÆÜÿÜ YÈ êh ‹ûÿÿu  ø  8              8 €  h  €     ¼@½»?óÿ; Õ› Ûicîÿî ,d u4
+ Æıÿÿ:  |  9              9 €  h  €     6pJvæÿv&2 «7 úÓ	ÒÆÜÿÜ YÈ RÚ ‹ûÿÿu  ø  :              : €  h  €     ºß¯EÀ Åìæÿ+dóÿ´]ş—œ pşÿÔ›ùÿ¥î	 :  Æıÿÿ„şÿÿ;              ; €  h  €     |ŸG»?óÿ; Õ› ½icîÿî ,d u4
+ Æıÿÿ:  |  <      ·       < €  h  €     ô^væÿv&2 «7 =ŞkÒÆÜÿÜ YÈ ºK ‹ûÿÿu  ø  =     €»       = €  h  €     3®/Š€ ŠÙÍÿUÈæÿ¬••.9# $àüÿ§7óÿ²N u  ‹ûÿÿıÿÿ>      À       > €  h  €     Û–¯»?óÿ; Õ› ßìçicîÿî ,d )í	 Æıÿÿ:  |  ?     €Ä       ? €  h  €     {>:EÀ Åìæÿ+dóÿ—Èü —œ pşÿÔ›ùÿ¥î	 :  Æıÿÿ„şÿÿ@      É       @ €  h  €     <şÑ»?óÿ; Õ› Ÿêicîÿî ,d u4
+ Æıÿÿ:  |  A               A €  h  €     ²Mêvæÿv&2 «7 ¸ÒÆÜÿÜ YÈ "½ ‹ûÿÿu  ø  B               B €  h  €     ñœÿŠ€ ŠÙÍÿUÈæÿğo.ı.9# $àüÿ§7óÿÀ u  ‹ûÿÿıÿÿC               C €  h  €     t/væÿv&2 «7 ´hÒÆÜÿÜ YÈ ºK ‹ûÿÿu  ø  D               D €  h  €     Ú5¢EÀ Åìæÿ+dóÿ¸5Éş—œ pşÿÔ›ùÿY§	 :  Æıÿÿ„şÿÿE               E €  h  €     ›õ9»?óÿ; Õ› ÁWæ icîÿî ,d )í	 Æıÿÿ:  |  F               F €  h  €     ;ÄEÀ Åìæÿ+dóÿy3ûş—œ pşÿÔ›ùÿ¥î	 :  Æıÿÿ„şÿÿG               G €  h  €     ı\\»?óÿ; Õ› ‚Uicîÿî ,d u4
+ Æıÿÿ:  |  y     €Í       y €  h  €     ³ÍRyP YÔÿKïéÿ39ûşÒ Dıÿ²ĞôÿŸx æ  üÿÿgıÿÿz               z €  h  €     \( ‡¯éÿ§á+ µ ²¸Vø-áÿá» N/ v üÿÿæ  ™  {               { €  h  €     É˜ÖyP YÔÿKïéÿ"½£şÒ Dıÿ²ĞôÿÚû æ  üÿÿgıÿÿ|               | €  h  €     äæG_ÓÿOÃW k!, Byşğ[ÂÿÁw ›^ ‚ò# 4øÿÿÌ  3  }               } €  h  €     ¾Ç´ò , ±<¨ÿ•ŞÓÿ$‚˜ü¤= ?ˆúÿe¡éÿ+ş" Ì  4øÿÿÍúÿÿ~               ~ €  h  €     }O_ÓÿOÃW k!, !Oğ[ÂÿÁw ›^ øø" 4øÿÿÌ  3                  €  h  €     é]¼ûò , ±<¨ÿ•ŞÓÿŠéû¤= ?ˆúÿe¡éÿ¡" Ì  4øÿÿÍúÿÿ‚              ‚ €  h  €     ÍÜyP YÔÿKïéÿ8zÕÒ Dıÿ²Ğôÿdõ æ  üÿÿgıÿÿƒ      Ò       ƒ €  h  €     v7j‡¯éÿ§á+ µ ¶ù0ø-áÿá» N/ Ëò üÿÿæ  ™  „     €Ö       „ €  h  €     ã§ yP YÔÿKïéÿ'ş}Ò Dıÿ²ĞôÿŸx æ  üÿÿgıÿÿ…      Û       … €  h  €     Œî‡¯éÿ§á+ µ ¦}Ùø-áÿá» N/ v üÿÿæ  ™  †     €ß       † €  h  €     ñåHò , ±<¨ÿ•ŞÓÿ-M¤= ?ˆúÿe¡éÿ´÷# Ì  4øÿÿÍúÿÿ‡      ä       ‡ €  h  €     C›ã_ÓÿOÃW k!, +ğ[ÂÿÁw ›^ ‚ò# 4øÿÿÌ  3  ˆ               ˆ €  h  €     |Pò , ±<¨ÿ•ŞÓÿ¤= ?ˆúÿe¡éÿ+ş" Ì  4øÿÿÍúÿÿ‰               ‰ €  h  €     o1ëû_ÓÿOÃW k!, 	U
+ğ[ÂÿÁw ›^ øø" 4øÿÿÌ  3                 €  h  €     çëæyP YÔÿKïéÿ<»¯Ò Dıÿ²Ğôÿ)r æ  üÿÿgıÿÿ               €  h  €     F4‡¯éÿ§á+ µ »:
+ø-áÿá» N/ o üÿÿæ  ™                 €  h  €     ı¶jyP YÔÿKïéÿ,?XÒ Dıÿ²Ğôÿdõ æ  üÿÿgıÿÿ               €  h  €     ¦¸‡¯éÿ§á+ µ «¾³	ø-áÿá» N/ Ëò üÿÿæ  ™  ‘              ‘ €  h  €     ‚îyP YÔÿKïéÿÃ Ò Dıÿ²ĞôÿŸx æ  üÿÿgıÿÿ’     €è       ’ €  h  €     w¹w_ÓÿOÃW k!, 4…¸ğ[ÂÿÁw ›^ ì$ 4øÿÿÌ  3  “      í       “ €  h  €     Qšäò , ±<¨ÿ•ŞÓÿR¤= ?ˆúÿe¡éÿ´÷# Ì  4øÿÿÍúÿÿ”               ” €  h  €     £O_ÓÿOÃW k!, 	ğ[ÂÿÁw ›^ ‚ò# 4øÿÿÌ  3  •               • €  h  €     }0ìûò , ±<¨ÿ•ŞÓÿô•£
+¤= ?ˆúÿe¡éÿ+ş" Ì  4øÿÿÍúÿÿš              š €  h  €     û°yP YÔÿKïéÿAü‰
+Ò Dıÿ²Ğôÿîî æ  üÿÿgıÿÿ›              › €  h  €     ªUş‡¯éÿ§á+ µ À{åø-áÿá» N/ Tì üÿÿæ  ™  œ              œ €  h  €     Æ4yP YÔÿKïéÿ0€2
+Ò Dıÿ²Ğôÿ)r æ  üÿÿgıÿÿ               €  h  €     À ‚‡¯éÿ§á+ µ ¯ÿø-áÿá» N/ o üÿÿæ  ™                 €  h  €     -‘¸yP YÔÿKïéÿ Û	Ò Dıÿ²Ğôÿdõ æ  üÿÿgıÿÿŸ              Ÿ €  h  €     Öë	‡¯éÿ§á+ µ Ÿƒ6ø-áÿá» N/ Ëò üÿÿæ  ™        €ñ         €  h  €     …¸xò , ±<¨ÿ•ŞÓÿ¤= ?ˆúÿe¡éÿ>ñ$ Ì  4øÿÿÍúÿÿ¡      ö       ¡ €  h  €     ë¶‰‡¯éÿ§á+ µ ßø-áÿá» N/ v üÿÿæ  ™  ¢               ¢ €  h  €     °N€ò , ±<¨ÿ•ŞÓÿıX¤= ?ˆúÿe¡éÿ´÷# Ì  4øÿÿÍúÿÿ£               £ €  h  €     ‚ş‡¯éÿ§á+ µ }‹‡ø-áÿá» N/ Aù üÿÿæ  ™                              şÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ                                                                                                                                                                                                                                                                                                                                                                      ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ Uÿÿÿ     ú                                                                                                   ®
+ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿêÿÿÿÿ  Põÿ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ş ğ  ş?  ÿ?  şÿ ğÿ  şÿ  ÿÿ  şÿ?  ğÿÿ  şÿÿ   ÿÿÿ   şÿÿ  ğÿÿ?   şÿÿ   ÿÿÿ   şÿÿ?   ğÿÿÿ   şÿÿÿ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ˆáàøş şø€ÿàÿ àÿ€ÿ øÿ şÿ  şÿ øÿ €ÿÿ àÿÿ  àÿÿ €ÿÿ  øÿÿ  şÿÿ   şÿÿ  øÿÿ  €ÿÿÿ  àÿÿÿ   àÿÿÿ  €ÿÿÿ   øÿÿÿ   şÿÿÿ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                2>ğş ÿ şğ? ş ÿ ş? ğÿ şÿ  ÿÿ  şÿ ğÿ?  şÿ  ÿÿ  şÿ?  ğÿÿ  şÿÿ   ÿÿÿ   şÿÿ  ğÿÿ?   şÿÿ   ÿÿÿ   şÿÿ?   ğÿÿÿ   şÿÿÿ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           ÿÿÿ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ¨ê Uıÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ÿ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        €ªşUıÿÿÿÿÿÿÿÿÿÿÿÿÿ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               €ªşğÿÿÿÿÿÿÿÿÿÿÿğÿÿÿÿÿÿáÿÿÿÿÿÿÿÿÿÿÿÿÿñÿÿÿÿÿÿÿ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ÿÿÿÿÿÿ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ¨êUıÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ÿÿÿÿÿÿÿÿÿÿ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          €
+Uıÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ÁÀøş şø€ÿàÿ àÿ€ÿ øÿ şÿ  şÿ øÿ €ÿÿ àÿÿ  àÿÿ €ÿÿ  øÿÿ  şÿÿ   şÿÿ  øÿÿ  €ÿÿÿ  àÿÿÿ   àÿÿÿ  €ÿÿÿ   øÿÿÿ   şÿÿÿ   ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿşÿÿÿÿÿÿ?                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                2>ğş ÿ şğ? ş ÿ ş? ğÿ şÿ  ÿÿ  şÿ ğÿ?  şÿ  ÿÿ  şÿ?  ğÿÿ  şÿÿ   ÿÿÿ   şÿÿ  ğÿÿ?   şÿÿ   ÿÿÿ   şÿÿ?   ğÿÿÿ   şÿÿÿ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ÿÿ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ªúÿ_Õÿÿÿÿÿÿÿÿÿÿÿÿÿÿ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ÿ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ªúÿUıÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ğ~  şğ ş ÿ ş ğÿ ş  ÿ  şÿ ğÿ  şÿ  ÿÿ  şÿ  ğÿÿ  şÿ   ÿÿ?   şÿÿ   ğÿÿ   şÿÿ   ÿÿÿ    şÿÿ   ğÿÿ    şÿ      ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿıÿÿÿÿÿÿÿ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ÁÀğü üğ ÿÀÿ Àÿ ÿ ğÿ üÿ  üÿ ğÿ  ÿÿ Àÿÿ  Àÿÿ  ÿÿ  ğÿÿ  üÿÿ   üÿÿ  ğÿÿ   ÿÿÿ  Àÿÿÿ   Àÿÿÿ   ÿÿÿ   ğÿÿÿ   üÿÿÿ ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ Põÿ                                                                                                                                                                    ş«òÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿPõÿÿÿ     ê                                                                                                        şÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ                                                                                                                                                                                                                                                                                                                                             ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿUıÿÿÿÿ   ªşÿ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ®
+                                      ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ¯şÿÿÿÿÿÿ  Tıÿÿÿ  úÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ                                                                                                                                                                          ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ êÿÿÿÿÿ   Tıÿ                                  ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ÁÀğü üğ ÿÀÿ Àÿ ÿ ğÿ üÿ  üÿ ğÿ  şÿ €ÿÿ   ÿÿ  üÿ  €ÿÿ  Àÿÿ   €ÿÿ   ğÿ    şÿ    Pı                               ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿıÿÿÿÿÿÿÿ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ğ~  şğ ş ÿ ş ğÿ ş  ÿ  şÿ ğÿ  şÿ  ÿÿ  şÿ  ğÿÿ  şÿ   ÿÿ   şÿÿ  ğÿÿ   şÿÿ   ÿÿÿ   şÿÿ   ğÿÿÿ   şÿÿ     ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ÁÀğü üğ ÿÀÿ Àÿ ÿ ğÿ üÿ  üÿ ğÿ  ÿÿ Àÿÿ  Àÿÿ  ÿÿ  ğÿÿ  üÿÿ   üÿÿ  ğÿÿ   ÿÿÿ  Àÿÿÿ   Àÿÿÿ   ÿÿÿ   ğÿÿÿ   üÿÿÿ__PLAN_END__
+__NATIVE_RC:0
+oryukdo# __NATIVE_RC:0
+oryukdo# boayo-dual-selftest; echo __NATIVE_RC:$?
+BOAYO_DUAL_MODEL_PASS {"scope":"integer model, not FPGA","both_cores":true,"bank_ownership":true}
+BOAYO_NATIVE_SELFTEST_PASS {"python_golden_geometry":true,"python_golden_pixels":true,"wm_input":true,"hardware_tested":false}
+__NATIVE_RC:0
+oryukdo# boayo-start --mock; echo __NATIVE_RC:$?
+BoAYO C++ service started; initialization continues. boayo-status / boayo-keys / boayo-stop
+{"features":["windows","pointer","input-injection","button-events","scene-stream","spatial-workspace","pointer-capture"],"headless":true,"m":32,"mock_backend":true,"runtime":"C++17","version":2}
+__NATIVE_RC:0
+oryukdo# bBOAYO_INITTRACE n=1 event=desktop.begin wall_us=84 cpu_us=72 value=0
+BOAYO_INITTRACE n=2 event=window.create.begin wall_us=262 cpu_us=200 value=0
+BOAYO_INITTRACE n=3 event=window.create.end wall_us=462 cpu_us=400 value=1
+BOAYO_INITTRACE n=4 event=window.configure.begin wall_us=509 cpu_us=446 value=0
+BOAYO_INITTRACE n=5 event=window.configure.end wall_us=580 cpu_us=516 value=1
+BOAYO_INITTRACE n=6 event=asset.map.begin wall_us=643 cpu_us=582 value=0
+BOAYO_INITTRACE n=7 event=asset.loaded wall_us=779 cpu_us=717 value=921600
+BOAYO_INITTRACE n=8 event=desktop.end wall_us=845 cpu_us=782 value=1
+BOAYO_INITTRACE n=9 event=desktop.scope_exit wall_us=891 cpu_us=828 value=0
+oBOAYO_FRAME_TRACE n=1 event=frame.begin wall_us=50 cpu_us=46 value=0
+BOAYO_FRAME_TRACE n=2 event=plan.load.begin wall_us=315 cpu_us=240 value=0
+BOAYO_FRAME_TRACE n=3 event=plan.load.end wall_us=767 cpu_us=692 value=1
+BOAYO_FRAME_TRACE n=4 event=ready.prepare.begin wall_us=1158 cpu_us=1083 value=0
+BOAYO_FRAME_TRACE n=5 event=ready.prepare.end wall_us=1742 cpu_us=1662 value=96
+BOAYO_FRAME_TRACE n=6 event=texture.upload.begin wall_us=1786 cpu_us=1706 value=230400
+BOAYO_FRAME_TRACE n=7 event=texture.upload.end wall_us=2257 cpu_us=2178 value=230400
+BOAYO_FRAME_TRACE n=8 event=projectors.begin wall_us=2301 cpu_us=2220 value=96
+BOAYO_FRAME_TRACE n=9 event=projectors.end wall_us=8780 cpu_us=8702 value=96
+BOAYO_FRAME_TRACE n=10 event=output.upload.begin wall_us=8855 cpu_us=8775 value=0
+BOAYO_FRAME_TRACE n=11 event=output.versions.begin wall_us=8891 cpu_us=8810 value=0
+BOAYO_FRAME_TRACE n=12 event=output.versions.end wall_us=8944 cpu_us=8864 value=0
+BOAYO_FRAME_TRACE n=13 event=output.publish.begin wall_us=8995 cpu_us=8915 value=0
+BOAYO_FRAME_TRACE n=14 event=output.publish.end wall_us=9077 cpu_us=8997 value=0
+BOAYO_FRAME_TRACE n=15 event=output.present.done wall_us=9122 cpu_us=9041 value=0
+BOAYO_FRAME_TRACE n=16 event=output.upload.end wall_us=9157 cpu_us=9077 value=0
+BOAYO_FRAME_TRACE n=17 event=frame.scope_exit wall_us=9772 cpu_us=9692 value=0
+ayo-status; echo __NATIVE_RC:$?
+{
+  "app_error": null,
+  "assets": {
+    "cache_hits": 0,
+    "format": "raw-mapped-00RRGGBB",
+    "loads": 1,
+    "misses": 0,
+    "rejected": 0,
+    "rgb_materializations": 0
+  },
+  "buttons": {
+    "available": false,
+    "last_event_id": 0,
+    "state": 0
+  },
+  "compositor": "cpp-native",
+  "driver_profile": {
+    "available": false,
+    "enabled": false
+  },
+  "focused_window": 1,
+  "generation": 4,
+  "motion": {
+    "active": false,
+    "next_step": 0,
+    "phase": "idle",
+    "steps": 25,
+    "target_generation": 0,
+    "view": {
+      "pitch": 0.0,
+      "roll": 0.0,
+      "yaw": 0.0
+    },
+    "windows": []
+  },
+  "output": {
+    "abi": 3,
+    "active_bank": 1,
+    "active_base": 0,
+    "antialias": false,
+    "backend": "kfb-linux-frame-atomic-output",
+    "capability": 0,
+    "commits": 2,
+    "dma_copied_words": 0,
+    "max_jobs": 64,
+    "max_scene_words": 1084816,
+    "memory_dma": {
+      "available": true,
+      "copy_ops": 0,
+      "fill_ops": 44
+    },
+    "metadata_only": false,
+    "mock_backend": true,
+    "poisoned": 0,
+    "publish_profile": {
+      "backend": "mock"
+    },
+    "sensor_available": false,
+    "shadow_copied_words": 0,
+    "signature": 0,
+    "status": 131075,
+    "uploaded_words": 8950
+  },
+  "performance": {
+    "frame_interval_ms": 0.0,
+    "frame_limit": 2.0,
+    "frame_pacing": "start-to-start",
+    "full_update_count": 1,
+    "last_apps_ms": 0.11144000000484766,
+    "last_compose_ms": 9.551080000001377,
+    "last_upload_ms": 0.0,
+    "no_op_update_count": 0,
+    "patch_update_count": 1,
+    "render_count": 1,
+    "rendered_generation": 4,
+    "update_words": 4480,
+    "uptime_seconds": 0.011173299999995834
+  },
+  "pointer": {
+    "azimuth": 0.0,
+    "buttons": [],
+    "cancel_serial": 0,
+    "captured_window": null,
+    "dragging": false,
+    "elevation": 0.0,
+    "last_left_press": null,
+    "last_left_release": null,
+    "left_press_serial": 0,
+    "left_release_serial": 0,
+    "scroll_delta": 0.0,
+    "scroll_serial": 0,
+    "visible": false,
+    "window_id": 1,
+    "zone": "content"
+  },
+  "profile": {
+    "enabled": false,
+    "nested": true,
+    "units": "microseconds"
+  },
+  "projection": {
+    "cpu_output_shadow_words": 4480,
+    "cpu_result_download_words": 0,
+    "cpu_scene_words": 0,
+    "device_ready_frames": 1,
+    "dirty_tiles": 160,
+    "fallback_frames": 0,
+    "geometry_builds": 0,
+    "geometry_cull_us_total": 0,
+    "geometry_descriptor_us_total": 0,
+    "geometry_insert_us_total": 0,
+    "geometry_prepare_us_total": 0,
+    "geometry_tiles_evaluated_total": 0,
+    "hardware_frames": 1,
+    "jobs_per_core": [
+      48,
+      48
+    ],
+    "lazy_copied_tiles_total": 0,
+    "mask_build_us_total": 0,
+    "mask_builds": 0,
+    "mask_fast_tiles_total": 0,
+    "mask_integer_samples_total": 0,
+    "mask_precise_samples_total": 0,
+    "mask_samples_evaluated_total": 0,
+    "masked_tiles_total": 44,
+    "mode": "ddr-resident-dirty-tiles",
+    "packed_mask_tiles_total": 44,
+    "plan_cache": {
+      "builtin_loads": 1,
+      "hits": 0,
+      "loads": 1,
+      "misses": 0,
+      "payload_scan_bytes": 0,
+      "rejected": 0,
+      "revision": "9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5"
+    },
+    "precomputed_layers_total": 1,
+    "redrawn_tiles": 96,
+    "reused_tiles_total": 0,
+    "solid_tiles_total": 0,
+    "texture_pool": {
+      "asset_cache_evictions": 0,
+      "asset_cache_hits": 0,
+      "asset_cache_misses": 0,
+      "asset_cache_upload_bytes": 0,
+      "asset_copy_batches": 0,
+      "asset_copy_bytes": 0,
+      "asset_copy_requests": 0,
+      "asset_resident_bytes": 0,
+      "capacity_bytes": 4194304,
+      "evictions": 0,
+      "full_uploads": 1,
+      "partial_uploads": 0,
+      "resident_bytes": 921600,
+      "resident_windows": 1,
+      "reuses": 0,
+      "source_tile_size": 32,
+      "source_tiles_updated": 240,
+      "staged_copy_bytes": 0,
+      "total_resident_bytes": 921600,
+      "upload_bytes": 921600,
+      "upload_calls": 1
+    },
+    "texture_reuses_total": 0,
+    "texture_uploads_total": 1,
+    "tile_fills_total": 44,
+    "total_hw_jobs": 96,
+    "update_kind": "tiles"
+  },
+  "render_error": null,
+  "runtime": "C++17",
+  "scene_owner": null,
+  "service": {
+    "phase": "ready",
+    "queued_requests": 0,
+    "snapshot_age_seconds": 0.8663177000000033,
+    "state_is_snapshot": true
+  },
+  "view": {
+    "pitch": 0.0,
+    "roll": 0.0,
+    "yaw": 0.0
+  },
+  "windows": [
+    {
+      "always_on_top": true,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": true,
+      "height_deg": 30.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "boayo-desktop",
+      "roll": 0.0,
+      "shape": [
+        [
+          51.2,
+          36.0,
+          537.6,
+          252.0,
+          18.0
+        ]
+      ],
+      "surface_height": 360,
+      "surface_width": 640,
+      "title": "BoAYO Launcher",
+      "width_deg": 42.0,
+      "window_id": 1,
+      "workspace": {},
+      "z": 0
+    }
+  ]
+}
+__NATIVE_RC:0
+oryukdo# boayo-app dashboard; echo __NATIVE_RC:$?
+BOAYO_APP_READY window=2
+__NATIVE_RC:0
+oryukdo# boayo-status; echo __NATIVE_RC:$?
+{
+  "app_error": null,
+  "assets": {
+    "cache_hits": 3,
+    "format": "raw-mapped-00RRGGBB",
+    "loads": 7,
+    "misses": 0,
+    "rejected": 0,
+    "rgb_materializations": 0
+  },
+  "buttons": {
+    "available": false,
+    "last_event_id": 0,
+    "state": 0
+  },
+  "compositor": "cpp-native",
+  "driver_profile": {
+    "available": false,
+    "enabled": false
+  },
+  "focused_window": 2,
+  "generation": 17,
+  "motion": {
+    "active": false,
+    "next_step": 0,
+    "phase": "idle",
+    "steps": 25,
+    "target_generation": 0,
+    "view": {
+      "pitch": 0.0,
+      "roll": 0.0,
+      "yaw": 0.0
+    },
+    "windows": []
+  },
+  "output": {
+    "abi": 3,
+    "active_bank": 0,
+    "active_base": 0,
+    "antialias": false,
+    "backend": "kfb-linux-frame-atomic-output",
+    "capability": 0,
+    "commits": 3,
+    "dma_copied_words": 0,
+    "max_jobs": 64,
+    "max_scene_words": 1084816,
+    "memory_dma": {
+      "available": true,
+      "copy_ops": 56,
+      "fill_ops": 108
+    },
+    "metadata_only": false,
+    "mock_backend": true,
+    "poisoned": 0,
+    "publish_profile": {
+      "backend": "mock"
+    },
+    "sensor_available": false,
+    "shadow_copied_words": 0,
+    "signature": 0,
+    "status": 196611,
+    "uploaded_words": 9085
+  },
+  "performance": {
+    "frame_interval_ms": 1997.6966199999993,
+    "frame_limit": 2.0,
+    "frame_pacing": "start-to-start",
+    "full_update_count": 1,
+    "last_apps_ms": 0.35989999999941347,
+    "last_compose_ms": 15.24909999999835,
+    "last_upload_ms": 0.0,
+    "no_op_update_count": 0,
+    "patch_update_count": 2,
+    "render_count": 2,
+    "rendered_generation": 17,
+    "update_words": 4480,
+    "uptime_seconds": 2.036384919999996
+  },
+  "pointer": {
+    "azimuth": 0.0,
+    "buttons": [],
+    "cancel_serial": 0,
+    "captured_window": null,
+    "dragging": false,
+    "elevation": 0.0,
+    "last_left_press": null,
+    "last_left_release": null,
+    "left_press_serial": 0,
+    "left_release_serial": 0,
+    "scroll_delta": 0.0,
+    "scroll_serial": 0,
+    "visible": false,
+    "window_id": 2,
+    "zone": "content"
+  },
+  "profile": {
+    "enabled": false,
+    "nested": true,
+    "units": "microseconds"
+  },
+  "projection": {
+    "cpu_output_shadow_words": 4480,
+    "cpu_result_download_words": 0,
+    "cpu_scene_words": 0,
+    "device_ready_frames": 1,
+    "dirty_tiles": 160,
+    "fallback_frames": 0,
+    "geometry_builds": 0,
+    "geometry_cull_us_total": 0,
+    "geometry_descriptor_us_total": 0,
+    "geometry_insert_us_total": 0,
+    "geometry_prepare_us_total": 0,
+    "geometry_tiles_evaluated_total": 0,
+    "hardware_frames": 2,
+    "jobs_per_core": [
+      76,
+      72
+    ],
+    "lazy_copied_tiles_total": 0,
+    "mask_build_us_total": 0,
+    "mask_builds": 0,
+    "mask_fast_tiles_total": 0,
+    "mask_integer_samples_total": 0,
+    "mask_precise_samples_total": 0,
+    "mask_samples_evaluated_total": 0,
+    "masked_tiles_total": 121,
+    "mode": "ddr-resident-dirty-tiles",
+    "packed_mask_tiles_total": 121,
+    "plan_cache": {
+      "builtin_loads": 5,
+      "hits": 0,
+      "loads": 5,
+      "misses": 0,
+      "payload_scan_bytes": 0,
+      "rejected": 0,
+      "revision": "9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5"
+    },
+    "precomputed_layers_total": 5,
+    "redrawn_tiles": 135,
+    "reused_tiles_total": 0,
+    "solid_tiles_total": 0,
+    "texture_pool": {
+      "asset_cache_evictions": 0,
+      "asset_cache_hits": 0,
+      "asset_cache_misses": 2,
+      "asset_cache_upload_bytes": 6272,
+      "asset_copy_batches": 2,
+      "asset_copy_bytes": 6272,
+      "asset_copy_requests": 56,
+      "asset_resident_bytes": 6272,
+      "capacity_bytes": 4194304,
+      "evictions": 0,
+      "full_uploads": 5,
+      "partial_uploads": 0,
+      "resident_bytes": 2076800,
+      "resident_windows": 5,
+      "reuses": 0,
+      "source_tile_size": 32,
+      "source_tiles_updated": 536,
+      "staged_copy_bytes": 0,
+      "total_resident_bytes": 2083072,
+      "upload_bytes": 2083072,
+      "upload_calls": 7
+    },
+    "texture_reuses_total": 0,
+    "texture_uploads_total": 5,
+    "tile_fills_total": 108,
+    "total_hw_jobs": 244,
+    "update_kind": "tiles"
+  },
+  "render_error": null,
+  "runtime": "C++17",
+  "scene_owner": null,
+  "service": {
+    "phase": "ready",
+    "queued_requests": 0,
+    "snapshot_age_seconds": 0.8409516199999985,
+    "state_is_snapshot": true
+  },
+  "view": {
+    "pitch": 0.0,
+    "roll": 0.0,
+    "yaw": 0.0
+  },
+  "windows": [
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": true,
+      "height_deg": 28.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-dashboard-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          544.0,
+          428.0,
+          0.0
+        ]
+      ],
+      "surface_height": 440,
+      "surface_width": 640,
+      "title": "Dashboard",
+      "width_deg": 38.0,
+      "window_id": 2,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 0
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 30.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "boayo-desktop",
+      "roll": 0.0,
+      "shape": [
+        [
+          51.2,
+          36.0,
+          537.6,
+          252.0,
+          18.0
+        ]
+      ],
+      "surface_height": 360,
+      "surface_width": 640,
+      "title": "BoAYO Launcher",
+      "width_deg": 42.0,
+      "window_id": 1,
+      "workspace": {},
+      "z": 1
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -18.91361728563541,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-dashboard-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: Dashboard",
+      "width_deg": 2.88,
+      "window_id": 3,
+      "workspace": {
+        "control": "move",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 2
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 18.91361728563541,
+      "decorated": false,
+      "elevation": -11.136823482150845,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-dashboard-2",
+      "roll": 3.7864391911801647,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: Dashboard",
+      "width_deg": 4.0,
+      "window_id": 4,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 3
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 18.91361728563541,
+      "decorated": false,
+      "elevation": 11.136823482150847,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-dashboard-2",
+      "roll": -3.7864391911801647,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: Dashboard",
+      "width_deg": 4.0,
+      "window_id": 5,
+      "workspace": {
+        "control": "close",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 4
+    }
+  ]
+}
+__NATIVE_RC:0
+oryukdo# boayo-app telemetry; echo __NATIVE_RC:$?
+BOAYO_APP_READY window=6
+__NATIVE_RC:0
+oryukdo# boayo-status; echo __NATIVE_RC:$?
+{
+  "app_error": null,
+  "assets": {
+    "cache_hits": 17,
+    "format": "raw-mapped-00RRGGBB",
+    "loads": 20,
+    "misses": 0,
+    "rejected": 0,
+    "rgb_materializations": 0
+  },
+  "buttons": {
+    "available": false,
+    "last_event_id": 0,
+    "state": 0
+  },
+  "compositor": "cpp-native",
+  "driver_profile": {
+    "available": false,
+    "enabled": false
+  },
+  "focused_window": 6,
+  "generation": 38,
+  "motion": {
+    "active": false,
+    "next_step": 0,
+    "phase": "idle",
+    "steps": 25,
+    "target_generation": 0,
+    "view": {
+      "pitch": 0.0,
+      "roll": 0.0,
+      "yaw": 0.0
+    },
+    "windows": []
+  },
+  "output": {
+    "abi": 3,
+    "active_bank": 0,
+    "active_base": 0,
+    "antialias": false,
+    "backend": "kfb-linux-frame-atomic-output",
+    "capability": 0,
+    "commits": 5,
+    "dma_copied_words": 9216,
+    "max_jobs": 64,
+    "max_scene_words": 1084816,
+    "memory_dma": {
+      "available": true,
+      "copy_ops": 133,
+      "fill_ops": 190
+    },
+    "metadata_only": false,
+    "mock_backend": true,
+    "poisoned": 0,
+    "publish_profile": {
+      "backend": "mock"
+    },
+    "sensor_available": false,
+    "shadow_copied_words": 0,
+    "signature": 0,
+    "status": 327683,
+    "uploaded_words": 9134
+  },
+  "performance": {
+    "frame_interval_ms": 528.120560000005,
+    "frame_limit": 2.0,
+    "frame_pacing": "start-to-start",
+    "full_update_count": 1,
+    "last_apps_ms": 0.33480000000452037,
+    "last_compose_ms": 22.8186000000008,
+    "last_upload_ms": 0.0,
+    "no_op_update_count": 0,
+    "patch_update_count": 4,
+    "render_count": 4,
+    "rendered_generation": 38,
+    "update_words": 4480,
+    "uptime_seconds": 4.3895623999999955
+  },
+  "pointer": {
+    "azimuth": 0.0,
+    "buttons": [],
+    "cancel_serial": 0,
+    "captured_window": null,
+    "dragging": false,
+    "elevation": 0.0,
+    "last_left_press": null,
+    "last_left_release": null,
+    "left_press_serial": 0,
+    "left_release_serial": 0,
+    "scroll_delta": 0.0,
+    "scroll_serial": 0,
+    "visible": false,
+    "window_id": 6,
+    "zone": "content"
+  },
+  "profile": {
+    "enabled": false,
+    "nested": true,
+    "units": "microseconds"
+  },
+  "projection": {
+    "cpu_output_shadow_words": 4480,
+    "cpu_result_download_words": 0,
+    "cpu_scene_words": 0,
+    "device_ready_frames": 1,
+    "dirty_tiles": 148,
+    "fallback_frames": 0,
+    "geometry_builds": 0,
+    "geometry_cull_us_total": 0,
+    "geometry_descriptor_us_total": 0,
+    "geometry_insert_us_total": 0,
+    "geometry_prepare_us_total": 0,
+    "geometry_tiles_evaluated_total": 0,
+    "hardware_frames": 4,
+    "jobs_per_core": [
+      121,
+      116
+    ],
+    "lazy_copied_tiles_total": 36,
+    "mask_build_us_total": 0,
+    "mask_builds": 0,
+    "mask_fast_tiles_total": 0,
+    "mask_integer_samples_total": 0,
+    "mask_precise_samples_total": 0,
+    "mask_samples_evaluated_total": 0,
+    "masked_tiles_total": 345,
+    "mode": "ddr-resident-dirty-tiles",
+    "packed_mask_tiles_total": 345,
+    "plan_cache": {
+      "builtin_loads": 9,
+      "hits": 0,
+      "loads": 9,
+      "misses": 0,
+      "payload_scan_bytes": 0,
+      "rejected": 0,
+      "revision": "9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5"
+    },
+    "precomputed_layers_total": 9,
+    "redrawn_tiles": 125,
+    "reused_tiles_total": 36,
+    "solid_tiles_total": 0,
+    "texture_pool": {
+      "asset_cache_evictions": 0,
+      "asset_cache_hits": 1,
+      "asset_cache_misses": 7,
+      "asset_cache_upload_bytes": 86208,
+      "asset_copy_batches": 7,
+      "asset_copy_bytes": 89344,
+      "asset_copy_requests": 116,
+      "asset_resident_bytes": 86208,
+      "capacity_bytes": 4194304,
+      "evictions": 0,
+      "full_uploads": 9,
+      "partial_uploads": 2,
+      "resident_bytes": 2585600,
+      "resident_windows": 9,
+      "reuses": 7,
+      "source_tile_size": 32,
+      "source_tiles_updated": 1001,
+      "staged_copy_bytes": 0,
+      "total_resident_bytes": 2671808,
+      "upload_bytes": 3798208,
+      "upload_calls": 17
+    },
+    "texture_reuses_total": 7,
+    "texture_uploads_total": 11,
+    "tile_fills_total": 190,
+    "total_hw_jobs": 704,
+    "update_kind": "tiles"
+  },
+  "render_error": null,
+  "runtime": "C++17",
+  "scene_owner": null,
+  "service": {
+    "phase": "ready",
+    "queued_requests": 0,
+    "snapshot_age_seconds": 0.24780781999999846,
+    "state_is_snapshot": true
+  },
+  "view": {
+    "pitch": 0.0,
+    "roll": 0.0,
+    "yaw": 0.0
+  },
+  "windows": [
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 28.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-dashboard-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          544.0,
+          428.0,
+          0.0
+        ]
+      ],
+      "surface_height": 440,
+      "surface_width": 640,
+      "title": "Dashboard",
+      "width_deg": 38.0,
+      "window_id": 2,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 0
+    },
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": true,
+      "height_deg": 26.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-6",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          0.0
+        ]
+      ],
+      "surface_height": 300,
+      "surface_width": 400,
+      "title": "Telemetry",
+      "width_deg": 36.0,
+      "window_id": 6,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 1
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 30.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "boayo-desktop",
+      "roll": 0.0,
+      "shape": [
+        [
+          51.2,
+          36.0,
+          537.6,
+          252.0,
+          18.0
+        ]
+      ],
+      "surface_height": 360,
+      "surface_width": 640,
+      "title": "BoAYO Launcher",
+      "width_deg": 42.0,
+      "window_id": 1,
+      "workspace": {},
+      "z": 2
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -18.91361728563541,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-dashboard-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: Dashboard",
+      "width_deg": 2.88,
+      "window_id": 3,
+      "workspace": {
+        "control": "move",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 3
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 18.91361728563541,
+      "decorated": false,
+      "elevation": -11.136823482150845,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-dashboard-2",
+      "roll": 3.7864391911801647,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: Dashboard",
+      "width_deg": 4.0,
+      "window_id": 4,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 4
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 18.91361728563541,
+      "decorated": false,
+      "elevation": 11.136823482150847,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-dashboard-2",
+      "roll": -3.7864391911801647,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: Dashboard",
+      "width_deg": 4.0,
+      "window_id": 5,
+      "workspace": {
+        "control": "close",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 5
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -16.47105751657935,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-6",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: Telemetry",
+      "width_deg": 2.88,
+      "window_id": 7,
+      "workspace": {
+        "control": "move",
+        "parent": 6,
+        "role": "caption"
+      },
+      "z": 6
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": -10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-6",
+      "roll": 3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 8,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 6,
+        "role": "caption"
+      },
+      "z": 7
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": 10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-6",
+      "roll": -3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 9,
+      "workspace": {
+        "control": "close",
+        "parent": 6,
+        "role": "caption"
+      },
+      "z": 8
+    }
+  ]
+}
+__NATIVE_RC:0
+oryukdo# boayo-app pulse; echo __NATIVE_RC:$?
+BOAYO_APP_READY window=10
+__NATIVE_RC:0
+oryukdo# boayo-status; echo __NATIVE_RC:$?
+{
+  "app_error": null,
+  "assets": {
+    "cache_hits": 44,
+    "format": "raw-mapped-00RRGGBB",
+    "loads": 49,
+    "misses": 0,
+    "rejected": 0,
+    "rgb_materializations": 0
+  },
+  "buttons": {
+    "available": false,
+    "last_event_id": 0,
+    "state": 0
+  },
+  "compositor": "cpp-native",
+  "driver_profile": {
+    "available": false,
+    "enabled": false
+  },
+  "focused_window": 10,
+  "generation": 68,
+  "motion": {
+    "active": false,
+    "next_step": 0,
+    "phase": "idle",
+    "steps": 25,
+    "target_generation": 0,
+    "view": {
+      "pitch": 0.0,
+      "roll": 0.0,
+      "yaw": 0.0
+    },
+    "windows": []
+  },
+  "output": {
+    "abi": 3,
+    "active_bank": 1,
+    "active_base": 0,
+    "antialias": false,
+    "backend": "kfb-linux-frame-atomic-output",
+    "capability": 0,
+    "commits": 8,
+    "dma_copied_words": 34048,
+    "max_jobs": 64,
+    "max_scene_words": 1084816,
+    "memory_dma": {
+      "available": true,
+      "copy_ops": 229,
+      "fill_ops": 249
+    },
+    "metadata_only": false,
+    "mock_backend": true,
+    "poisoned": 0,
+    "publish_profile": {
+      "backend": "mock"
+    },
+    "sensor_available": false,
+    "shadow_copied_words": 0,
+    "signature": 0,
+    "status": 524291,
+    "uploaded_words": 9150
+  },
+  "performance": {
+    "frame_interval_ms": 509.7591000000037,
+    "frame_limit": 2.0,
+    "frame_pacing": "start-to-start",
+    "full_update_count": 1,
+    "last_apps_ms": 0.13601999999934833,
+    "last_compose_ms": 32.97161999999787,
+    "last_upload_ms": 0.0,
+    "no_op_update_count": 0,
+    "patch_update_count": 7,
+    "render_count": 7,
+    "rendered_generation": 68,
+    "update_words": 4480,
+    "uptime_seconds": 5.959522440000001
+  },
+  "pointer": {
+    "azimuth": 0.0,
+    "buttons": [],
+    "cancel_serial": 0,
+    "captured_window": null,
+    "dragging": false,
+    "elevation": 0.0,
+    "last_left_press": null,
+    "last_left_release": null,
+    "left_press_serial": 0,
+    "left_release_serial": 0,
+    "scroll_delta": 0.0,
+    "scroll_serial": 0,
+    "visible": false,
+    "window_id": 10,
+    "zone": "content"
+  },
+  "profile": {
+    "enabled": false,
+    "nested": true,
+    "units": "microseconds"
+  },
+  "projection": {
+    "cpu_output_shadow_words": 4480,
+    "cpu_result_download_words": 0,
+    "cpu_scene_words": 0,
+    "device_ready_frames": 1,
+    "dirty_tiles": 144,
+    "fallback_frames": 0,
+    "geometry_builds": 0,
+    "geometry_cull_us_total": 0,
+    "geometry_descriptor_us_total": 0,
+    "geometry_insert_us_total": 0,
+    "geometry_prepare_us_total": 0,
+    "geometry_tiles_evaluated_total": 0,
+    "hardware_frames": 7,
+    "jobs_per_core": [
+      170,
+      165
+    ],
+    "lazy_copied_tiles_total": 133,
+    "mask_build_us_total": 0,
+    "mask_builds": 0,
+    "mask_fast_tiles_total": 0,
+    "mask_integer_samples_total": 0,
+    "mask_precise_samples_total": 0,
+    "mask_samples_evaluated_total": 0,
+    "masked_tiles_total": 536,
+    "mode": "ddr-resident-dirty-tiles",
+    "packed_mask_tiles_total": 536,
+    "plan_cache": {
+      "builtin_loads": 13,
+      "hits": 0,
+      "loads": 13,
+      "misses": 0,
+      "payload_scan_bytes": 0,
+      "rejected": 0,
+      "revision": "9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5"
+    },
+    "precomputed_layers_total": 13,
+    "redrawn_tiles": 122,
+    "reused_tiles_total": 45,
+    "solid_tiles_total": 0,
+    "texture_pool": {
+      "asset_cache_evictions": 0,
+      "asset_cache_hits": 2,
+      "asset_cache_misses": 16,
+      "asset_cache_upload_bytes": 244708,
+      "asset_copy_batches": 16,
+      "asset_copy_bytes": 249608,
+      "asset_copy_requests": 193,
+      "asset_resident_bytes": 244708,
+      "capacity_bytes": 4194304,
+      "evictions": 0,
+      "full_uploads": 13,
+      "partial_uploads": 6,
+      "resident_bytes": 3094400,
+      "resident_windows": 13,
+      "reuses": 11,
+      "source_tile_size": 32,
+      "source_tiles_updated": 1359,
+      "staged_copy_bytes": 0,
+      "total_resident_bytes": 3339108,
+      "upload_bytes": 4945508,
+      "upload_calls": 31
+    },
+    "texture_reuses_total": 11,
+    "texture_uploads_total": 19,
+    "tile_fills_total": 249,
+    "total_hw_jobs": 1159,
+    "update_kind": "tiles"
+  },
+  "render_error": null,
+  "runtime": "C++17",
+  "scene_owner": null,
+  "service": {
+    "phase": "ready",
+    "queued_requests": 0,
+    "snapshot_age_seconds": 0.43775449999999694,
+    "state_is_snapshot": true
+  },
+  "view": {
+    "pitch": 0.0,
+    "roll": 0.0,
+    "yaw": 0.0
+  },
+  "windows": [
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 28.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-dashboard-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          544.0,
+          428.0,
+          0.0
+        ]
+      ],
+      "surface_height": 440,
+      "surface_width": 640,
+      "title": "Dashboard",
+      "width_deg": 38.0,
+      "window_id": 2,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 0
+    },
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 26.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-6",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          0.0
+        ]
+      ],
+      "surface_height": 300,
+      "surface_width": 400,
+      "title": "Telemetry",
+      "width_deg": 36.0,
+      "window_id": 6,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 1
+    },
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": true,
+      "height_deg": 28.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-sdk-pulse-10",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          0.0
+        ]
+      ],
+      "surface_height": 300,
+      "surface_width": 400,
+      "title": "SDK Pulse",
+      "width_deg": 38.0,
+      "window_id": 10,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 2
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 30.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "boayo-desktop",
+      "roll": 0.0,
+      "shape": [
+        [
+          51.2,
+          36.0,
+          537.6,
+          252.0,
+          18.0
+        ]
+      ],
+      "surface_height": 360,
+      "surface_width": 640,
+      "title": "BoAYO Launcher",
+      "width_deg": 42.0,
+      "window_id": 1,
+      "workspace": {},
+      "z": 3
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -18.91361728563541,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-dashboard-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: Dashboard",
+      "width_deg": 2.88,
+      "window_id": 3,
+      "workspace": {
+        "control": "move",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 4
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 18.91361728563541,
+      "decorated": false,
+      "elevation": -11.136823482150845,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-dashboard-2",
+      "roll": 3.7864391911801647,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: Dashboard",
+      "width_deg": 4.0,
+      "window_id": 4,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 5
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 18.91361728563541,
+      "decorated": false,
+      "elevation": 11.136823482150847,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-dashboard-2",
+      "roll": -3.7864391911801647,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: Dashboard",
+      "width_deg": 4.0,
+      "window_id": 5,
+      "workspace": {
+        "control": "close",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 6
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -16.47105751657935,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-telemetry-6",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: Telemetry",
+      "width_deg": 2.88,
+      "window_id": 7,
+      "workspace": {
+        "control": "move",
+        "parent": 6,
+        "role": "caption"
+      },
+      "z": 7
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": -10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-telemetry-6",
+      "roll": 3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 8,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 6,
+        "role": "caption"
+      },
+      "z": 8
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": 10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-telemetry-6",
+      "roll": -3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 9,
+      "workspace": {
+        "control": "close",
+        "parent": 6,
+        "role": "caption"
+      },
+      "z": 9
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -17.264823078656832,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-sdk-pulse-10",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: SDK Pulse",
+      "width_deg": 2.88,
+      "window_id": 11,
+      "workspace": {
+        "control": "move",
+        "parent": 10,
+        "role": "caption"
+      },
+      "z": 10
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 17.264823078656832,
+      "decorated": false,
+      "elevation": -11.129687987414206,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-sdk-pulse-10",
+      "roll": 3.433190255028393,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: SDK Pulse",
+      "width_deg": 4.0,
+      "window_id": 12,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 10,
+        "role": "caption"
+      },
+      "z": 11
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 17.264823078656832,
+      "decorated": false,
+      "elevation": 11.129687987414204,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-sdk-pulse-10",
+      "roll": -3.433190255028393,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: SDK Pulse",
+      "width_deg": 4.0,
+      "window_id": 13,
+      "workspace": {
+        "control": "close",
+        "parent": 10,
+        "role": "caption"
+      },
+      "z": 12
+    }
+  ]
+}
+__NATIVE_RC:0
+oryukdo# boayo-keys
+BOAYO_KEYS_READY WASD/arrows=view Z/C=roll Space/Enter=center-click R=reset +/-=step Q=exit
+{"pitch":0.0,"yaw":0.0}
+{"pitch":0.0,"yaw":2.0}
+{"pitch":2.0,"yaw":2.0}
+{"pitch":2.0,"yaw":0.0}
+{"pitch":0.0,"yaw":0.0}
+{"pitch":0.0,"pointer":{"azimuth":0.0,"buttons":[],"cancel_serial":0,"captured_window":null,"dragging":false,"elevation":0.0,"last_left_press":{"azimuth":0.0,"elevation":0.0,"window_id":10},"last_left_release":{"azimuth":0.0,"elevation":0.0},"left_press_serial":1,"left_release_serial":1,"scroll_delta":0.0,"scroll_serial":0,"visible":false,"window_id":10,"zone":"content"},"yaw":0.0}
+{"pitch":0.0,"pointer":{"azimuth":0.0,"buttons":[],"cancel_serial":0,"captured_window":null,"dragging":false,"elevation":0.0,"last_left_press":{"azimuth":0.0,"elevation":0.0,"window_id":10},"last_left_release":{"azimuth":0.0,"elevation":0.0},"left_press_serial":2,"left_release_serial":2,"scroll_delta":0.0,"scroll_serial":0,"visible":false,"window_id":10,"zone":"content"},"yaw":0.0}
+{"pitch":0.0,"yaw":0.0}
+
+BOAYO_KEYS_EXIT (WM remains running)
+oryukdo# echo KEYS_SHELL_RESTORED; echo __NATIVE_RC:$?
+KEYS_SHELL_RESTORED
+__NATIVE_RC:0
+oryukdo# boayo-status; echo __NATIVE_RC:$?
+{
+  "app_error": null,
+  "assets": {
+    "cache_hits": 84,
+    "format": "raw-mapped-00RRGGBB",
+    "loads": 98,
+    "misses": 0,
+    "rejected": 0,
+    "rgb_materializations": 0
+  },
+  "buttons": {
+    "available": false,
+    "last_event_id": 0,
+    "state": 0
+  },
+  "compositor": "cpp-native",
+  "driver_profile": {
+    "available": false,
+    "enabled": false
+  },
+  "focused_window": 10,
+  "generation": 108,
+  "motion": {
+    "active": false,
+    "next_step": 0,
+    "phase": "idle",
+    "steps": 25,
+    "target_generation": 0,
+    "view": {
+      "pitch": 0.0,
+      "roll": 0.0,
+      "yaw": 0.0
+    },
+    "windows": []
+  },
+  "output": {
+    "abi": 3,
+    "active_bank": 0,
+    "active_base": 0,
+    "antialias": false,
+    "backend": "kfb-linux-frame-atomic-output",
+    "capability": 0,
+    "commits": 13,
+    "dma_copied_words": 58880,
+    "max_jobs": 64,
+    "max_scene_words": 1084816,
+    "memory_dma": {
+      "available": true,
+      "copy_ops": 281,
+      "fill_ops": 269
+    },
+    "metadata_only": false,
+    "mock_backend": true,
+    "poisoned": 0,
+    "publish_profile": {
+      "backend": "mock"
+    },
+    "sensor_available": false,
+    "shadow_copied_words": 0,
+    "signature": 0,
+    "status": 1179651,
+    "uploaded_words": 9156
+  },
+  "performance": {
+    "frame_interval_ms": 520.1376600000032,
+    "frame_limit": 2.0,
+    "frame_pacing": "start-to-start",
+    "full_update_count": 1,
+    "last_apps_ms": 0.2764199999987227,
+    "last_compose_ms": 15.30729999999636,
+    "last_upload_ms": 0.0,
+    "no_op_update_count": 0,
+    "patch_update_count": 12,
+    "render_count": 12,
+    "rendered_generation": 108,
+    "update_words": 4480,
+    "uptime_seconds": 8.541891679999999
+  },
+  "pointer": {
+    "azimuth": 0.0,
+    "buttons": [],
+    "cancel_serial": 0,
+    "captured_window": null,
+    "dragging": false,
+    "elevation": 0.0,
+    "last_left_press": {
+      "azimuth": 0.0,
+      "elevation": 0.0,
+      "window_id": 10
+    },
+    "last_left_release": {
+      "azimuth": 0.0,
+      "elevation": 0.0
+    },
+    "left_press_serial": 2,
+    "left_release_serial": 2,
+    "scroll_delta": 0.0,
+    "scroll_serial": 0,
+    "visible": false,
+    "window_id": 10,
+    "zone": "content"
+  },
+  "profile": {
+    "enabled": false,
+    "nested": true,
+    "units": "microseconds"
+  },
+  "projection": {
+    "cpu_output_shadow_words": 4480,
+    "cpu_result_download_words": 0,
+    "cpu_scene_words": 0,
+    "device_ready_frames": 1,
+    "dirty_tiles": 28,
+    "fallback_frames": 0,
+    "geometry_builds": 0,
+    "geometry_cull_us_total": 0,
+    "geometry_descriptor_us_total": 0,
+    "geometry_insert_us_total": 0,
+    "geometry_prepare_us_total": 0,
+    "geometry_tiles_evaluated_total": 0,
+    "hardware_frames": 12,
+    "jobs_per_core": [
+      43,
+      43
+    ],
+    "lazy_copied_tiles_total": 230,
+    "mask_build_us_total": 0,
+    "mask_builds": 0,
+    "mask_fast_tiles_total": 0,
+    "mask_integer_samples_total": 0,
+    "mask_precise_samples_total": 0,
+    "mask_samples_evaluated_total": 0,
+    "masked_tiles_total": 646,
+    "mode": "ddr-resident-dirty-tiles",
+    "packed_mask_tiles_total": 646,
+    "plan_cache": {
+      "builtin_loads": 13,
+      "hits": 0,
+      "loads": 13,
+      "misses": 0,
+      "payload_scan_bytes": 0,
+      "rejected": 0,
+      "revision": "9a36cfafee7d059959f36d30c8034c6d219bd69bc727cd8b10083b58ff5f02d5"
+    },
+    "precomputed_layers_total": 13,
+    "redrawn_tiles": 28,
+    "reused_tiles_total": 45,
+    "solid_tiles_total": 0,
+    "texture_pool": {
+      "asset_cache_evictions": 17,
+      "asset_cache_hits": 2,
+      "asset_cache_misses": 29,
+      "asset_cache_upload_bytes": 515272,
+      "asset_copy_batches": 29,
+      "asset_copy_bytes": 520172,
+      "asset_copy_requests": 226,
+      "asset_resident_bytes": 248164,
+      "capacity_bytes": 4194304,
+      "evictions": 0,
+      "full_uploads": 13,
+      "partial_uploads": 13,
+      "resident_bytes": 3094400,
+      "resident_windows": 13,
+      "reuses": 24,
+      "source_tile_size": 32,
+      "source_tiles_updated": 1608,
+      "staged_copy_bytes": 0,
+      "total_resident_bytes": 3342564,
+      "upload_bytes": 5216072,
+      "upload_calls": 44
+    },
+    "texture_reuses_total": 24,
+    "texture_uploads_total": 26,
+    "tile_fills_total": 269,
+    "total_hw_jobs": 1598,
+    "update_kind": "tiles"
+  },
+  "render_error": null,
+  "runtime": "C++17",
+  "scene_owner": null,
+  "service": {
+    "phase": "ready",
+    "queued_requests": 0,
+    "snapshot_age_seconds": 0.1954025200000018,
+    "state_is_snapshot": true
+  },
+  "view": {
+    "pitch": 0.0,
+    "roll": 0.0,
+    "yaw": 0.0
+  },
+  "windows": [
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 28.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-dashboard-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          544.0,
+          428.0,
+          0.0
+        ]
+      ],
+      "surface_height": 440,
+      "surface_width": 640,
+      "title": "Dashboard",
+      "width_deg": 38.0,
+      "window_id": 2,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 0
+    },
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 26.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-6",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          0.0
+        ]
+      ],
+      "surface_height": 300,
+      "surface_width": 400,
+      "title": "Telemetry",
+      "width_deg": 36.0,
+      "window_id": 6,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 1
+    },
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": true,
+      "height_deg": 28.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-sdk-pulse-10",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          0.0
+        ]
+      ],
+      "surface_height": 300,
+      "surface_width": 400,
+      "title": "SDK Pulse",
+      "width_deg": 38.0,
+      "window_id": 10,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 2
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 30.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "boayo-desktop",
+      "roll": 0.0,
+      "shape": [
+        [
+          51.2,
+          36.0,
+          537.6,
+          252.0,
+          18.0
+        ]
+      ],
+      "surface_height": 360,
+      "surface_width": 640,
+      "title": "BoAYO Launcher",
+      "width_deg": 42.0,
+      "window_id": 1,
+      "workspace": {},
+      "z": 3
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -18.91361728563541,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-dashboard-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: Dashboard",
+      "width_deg": 2.88,
+      "window_id": 3,
+      "workspace": {
+        "control": "move",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 4
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 18.91361728563541,
+      "decorated": false,
+      "elevation": -11.136823482150845,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-dashboard-2",
+      "roll": 3.7864391911801647,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: Dashboard",
+      "width_deg": 4.0,
+      "window_id": 4,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 5
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 18.91361728563541,
+      "decorated": false,
+      "elevation": 11.136823482150847,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-dashboard-2",
+      "roll": -3.7864391911801647,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: Dashboard",
+      "width_deg": 4.0,
+      "window_id": 5,
+      "workspace": {
+        "control": "close",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 6
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -16.47105751657935,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-telemetry-6",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: Telemetry",
+      "width_deg": 2.88,
+      "window_id": 7,
+      "workspace": {
+        "control": "move",
+        "parent": 6,
+        "role": "caption"
+      },
+      "z": 7
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": -10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-telemetry-6",
+      "roll": 3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 8,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 6,
+        "role": "caption"
+      },
+      "z": 8
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": 10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-telemetry-6",
+      "roll": -3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 9,
+      "workspace": {
+        "control": "close",
+        "parent": 6,
+        "role": "caption"
+      },
+      "z": 9
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -17.264823078656832,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-sdk-pulse-10",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: SDK Pulse",
+      "width_deg": 2.88,
+      "window_id": 11,
+      "workspace": {
+        "control": "move",
+        "parent": 10,
+        "role": "caption"
+      },
+      "z": 10
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 17.264823078656832,
+      "decorated": false,
+      "elevation": -11.129687987414206,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-sdk-pulse-10",
+      "roll": 3.433190255028393,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: SDK Pulse",
+      "width_deg": 4.0,
+      "window_id": 12,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 10,
+        "role": "caption"
+      },
+      "z": 11
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 17.264823078656832,
+      "decorated": false,
+      "elevation": 11.129687987414204,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-sdk-pulse-10",
+      "roll": -3.433190255028393,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: SDK Pulse",
+      "width_deg": 4.0,
+      "window_id": 13,
+      "workspace": {
+        "control": "close",
+        "parent": 10,
+        "role": "caption"
+      },
+      "z": 12
+    }
+  ]
+}
+__NATIVE_RC:0
+oryukdo# boayo-stop; echo __NATIVE_RC:$?
+__NATIVE_RC:0
+oryukdo# 

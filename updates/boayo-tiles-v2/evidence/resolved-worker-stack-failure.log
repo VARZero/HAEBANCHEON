@@ -1,0 +1,20 @@
+PASS_QEMU cat /etc/oryukdo-image
+PASS_QEMU /bin/storage-check --identity
+PASS_QEMU test -x /bin/bosio-dma-check
+PASS_QEMU test -r /usr/share/boayo/assets/a0ebce13.bui
+PASS_QEMU test ! -L /usr/bin/python && test ! -e /usr/bin/python3 && test ! -d /usr/lib/python3.12
+PASS_QEMU echo $((19+23))
+PASS_QEMU ddrcheck
+PASS_QEMU boayo-selftest
+PASS_QEMU printf '{"op":"test_desktop","args":{"op":"tick","now":0},"app":"boayo-desktop"}\n{"op":"test_plan_export","args":{"window_id":1,"path":"/tmp/plan-body"},"app":"boayo-desktop"}\n' | BOAYO_PLANS=0 /usr/bin/boayo-native --rpc
+PASS_QEMU stty -opost -echo
+PASS_QEMU printf '__PLAN_BEGIN__'; cat /tmp/plan-body; printf '__PLAN_END__\n'
+PASS_QEMU stty opost echo
+PASS_QEMU boayo-dual-selftest
+Traceback (most recent call last):
+  File "/mnt/d/ORYUKDO-Gen3_AB_integrated_unverified/ORYUKDO-Gen3/work/ORYUKDO-3d5i_BOSIO_SoC/updates/boayo-tiles-v2/tests/test_image.py", line 65, in <module>
+    run('boayo-start --mock',rb'BoAYO C\+\+ service started',1200)
+  File "/mnt/d/ORYUKDO-Gen3_AB_integrated_unverified/ORYUKDO-Gen3/work/ORYUKDO-3d5i_BOSIO_SoC/updates/boayo-tiles-v2/tests/test_image.py", line 31, in run
+    assert re.search(rb'(?:^|\n)__NATIVE_RC:0\r*\n',reply),(command,reply[-4096:])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('boayo-start --mock', b'boayo-start --mock; echo __NATIVE_RC:$?\r\r\n[   51.678170] boayo-native[54]: unhandled signal 11 code 0x1 at 0x95714ee8 in boayo-native[a05e4,10000+1d4000]\r\r\n[   51.678170] boayo-native[54]: unhandled signal 11 code 0x1 at 0x95714ee8 in boayo-native[a05e4,10000+1d4000]\r\n[   51.678391] CPU: 0 UID: 0 PID: 54 Comm: boayo-native Not tainted 6.12.0-oryukdo-tiles2 #1\r\r\n[   51.678391] CPU: 0 UID: 0 PID: 54 Comm: boayo-native Not tainted 6.12.0-oryukdo-tiles2 #1\r\n[   51.678529] Hardware name: ORYUKDO Gen3 3D5I (DT)\r\r\n[   51.678529] Hardware name: ORYUKDO Gen3 3D5I (DT)\r\n[   51.678603] epc : 000b05e4 ra : 000b4720 sp : 95714ed0\r\r\n[   51.678603] epc : 000b05e4 ra : 000b4720 sp : 95714ed0\r\n[   51.678663]  gp : 001e7a88 tp : 9575fd30 t0 : fffb5ad0\r\r\n[   51.678663]  gp : 001e7a88 tp : 9575fd30 t0 : fffb5ad0\r\n[   51.678716]  t1 : 00000000 t2 : 00000069 s0 : 957656a0\r\r\n[   51.678716]  t1 : 00000000 t2 : 00000069 s0 : 957656a0\r\n[   51.678760]  s1 : 001e9000 a0 : 00000001 a1 : 9d12bd00\r\r\n[   51.678760]  s1 : 001e9000 a0 : 00000001 a1 : 9d12bd00\r\n[   51.678803]  a2 : fffffc80 a3 : 0004b000 a4 : 95714bb0\r\r\n[   51.678803]  a2 : fffffc80 a3 : 0004b000 a4 : 95714bb0\r\n[   51.678847]  a5 : 95715760 a6 : 001ea1f0 a7 : 00000087\r\r\n[   51.678847]  a5 : 95715760 a6 : 001ea1f0 a7 : 00000087\r\n[   51.678890]  s2 : 00000000 s3 : 00023000 s4 : 9d12b91c\r\r\n[   51.678890]  s2 : 00000000 s3 : 00023000 s4 : 9d12b91c\r\n[   51.678934]  s5 : 95766000 s6 : 9575fcc0 s7 : 957656a0\r\r\n[   51.678934]  s5 : 95766000 s6 : 9575fcc0 s7 : 957656a0\r\n[   51.678977]  s8 : 001e91d8 s9 : 001e90a8 s10: 9573d000\r\r\n[   51.678977]  s8 : 001e91d8 s9 : 001e90a8 s10: 9573d000\r\n[   51.679030]  s11: 9575fcac t3 : 9575fcc0 t4 : 00000000\r\r\n[   51.679030]  s11: 9575fcac t3 : 9575fcc0 t4 : 00000000\r\n[   51.679078]  t5 : 00005a66 t6 : 0000ffff\r\r\n[   51.679078]  t5 : 00005a66 t6 : 0000ffff\r\n[   51.679115] status: 00000020 badaddr: 95714ee8 cause: 0000000f\r\r\n[   51.679115] status: 00000020 badaddr: 95714ee8 cause: 0000000f\r\n[   51.679188] Code: 8613 c806 5737 fffb 0633 00e6 0713 0601 0733 00e6 (2c23) 00f1 \r\r\n[   51.679188] Code: 8613 c806 5737 fffb 0633 00e6 0713 0601 0733 00e6 (2c23) 00f1 \r\nWM reply failed or timed out\r\r\n__NATIVE_RC:1\r\r\noryukdo# ')

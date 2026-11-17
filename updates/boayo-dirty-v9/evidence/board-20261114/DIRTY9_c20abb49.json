@@ -1,0 +1,8 @@
+{
+  "command": "boayo-start",
+  "seconds": 3.012,
+  "rc": 0,
+  "uart": "boayo-start; echo DIRTY9_c20abb49_RC:$?\r\r\nBoAYO C++ service started; initialization continues. boayo-status / boayo-keys / boayo-stop\r\r\n{\"features\":[\"windows\",\"pointer\",\"input-injection\",\"button-events\",\"scene-stream\",\"spatial-workspace\",\"pointer-capture\"],\"headless\":false,\"m\":32,\"mock_backend\":false,\"runtime\":\"C++17\",\"version\":2}\r\r\nBOAYO_INITTRACE n=1 event=desktop.begin wall_us=26366 cpu_us=8500 value=0\r\r\nBOAYO_INITTRACE n=2 event=window.create.begin wall_us=160829 cpu_us=67494 value=0\r\r\nDIRTY9_c20abb49_RC:0\r\r\n",
+  "observed_at": "2026-11-14T20:47:54.311239",
+  "log_start": 163692
+}

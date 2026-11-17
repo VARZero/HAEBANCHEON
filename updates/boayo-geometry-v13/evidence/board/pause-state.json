@@ -1,0 +1,15 @@
+{
+  "result": "PAUSED_BY_USER",
+  "motion_restored": true,
+  "cli_return_code": 130,
+  "completed_optimized_steps": 18,
+  "full_25_step_test_pass": false,
+  "host_trial_sequencer_stopped": true,
+  "extra_observers_stopped": true,
+  "uart_collector_and_live_viewers_preserved": true,
+  "board_service_not_shutdown": false,
+  "observed_at": 1794710661.4006255,
+  "linux_powerdown_confirmed": true,
+  "sd_unmounted": true,
+  "physical_power_switch": "user must turn off"
+}

@@ -1,0 +1,27 @@
+BOAYO_MOTION_BEGIN loop=1 steps=25
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-axis","seconds":0.010300577000066369,"step":1,"view":{"pitch":0.0,"roll":0.0,"yaw":0.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-axis","seconds":0.21037311300005967,"step":2,"view":{"pitch":0.0,"roll":0.0,"yaw":-12.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-axis","seconds":0.010279145000026801,"step":3,"view":{"pitch":0.0,"roll":0.0,"yaw":12.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-axis","seconds":0.21056808700006968,"step":4,"view":{"pitch":-8.0,"roll":0.0,"yaw":0.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-axis","seconds":0.010359035999954358,"step":5,"view":{"pitch":8.0,"roll":0.0,"yaw":0.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-axis","seconds":0.21066515999996227,"step":6,"view":{"pitch":0.0,"roll":-20.0,"yaw":0.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-axis","seconds":0.010304271999984849,"step":7,"view":{"pitch":0.0,"roll":20.0,"yaw":0.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-mixed","seconds":0.21071213200002603,"step":8,"view":{"pitch":6.0,"roll":-15.0,"yaw":-8.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-mixed","seconds":0.010279292000063833,"step":9,"view":{"pitch":-6.0,"roll":15.0,"yaw":8.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-axis","seconds":0.21046968000007382,"step":10,"view":{"pitch":0.0,"roll":0.0,"yaw":0.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"window-azimuth-elevation","seconds":0.21047306000002663,"step":11,"view":{"pitch":0.0,"roll":0.0,"yaw":0.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"window-azimuth-elevation","seconds":0.21049838300007195,"step":12,"view":{"pitch":0.0,"roll":0.0,"yaw":0.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"window-azimuth-elevation","seconds":0.2105515060000016,"step":13,"view":{"pitch":0.0,"roll":0.0,"yaw":0.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"window-width-height","seconds":0.21042941500002144,"step":14,"view":{"pitch":0.0,"roll":0.0,"yaw":0.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"window-width-height","seconds":0.2104482280000184,"step":15,"view":{"pitch":0.0,"roll":0.0,"yaw":0.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"overlap","seconds":0.21047121200001584,"step":16,"view":{"pitch":0.0,"roll":0.0,"yaw":0.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"front-back","seconds":0.01030696199995873,"step":17,"view":{"pitch":0.0,"roll":0.0,"yaw":0.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"front-back","seconds":0.21045983800001977,"step":18,"view":{"pitch":0.0,"roll":0.0,"yaw":0.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"second-window-move","seconds":0.21061451900004613,"step":19,"view":{"pitch":0.0,"roll":0.0,"yaw":0.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"second-window-move","seconds":0.2105964849999964,"step":20,"view":{"pitch":0.0,"roll":0.0,"yaw":0.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-mixed","seconds":0.2105037879999827,"step":21,"view":{"pitch":4.0,"roll":15.0,"yaw":6.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-reset","seconds":0.2104186799999752,"step":22,"view":{"pitch":0.0,"roll":0.0,"yaw":0.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"close-caption","seconds":0.21048389099996712,"step":23,"view":{"pitch":0.0,"roll":0.0,"yaw":0.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"close-caption","seconds":0.010248636999904193,"step":24,"view":{"pitch":0.0,"roll":0.0,"yaw":0.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"close-caption","seconds":0.21063696800001708,"step":25,"view":{"pitch":0.0,"roll":0.0,"yaw":0.0}}
+BOAYO_MOTION_COMPLETE device-acknowledged; HDMI visual check separate

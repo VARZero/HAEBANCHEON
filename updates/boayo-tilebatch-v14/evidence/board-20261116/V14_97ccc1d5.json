@@ -1,0 +1,8 @@
+{
+  "command": "sleep 12",
+  "seconds": 13.556,
+  "rc": 0,
+  "uart": "sleep 12; echo V14_97ccc1d5_RC:$?\r\r\nV14_97ccc1d5_RC:0\r\r\n",
+  "observed_at": "2026-11-16T21:46:52.039438",
+  "log_start": 31574
+}

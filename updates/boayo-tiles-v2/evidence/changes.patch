@@ -1,0 +1,296 @@
+--- boayo-tiles-v1/software/boayo/native/build.sh
++++ boayo-tiles-v2/software/boayo/native/build.sh
+@@ -19,6 +19,21 @@
+  flags+=(-static -march=rv32ima_zicsr_zifencei -mabi=ilp32 -ffunction-sections -fdata-sections -Wl,--gc-sections)
+ fi
+ if [[ "$mode" == sanitize ]]; then flags+=(-fsanitize=address,undefined -fno-omit-frame-pointer); fi
+-"$compiler" "${flags[@]}" "$source/src/resident.cpp" "$source/src/plan.cpp" "$source/src/assets.cpp" "$source/src/geometry.cpp" "$source/src/wm.cpp" "$source/src/ui.cpp" "$source/src/backend.cpp" "$source/src/apps.cpp" "$source/src/runtime.cpp" "$source/src/selftest.cpp" "$source/src/main.cpp" "$source/reference/wm/native/bosio_compositor.cpp" -o "$out/boayo-native-$mode"
++# Independent translation units use the same flags; bound concurrency to limit RAM.
++python3 - "$compiler" "$source" "$out/boayo-native-$mode" "${flags[@]}" <<'PYBUILD'
++from pathlib import Path
++from concurrent.futures import ThreadPoolExecutor
++import subprocess,sys
++compiler,source,target,*flags=sys.argv[1:]
++source=Path(source);objects=source.parent/'objects';objects.mkdir(exist_ok=True)
++units=[source/'src'/(n+'.cpp') for n in ('resident','plan','assets','geometry','wm','ui','backend','apps','runtime','selftest','main')]
++units.append(source/'reference/wm/native/bosio_compositor.cpp')
++def compile_unit(p):
++    obj=objects/(p.stem+'.o')
++    subprocess.run([compiler,*flags,'-Wframe-larger-than=32768','-c',str(p),'-o',str(obj)],check=True)
++    return str(obj)
++with ThreadPoolExecutor(max_workers=3) as pool: objs=list(pool.map(compile_unit,units))
++subprocess.run([compiler,*flags,*objs,'-o',target],check=True)
++PYBUILD
+ python3 "$here/build_manifest.py" "$source" "$out/boayo-native-$mode"
+ echo "BUILD_OK $out/boayo-native-$mode"
+--- boayo-tiles-v1/software/boayo/native/src/backend.cpp
++++ boayo-tiles-v2/software/boayo/native/src/backend.cpp
+@@ -226,9 +226,13 @@
+                          const std::array<int32_t, 180> &camera) {
+   check();
+   require(bank < 2 && int(bank) != active && n <= BO_MAX_WORDS && res == 2, "mock present bounds");
++  const auto &scene=regions[3+bank];
++  unsigned command=active>=0 && active_words==n && active_metadata.size()==header &&
++    std::equal(active_metadata.begin(),active_metadata.end(),scene.begin())?2:1;
++  active_metadata.assign(scene.begin(),scene.begin()+header);active_words=n;
+   active = bank;
+   ++frames;
+-  trace.push_back({{"op", "present"}, {"bank", bank}, {"words", n}, {"camera", camera}});
++  trace.push_back({{"command",command},{"op", "present"}, {"bank", bank}, {"words", n}, {"camera", camera}});
+ }
+ void MockDevice::pose(const std::array<int32_t, 180> &camera) {
+   check();
+@@ -329,8 +333,17 @@
+   for (unsigned k = 0; k < 256; ++k)
+     metadata[k] = palette(k);
+   std::fill(metadata.begin() + 256, metadata.begin() + header, 0xffffffff);
+-  full(metadata);
+-  blank_only = true;
++  // The hardware reads 4480 words but cell data begins at word 4476.
++  // Never write the alignment tail into the first tile, even for blank output.
++  for(unsigned k=0;k<256;++k){auto v=metadata[k];metadata[k]=(v&0xff0000)|((v&255)<<8)|((v>>8)&255);}
++  require(!failed,"previous upload failed; restart required");
++  unsigned target=active<0?0:unsigned(active)^1;
++  try {
++    dev.upload(3+target,0,metadata.data(),header);uploaded_words+=header;
++    dev.present(target,metadata.size(),2,camera);active=target;++commits;
++    // No eager mirror: the resident scheduler prepares the other bank on demand.
++    shadow=std::move(metadata);blank_only=true;
++  }catch(...){failed=true;throw;}
+ }
+ void Output::patch(const Words &p) {
+   if (p.empty())
+--- boayo-tiles-v1/software/boayo/native/src/backend.hpp
++++ boayo-tiles-v2/software/boayo/native/src/backend.hpp
+@@ -48,6 +48,8 @@
+   std::array<Words, 6> regions;
+   int active = -1;
+   unsigned frames = 0;
++  Words active_metadata;
++  unsigned active_words=0;
+   J trace = J::array();
+   bool poisoned = false;
+   int fail_after = -1;
+@@ -103,6 +105,7 @@
+              std::shared_ptr<const Texture> immutable = {});
+ };
+ struct Layer {
++  std::vector<uint64_t> tile_content_revision;
+   J key, shape;
+   uint64_t revision = 0;
+   std::vector<unsigned> ids;
+--- boayo-tiles-v1/software/boayo/native/src/plan_revision.hpp
++++ boayo-tiles-v2/software/boayo/native/src/plan_revision.hpp
+@@ -1,2 +1,2 @@
+ #pragma once
+-#define BOAYO_PLAN_REV "746089fe5e66eb1cf0d915a35257922c1192742b73d0ede1d099181cbfb03cdc"
++#define BOAYO_PLAN_REV "72fc16265eca64ceb2c3ce6cf21f6f78ba85f86ba92bcd082bea1528eab1d8ca"
+--- boayo-tiles-v1/software/boayo/native/src/resident.cpp
++++ boayo-tiles-v2/software/boayo/native/src/resident.cpp
+@@ -58,7 +58,10 @@
+       p.layers[id]=std::move(c);dirty.insert(p.layers[id].ids.begin(),p.layers[id].ids.end());}
+     auto &c=p.layers[id];
+     if(c.shape!=w.data["shape"]){p.prepare_masks(c,w);dirty.insert(c.ids.begin(),c.ids.end());}
+-    p.source_changes(c,w);for(auto index:c.invalid)if(c.mask_kinds[index])dirty.insert(c.ids[index]);
++    p.source_changes(c,w);
++    c.tile_content_revision.resize(c.ids.size());
++    for(unsigned index:c.invalid)c.tile_content_revision[index]=generation+1;
++    for(auto index:c.invalid)if(c.mask_kinds[index])dirty.insert(c.ids[index]);
+     if(!valid || std::find(p.previous_order.begin(),p.previous_order.end(),id)==p.previous_order.end())dirty.insert(c.ids.begin(),c.ids.end());
+   }
+   // Reordering only touches the union of windows, never the whole sphere.
+@@ -83,21 +86,55 @@
+   }
+   if(!valid)dirty.insert(p.previous_pointer_tiles.begin(),p.previous_pointer_tiles.end());
+   bool any=!dirty.empty();unsigned bank=output.active<0?0:unsigned(output.active)^1;std::array<unsigned,2> jobs{};
++  std::set<unsigned> redraw;std::map<unsigned,std::string> new_keys;bool scene_changed=!valid;
+   try{
+     // Only the directory/palette are represented on the CPU.
+     output.shadow.resize((header+15)&~15u);
+     if(!valid)std::fill(output.shadow.begin()+256,output.shadow.begin()+header,0xffffffffu);
++    if(!generation && output.active>=0)bank_metadata[output.active]=output.shadow;
++    ++generation;
+     frame_trace::mark("tiles.prepare.begin",dirty.size());
+     for(unsigned t:dirty){bool occupied=false,first_full=false;
+       for(int id:order){auto &c=p.layers[id];int i=c.lookup[t];if(i>=0 && c.mask_kinds[i]){occupied=true;first_full=c.mask_kinds[i]==1;break;}}
+       bool pointer=p.previous_pointer_tiles.count(t);
+-      output.shadow[256+t]=(occupied||pointer)?t*1024:0xffffffffu;
+-      if((occupied||pointer)&&!first_full){require(dev.fill(3+bank,header+t*256,256,0),"tile DMA fill required");++cleared_tiles;}
++      unsigned entry=(occupied||pointer)?t*1024:0xffffffffu;
++      scene_changed|=output.shadow[256+t]!=entry;output.shadow[256+t]=entry;
++      if(!occupied && !pointer){wanted[t]=0;continue;}
++      // Exact input identities, not hashes or cell readback. Preserve old slot
++      // identities through deactivation so an unchanged reactivation can reuse.
++      J signature=J::array();
++      for(int id:order){auto &c=p.layers[id];int i=c.lookup[t];
++        if(i>=0 && c.mask_kinds[i])signature.push_back(J::array({id,c.key,c.tile_content_revision[i],c.shape}));}
++      J outer=J::array(),inner=J::array();
++      for(unsigned x:p.pointer_outer)if(x/1024==t)outer.push_back(x%1024);
++      for(unsigned x:p.pointer_inner)if(x/1024==t)inner.push_back(x%1024);
++      signature.push_back(J::array({outer,inner}));auto identity=signature.dump();
++      unsigned source=bank;
++      if(!stored[source][t] || tile_keys[source][t]!=identity)source^=1;
++      if(stored[source][t] && tile_keys[source][t]==identity){wanted[t]=stored[source][t];scene_changed|=output.active<0 || stored[output.active][t]!=wanted[t];++reused_tiles;continue;}
++      scene_changed=true;wanted[t]=generation;redraw.insert(t);new_keys.emplace(t,std::move(identity));
++      stored[bank][t]=0; // A failed or partial render must never be reused.
++      if(!first_full){require(dev.fill(3+bank,header+t*256,256,0),"tile DMA fill required");++cleared_tiles;}
++    }
++    any=scene_changed;
++    // Unchanged active tiles may be stale in the next back bank. Copy only
++    // missing versions, before presentation. Never touch inactive cell slots.
++    if(any || !valid)for(unsigned t=0;t<tiles;){
++      if(!wanted[t] || redraw.count(t) || stored[bank][t]==wanted[t]){++t;continue;}
++      unsigned first=t,source=bank^1;
++      do {
++        require(stored[source][t]==wanted[t],"missing resident tile generation");++t;
++      }while(t<tiles && wanted[t] && !redraw.count(t) && stored[bank][t]!=wanted[t]);
++      require(dev.copy(3+source,header+first*256,3+bank,header+first*256,(t-first)*256),"lazy tile DMA required");
++      output.dma_copied_words+=(t-first)*256;lazy_copied_tiles+=t-first;
++      for(unsigned j=first;j<t;++j){stored[bank][j]=wanted[j];tile_keys[bank][j]=tile_keys[source][j];}
+     }
+     frame_trace::mark("tiles.prepare.end",dirty.size());
+     for(int id:order){auto &c=p.layers[id];std::vector<unsigned> direct,masked;
+-      for(unsigned i=0;i<c.ids.size();++i)if(dirty.count(c.ids[i])&&c.mask_kinds[i]){
+-        if(c.mask_kinds[i]==1 || c.shape.empty())direct.push_back(i);else masked.push_back(i);}
++      for(unsigned i=0;i<c.ids.size();++i)if(redraw.count(c.ids[i])&&c.mask_kinds[i]){
++        if(c.mask_kinds[i]==1 && wm.windows.at(id).solid_revision==wm.windows.at(id).revision){
++          require(dev.fill(3+bank,header+c.ids[i]*256,256,wm.windows.at(id).solid_index),"solid tile DMA required");++solid_tiles;
++        }else if(c.mask_kinds[i]==1 || c.shape.empty())direct.push_back(i);else masked.push_back(i);}
+       if(direct.empty()&&masked.empty())continue;
+       auto texture=c.prepared_source?WordView(*c.prepared_source):WordView(c.source);auto &pr=p.projectors;
+       if(!c.prepared_source || pr.resident_texture!=c.prepared_source){pr.resident_texture.reset();frame_trace::mark("texture.upload.begin",texture.size());
+@@ -107,25 +144,28 @@
+     }
+     for(unsigned pass=0;pass<2;++pass){const auto &pixels=pass?p.pointer_inner:p.pointer_outer;
+       std::map<unsigned,bo_tile_blend> paint;
+-      for(unsigned x:pixels)if(dirty.count(x/1024)){auto &b=paint[x/1024];b.bank=bank;b.tile=x/1024;b.mode=1;b.color=pass?255:rgb_index(10,10,10);b.mask[(x%1024)/32]|=1u<<(x%32);}
++      for(unsigned x:pixels)if(redraw.count(x/1024)){auto &b=paint[x/1024];b.bank=bank;b.tile=x/1024;b.mode=1;b.color=pass?255:rgb_index(10,10,10);b.mask[(x%1024)/32]|=1u<<(x%32);}
+       for(auto &[t,b]:paint)dev.blend(b);
+     }
+     if(any || !valid){frame_trace::mark("output.upload.begin");
+-      dev.upload(3+bank,256,output.shadow.data()+256,header-256);output.uploaded_words+=header-256;
++      // Record a version only once all ordered layers and pointer writes finish.
++      for(unsigned t:redraw){stored[bank][t]=wanted[t];tile_keys[bank][t]=std::move(new_keys.at(t));}
++      for(unsigned t=0;t<tiles;++t)require(!wanted[t] || stored[bank][t]==wanted[t],"incomplete scene");
++      auto &meta=bank_metadata[bank];
++      for(unsigned i=0;i<header;){
++        if(meta.size()>=header && meta[i]==output.shadow[i]){++i;continue;}
++        unsigned first=i++;
++        while(i<header && (meta.size()<header || meta[i]!=output.shadow[i]))++i;
++        dev.upload(3+bank,first,output.shadow.data()+first,i-first);output.uploaded_words+=i-first;
++      }
++      meta.assign(output.shadow.begin(),output.shadow.begin()+header);
+       dev.present(bank,scene_words,2,output.camera);output.active=bank;++output.commits;frame_trace::mark("output.present.done");
+-      // Mirror only modified resident tiles so the next back bank starts valid.
+-      for(auto i=dirty.begin();i!=dirty.end();){unsigned first=*i,last=first;
+-        if(output.shadow[256+first]==0xffffffffu){++i;continue;}++i;
+-        while(i!=dirty.end() && *i==last+1 && output.shadow[256+*i]!=0xffffffffu){last=*i;++i;}
+-        size_t count=(last-first+1)*256;require(dev.copy(3+bank,header+first*256,3+(bank^1),header+first*256,count),"tile mirror DMA required");output.dma_copied_words+=count;
+-      }
+-      require(dev.copy(3+bank,256,3+(bank^1),256,header-256),"directory mirror DMA required");output.dma_copied_words+=header-256;
+       output.blank_only=false;frame_trace::mark("output.upload.end");
+     }
+   }catch(...){output.failed=true;p.projectors.resident_texture.reset();throw;}
+   for(int id:order){auto &c=p.layers[id];c.invalid.clear();wm.windows[id].dirty={};p.previous_tiles[id]={c.ids.begin(),c.ids.end()};}
+   p.previous_order=order;valid=true;++frames;
+-  metrics={{"mode","ddr-resident-dirty-tiles"},{"hardware_frames",frames},{"fallback_frames",0},
++  metrics={{"redrawn_tiles",redraw.size()},{"reused_tiles_total",reused_tiles},{"lazy_copied_tiles_total",lazy_copied_tiles},{"solid_tiles_total",solid_tiles},{"mode","ddr-resident-dirty-tiles"},{"hardware_frames",frames},{"fallback_frames",0},
+     {"geometry_tiles_evaluated_total",p.geometry_tiles_evaluated},{"mask_samples_evaluated_total",p.mask_samples_evaluated},
+     {"precomputed_layers_total",p.precomputed_layers},{"plan_cache",projection_plan_stats()},
+     {"jobs_per_core",jobs},{"total_hw_jobs",total_jobs},{"dirty_tiles",dirty.size()},
+--- boayo-tiles-v1/software/boayo/native/src/resident.hpp
++++ boayo-tiles-v2/software/boayo/native/src/resident.hpp
+@@ -8,6 +8,12 @@
+   Device &dev;
+   bool valid=false;
+   uint64_t frames=0,total_jobs=0,cleared_tiles=0,blended_tiles=0;
++  uint64_t generation=0,solid_tiles=0,lazy_copied_tiles=0;
++  std::array<uint64_t,tiles> wanted{};
++  std::array<std::array<uint64_t,tiles>,2> stored{};
++  std::array<Words,2> bank_metadata;
++  std::array<std::array<std::string,tiles>,2> tile_keys;
++  uint64_t reused_tiles=0;
+   J metrics=J::object();
+   ResidentCompositor(const Geometry &g,Projectors &p,Output &o):planner(g,p,true,true),output(o),dev(p.dev){}
+   static bool supported(const WM &wm);
+--- boayo-tiles-v1/software/boayo/native/src/runtime.cpp
++++ boayo-tiles-v2/software/boayo/native/src/runtime.cpp
+@@ -155,7 +155,10 @@
+   Compositor compositor(geometry, projectors, true);
+   b.phase("output_initialization");
+   Output output(*dev, geometry);
+-  ResidentCompositor resident(geometry,projectors,output);
++  // Persistent tile bookkeeping exceeds the RV32 musl worker stack budget.
++  // Own it on the heap; this contains no full scene pixel buffer.
++  auto resident_state=std::make_unique<ResidentCompositor>(geometry,projectors,output);
++  auto &resident=*resident_state;
+   const char *renderer=getenv("BOAYO_RENDERER");
+   bool use_resident=!renderer || std::string(renderer)!="legacy";
+   wm.pose = [&](double y, double p) { output.set_pose(y, p); };
+--- boayo-tiles-v1/software/boayo/native/src/wm.cpp
++++ boayo-tiles-v2/software/boayo/native/src/wm.cpp
+@@ -435,6 +435,8 @@
+       }
+     }
+     ++w.revision;
++    w.solid_revision=op=="fill"?w.revision:0;
++    if(op=="fill"){auto c=a.at("rgb");w.solid_index=(c[0].get<unsigned>()&224)|((c[1].get<unsigned>()&224)>>3)|(c[2].get<unsigned>()>>6);}
+     ++generation;
+     return true;
+   }
+--- boayo-tiles-v1/software/boayo/native/src/wm.hpp
++++ boayo-tiles-v2/software/boayo/native/src/wm.hpp
+@@ -10,6 +10,8 @@
+   void ensure_surface() const;
+   std::shared_ptr<const Texture> prepared;
+   uint64_t revision = 1;
++  uint64_t solid_revision=0;
++  unsigned solid_index=0;
+   std::array<int, 4> dirty{};
+ };
+ struct Hit {
+--- boayo-tiles-v1/software/bosio/common/bosio_engine.c
++++ boayo-tiles-v2/software/bosio/common/bosio_engine.c
+@@ -158,7 +158,7 @@
+ }
+ int bo_present(struct bo_engine *e,const struct bo_present *p,const __u32 *scene)
+ {
+-    unsigned int n;__u32 status,base;__u64 end;
++    unsigned int n;__u32 status,base,command;__u64 end;
+     if(e->poisoned)return -EIO;
+     if(p->bank>1 || !scene_ok(p->scene_words) || p->resolution>2 || !timeout_ok(p->timeout_ms))return -EINVAL;
+     if((int)p->bank==e->active)return -EBUSY;
+@@ -174,7 +174,11 @@
+     }
+     e->io.memory_fence(e->io.opaque);
+     base=e->dma_base+bo_offsets[BO_SCENE0+p->bank];
+-    if(wr(e,2,8,base)||wr(e,2,0x0c,p->scene_words)||wr(e,2,0x6c,1))return poison(e,-EIO);
++    /* Patch retains BS25's current metadata, so exact equality is required.
++     * Only 4476 metadata words are inspected, never inactive cell data. */
++    command=e->configured && e->metadata_valid && e->metadata_words==p->scene_words &&
++        !memcmp(e->metadata,scene,sizeof(e->metadata)) ? 2 : 1;
++    if(wr(e,2,8,base)||wr(e,2,0x0c,p->scene_words)||wr(e,2,0x6c,command))return poison(e,-EIO);
+     end=deadline(e,p->timeout_ms);
+     /* Wait for metadata loaded before first enable; pending is NOT completion. */
+     if(!e->configured){
+@@ -192,6 +196,8 @@
+         if(active==base && (status&2) && !(status&0x14))break;
+         if(expired(e,end))return poison(e,-ETIMEDOUT);
+     }
++    memcpy(e->metadata,scene,sizeof(e->metadata));
++    e->metadata_words=p->scene_words;e->metadata_valid=1;
+     e->active=p->bank;e->configured=1;e->resolution=p->resolution;
+     memcpy(e->camera,p->camera,sizeof(e->camera));return 0;
+ }
+--- boayo-tiles-v1/software/bosio/common/bosio_engine.h
++++ boayo-tiles-v2/software/bosio/common/bosio_engine.h
+@@ -14,6 +14,9 @@
+     __u32 dma_base;
+     int active, poisoned, configured;
+     __u32 resolution, camera[180];
++    /* Last successfully committed BS25 metadata; never a cell-data shadow. */
++    __u32 metadata[BO_HEADER_WORDS], metadata_words;
++    int metadata_valid;
+ };
+ extern const __u32 bo_offsets[BO_REGIONS], bo_sizes[BO_REGIONS];
+ void bo_init(struct bo_engine *, const struct bo_io *, __u32);

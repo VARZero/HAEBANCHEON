@@ -1,0 +1,1 @@
+{"diagonal_upload_bytes":1081344,"pool":{"capacity_bytes":4194304,"evictions":0,"full_uploads":1,"partial_uploads":49,"resident_bytes":131072,"resident_windows":1,"reuses":0,"staged_copy_bytes":614400,"upload_bytes":745472,"upload_calls":401},"result":"PASS_TILE_REUSE_PIXELS","warm_batch_calls":320,"warm_frames":40,"warm_upload_bytes":491520,"warm_upload_calls":320}

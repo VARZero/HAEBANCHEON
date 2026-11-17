@@ -1,0 +1,55 @@
+{
+  "result": "PASS_PIXELS_AND_REDUCED_TRAFFIC",
+  "reference": {
+    "diagonal_upload_bytes": 1081344,
+    "pool": {
+      "capacity_bytes": 4194304,
+      "evictions": 0,
+      "full_uploads": 1,
+      "partial_uploads": 49,
+      "resident_bytes": 131072,
+      "resident_windows": 1,
+      "reuses": 0,
+      "staged_copy_bytes": 614400,
+      "upload_bytes": 745472,
+      "upload_calls": 401
+    },
+    "result": "PASS_TILE_REUSE_PIXELS",
+    "warm_batch_calls": 320,
+    "warm_frames": 40,
+    "warm_upload_bytes": 491520,
+    "warm_upload_calls": 320
+  },
+  "candidate": {
+    "diagonal_upload_bytes": 1024,
+    "pool": {
+      "asset_cache_evictions": 0,
+      "asset_cache_hits": 390,
+      "asset_cache_misses": 10,
+      "asset_cache_upload_bytes": 15360,
+      "asset_copy_batches": 108,
+      "asset_copy_bytes": 614400,
+      "asset_copy_requests": 9600,
+      "asset_resident_bytes": 15360,
+      "capacity_bytes": 4194304,
+      "evictions": 0,
+      "full_uploads": 1,
+      "partial_uploads": 49,
+      "resident_bytes": 131072,
+      "resident_windows": 1,
+      "reuses": 0,
+      "source_tile_size": 32,
+      "source_tiles_updated": 375,
+      "staged_copy_bytes": 0,
+      "total_resident_bytes": 146432,
+      "upload_bytes": 146432,
+      "upload_calls": 11
+    },
+    "result": "PASS_TILE_REUSE_PIXELS",
+    "warm_batch_calls": 80,
+    "warm_frames": 40,
+    "warm_upload_bytes": 0,
+    "warm_upload_calls": 0
+  },
+  "physical_timing": false
+}

@@ -1,0 +1,4901 @@
+G
+
+OpenSBI v1.8.1
+   ____                    _____ ____ _____
+  / __ \                  / ____|  _ \_   _|
+ | |  | |_ __   ___ _ __ | (___ | |_) || |
+ | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
+ | |__| | |_) |  __/ | | |____) | |_) || |_
+  \____/| .__/ \___|_| |_|_____/|____/_____|
+        | |
+        |_|
+
+Platform Name               : HAEBANCHEON 3d5i L1-16K DMA3
+Platform Features           : medeleg
+Platform HART Count         : 1
+Platform HART Protection    : ---
+Platform IPI Device         : ---
+Platform Timer Device       : aclint-mtimer @ 50000000Hz
+Platform Console Device     : uart8250
+Platform HSM Device         : ---
+Platform PMU Device         : ---
+Platform Reboot Device      : ---
+Platform Shutdown Device    : ---
+Platform Suspend Device     : ---
+Platform CPPC Device        : ---
+Firmware Base               : 0x80000000
+Firmware Size               : 309 KB
+Firmware RW Offset          : 0x40000
+Firmware RW Size            : 53 KB
+Firmware Heap Offset        : 0x44000
+Firmware Heap Size          : 37 KB (total), 0 KB (reserved), 9 KB (used), 26 KB (free)
+Firmware Scratch Size       : 4096 B (total), 228 B (used), 3868 B (free)
+Runtime SBI Version         : 3.0
+Standard SBI Extensions     : time,rfnc,ipi,base,hsm,pmu,dbcn,fwft,legacy,sse
+Experimental SBI Extensions : none
+
+Domain0 Name                : root
+Domain0 Boot HART           : 0
+Domain0 HARTs               : 0*
+Domain0 Region00            : 0x80040000-0x8004ffff M: (F,R,W) S/U: ()
+Domain0 Region01            : 0x80000000-0x8003ffff M: (F,R,X) S/U: ()
+Domain0 Region02            : 0x02004000-0x02004007 M: (I,R,W) S/U: ()
+Domain0 Region03            : 0x0200bff8-0x0200bfff M: (I,R,W) S/U: ()
+Domain0 Region04            : 0x10000000-0x10000fff M: (I,R,W) S/U: (R,W)
+Domain0 Region05            : 0x00000000-0xffffffff M: () S/U: (R,W,X)
+Domain0 Next Address        : 0x80400000
+Domain0 Next Arg1           : 0x87f00000
+Domain0 Next Mode           : S-mode
+Domain0 SysReset            : yes
+Domain0 SysSuspend          : yes
+
+Boot HART ID                : 0
+Boot HART Domain            : root
+Boot HART Priv Version      : v1.11
+Boot HART Base ISA          : rv32ima
+Boot HART ISA Extensions    : zicntr,svade
+Boot HART PMP Count         : 0
+Boot HART PMP Granularity   : 0 bits
+Boot HART PMP Address Bits  : 0
+Boot HART MHPM Info         : 0 (0x00000000)
+Boot HART Debug Triggers    : 0 triggers
+Boot HART MIDELEG           : 0x00000222
+Boot HART MEDELEG           : 0x0000b109
+Linux version 6.12.0-haebancheon-incremental11 (haebancheon@kfb) (riscv64-linux-gnu-gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, GNU ld (GNU Binutils for Ubuntu) 2.42) #1 2026-11-15 00:00:00 UTC
+OF: fdt: Ignoring memory range 0x80000000 - 0x80400000
+Machine model: HAEBANCHEON 3d5i L1-16K DMA3
+SBI specification v3.0 detected
+SBI implementation ID=0x1 Version=0x10008
+SBI TIME extension detected
+SBI IPI extension detected
+SBI RFENCE extension detected
+SBI DBCN extension detected
+earlycon: sbi0 at I/O port 0x0 (options '')
+printk: legacy bootconsole [sbi0] enabled
+printk: debug: ignoring loglevel setting.
+printk: debug: skip boot console de-registration.
+OF: reserved mem: 0x80000000..0x8003ffff (256 KiB) nomap non-reusable mmode_resv1@80000000
+OF: reserved mem: 0x80040000..0x8004ffff (64 KiB) nomap non-reusable mmode_resv0@80040000
+OF: reserved mem: 0xbd000000..0xbdffffff (16384 KiB) nomap non-reusable dma-pool@bd000000
+OF: reserved mem: 0xbf800000..0xbfffffff (8192 KiB) nomap non-reusable framebuffer@bf800000
+Zone ranges:
+  Normal   [mem 0x0000000080400000-0x00000000bfffffff]
+Movable zone start for each node
+Early memory node ranges
+  node   0: [mem 0x0000000080400000-0x00000000bcffffff]
+  node   0: [mem 0x00000000bd000000-0x00000000bdffffff]
+  node   0: [mem 0x00000000be000000-0x00000000bf7fffff]
+  node   0: [mem 0x00000000bf800000-0x00000000bfffffff]
+Initmem setup node 0 [mem 0x0000000080400000-0x00000000bfffffff]
+riscv: base ISA extensions aim
+riscv: ELF capabilities aim
+pcpu-alloc: s0 r0 d32768 u32768 alloc=1*32768
+pcpu-alloc: [0] 0 
+Kernel command line: earlycon=sbi console=hvc0 loglevel=7 nokaslr lpj=1000000 rdinit=/init initcall_debug ignore_loglevel keep_bootcon printk.time=1
+[    0.000000] Dentry cache hash table entries: 131072 (order: 7, 524288 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 65536 (order: 6, 262144 bytes, linear)
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 261120
+[    0.000000] mem auto-init: stack:all(zero), heap alloc:off, heap free:off
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    0.000000] NR_IRQS: 64, nr_irqs: 64, preallocated irqs: 0
+[    0.000000] riscv-intc: 32 local interrupts mapped
+[    0.000000] clocksource: riscv_clocksource: mask: 0xffffffffffffffff max_cycles: 0xb8812736b, max_idle_ns: 440795202655 ns
+[    0.000292] sched_clock: 64 bits at 50MHz, resolution 20ns, wraps every 4398046511100ns
+[    0.026728] Calibrating delay loop (skipped) preset value.. 200.00 BogoMIPS (lpj=1000000)
+[    0.047632] pid_max: default: 32768 minimum: 301
+[    0.101225] Mount-cache hash table entries: 2048 (order: 1, 8192 bytes, linear)
+[    0.119642] Mountpoint-cache hash table entries: 2048 (order: 1, 8192 bytes, linear)
+[    0.254506] ORY_BOOT kernel_init_freeable enter
+[    0.406727] calling  0xc028eb44 @ 1
+[    0.418178] ASID allocator disabled (0 bits)
+[    0.429415] initcall 0xc028eb44 returned 0 after 0 usecs
+[    0.443387] calling  0xc028f298 @ 1
+[    0.480343] initcall 0xc028f298 returned 0 after 30000 usecs
+[    0.494921] calling  0xc02917f8 @ 1
+[    0.506041] initcall 0xc02917f8 returned 0 after 0 usecs
+[    0.520237] calling  0xc0292944 @ 1
+[    0.529095] initcall 0xc0292944 returned 0 after 0 usecs
+[    0.543015] calling  0xc0295784 @ 1
+[    0.554241] initcall 0xc0295784 returned 0 after 0 usecs
+[    0.575035] Memory: 968004K/1044480K available (2595K kernel code, 493K rwdata, 301K rodata, 36789K init, 186K bss, 74928K reserved, 0K cma-reserved)
+[    0.658630] devtmpfs: initialized
+[    1.041128] calling  0xc029b9a8 @ 1
+[    1.052750] initcall 0xc029b9a8 returned 0 after 0 usecs
+[    1.083859] calling  0xc028f964 @ 1
+[    1.112970] initcall 0xc028f964 returned 0 after 10000 usecs
+[    1.130767] calling  0xc0290824 @ 1
+[    1.147408] initcall 0xc0290824 returned 0 after 10000 usecs
+[    1.162059] calling  0xc0292320 @ 1
+[    1.173741] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+[    1.194488] initcall 0xc0292320 returned 0 after 20000 usecs
+[    1.208956] calling  0xc029283c @ 1
+[    1.220786] futex hash table entries: 256 (order: -1, 3072 bytes, linear)
+[    1.237835] initcall 0xc029283c returned 0 after 20000 usecs
+[    1.252121] calling  0xc029a3f4 @ 1
+[    1.268675] initcall 0xc029a3f4 returned 0 after 10000 usecs
+[    1.283594] calling  0xc029a4dc @ 1
+[    1.294926] initcall 0xc029a4dc returned 0 after 0 usecs
+[    1.308671] calling  0xc029a508 @ 1
+[    1.319882] initcall 0xc029a508 returned 0 after 0 usecs
+[    1.333849] calling  0xc01cf000 @ 1
+[    1.345429] initcall 0xc01cf000 returned 0 after 0 usecs
+[    1.359167] calling  0xc02a2bf4 @ 1
+[    1.389742] initcall 0xc02a2bf4 returned 0 after 20000 usecs
+[    1.404637] calling  0xc02a2cb8 @ 1
+[    1.415811] initcall 0xc02a2cb8 returned 0 after 0 usecs
+[    1.429607] calling  0xc02a2ccc @ 1
+[    1.441852] initcall 0xc02a2ccc returned 0 after 10000 usecs
+[    1.456529] calling  0xc02a3158 @ 1
+[    1.468204] initcall 0xc02a3158 returned 0 after 10000 usecs
+[    1.482680] calling  0xc02a3c28 @ 1
+[    1.746965] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+[    1.767659] initcall 0xc02a3c28 returned 0 after 180000 usecs
+[    1.785564] calling  0xc02a3e30 @ 1
+[    1.799261] initcall 0xc02a3e30 returned 0 after 10000 usecs
+[    1.829193] calling  0xc02919d0 @ 1
+[    1.857032] initcall 0xc02919d0 returned 0 after 10000 usecs
+[    1.871769] calling  0xc0292d18 @ 1
+[    1.888879] initcall 0xc0292d18 returned 0 after 10000 usecs
+[    1.903351] calling  0xc0292d68 @ 1
+[    1.916891] initcall 0xc0292d68 returned 0 after 10000 usecs
+[    1.931204] calling  0xc0296020 @ 1
+[    1.942929] initcall 0xc0296020 returned 0 after 10000 usecs
+[    1.957307] calling  0xc029dc64 @ 1
+[    1.972433] initcall 0xc029dc64 returned 0 after 10000 usecs
+[    1.986706] calling  0xc029ec4c @ 1
+[    2.001829] initcall 0xc029ec4c returned 0 after 10000 usecs
+[    2.016162] calling  0xc029f4cc @ 1
+[    2.029097] initcall 0xc029f4cc returned 0 after 10000 usecs
+[    2.043392] calling  0xc02a44ec @ 1
+[    2.055676] initcall 0xc02a44ec returned 0 after 10000 usecs
+[    2.085804] calling  0xc028cb24 @ 1
+[    2.097473] initcall 0xc028cb24 returned 0 after 0 usecs
+[    2.111274] calling  0xc028df14 @ 1
+[    2.122615] initcall 0xc028df14 returned 0 after 10000 usecs
+[    2.137317] calling  0xc0004b64 @ 1
+[    3.921768] cpu0: Ratio of byte access time to unaligned word access is 0.00, unaligned accesses are slow
+[    3.944631] initcall 0xc0004b64 returned 0 after 1510000 usecs
+[    3.959235] calling  0xc029db74 @ 1
+[    3.977068] initcall 0xc029db74 returned 0 after 10000 usecs
+[    3.991790] calling  0xc029d99c @ 1
+[    4.015735] initcall 0xc029d99c returned 0 after 10000 usecs
+[    4.030006] calling  0xc01bb7bc @ 1
+[    4.065882] initcall 0xc01bb7bc returned 0 after 20000 usecs
+[    4.080436] calling  0xc028dd84 @ 1
+[    4.092945] initcall 0xc028dd84 returned 0 after 0 usecs
+[    4.107730] calling  0xc0004aec @ 1
+[    4.119052] initcall 0xc0004aec returned 0 after 0 usecs
+[    4.132801] calling  0xc02a085c @ 1
+[    4.814526] initcall 0xc02a085c returned 0 after 550000 usecs
+[    4.844613] calling  0xc028f7e0 @ 1
+[    4.857169] initcall 0xc028f7e0 returned 0 after 0 usecs
+[    4.871169] calling  0xc0290334 @ 1
+[    4.883662] initcall 0xc0290334 returned 0 after 10000 usecs
+[    4.898417] calling  0xc0290b40 @ 1
+[    4.907396] initcall 0xc0290b40 returned 0 after 0 usecs
+[    4.921255] calling  0xc0290f2c @ 1
+[    4.932376] initcall 0xc0290f2c returned 0 after 0 usecs
+[    4.946352] calling  0xc02929b8 @ 1
+[    4.980147] initcall 0xc02929b8 returned 0 after 20000 usecs
+[    4.994605] calling  0xc0292c0c @ 1
+[    5.006106] initcall 0xc0292c0c returned 0 after 0 usecs
+[    5.019961] calling  0xc0292d24 @ 1
+[    5.072941] initcall 0xc0292d24 returned 0 after 40000 usecs
+[    5.087334] calling  0xc02947f0 @ 1
+[    5.098493] initcall 0xc02947f0 returned 0 after 0 usecs
+[    5.112585] calling  0xc02957c0 @ 1
+[    5.123735] initcall 0xc02957c0 returned 0 after 0 usecs
+[    5.137701] calling  0xc007bf98 @ 1
+[    5.146554] initcall 0xc007bf98 returned 0 after 0 usecs
+[    5.160321] calling  0xc007bf70 @ 1
+[    5.171883] initcall 0xc007bf70 returned 0 after 0 usecs
+[    5.185828] calling  0xc0298a2c @ 1
+[    5.199055] initcall 0xc0298a2c returned 0 after 0 usecs
+[    5.213873] calling  0xc0298af0 @ 1
+[    5.225484] initcall 0xc0298af0 returned 0 after 0 usecs
+[    5.239218] calling  0xc029ba00 @ 1
+[    5.250597] initcall 0xc029ba00 returned 0 after 0 usecs
+[    5.264552] calling  0xc029bb30 @ 1
+[    5.290064] initcall 0xc029bb30 returned 0 after 10000 usecs
+[    5.304636] calling  0xc029bcb8 @ 1
+[    5.317670] initcall 0xc029bcb8 returned 0 after 0 usecs
+[    5.332056] calling  0xc029bd20 @ 1
+[    5.343485] initcall 0xc029bd20 returned 0 after 0 usecs
+[    5.357328] calling  0xc029bdd0 @ 1
+[    5.406134] initcall 0xc029bdd0 returned 0 after 30000 usecs
+[    5.420777] calling  0xc029eb78 @ 1
+[    5.440617] initcall 0xc029eb78 returned 0 after 10000 usecs
+[    5.454909] calling  0xc01cf034 @ 1
+[    5.467239] initcall 0xc01cf034 returned 0 after 10000 usecs
+[    5.482044] calling  0xc029febc @ 1
+[    5.519538] initcall 0xc029febc returned 0 after 30000 usecs
+[    5.534279] calling  0xc02a2cc0 @ 1
+[    5.546130] initcall 0xc02a2cc0 returned 0 after 10000 usecs
+[    5.560628] calling  0xc02a31c0 @ 1
+[    5.681518] initcall 0xc02a31c0 returned 0 after 100000 usecs
+[    5.696689] calling  0xc02a34d4 @ 1
+[    5.708903] initcall 0xc02a34d4 returned 0 after 10000 usecs
+[    5.724174] calling  0xc02a3928 @ 1
+[    5.735904] initcall 0xc02a3928 returned 0 after 0 usecs
+[    5.750257] calling  0xc02a3968 @ 1
+[    5.774747] initcall 0xc02a3968 returned 0 after 20000 usecs
+[    5.789309] calling  0xc02a3e7c @ 1
+[    5.996819] initcall 0xc02a3e7c returned 0 after 170000 usecs
+[    6.011646] calling  0xc02a46e4 @ 1
+[    6.022780] initcall 0xc02a46e4 returned 0 after 0 usecs
+[    6.054247] calling  0xc028f3b8 @ 1
+[    6.070806] initcall 0xc028f3b8 returned 0 after 0 usecs
+[    6.084902] calling  0xc029226c @ 1
+[C0]
+[C1]
+[C2]
+[T0]
+[T1]
+[N0]
+[X0]
+[X1]
+[X2]
+[X3]
+[X4]
+[X5]
+[T0]
+[T1]
+[N1]
+[    6.117742] clocksource: Switched to clocksource riscv_clocksource
+[T0]
+[T1]
+[C3]
+[C4]
+[    6.136228] initcall 0xc029226c returned 0 after 37519 usecs
+[    6.152853] calling  0xc0299114 @ 1
+[    6.172594] initcall 0xc0299114 returned 0 after 8318 usecs
+[    6.187215] calling  0xc029a220 @ 1
+[    6.204263] initcall 0xc029a220 returned 0 after 5973 usecs
+[    6.221426] calling  0xc029a334 @ 1
+[    6.238497] initcall 0xc029a334 returned 0 after 5993 usecs
+[    6.255095] calling  0xc029a3b4 @ 1
+[    6.266846] initcall 0xc029a3b4 returned 0 after 694 usecs
+[    6.283758] calling  0xc029a598 @ 1
+[    6.306949] initcall 0xc029a598 returned 0 after 11913 usecs
+[    6.323950] calling  0xc029a5b4 @ 1
+[    6.347471] initcall 0xc029a5b4 returned 0 after 12341 usecs
+[    6.364106] calling  0xc029a904 @ 1
+[    6.376188] initcall 0xc029a904 returned 0 after 677 usecs
+[    6.392719] calling  0xc029a960 @ 1
+[    6.404617] initcall 0xc029a960 returned 0 after 730 usecs
+[    6.421280] calling  0xc029a9a0 @ 1
+[    6.433388] initcall 0xc029a9a0 returned 0 after 713 usecs
+[    6.447841] calling  0xc029a9d8 @ 1
+[    6.462601] initcall 0xc029a9d8 returned 0 after 1359 usecs
+[    6.478191] calling  0xc029aa24 @ 1
+[    6.492731] initcall 0xc029aa24 returned 0 after 733 usecs
+[    6.506943] calling  0xc029aa64 @ 1
+[    6.520947] initcall 0xc029aa64 returned 0 after 712 usecs
+[    6.535712] calling  0xc029aaac @ 1
+[    6.547493] initcall 0xc029aaac returned 0 after 733 usecs
+[    6.564150] calling  0xc029aaf4 @ 1
+[    6.575855] initcall 0xc029aaf4 returned 0 after 676 usecs
+[    6.592624] calling  0xc029ab2c @ 1
+[    6.604492] initcall 0xc029ab2c returned 0 after 704 usecs
+[    6.621056] calling  0xc029ab74 @ 1
+[    6.632967] initcall 0xc029ab74 returned 0 after 736 usecs
+[    6.647521] calling  0xc029abbc @ 1
+[    6.661528] initcall 0xc029abbc returned 0 after 2929 usecs
+[    6.675936] calling  0xc029ad44 @ 1
+[    6.687784] initcall 0xc029ad44 returned 0 after 659 usecs
+[    6.704567] calling  0xc029ad7c @ 1
+[    6.716989] initcall 0xc029ad7c returned 0 after 1356 usecs
+[    6.733521] calling  0xc029b998 @ 1
+[    6.744944] initcall 0xc029b998 returned 0 after 268 usecs
+[    6.761924] calling  0xc029e864 @ 1
+[    6.973876] initcall 0xc029e864 returned 0 after 200755 usecs
+[    6.988402] calling  0xc02a3b64 @ 1
+[    7.001744] initcall 0xc02a3b64 returned 0 after 88 usecs
+[    7.016210] calling  0xc02a3ef4 @ 1
+[    7.033815] NET: Registered PF_UNIX/PF_LOCAL protocol family
+[    7.051609] initcall 0xc02a3ef4 returned 0 after 24314 usecs
+[    7.066252] calling  0xc028c638 @ 1
+[    7.078698] initcall 0xc028c638 returned 0 after 1185 usecs
+[    7.112736] calling  0xc028d84c @ 1
+[    7.124354] initcall 0xc028d84c returned 0 after 72 usecs
+[    7.140840] calling  0xc028efe4 @ 1
+[    7.152587] initcall 0xc028efe4 returned 0 after 704 usecs
+[    7.168034] calling  0xc028f020 @ 1
+[    7.181950] initcall 0xc028f020 returned 0 after 71 usecs
+[    7.196111] calling  0xc028f33c @ 1
+[    7.208527] initcall 0xc028f33c returned 0 after 1223 usecs
+[    7.225279] calling  0xc0291e54 @ 1
+[    7.236960] initcall 0xc0291e54 returned 0 after 108 usecs
+[    7.253461] calling  0xc0292184 @ 1
+[    7.295882] initcall 0xc0292184 returned 0 after 31249 usecs
+[    7.312553] calling  0xc0292344 @ 1
+[    7.324400] initcall 0xc0292344 returned 0 after 784 usecs
+[    7.341408] calling  0xc0292390 @ 1
+[    7.362838] initcall 0xc0292390 returned 0 after 10349 usecs
+[    7.377334] calling  0xc02923f4 @ 1
+[    7.393010] initcall 0xc02923f4 returned 0 after 4530 usecs
+[    7.407365] calling  0xc0292454 @ 1
+[    7.448503] initcall 0xc0292454 returned 0 after 29948 usecs
+[    7.465106] calling  0xc02924e4 @ 1
+[    7.476269] initcall 0xc02924e4 returned 0 after 109 usecs
+[    7.493226] calling  0xc02928dc @ 1
+[    7.505141] initcall 0xc02928dc returned 0 after 736 usecs
+[    7.521788] calling  0xc0292b58 @ 1
+[    7.575515] ORY_BOOT rootfs begin compressed_bytes=37533696
+[    7.617500] initcall 0xc0292b58 returned 0 after 84523 usecs
+[    7.634248] calling  0xc0295648 @ 1
+[    7.645276] workingset: timestamp_bits=30 max_order=18 bucket_order=0
+[    7.663452] initcall 0xc0295648 returned 0 after 18172 usecs
+[    7.678512] calling  0xc02958b4 @ 1
+[    7.692641] initcall 0xc02958b4 returned 0 after 761 usecs
+[    7.707260] calling  0xc0298ab8 @ 1
+[    7.721405] initcall 0xc0298ab8 returned 0 after 2927 usecs
+[    7.736988] calling  0xc0299180 @ 1
+[    7.752393] initcall 0xc0299180 returned 0 after 4154 usecs
+[    7.767306] calling  0xc0299434 @ 1
+[    7.781500] initcall 0xc0299434 returned 0 after 2988 usecs
+[    7.796093] calling  0xc0299820 @ 1
+[    7.807556] initcall 0xc0299820 returned 0 after 259 usecs
+[    7.824362] calling  0xc029a534 @ 1
+[    7.837361] initcall 0xc029a534 returned 0 after 1951 usecs
+[    7.854030] calling  0xc029af5c @ 1
+[    7.865492] initcall 0xc029af5c returned 0 after 306 usecs
+[    7.882322] calling  0xc029b324 @ 1
+[    7.937852] initcall 0xc029b324 returned 0 after 44334 usecs
+[    7.955051] calling  0xc029b810 @ 1
+[    7.978153] initcall 0xc029b810 returned 0 after 11897 usecs
+[    7.995096] calling  0xc029bb14 @ 1
+[    8.013567] initcall 0xc029bb14 returned 0 after 7247 usecs
+[    8.028191] calling  0xc029be38 @ 1
+[    8.042928] initcall 0xc029be38 returned 0 after 1347 usecs
+[    8.057618] calling  0xc029c5c8 @ 1
+[    8.071014] io scheduler mq-deadline registered
+[    8.082723] initcall 0xc029c5c8 returned 0 after 11736 usecs
+[    8.097110] calling  0xc029c5d8 @ 1
+[    8.108252] io scheduler kyber registered
+[    8.121786] initcall 0xc029c5d8 returned 0 after 13587 usecs
+[    8.136128] calling  0xc029c5e8 @ 1
+[    8.153525] io scheduler bfq registered
+[    8.164772] initcall 0xc029c5e8 returned 0 after 17609 usecs
+[    8.181521] calling  0xc029c694 @ 1
+[    8.192620] initcall 0xc029c694 returned 0 after 70 usecs
+[    8.206666] calling  0xc029c894 @ 1
+[    8.232793] initcall 0xc029c894 returned 0 after 14959 usecs
+[    8.247104] calling  0xc029d3b0 @ 1
+[    8.273212] initcall 0xc029d3b0 returned 0 after 14901 usecs
+[    8.287763] calling  0xc029d3c0 @ 1
+[    8.376252] riscv-plic: interrupt-controller@c000000: mapped 4 interrupts with 1 handlers for 2 contexts.
+[    8.414154] probe of c000000.interrupt-controller returned 0 after 109373 usecs
+[    8.444916] initcall 0xc029d3c0 returned 0 after 143812 usecs
+[    8.462745] calling  0xc029d3dc @ 1
+[    8.501264] probe of soc returned 0 after 24009 usecs
+[    8.532617] initcall 0xc029d3dc returned 0 after 58754 usecs
+[    8.547518] calling  0xc029d8dc @ 1
+[    8.573186] initcall 0xc029d8dc returned 0 after 14589 usecs
+[    8.587504] calling  0xc029d934 @ 1
+[    8.613442] initcall 0xc029d934 returned 0 after 14819 usecs
+[    8.627759] calling  0xc029d98c @ 1
+[    8.654986] initcall 0xc029d98c returned 0 after 13954 usecs
+[    8.671770] calling  0xc029dc54 @ 1
+[    8.753100] probe of 10009000.dma-controller returned 0 after 66722 usecs
+[    8.834894] probe of 1000a000.dma-controller returned 0 after 63010 usecs
+[    8.920869] probe of 1000b000.dma-controller returned 0 after 65049 usecs
+[    8.944389] initcall 0xc029dc54 returned 0 after 261431 usecs
+[    8.961179] calling  0xc029ddc0 @ 1
+[    8.972334] initcall 0xc029ddc0 returned 0 after 91 usecs
+[    8.986429] calling  0xc029dde8 @ 1
+[   10.471732] initcall 0xc029dde8 returned 0 after 1473862 usecs
+[   10.486885] calling  0xc029e060 @ 1
+[   10.501034] initcall 0xc029e060 returned 0 after 2981 usecs
+[   10.515371] calling  0xc029e0d0 @ 1
+[   11.037575] printk: legacy console [hvc0] enabled
+[   11.037575] printk: legacy console [hvc0] enabled
+[   11.063693] initcall 0xc029e0d0 returned 0 after 537100 usecs
+[   11.063693] initcall 0xc029e0d0 returned 0 after 537100 usecs
+[   11.093576] calling  0xc029f420 @ 1
+[   11.093576] calling  0xc029f420 @ 1
+[   11.128364] initcall 0xc029f420 returned 0 after 14537 usecs
+[   11.128364] initcall 0xc029f420 returned 0 after 14537 usecs
+[   11.157843] calling  0xc029f4a0 @ 1
+[   11.157843] calling  0xc029f4a0 @ 1
+[   11.220906] initcall 0xc029f4a0 returned 0 after 40555 usecs
+[   11.220906] initcall 0xc029f4a0 returned 0 after 40555 usecs
+[   11.248150] calling  0xc029fd98 @ 1
+[   11.248150] calling  0xc029fd98 @ 1
+[   11.901525] bosio-kfb 20000000.bosio: BOSIO ABI3: dual projectors + BS25, DMA copy/fill/upload/RGB-user, 16MiB arena
+[   11.901525] bosio-kfb 20000000.bosio: BOSIO ABI3: dual projectors + BS25, DMA copy/fill/upload/RGB-user, 16MiB arena
+[   11.955115] probe of 20000000.bosio returned 0 after 679632 usecs
+[   11.955115] probe of 20000000.bosio returned 0 after 679632 usecs
+[   11.992298] initcall 0xc029fd98 returned 0 after 723833 usecs
+[   11.992298] initcall 0xc029fd98 returned 0 after 723833 usecs
+[   12.022164] calling  0xc029fe3c @ 1
+[   12.022164] calling  0xc029fe3c @ 1
+[   12.044073] initcall 0xc029fe3c returned 0 after 1734 usecs
+[   12.044073] initcall 0xc029fe3c returned 0 after 1734 usecs
+[   12.073167] calling  0xc029ff00 @ 1
+[   12.073167] calling  0xc029ff00 @ 1
+[   12.105733] initcall 0xc029ff00 returned 0 after 12396 usecs
+[   12.105733] initcall 0xc029ff00 returned 0 after 12396 usecs
+[   12.136283] calling  0xc029ff10 @ 1
+[   12.136283] calling  0xc029ff10 @ 1
+[   12.171174] initcall 0xc029ff10 returned 0 after 14578 usecs
+[   12.171174] initcall 0xc029ff10 returned 0 after 14578 usecs
+[   12.198352] calling  0xc029ff20 @ 1
+[   12.198352] calling  0xc029ff20 @ 1
+[   12.243837] initcall 0xc029ff20 returned 0 after 25120 usecs
+[   12.243837] initcall 0xc029ff20 returned 0 after 25120 usecs
+[   12.272735] calling  0xc02a004c @ 1
+[   12.272735] calling  0xc02a004c @ 1
+[   12.826433] probe of 10008000.mmc returned 0 after 530044 usecs
+[   12.826433] probe of 10008000.mmc returned 0 after 530044 usecs
+[   12.865263] initcall 0xc02a004c returned 0 after 571952 usecs
+[   12.865263] initcall 0xc02a004c returned 0 after 571952 usecs
+[   12.894676] calling  0xc02a3870 @ 1
+[   12.894676] calling  0xc02a3870 @ 1
+[   12.917899] initcall 0xc02a3870 returned 0 after 2693 usecs
+[   12.917899] initcall 0xc02a3870 returned 0 after 2693 usecs
+[   12.964637] calling  0xc028f028 @ 1
+[   12.964637] calling  0xc028f028 @ 1
+[   12.985962] initcall 0xc028f028 returned 0 after 1069 usecs
+[   12.985962] initcall 0xc028f028 returned 0 after 1069 usecs
+[   13.015243] calling  0xc028f268 @ 1
+[   13.015243] calling  0xc028f268 @ 1
+[   13.036495] initcall 0xc028f268 returned 0 after 1075 usecs
+[   13.036495] initcall 0xc028f268 returned 0 after 1075 usecs
+[   13.065577] calling  0xc0290460 @ 1
+[   13.065577] calling  0xc0290460 @ 1
+[   13.362339] initcall 0xc0290460 returned 0 after 276584 usecs
+[   13.362339] initcall 0xc0290460 returned 0 after 276584 usecs
+[   13.392250] calling  0xc0290a9c @ 1
+[   13.392250] calling  0xc0290a9c @ 1
+[   13.414742] initcall 0xc0290a9c returned 0 after 2218 usecs
+[   13.414742] initcall 0xc0290a9c returned 0 after 2218 usecs
+[   13.443890] calling  0xc029183c @ 1
+[   13.443890] calling  0xc029183c @ 1
+[   13.464444] initcall 0xc029183c returned 0 after 294 usecs
+[   13.464444] initcall 0xc029183c returned 0 after 294 usecs
+[   13.493097] calling  0xc02987bc @ 1
+[   13.493097] calling  0xc02987bc @ 1
+[   15.634153] initcall 0xc02987bc returned 0 after 2120464 usecs
+[   15.634153] initcall 0xc02987bc returned 0 after 2120464 usecs
+[   15.664480] calling  0xc0298ab0 @ 1
+[   15.664480] calling  0xc0298ab0 @ 1
+[   15.684769] initcall 0xc0298ab0 returned 0 after 70 usecs
+[   15.684769] initcall 0xc0298ab0 returned 0 after 70 usecs
+[   15.713438] calling  0xc0298b70 @ 1
+[   15.713438] calling  0xc0298b70 @ 1
+[   15.733759] initcall 0xc0298b70 returned 0 after 110 usecs
+[   15.733759] initcall 0xc0298b70 returned 0 after 110 usecs
+[   15.762438] calling  0xc029b9bc @ 1
+[   15.762438] calling  0xc029b9bc @ 1
+[   15.783422] initcall 0xc029b9bc returned 0 after 738 usecs
+[   15.783422] initcall 0xc029b9bc returned 0 after 738 usecs
+[   15.811791] calling  0xc029bd0c @ 1
+[   15.811791] calling  0xc029bd0c @ 1
+[   15.832442] initcall 0xc029bd0c returned 0 after 71 usecs
+[   15.832442] initcall 0xc029bd0c returned 0 after 71 usecs
+[   15.858578] calling  0xc01c18ec @ 1
+[   15.858578] calling  0xc01c18ec @ 1
+[   15.881459] initcall 0xc01c18ec returned 0 after 131 usecs
+[   15.881459] initcall 0xc01c18ec returned 0 after 131 usecs
+[   15.907671] calling  0xc01c59f8 @ 1
+[   15.907671] calling  0xc01c59f8 @ 1
+[   19.271252] initcall 0xc01c59f8 returned 0 after 3343196 usecs
+[   19.271252] initcall 0xc01c59f8 returned 0 after 3343196 usecs
+[   19.301710] calling  0xc02a0a08 @ 1
+[   19.301710] calling  0xc02a0a08 @ 1
+[   19.344781] initcall 0xc02a0a08 returned 0 after 22930 usecs
+[   19.344781] initcall 0xc02a0a08 returned 0 after 22930 usecs
+[   19.374045] calling  0xc022acec @ 1
+[   19.374045] calling  0xc022acec @ 1
+[   19.394697] initcall 0xc022acec returned 0 after 71 usecs
+[   19.394697] initcall 0xc022acec returned 0 after 71 usecs
+[   19.423002] calling  0xc02a3868 @ 1
+[   19.423002] calling  0xc02a3868 @ 1
+[   19.443328] initcall 0xc02a3868 returned 0 after 73 usecs
+[   19.443328] initcall 0xc02a3868 returned 0 after 73 usecs
+[   19.471792] calling  0xc02a3960 @ 1
+[   19.471792] calling  0xc02a3960 @ 1
+[   19.491960] initcall 0xc02a3960 returned 0 after 73 usecs
+[   19.491960] initcall 0xc02a3960 returned 0 after 73 usecs
+[   19.518457] calling  0xc029d58c @ 1
+[   19.518457] calling  0xc029d58c @ 1
+[   19.541015] clk: Disabling unused clocks
+[   19.541015] clk: Disabling unused clocks
+[   19.561139] initcall 0xc029d58c returned 0 after 20111 usecs
+[   19.561139] initcall 0xc029d58c returned 0 after 20111 usecs
+[   19.588396] calling  0xc02a0840 @ 1
+[   19.588396] calling  0xc02a0840 @ 1
+[   19.610920] initcall 0xc02a0840 returned 0 after 135 usecs
+[   19.610920] initcall 0xc02a0840 returned 0 after 135 usecs
+[   19.637579] ORY_BOOT wait_for_initramfs enter
+[   19.637579] ORY_BOOT wait_for_initramfs enter
+[   20.265800] mmc0: host does not support reading read-only switch, assuming write-enable
+[   20.265800] mmc0: host does not support reading read-only switch, assuming write-enable
+[   20.367461] mmc0: new SDHC card at address 0001
+[   20.367461] mmc0: new SDHC card at address 0001
+[   20.661305] mmcblk0: mmc0:0001 SD 14.6 GiB
+[   20.661305] mmcblk0: mmc0:0001 SD 14.6 GiB
+[   21.324962]  mmcblk0: p1 p2
+[   21.324962]  mmcblk0: p1 p2
+[   21.548353] probe of mmc0:0001 returned 0 after 1122693 usecs
+[   21.548353] probe of mmc0:0001 returned 0 after 1122693 usecs
+[   58.153499] ORY_BOOT rootfs unpack returned error=none extracted_bytes=0
+[   58.153499] ORY_BOOT rootfs unpack returned error=none extracted_bytes=0
+[   58.192822] ORY_BOOT wait_for_initramfs done
+[   58.192822] ORY_BOOT wait_for_initramfs done
+[   58.214145] ORY_BOOT console_on_rootfs enter
+[   58.214145] ORY_BOOT console_on_rootfs enter
+[   58.253336] ORY_BOOT console_on_rootfs done
+[   58.253336] ORY_BOOT console_on_rootfs done
+[   58.275346] ORY_BOOT kernel_init_freeable done
+[   58.275346] ORY_BOOT kernel_init_freeable done
+[   66.842551] Freeing unused kernel image (initmem) memory: 36788K
+[   66.842551] Freeing unused kernel image (initmem) memory: 36788K
+[   66.871835] Kernel memory protection not selected by kernel config.
+[   66.871835] Kernel memory protection not selected by kernel config.
+[   66.898703] Run /init as init process
+[   66.898703] Run /init as init process
+[   66.921100]   with arguments:
+[   66.921100]   with arguments:
+[   66.936459]     /init
+[   66.936459]     /init
+[   66.952213]   with environment:
+[   66.952213]   with environment:
+[   66.968383]     HOME=/
+[   66.968383]     HOME=/
+[   66.984360]     TERM=linux
+[   66.984360]     TERM=linux
+[   70.612210] EXT4-fs (mmcblk0p2): mounted filesystem e971e79a-47af-485d-828a-db4fafc0f9dd r/w with ordered data mode. Quota mode: disabled.
+[   70.612210] EXT4-fs (mmcblk0p2): mounted filesystem e971e79a-47af-485d-828a-db4fafc0f9dd r/w with ordered data mode. Quota mode: disabled.
+ORYUKDO: SD ext4 /data mounted
+ORYUKDO BusyBox serial console
+
+
+BusyBox v1.37.0 (2026-11-07 10:24:46 KST) built-in shell (ash)
+Enter 'help' for a list of built-in commands.
+
+oryukdo# cat /etc/oryukdo-image; uname -r; cat /proc/mounts; test ! -S /tmp/bosi
+o-wm.sock; echo INCR11_e236cbf0_RC:$?
+HAEBANCHEON-BoAYO-incremental-v11 / L1-16K DMA3 / incremental state and profiled boundary driver
+6.12.0-haebancheon-incremental11
+rootfs / rootfs rw 0 0
+devtmpfs /dev devtmpfs rw,relatime 0 0
+/dev/mmcblk0p2 /data ext4 rw,relatime 0 0
+proc /proc proc rw,relatime 0 0
+sysfs /sys sysfs rw,relatime 0 0
+INCR11_e236cbf0_RC:0
+oryukdo# cat /etc/oryukdo-image; echo INCR11_14b1071b_RC:$?
+HAEBANCHEON-BoAYO-incremental-v11 / L1-16K DMA3 / incremental state and profiled boundary driver
+INCR11_14b1071b_RC:0
+oryukdo# BOAYO_PROFILE=1 BOAYO_DRIVER_LEGACY=1 BOAYO_INIT_TRACE=0 /usr/bin/boayo
+-native start; echo INCR11_2fc09bed_RC:$?
+BoAYO C++ service started; initialization continues. boayo-status / boayo-keys / boayo-stop
+{"features":["windows","pointer","input-injection","button-events","scene-stream","spatial-workspace","pointer-capture"],"headless":false,"m":32,"mock_backend":false,"runtime":"C++17","version":2}
+INCR11_2fc09bed_RC:0
+oryukdo# sleep 12; /usr/bin/boayo-native app telemetry; echo INCR11_152184fe_RC:
+$?
+BOAYO_APP_READY window=2
+INCR11_152184fe_RC:0
+oryukdo# sleep 20; echo INCR11_16372f3b_RC:$?
+INCR11_16372f3b_RC:0
+oryukdo# /usr/bin/boayo-native profile; sleep 40; /usr/bin/boayo-native profile;
+ echo INCR11_46d7f4aa_RC:$?
+{"app_error":null,"driver_profile":{"available":true,"batch_calls":19,"batch_copy_dma_us":96294,"batch_copy_us":29184,"batch_execute_us":6292324,"batch_fill_dma_us":582959,"batch_validate_us":18742,"enabled":true,"fast_paths":false,"publish_calls":7,"publish_compare_us":622599,"publish_copy_us":62049,"publish_diff_us":272670,"publish_finish_us":43424,"publish_mmio_us":935,"publish_poll_us":4266,"publish_polls":16,"publish_sleep_us":396716,"publish_transfer_us":174052,"publish_validate_us":252830,"tile_calls":157,"tile_cpu_us":396147,"tile_cpu_words":2243,"tile_dma_bytes":65544,"tile_dma_calls":1571,"tile_dma_us":3160662,"tile_fence_us":44987,"tile_mask_us":925770,"units":"microseconds","version":1},"performance":{"frame_interval_ms":3279.993459999986,"frame_limit":2.0,"frame_pacing":"start-to-start","full_update_count":1,"last_apps_ms":422.40699999999265,"last_compose_ms":2798.6786200000042,"last_upload_ms":0.0,"no_op_update_count":0,"patch_update_count":6,"render_count":6,"rendered_generation":21,"update_words":4480,"uptime_seconds":46.17431454000001},"phase":"ready","profile":{"app_present":[3023516,2265164,6],"apps":[9200296,5878481,64],"blend":[5046146,4318976,17],"captions":[1983592,1429841,11],"compose":[19896900,14694426,6],"descriptors":[381068,293320,17],"enabled":true,"finish":[1894318,1280120,6],"image":[642686,477153,5],"image_publish":[37700,29755,5],"layers":[3201321,2244043,6],"nested":true,"output_publish":[1736754,1299390,6],"pointer":[130628,81412,12],"projection_wait":[705575,232987,17],"state_publish":[10123075,7288801,9],"texture":[2584014,1774005,13],"tiles_prepare":[4967956,3680376,6],"units":"microseconds","workspace":[5020311,3274968,64]},"render_error":null,"snapshot_time":139.11892258}
+{"app_error":null,"driver_profile":{"available":true,"batch_calls":58,"batch_copy_dma_us":114790,"batch_copy_us":82464,"batch_execute_us":13867312,"batch_fill_dma_us":1142167,"batch_validate_us":40355,"enabled":true,"fast_paths":false,"publish_calls":20,"publish_compare_us":2621040,"publish_copy_us":189473,"publish_diff_us":852503,"publish_finish_us":113667,"publish_mmio_us":2630,"publish_poll_us":8722,"publish_polls":54,"publish_sleep_us":851500,"publish_transfer_us":174052,"publish_validate_us":705544,"tile_calls":307,"tile_cpu_us":927626,"tile_cpu_words":5106,"tile_dma_bytes":121068,"tile_dma_calls":3660,"tile_dma_us":7149380,"tile_fence_us":86569,"tile_mask_us":1970501,"units":"microseconds","version":1},"performance":{"frame_interval_ms":3218.7577800000045,"frame_limit":2.0,"frame_pacing":"start-to-start","full_update_count":1,"last_apps_ms":404.8765400000036,"last_compose_ms":1948.4807799999828,"last_upload_ms":0.0,"no_op_update_count":0,"patch_update_count":19,"render_count":19,"rendered_generation":34,"update_words":4480,"uptime_seconds":91.59237519999999},"phase":"composing","profile":{"app_present":[6215121,4585952,19],"apps":[14818196,10016022,77],"blend":[12911940,11082143,56],"captions":[2234068,1627757,37],"compose":[44618394,33751544,19],"descriptors":[980246,731696,56],"enabled":true,"finish":[4891444,3589055,19],"image":[2497947,1771426,18],"image_publish":[146675,109922,18],"layers":[5838270,4222131,19],"nested":true,"output_publish":[5615523,4706592,19],"pointer":[342127,228443,38],"projection_wait":[2073572,662526,56],"state_publish":[24448363,17920743,23],"texture":[3880684,2597905,39],"tiles_prepare":[7832775,5737581,19],"units":"microseconds","workspace":[6511875,4385107,77]},"render_error":null,"snapshot_time":184.37859686}
+INCR11_46d7f4aa_RC:0
+oryukdo# boayo-status; echo INCR11_433240d9_RC:$?
+{
+  "app_error": null,
+  "assets": {
+    "cache_hits": 23,
+    "format": "raw-mapped-00RRGGBB",
+    "loads": 41,
+    "misses": 0,
+    "rejected": 0,
+    "rgb_materializations": 0
+  },
+  "buttons": {
+    "available": false,
+    "last_event_id": 0,
+    "state": 0
+  },
+  "compositor": "cpp-native",
+  "driver_profile": {
+    "available": true,
+    "batch_calls": 61,
+    "batch_copy_dma_us": 114790,
+    "batch_copy_us": 84585,
+    "batch_execute_us": 14700551,
+    "batch_fill_dma_us": 1195856,
+    "batch_validate_us": 41388,
+    "enabled": true,
+    "fast_paths": false,
+    "publish_calls": 21,
+    "publish_compare_us": 2773194,
+    "publish_copy_us": 198772,
+    "publish_diff_us": 896308,
+    "publish_finish_us": 117890,
+    "publish_mmio_us": 2765,
+    "publish_poll_us": 8964,
+    "publish_polls": 56,
+    "publish_sleep_us": 1187262,
+    "publish_transfer_us": 174052,
+    "publish_validate_us": 742772,
+    "tile_calls": 319,
+    "tile_cpu_us": 964549,
+    "tile_cpu_words": 5335,
+    "tile_dma_bytes": 125516,
+    "tile_dma_calls": 3827,
+    "tile_dma_us": 7696855,
+    "tile_fence_us": 88956,
+    "tile_mask_us": 2055112,
+    "units": "microseconds",
+    "version": 1
+  },
+  "focused_window": 2,
+  "generation": 35,
+  "motion": {
+    "active": false,
+    "next_step": 0,
+    "phase": "idle",
+    "steps": 25,
+    "target_generation": 0,
+    "view": {
+      "pitch": 0.0,
+      "roll": 0.0,
+      "yaw": 0.0
+    },
+    "windows": []
+  },
+  "output": {
+    "abi": 3,
+    "active_bank": 0,
+    "active_base": 3170959360,
+    "antialias": false,
+    "backend": "kfb-linux-frame-atomic-output",
+    "capability": 1146373681,
+    "commits": 21,
+    "dma_copied_words": 21504,
+    "max_jobs": 64,
+    "max_scene_words": 1084816,
+    "memory_dma": {
+      "available": true,
+      "copy_bytes": 2384940,
+      "copy_ops": 3916,
+      "errors": 0,
+      "features": 255,
+      "fill_bytes": 240640,
+      "fill_ops": 235,
+      "quarantined": 0,
+      "timeouts": 0,
+      "upload_bytes": 2173408,
+      "upload_ops": 44,
+      "upload_threshold": 4096
+    },
+    "metadata_only": false,
+    "mock_backend": false,
+    "poisoned": 0,
+    "publish_profile": {
+      "backend": "kernel",
+      "command": 2,
+      "configure_us": 89,
+      "finish_us": 4223,
+      "select_us": 152154,
+      "upload_ranges": 0,
+      "upload_us": 49903,
+      "uploaded_words": 0,
+      "user_copy_us": 9299,
+      "validate_us": 37228,
+      "wait_us": 336717
+    },
+    "sensor_available": false,
+    "shadow_copied_words": 0,
+    "signature": 1112748597,
+    "status": 194772995,
+    "uploaded_words": 9066
+  },
+  "performance": {
+    "frame_interval_ms": 4270.544879999989,
+    "frame_limit": 2.0,
+    "frame_pacing": "start-to-start",
+    "full_update_count": 1,
+    "last_apps_ms": 866.3900399999989,
+    "last_compose_ms": 3601.3924199999965,
+    "last_upload_ms": 0.0,
+    "no_op_update_count": 0,
+    "patch_update_count": 20,
+    "render_count": 20,
+    "rendered_generation": 35,
+    "update_words": 4480,
+    "uptime_seconds": 99.06444224
+  },
+  "pointer": {
+    "azimuth": 0.0,
+    "buttons": [],
+    "cancel_serial": 0,
+    "captured_window": null,
+    "dragging": false,
+    "elevation": 0.0,
+    "last_left_press": null,
+    "last_left_release": null,
+    "left_press_serial": 0,
+    "left_release_serial": 0,
+    "scroll_delta": 0.0,
+    "scroll_serial": 0,
+    "visible": false,
+    "window_id": 2,
+    "zone": "content"
+  },
+  "profile": {
+    "app_present": [
+      6708194,
+      4791189,
+      20
+    ],
+    "apps": [
+      15682627,
+      10371122,
+      78
+    ],
+    "blend": [
+      14090857,
+      11623117,
+      59
+    ],
+    "captions": [
+      2273534,
+      1643480,
+      39
+    ],
+    "compose": [
+      48077915,
+      35297893,
+      20
+    ],
+    "descriptors": [
+      1051276,
+      767470,
+      59
+    ],
+    "enabled": true,
+    "finish": [
+      5290877,
+      3784883,
+      20
+    ],
+    "image": [
+      2794177,
+      1887063,
+      19
+    ],
+    "image_publish": [
+      168143,
+      118021,
+      19
+    ],
+    "layers": [
+      6223818,
+      4386885,
+      20
+    ],
+    "nested": true,
+    "output_publish": [
+      6213560,
+      4963467,
+      20
+    ],
+    "pointer": [
+      354853,
+      236967,
+      40
+    ],
+    "projection_wait": [
+      2215744,
+      703811,
+      59
+    ],
+    "state_publish": [
+      26977934,
+      19491199,
+      25
+    ],
+    "texture": [
+      4023560,
+      2667986,
+      41
+    ],
+    "tiles_prepare": [
+      8192952,
+      5902897,
+      20
+    ],
+    "units": "microseconds",
+    "workspace": [
+      6706981,
+      4475172,
+      78
+    ]
+  },
+  "projection": {
+    "cpu_output_shadow_words": 4480,
+    "cpu_result_download_words": 0,
+    "cpu_scene_words": 0,
+    "device_ready_frames": 1,
+    "dirty_tiles": 28,
+    "fallback_frames": 0,
+    "geometry_tiles_evaluated_total": 0,
+    "hardware_frames": 20,
+    "jobs_per_core": [
+      16,
+      16
+    ],
+    "lazy_copied_tiles_total": 84,
+    "mask_samples_evaluated_total": 0,
+    "masked_tiles_total": 319,
+    "mode": "ddr-resident-dirty-tiles",
+    "packed_mask_tiles_total": 319,
+    "plan_cache": {
+      "builtin_loads": 5,
+      "hits": 0,
+      "loads": 5,
+      "misses": 0,
+      "payload_scan_bytes": 0,
+      "rejected": 0,
+      "revision": "c830e2bae43593f8c188620447b4ce808ce4894a826a073b44f12b949ad54b7e"
+    },
+    "precomputed_layers_total": 5,
+    "redrawn_tiles": 28,
+    "reused_tiles_total": 0,
+    "solid_tiles_total": 0,
+    "texture_pool": {
+      "capacity_bytes": 4194304,
+      "evictions": 0,
+      "full_uploads": 5,
+      "partial_uploads": 18,
+      "resident_bytes": 1430400,
+      "resident_windows": 5,
+      "reuses": 18,
+      "staged_copy_bytes": 0,
+      "upload_bytes": 2137600,
+      "upload_calls": 42
+    },
+    "texture_reuses_total": 18,
+    "texture_uploads_total": 23,
+    "tile_fills_total": 235,
+    "total_hw_jobs": 768,
+    "update_kind": "tiles"
+  },
+  "render_error": null,
+  "runtime": "C++17",
+  "scene_owner": null,
+  "service": {
+    "phase": "composing",
+    "queued_requests": 0,
+    "snapshot_age_seconds": 3.1986154199999817,
+    "state_is_snapshot": true
+  },
+  "view": {
+    "pitch": 0.0,
+    "roll": 0.0,
+    "yaw": 0.0
+  },
+  "windows": [
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": true,
+      "height_deg": 26.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          14.0
+        ]
+      ],
+      "surface_height": 300,
+      "surface_width": 400,
+      "title": "Telemetry",
+      "width_deg": 36.0,
+      "window_id": 2,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 0
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 30.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "boayo-desktop",
+      "roll": 0.0,
+      "shape": [
+        [
+          51.2,
+          36.0,
+          537.6,
+          252.0,
+          18.0
+        ]
+      ],
+      "surface_height": 360,
+      "surface_width": 640,
+      "title": "BoAYO Launcher",
+      "width_deg": 42.0,
+      "window_id": 1,
+      "workspace": {},
+      "z": 1
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -16.47105751657935,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: Telemetry",
+      "width_deg": 2.88,
+      "window_id": 3,
+      "workspace": {
+        "control": "move",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 2
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": -10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 4,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 3
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": 10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": -3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 5,
+      "workspace": {
+        "control": "close",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 4
+    }
+  ]
+}
+INCR11_433240d9_RC:0
+oryukdo# boayo-stop && while test -S /tmp/bosio-wm.sock; do sleep 1; done; echo 
+INCR11_9fab7e42_RC:$?
+INCR11_9fab7e42_RC:0
+oryukdo# BOAYO_PROFILE=1 BOAYO_DRIVER_LEGACY=0 BOAYO_INIT_TRACE=0 /usr/bin/boayo
+-native start; echo INCR11_dba18dc5_RC:$?
+BoAYO C++ service started; initialization continues. boayo-status / boayo-keys / boayo-stop
+{"features":["windows","pointer","input-injection","button-events","scene-stream","spatial-workspace","pointer-capture"],"headless":false,"m":32,"mock_backend":false,"runtime":"C++17","version":2}
+INCR11_dba18dc5_RC:0
+oryukdo# sleep 12; /usr/bin/boayo-native app telemetry; echo INCR11_b834cbaf_RC:
+$?
+BOAYO_APP_READY window=2
+INCR11_b834cbaf_RC:0
+oryukdo# sleep 20; echo INCR11_53a9b0bf_RC:$?
+INCR11_53a9b0bf_RC:0
+oryukdo# /usr/bin/boayo-native profile; sleep 40; /usr/bin/boayo-native profile;
+ echo INCR11_cf4bf862_RC:$?
+{"app_error":null,"driver_profile":{"available":true,"batch_calls":19,"batch_copy_dma_us":98411,"batch_copy_us":38497,"batch_execute_us":3999801,"batch_fill_dma_us":582204,"batch_validate_us":16317,"enabled":true,"fast_paths":true,"publish_calls":7,"publish_compare_us":102981,"publish_copy_us":68788,"publish_diff_us":324648,"publish_finish_us":13810,"publish_mmio_us":929,"publish_poll_us":1998,"publish_polls":17,"publish_sleep_us":99780,"publish_transfer_us":6617,"publish_validate_us":240694,"tile_calls":157,"tile_cpu_us":925565,"tile_cpu_words":10466,"tile_dma_bytes":32652,"tile_dma_calls":70,"tile_dma_us":419344,"tile_fence_us":48369,"tile_mask_us":902779,"units":"microseconds","version":1},"performance":{"frame_interval_ms":2902.034540000045,"frame_limit":2.0,"frame_pacing":"start-to-start","full_update_count":1,"last_apps_ms":399.0372399999842,"last_compose_ms":1500.2093600000421,"last_upload_ms":0.0,"no_op_update_count":0,"patch_update_count":6,"render_count":6,"rendered_generation":21,"update_words":4480,"uptime_seconds":42.92653684000001},"phase":"composing","profile":{"app_present":[3040128,2294897,6],"apps":[9016276,5751296,61],"blend":[3086801,2633274,17],"captions":[2053143,1463344,11],"compose":[17596881,13192985,6],"descriptors":[380473,293312,17],"enabled":true,"finish":[1591293,1258032,6],"image":[672419,487627,5],"image_publish":[35386,30741,5],"layers":[3028920,2216099,6],"nested":true,"output_publish":[833411,718695,6],"pointer":[110396,87407,12],"projection_wait":[753562,249180,17],"state_publish":[10188827,7281165,9],"texture":[4117291,3064466,13],"tiles_prepare":[5404779,3932958,6],"units":"microseconds","workspace":[5088348,3223903,61]},"render_error":null,"snapshot_time":263.8942126}
+{"app_error":null,"driver_profile":{"available":true,"batch_calls":64,"batch_copy_dma_us":117812,"batch_copy_us":81135,"batch_execute_us":9393404,"batch_fill_dma_us":1272028,"batch_validate_us":42324,"enabled":true,"fast_paths":true,"publish_calls":22,"publish_compare_us":466179,"publish_copy_us":214042,"publish_diff_us":1004348,"publish_finish_us":17930,"publish_mmio_us":5076,"publish_poll_us":7832,"publish_polls":67,"publish_sleep_us":586949,"publish_transfer_us":6617,"publish_validate_us":760612,"tile_calls":331,"tile_cpu_us":2359601,"tile_cpu_words":27635,"tile_dma_bytes":41680,"tile_dma_calls":128,"tile_dma_us":880408,"tile_fence_us":92329,"tile_mask_us":2104707,"units":"microseconds","version":1},"performance":{"frame_interval_ms":2951.1666200000377,"frame_limit":2.0,"frame_pacing":"start-to-start","full_update_count":1,"last_apps_ms":401.8849800000339,"last_compose_ms":1517.7007399999525,"last_upload_ms":0.0,"no_op_update_count":0,"patch_update_count":21,"render_count":21,"rendered_generation":36,"update_words":4480,"uptime_seconds":91.69164872000002},"phase":"composing","profile":{"app_present":[7055132,5012121,21],"apps":[15837074,10549902,76],"blend":[8647524,7241739,62],"captions":[2360346,1699448,41],"compose":[41901552,30524287,21],"descriptors":[1147343,791489,62],"enabled":true,"finish":[5249295,3961698,21],"image":[3096582,1997198,20],"image_publish":[114459,100067,20],"layers":[6257043,4522043,21],"nested":true,"output_publish":[3166102,2557874,21],"pointer":[410430,281440,42],"projection_wait":[2374953,710772,62],"state_publish":[26027949,19316057,25],"texture":[6152394,4420066,43],"tiles_prepare":[9036597,6398583,21],"units":"microseconds","workspace":[6822802,4513228,76]},"render_error":null,"snapshot_time":312.53001528}
+INCR11_cf4bf862_RC:0
+oryukdo# boayo-status; echo INCR11_6f648e61_RC:$?
+{
+  "app_error": null,
+  "assets": {
+    "cache_hits": 25,
+    "format": "raw-mapped-00RRGGBB",
+    "loads": 45,
+    "misses": 0,
+    "rejected": 0,
+    "rgb_materializations": 0
+  },
+  "buttons": {
+    "available": false,
+    "last_event_id": 0,
+    "state": 0
+  },
+  "compositor": "cpp-native",
+  "driver_profile": {
+    "available": true,
+    "batch_calls": 67,
+    "batch_copy_dma_us": 117812,
+    "batch_copy_us": 83204,
+    "batch_execute_us": 9900699,
+    "batch_fill_dma_us": 1367815,
+    "batch_validate_us": 43341,
+    "enabled": true,
+    "fast_paths": true,
+    "publish_calls": 23,
+    "publish_compare_us": 489607,
+    "publish_copy_us": 224524,
+    "publish_diff_us": 1050435,
+    "publish_finish_us": 18203,
+    "publish_mmio_us": 5216,
+    "publish_poll_us": 8064,
+    "publish_polls": 69,
+    "publish_sleep_us": 730389,
+    "publish_transfer_us": 6617,
+    "publish_validate_us": 793894,
+    "tile_calls": 343,
+    "tile_cpu_us": 2453223,
+    "tile_cpu_words": 28820,
+    "tile_dma_bytes": 42304,
+    "tile_dma_calls": 132,
+    "tile_dma_us": 1011627,
+    "tile_fence_us": 94706,
+    "tile_mask_us": 2180877,
+    "units": "microseconds",
+    "version": 1
+  },
+  "focused_window": 2,
+  "generation": 37,
+  "motion": {
+    "active": false,
+    "next_step": 0,
+    "phase": "idle",
+    "steps": 25,
+    "target_generation": 0,
+    "view": {
+      "pitch": 0.0,
+      "roll": 0.0,
+      "yaw": 0.0
+    },
+    "windows": []
+  },
+  "output": {
+    "abi": 3,
+    "active_bank": 0,
+    "active_base": 3170959360,
+    "antialias": false,
+    "backend": "kfb-linux-frame-atomic-output",
+    "capability": 1146373681,
+    "commits": 23,
+    "dma_copied_words": 21504,
+    "max_jobs": 64,
+    "max_scene_words": 1084816,
+    "memory_dma": {
+      "available": true,
+      "copy_bytes": 4856204,
+      "copy_ops": 5128,
+      "errors": 0,
+      "features": 255,
+      "fill_bytes": 522240,
+      "fill_ops": 510,
+      "quarantined": 0,
+      "timeouts": 0,
+      "upload_bytes": 4503008,
+      "upload_ops": 96,
+      "upload_threshold": 4096
+    },
+    "metadata_only": false,
+    "mock_backend": false,
+    "poisoned": 0,
+    "publish_profile": {
+      "backend": "kernel",
+      "command": 2,
+      "configure_us": 87,
+      "finish_us": 273,
+      "select_us": 23428,
+      "upload_ranges": 0,
+      "upload_us": 46278,
+      "uploaded_words": 0,
+      "user_copy_us": 10482,
+      "validate_us": 33282,
+      "wait_us": 144385
+    },
+    "sensor_available": false,
+    "shadow_copied_words": 0,
+    "signature": 1112748597,
+    "status": 434110467,
+    "uploaded_words": 228
+  },
+  "performance": {
+    "frame_interval_ms": 3549.2115600000034,
+    "frame_limit": 2.0,
+    "frame_pacing": "start-to-start",
+    "full_update_count": 1,
+    "last_apps_ms": 956.4560000000029,
+    "last_compose_ms": 3089.5909999999844,
+    "last_upload_ms": 0.0,
+    "no_op_update_count": 0,
+    "patch_update_count": 22,
+    "render_count": 22,
+    "rendered_generation": 37,
+    "update_words": 4480,
+    "uptime_seconds": 99.11066628
+  },
+  "pointer": {
+    "azimuth": 0.0,
+    "buttons": [],
+    "cancel_serial": 0,
+    "captured_window": null,
+    "dragging": false,
+    "elevation": 0.0,
+    "last_left_press": null,
+    "last_left_release": null,
+    "left_press_serial": 0,
+    "left_release_serial": 0,
+    "scroll_delta": 0.0,
+    "scroll_serial": 0,
+    "visible": false,
+    "window_id": 2,
+    "zone": "content"
+  },
+  "profile": {
+    "app_present": [
+      7606276,
+      5228518,
+      22
+    ],
+    "apps": [
+      16785230,
+      10918086,
+      77
+    ],
+    "blend": [
+      9323791,
+      7569107,
+      65
+    ],
+    "captions": [
+      2410871,
+      1714665,
+      43
+    ],
+    "compose": [
+      44845904,
+      31781923,
+      22
+    ],
+    "descriptors": [
+      1183282,
+      819561,
+      65
+    ],
+    "enabled": true,
+    "finish": [
+      5728393,
+      4163018,
+      22
+    ],
+    "image": [
+      3398597,
+      2123395,
+      21
+    ],
+    "image_publish": [
+      133988,
+      109926,
+      21
+    ],
+    "layers": [
+      6606984,
+      4675509,
+      22
+    ],
+    "nested": true,
+    "output_publish": [
+      3435590,
+      2683107,
+      22
+    ],
+    "pointer": [
+      451284,
+      297720,
+      44
+    ],
+    "projection_wait": [
+      2492437,
+      748089,
+      65
+    ],
+    "state_publish": [
+      28637804,
+      20817806,
+      27
+    ],
+    "texture": [
+      6358618,
+      4503346,
+      45
+    ],
+    "tiles_prepare": [
+      9556423,
+      6610495,
+      22
+    ],
+    "units": "microseconds",
+    "workspace": [
+      7060237,
+      4611968,
+      77
+    ]
+  },
+  "projection": {
+    "cpu_output_shadow_words": 4480,
+    "cpu_result_download_words": 0,
+    "cpu_scene_words": 0,
+    "device_ready_frames": 1,
+    "dirty_tiles": 28,
+    "fallback_frames": 0,
+    "geometry_tiles_evaluated_total": 0,
+    "hardware_frames": 22,
+    "jobs_per_core": [
+      16,
+      16
+    ],
+    "lazy_copied_tiles_total": 84,
+    "mask_samples_evaluated_total": 0,
+    "masked_tiles_total": 343,
+    "mode": "ddr-resident-dirty-tiles",
+    "packed_mask_tiles_total": 343,
+    "plan_cache": {
+      "builtin_loads": 5,
+      "hits": 0,
+      "loads": 5,
+      "misses": 0,
+      "payload_scan_bytes": 0,
+      "rejected": 0,
+      "revision": "c830e2bae43593f8c188620447b4ce808ce4894a826a073b44f12b949ad54b7e"
+    },
+    "precomputed_layers_total": 5,
+    "redrawn_tiles": 28,
+    "reused_tiles_total": 0,
+    "solid_tiles_total": 0,
+    "texture_pool": {
+      "capacity_bytes": 4194304,
+      "evictions": 0,
+      "full_uploads": 5,
+      "partial_uploads": 20,
+      "resident_bytes": 1430400,
+      "resident_windows": 5,
+      "reuses": 20,
+      "staged_copy_bytes": 0,
+      "upload_bytes": 2214400,
+      "upload_calls": 46
+    },
+    "texture_reuses_total": 20,
+    "texture_uploads_total": 25,
+    "tile_fills_total": 251,
+    "total_hw_jobs": 832,
+    "update_kind": "tiles"
+  },
+  "render_error": null,
+  "runtime": "C++17",
+  "scene_owner": null,
+  "service": {
+    "phase": "composing",
+    "queued_requests": 0,
+    "snapshot_age_seconds": 2.8689827000000037,
+    "state_is_snapshot": true
+  },
+  "view": {
+    "pitch": 0.0,
+    "roll": 0.0,
+    "yaw": 0.0
+  },
+  "windows": [
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": true,
+      "height_deg": 26.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          14.0
+        ]
+      ],
+      "surface_height": 300,
+      "surface_width": 400,
+      "title": "Telemetry",
+      "width_deg": 36.0,
+      "window_id": 2,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 0
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 30.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "boayo-desktop",
+      "roll": 0.0,
+      "shape": [
+        [
+          51.2,
+          36.0,
+          537.6,
+          252.0,
+          18.0
+        ]
+      ],
+      "surface_height": 360,
+      "surface_width": 640,
+      "title": "BoAYO Launcher",
+      "width_deg": 42.0,
+      "window_id": 1,
+      "workspace": {},
+      "z": 1
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -16.47105751657935,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: Telemetry",
+      "width_deg": 2.88,
+      "window_id": 3,
+      "workspace": {
+        "control": "move",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 2
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": -10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 4,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 3
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": 10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": -3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 5,
+      "workspace": {
+        "control": "close",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 4
+    }
+  ]
+}
+INCR11_6f648e61_RC:0
+oryukdo# boayo-stop && while test -S /tmp/bosio-wm.sock; do sleep 1; done; echo 
+INCR11_7a0ce3ac_RC:$?
+INCR11_7a0ce3ac_RC:0
+oryukdo# BOAYO_PROFILE=0 BOAYO_DRIVER_LEGACY=0 BOAYO_INIT_TRACE=0 /usr/bin/boayo
+-native start; echo INCR11_fba15067_RC:$?
+BoAYO C++ service started; initialization continues. boayo-status / boayo-keys / boayo-stop
+{"features":["windows","pointer","input-injection","button-events","scene-stream","spatial-workspace","pointer-capture"],"headless":false,"m":32,"mock_backend":false,"runtime":"C++17","version":2}
+INCR11_fba15067_RC:0
+oryukdo# sleep 12; /usr/bin/boayo-native app telemetry; echo INCR11_ca24eaa6_RC:
+$?
+BOAYO_APP_READY window=2
+INCR11_ca24eaa6_RC:0
+oryukdo# sleep 20; echo INCR11_5a0fa0be_RC:$?
+INCR11_5a0fa0be_RC:0
+oryukdo# /usr/bin/boayo-native profile; sleep 40; /usr/bin/boayo-native profile;
+ echo INCR11_a3b28a60_RC:$?
+{"app_error":null,"driver_profile":{"available":true,"enabled":false,"fast_paths":true},"performance":{"frame_interval_ms":2308.8476199999945,"frame_limit":2.0,"frame_pacing":"start-to-start","full_update_count":1,"last_apps_ms":386.0990200000174,"last_compose_ms":1338.7799600000108,"last_upload_ms":0.0,"no_op_update_count":0,"patch_update_count":8,"render_count":8,"rendered_generation":23,"update_words":4480,"uptime_seconds":43.29327802},"phase":"composing","profile":{"enabled":false,"nested":true,"units":"microseconds"},"render_error":null,"snapshot_time":393.60589034}
+{"app_error":null,"driver_profile":{"available":true,"enabled":false,"fast_paths":true},"performance":{"frame_interval_ms":2362.9947599999923,"frame_limit":2.0,"frame_pacing":"start-to-start","full_update_count":1,"last_apps_ms":379.30244000000357,"last_compose_ms":1279.8916399999598,"last_upload_ms":0.0,"no_op_update_count":0,"patch_update_count":26,"render_count":26,"rendered_generation":41,"update_words":4480,"uptime_seconds":89.26464026000002},"phase":"composing","profile":{"enabled":false,"nested":true,"units":"microseconds"},"render_error":null,"snapshot_time":439.27275608}
+INCR11_a3b28a60_RC:0
+oryukdo# boayo-status; echo INCR11_3a3b2307_RC:$?
+{
+  "app_error": null,
+  "assets": {
+    "cache_hits": 30,
+    "format": "raw-mapped-00RRGGBB",
+    "loads": 55,
+    "misses": 0,
+    "rejected": 0,
+    "rgb_materializations": 0
+  },
+  "buttons": {
+    "available": false,
+    "last_event_id": 0,
+    "state": 0
+  },
+  "compositor": "cpp-native",
+  "driver_profile": {
+    "available": true,
+    "enabled": false,
+    "fast_paths": true
+  },
+  "focused_window": 2,
+  "generation": 42,
+  "motion": {
+    "active": false,
+    "next_step": 0,
+    "phase": "idle",
+    "steps": 25,
+    "target_generation": 0,
+    "view": {
+      "pitch": 0.0,
+      "roll": 0.0,
+      "yaw": 0.0
+    },
+    "windows": []
+  },
+  "output": {
+    "abi": 3,
+    "active_bank": 1,
+    "active_base": 3175415808,
+    "antialias": false,
+    "backend": "kfb-linux-frame-atomic-output",
+    "capability": 1146373681,
+    "commits": 28,
+    "dma_copied_words": 21504,
+    "max_jobs": 64,
+    "max_scene_words": 1084816,
+    "memory_dma": {
+      "available": true,
+      "copy_bytes": 7550140,
+      "copy_ops": 5523,
+      "errors": 0,
+      "features": 255,
+      "fill_bytes": 852992,
+      "fill_ops": 833,
+      "quarantined": 0,
+      "timeouts": 0,
+      "upload_bytes": 7063008,
+      "upload_ops": 160,
+      "upload_threshold": 4096
+    },
+    "metadata_only": false,
+    "mock_backend": false,
+    "poisoned": 0,
+    "publish_profile": {
+      "backend": "kernel",
+      "command": 2,
+      "configure_us": 88,
+      "finish_us": 302,
+      "select_us": 26153,
+      "upload_ranges": 0,
+      "upload_us": 43163,
+      "uploaded_words": 0,
+      "user_copy_us": 10571,
+      "validate_us": 35740,
+      "wait_us": 148807
+    },
+    "sensor_available": false,
+    "shadow_copied_words": 0,
+    "signature": 1112748597,
+    "status": 669777923,
+    "uploaded_words": 228
+  },
+  "performance": {
+    "frame_interval_ms": 2688.8997799999856,
+    "frame_limit": 2.0,
+    "frame_pacing": "start-to-start",
+    "full_update_count": 1,
+    "last_apps_ms": 692.1019200000273,
+    "last_compose_ms": 2289.5626800000173,
+    "last_upload_ms": 0.0,
+    "no_op_update_count": 0,
+    "patch_update_count": 27,
+    "render_count": 27,
+    "rendered_generation": 42,
+    "update_words": 4480,
+    "uptime_seconds": 94.38208652000003
+  },
+  "pointer": {
+    "azimuth": 0.0,
+    "buttons": [],
+    "cancel_serial": 0,
+    "captured_window": null,
+    "dragging": false,
+    "elevation": 0.0,
+    "last_left_press": null,
+    "last_left_release": null,
+    "left_press_serial": 0,
+    "left_release_serial": 0,
+    "scroll_delta": 0.0,
+    "scroll_serial": 0,
+    "visible": false,
+    "window_id": 2,
+    "zone": "content"
+  },
+  "profile": {
+    "enabled": false,
+    "nested": true,
+    "units": "microseconds"
+  },
+  "projection": {
+    "cpu_output_shadow_words": 4480,
+    "cpu_result_download_words": 0,
+    "cpu_scene_words": 0,
+    "device_ready_frames": 1,
+    "dirty_tiles": 28,
+    "fallback_frames": 0,
+    "geometry_tiles_evaluated_total": 0,
+    "hardware_frames": 27,
+    "jobs_per_core": [
+      16,
+      16
+    ],
+    "lazy_copied_tiles_total": 84,
+    "mask_samples_evaluated_total": 0,
+    "masked_tiles_total": 403,
+    "mode": "ddr-resident-dirty-tiles",
+    "packed_mask_tiles_total": 403,
+    "plan_cache": {
+      "builtin_loads": 5,
+      "hits": 0,
+      "loads": 5,
+      "misses": 0,
+      "payload_scan_bytes": 0,
+      "rejected": 0,
+      "revision": "c830e2bae43593f8c188620447b4ce808ce4894a826a073b44f12b949ad54b7e"
+    },
+    "precomputed_layers_total": 5,
+    "redrawn_tiles": 28,
+    "reused_tiles_total": 0,
+    "solid_tiles_total": 0,
+    "texture_pool": {
+      "capacity_bytes": 4194304,
+      "evictions": 0,
+      "full_uploads": 5,
+      "partial_uploads": 25,
+      "resident_bytes": 1430400,
+      "resident_windows": 5,
+      "reuses": 25,
+      "staged_copy_bytes": 0,
+      "upload_bytes": 2406400,
+      "upload_calls": 56
+    },
+    "texture_reuses_total": 25,
+    "texture_uploads_total": 30,
+    "tile_fills_total": 291,
+    "total_hw_jobs": 992,
+    "update_kind": "tiles"
+  },
+  "render_error": null,
+  "runtime": "C++17",
+  "scene_owner": null,
+  "service": {
+    "phase": "composing",
+    "queued_requests": 0,
+    "snapshot_age_seconds": 3.5490892799999756,
+    "state_is_snapshot": true
+  },
+  "view": {
+    "pitch": 0.0,
+    "roll": 0.0,
+    "yaw": 0.0
+  },
+  "windows": [
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": true,
+      "height_deg": 26.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          14.0
+        ]
+      ],
+      "surface_height": 300,
+      "surface_width": 400,
+      "title": "Telemetry",
+      "width_deg": 36.0,
+      "window_id": 2,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 0
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 30.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "boayo-desktop",
+      "roll": 0.0,
+      "shape": [
+        [
+          51.2,
+          36.0,
+          537.6,
+          252.0,
+          18.0
+        ]
+      ],
+      "surface_height": 360,
+      "surface_width": 640,
+      "title": "BoAYO Launcher",
+      "width_deg": 42.0,
+      "window_id": 1,
+      "workspace": {},
+      "z": 1
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -16.47105751657935,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: Telemetry",
+      "width_deg": 2.88,
+      "window_id": 3,
+      "workspace": {
+        "control": "move",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 2
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": -10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 4,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 3
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": 10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": -3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 5,
+      "workspace": {
+        "control": "close",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 4
+    }
+  ]
+}
+INCR11_3a3b2307_RC:0
+oryukdo# /usr/bin/boayo-native motion 1 0; echo INCR11_b8bdb17f_RC:$?
+WM reply failed or timed out
+INCR11_b8bdb17f_RC:1
+oryukdo# boayo-status; cat /tmp/boayo-native.log; echo INCR11_3d7681d5_RC:$?
+{
+  "app_error": null,
+  "assets": {
+    "cache_hits": 43,
+    "format": "raw-mapped-00RRGGBB",
+    "loads": 81,
+    "misses": 0,
+    "rejected": 0,
+    "rgb_materializations": 0
+  },
+  "buttons": {
+    "available": false,
+    "last_event_id": 0,
+    "state": 0
+  },
+  "compositor": "cpp-native",
+  "driver_profile": {
+    "available": true,
+    "enabled": false,
+    "fast_paths": true
+  },
+  "focused_window": 2,
+  "generation": 55,
+  "motion": {
+    "active": false,
+    "next_step": 0,
+    "phase": "idle",
+    "steps": 25,
+    "target_generation": 0,
+    "view": {
+      "pitch": 0.0,
+      "roll": 0.0,
+      "yaw": 0.0
+    },
+    "windows": []
+  },
+  "output": {
+    "abi": 3,
+    "active_bank": 0,
+    "active_base": 3170959360,
+    "antialias": false,
+    "backend": "kfb-linux-frame-atomic-output",
+    "capability": 1146373681,
+    "commits": 41,
+    "dma_copied_words": 21504,
+    "max_jobs": 64,
+    "max_scene_words": 1084816,
+    "memory_dma": {
+      "available": true,
+      "copy_bytes": 8057452,
+      "copy_ops": 5612,
+      "errors": 0,
+      "features": 255,
+      "fill_bytes": 959488,
+      "fill_ops": 937,
+      "quarantined": 0,
+      "timeouts": 0,
+      "upload_bytes": 7562208,
+      "upload_ops": 186,
+      "upload_threshold": 4096
+    },
+    "metadata_only": false,
+    "mock_backend": false,
+    "poisoned": 0,
+    "publish_profile": {
+      "backend": "kernel",
+      "command": 2,
+      "configure_us": 91,
+      "finish_us": 272,
+      "select_us": 25579,
+      "upload_ranges": 0,
+      "upload_us": 48067,
+      "uploaded_words": 0,
+      "user_copy_us": 10154,
+      "validate_us": 32977,
+      "wait_us": 25650
+    },
+    "sensor_available": false,
+    "shadow_copied_words": 0,
+    "signature": 1112748597,
+    "status": 749076483,
+    "uploaded_words": 228
+  },
+  "performance": {
+    "frame_interval_ms": 4221.333860000015,
+    "frame_limit": 2.0,
+    "frame_pacing": "start-to-start",
+    "full_update_count": 1,
+    "last_apps_ms": 556.2798800000337,
+    "last_compose_ms": 1349.9244399999952,
+    "last_upload_ms": 0.0,
+    "no_op_update_count": 0,
+    "patch_update_count": 40,
+    "render_count": 40,
+    "rendered_generation": 55,
+    "update_words": 4480,
+    "uptime_seconds": 134.69082265999998
+  },
+  "pointer": {
+    "azimuth": 0.0,
+    "buttons": [],
+    "cancel_serial": 0,
+    "captured_window": null,
+    "dragging": false,
+    "elevation": 0.0,
+    "last_left_press": null,
+    "last_left_release": null,
+    "left_press_serial": 0,
+    "left_release_serial": 0,
+    "scroll_delta": 0.0,
+    "scroll_serial": 0,
+    "visible": false,
+    "window_id": 2,
+    "zone": "content"
+  },
+  "profile": {
+    "enabled": false,
+    "nested": true,
+    "units": "microseconds"
+  },
+  "projection": {
+    "cpu_output_shadow_words": 4480,
+    "cpu_result_download_words": 0,
+    "cpu_scene_words": 0,
+    "device_ready_frames": 1,
+    "dirty_tiles": 28,
+    "fallback_frames": 0,
+    "geometry_tiles_evaluated_total": 0,
+    "hardware_frames": 40,
+    "jobs_per_core": [
+      16,
+      16
+    ],
+    "lazy_copied_tiles_total": 84,
+    "mask_samples_evaluated_total": 0,
+    "masked_tiles_total": 559,
+    "mode": "ddr-resident-dirty-tiles",
+    "packed_mask_tiles_total": 559,
+    "plan_cache": {
+      "builtin_loads": 5,
+      "hits": 0,
+      "loads": 5,
+      "misses": 0,
+      "payload_scan_bytes": 0,
+      "rejected": 0,
+      "revision": "c830e2bae43593f8c188620447b4ce808ce4894a826a073b44f12b949ad54b7e"
+    },
+    "precomputed_layers_total": 5,
+    "redrawn_tiles": 28,
+    "reused_tiles_total": 0,
+    "solid_tiles_total": 0,
+    "texture_pool": {
+      "capacity_bytes": 4194304,
+      "evictions": 0,
+      "full_uploads": 5,
+      "partial_uploads": 38,
+      "resident_bytes": 1430400,
+      "resident_windows": 5,
+      "reuses": 38,
+      "staged_copy_bytes": 0,
+      "upload_bytes": 2905600,
+      "upload_calls": 82
+    },
+    "texture_reuses_total": 38,
+    "texture_uploads_total": 43,
+    "tile_fills_total": 395,
+    "total_hw_jobs": 1408,
+    "update_kind": "tiles"
+  },
+  "render_error": null,
+  "runtime": "C++17",
+  "scene_owner": null,
+  "service": {
+    "phase": "command",
+    "queued_requests": 1,
+    "snapshot_age_seconds": 184.80302997999996,
+    "state_is_snapshot": true
+  },
+  "view": {
+    "pitch": 0.0,
+    "roll": 0.0,
+    "yaw": 0.0
+  },
+  "windows": [
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": true,
+      "height_deg": 26.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          14.0
+        ]
+      ],
+      "surface_height": 300,
+      "surface_width": 400,
+      "title": "Telemetry",
+      "width_deg": 36.0,
+      "window_id": 2,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 0
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 30.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "boayo-desktop",
+      "roll": 0.0,
+      "shape": [
+        [
+          51.2,
+          36.0,
+          537.6,
+          252.0,
+          18.0
+        ]
+      ],
+      "surface_height": 360,
+      "surface_width": 640,
+      "title": "BoAYO Launcher",
+      "width_deg": 42.0,
+      "window_id": 1,
+      "workspace": {},
+      "z": 1
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -16.47105751657935,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: Telemetry",
+      "width_deg": 2.88,
+      "window_id": 3,
+      "workspace": {
+        "control": "move",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 2
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": -10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 4,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 3
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": 10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": -3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 5,
+      "workspace": {
+        "control": "close",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 4
+    }
+  ]
+}
+cat: can't open '/tmp/boayo-native.log': No such file or directory
+INCR11_3d7681d5_RC:1
+oryukdo# cat /tmp/boayo-wm.log; echo INCR11_148bf573_RC:$?
+BOAYO_NATIVE_SERVICE /tmp/bosio-wm.sock initializing; query boayo-status
+BOAYO_NATIVE_INIT backend=BOSIO_ABI3
+BOAYO_BLANK_METADATA_READY words=4480 tile_composition=0 projection_jobs=0
+BOAYO_NATIVE_READY blank_committed_launcher_pending
+BOAYO_FIRST_FRAME_COMPOSE_BEGIN
+BOAYO_FIRST_FRAME_PRESENT_DONE
+BOAYO_NATIVE_SERVICE /tmp/bosio-wm.sock initializing; query boayo-status
+BOAYO_NATIVE_INIT backend=BOSIO_ABI3
+BOAYO_BLANK_METADATA_READY words=4480 tile_composition=0 projection_jobs=0
+BOAYO_NATIVE_READY blank_committed_launcher_pending
+BOAYO_FIRST_FRAME_COMPOSE_BEGIN
+BOAYO_FIRST_FRAME_PRESENT_DONE
+BOAYO_NATIVE_SERVICE /tmp/bosio-wm.sock initializing; query boayo-status
+BOAYO_NATIVE_INIT backend=BOSIO_ABI3
+BOAYO_BLANK_METADATA_READY words=4480 tile_composition=0 projection_jobs=0
+BOAYO_NATIVE_READY blank_committed_launcher_pending
+BOAYO_FIRST_FRAME_COMPOSE_BEGIN
+BOAYO_FIRST_FRAME_PRESENT_DONE
+INCR11_148bf573_RC:0
+oryukdo# ps; cat /tmp/boayo-wm.pid; echo INCR11_b5a959a5_RC:$?
+    1 root       192 S    /init.console
+    2 root         0 SW   [kthreadd]
+    3 root         0 SW   [pool_workqueue_]
+    4 root         0 IW<  [kworker/R-slub_]
+    5 root         0 IW   [kworker/0:0-eve]
+    6 root         0 IW<  [kworker/0:0H]
+    7 root         0 IW   [kworker/u4:0-ev]
+    8 root         0 IW<  [kworker/R-mm_pe]
+    9 root         0 SW   [ksoftirqd/0]
+   10 root         0 SW   [kdevtmpfs]
+   11 root         0 SW   [oom_reaper]
+   12 root         0 IW<  [kworker/R-write]
+   13 root         0 IW<  [kworker/R-kbloc]
+   14 root         0 SW   [kswapd0]
+   15 root         0 IW   [kworker/u4:1-ev]
+   17 root         0 SW   [khvcd]
+   18 root         0 IW   [kworker/u4:2-ev]
+   19 root         0 IW   [kworker/0:2-eve]
+   21 root         0 IW<  [kworker/R-mmc_c]
+   22 root         0 IW<  [kworker/0:1H-kb]
+   26 root         0 SW   [jbd2/mmcblk0p2-]
+   27 root         0 IW<  [kworker/R-ext4-]
+   29 root       496 S    sh -i
+   62 root     10236 R    /usr/bin/boayo-native start
+   75 root       508 R    {ps} sh -i
+cat: can't open '/tmp/boayo-wm.pid': No such file or directory
+INCR11_b5a959a5_RC:1
+oryukdo# for t in /proc/62/task/*; do echo $t; cat $t/stat; cat $t/wchan; done; 
+cat /proc/62/io; echo INCR11_11d82502_RC:$?
+/proc/62/task/62
+62 (boayo-native) S 1 62 62 0 -1 4194368 65 0 0 0 1961 5381 0 0 20 0 2 0 34768 10481664 1577 4294967295 65536 2141613 2639527136 0 0 0 0 4096 16386 1 0 0 17 0 0 0 0 0 0 2142272 2156360 16302080 2639527777 2639527805 2639527805 2639527910 0
+cat: can't open '/proc/62/task/62/wchan': No such file or directory
+/proc/62/task/63
+63 (boayo-native) R 1 62 62 0 -1 4194624 1268 0 0 0 25078 2471 0 0 20 0 2 0 34792 10481664 1577 4294967295 65536 2141613 2639527136 0 0 0 0 4096 16386 0 0 0 -1 0 0 0 0 0 0 2142272 2156360 16302080 2639527777 2639527805 2639527805 2639527910 0
+cat: can't open '/proc/62/task/63/wchan': No such file or directory
+cat: can't open '/proc/62/io': No such file or directory
+INCR11_11d82502_RC:1
+oryukdo# : > /tmp/v11-sample; echo INCR11_b06650e0_RC:$?
+INCR11_b06650e0_RC:0
+oryukdo# printf '\177\105\114\106\001\001\001\000\000\000\000\000\000\000\000\00
+0\002\000\363\000\001\000\000\000\174\001\001\000\064\000\000\000\234\005\000\00
+0\000\000\000\000\064\000\040\000\003\000\050\000' >> /tmp/v11-sample; echo INCR
+11_eebdf651_RC:$?
+INCR11_eebdf651_RC:0
+oryukdo# printf '\007\000\006\000\003\000\000\160\007\005\000\000\000\000\000\00
+0\000\000\000\000\127\000\000\000\000\000\000\000\004\000\000\000\001\000\000\00
+0\001\000\000\000\000\000\000\000\000\000\001\000' >> /tmp/v11-sample; echo INCR
+11_f2cae444_RC:$?
+INCR11_f2cae444_RC:0
+oryukdo# printf '\000\000\001\000\344\004\000\000\344\004\000\000\005\000\000\00
+0\000\020\000\000\121\345\164\144\000\000\000\000\000\000\000\000\000\000\000\00
+0\000\000\000\000\000\000\000\000\006\000\000\000' >> /tmp/v11-sample; echo INCR
+11_c22712c5_RC:$?
+INCR11_c22712c5_RC:0
+oryukdo# printf '\020\000\000\000\223\010\005\000\023\205\005\000\223\005\006\00
+0\023\206\006\000\223\006\007\000\023\007\000\000\163\000\000\000\147\200\000\00
+0\023\006\005\000\223\206\005\000\023\007\000\000' >> /tmp/v11-sample; echo INCR
+11_30ebc0f9_RC:$?
+INCR11_30ebc0f9_RC:0
+oryukdo# printf '\223\005\020\000\023\005\000\004\157\360\337\374\023\001\001\37
+6\223\006\101\000\067\006\001\000\223\005\005\000\043\056\021\000\023\007\300\00
+1\023\205\006\000\023\006\006\072\023\010\300\377' >> /tmp/v11-sample; echo INCR
+11_8b49e460_RC:$?
+INCR11_8b49e460_RC:0
+oryukdo# printf '\263\327\345\000\223\367\367\000\263\007\366\000\203\307\007\00
+0\023\007\307\377\223\206\026\000\243\217\366\376\343\022\007\377\223\007\000\00
+2\223\005\220\000\043\006\361\000\357\360\237\371' >> /tmp/v11-sample; echo INCR
+11_bb504ac4_RC:$?
+INCR11_bb504ac4_RC:0
+oryukdo# printf '\203\040\301\001\023\001\001\002\147\200\000\000\067\347\365\00
+5\023\001\001\376\223\007\000\000\023\007\007\020\043\040\361\000\043\044\341\00
+0\023\010\000\000\223\007\000\000\223\006\001\000' >> /tmp/v11-sample; echo INCR
+11_4f53ceac_RC:$?
+INCR11_4f53ceac_RC:0
+oryukdo# printf '\023\007\000\000\023\006\000\000\223\005\000\000\023\005\160\03
+1\043\056\021\000\043\042\001\001\043\046\361\000\357\360\237\362\203\040\301\00
+1\023\001\001\002\147\200\000\000\023\001\001\352' >> /tmp/v11-sample; echo INCR
+11_eeaacee8_RC:$?
+INCR11_eeaacee8_RC:0
+oryukdo# printf '\043\046\061\025\267\011\000\100\043\052\221\024\043\050\041\02
+5\043\042\121\025\043\040\141\025\043\056\161\023\043\054\201\023\043\056\021\02
+4\043\054\201\024\043\044\101\025\043\052\221\023' >> /tmp/v11-sample; echo INCR
+11_fb32f565_RC:$?
+INCR11_fb32f565_RC:0
+oryukdo# printf '\223\004\200\000\023\011\001\003\223\211\071\000\223\012\001\01
+3\067\013\001\000\267\013\001\000\067\014\001\000\023\007\000\000\223\006\000\00
+0\023\006\360\003\223\005\000\001\023\005\120\007' >> /tmp/v11-sample; echo INCR
+11_4255b4b1_RC:$?
+INCR11_4255b4b1_RC:0
+oryukdo# printf '\357\360\137\353\023\004\005\000\143\134\005\002\067\005\001\00
+0\023\005\105\073\223\005\320\000\357\360\337\353\023\005\004\000\357\360\337\35
+4\023\007\000\000\223\006\000\000\023\006\000\000' >> /tmp/v11-sample; echo INCR
+11_15397527_RC:$?
+INCR11_15397527_RC:0
+oryukdo# printf '\223\005\000\000\023\005\320\005\357\360\337\347\157\000\000\00
+0\023\006\000\010\223\005\000\000\023\005\011\000\357\000\300\022\023\004\340\00
+1\023\207\011\000\223\006\011\000\023\006\360\003' >> /tmp/v11-sample; echo INCR
+11_2ebaaa61_RC:$?
+INCR11_2ebaaa61_RC:0
+oryukdo# printf '\223\005\020\000\023\005\360\005\357\360\337\344\003\047\301\00
+3\223\007\360\003\143\016\367\002\023\004\364\377\357\360\037\355\343\032\004\37
+4\023\007\000\000\223\006\000\000\023\006\360\003' >> /tmp/v11-sample; echo INCR
+11_1142098e_RC:$?
+INCR11_1142098e_RC:0
+oryukdo# printf '\223\005\020\001\023\005\120\007\357\360\337\341\067\005\001\00
+0\223\005\260\000\023\005\305\076\357\360\337\342\157\360\237\367\023\006\000\01
+0\223\005\000\000\023\205\012\000\357\000\300\013' >> /tmp/v11-sample; echo INCR
+11_640d17c6_RC:$?
+INCR11_640d17c6_RC:0
+oryukdo# printf '\267\105\000\000\223\007\000\010\023\007\301\000\223\006\020\00
+0\023\006\360\003\223\205\105\040\023\005\120\007\043\050\361\000\043\046\121\00
+1\357\360\037\335\023\007\000\000\223\006\000\000' >> /tmp/v11-sample; echo INCR
+11_eb48b2a8_RC:$?
+INCR11_eb48b2a8_RC:0
+oryukdo# printf '\023\006\360\003\223\005\020\001\023\012\005\000\023\005\120\00
+7\357\360\137\333\223\005\360\001\023\004\005\000\023\005\113\074\357\360\137\33
+4\023\006\300\001\223\205\213\077\023\005\101\001' >> /tmp/v11-sample; echo INCR
+11_0211cb64_RC:$?
+INCR11_0211cb64_RC:0
+oryukdo# printf '\357\000\200\007\223\014\101\001\203\247\014\000\223\214\114\00
+0\223\227\047\000\223\207\007\023\263\207\047\000\003\245\007\370\357\360\337\33
+2\343\022\231\377\023\005\012\000\357\360\037\332' >> /tmp/v11-sample; echo INCR
+11_26f8e015_RC:$?
+INCR11_26f8e015_RC:0
+oryukdo# printf '\023\005\004\000\357\360\237\331\223\005\020\000\023\005\214\07
+6\357\360\137\327\343\100\004\354\223\204\364\377\357\360\037\336\343\236\004\34
+6\157\360\037\353\063\006\305\000\223\007\005\000' >> /tmp/v11-sample; echo INCR
+11_e4b3a408_RC:$?
+INCR11_e4b3a408_RC:0
+oryukdo# printf '\223\365\365\017\143\224\307\000\147\200\000\000\043\200\267\00
+0\223\207\027\000\157\360\037\377\223\007\000\000\263\006\365\000\063\207\365\00
+0\143\024\366\000\147\200\000\000\003\107\007\000' >> /tmp/v11-sample; echo INCR
+11_94087fbb_RC:$?
+INCR11_94087fbb_RC:0
+oryukdo# printf '\223\207\027\000\023\167\367\017\043\200\346\000\157\360\037\37
+6\060\061\062\063\064\065\066\067\070\071\141\142\143\144\145\146\000\000\000\00
+0\141\164\164\141\143\150\040\145\162\162\157\162' >> /tmp/v11-sample; echo INCR
+11_d5304310_RC:$?
+INCR11_d5304310_RC:0
+oryukdo# printf '\040\000\000\000\120\103\040\122\101\040\123\120\040\101\060\04
+0\101\061\040\123\060\040\123\061\040\107\105\124\040\104\105\124\101\103\110\04
+0\000\000\000\000\012\000\000\000\167\141\151\164' >> /tmp/v11-sample; echo INCR
+11_fdc82520_RC:$?
+INCR11_fdc82520_RC:0
+oryukdo# printf '\040\145\162\162\157\162\012\000\000\000\000\000\001\000\000\00
+0\002\000\000\000\012\000\000\000\013\000\000\000\010\000\000\000\011\000\000\00
+0\020\000\000\000\000\000\000\000\003\172\122\000' >> /tmp/v11-sample; echo INCR
+11_5f55a097_RC:$?
+INCR11_5f55a097_RC:0
+oryukdo# printf '\001\174\001\001\033\014\002\000\020\000\000\000\030\000\000\00
+0\144\374\377\377\040\000\000\000\000\000\000\000\020\000\000\000\054\000\000\00
+0\160\374\377\377\030\000\000\000\000\000\000\000' >> /tmp/v11-sample; echo INCR
+11_6b94d02d_RC:$?
+INCR11_6b94d02d_RC:0
+oryukdo# printf '\034\000\000\000\100\000\000\000\164\374\377\377\140\000\000\00
+0\000\104\016\040\120\201\001\002\104\301\104\016\000\000\000\000\030\000\000\00
+0\140\000\000\000\264\374\377\377\120\000\000\000' >> /tmp/v11-sample; echo INCR
+11_78246967_RC:$?
+INCR11_78246967_RC:0
+oryukdo# printf '\000\110\016\040\160\201\001\120\301\104\016\000\054\000\000\00
+0\174\000\000\000\350\374\377\377\334\001\000\000\000\104\016\340\002\104\223\00
+5\154\211\003\222\004\225\007\226\010\227\011\230' >> /tmp/v11-sample; echo INCR
+11_75e503f0_RC:$?
+INCR11_75e503f0_RC:0
+oryukdo# printf '\012\201\001\210\002\224\006\231\013\000\000\000\020\000\000\00
+0\254\000\000\000\224\376\377\377\040\000\000\000\000\000\000\000\020\000\000\00
+0\300\000\000\000\240\376\377\377\050\000\000\000' >> /tmp/v11-sample; echo INCR
+11_f01c7e05_RC:$?
+INCR11_f01c7e05_RC:0
+oryukdo# printf '\000\000\000\000\107\103\103\072\040\050\102\165\151\154\144\16
+2\157\157\164\040\062\060\062\065\056\060\062\056\061\071\051\040\061\063\056\06
+4\056\060\000\101\126\000\000\000\162\151\163\143' >> /tmp/v11-sample; echo INCR
+11_d535b65e_RC:$?
+INCR11_d535b65e_RC:0
+oryukdo# printf '\166\000\001\114\000\000\000\004\020\005\162\166\063\062\151\06
+2\160\061\137\155\062\160\060\137\141\062\160\061\137\172\151\143\163\162\062\16
+0\060\137\172\151\146\145\156\143\145\151\062\160' >> /tmp/v11-sample; echo INCR
+11_f44c4b58_RC:$?
+INCR11_f44c4b58_RC:0
+oryukdo# printf '\060\137\172\155\155\165\154\061\160\060\137\172\141\141\155\15
+7\061\160\060\137\172\141\154\162\163\143\061\160\060\000\000\056\163\150\163\16
+4\162\164\141\142\000\056\164\145\170\164\000\056' >> /tmp/v11-sample; echo INCR
+11_44e3ca0e_RC:$?
+INCR11_44e3ca0e_RC:0
+oryukdo# printf '\162\157\144\141\164\141\000\056\145\150\137\146\162\141\155\14
+5\000\056\143\157\155\155\145\156\164\000\056\162\151\163\143\166\056\141\164\16
+4\162\151\142\165\164\145\163\000\000\000\000\000' >> /tmp/v11-sample; echo INCR
+11_a5547a6c_RC:$?
+INCR11_a5547a6c_RC:0
+oryukdo# printf '\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\00
+0\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\00
+0\013\000\000\000\001\000\000\000\006\000\000\000' >> /tmp/v11-sample; echo INCR
+11_e56b011c_RC:$?
+INCR11_e56b011c_RC:0
+oryukdo# printf '\224\000\001\000\224\000\000\000\014\003\000\000\000\000\000\00
+0\000\000\000\000\004\000\000\000\000\000\000\000\021\000\000\000\001\000\000\00
+0\002\000\000\000\240\003\001\000\240\003\000\000' >> /tmp/v11-sample; echo INCR
+11_4665d243_RC:$?
+INCR11_4665d243_RC:0
+oryukdo# printf '\164\000\000\000\000\000\000\000\000\000\000\000\004\000\000\00
+0\000\000\000\000\031\000\000\000\001\000\000\000\002\000\000\000\024\004\001\00
+0\024\004\000\000\320\000\000\000\000\000\000\000' >> /tmp/v11-sample; echo INCR
+11_2748edbb_RC:$?
+INCR11_2748edbb_RC:0
+oryukdo# printf '\000\000\000\000\004\000\000\000\000\000\000\000\043\000\000\00
+0\001\000\000\000\060\000\000\000\000\000\000\000\344\004\000\000\043\000\000\00
+0\000\000\000\000\000\000\000\000\001\000\000\000' >> /tmp/v11-sample; echo INCR
+11_ad32b4b1_RC:$?
+INCR11_ad32b4b1_RC:0
+oryukdo# printf '\001\000\000\000\054\000\000\000\003\000\000\160\000\000\000\00
+0\000\000\000\000\007\005\000\000\127\000\000\000\000\000\000\000\000\000\000\00
+0\001\000\000\000\000\000\000\000\001\000\000\000' >> /tmp/v11-sample; echo INCR
+11_6d023fb5_RC:$?
+INCR11_6d023fb5_RC:0
+oryukdo# printf '\003\000\000\000\000\000\000\000\000\000\000\000\136\005\000\00
+0\076\000\000\000\000\000\000\000\000\000\000\000\001\000\000\000\000\000\000\00
+0' >> /tmp/v11-sample; echo INCR11_62272ea3_RC:$?
+INCR11_62272ea3_RC:0
+oryukdo# chmod +x /tmp/v11-sample; /tmp/v11-sample; echo INCR11_3075f445_RC:$?
+sh: chmod: not found
+sh: /tmp/v11-sample: Permission denied
+INCR11_3075f445_RC:126
+oryukdo# cp /bin/ddrcheck /tmp/v11-exec && cat /tmp/v11-sample > /tmp/v11-exec &
+& /tmp/v11-exec; echo INCR11_88877593_RC:$?
+PC RA SP A0 A1 S0 S1 GET DETACH001528cc 001607e8 95727090 000000ff 00000000 00000096 00000000 00000000 00000000 
+PC RA SP A0 A1 S0 S1 GET DETACH00151e40 001607f4 957270a0 00000001 00000000 437a0000 00000000 00000000 00000000 
+PC RA SP A0 A1 S0 S1 GET DETACH0015262c 0015250c 95727090 00000015 00000000 00000081 00000000 00000000 00000000 
+PC RA SP A0 A1 S0 S1 GET DETACH00151558 00070b8c 957270b0 00000000 00000000 00000000 94ec6df2 00000000 00000000 
+PC RA SP A0 A1 S0 S1 GET DETACH00152a4c 00152a10 957270b0 00000015 001f4000 00200000 00000000 00000000 00000000 
+PC RA SP A0 A1 S0 S1 GET DETACH0015250c 0015250c 95727090 00000015 00000000 00000096 00000000 00000000 00000000 
+PC RA SP A0 A1 S0 S1 GET DETACH00160668 00160668 957270b0 00000000 00000000 43790000 00000000 00000000 00000000 
+PC RA SP A0 A1 S0 S1 GET DETACH00070b24 00070b94 957270c0 00000008 00000095 00000000 94ec7195 00000000 00000000 
+INCR11_88877593_RC:0
+oryukdo# boayo-stop; sync; echo INCR11_59be0327_RC:$?
+INCR11_59be0327_RC:0
+oryukdo# test ! -S /tmp/bosio-wm.sock; echo STOP_SOCKET_RC:$?; ps; echo INCR11_8
+7e502e4_RC:$?
+STOP_SOCKET_RC:1
+    1 root       192 S    /init.console
+    2 root         0 SW   [kthreadd]
+    3 root         0 SW   [pool_workqueue_]
+    4 root         0 IW<  [kworker/R-slub_]
+    5 root         0 IW   [kworker/0:0-eve]
+    6 root         0 IW<  [kworker/0:0H]
+    7 root         0 IW   [kworker/u4:0-ev]
+    8 root         0 IW<  [kworker/R-mm_pe]
+    9 root         0 SW   [ksoftirqd/0]
+   10 root         0 SW   [kdevtmpfs]
+   11 root         0 SW   [oom_reaper]
+   12 root         0 IW<  [kworker/R-write]
+   13 root         0 IW<  [kworker/R-kbloc]
+   14 root         0 SW   [kswapd0]
+   15 root         0 IW   [kworker/u4:1-ev]
+   17 root         0 SW   [khvcd]
+   18 root         0 IW   [kworker/u4:2-ev]
+   19 root         0 IW   [kworker/0:2-eve]
+   21 root         0 IW<  [kworker/R-mmc_c]
+   22 root         0 IW<  [kworker/0:1H-kb]
+   26 root         0 SW   [jbd2/mmcblk0p2-]
+   27 root         0 IW<  [kworker/R-ext4-]
+   29 root       504 S    sh -i
+   62 root     11596 S    /usr/bin/boayo-native start
+   88 root       512 R    {ps} sh -i
+INCR11_87e502e4_RC:0
+oryukdo# kill -9 62; while test -e /proc/62/exe; do sleep 1; done; rm /tmp/bosio
+-wm.sock; sync; echo INCR11_e3632362_RC:$?
+INCR11_e3632362_RC:0
+oryukdo# cp /bin/ddrcheck /tmp/view-rx && : > /tmp/view-rx; echo INCR11_bc9e9182
+_RC:$?
+INCR11_bc9e9182_RC:0
+oryukdo# printf '\177\105\114\106\001\001\001\000\000\000\000\000\000\000\000\00
+0\002\000\363\000\001\000\000\000\224\000\001\000\064\000\000\000\224\006\000\00
+0\000\000\000\000\064\000\040\000\003\000\050\000' >> /tmp/view-rx; echo INCR11_
+2700a18b_RC:$?
+INCR11_2700a18b_RC:0
+oryukdo# printf '\007\000\006\000\003\000\000\160\377\005\000\000\000\000\000\00
+0\000\000\000\000\127\000\000\000\000\000\000\000\004\000\000\000\001\000\000\00
+0\001\000\000\000\000\000\000\000\000\000\001\000' >> /tmp/view-rx; echo INCR11_
+0cff6e7f_RC:$?
+INCR11_0cff6e7f_RC:0
+oryukdo# printf '\000\000\001\000\334\005\000\000\334\005\000\000\005\000\000\00
+0\000\020\000\000\121\345\164\144\000\000\000\000\000\000\000\000\000\000\000\00
+0\000\000\000\000\000\000\000\000\006\000\000\000' >> /tmp/view-rx; echo INCR11_
+2dacd415_RC:$?
+INCR11_2dacd415_RC:0
+oryukdo# printf '\020\000\000\000\023\005\001\000\227\000\000\000\347\200\000\03
+2\223\010\320\005\163\000\000\000\223\007\005\000\023\205\007\000\223\006\000\00
+0\223\010\000\004\163\000\000\000\143\134\240\000' >> /tmp/view-rx; echo INCR11_
+cfdacfac_RC:$?
+INCR11_cfdacfac_RC:0
+oryukdo# printf '\063\006\246\100\263\205\245\000\343\022\006\376\023\005\000\00
+0\147\200\000\000\023\005\360\377\147\200\000\000\267\006\001\000\023\007\300\00
+1\223\206\206\114\023\006\300\377\263\327\345\000' >> /tmp/view-rx; echo INCR11_
+15cb34ba_RC:$?
+INCR11_15cb34ba_RC:0
+oryukdo# printf '\223\367\367\000\263\207\366\000\203\307\007\000\023\007\307\37
+7\023\005\025\000\243\017\365\376\343\022\307\376\147\200\000\000\023\001\001\20
+0\023\210\005\000\023\226\025\000\223\005\001\000' >> /tmp/view-rx; echo INCR11_
+c7ff7729_RC:$?
+INCR11_c7ff7729_RC:0
+oryukdo# printf '\023\003\005\000\223\007\000\000\023\207\005\000\023\016\360\00
+0\023\005\000\000\223\006\000\000\223\010\360\003\163\000\000\000\143\110\005\00
+0\143\032\005\000\223\207\027\000\343\222\307\377' >> /tmp/view-rx; echo INCR11_
+da271bcd_RC:$?
+INCR11_da271bcd_RC:0
+oryukdo# printf '\023\005\360\377\157\000\300\010\063\006\246\100\263\205\245\00
+0\143\006\006\000\223\007\000\000\157\360\237\374\023\005\220\000\223\010\120\00
+0\023\016\360\377\203\106\007\000\223\207\006\375' >> /tmp/view-rx; echo INCR11_
+bed1fdf3_RC:$?
+INCR11_bed1fdf3_RC:0
+oryukdo# printf '\223\365\367\017\143\174\265\000\223\205\366\371\223\365\365\01
+7\223\007\360\377\143\344\270\000\223\207\226\372\203\105\027\000\223\206\005\37
+5\223\376\366\017\143\172\325\001\223\206\365\371' >> /tmp/view-rx; echo INCR11_
+85a5cd31_RC:$?
+INCR11_85a5cd31_RC:0
+oryukdo# printf '\223\366\366\017\343\356\330\370\223\206\225\372\343\212\307\37
+1\223\227\107\000\263\005\303\000\263\347\327\000\043\200\365\000\023\006\026\00
+0\023\007\047\000\343\020\310\372\023\005\000\000' >> /tmp/view-rx; echo INCR11_
+9ad08e2b_RC:$?
+INCR11_9ad08e2b_RC:0
+oryukdo# printf '\267\022\000\000\223\202\002\200\063\001\121\000\147\200\000\00
+0\223\007\000\000\263\006\365\000\063\207\365\000\143\024\366\000\147\200\000\00
+0\003\107\007\000\223\207\027\000\023\167\367\017' >> /tmp/view-rx; echo INCR11_
+075e52d8_RC:$?
+INCR11_075e52d8_RC:0
+oryukdo# printf '\043\200\346\000\157\360\037\376\063\006\305\000\223\007\005\00
+0\223\365\365\017\143\224\307\000\147\200\000\000\043\200\267\000\223\207\027\00
+0\157\360\037\377\003\047\005\000\023\001\001\346' >> /tmp/view-rx; echo INCR11_
+045961d6_RC:$?
+INCR11_045961d6_RC:0
+oryukdo# printf '\043\054\201\030\043\056\021\030\043\052\221\030\043\050\041\03
+1\043\046\061\031\043\044\101\031\043\042\121\031\043\040\141\031\223\007\040\00
+0\023\004\040\000\143\020\367\016\267\125\000\000' >> /tmp/view-rx; echo INCR11_
+2437b0ff_RC:$?
+INCR11_2437b0ff_RC:0
+oryukdo# printf '\223\004\005\000\223\205\025\100\023\005\000\000\023\006\201\00
+3\223\006\000\000\223\010\320\001\163\000\000\000\023\004\060\000\143\114\005\01
+2\223\005\201\003\023\006\100\002\023\005\301\005' >> /tmp/view-rx; echo INCR11_
+3b6ca671_RC:$?
+INCR11_3b6ca671_RC:0
+oryukdo# printf '\227\000\000\000\347\200\000\365\223\007\100\001\267\125\000\00
+0\043\056\001\004\043\040\001\006\043\044\001\006\043\031\361\006\023\005\000\00
+0\223\205\045\100\023\006\301\005\223\006\000\000' >> /tmp/view-rx; echo INCR11_
+70097534_RC:$?
+INCR11_70097534_RC:0
+oryukdo# printf '\223\010\320\001\163\000\000\000\023\004\100\000\143\106\005\00
+6\267\005\001\000\223\205\105\117\023\006\220\000\023\005\020\000\227\000\000\00
+0\347\200\200\333\223\005\000\001\023\005\301\000' >> /tmp/view-rx; echo INCR11_
+3ed39fa2_RC:$?
+INCR11_3ed39fa2_RC:0
+oryukdo# printf '\227\000\000\000\347\200\000\341\143\006\005\006\023\004\020\00
+0\267\125\000\000\023\005\000\000\223\205\045\100\023\006\201\003\223\006\000\00
+0\223\010\320\001\163\000\000\000\143\010\004\030' >> /tmp/view-rx; echo INCR11_
+847d9451_RC:$?
+INCR11_847d9451_RC:0
+oryukdo# printf '\267\005\001\000\223\205\305\115\023\006\200\000\023\005\020\00
+0\227\000\000\000\347\200\200\326\203\040\301\031\023\005\004\000\003\044\201\03
+1\203\044\101\031\003\051\001\031\203\051\301\030' >> /tmp/view-rx; echo INCR11_
+a2601b73_RC:$?
+INCR11_a2601b73_RC:0
+oryukdo# printf '\003\052\201\030\203\052\101\030\003\053\001\030\023\001\001\03
+2\147\200\000\000\003\047\301\000\267\127\130\061\223\207\047\044\343\026\367\37
+0\203\047\001\001\067\007\200\000\223\206\367\377' >> /tmp/view-rx; echo INCR11_
+82f95333_RC:$?
+INCR11_82f95333_RC:0
+oryukdo# printf '\343\376\346\366\003\047\201\001\223\307\367\377\343\030\367\36
+6\203\245\204\000\023\005\300\371\023\006\020\044\223\006\320\036\223\010\200\00
+3\163\000\000\000\023\011\005\000\343\110\005\364' >> /tmp/view-rx; echo INCR11_
+ea979652_RC:$?
+INCR11_ea979652_RC:0
+oryukdo# printf '\267\244\034\201\067\012\000\001\223\204\124\334\223\011\000\00
+0\223\012\000\020\023\012\072\031\067\013\001\000\003\044\001\001\143\352\211\00
+0\003\044\101\001\063\004\224\100\063\064\200\000' >> /tmp/view-rx; echo INCR11_
+c384799e_RC:$?
+INCR11_c384799e_RC:0
+oryukdo# printf '\157\000\000\013\063\004\064\101\143\364\212\000\023\004\000\02
+0\223\005\004\000\023\005\001\010\227\000\000\000\347\200\200\320\143\026\005\01
+0\223\007\000\000\023\007\001\010\063\007\367\000' >> /tmp/view-rx; echo INCR11_
+81227b74_RC:$?
+INCR11_81227b74_RC:0
+oryukdo# printf '\003\107\007\000\223\207\027\000\063\107\227\000\263\004\107\00
+3\343\024\364\376\023\006\004\000\223\005\001\010\023\005\011\000\227\000\000\00
+0\347\200\200\306\143\032\005\004\023\006\240\001' >> /tmp/view-rx; echo INCR11_
+e0a8cd10_RC:$?
+INCR11_e0a8cd10_RC:0
+oryukdo# printf '\223\005\013\120\023\005\301\001\227\000\000\000\347\200\200\33
+1\263\211\211\000\223\205\011\000\023\005\061\002\227\000\000\000\347\200\000\30
+7\223\205\004\000\023\005\301\002\227\000\000\000' >> /tmp/view-rx; echo INCR11_
+4966a364_RC:$?
+INCR11_4966a364_RC:0
+oryukdo# printf '\347\200\000\306\023\006\220\001\223\005\301\001\023\005\020\00
+0\227\000\000\000\347\200\200\301\343\002\005\364\023\004\020\000\023\005\011\00
+0\223\005\000\000\023\006\000\000\223\006\000\000' >> /tmp/view-rx; echo INCR11_
+df9de766_RC:$?
+INCR11_df9de766_RC:0
+oryukdo# printf '\223\010\220\003\163\000\000\000\157\360\237\345\267\005\001\00
+0\223\205\205\116\157\360\137\347\060\061\062\063\064\065\066\067\070\071\141\14
+2\143\144\145\146\000\000\000\000\122\130\137\106' >> /tmp/view-rx; echo INCR11_
+f257df9b_RC:$?
+INCR11_f257df9b_RC:0
+oryukdo# printf '\101\111\114\012\000\000\000\000\122\130\137\104\117\116\105\01
+2\000\000\000\000\122\130\137\122\105\101\104\131\012\000\000\000\122\130\137\10
+1\103\113\040\060\060\060\060\060\060\060\060\040' >> /tmp/view-rx; echo INCR11_
+ebd040fc_RC:$?
+INCR11_ebd040fc_RC:0
+oryukdo# printf '\060\060\060\060\060\060\060\060\012\000\000\000\020\000\000\00
+0\000\000\000\000\003\172\122\000\001\174\001\001\033\014\002\000\020\000\000\00
+0\030\000\000\000\160\373\377\377\064\000\000\000' >> /tmp/view-rx; echo INCR11_
+6a4cb62f_RC:$?
+INCR11_6a4cb62f_RC:0
+oryukdo# printf '\000\000\000\000\020\000\000\000\054\000\000\000\220\373\377\37
+7\064\000\000\000\000\000\000\000\030\000\000\000\100\000\000\000\260\373\377\37
+7\340\000\000\000\000\104\016\200\020\002\330\016' >> /tmp/view-rx; echo INCR11_
+adc79228_RC:$?
+INCR11_adc79228_RC:0
+oryukdo# printf '\000\000\000\000\020\000\000\000\134\000\000\000\164\374\377\37
+7\050\000\000\000\000\000\000\000\020\000\000\000\160\000\000\000\210\374\377\37
+7\040\000\000\000\000\000\000\000\074\000\000\000' >> /tmp/view-rx; echo INCR11_
+0dcbdb53_RC:$?
+INCR11_0dcbdb53_RC:0
+oryukdo# printf '\204\000\000\000\224\374\377\377\220\002\000\000\000\110\016\24
+0\003\140\210\002\201\001\211\003\222\004\223\005\224\006\225\007\226\010\002\35
+4\012\301\110\310\104\311\104\322\104\323\104\324' >> /tmp/view-rx; echo INCR11_
+d5cca3de_RC:$?
+INCR11_d5cca3de_RC:0
+oryukdo# printf '\104\325\104\326\104\016\000\104\013\000\000\000\107\103\103\07
+2\040\050\102\165\151\154\144\162\157\157\164\040\062\060\062\065\056\060\062\05
+6\061\071\051\040\061\063\056\064\056\060\000\101' >> /tmp/view-rx; echo INCR11_
+670a9bed_RC:$?
+INCR11_670a9bed_RC:0
+oryukdo# printf '\126\000\000\000\162\151\163\143\166\000\001\114\000\000\000\00
+4\020\005\162\166\063\062\151\062\160\061\137\155\062\160\060\137\141\062\160\06
+1\137\172\151\143\163\162\062\160\060\137\172\151' >> /tmp/view-rx; echo INCR11_
+7fc72045_RC:$?
+INCR11_7fc72045_RC:0
+oryukdo# printf '\146\145\156\143\145\151\062\160\060\137\172\155\155\165\154\06
+1\160\060\137\172\141\141\155\157\061\160\060\137\172\141\154\162\163\143\061\16
+0\060\000\000\056\163\150\163\164\162\164\141\142' >> /tmp/view-rx; echo INCR11_
+0e3ed40e_RC:$?
+INCR11_0e3ed40e_RC:0
+oryukdo# printf '\000\056\164\145\170\164\000\056\162\157\144\141\164\141\000\05
+6\145\150\137\146\162\141\155\145\000\056\143\157\155\155\145\156\164\000\056\16
+2\151\163\143\166\056\141\164\164\162\151\142\165' >> /tmp/view-rx; echo INCR11_
+f59b2dbf_RC:$?
+INCR11_f59b2dbf_RC:0
+oryukdo# printf '\164\145\163\000\000\000\000\000\000\000\000\000\000\000\000\00
+0\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\00
+0\000\000\000\000\000\000\000\000\013\000\000\000' >> /tmp/view-rx; echo INCR11_
+899c1054_RC:$?
+INCR11_899c1054_RC:0
+oryukdo# printf '\001\000\000\000\006\000\000\000\224\000\001\000\224\000\000\00
+0\064\004\000\000\000\000\000\000\000\000\000\000\004\000\000\000\000\000\000\00
+0\021\000\000\000\001\000\000\000\062\000\000\000' >> /tmp/view-rx; echo INCR11_
+8c4865be_RC:$?
+INCR11_8c4865be_RC:0
+oryukdo# printf '\310\004\001\000\310\004\000\000\122\000\000\000\000\000\000\00
+0\000\000\000\000\004\000\000\000\001\000\000\000\031\000\000\000\001\000\000\00
+0\002\000\000\000\034\005\001\000\034\005\000\000' >> /tmp/view-rx; echo INCR11_
+e5ae957d_RC:$?
+INCR11_e5ae957d_RC:0
+oryukdo# printf '\300\000\000\000\000\000\000\000\000\000\000\000\004\000\000\00
+0\000\000\000\000\043\000\000\000\001\000\000\000\060\000\000\000\000\000\000\00
+0\334\005\000\000\043\000\000\000\000\000\000\000' >> /tmp/view-rx; echo INCR11_
+04e0f871_RC:$?
+INCR11_04e0f871_RC:0
+oryukdo# printf '\000\000\000\000\001\000\000\000\001\000\000\000\054\000\000\00
+0\003\000\000\160\000\000\000\000\000\000\000\000\377\005\000\000\127\000\000\00
+0\000\000\000\000\000\000\000\000\001\000\000\000' >> /tmp/view-rx; echo INCR11_
+58ab40ba_RC:$?
+INCR11_58ab40ba_RC:0
+oryukdo# printf '\000\000\000\000\001\000\000\000\003\000\000\000\000\000\000\00
+0\000\000\000\000\126\006\000\000\076\000\000\000\000\000\000\000\000\000\000\00
+0\001\000\000\000\000\000\000\000' >> /tmp/view-rx; echo INCR11_c1031972_RC:$?
+INCR11_c1031972_RC:0
+oryukdo# /tmp/view-rx /tmp/v11-apply; echo RX_EXIT:$?
+RX_READY
+RX_ACK 00000100 1f8d0b02
+RX_ACK 00000200 15d0ae96
+RX_ACK 00000300 0f4eee23
+RX_ACK 00000400 7f9bf71a
+RX_ACK 00000500 307778f2
+RX_ACK 00000600 eaffcb4f
+RX_ACK 00000700 59d48262
+RX_ACK 00000800 1b046406
+RX_ACK 00000900 7647065e
+RX_ACK 00000998 51a2a74d
+RX_DONE
+RX_EXIT:0
+oryukdo# /tmp/view-rx /tmp/v11-fix1.delta; echo RX_EXIT:$?
+RX_READY
+RX_ACK 00000100 b93e5e69
+RX_ACK 00000200 598329cf
+RX_ACK 00000300 09187f3c
+RX_ACK 00000400 f359f23e
+RX_ACK 00000500 6e93455d
+RX_ACK 00000600 3a5f2b5e
+RX_ACK 00000700 33bb0adc
+RX_ACK 00000800 70d363c2
+RX_ACK 00000900 74a44423
+RX_ACK 00000a00 8b156d5f
+RX_ACK 00000b00 29f15de9
+RX_ACK 00000c00 fd73ddcf
+RX_ACK 00000d00 ca7c4d9b
+RX_ACK 00000e00 9030cb61
+RX_ACK 00000f00 7c2af30b
+RX_ACK 00001000 fb9bdb54
+RX_ACK 00001100 06754a3c
+RX_ACK 00001200 aa8f0e3a
+RX_ACK 00001300 3f4076eb
+RX_ACK 00001400 3b31057e
+RX_ACK 00001500 5c2629f0
+RX_ACK 00001600 519288e8
+RX_ACK 00001700 0b4649c5
+RX_ACK 00001800 fa7f86c0
+RX_ACK 00001900 dafe183d
+RX_ACK 00001a00 4c132cca
+RX_ACK 00001b00 8387fa8b
+RX_ACK 00001c00 9b838756
+RX_ACK 00001d00 853137b4
+RX_ACK 00001e00 e567c52d
+RX_ACK 00001f00 7605e084
+RX_ACK 00002000 a20d4f71
+RX_ACK 00002100 6bd449c5
+RX_ACK 00002200 561f28d2
+RX_ACK 00002300 fa30b5be
+RX_ACK 00002400 b75e639b
+RX_ACK 00002500 005df2ac
+RX_ACK 00002600 edca141f
+RX_ACK 00002700 3cbbe3c2
+RX_ACK 00002800 4b4fac17
+RX_ACK 00002900 a2d7f1d7
+RX_ACK 00002a00 b72fdb81
+RX_ACK 00002b00 e02a7889
+RX_ACK 00002c00 02be865a
+RX_ACK 00002d00 4d9b4b4f
+RX_ACK 00002e00 1edbf068
+RX_ACK 00002f00 ad2edbef
+RX_ACK 00003000 2223ed4c
+RX_ACK 00003100 947c49e7
+RX_ACK 00003200 ec63dd55
+RX_ACK 00003300 4b25b416
+RX_ACK 00003400 1d27ff59
+RX_ACK 00003500 b2895bbe
+RX_ACK 00003600 8004d6ef
+RX_ACK 00003700 e2917c16
+RX_ACK 00003800 615e0fc8
+RX_ACK 00003900 0ecc7f72
+RX_ACK 00003a00 3a65df5a
+RX_ACK 00003b00 e948b61a
+RX_ACK 00003c00 b2171413
+RX_ACK 00003d00 1baf2fa9
+RX_ACK 00003e00 9d5780ed
+RX_ACK 00003f00 61a2218e
+RX_ACK 00004000 e12047b1
+RX_ACK 00004100 2264486a
+RX_ACK 00004200 d1b306b1
+RX_ACK 00004300 29786e1f
+RX_ACK 00004400 055dac77
+RX_ACK 00004500 90485350
+RX_ACK 00004600 c0e71bb1
+RX_ACK 00004700 e56f76bf
+RX_ACK 00004800 7d2e91f9
+RX_ACK 00004900 78f29e6e
+RX_ACK 00004a00 d950a223
+RX_ACK 00004b00 2c906a0a
+RX_ACK 00004c00 b066d037
+RX_ACK 00004d00 38230f3b
+RX_ACK 00004e00 3e1917a6
+RX_ACK 00004f00 bb649761
+RX_ACK 00005000 0f6b984e
+RX_ACK 00005100 64b08c3b
+RX_ACK 00005200 8105c018
+RX_ACK 00005300 69d3231f
+RX_ACK 00005400 6b98445a
+RX_ACK 00005500 8d9c61cb
+RX_ACK 00005600 86a0026f
+RX_ACK 00005700 27a1ea36
+RX_ACK 00005800 1a2234c2
+RX_ACK 00005900 1f8814d0
+RX_ACK 00005a00 141be6e1
+RX_ACK 00005b00 19cb954a
+RX_ACK 00005c00 8d73f279
+RX_ACK 00005d00 a4aca662
+RX_ACK 00005e00 01c9b734
+RX_ACK 00005f00 754a38d6
+RX_ACK 00006000 fd2fe78c
+RX_ACK 00006100 967358ef
+RX_ACK 00006200 b5fc9f46
+RX_ACK 00006300 5d0c0df4
+RX_ACK 00006400 afe22dee
+RX_ACK 00006500 c2cbc5b8
+RX_ACK 00006600 398278a0
+RX_ACK 00006700 97d4ad46
+RX_ACK 00006800 a09ad69e
+RX_ACK 00006900 123cea0d
+RX_ACK 00006a00 39e3c139
+RX_ACK 00006b00 5e782d3d
+RX_ACK 00006c00 bed3b603
+RX_ACK 00006d00 c45aff6f
+RX_ACK 00006e00 7ebdd182
+RX_ACK 00006f00 3d461478
+RX_ACK 00007000 26f51864
+RX_ACK 00007100 5e172441
+RX_ACK 00007200 9a667869
+RX_ACK 00007300 30bb65cf
+RX_ACK 00007400 941e3d1d
+RX_ACK 00007500 d4a41e10
+RX_ACK 00007600 6b1feaa5
+RX_ACK 00007700 c2ce7b48
+RX_ACK 00007800 2e0779c8
+RX_ACK 00007900 57c95a3c
+RX_ACK 00007a00 67357abc
+RX_ACK 00007b00 e27a3920
+RX_ACK 00007c00 fbc299d9
+RX_ACK 00007d00 6aafe9c0
+RX_ACK 00007e00 53f2f3fd
+RX_ACK 00007f00 f3180b57
+RX_ACK 00008000 ce4e3280
+RX_ACK 00008100 14b3aba5
+RX_ACK 00008200 b576c855
+RX_ACK 00008300 1511816e
+RX_ACK 00008400 62483dd8
+RX_ACK 00008500 a257d017
+RX_ACK 00008600 c8a90b3a
+RX_ACK 00008700 a1ed5bbd
+RX_ACK 00008800 6ea295ca
+RX_ACK 00008900 7f75ae3c
+RX_ACK 00008a00 ee45ce74
+RX_ACK 00008b00 1ce92457
+RX_ACK 00008c00 9a5f9bea
+RX_ACK 00008d00 4a2b555b
+RX_ACK 00008e00 a30430e0
+RX_ACK 00008f00 b3684b10
+RX_ACK 00009000 bcaed115
+RX_ACK 00009100 6a2e7824
+RX_ACK 00009200 07699984
+RX_ACK 00009300 e9a496af
+RX_ACK 00009400 fa83d82f
+RX_ACK 00009500 4c012270
+RX_ACK 00009600 c8e0735c
+RX_ACK 00009700 e5a5b9c7
+RX_ACK 00009800 b85522c6
+RX_ACK 00009900 02dc350d
+RX_ACK 00009a00 26366616
+RX_ACK 00009b00 89a6b980
+RX_ACK 00009c00 ed6d4ba1
+RX_ACK 00009d00 42ff8079
+RX_ACK 00009e00 94403aa2
+RX_ACK 00009f00 79299f85
+RX_ACK 0000a000 2723381b
+RX_ACK 0000a100 545e37a0
+RX_ACK 0000a200 b7ffbd29
+RX_ACK 0000a300 11682803
+RX_ACK 0000a400 873f1dec
+RX_ACK 0000a500 3be4701b
+RX_ACK 0000a600 e6867df8
+RX_ACK 0000a700 aefa0a80
+RX_ACK 0000a800 18650dbf
+RX_ACK 0000a900 b8bfcf6b
+RX_ACK 0000aa00 681eccdc
+RX_ACK 0000ab00 ee42d5ba
+RX_ACK 0000ac00 58df273f
+RX_ACK 0000ad00 9089e65f
+RX_ACK 0000ae00 6ab6997b
+RX_ACK 0000af00 adfbf4ed
+RX_ACK 0000b000 e3556145
+RX_ACK 0000b100 8995b5f0
+RX_ACK 0000b200 e3cd4a07
+RX_ACK 0000b300 71c8b2bb
+RX_ACK 0000b400 36d10e6d
+RX_ACK 0000b500 d30323c5
+RX_ACK 0000b600 a301f87a
+RX_ACK 0000b700 c3af336e
+RX_ACK 0000b800 a05d5bef
+RX_ACK 0000b900 70e3534c
+RX_ACK 0000ba00 c917adb8
+RX_ACK 0000bb00 f7ebd6f3
+RX_ACK 0000bc00 36b207d0
+RX_ACK 0000bd00 d739e2c3
+RX_ACK 0000be00 25a86e6e
+RX_ACK 0000bf00 e9b61ca4
+RX_ACK 0000c000 9800a2d1
+RX_ACK 0000c100 f7090d2f
+RX_ACK 0000c200 6d78d1b7
+RX_ACK 0000c300 c8c65ebf
+RX_ACK 0000c400 b8c2d195
+RX_ACK 0000c500 88bc16b7
+RX_ACK 0000c600 f612db48
+RX_ACK 0000c700 f601413a
+RX_ACK 0000c800 80a5677f
+RX_ACK 0000c900 b986a65b
+RX_ACK 0000ca00 5706fd38
+RX_ACK 0000cb00 afaac9f1
+RX_ACK 0000cc00 5673ec80
+RX_ACK 0000cd00 f5522c30
+RX_ACK 0000ce00 04874e35
+RX_ACK 0000cf00 3ce6df4d
+RX_ACK 0000d000 18d2a65d
+RX_ACK 0000d100 8f939038
+RX_ACK 0000d200 dd1655c4
+RX_ACK 0000d300 a68276c7
+RX_ACK 0000d400 4eeeb824
+RX_ACK 0000d500 9bc1e41a
+RX_ACK 0000d600 62d2688d
+RX_ACK 0000d700 3caa27e5
+RX_ACK 0000d800 d3c84f70
+RX_ACK 0000d900 d53fc3da
+RX_ACK 0000da00 fe1d9d7b
+RX_ACK 0000db00 638a7221
+RX_ACK 0000dc00 5bd2c3f2
+RX_ACK 0000dd00 748e1124
+RX_ACK 0000de00 78441297
+RX_ACK 0000df00 18a8173d
+RX_ACK 0000e000 f39f84e8
+RX_ACK 0000e100 e81c1bd9
+RX_ACK 0000e200 b9f9517a
+RX_ACK 0000e300 b1de83f1
+RX_ACK 0000e400 16e88dbf
+RX_ACK 0000e500 99904938
+RX_ACK 0000e600 13e51a17
+RX_ACK 0000e700 f7387d9d
+RX_ACK 0000e800 73436cd8
+RX_ACK 0000e900 15ceffa9
+RX_ACK 0000ea00 dc3090ec
+RX_ACK 0000eb00 ad87af0a
+RX_ACK 0000ec00 170191a1
+RX_ACK 0000ed00 691457c4
+RX_ACK 0000ee00 bf94316a
+RX_ACK 0000ef00 8146a63f
+RX_ACK 0000f000 e78147c8
+RX_ACK 0000f100 ac3f39f9
+RX_ACK 0000f200 47d384ff
+RX_ACK 0000f300 69417f02
+RX_ACK 0000f400 dfe22854
+RX_ACK 0000f500 884ab1bc
+RX_ACK 0000f600 aab64f42
+RX_ACK 0000f700 6407a3d0
+RX_ACK 0000f800 065474fb
+RX_ACK 0000f900 db3eaa8a
+RX_ACK 0000fa00 bc49662e
+RX_ACK 0000fb00 6a65bbc8
+RX_ACK 0000fc00 ca8b0f89
+RX_ACK 0000fd00 78fece1c
+RX_ACK 0000fe00 934fbe88
+RX_ACK 0000ff00 50fc2263
+RX_ACK 00010000 bc7792d4
+RX_ACK 00010100 1732be1a
+RX_ACK 00010200 89894aa4
+RX_ACK 00010300 46853788
+RX_ACK 00010400 7222afd7
+RX_ACK 00010500 41797fb5
+RX_ACK 00010600 ffae4e4d
+RX_ACK 00010700 623f683f
+RX_ACK 00010800 816447ce
+RX_ACK 00010900 9bd4cbbf
+RX_ACK 00010a00 4fa33692
+RX_ACK 00010b00 92ab88ca
+RX_ACK 00010c00 324dea91
+RX_ACK 00010d00 ce4a60ef
+RX_ACK 00010e00 4958cb3b
+RX_ACK 00010f00 d9e74a9c
+RX_ACK 00011000 126d115f
+RX_ACK 00011100 985d6e5b
+RX_ACK 00011200 bdbd492d
+RX_ACK 00011300 b0f5f160
+RX_ACK 00011400 7ea5bcf2
+RX_ACK 00011500 1b486e95
+RX_ACK 00011600 25a2416f
+RX_ACK 00011700 219fb0d9
+RX_ACK 00011800 a7cc8021
+RX_ACK 00011900 ee18bc06
+RX_ACK 00011a00 f4b1b255
+RX_ACK 00011b00 85b87a6f
+RX_ACK 00011c00 16b05c0f
+RX_ACK 00011d00 7312b06d
+RX_ACK 00011e00 7ac9dd42
+RX_ACK 00011f00 bd57139f
+RX_ACK 00012000 6a89b18e
+RX_ACK 00012100 2f470e05
+RX_ACK 00012200 60e4e83c
+RX_ACK 00012300 d1122a03
+RX_ACK 00012400 d34a3bb7
+RX_ACK 00012500 cf7a9d1c
+RX_ACK 00012600 aa0dcac4
+RX_ACK 00012700 951f146b
+RX_ACK 00012800 590843fe
+RX_ACK 00012900 1ffb10ee
+RX_ACK 00012a00 3ad69181
+RX_ACK 00012b00 a39d474b
+RX_ACK 00012c00 5825620c
+RX_ACK 00012d00 995a799a
+RX_ACK 00012e00 cc74c2c0
+RX_ACK 00012f00 78faf4a0
+RX_ACK 00013000 d2b713b6
+RX_ACK 00013100 6127bb0f
+RX_ACK 00013200 61b001d0
+RX_ACK 00013300 2f1c7510
+RX_ACK 00013400 3a70edd3
+RX_ACK 00013500 eba695d2
+RX_ACK 00013600 3953d53a
+RX_ACK 00013700 6c0c59bc
+RX_ACK 00013800 2633fa87
+RX_ACK 00013900 9718257e
+RX_ACK 00013a00 888b7202
+RX_ACK 00013b00 372b2083
+RX_ACK 00013c00 e7f948f7
+RX_ACK 00013d00 9e759fde
+RX_ACK 00013e00 fd157930
+RX_ACK 00013f00 1653c2bf
+RX_ACK 00014000 445ed786
+RX_ACK 00014100 144790bb
+RX_ACK 00014200 a91702b8
+RX_ACK 00014300 b400282a
+RX_ACK 00014400 1190261b
+RX_ACK 00014500 47756fd5
+RX_ACK 00014600 18335c35
+RX_ACK 00014700 7260b056
+RX_ACK 00014800 cc35635c
+RX_ACK 00014900 64b7de54
+RX_ACK 00014a00 77f4b9cc
+RX_ACK 00014b00 79d729da
+RX_ACK 00014c00 eee18121
+RX_ACK 00014d00 a7b424ba
+RX_ACK 00014e00 a7f8fbed
+RX_ACK 00014f00 4204bcdd
+RX_ACK 00015000 3b4d9d56
+RX_ACK 00015100 b5eb664b
+RX_ACK 00015200 3427cd41
+RX_ACK 00015300 96b7763b
+RX_ACK 00015400 829f4ee8
+RX_ACK 00015500 775b5457
+RX_ACK 00015600 1538dd45
+RX_ACK 00015700 969b4899
+RX_ACK 00015800 20a57f99
+RX_ACK 00015900 975a3cc4
+RX_ACK 00015a00 84257927
+RX_ACK 00015b00 3cf602a3
+RX_ACK 00015c00 c89d291c
+RX_ACK 00015d00 512c4966
+RX_ACK 00015e00 b07e48e4
+RX_ACK 00015f00 555c8a65
+RX_ACK 00016000 ac0c2a56
+RX_ACK 00016100 381ef060
+RX_ACK 00016200 7f904ed6
+RX_ACK 00016300 cce84550
+RX_ACK 00016400 93e59ca2
+RX_ACK 00016500 36e8c316
+RX_ACK 00016600 548e1d7a
+RX_ACK 00016700 e95c9db7
+RX_ACK 00016800 1938f1a9
+RX_ACK 00016900 662ab4d0
+RX_ACK 00016a00 fc54f0b2
+RX_ACK 00016b00 1fcddc3c
+RX_ACK 00016c00 1e09f0a4
+RX_ACK 00016d00 2df7f696
+RX_ACK 00016e00 97e11bc7
+RX_ACK 00016f00 65e35c2e
+RX_ACK 00017000 944d78cf
+RX_ACK 00017100 d27f9736
+RX_ACK 00017200 3e2ae1f6
+RX_ACK 00017300 f3874652
+RX_ACK 00017400 4bca6de7
+RX_ACK 00017500 1c0a5bfc
+RX_ACK 00017600 3266498c
+RX_ACK 00017700 2075942e
+RX_ACK 00017800 7e2e3851
+RX_ACK 00017900 b383c198
+RX_ACK 00017a00 d5c28ad0
+RX_ACK 00017b00 fd42d87d
+RX_ACK 00017c00 7be16dbe
+RX_ACK 00017d00 3529c593
+RX_ACK 00017e00 f4f83884
+RX_ACK 00017f00 6a7ec968
+RX_ACK 00018000 0d60309b
+RX_ACK 00018100 11327d70
+RX_ACK 00018200 7875ceed
+RX_ACK 00018300 22ea39c7
+RX_ACK 00018400 b0400cb3
+RX_ACK 00018500 0175243f
+RX_ACK 00018600 2f8e457d
+RX_ACK 00018700 ecc556df
+RX_ACK 00018800 fe1d1c65
+RX_ACK 00018900 54f3b48d
+RX_ACK 00018a00 c5b651ad
+RX_ACK 00018b00 c1e38520
+RX_ACK 00018c00 104f2448
+RX_ACK 00018d00 7a5dac1c
+RX_ACK 00018e00 9c88cf6d
+RX_ACK 00018f00 2d0f92e8
+RX_ACK 00019000 29490133
+RX_ACK 00019100 0ae06ea8
+RX_ACK 00019200 75171c8c
+RX_ACK 00019300 247cfb9c
+RX_ACK 00019400 a8f3b8c6
+RX_ACK 00019500 98a17e98
+RX_ACK 00019600 50089b5b
+RX_ACK 00019700 74329a32
+RX_ACK 00019800 18cfe08c
+RX_ACK 00019900 d9f616fd
+RX_ACK 00019a00 17f70fe0
+RX_ACK 00019b00 c10bf299
+RX_ACK 00019c00 af7ef209
+RX_ACK 00019d00 c19cabbd
+RX_ACK 00019e00 0f831013
+RX_ACK 00019f00 7ce2c8ef
+RX_ACK 0001a000 5c5ae8d6
+RX_ACK 0001a100 4701a295
+RX_ACK 0001a200 79c01636
+RX_ACK 0001a300 27e9a17b
+RX_ACK 0001a400 cb1439f1
+RX_ACK 0001a500 4fa88245
+RX_ACK 0001a600 526d4fc0
+RX_ACK 0001a700 f3beddc2
+RX_ACK 0001a800 3c5b0b94
+RX_ACK 0001a900 75835b14
+RX_ACK 0001aa00 35adab75
+RX_ACK 0001ab00 083f50d1
+RX_ACK 0001ac00 67a0b222
+RX_ACK 0001ad00 65520d48
+RX_ACK 0001ae00 0a74a8fb
+RX_ACK 0001af00 ac7f1f32
+RX_ACK 0001b000 fc1deb3e
+RX_ACK 0001b100 f754726c
+RX_ACK 0001b200 2d8fd111
+RX_ACK 0001b300 900dcbd8
+RX_ACK 0001b400 b59a4dd0
+RX_ACK 0001b500 d89e7b39
+RX_ACK 0001b600 f8c2fd3e
+RX_ACK 0001b700 dbfbff80
+RX_ACK 0001b800 020de11e
+RX_ACK 0001b900 403a06d4
+RX_ACK 0001ba00 f604eadc
+RX_ACK 0001bb00 0c739164
+RX_ACK 0001bc00 d09e451f
+RX_ACK 0001bd00 c0612211
+RX_ACK 0001be00 8094aac4
+RX_ACK 0001bf00 ee0f8b3b
+RX_ACK 0001c000 733d18ce
+RX_ACK 0001c100 7e431d39
+RX_ACK 0001c200 07cc89c1
+RX_ACK 0001c300 f092483b
+RX_ACK 0001c400 4f6702b6
+RX_ACK 0001c500 cdf17b4c
+RX_ACK 0001c600 61ee94f1
+RX_ACK 0001c700 087c9802
+RX_ACK 0001c800 9bb16b2d
+RX_ACK 0001c900 bfe5fd44
+RX_ACK 0001ca00 67f64047
+RX_ACK 0001cb00 f31df9d6
+RX_ACK 0001cc00 1b4cc71d
+RX_ACK 0001cd00 8697c977
+RX_ACK 0001ce00 9b68925a
+RX_ACK 0001cf00 ee0754d1
+RX_ACK 0001d000 aa8527d0
+RX_ACK 0001d100 db8d2805
+RX_ACK 0001d200 5dd02bb1
+RX_ACK 0001d300 2d291e59
+RX_ACK 0001d400 a46d5640
+RX_ACK 0001d500 8481dd3c
+RX_ACK 0001d600 58e2290c
+RX_ACK 0001d700 a5d7b80c
+RX_ACK 0001d800 5b69470c
+RX_ACK 0001d900 6996d60c
+RX_ACK 0001da00 c060650c
+RX_ACK 0001db00 9ef80300
+RX_ACK 0001dc00 5eb79509
+RX_ACK 0001dd00 93567188
+RX_ACK 0001de00 7fc755b4
+RX_ACK 0001df00 e2df45e8
+RX_ACK 0001e000 4fade67a
+RX_ACK 0001e100 5397dda8
+RX_ACK 0001e200 c9f53a92
+RX_ACK 0001e300 9766936e
+RX_ACK 0001e400 83ab2188
+RX_ACK 0001e500 7a6865c1
+RX_ACK 0001e600 1b1e36e7
+RX_ACK 0001e700 4fb014c5
+RX_ACK 0001e800 7fe093b8
+RX_ACK 0001e900 6739407c
+RX_ACK 0001ea00 c67cfffa
+RX_ACK 0001eb00 e89dd5b2
+RX_ACK 0001ec00 183a5ac3
+RX_ACK 0001ed00 5ddb37bd
+RX_ACK 0001ee00 66d837ca
+RX_ACK 0001ef00 23a44650
+RX_ACK 0001f000 4c9062f1
+RX_ACK 0001f100 8acc8cff
+RX_ACK 0001f200 b8875613
+RX_ACK 0001f300 a1defca3
+RX_ACK 0001f400 2b73afb5
+RX_ACK 0001f500 9f9aae22
+RX_ACK 0001f600 8f5b9365
+RX_ACK 0001f700 e941178e
+RX_ACK 0001f800 3a44ea0b
+RX_ACK 0001f900 91a837bc
+RX_ACK 0001fa00 6faaa927
+RX_ACK 0001fb00 cdf5834a
+RX_ACK 0001fc00 1ff56040
+RX_ACK 0001fd00 89dd162b
+RX_ACK 0001fe00 c5588e27
+RX_ACK 0001ff00 7b6e83d6
+RX_ACK 00020000 18086845
+RX_ACK 00020100 40693a5c
+RX_ACK 00020200 0973fbf6
+RX_ACK 00020300 d93b1348
+RX_ACK 00020400 bafeede3
+RX_ACK 00020500 7e18de52
+RX_ACK 00020600 e3ec4dbe
+RX_ACK 00020700 abb779c7
+RX_ACK 00020800 33a95f81
+RX_ACK 00020900 0f8e3c22
+RX_ACK 00020a00 f29c6092
+RX_ACK 00020b00 8993ac01
+RX_ACK 00020c00 b56457c1
+RX_ACK 00020d00 88e9a505
+RX_ACK 00020e00 929ac74f
+RX_ACK 00020f00 b5696bb1
+RX_ACK 00021000 0c3460b9
+RX_ACK 00021100 8f7aa4ea
+RX_ACK 00021200 b325feaf
+RX_ACK 00021300 bbfa49a7
+RX_ACK 00021400 e2d78b91
+RX_ACK 00021500 3d90be33
+RX_ACK 00021600 ccf85202
+RX_ACK 00021700 9e1956cb
+RX_ACK 00021800 298b91c2
+RX_ACK 00021900 bb0a5597
+RX_ACK 00021a00 ae6c3be7
+RX_ACK 00021b00 5a3ed9ba
+RX_ACK 00021c00 15d4cc9b
+RX_ACK 00021d00 43c206ea
+RX_ACK 00021e00 4f01d7a9
+RX_ACK 00021f00 55eb00de
+RX_ACK 00022000 2a7bbf99
+RX_ACK 00022100 73e08285
+RX_ACK 0002215c da7ec860
+RX_DONE
+RX_EXIT:0
+oryukdo# /tmp/v11-apply /usr/bin/boayo-native /tmp/v11-fix1.delta /tmp/boayo-fix
+1; echo INCR11_2c883704_RC:$?
+PATCH_OK
+INCR11_2c883704_RC:0
+oryukdo# BOAYO_PROFILE=0 BOAYO_INIT_TRACE=0 /tmp/boayo-fix1 start; echo INCR11_8
+61c7503_RC:$?
+BoAYO C++ service started; initialization continues. boayo-status / boayo-keys / boayo-stop
+{"features":["windows","pointer","input-injection","button-events","scene-stream","spatial-workspace","pointer-capture"],"headless":false,"m":32,"mock_backend":false,"runtime":"C++17","version":2}
+INCR11_861c7503_RC:0
+oryukdo# sleep 12; /tmp/boayo-fix1 app telemetry; echo INCR11_122de15a_RC:$?
+BOAYO_APP_READY window=2
+INCR11_122de15a_RC:0
+oryukdo# sleep 20; echo INCR11_f1531b7e_RC:$?
+INCR11_f1531b7e_RC:0
+oryukdo# /tmp/boayo-fix1 profile; sleep 40; /tmp/boayo-fix1 profile; echo INCR11
+_728d39f9_RC:$?
+{"app_error":null,"driver_profile":{"available":true,"enabled":false,"fast_paths":true},"performance":{"frame_interval_ms":2371.288779999986,"frame_limit":2.0,"frame_pacing":"start-to-start","full_update_count":1,"last_apps_ms":377.58112000005895,"last_compose_ms":1978.3890799999426,"last_upload_ms":0.0,"no_op_update_count":0,"patch_update_count":8,"render_count":8,"rendered_generation":23,"update_words":4480,"uptime_seconds":44.87964057999989},"phase":"composing","profile":{"enabled":false,"nested":true,"units":"microseconds"},"render_error":null,"snapshot_time":1642.95002548}
+{"app_error":null,"driver_profile":{"available":true,"enabled":false,"fast_paths":true},"performance":{"frame_interval_ms":2318.259639999951,"frame_limit":2.0,"frame_pacing":"start-to-start","full_update_count":1,"last_apps_ms":387.60051999997813,"last_compose_ms":1659.3786000000819,"last_upload_ms":0.0,"no_op_update_count":0,"patch_update_count":26,"render_count":26,"rendered_generation":41,"update_words":4480,"uptime_seconds":90.42834015999983},"phase":"ready","profile":{"enabled":false,"nested":true,"units":"microseconds"},"render_error":null,"snapshot_time":1688.46993764}
+INCR11_728d39f9_RC:0
+oryukdo# boayo-status; echo INCR11_d211e6ba_RC:$?
+{
+  "app_error": null,
+  "assets": {
+    "cache_hits": 30,
+    "format": "raw-mapped-00RRGGBB",
+    "loads": 55,
+    "misses": 0,
+    "rejected": 0,
+    "rgb_materializations": 0
+  },
+  "buttons": {
+    "available": false,
+    "last_event_id": 0,
+    "state": 0
+  },
+  "compositor": "cpp-native",
+  "driver_profile": {
+    "available": true,
+    "enabled": false,
+    "fast_paths": true
+  },
+  "focused_window": 2,
+  "generation": 42,
+  "motion": {
+    "active": false,
+    "next_step": 0,
+    "phase": "idle",
+    "steps": 25,
+    "target_generation": 0,
+    "view": {
+      "pitch": 0.0,
+      "roll": 0.0,
+      "yaw": 0.0
+    },
+    "windows": []
+  },
+  "output": {
+    "abi": 3,
+    "active_bank": 1,
+    "active_base": 3175415808,
+    "antialias": false,
+    "backend": "kfb-linux-frame-atomic-output",
+    "capability": 1146373681,
+    "commits": 28,
+    "dma_copied_words": 21504,
+    "max_jobs": 64,
+    "max_scene_words": 1084816,
+    "memory_dma": {
+      "available": true,
+      "copy_bytes": 15556132,
+      "copy_ops": 7105,
+      "errors": 0,
+      "features": 255,
+      "fill_bytes": 1343488,
+      "fill_ops": 1312,
+      "quarantined": 0,
+      "timeouts": 0,
+      "upload_bytes": 12646880,
+      "upload_ops": 255,
+      "upload_threshold": 4096
+    },
+    "metadata_only": false,
+    "mock_backend": false,
+    "poisoned": 0,
+    "publish_profile": {
+      "backend": "kernel",
+      "command": 2,
+      "configure_us": 91,
+      "finish_us": 284,
+      "select_us": 25726,
+      "upload_ranges": 0,
+      "upload_us": 43558,
+      "uploaded_words": 0,
+      "user_copy_us": 10625,
+      "validate_us": 38271,
+      "wait_us": 153462
+    },
+    "sensor_available": false,
+    "shadow_copied_words": 0,
+    "signature": 1112748597,
+    "status": 2650472451,
+    "uploaded_words": 247
+  },
+  "performance": {
+    "frame_interval_ms": 3858.446239999921,
+    "frame_limit": 2.0,
+    "frame_pacing": "start-to-start",
+    "full_update_count": 1,
+    "last_apps_ms": 696.5804199999184,
+    "last_compose_ms": 2650.8996000000025,
+    "last_upload_ms": 0.0,
+    "no_op_update_count": 0,
+    "patch_update_count": 27,
+    "render_count": 27,
+    "rendered_generation": 42,
+    "update_words": 4480,
+    "uptime_seconds": 95.50906667999993
+  },
+  "pointer": {
+    "azimuth": 0.0,
+    "buttons": [],
+    "cancel_serial": 0,
+    "captured_window": null,
+    "dragging": false,
+    "elevation": 0.0,
+    "last_left_press": null,
+    "last_left_release": null,
+    "left_press_serial": 0,
+    "left_release_serial": 0,
+    "scroll_delta": 0.0,
+    "scroll_serial": 0,
+    "visible": false,
+    "window_id": 2,
+    "zone": "content"
+  },
+  "profile": {
+    "enabled": false,
+    "nested": true,
+    "units": "microseconds"
+  },
+  "projection": {
+    "cpu_output_shadow_words": 4480,
+    "cpu_result_download_words": 0,
+    "cpu_scene_words": 0,
+    "device_ready_frames": 1,
+    "dirty_tiles": 28,
+    "fallback_frames": 0,
+    "geometry_tiles_evaluated_total": 0,
+    "hardware_frames": 27,
+    "jobs_per_core": [
+      16,
+      16
+    ],
+    "lazy_copied_tiles_total": 84,
+    "mask_samples_evaluated_total": 0,
+    "masked_tiles_total": 403,
+    "mode": "ddr-resident-dirty-tiles",
+    "packed_mask_tiles_total": 403,
+    "plan_cache": {
+      "builtin_loads": 5,
+      "hits": 0,
+      "loads": 5,
+      "misses": 0,
+      "payload_scan_bytes": 0,
+      "rejected": 0,
+      "revision": "c830e2bae43593f8c188620447b4ce808ce4894a826a073b44f12b949ad54b7e"
+    },
+    "precomputed_layers_total": 5,
+    "redrawn_tiles": 28,
+    "reused_tiles_total": 0,
+    "solid_tiles_total": 0,
+    "texture_pool": {
+      "capacity_bytes": 4194304,
+      "evictions": 0,
+      "full_uploads": 5,
+      "partial_uploads": 25,
+      "resident_bytes": 1430400,
+      "resident_windows": 5,
+      "reuses": 25,
+      "staged_copy_bytes": 0,
+      "upload_bytes": 2406400,
+      "upload_calls": 56
+    },
+    "texture_reuses_total": 25,
+    "texture_uploads_total": 30,
+    "tile_fills_total": 291,
+    "total_hw_jobs": 992,
+    "update_kind": "tiles"
+  },
+  "render_error": null,
+  "runtime": "C++17",
+  "scene_owner": null,
+  "service": {
+    "phase": "command",
+    "queued_requests": 0,
+    "snapshot_age_seconds": 1.073656420000134,
+    "state_is_snapshot": true
+  },
+  "view": {
+    "pitch": 0.0,
+    "roll": 0.0,
+    "yaw": 0.0
+  },
+  "windows": [
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": true,
+      "height_deg": 26.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          14.0
+        ]
+      ],
+      "surface_height": 300,
+      "surface_width": 400,
+      "title": "Telemetry",
+      "width_deg": 36.0,
+      "window_id": 2,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 0
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 30.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "boayo-desktop",
+      "roll": 0.0,
+      "shape": [
+        [
+          51.2,
+          36.0,
+          537.6,
+          252.0,
+          18.0
+        ]
+      ],
+      "surface_height": 360,
+      "surface_width": 640,
+      "title": "BoAYO Launcher",
+      "width_deg": 42.0,
+      "window_id": 1,
+      "workspace": {},
+      "z": 1
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -16.47105751657935,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: Telemetry",
+      "width_deg": 2.88,
+      "window_id": 3,
+      "workspace": {
+        "control": "move",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 2
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": -10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 4,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 3
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": 10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": -3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 5,
+      "workspace": {
+        "control": "close",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 4
+    }
+  ]
+}
+INCR11_d211e6ba_RC:0
+oryukdo# /tmp/boayo-fix1 motion 1 0; echo INCR11_e76dcef3_RC:$?
+BOAYO_MOTION_BEGIN loop=1 steps=25
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-axis","seconds":14.378239659999963,"step":1,"view":{"pitch":0.0,"roll":0.0,"yaw":0.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-axis","seconds":14.578702739999926,"step":2,"view":{"pitch":0.0,"roll":0.0,"yaw":-12.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-axis","seconds":14.228350280000086,"step":3,"view":{"pitch":0.0,"roll":0.0,"yaw":12.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-axis","seconds":14.307069700000056,"step":4,"view":{"pitch":-8.0,"roll":0.0,"yaw":0.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-axis","seconds":14.09638842000004,"step":5,"view":{"pitch":8.0,"roll":0.0,"yaw":0.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-axis","seconds":14.648201100000051,"step":6,"view":{"pitch":0.0,"roll":-20.0,"yaw":0.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-axis","seconds":14.715580820000014,"step":7,"view":{"pitch":0.0,"roll":20.0,"yaw":0.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-mixed","seconds":15.380093640000041,"step":8,"view":{"pitch":6.0,"roll":-15.0,"yaw":-8.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-mixed","seconds":14.11872029999995,"step":9,"view":{"pitch":-6.0,"roll":15.0,"yaw":8.0}}
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-axis","seconds":13.843827260000126,"step":10,"view":{"pitch":0.0,"roll":0.0,"yaw":0.0}}
+[ 1927.047946] random: crng init done
+[ 1927.047946] random: crng init done
+^ZINCR11_e76dcef3_RC:148
+[1]+  Stopped                    /tmp/boayo-fix1 motion 1 0
+oryukdo# boayo-status; ps; echo INCR11_bf4cdd01_RC:$?
+{
+  "app_error": null,
+  "assets": {
+    "cache_hits": 365,
+    "format": "raw-mapped-00RRGGBB",
+    "loads": 163,
+    "misses": 2,
+    "rejected": 0,
+    "rgb_materializations": 0
+  },
+  "buttons": {
+    "available": false,
+    "last_event_id": 0,
+    "state": 0
+  },
+  "compositor": "cpp-native",
+  "driver_profile": {
+    "available": true,
+    "enabled": false,
+    "fast_paths": true
+  },
+  "focused_window": 7,
+  "generation": 242,
+  "motion": {
+    "active": true,
+    "next_step": 11,
+    "phase": "window-azimuth-elevation",
+    "steps": 25,
+    "target_generation": 242,
+    "view": {
+      "pitch": 0.0,
+      "roll": 0.0,
+      "yaw": 0.0
+    },
+    "windows": [
+      6,
+      10,
+      14
+    ]
+  },
+  "output": {
+    "abi": 3,
+    "active_bank": 1,
+    "active_base": 3175415808,
+    "antialias": false,
+    "backend": "kfb-linux-frame-atomic-output",
+    "capability": 1146373681,
+    "commits": 62,
+    "dma_copied_words": 47872,
+    "max_jobs": 64,
+    "max_scene_words": 1084816,
+    "memory_dma": {
+      "available": true,
+      "copy_bytes": 21667268,
+      "copy_ops": 8064,
+      "errors": 0,
+      "features": 255,
+      "fill_bytes": 1699840,
+      "fill_ops": 1660,
+      "quarantined": 0,
+      "timeouts": 0,
+      "upload_bytes": 18202280,
+      "upload_ops": 398,
+      "upload_threshold": 4096
+    },
+    "metadata_only": false,
+    "mock_backend": false,
+    "poisoned": 0,
+    "publish_profile": {
+      "backend": "kernel",
+      "command": 2,
+      "configure_us": 88,
+      "finish_us": 268,
+      "select_us": 23393,
+      "upload_ranges": 0,
+      "upload_us": 46316,
+      "uploaded_words": 0,
+      "user_copy_us": 6529,
+      "validate_us": 36036,
+      "wait_us": 23008
+    },
+    "sensor_available": false,
+    "shadow_copied_words": 0,
+    "signature": 1112748597,
+    "status": 3153526787,
+    "uploaded_words": 313
+  },
+  "performance": {
+    "frame_interval_ms": 5574.343880000015,
+    "frame_limit": 2.0,
+    "frame_pacing": "start-to-start",
+    "full_update_count": 1,
+    "last_apps_ms": 1314.1242399999555,
+    "last_compose_ms": 2482.7554000000873,
+    "last_upload_ms": 0.0,
+    "no_op_update_count": 0,
+    "patch_update_count": 61,
+    "render_count": 61,
+    "rendered_generation": 211,
+    "update_words": 4480,
+    "uptime_seconds": 350.80930453999986
+  },
+  "pointer": {
+    "azimuth": -28.91361728563541,
+    "buttons": [],
+    "cancel_serial": 0,
+    "captured_window": null,
+    "dragging": false,
+    "elevation": 4.0,
+    "last_left_press": {
+      "azimuth": -18.91361728563541,
+      "elevation": 0.0,
+      "window_id": 7
+    },
+    "last_left_release": {
+      "azimuth": -28.91361728563541,
+      "elevation": 4.0
+    },
+    "left_press_serial": 1,
+    "left_release_serial": 1,
+    "scroll_delta": 0.0,
+    "scroll_serial": 0,
+    "visible": false,
+    "window_id": 7,
+    "zone": "content"
+  },
+  "profile": {
+    "enabled": false,
+    "nested": true,
+    "units": "microseconds"
+  },
+  "projection": {
+    "cpu_output_shadow_words": 4480,
+    "cpu_result_download_words": 0,
+    "cpu_scene_words": 0,
+    "device_ready_frames": 1,
+    "dirty_tiles": 28,
+    "fallback_frames": 0,
+    "geometry_tiles_evaluated_total": 0,
+    "hardware_frames": 61,
+    "jobs_per_core": [
+      57,
+      57
+    ],
+    "lazy_copied_tiles_total": 187,
+    "mask_samples_evaluated_total": 0,
+    "masked_tiles_total": 1386,
+    "mode": "ddr-resident-dirty-tiles",
+    "packed_mask_tiles_total": 1386,
+    "plan_cache": {
+      "builtin_loads": 10,
+      "hits": 1,
+      "loads": 10,
+      "misses": 0,
+      "payload_scan_bytes": 0,
+      "rejected": 0,
+      "revision": "c830e2bae43593f8c188620447b4ce808ce4894a826a073b44f12b949ad54b7e"
+    },
+    "precomputed_layers_total": 11,
+    "redrawn_tiles": 28,
+    "reused_tiles_total": 0,
+    "solid_tiles_total": 0,
+    "texture_pool": {
+      "capacity_bytes": 4194304,
+      "evictions": 0,
+      "full_uploads": 11,
+      "partial_uploads": 101,
+      "resident_bytes": 3545600,
+      "resident_windows": 11,
+      "reuses": 79,
+      "staged_copy_bytes": 9800,
+      "upload_bytes": 7961800,
+      "upload_calls": 199
+    },
+    "texture_reuses_total": 79,
+    "texture_uploads_total": 112,
+    "tile_fills_total": 639,
+    "total_hw_jobs": 4202,
+    "update_kind": "tiles"
+  },
+  "render_error": null,
+  "runtime": "C++17",
+  "scene_owner": null,
+  "service": {
+    "phase": "composing",
+    "queued_requests": 0,
+    "snapshot_age_seconds": 231.48231951999992,
+    "state_is_snapshot": true
+  },
+  "view": {
+    "pitch": 0.0,
+    "roll": 0.0,
+    "yaw": 0.0
+  },
+  "windows": [
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 26.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          14.0
+        ]
+      ],
+      "surface_height": 300,
+      "surface_width": 400,
+      "title": "Telemetry",
+      "width_deg": 36.0,
+      "window_id": 2,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 0
+    },
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 26.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-10",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          14.0
+        ]
+      ],
+      "surface_height": 300,
+      "surface_width": 400,
+      "title": "Telemetry",
+      "width_deg": 36.0,
+      "window_id": 10,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 1
+    },
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 28.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-sdk-pulse-14",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          14.0
+        ]
+      ],
+      "surface_height": 300,
+      "surface_width": 400,
+      "title": "SDK Pulse",
+      "width_deg": 38.0,
+      "window_id": 14,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 2
+    },
+    {
+      "always_on_top": false,
+      "azimuth": -10.0,
+      "decorated": false,
+      "elevation": 4.0,
+      "focused": false,
+      "height_deg": 28.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-dashboard-6",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          544.0,
+          428.0,
+          14.0
+        ]
+      ],
+      "surface_height": 440,
+      "surface_width": 640,
+      "title": "Dashboard",
+      "width_deg": 38.0,
+      "window_id": 6,
+      "workspace": {
+        "restore": {
+          "azimuth": -10.0,
+          "elevation": 4.0,
+          "height_deg": 28.0,
+          "width_deg": 38.0
+        },
+        "role": "app",
+        "state": "open"
+      },
+      "z": 3
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 30.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "boayo-desktop",
+      "roll": 0.0,
+      "shape": [
+        [
+          51.2,
+          36.0,
+          537.6,
+          252.0,
+          18.0
+        ]
+      ],
+      "surface_height": 360,
+      "surface_width": 640,
+      "title": "BoAYO Launcher",
+      "width_deg": 42.0,
+      "window_id": 1,
+      "workspace": {},
+      "z": 4
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -16.47105751657935,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-telemetry-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: Telemetry",
+      "width_deg": 2.88,
+      "window_id": 3,
+      "workspace": {
+        "control": "move",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 5
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": -10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-telemetry-2",
+      "roll": 3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 4,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 6
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": 10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-telemetry-2",
+      "roll": -3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 5,
+      "workspace": {
+        "control": "close",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 7
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 8.703651028610665,
+      "decorated": false,
+      "elevation": -7.350254556943742,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-dashboard-6",
+      "roll": 2.48007595979405,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: Dashboard",
+      "width_deg": 4.0,
+      "window_id": 8,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 6,
+        "role": "caption"
+      },
+      "z": 8
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 9.216035186353338,
+      "decorated": false,
+      "elevation": 14.917598889100052,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-dashboard-6",
+      "roll": -5.127263251490149,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: Dashboard",
+      "width_deg": 4.0,
+      "window_id": 9,
+      "workspace": {
+        "control": "close",
+        "parent": 6,
+        "role": "caption"
+      },
+      "z": 9
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -16.47105751657935,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-telemetry-10",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: Telemetry",
+      "width_deg": 2.88,
+      "window_id": 11,
+      "workspace": {
+        "control": "move",
+        "parent": 10,
+        "role": "caption"
+      },
+      "z": 10
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": -10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-telemetry-10",
+      "roll": 3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 12,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 10,
+        "role": "caption"
+      },
+      "z": 11
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": 10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-telemetry-10",
+      "roll": -3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 13,
+      "workspace": {
+        "control": "close",
+        "parent": 10,
+        "role": "caption"
+      },
+      "z": 12
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -17.264823078656832,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-sdk-pulse-14",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: SDK Pulse",
+      "width_deg": 2.88,
+      "window_id": 15,
+      "workspace": {
+        "control": "move",
+        "parent": 14,
+        "role": "caption"
+      },
+      "z": 13
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 17.264823078656832,
+      "decorated": false,
+      "elevation": -11.129687987414206,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-sdk-pulse-14",
+      "roll": 3.433190255028393,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: SDK Pulse",
+      "width_deg": 4.0,
+      "window_id": 16,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 14,
+        "role": "caption"
+      },
+      "z": 14
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 17.264823078656832,
+      "decorated": false,
+      "elevation": 11.129687987414204,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-sdk-pulse-14",
+      "roll": -3.433190255028393,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: SDK Pulse",
+      "width_deg": 4.0,
+      "window_id": 17,
+      "workspace": {
+        "control": "close",
+        "parent": 14,
+        "role": "caption"
+      },
+      "z": 15
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -28.956508594668833,
+      "decorated": false,
+      "elevation": 3.783709874320877,
+      "focused": true,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-dashboard-6",
+      "roll": 1.2984572681811244,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: Dashboard",
+      "width_deg": 2.88,
+      "window_id": 7,
+      "workspace": {
+        "control": "move",
+        "parent": 6,
+        "role": "caption"
+      },
+      "z": 16
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -28.91361728563541,
+      "decorated": false,
+      "elevation": -36.0,
+      "focused": false,
+      "height_deg": 5.0,
+      "input_enabled": false,
+      "mapped": false,
+      "owner": "boayo-desktop",
+      "roll": 0.0,
+      "shape": [],
+      "surface_height": 96,
+      "surface_width": 320,
+      "title": "RELEASE TO STORE",
+      "width_deg": 30.0,
+      "window_id": 18,
+      "workspace": {
+        "role": "feedback"
+      },
+      "z": 17
+    }
+  ]
+}
+    1 root       192 S    /init.console
+    2 root         0 SW   [kthreadd]
+    3 root         0 SW   [pool_workqueue_]
+    4 root         0 IW<  [kworker/R-slub_]
+    5 root         0 IW   [kworker/0:0-eve]
+    6 root         0 IW<  [kworker/0:0H]
+    7 root         0 IW   [kworker/u4:0-ev]
+    8 root         0 IW<  [kworker/R-mm_pe]
+    9 root         0 SW   [ksoftirqd/0]
+   10 root         0 SW   [kdevtmpfs]
+   11 root         0 SW   [oom_reaper]
+   12 root         0 IW<  [kworker/R-write]
+   13 root         0 IW<  [kworker/R-kbloc]
+   14 root         0 SW   [kswapd0]
+   15 root         0 IW   [kworker/u4:1-ev]
+   17 root         0 SW   [khvcd]
+   18 root         0 IW   [kworker/u4:2-ev]
+   19 root         0 IW   [kworker/0:2-eve]
+   21 root         0 IW<  [kworker/R-mmc_c]
+   22 root         0 IW<  [kworker/0:1H-kb]
+   26 root         0 SW   [jbd2/mmcblk0p2-]
+   27 root         0 IW<  [kworker/R-ext4-]
+   29 root       504 S    sh -i
+   96 root     13944 S    /tmp/boayo-fix1 start
+  105 root      2236 T    /tmp/boayo-fix1 motion 1 0
+  107 root       512 R    {ps} sh -i
+INCR11_bf4cdd01_RC:0
+oryukdo# /tmp/view-rx /tmp/sample97; echo RX_EXIT:$?
+RX_READY
+RX_ACK 00000100 4926cb23
+RX_ACK 00000200 a687efa5
+RX_ACK 00000300 4861e8a9
+RX_ACK 00000400 44b9f2ab
+RX_ACK 00000500 e1aea15c
+RX_ACK 00000600 1cf7b99a
+RX_ACK 000006b4 7998b74d
+RX_DONE
+RX_EXIT:0
+oryukdo# /tmp/sample97; echo INCR11_5222cbd0_RC:$?
+PC RA SP A0 A1 S0 S1 GET DETACH000840e0 00083f3c 9572feb0 00000001 186d4547 000001d4 00000001 00000000 00000000 
+PC RA SP A0 A1 S0 S1 GET DETACH0014f79c 00083fb0 9572fe80 00009c7f 00000000 00b990e3 001d6bec 00000000 00000000 
+PC RA SP A0 A1 S0 S1 GET DETACH000589ec 000589ec 9572fdf0 00000000 00000000 00000000 00000000 00000000 00000000 
+PC RA SP A0 A1 S0 S1 GET DETACH0002bc8c 000586d4 9572fdc0 94ff40e0 9572fe28 94ff40e0 9572fe28 00000000 00000000 
+PC RA SP A0 A1 S0 S1 GET DETACH00150cf4 000588f0 9572fdd0 2e70c985 00510000 00000000 2e70c985 00000000 00000000 
+PC RA SP A0 A1 S0 S1 GET DETACH0005869c 00058658 9572fdf0 9572fe40 94fb8ac0 94fb8ac0 00000001 00000000 00000000 
+PC RA SP A0 A1 S0 S1 GET DETACH0002bc4c 00058730 9572fdf0 94ff4100 9572fe28 00000000 00000000 00000000 00000000 
+PC RA SP A0 A1 S0 S1 GET DETACH00150554 000588f0 9572fdd0 e5ed70ff 00510000 00000001 d0947808 00000000 00000000 
+INCR11_5222cbd0_RC:0
+oryukdo# kill -9 105 96; while test -e /proc/96/exe; do sleep 1; done; rm /tmp/b
+osio-wm.sock; sync; BOAYO_PROFILE=0 BOAYO_INIT_TRACE=0 /tmp/boayo-fix1 start; ec
+ho INCR11_28d0418d_RC:$?
+WM startup failed; read /tmp/boayo-wm.log
+INCR11_28d0418d_RC:1
+[1]+  Killed                     /tmp/boayo-fix1 motion 1 0
+oryukdo# cat /tmp/boayo-wm.log; ps; echo INCR11_f283f796_RC:$?
+BOAYO_NATIVE_SERVICE /tmp/bosio-wm.sock initializing; query boayo-status
+BOAYO_NATIVE_INIT backend=BOSIO_ABI3
+BOAYO_BLANK_METADATA_READY words=4480 tile_composition=0 projection_jobs=0
+BOAYO_NATIVE_READY blank_committed_launcher_pending
+BOAYO_FIRST_FRAME_COMPOSE_BEGIN
+BOAYO_FIRST_FRAME_PRESENT_DONE
+BOAYO_NATIVE_SERVICE /tmp/bosio-wm.sock initializing; query boayo-status
+BOAYO_NATIVE_INIT backend=BOSIO_ABI3
+BOAYO_BLANK_METADATA_READY words=4480 tile_composition=0 projection_jobs=0
+BOAYO_NATIVE_READY blank_committed_launcher_pending
+BOAYO_FIRST_FRAME_COMPOSE_BEGIN
+BOAYO_FIRST_FRAME_PRESENT_DONE
+BOAYO_NATIVE_SERVICE /tmp/bosio-wm.sock initializing; query boayo-status
+BOAYO_NATIVE_INIT backend=BOSIO_ABI3
+BOAYO_BLANK_METADATA_READY words=4480 tile_composition=0 projection_jobs=0
+BOAYO_NATIVE_READY blank_committed_launcher_pending
+BOAYO_FIRST_FRAME_COMPOSE_BEGIN
+BOAYO_FIRST_FRAME_PRESENT_DONE
+BOAYO_NATIVE_SERVICE /tmp/bosio-wm.sock initializing; query boayo-status
+BOAYO_NATIVE_INIT backend=BOSIO_ABI3
+BOAYO_BLANK_METADATA_READY words=4480 tile_composition=0 projection_jobs=0
+BOAYO_NATIVE_READY blank_committed_launcher_pending
+BOAYO_FIRST_FRAME_COMPOSE_BEGIN
+BOAYO_FIRST_FRAME_PRESENT_DONE
+WM already running
+    1 root       192 S    /init.console
+    2 root         0 SW   [kthreadd]
+    3 root         0 SW   [pool_workqueue_]
+    4 root         0 IW<  [kworker/R-slub_]
+    5 root         0 IW   [kworker/0:0-eve]
+    6 root         0 IW<  [kworker/0:0H]
+    7 root         0 IW   [kworker/u4:0-ev]
+    8 root         0 IW<  [kworker/R-mm_pe]
+    9 root         0 SW   [ksoftirqd/0]
+   10 root         0 SW   [kdevtmpfs]
+   11 root         0 SW   [oom_reaper]
+   12 root         0 IW<  [kworker/R-write]
+   13 root         0 IW<  [kworker/R-kbloc]
+   14 root         0 SW   [kswapd0]
+   15 root         0 IW   [kworker/u4:1-ev]
+   17 root         0 SW   [khvcd]
+   18 root         0 IW   [kworker/u4:2-ev]
+   19 root         0 IW   [kworker/0:2-eve]
+   21 root         0 IW<  [kworker/R-mmc_c]
+   22 root         0 IW<  [kworker/0:1H-kb]
+   26 root         0 SW   [jbd2/mmcblk0p2-]
+   27 root         0 IW<  [kworker/R-ext4-]
+   29 root       504 S    sh -i
+  115 root       512 R    {ps} sh -i
+INCR11_f283f796_RC:0
+oryukdo# cat /proc/locks; BOAYO_PROFILE=0 BOAYO_INIT_TRACE=0 /tmp/boayo-fix1 sta
+rt; echo INCR11_2a0475c0_RC:$?
+BoAYO C++ service started; initialization continues. boayo-status / boayo-keys / boayo-stop
+{"features":["windows","pointer","input-injection","button-events","scene-stream","spatial-workspace","pointer-capture"],"headless":false,"m":32,"mock_backend":false,"runtime":"C++17","version":2}
+INCR11_2a0475c0_RC:0
+oryukdo# sleep 12; /tmp/boayo-fix1 app telemetry; sleep 20; echo INCR11_fe8c3e8b
+_RC:$?
+BOAYO_APP_READY window=2
+INCR11_fe8c3e8b_RC:0
+oryukdo# boayo-status; echo INCR11_e5adfb40_RC:$?
+{
+  "app_error": null,
+  "assets": {
+    "cache_hits": 21,
+    "format": "raw-mapped-00RRGGBB",
+    "loads": 37,
+    "misses": 0,
+    "rejected": 0,
+    "rgb_materializations": 0
+  },
+  "buttons": {
+    "available": false,
+    "last_event_id": 0,
+    "state": 0
+  },
+  "compositor": "cpp-native",
+  "driver_profile": {
+    "available": true,
+    "enabled": false,
+    "fast_paths": true
+  },
+  "focused_window": 2,
+  "generation": 33,
+  "motion": {
+    "active": false,
+    "next_step": 0,
+    "phase": "idle",
+    "steps": 25,
+    "target_generation": 0,
+    "view": {
+      "pitch": 0.0,
+      "roll": 0.0,
+      "yaw": 0.0
+    },
+    "windows": []
+  },
+  "output": {
+    "abi": 3,
+    "active_bank": 0,
+    "active_base": 3170959360,
+    "antialias": false,
+    "backend": "kfb-linux-frame-atomic-output",
+    "capability": 1146373681,
+    "commits": 19,
+    "dma_copied_words": 21504,
+    "max_jobs": 64,
+    "max_scene_words": 1084816,
+    "memory_dma": {
+      "available": true,
+      "copy_bytes": 23853892,
+      "copy_ops": 8382,
+      "errors": 0,
+      "features": 255,
+      "fill_bytes": 1924096,
+      "fill_ops": 1879,
+      "quarantined": 0,
+      "timeouts": 0,
+      "upload_bytes": 20263080,
+      "upload_ops": 436,
+      "upload_threshold": 4096
+    },
+    "metadata_only": false,
+    "mock_backend": false,
+    "poisoned": 0,
+    "publish_profile": {
+      "backend": "kernel",
+      "command": 2,
+      "configure_us": 90,
+      "finish_us": 305,
+      "select_us": 26252,
+      "upload_ranges": 0,
+      "upload_us": 43216,
+      "uploaded_words": 0,
+      "user_copy_us": 12607,
+      "validate_us": 35287,
+      "wait_us": 156207
+    },
+    "sensor_available": false,
+    "shadow_copied_words": 0,
+    "signature": 1112748597,
+    "status": 4042784771,
+    "uploaded_words": 280
+  },
+  "performance": {
+    "frame_interval_ms": 2253.6102400003983,
+    "frame_limit": 2.0,
+    "frame_pacing": "start-to-start",
+    "full_update_count": 1,
+    "last_apps_ms": 370.3457599999638,
+    "last_compose_ms": 2027.2820400000455,
+    "last_upload_ms": 0.0,
+    "no_op_update_count": 0,
+    "patch_update_count": 18,
+    "render_count": 18,
+    "rendered_generation": 33,
+    "update_words": 4480,
+    "uptime_seconds": 77.88369684000008
+  },
+  "pointer": {
+    "azimuth": 0.0,
+    "buttons": [],
+    "cancel_serial": 0,
+    "captured_window": null,
+    "dragging": false,
+    "elevation": 0.0,
+    "last_left_press": null,
+    "last_left_release": null,
+    "left_press_serial": 0,
+    "left_release_serial": 0,
+    "scroll_delta": 0.0,
+    "scroll_serial": 0,
+    "visible": false,
+    "window_id": 2,
+    "zone": "content"
+  },
+  "profile": {
+    "enabled": false,
+    "nested": true,
+    "units": "microseconds"
+  },
+  "projection": {
+    "cpu_output_shadow_words": 4480,
+    "cpu_result_download_words": 0,
+    "cpu_scene_words": 0,
+    "device_ready_frames": 1,
+    "dirty_tiles": 28,
+    "fallback_frames": 0,
+    "geometry_tiles_evaluated_total": 0,
+    "hardware_frames": 18,
+    "jobs_per_core": [
+      16,
+      16
+    ],
+    "lazy_copied_tiles_total": 84,
+    "mask_samples_evaluated_total": 0,
+    "masked_tiles_total": 295,
+    "mode": "ddr-resident-dirty-tiles",
+    "packed_mask_tiles_total": 295,
+    "plan_cache": {
+      "builtin_loads": 5,
+      "hits": 0,
+      "loads": 5,
+      "misses": 0,
+      "payload_scan_bytes": 0,
+      "rejected": 0,
+      "revision": "c830e2bae43593f8c188620447b4ce808ce4894a826a073b44f12b949ad54b7e"
+    },
+    "precomputed_layers_total": 5,
+    "redrawn_tiles": 28,
+    "reused_tiles_total": 0,
+    "solid_tiles_total": 0,
+    "texture_pool": {
+      "capacity_bytes": 4194304,
+      "evictions": 0,
+      "full_uploads": 5,
+      "partial_uploads": 16,
+      "resident_bytes": 1430400,
+      "resident_windows": 5,
+      "reuses": 16,
+      "staged_copy_bytes": 0,
+      "upload_bytes": 2060800,
+      "upload_calls": 38
+    },
+    "texture_reuses_total": 16,
+    "texture_uploads_total": 21,
+    "tile_fills_total": 219,
+    "total_hw_jobs": 704,
+    "update_kind": "tiles"
+  },
+  "render_error": null,
+  "runtime": "C++17",
+  "scene_owner": null,
+  "service": {
+    "phase": "apps",
+    "queued_requests": 0,
+    "snapshot_age_seconds": 1.0512142999996286,
+    "state_is_snapshot": true
+  },
+  "view": {
+    "pitch": 0.0,
+    "roll": 0.0,
+    "yaw": 0.0
+  },
+  "windows": [
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": true,
+      "height_deg": 26.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          14.0
+        ]
+      ],
+      "surface_height": 300,
+      "surface_width": 400,
+      "title": "Telemetry",
+      "width_deg": 36.0,
+      "window_id": 2,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 0
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 30.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "boayo-desktop",
+      "roll": 0.0,
+      "shape": [
+        [
+          51.2,
+          36.0,
+          537.6,
+          252.0,
+          18.0
+        ]
+      ],
+      "surface_height": 360,
+      "surface_width": 640,
+      "title": "BoAYO Launcher",
+      "width_deg": 42.0,
+      "window_id": 1,
+      "workspace": {},
+      "z": 1
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -16.47105751657935,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: Telemetry",
+      "width_deg": 2.88,
+      "window_id": 3,
+      "workspace": {
+        "control": "move",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 2
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": -10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 4,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 3
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": 10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": -3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 5,
+      "workspace": {
+        "control": "close",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 4
+    }
+  ]
+}
+INCR11_e5adfb40_RC:0
+oryukdo# 

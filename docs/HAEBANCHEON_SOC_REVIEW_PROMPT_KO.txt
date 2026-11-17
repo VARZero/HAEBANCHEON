@@ -1,0 +1,640 @@
+# HAEBANCHEON SoC 구조·주소·인터럽트·장치 요청 형식 검토 요청
+
+나는 FPGA에 직접 구현한 HAEBANCHEON(해반천) SoC에서 Linux와 BoAYO 윈도우 매니저를 구동하고 있다. 아래는 2026-11-16 현재 사용한 비트스트림과 v14 소프트웨어의 로컬 소스에서 확인한 구성이다. 이 내용을 기준으로 구조와 성능을 검토해 달라.
+
+우선 설명·설계 리뷰만 원한다. 코드 수정이나 보드 실행을 지시하는 프롬프트가 아니다. 사실, 소스에서 도출한 해석, 아직 측정하지 않은 가설을 구분해 달라. 기존에 없는 하드웨어 기능을 있다고 가정하지 말고, 기존 HW로 가능한 SW 개선과 RTL 변경이 필요한 개선을 나눠 달라.
+
+내 목표는 CPU 사용을 줄여 실제 화면을 빠르게 갱신하는 것이다.
+- CPU: 입력, 창 위치·크기·앞뒤 순서, 에셋 선택, 변경된 2D 이미지 생성, DMA/투영 요청 관리.
+- 투영코어: CPU가 준비한 투영 정보와 DDR의 2D 이미지를 받아 구면 타일로 변환.
+- DMA: SD 데이터의 DDR 이동 및 DDR 이미지·에셋의 복사/채우기.
+- 출력코어: 구면 장면과 시점 정보로 최종 화면 생성.
+- 2D 이미지와 구면 타일 모두 변경된 부분을 추적하고 재사용하고 싶다.
+- 빈 구면 타일을 메타데이터로 표시할 수 있으면 장면 전체 payload를 0으로 채우지 않는다.
+- 창 본문은 사각형이다. 이동·크기조절·닫기 등의 BoAYO 컴포넌트는 별개다.
+
+## 1. 정확한 구성 기준
+
+프로젝트 표기: HAEBANCHEON / 해반천.
+보드: PZ-A7200T-KFB, FPGA xc7a200tfbg484-2.
+보드 top: gen3_kfb_bosio.
+최종 HW 소스: variants/l1-16k-dma3-lru-ram/.
+사용자 공간/현재 BOSIO 드라이버 소스: updates/boayo-tilebatch-v14/software/.
+비트스트림: HAEBANCHEON-KFB-L1-16K-DMA3-v1.bit
+SHA-256: 9bb855886be0ac55d983f9a72ab0e6c23317b7f4fe27e13430cb2de17d7d4e07
+현재 SD: HAEBANCHEON-KFB-BoAYO-tilebatch-v14.img
+SHA-256: cccee8bb4704fa2ec14a4b1f71d882c4d3a541809c0b91c2506467b3850cff30
+
+초기 variants/l1-16k-dma3/는 배선 타이밍을 통과하지 못한 비교본이다. 그것을 최종 HW로 혼동하지 말 것. 또한 v14/software/bosio/gen3-bosio.dts는 DMA 1개인 상속 파일이다. 실제 v14 build_image.sh는 최종 HW 폴더의 gen3-bosio.dts(DMA 3개/PLIC 4 source)를 선택한다.
+
+기존 최종 구현 리포트: LUT 119,141, FF 76,182, BRAM 110 tiles, DSP 62. 배선 후 WNS +0.093ns, TNS 0, WHS +0.011ns, THS 0. CPU 목표 50MHz를 유지했다. 이는 해당 비트스트림의 기존 구현 결과이며 이번 문서 작성에서 재합성한 수치가 아니다. 초기 릴리스 문서에는 실보드 미검증이라고 남아 있지만, 이후 이 비트스트림과 v14 SD의 Linux 셸, BoAYO 및 앱 HDMI 출력은 실보드에서 확인했다. 모든 시나리오 검증 완료라는 뜻은 아니다.
+
+## 2. 전체 하드웨어 데이터 경로
+
+```text
+SD 카드 CLK/CMD/DAT[3:0]
+    ├─ 전원 직후: SD boot loader ───────────────────────┐
+    └─ Linux 실행 중: SD4 host ↔ DMA0                  │
+                                                       ▼
+ORYUKDO CPU (50MHz)                              DDR3 MIG
+ ├─ Fetch → Sv32 I-MMU/TLB → L1I ─┐               x32, 1GiB
+ ├─ LSU   → Sv32 D-MMU/TLB → L1D ─┴→ CPU AXI CDC       ▲
+ ├─ 로컬 UART0 / mtime / mtimecmp             │         │
+ └─ Branch·CSR / ALU×2 / MULDIV               ▼         │
+                                      7-master AXI     │
+ 투영코어0 ──────────────────────────→ fabric           │
+ 투영코어1 ──────────────────────────→ 100MHz           │
+ 출력코어의 DDR read master ─────────→ │                │
+ DMA0(SD/기존 copy-fill) ────────────→ ├→ AXI–MIG bridge┤
+ DMA1(BOSIO memory) ─────────────────→ │     native DDR arbiter
+ DMA2(범용) ────────────────────────→ │                ▲
+                                      └→ AXI-Lite 제어 │
+                                         PLIC/SD/DMA  │
+                                         BOSIO/UART1  │
+                                         SPI/I2C     │
+                                                      │
+ 구면 DDR 장면 → BOSIO 출력코어 → RGB888 스트림          │
+                               → kfb_video ───────────┘
+                                 DDR 영상 이중 버퍼 저장/읽기
+                                 → CDC FIFO → HDMI2 rgb2dvi
+```
+
+7개 master의 실제 번호: 0 CPU, 1 투영0, 2 투영1, 3 출력, 4 DMA0, 5 DMA1, 6 DMA2.
+소스의 or_bo_bosio_axi.dma[3]는 두 투영기와 출력기의 AXI master를 뜻한다. 이것과 별도 or_storage_dma 3개를 혼동하지 말 것.
+
+AXI 데이터는 32비트, master ID는 1비트다. HLS 호환 주소 필드는 64비트지만 상위 32비트가 0이 아닌 주소는 거절한다. fabric은 transaction 단위 round-robin 중재이며, 한 transaction이 끝나기 전에 다른 master burst를 끼워 넣지 않는다. 독립 코어가 동시에 실행될 수 있어도 DDR 전송을 완전히 병렬 처리하는 crossbar는 아니다. CPU 원자 연산은 AXI exclusive 대신 전역 lock을 사용한다. non-CPU master는 RAM에만 접근할 수 있다.
+
+MIG native 데이터 폭 256비트, ui_clk/fabric 100MHz. DDR3는 x16 칩 두 개를 x32로 구성한 1GiB 단일 메모리 공간이다. MIG 설정은 MT41K256M16XX-107, row 15 / column 10 / bank 3, DDR clock 400MHz, PHY ratio 4:1, ECC disabled. CPU 50MHz, HDMI pixel 74.25MHz, serializer 371.25MHz. HDMI2는 공식 Digilent rgb2dvi IP를 사용하고 외부 어댑터가 RGB/RBG 순서를 맞춘다.
+
+영상은 1280×720, HDMI 타이밍은 720p60이다. 이것이 BoAYO 장면 갱신이나 BOSIO 렌더링이 60fps라는 뜻은 아니다. 출력코어의 구면 장면 bank 전환과 kfb_video의 실제 모니터용 영상 bank 전환도 서로 다른 완료 지점이다.
+
+## 3. CPU와 캐시
+
+- 단일 RV32 hart. RV32IMA + Zicsr + Zifencei, Sv32, Svade(A/D fault를 SW가 처리), M/S/U privilege 지원. C/F/D 확장을 사용하지 않는다. 특히 부동소수점 계산은 HW FPU 경로가 없다.
+- Decode 3, Issue 5. 실행 lane은 Branch/CSR 1, ALU 2, MULDIV 1, LSU 1.
+- ORYUKDO 동적 스케줄러: NEL/IST/PRM/RS/WBC/FCL/FDU, Out-of-Order 실행, 순서 보장 Commit·분기 복구·precise exception·인터럽트 경계 처리.
+- IST 128, physical register 64, Flow Window 8, window당 16 instruction slots. 기본 Static Not Taken이며 custom predictor 연결은 사용하지 않는다. LSQ 32 entries, 활성화.
+- CPU EX 내부 발행 자료는 별도의 packed entry_t다: rs2/rs1/rd 각각6bit, imm32bit, uop8bit, path2bit, tag35bit(Flow ID3bit+PC32bit). 이는 Linux ioctl이나 DMA descriptor와 무관한 CPU 내부 인터페이스다.
+- I-MMU와 D-MMU 각각 기본 8-entry direct-mapped TLB가 있다. 캐시 추가 전의 'TLB가 없다'는 과거 설명을 현재 구성에 적용하지 말 것.
+- L1I/L1D 각각 16KiB, 2-way, 256 sets, line 32B. 물리 주소 변환 후 접근. LRU 교체 상태는 분산 RAM.
+- D-cache write-through / no-write-allocate. Store 완료는 DDR 쓰기 응답 뒤에 반환. dirty write-back cache가 아니다.
+- CPU Store가 해당 I/D line을 무효화하고, FENCE.I는 순서 보장 후 I-cache 및 먼저 fetch된 명령을 정리한다.
+- 외부 AXI master 쓰기는 기존 snoop CDC에서 CPU I/D line과 LR/SC 예약 무효화 소비를 확인한 뒤 DDR 쓰기를 허용한다. refill 충돌도 처리한다.
+- MMIO, BOSIO arena 0xbd000000..0xbdffffff, 영상 영역 0xbf800000..0xbfffffff는 CPU cache bypass.
+- DT에는 SD/DMA/BOSIO를 dma-coherent로 선언하지만, 이것이 같은 버퍼의 동시 쓰기·조기 재사용을 허용하는 것은 아니다. DMA barrier와 소유권 관리는 필요하다.
+- 영상 저장/scan 경로는 fabric을 우회해 native arbiter를 사용하며, 항상 비캐시 예약 영역에만 접근한다.
+
+## 4. 물리 주소 맵
+
+아래 주소는 CPU 물리 주소다. 표의 크기는 실제 해당 decode/register 범위이며, 주변 빈 영역이 모두 유효한 것은 아니다.
+
+| 시작 주소 | 크기 | 기능 | 비고 |
+|---|---:|---|---|
+| 0x00000000 | 0x1000 fetch window | reset ROM | 실제 짧은 bootstrap, 미정의 instruction은 EBREAK |
+| 0x02004000 | 8B | mtimecmp | hart0, RV32 low/high |
+| 0x0200bff8 | 8B | mtime | 50MHz tick, RV32 low/high |
+| 0x0c000000 | 0x00400000 | PLIC | source 1..4, hart0 M/S contexts |
+| 0x10000000 | 8B | UART0 | 8250 유사 polling, 115200 console/hvc0 경로 |
+| 0x10004000 | 0x20 | BOSIO system/status | sensor enable/status, projection IRQ sticky |
+| 0x10005000 | 8B | 추가 UART1 | AXI 연결, polling |
+| 0x10006000 | 0x14 | SPI master | 1 CS, byte command, mode 0..3, polling |
+| 0x10007000 | 0x14 | I2C master | byte command, open drain, polling |
+| 0x10008000 | 0x34 | native SD4 host | PLIC 1 |
+| 0x10009000 | 0x18 | DMA0 | SD 내부 전송 / copy-fill, PLIC 2 |
+| 0x1000a000 | 0x18 | DMA1 | BOSIO Linux memory DMA, PLIC 3 |
+| 0x1000b000 | 0x18 | DMA2 | 범용 Linux DMAengine, PLIC 4 |
+| 0x20000000 | 0x80 | projection0 control | HLS AXI-Lite |
+| 0x20010000 | 0x80 | projection1 control | 같은 ABI |
+| 0x20020000 | 0x80 | BOSIO output control | BS25 / DTF1 ABI |
+| 0x80000000 | 0x40000000 | DDR 1GiB | 마지막 주소 0xbfffffff |
+| 0xbd000000 | 0x01000000 | BOSIO 전용 arena | DDR 안의 16MiB 예약, no-map |
+| 0xbf800000 | 0x00800000 | 실제 HDMI 영상 버퍼 | DDR 안의 8MiB 예약, no-map |
+
+DDR의 예약 영역은 별도 RAM이 아니다. Linux DT에는 물리 1GiB가 기술되지만 예약 arena/영상/OpenSBI/커널 등의 사용량을 제외하면 사용자 가용 메모리는 1GiB보다 작다.
+영상 bank 시작은0xbf800000과0xbfc00000이다. kfb_video는 native word address를 사용하며, 이를 CPU byte address와 혼동하면 안 된다.
+
+부팅: MIG calibration → RTL boot loader → SD LBA 2048의 ORYSD001 헤더 → OpenSBI 0x80000000, Linux Image 0x80400000, DTB 0x87f00000 적재 → 검증 후 CPU reset 해제 → ROM → OpenSBI → Linux/initramfs → SD ext4 /data → BoAYO.
+주의: 현재 RTL sd_boot에는 부팅 시 DDR 전체 초기화와 적재 데이터 readback/CRC 검사가 있다. 이것은 BoAYO 장면 초기화와 별개의 현재 HW 동작이다. 이 비용을 데몬 실행 이후 화면 갱신 비용과 섞지 말 것.
+
+## 5. 인터럽트와 완료 방식
+
+| 장치 | PLIC source ID | CPU 전달 |
+|---|---:|---|
+| SD4 host | 1 | PLIC M context→MEIP(11), S context→SEIP(9) |
+| DMA0 copy/fill | 2 | 동일 |
+| DMA1 | 3 | 동일 |
+| DMA2 | 4 | 동일 |
+| mtimecmp | PLIC 아님 | MTIP(7), OpenSBI/Linux timer 경로 |
+| projection0/1 | PLIC 연결 없음 | 드라이버 polling, HLS GIE/IER 끔 |
+| output | PLIC 연결 없음 | active base/pending/busy polling |
+| UART0/UART1/SPI/I2C | PLIC 연결 없음 | polling |
+
+PLIC source ID와 Linux에서 동적으로 배정하는 virq 번호를 혼동하지 말 것. level-triggered이며 claim 후 해당 context가 complete하기 전까지 같은 source는 다시 pending되지 않는다.
+PLIC base 기준 register offsets:
+- priority[source]: 4×source (1..4), 값 하위 3bit.
+- pending 0x1000.
+- M enable 0x2000 / S enable 0x2080, bit source.
+- M threshold 0x200000 / claim-complete 0x200004.
+- S threshold 0x201000 / claim-complete 0x201004.
+
+BOSIO status block 0x10004000:
+- +0x00 sensor_enable bit0(RW).
+- +0x04 sensor_ready bit0, sensor_error bit1(RO).
+- +0x08 signature 0x41584931.
+- +0x10 projection_irq[1:0] sticky, write-one-clear. PLIC 연결은 아니다.
+
+센서 허브는 MPU6050용 I2C 경로와 96bit pose stream으로 출력코어에 연결돼 있다. 사용자 보드에는 센서를 쓰지 않으며 현재 시점 입력은 UART/소프트웨어다. 센서 I2C와 추가 범용 I2C는 별도다.
+pose stream은 {roll[31:0],pitch[31:0],yaw[31:0]} 순서이며 각각 signed milliradian이다. 기본 허브 설정은 I2C100kHz, sample100Hz, calibration256 samples. 이는 센서 장착·측정 완료를 뜻하지 않는다.
+
+## 6. BOSIO arena와 단위
+
+arena base 0xbd000000, 총 16MiB. 아래는 현재 드라이버 bo_offsets/bo_sizes.
+
+| region ID | 이름 | arena byte offset | 물리 시작 | 유효 크기 |
+|---:|---|---:|---|---:|
+| 0 | BO_TEXTURE | 0x900000 | 0xbd900000 | 0x400000 (4MiB) |
+| 1 | BO_DESC0 | 0 | 0xbd000000 | 64×72 = 4608B |
+| 2 | BO_DESC1 | 0x2000 | 0xbd002000 | 4608B |
+| 3 | BO_SCENE0 | 0x10000 | 0xbd010000 | 1,084,816×4 = 4,339,264B |
+| 4 | BO_SCENE1 | 0x450000 | 0xbd450000 | 4,339,264B |
+| 5 | BO_SCRATCH | 0xd00000 | 0xbdd00000 | 0x40000 (256KiB) |
+
+사용자 요청은 region과 offset을 쓰며, 임의의 물리 주소는 받지 않는다.
+단위가 중요하다:
+- upload/copy/fill offset·bytes: 바이트.
+- projection descriptor d[0],d[1],stride와 *_words: 32bit word.
+- scene directory entry: payload 시작점부터의 바이트 offset.
+- camera coefficient와 projection coefficient: signed 32bit 정수 bit pattern.
+- userspace 포인터: __aligned_u64 (RV32에서도 ABI 정렬 유지), DMA bus address가 아님.
+
+## 7. 투영코어 hardware descriptor: 정확히 18워드 = 72B
+
+각 투영코어는 DDR descriptor 배열을 읽는다. 아래 구조체 이름은 설명용이며 실제 데이터 배열과 동일한 순서다. 모든 필드는 32bit, 리틀엔디언이다.
+
+```c
+struct projection_descriptor_18w {
+    uint32_t texture_word_offset; // d[0], texture base + 4*d[0]
+    uint32_t scene_word_offset;   // d[1], selected scene/scratch base + 4*d[1]
+    uint32_t width;               // d[2], pixels
+    uint32_t height;              // d[3], pixels
+    uint32_t stride_words;        // d[4], input row stride in RGB32 words
+    uint32_t flags;               // d[5], bit0=clear local tile; bits15:8=fallback RGB332 index
+    int32_t u[4];                 // d[6..9]: constant,row,col,inverted
+    int32_t v[4];                 // d[10..13]
+    int32_t denominator[4];       // d[14..17]
+}; // sizeof == 72
+```
+
+1 job은 구면의 삼각형 타일 하나다. 현재 투영기 출력은 m=32, 1,024 triangular cells = RGB332 1,024B = 256 words. 이것은 정사각형 32×32 2D 블록과 셀 수만 같으며 공간 배치는 다르다.
+
+cell i=0..1023에서 row=floor(sqrt(i)), col=floor((i-row²)/2), inv=(i-row²)&1.
+U=u0+u1*row+u2*col+u3*inv, V와 D도 같은 식.
+유효 영역은 D>0, U>=0, V>=0, U<=D*(width-1), V<=D*(height-1).
+텍스처 좌표는 U/D,V/D. 참조 구현은 8bit 소수부 기반 bilinear interpolation 후 RGB332로 양자화한다. 입력 texture word는 0x00RRGGBB이며 alpha 합성 필드가 아니다.
+투영 계수는 동차 좌표의 공통 scale을 갖는다. 고정된 Q16.16으로 단정하지 말 것. CPU 생성기는 동적 2의 거듭제곱 scale을 선택한다.
+
+flags bit0=1이면 해당 job의 로컬 1KiB 타일을 fallback 색으로 시작한다. 이는 장면 전체 버퍼 초기화 명령이 아니다. bit0=0은 기존 타일 데이터를 보존하면서 유효한 투영 셀을 덮는 경로다. written_cells는 유효하게 샘플링한 셀 수이고, 항상 jobs×1024가 되는 카운터가 아니다.
+
+드라이버 제약: width/height 1..2048, stride>=width, 입력/출력 범위 검사, d[1]>=4476, 결과 256words가 대상 공간 안에 들어가야 한다. 하나의 BO_RUN에서 두 코어의 모든 destination tile 범위는 겹치면 안 된다. 최대 코어당 64 jobs, 두 코어 합계 128. 두 코어를 먼저 시작한 다음 각각의 clear-on-read ap_done을 따로 기억해 모두 완료될 때까지 기다린다.
+
+투영 MMIO (0x20000000 또는 0x20010000 기준):
+| offset | 의미 |
+|---|---|
+| 0x00 | bit0 start, bit1 done(COR), bit2 idle, bit3 ready(COR), bit7 auto_restart |
+| 0x04/0x08/0x0c | GIE / IER / ISR. 현재 SW는 GIE/IER=0 |
+| 0x10 | ap_return status |
+| 0x18/0x1c | texture byte base low/high |
+| 0x24/0x28 | descriptor byte base low/high |
+| 0x30/0x34 | scene/scratch byte base low/high |
+| 0x3c | texture_words |
+| 0x44 | descriptor_words = jobs×18 |
+| 0x4c | scene_words |
+| 0x54 | job_count |
+| 0x5c | written_cells |
+| 0x60 | written_cells valid(COR) |
+
+## 8. 출력코어 장면·카메라 description
+
+출력코어에는 투영기와 같은 18워드 job queue가 없다. DDR 장면과 MMIO camera shadow/commit을 사용한다.
+
+scene layout:
+- word 0..255: palette[256], 하위 24bit RGB888.
+- word 256..4475: directory[4220] = 20 faces×211 hierarchical triangle entries.
+- word 4476부터: cell payload, 1byte RGB332 palette index.
+- directory entry가 0xffffffff이면 invalid/빈 영역으로 검정 출력. 일반 entry는 payload 시작점 기준 byte offset.
+- 현재 BS25 decode에서 '임의 단색을 directory bit만으로 지정하는 별도 opcode'는 확인되지 않는다. 단색 유효 타일의 current SW 경로는 DMA fill을 쓴다. 빈 타일 metadata, 단색 DMA fill, projection flags의 local fallback을 서로 혼동하지 말 것.
+- metadata는 4476words=17,904B이며 HW loader는 16word burst 때문에 4480words까지 읽는다. scene_words는 최소4480, 최대1,084,816, 16word 정렬.
+- resolution 0/1/2 → m=8/16/32 → 타일당64/256/1024 cells. 현재 앱/투영 경로는 resolution2(m32).
+- output DDR cache는 CPU L1과 별개: 기본16KiB, 2-way, 64B line. 장면 commit 때 invalidation.
+
+카메라 180words = 20 faces×3 barycentric numerators×(start,dx,dy):
+```c
+struct camera_description {
+    int32_t face[20][3][3]; // [face][barycentric component][start,dx,dy]
+}; // 720 bytes
+```
+SW 생성기는 coefficient를 2^24 scale로 양자화한다. 화면 pixel(x,y)별 numerator는 start+x*dx+y*dy이고, output 내부 DDA가 이를 더하기로 평가한다. 이 자료는 pitch/yaw/roll 각도 세 숫자 자체가 아니다. 일반 SW 시점 변경은 CPU가 계수 생성 후 BO_SET_POSE로 보낸다. 별도 sensor mode는 허브 pose 경로를 사용한다.
+
+output MMIO (0x20020000 기준, 현재 bosio_output_top ABI):
+| offset | 의미 |
+|---|---|
+| 0x00 | enable bit0 |
+| 0x04 | status: bit0 enable,1 scene_valid,2 cache_busy,3 pose_pending,4 scene_pending,5 cache_error; 상위16 frame counter |
+| 0x08/0x0c | staged scene byte base / scene_words |
+| 0x10/0x14/0x18 | cache hits / misses / stalls |
+| 0x1c | AA enable bit0, threshold[15:8], strength[23:16] |
+| 0x20 | sensor axis invert[2:0] |
+| 0x24/0x28/0x2c/0x30 | sensor yaw/pitch/roll/packet count |
+| 0x34/0x38/0x3c | cache line bytes / cache bytes / ways |
+| 0x40 | frame pipeline drained/ready bit0 |
+| 0x44 | active scene byte base |
+| 0x48/0x4c | staged/active display transform |
+| 0x50 | capability 0x44544631 (DTF1) |
+| 0x5c | resolution[1:0] |
+| 0x60/0x64 | camera write index / coefficient data(자동 index 증가) |
+| 0x68 | pose commit bit0; pending readback |
+| 0x6c | bit0 scene metadata reload request, bit1 metadata 재사용 base switch request |
+| 0x70/0x74 | received / payload capacity bytes |
+| 0x78 | sensor mode/status |
+| 0x7c | signature 0x42533235 (BS25) |
+
+vendor 폴더의 bosio_out_reg_ctrl.v에는 다른 과거 ABI가 남아 있다. 현재 top이 사용하는 위 BS25 레지스터와 섞지 말 것.
+
+BO_PUBLISH는 4476word immutable metadata snapshot을 받고, 드라이버가 검증·bank별 차이 비교·변경 영역 전송·commit을 같은 mutex 안에서 처리한다. 활성 장면 쓰기는 금지한다. 전환 요청의 AXI B 응답은 화면 전환 완료가 아니다. active base가 바뀌고 pending/busy가 해소된 뒤 이전 bank를 재사용한다. 이 확인조차 HDMI 수신기에 첫 pixel이 보인 시각과 동일하지 않다.
+
+## 9. DMA description과 제약
+
+세 DMA 엔진은 같은 or_storage_dma RTL이다. HW가 DDR linked descriptor ring을 직접 fetch하는 구조는 아니다. Linux DMAengine이 SW descriptor를 큐에 넣고 아래 MMIO를 순서대로 쓴다.
+
+설명용 register 구조:
+```c
+struct dma_register_job {
+    uint32_t src_phys;  // +0x00 byte address
+    uint32_t dst_phys;  // +0x04 byte address
+    uint32_t bytes;     // +0x08 byte count
+    uint32_t pattern;   // +0x0c fill에서 반복할 32bit word
+    uint32_t control;   // +0x10 쓰면 enqueue; op[1:0]:1 copy,2 fill; bit8 IRQ enable
+    uint32_t status;    // +0x14 bit0 busy,1 complete,2 error; bit1 W1C
+};
+```
+
+현재 Linux 드라이버 내부 SW descriptor:
+```c
+struct or_desc {
+    struct virt_dma_desc vd; // Linux SW queue/cookie, HW layout 아님
+    dma_addr_t src, dst;
+    u32 bytes, pattern, op;
+};
+```
+
+- HW burst 최대16×32bit=64B, src/dst 4KiB 경계에서 분할.
+- src/dst/length는 4B 정렬, bytes>0, 주소는 DDR 범위 안. copy에서 겹치는 범위는 거절: memmove가 아니다.
+- length register는32bit지만 실제 허용 길이는 DDR/할당 버퍼 범위로 제한된다. '최대64B밖에 복사 못 함'이 아니라 긴 작업을64B 이하 burst로 나눠 실행한다.
+- HW fill은32bit pattern, Linux dmaengine memset/BOSIO BO_MEM_FILL은 한 byte 반복을 제공한다.
+- SD 전용 DMA0 경로는 SD controller의512B sector buffer와 DDR 사이 이동을 담당한다. DMA1/2의 SD 전용 입력은 비활성.
+- HW 완료는 write response까지 확인한 뒤 IRQ. command write acceptance와 complete는 다르다.
+- active DMA를 즉시 취소하는 HW abort는 없다. 현재 driver terminate는 active가 있으면 -EBUSY. 안전 종료는 새 요청 중단→기존 작업 완료/배출이 기본이며 timeout 때 즉시 buffer를 반환하면 안 된다.
+- DMA1을 현재 BOSIO가 사용한다. DMA2가 존재한다고 BoAYO가 자동으로 두 memory DMA를 병렬 사용하는 것은 아니다.
+- 2D stride blit, 회전/투영, alpha blend, arbitrary pixel mask는 이 범용 DMA의 단일 HW job 기능이 아니다. 연속 구간 분할/여러 요청 또는 투영코어/CPU가 필요하다.
+
+## 10. SD 및 나머지 주변장치의 요청 형태
+
+SD4 host +offset:
+0x00 signature SD41, 0x04 argument, 0x08 command(write가 시작), 0x0c status,
+0x10 half-period divider, 0x14 config bit0 four-bit, 0x18 DDR byte address,
+0x1c transfer bytes, 0x20..0x2c response128bit, 0x30 IRQ enable bit0.
+command: bits5:0 SD command index,7:6 response type,8 CRC check,9 data_present,10 write.
+response type은0 none/1 short/2 long/3 short-busy. status bit0 busy,1 complete(W1C),6:4 failure.
+SD 최대25MHz,4bit,3.3V,SDHC/SDXC. Linux 요청은 sector buffer/DMA와 host IRQ로 완료된다. filesystem 해석은 Linux가 한다. DMA가 ext4 파일명으로 파일을 찾아 읽는 것은 아니다.
+
+SPI: +0 data, +4 status(busy/done/CS), +8 divider, +0xc config(CPOL,CPHA,keepCS), +0x10 command(start bit0, clear done bit1).
+I2C: +0 data, +4 status(busy/done/NACK/timeout/collision/owned/SCL/SDA), +8 divider, +0xc timeout, +0x10 command(START0,STOP1,READ2,WRITE3,readNACK4,clear5).
+UART0/UART1은 byte register 접근이고, 데이터/상태를 polling한다. UART1/SPI/I2C를 RTL에 넣었다는 사실과 현재 Linux DT/드라이버에 일반 장치로 등록했다는 사실은 구분해야 한다. 현재 첨부 DT는 UART1/SPI/I2C node를 만들지 않는다.
+
+## 11. Linux BOSIO 요청 ABI 요약
+
+장치 /dev/bosio0, ABI3, CAP_SYS_RAWIO, 단일 opener. 같은 fd의 요청도 드라이버 mutex로 직렬화. 현재 ioctl은 동기식이며 반환 시 완료/오류를 확인한다.
+
+- bo_upload: region, byte offset, bytes, reserved, 8B-aligned user pointer.
+- bo_run: bank(0/1 scene,2 scratch), scene_words, texture_words, jobs[2], timeout_ms → status[2],cells[2].
+- bo_present: bank, scene_words, resolution, timeout_ms, camera[180].
+- bo_pose: timeout_ms,camera[180].
+- bo_mem_copy: src_region/src_offset,dst_region/dst_offset,bytes,reserved.
+- bo_mem_fill: region,offset,bytes,value(0..255),reserved.
+- bo_tile_blend: bank,tile,scratch_word,mode,color,reserved,mask[32]. tile은 destination payload slot index, scratch_word는 scratch 시작 기준 word offset. mask bit i는1024개 cell 중 i번째 byte 선택. mode0은scratch byte복사, mode1은color byte채우기.
+- bo_batch: count,reserved,entries pointer. 최대128개 COPY/FILL/BLEND 순서 실행. 전체 list 사전 검증 후 실행하지만, runtime failure시 이전 entry가 이미 수행됐을 수 있다. HW multi-engine 동시 descriptor queue가 아니다.
+- bo_publish: bo_present + immutable metadata user pointer + words + 반환 profile.
+- BO_UPLOAD_DIRECT: 정렬된 userspace page를 pin/map하여 source-only DMA, 임시 pixel staging 복사 없음. 반환 전 변경/unmap/reuse 금지. timeout에서는 late DMA를 고려해 pin 유지/poison.
+- BO_RGB_FILL: writable userspace RGB24 버퍼용 확장. texture RGB32와 다름. color는 R | G<<8 | B<<16, 최대3MiB,4B 정렬.
+- BO_DOWNLOAD: 완료된 scratch만 허용.
+- BO_STOP: 출력 비활성 및 pipeline/DDR 요청 drain 확인.
+
+경계 합성은 '창의 테두리 장식'만 뜻하지 않는다. 한 구면 타일 안에서 일부 셀은 앞창, 다른 셀은 뒷창/배경에 속하는 경우의 가림 처리다. 현재 BO_TILE_BLEND는 CPU가 mask를 해석하고 긴 완전 선택 구간은 DMA, 짧은 구간이나 부분 word는 CPU read-modify-write로 처리한다. 투영코어의 alpha blender 기능이 아니다. 사각형 창도 구면 타일과 경계가 맞아떨어지지 않으면 이 처리가 필요하다.
+
+## 12. 현재 SW와 측정의 한계
+
+BoAYO는 C++17 native. prepared asset/geometry plan, texture pool, dirty tracking, DDR resident scene 이중 bank, copy/fill/blend batch와 metadata publish 경로가 있다.
+v14의2D dirty 단위32×32는 변경 사각형을 나누는 추적 단위다. 현재 창 texture는 연속 linear storage이며 각각 독립 저장되는2D tile atlas라고 설명하면 부정확하다.
+dirty2D rect로 영향을 받는 구면 타일을 보수적으로 고른다. 선택된 구면 타일1개를1024cells 단위로 다시 투영하는 것은 현재 설계 의도에 맞다. 창 이동/닫기는 이전 위치와 새 위치 및 드러난 아래 layer를 함께 반영해야 한다. unchanged tile은 재사용하고 inactive bank에 없으면 DMA복사한다.
+v14의 asset cache는 총256KiB/개별64KiB 제한이며 SDK Pulse400×24 RGB32 strip의10상태는384,000B라 cache thrash가 관측됐다. 실제 앱이 바뀐 몇pixel만 dirty로 보고하는 최적화가 아직 완성된 것은 아니다.
+실보드 비교에서v14는 Telemetry/SDK Pulse 평균 갱신 시간이 비교본보다 각각 약31.55%/26.69% 증가했다. 따라서v14를 성능 개선 완료로 간주하지 말 것.
+
+현재 보드에서는 Linux 셸/앱/HDMI 동작을 확인했지만 CPU→투영 요청부터 HW 순수 실행 완료까지의 정밀한 단계별 계측은 확정하지 않았다. 사용자 공간ioctl경과시간을 core cycles로 둔갑시키거나 전체frame시간/타일수로1타일 latency를 단정하지 말 것. batch당 latency, tile당 throughput, 앱 dirty/계수 준비, 메모리 업로드, 경계 처리, 출력 commit, 실제 HDMI 노출은 따로 측정해야 한다.
+추후 커널 이미지에 계측을 넣기로 했으며 아직 구현 완료가 아니다. poweroff/umount 및 보시오·DMA drain→SD sync/unmount→halt 종료 경로도 다음 이미지의 요구사항이지 현재 제공 기능이 아니다.
+
+## 13. 요청하는 답변
+
+1. 이 구조에서 CPU/DMA/투영/출력이 각각 실제로 하는 일을 표로 설명해 달라.
+2. 2D 한 부분 수정→구면 타일 갱신→출력까지 현재 필수 요청과 피할 수 있는 복사를 구분해 달라.
+3. 단일 타일 latency 및 여러 코어 요청 지연을 측정할 정확한 시작/끝 지점, 관련 register/완료 조건, 최소 계측 항목을 제안해 달라. 지금 수치를 모르면 모른다고 해 달라.
+4. transaction 직렬 fabric, MMIO 왕복, BO_RUN descriptor 중첩검사, polling sleep, mutex, snoop, SD sector 처리, tile blend, metadata publish 중 어디가 병목 후보인지 근거와 함께 순위를 나눠 달라. 측정 전 확정은 하지 말 것.
+5. HW를 유지하면서 작은2D 변경/고정 에셋 재사용/요청 묶기를 개선하는 순서를 제안해 달라. 전체 장면0초기화를 기본 전제로 삼지 말 것.
+6. HW 변경이 필요하다면 비용·호환성·타이밍 여유와 함께 별도 대안으로만 제안해 달라. 현FPGA는 면적·timing 여유가 작다.
+7. 부족한 자료가 있다면 정확한 파일/신호/field를 짚어 달라. 일반 GPU·AXI DMA·Zynq의 기능을 이 커스텀 SoC에 자동으로 대입하지 말 것.
+
+이하 부록의 구조체는 실제 v14 UAPI 원문이다. 위 설명용 구조체와 달리 ioctl ABI의 기준이며, __aligned_u64와 reserved field를 생략해 재정의하지 말 것.
+
+
+## 부록 A. 현재 Linux BOSIO UAPI 원문
+출처: updates/boayo-tilebatch-v14/software/bosio/include/bosio_uapi.h
+
+#ifndef BOSIO_UAPI_H
+#define BOSIO_UAPI_H
+#include <linux/types.h>
+#include <linux/ioctl.h>
+#define BO_ABI 3
+#define BO_ARENA_BYTES 0x1000000u
+#define BO_MAX_WORDS 1084816u
+#define BO_MAX_JOBS 64u
+#define BO_DESC_WORDS 18u
+#define BO_HEADER_WORDS 4476u
+#define BO_TILE_WORDS 256u
+/* Scratch is disjoint from both scanout banks and never presented. */
+#define BO_SCRATCH_BYTES 0x40000u
+enum { BO_TEXTURE, BO_DESC0, BO_DESC1, BO_SCENE0, BO_SCENE1, BO_SCRATCH, BO_REGIONS };
+struct bo_upload { __u32 region, offset, bytes, reserved; __aligned_u64 data; };
+struct bo_run {
+    __u32 bank, scene_words, texture_words, jobs[2], timeout_ms;
+    __u32 status[2], cells[2];
+};
+struct bo_present {
+    __u32 bank, scene_words, resolution, timeout_ms;
+    __u32 camera[180];
+};
+struct bo_info {
+    __u32 abi, signature, capability, status, active_base;
+    __s32 active_bank;
+    __u32 poisoned, max_jobs, max_scene_words;
+};
+struct bo_pose { __u32 timeout_ms; __u32 camera[180]; };
+/* Optional ABI3 extension; old structures/ioctl numbers stay unchanged. */
+#define BO_DMA_COPY 1u
+#define BO_DMA_FILL 2u
+#define BO_DMA_UPLOAD 4u
+#define BO_DMA_RGB_USER 8u
+#define BO_DMA_DIRECT_USER 16u
+#define BO_DMA_TILE_BLEND 32u
+/* One changed tile only. mode 0 copies selected scratch bytes; mode 1 paints
+ * selected bytes with color. mask bit i selects RGB332 byte i. */
+struct bo_tile_blend {
+    __u32 bank, tile, scratch_word, mode, color, reserved;
+    __u32 mask[32];
+};
+#define BO_TILE_BLEND _IOW('B', 0x4c, struct bo_tile_blend)
+#define BO_RGB_MAX_BYTES (3u * 1024u * 1024u)
+/* Synchronous RGB24 fill of writable, 4-byte-aligned user memory.
+ * The caller must not access/reuse/unmap the range until return. On ETIMEDOUT
+ * it must terminate: pages remain pinned until reset for a possible late DMA.
+ * color is R | G<<8 | B<<16, independent of host byte order. */
+struct bo_rgb_fill { __aligned_u64 data; __u32 bytes, color, reserved[2]; };
+struct bo_mem_copy {
+    __u32 src_region, src_offset, dst_region, dst_offset, bytes, reserved;
+};
+/* value is one byte, repeated throughout a 4-byte-aligned range. */
+struct bo_mem_fill { __u32 region, offset, bytes, value, reserved; };
+struct bo_dma_info {
+    __u32 version, features, upload_threshold, quarantined;
+    __aligned_u64 copy_ops, copy_bytes, fill_ops, fill_bytes, upload_ops, upload_bytes;
+    __u32 errors, timeouts;
+};
+#define BO_GET_INFO _IOR('B', 0x40, struct bo_info)
+#define BO_UPLOAD _IOW('B', 0x41, struct bo_upload)
+#define BO_RUN _IOWR('B', 0x42, struct bo_run)
+#define BO_PRESENT _IOW('B', 0x43, struct bo_present)
+#define BO_STOP _IO('B', 0x44)
+#define BO_DOWNLOAD _IOW('B', 0x45, struct bo_upload)
+#define BO_SET_POSE _IOW('B', 0x46, struct bo_pose)
+#define BO_MEM_COPY _IOW('B', 0x47, struct bo_mem_copy)
+#define BO_MEM_FILL _IOW('B', 0x48, struct bo_mem_fill)
+#define BO_GET_DMA_INFO _IOR('B', 0x49, struct bo_dma_info)
+#define BO_RGB_FILL _IOW('B', 0x4a, struct bo_rgb_fill)
+/* Synchronous source-only pinned-page DMA; no temporary pixel buffer.
+ * Source must remain immutable/mapped until return. ETIMEDOUT poisons the
+ * device and retains mappings/pins until board reset. Never pass bus addresses. */
+#define BO_UPLOAD_DIRECT _IOW('B', 0x4b, struct bo_upload)
+/* Ordered synchronous commands. Entire list is validated before any write.
+ * On execution failure earlier commands may have completed; device is poisoned.
+ * Entries are copied once, never reread from mutable userspace during execution. */
+#define BO_DMA_BATCH 64u
+#define BO_BATCH_MAX 128u
+#define BO_BATCH_COPY 0u
+#define BO_BATCH_FILL 1u
+#define BO_BATCH_BLEND 2u
+struct bo_batch_entry {
+    __u32 kind, reserved;
+    union { struct bo_mem_copy copy; struct bo_mem_fill fill; struct bo_tile_blend blend; } op;
+};
+struct bo_batch { __u32 count, reserved; __aligned_u64 entries; };
+#define BO_BATCH _IOW('B', 0x4d, struct bo_batch)
+/* Full immutable CPU metadata snapshot; driver writes only changed ranges and
+ * commits under the same mutex. No caller-supplied dirty mask or bus address. */
+#define BO_DMA_PUBLISH 128u
+struct bo_publish_profile {
+    __aligned_u64 validate_us, upload_us, configure_us, select_us, wait_us, finish_us, user_copy_us;
+    __u32 uploaded_words, upload_ranges, command, reserved;
+};
+struct bo_publish {
+    struct bo_present present;
+    __aligned_u64 metadata;
+    __u32 words, reserved;
+    struct bo_publish_profile profile;
+};
+#define BO_PUBLISH _IOWR('B', 0x4e, struct bo_publish)
+/* Optional diagnostics. Existing ABI3 ioctl layouts remain unchanged.
+ * Timers are cumulative microseconds; disabled by default. */
+#define BO_DIAG_FIELDS(X) X(batch_calls) X(batch_copy_us) X(batch_validate_us) X(batch_execute_us) X(batch_copy_dma_us) X(batch_fill_dma_us) X(tile_calls) X(tile_mask_us) X(tile_dma_us) X(tile_cpu_us) X(tile_fence_us) X(tile_dma_calls) X(tile_dma_bytes) X(tile_cpu_words) X(publish_calls) X(publish_copy_us) X(publish_validate_us) X(publish_diff_us) X(publish_transfer_us) X(publish_compare_us) X(publish_mmio_us) X(publish_poll_us) X(publish_sleep_us) X(publish_polls) X(publish_finish_us)
+struct bo_driver_profile {
+    __u32 version, enabled, fast_paths, reserved;
+#define BO_DIAG_MEMBER(name) __aligned_u64 name;
+    BO_DIAG_FIELDS(BO_DIAG_MEMBER)
+#undef BO_DIAG_MEMBER
+};
+struct bo_profile_control { __u32 enabled, fast_paths, reset, reserved; };
+#define BO_PROFILE_CONTROL _IOW('B', 0x4f, struct bo_profile_control)
+#define BO_GET_PROFILE _IOR('B', 0x50, struct bo_driver_profile)
+#endif
+
+## 부록 B. v14 이미지 빌드가 선택하는 Device Tree 원문
+출처: variants/l1-16k-dma3-lru-ram/software/bosio/gen3-bosio.dts
+
+/dts-v1/;
+// 50 MHz timebase and UART input clock.
+// Board clocks, pins, DDR controller and peripherals are separate integration.
+/ {
+    #address-cells = <1>;
+    #size-cells = <1>;
+    compatible = "oryukdo,gen3";
+    model = "HAEBANCHEON 3d5i L1-16K DMA3";
+    chosen {
+        stdout-path = "/soc/serial@10000000:115200n8";
+        bootargs = "earlycon=sbi console=hvc0 loglevel=7 nokaslr lpj=1000000 rdinit=/init initcall_debug ignore_loglevel keep_bootcon printk.time=1";
+    };
+    memory@80000000 { device_type = "memory"; reg = <0x80000000 0x40000000>; };
+    reserved-memory {
+        #address-cells = <1>;
+        #size-cells = <1>;
+        ranges;
+        bosio_dma: dma-pool@bd000000 {
+            compatible = "oryukdo,bosio-reserved-arena";
+            reg = <0xbd000000 0x01000000>;
+            no-map;
+        };
+        // OpenSBI additionally inserts its own no-map firmware reservation.
+        bosio_frames: framebuffer@bf800000 {
+            reg = <0xbf800000 0x00800000>;
+            no-map;
+        };
+    };
+    cpus {
+        #address-cells = <1>;
+        #size-cells = <0>;
+        timebase-frequency = <50000000>;
+        cpu@0 {
+            device_type = "cpu";
+            compatible = "riscv";
+            reg = <0>;
+            status = "okay";
+            riscv,isa = "rv32ima_zicsr_zifencei_svade";
+            riscv,isa-base = "rv32i";
+            riscv,isa-extensions = "i", "m", "a", "zicsr", "zifencei", "svade";
+            mmu-type = "riscv,sv32";
+            i-cache-size = <16384>;
+            i-cache-sets = <256>;
+            i-cache-block-size = <32>;
+            d-cache-size = <16384>;
+            d-cache-sets = <256>;
+            d-cache-block-size = <32>;
+            cpu_intc: interrupt-controller {
+                #interrupt-cells = <1>;
+                #address-cells = <0>;
+                interrupt-controller;
+                compatible = "riscv,cpu-intc";
+            };
+        };
+    };
+    soc {
+        #address-cells = <1>;
+        #size-cells = <1>;
+        compatible = "simple-bus";
+        ranges;
+        plic: interrupt-controller@c000000 {
+            compatible = "riscv,plic0";
+            reg = <0x0c000000 0x00400000>;
+            #address-cells = <0>;
+            #interrupt-cells = <1>;
+            interrupt-controller;
+            riscv,ndev = <4>;
+            interrupts-extended = <&cpu_intc 11>, <&cpu_intc 9>;
+        };
+        mmc@10008000 {
+            compatible = "oryukdo,sd4-v1";
+            dma-coherent;
+            reg = <0x10008000 0x34>;
+            interrupt-parent = <&plic>;
+            interrupts = <1>;
+            bus-width = <4>;
+            max-frequency = <25000000>;
+            non-removable;
+            no-1-8-v;
+        };
+        storage_dma: dma-controller@10009000 {
+            compatible = "oryukdo,dma-v1";
+            dma-coherent;
+            reg = <0x10009000 0x18>;
+            interrupt-parent = <&plic>;
+            interrupts = <2>;
+            #dma-cells = <1>;
+        };
+        bosio_memory_dma: dma-controller@1000a000 {
+            compatible = "oryukdo,dma-v1";
+            reg = <0x1000a000 0x18>;
+            interrupt-parent = <&plic>;
+            interrupts = <3>;
+            #dma-cells = <1>;
+            dma-coherent;
+        };
+        general_dma: dma-controller@1000b000 {
+            compatible = "oryukdo,dma-v1";
+            reg = <0x1000b000 0x18>;
+            interrupt-parent = <&plic>;
+            interrupts = <4>;
+            #dma-cells = <1>;
+            dma-coherent;
+        };
+        bosio@20000000 {
+            compatible = "oryukdo,kfb-bosio-v1";
+            reg = <0x20000000 0x80>, <0x20010000 0x80>, <0x20020000 0x80>;
+            reg-names = "projection0", "projection1", "output";
+            memory-region = <&bosio_dma>;
+            dma-coherent;
+            dmas = <&bosio_memory_dma 0>;
+            dma-names = "memory";
+            status = "okay";
+        };
+        serial@10000000 {
+            compatible = "ns16550";
+            reg = <0x10000000 8>;
+            clock-frequency = <50000000>;
+            current-speed = <115200>;
+            reg-shift = <0>;
+            reg-io-width = <1>;
+            // Polling only; no external UART interrupt controller yet.
+        };
+        timer@200bff8 {
+            compatible = "riscv,aclint-mtimer";
+            reg = <0x0200bff8 8>, <0x02004000 8>;
+            interrupts-extended = <&cpu_intc 7>;
+        };
+    };
+};
+
+## 부록 C. 확인한 소스 위치
+저장소 루트 기준 경로다. 현재 RTL과 현재 SW를 위에서 지정한 버전으로 구분해서 읽었다.
+
+- variants/l1-16k-dma3-lru-ram/soc/board/gen3_kfb_bosio.sv
+- variants/l1-16k-dma3-lru-ram/soc/board/kfb_video.sv
+- variants/l1-16k-dma3-lru-ram/soc/board/kfb_hdmi.sv
+- variants/l1-16k-dma3-lru-ram/soc/board/mig_a.prj
+- variants/l1-16k-dma3-lru-ram/soc/board/sd_boot.sv
+- variants/l1-16k-dma3-lru-ram/soc/rtl/gen3_cpu.sv
+- variants/l1-16k-dma3-lru-ram/soc/rtl/gen3_soc.sv
+- variants/l1-16k-dma3-lru-ram/soc/rtl/oryukdo_scheduler_integrated.sv
+- variants/l1-16k-dma3-lru-ram/soc/rtl/rv32_sv32.sv
+- variants/l1-16k-dma3-lru-ram/soc/bosio/gen3_bosio_soc.sv
+- variants/l1-16k-dma3-lru-ram/soc/bosio/or_bo_axi_pkg.sv
+- variants/l1-16k-dma3-lru-ram/soc/bosio/or_bo_axi_fabric.sv
+- variants/l1-16k-dma3-lru-ram/soc/bosio/or_storage_dma.sv
+- variants/l1-16k-dma3-lru-ram/soc/bosio/or_storage_plic.sv
+- variants/l1-16k-dma3-lru-ram/soc/bosio/or_sd_storage.sv
+- variants/l1-16k-dma3-lru-ram/soc/vendor/projection/bosio_projector_control_s_axi.v
+- variants/l1-16k-dma3-lru-ram/soc/vendor/output/bosio_output_top.v
+- variants/l1-16k-dma3-lru-ram/soc/vendor/output/bosio_ddr_scene_cache.v
+- variants/l1-16k-dma3-lru-ram/software/bosio/gen3-bosio.dts
+- variants/l1-16k-dma3-lru-ram/software/storage/oryukdo_dma.c
+- updates/boayo-tilebatch-v14/build_image.sh
+- updates/boayo-tilebatch-v14/software/bosio/include/bosio_uapi.h
+- updates/boayo-tilebatch-v14/software/bosio/common/bosio_engine.c
+- updates/boayo-tilebatch-v14/software/bosio/common/bosio_tile.h
+- updates/boayo-tilebatch-v14/software/boayo/native/src/geometry.cpp
+- updates/boayo-tilebatch-v14/software/boayo/native/src/resident.cpp
+- updates/boayo-tilebatch-v14/BOARD_RESULT_KO.md

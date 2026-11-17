@@ -1,0 +1,8 @@
+{
+  "command": "kill -9 62; while test -e /proc/62/exe; do sleep 1; done; rm /tmp/bosio-wm.sock; sync",
+  "seconds": 2.826,
+  "rc": 0,
+  "uart": "kill -9 62; while test -e /proc/62/exe; do sleep 1; done; rm /tmp/bosio\r\r\r\n-wm.sock; sync; echo INCR11_e3632362_RC:$?\r\r\nINCR11_e3632362_RC:0\r\r\n",
+  "observed_at": "2026-11-15T00:54:30.557559",
+  "log_start": 408201
+}

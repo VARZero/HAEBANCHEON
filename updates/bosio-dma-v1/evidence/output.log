@@ -1,0 +1,2 @@
+PASS CPU-vs-DMA both-bank byte equality: metadata blank, full scene, 32 BPT2 patches; active guard/fill/error quarantine
+CPU uploaded_words=34872 DMA uploaded_words=17436 device_copied_words=17436

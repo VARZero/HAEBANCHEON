@@ -1,0 +1,54 @@
+--- a/src/apps.cpp
++++ b/src/apps.cpp
+@@ -131,7 +131,7 @@
+                               : (!drag.is_null() ? drag["zone"].get<std::string>() : "idle")}};
+ }
+ J App::shape() const {
+-  return J::array({J::array({48, 4, width - 96, height - 12, 14})});
++  return J::array({J::array({48, 4, width - 96, height - 12, 0})});
+ }
+ void App::sync_shape() {
+   auto s = shape();
+--- a/src/assets.cpp
++++ b/src/assets.cpp
+@@ -40,7 +40,9 @@
+ }
+ std::optional<Surface> asset_surface(const J &request){
+   const char *mode=getenv("BOAYO_ASSETS");if(mode && std::string(mode)=="0")return {};
+-  std::string key=request.dump();
++  J versioned=request;
++  if(versioned[0]=="frame" || versioned[0]=="app-base")versioned.push_back("rect-body-v14");
++  std::string key=versioned.dump();
+   for(auto i=cache.begin();i!=cache.end();++i)if(i->key==key){
+     ++hits;cache.splice(cache.begin(),cache,i);auto &e=cache.front();init_trace::mark("asset.cache",e.texture->size()*4);
+     return Surface(e.w,e.h,{},e.texture);
+--- a/src/ui.cpp
++++ b/src/ui.cpp
+@@ -215,8 +215,8 @@
+   require(w >= 240 && h >= 170, "app surface too small");
+   Surface c(w, h);
+   int sx = 48, sy = 4, sw = w - 96, sh = h - 12, cx = 50, cy = 48, cw = w - 100, ch = h - 82;
+-  c.rounded(sx, sy, sw, sh, 14, edge);
+-  c.rounded(sx + 1, sy + 1, sw - 2, sh - 2, 13, chrome);
++  c.rect(sx, sy, sw, sh, edge);
++  c.rect(sx + 1, sy + 1, sw - 2, sh - 2, chrome);
+   c.rect(cx, 6, cw, 40, {64, 96, 128});
+   c.rect(cx, cy, cw, ch, white);
+   c.rect(cx, 46, cw, 1, edge);
+@@ -233,14 +233,8 @@
+   else if (hovered == "close")
+     label = "CLOSE";
+   c.text(label, cx + 10, bottom + 9, subtle, 1);
+-  Surface mask(w, h, {0, 0, 0});
+-  mask.rounded(sx, sy, sw, sh, 14, {255, 255, 255});
+-  for (size_t p = 0; p < c.pixels.size(); p += 3) {
+-    float alpha = mask.pixels[p] / 255.f;
+-    for (int k = 0; k < 3; k++)
+-      c.pixels[p + k] = uint8_t(
+-          std::nearbyint(float(c.pixels[p + k] * alpha) + float(black[k] * float(1 - alpha))));
+-  }
++  // Rectangular app body; the background is already black outside it.
++  // Shared move/resize/close controls retain their original rounded artwork.
+   if (focused)
+     c.rect(sx + 14, sy, sw - 28, 1, focus_color);
+   if (focused && !external) {

@@ -1,0 +1,8 @@
+{
+  "result": "PASS_RECT_BODY_AND_UNCHANGED_CONTROLS",
+  "assets": 689,
+  "button_assets_identical": 18,
+  "app_shapes_rectangular": 3,
+  "all_asset_pixels_match_reference": true,
+  "physical": false
+}

@@ -1,0 +1,2 @@
+PASS BS25 actual RTL: full/patch, frame boundary, old reads drain, cache invalidate, inactive black, AXI stalls, metadata error recovery
+- /mnt/d/ORYUKDO-Gen3_AB_integrated_unverified/ORYUKDO-Gen3/work/ORYUKDO-3d5i_BOSIO_SoC/updates/boayo-tiles-v4/tests/tb_scene_switch.sv:79: Verilog $finish

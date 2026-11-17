@@ -1,0 +1,29 @@
+{
+  "result": "PASS_BOARD_FUNCTION_AND_MASK_EQUIVALENCE",
+  "motion_steps": 25,
+  "apps_restored": [
+    2
+  ],
+  "mask_benchmark": {
+    "fast_first_us": 2400705,
+    "fast_second_us": 2220317,
+    "integer_samples": 11956,
+    "pixels": 16384,
+    "precise_samples": 93,
+    "reference_us": 25056008,
+    "result": "PASS_RV32_MASK_BENCHMARK",
+    "tiles": 16
+  },
+  "mask_reduction_percent": 90.77861485357126,
+  "mask_speedup": 10.844357806563137,
+  "app_sha256": "c6e9114ca5398f84e0c7bc2522bda71be7f064a6781e950f4bd20e6ecca0dc51",
+  "image_sha256": "a14cb702636b07bce056261778d432abe92703604291f7b543be9515cfb63d90",
+  "physical_sd_cold_boot": false,
+  "physical_kernel": "v11",
+  "bitstream": "unchanged L1-16K DMA3",
+  "notes": [
+    "Physical app reconstructed from verified local binary by UART/FNV checked patch; SHA256 refers to host build.",
+    "Timing is sequential multi-window motion exercise completion, not continuous playback FPS.",
+    "HDMI has pre-existing colored/jagged text edges; this work does not claim to fix them."
+  ]
+}

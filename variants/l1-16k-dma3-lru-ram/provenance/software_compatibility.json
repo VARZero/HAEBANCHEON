@@ -1,0 +1,31 @@
+{
+  "status": "IDENTICAL_RUNTIME_SOFTWARE_AND_DEVICE_TREE",
+  "image": "D:\\temp\\haebancheon-l1-16k-dma3\\image\\HAEBANCHEON-KFB-L1-16K-DMA3-v1.img",
+  "image_sha256": "7bc6541ea1215ec01780dfc5e372c729c4721d4dde42ceb605df308a2550c333",
+  "runtime_sources_sha256": {
+    "software\\bosio\\gen3-bosio.dts": "77b015b4a2a67cc86448c2a5b06f26398c027d9991aa0161ed54a28db25212dc",
+    "software\\storage\\oryukdo_dma.c": "428771883d8664b35ca08747520e923b61b48ca0cf1face85b45113726bb08ca",
+    "software\\storage\\oryukdo_sd.c": "94078a234e6a8baa0f3f846747ef4f7b3b4fece0c5abf113fe5f18d958d42cd5",
+    "software\\linux\\modified\\kernel\\time\\clocksource.c": "33dcc8f270d0bc67299efa02772fe79f76e515e5ad5ee953b7caac1c71134204",
+    "software\\linux\\modified\\kernel\\time\\tick-common.c": "abd01e2fc931a1ffa42b505acd5e485c565dae7f2e44e5743e1162b53ebd03ba",
+    "software\\linux\\modified\\kernel\\time\\timekeeping.c": "2b5244aab21938ca48171764ba49237f0c8dc47825fae6796fe109a9a45b35ac",
+    "software\\bosio\\common\\bosio_batch.h": "5f0ad3f07f6a21be54f8d55d0792cd5b700cf07b54c2134393af4ac4cc99687f",
+    "software\\bosio\\common\\bosio_demo.h": "10442e79553bb327f7d359b1aa22c4918798f0b2c3a512af747e04d99b40d92a",
+    "software\\bosio\\common\\bosio_engine.c": "d3741f521e87c29d13b1fee0e98d7decbbcb4a9eae442bb6f366db775931ec2b",
+    "software\\bosio\\common\\bosio_engine.h": "0b5652a0d816cbc269503c3ab357b24b6584d3149eef51f92e74ef515fa59486",
+    "software\\bosio\\common\\bosio_tile.h": "f56e657a4a4ab5d8b3b1763e2ee394f3af9ac157d5ca801c32bfdc65ce076c32",
+    "software\\bosio\\driver\\bosio_direct_dma.h": "b73e9af785dcbf43d31e2a0754a41d8227d7bd13264523cbed7f5473068d660b",
+    "software\\bosio\\driver\\bosio_dma_wait.h": "e7ae44be32ed9be3aaff9a057d4281e6955964fd1f0cd5a8fa516b4e0a0fd529",
+    "software\\bosio\\driver\\bosio_engine.c": "8666d9684232232bd93d53f997d79d0dab59cc92282f50aab32e6b865fc04ae7",
+    "software\\bosio\\driver\\bosio_kfb.c": "c0294a9de0e8d93061816f99b13fb2e428f291e0ef9901e6c9e988aec5874569",
+    "software\\bosio\\driver\\bosio_rgb_dma.h": "b57d00ee271302eabd9c36c8a48db05511ab1527e840d459a7529d7ed3b9f210",
+    "software\\bosio\\include\\bosio_uapi.h": "3c4b0c45f67faebcfc849dac68c3aa8ac4fe45078822c7d576c6e552ee0e9f5c",
+    "software\\bosio\\tests\\test_engine.c": "5ddd73de1deab1274dcd4864c417faf6132fdbc5b9a95e8c80ff1bb0cb945323",
+    "software\\bosio\\tests\\test_rtl.cpp": "91bcc329760f136804ae40f06ecd3d298cfc40f74fd4395777eeb02c1e92cca9",
+    "software\\bosio\\tools\\bosioctl.c": "39e49824e66b15810fe4efc3c613efb0edb626e26286cbe4df8ae7eecb08c528"
+  },
+  "qemu_and_image_audit_source": "D:\\ORYUKDO-Gen3_AB_integrated_unverified\\ORYUKDO-Gen3\\work\\ORYUKDO-3d5i_BOSIO_SoC\\variants\\l1-16k-dma3\\provenance",
+  "qemu_repeated_for_lru_candidate": false,
+  "physical_board_tested": false,
+  "note": "LRU storage changes only RTL implementation. Cache geometry, memory map, coherence and DMA count remain identical."
+}

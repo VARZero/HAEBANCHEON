@@ -1,0 +1,9 @@
+{
+  "source": "D:\\temp\\haebancheon-mask-v12\\board-trial\\bench.delta",
+  "target": "/tmp/mask-bench.delta",
+  "bytes": 96673,
+  "fnv1a": 3119190568,
+  "sha256": "f0c0264d3de34ce523c9317178dfea22e499e5a24e89c11a05ce72ed87793aaf",
+  "seconds": 49.71,
+  "result": "PASS_TRANSFER_FNV"
+}

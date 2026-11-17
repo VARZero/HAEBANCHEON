@@ -1,0 +1,8 @@
+{
+  "command": "/tmp/v11-apply /usr/bin/boayo-native /tmp/v11-fix1.delta /tmp/boayo-fix1",
+  "seconds": 58.666,
+  "rc": 0,
+  "uart": "oryukdo# /tmp/v11-apply /usr/bin/boayo-native /tmp/v11-fix1.delta /tmp/boayo-fix\r\r\r\n1; echo INCR11_2c883704_RC:$?\r\r\nPATCH_OK\r\r\nINCR11_2c883704_RC:0\r\r\n",
+  "observed_at": "2026-11-15T00:58:29.241887",
+  "log_start": 435049
+}

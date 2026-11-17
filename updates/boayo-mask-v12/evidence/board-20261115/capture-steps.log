@@ -1,0 +1,26 @@
+{"output_complete": true, "phase": "view-axis", "seconds": 14.622168939999938, "step": 1, "view": {"pitch": 0.0, "roll": 0.0, "yaw": 0.0}}
+{"output_complete": true, "phase": "view-axis", "seconds": 15.012312920000113, "step": 2, "view": {"pitch": 0.0, "roll": 0.0, "yaw": -12.0}}
+{"output_complete": true, "phase": "view-axis", "seconds": 14.739328960000421, "step": 3, "view": {"pitch": 0.0, "roll": 0.0, "yaw": 12.0}}
+{"output_complete": true, "phase": "view-axis", "seconds": 14.709997939999994, "step": 4, "view": {"pitch": -8.0, "roll": 0.0, "yaw": 0.0}}
+{"output_complete": true, "phase": "view-axis", "seconds": 14.527952219999861, "step": 5, "view": {"pitch": 8.0, "roll": 0.0, "yaw": 0.0}}
+{"output_complete": true, "phase": "view-axis", "seconds": 15.160978019999675, "step": 6, "view": {"pitch": 0.0, "roll": -20.0, "yaw": 0.0}}
+{"output_complete": true, "phase": "view-axis", "seconds": 14.70922556000005, "step": 7, "view": {"pitch": 0.0, "roll": 20.0, "yaw": 0.0}}
+{"output_complete": true, "phase": "view-mixed", "seconds": 15.089856539999346, "step": 8, "view": {"pitch": 6.0, "roll": -15.0, "yaw": -8.0}}
+{"output_complete": true, "phase": "view-mixed", "seconds": 15.133133520000229, "step": 9, "view": {"pitch": -6.0, "roll": 15.0, "yaw": 8.0}}
+{"output_complete": true, "phase": "view-axis", "seconds": 13.901761160000206, "step": 10, "view": {"pitch": 0.0, "roll": 0.0, "yaw": 0.0}}
+{"output_complete": true, "phase": "window-azimuth-elevation", "seconds": 224.69943411999975, "step": 11, "view": {"pitch": 0.0, "roll": 0.0, "yaw": 0.0}}
+{"output_complete": true, "phase": "window-azimuth-elevation", "seconds": 216.5040860600002, "step": 12, "view": {"pitch": 0.0, "roll": 0.0, "yaw": 0.0}}
+{"output_complete": true, "phase": "window-azimuth-elevation", "seconds": 45.33789168000021, "step": 13, "view": {"pitch": 0.0, "roll": 0.0, "yaw": 0.0}}
+{"output_complete": true, "phase": "window-width-height", "seconds": 217.22030551999978, "step": 14, "view": {"pitch": 0.0, "roll": 0.0, "yaw": 0.0}}
+{"output_complete": true, "phase": "window-width-height", "seconds": 30.19989796000027, "step": 15, "view": {"pitch": 0.0, "roll": 0.0, "yaw": 0.0}}
+{"output_complete": true, "phase": "overlap", "seconds": 223.80822695999996, "step": 16, "view": {"pitch": 0.0, "roll": 0.0, "yaw": 0.0}}
+{"output_complete": true, "phase": "front-back", "seconds": 28.240832899999987, "step": 17, "view": {"pitch": 0.0, "roll": 0.0, "yaw": 0.0}}
+{"output_complete": true, "phase": "front-back", "seconds": 26.671634439999252, "step": 18, "view": {"pitch": 0.0, "roll": 0.0, "yaw": 0.0}}
+{"output_complete": true, "phase": "second-window-move", "seconds": 220.70517931999984, "step": 19, "view": {"pitch": 0.0, "roll": 0.0, "yaw": 0.0}}
+{"output_complete": true, "phase": "second-window-move", "seconds": 44.70480139999927, "step": 20, "view": {"pitch": 0.0, "roll": 0.0, "yaw": 0.0}}
+{"output_complete": true, "phase": "view-mixed", "seconds": 23.46405085999959, "step": 21, "view": {"pitch": 4.0, "roll": 15.0, "yaw": 6.0}}
+{"output_complete": true, "phase": "view-reset", "seconds": 15.88035446000049, "step": 22, "view": {"pitch": 0.0, "roll": 0.0, "yaw": 0.0}}
+{"output_complete": true, "phase": "close-caption", "seconds": 26.317577459999484, "step": 23, "view": {"pitch": 0.0, "roll": 0.0, "yaw": 0.0}}
+{"output_complete": true, "phase": "close-caption", "seconds": 22.35944489999929, "step": 24, "view": {"pitch": 0.0, "roll": 0.0, "yaw": 0.0}}
+{"output_complete": true, "phase": "close-caption", "seconds": 17.52523078000013, "step": 25, "view": {"pitch": 0.0, "roll": 0.0, "yaw": 0.0}}
+MOTION_FINISHED

@@ -1,0 +1,9 @@
+BOAYO_INITTRACE n=1 event=desktop.begin wall_us=3 cpu_us=1 value=0
+BOAYO_INITTRACE n=2 event=window.create.begin wall_us=79 cpu_us=77 value=0
+BOAYO_INITTRACE n=3 event=window.create.end wall_us=873 cpu_us=871 value=1
+BOAYO_INITTRACE n=4 event=window.configure.begin wall_us=876 cpu_us=874 value=0
+BOAYO_INITTRACE n=5 event=window.configure.end wall_us=885 cpu_us=883 value=1
+BOAYO_INITTRACE n=6 event=asset.loaded wall_us=2223 cpu_us=2222 value=691200
+BOAYO_INITTRACE n=7 event=surface.publish.move wall_us=2720 cpu_us=2719 value=1
+BOAYO_INITTRACE n=8 event=desktop.end wall_us=2726 cpu_us=2724 value=1
+BOAYO_INITTRACE n=9 event=desktop.scope_exit wall_us=2728 cpu_us=2726 value=0

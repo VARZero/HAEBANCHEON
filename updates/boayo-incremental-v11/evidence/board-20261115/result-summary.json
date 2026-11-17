@@ -1,0 +1,57 @@
+{
+  "scope": "Physical PZ-A7200T-KFB, unchanged L1-16K-DMA3 FPGA, v11 kernel/SD; v11 profile comparison, then fix1 app in RAM. Warmed Telemetry rendering, not boot duration or optical latency.",
+  "normal_seconds_per_update": 2.5370480966666693,
+  "normal_frames": 18,
+  "normal_fps": 0.3941588656966582,
+  "fix1_normal": {
+    "frames": 18,
+    "seconds_per_update": 2.528884008888882,
+    "app_sha256": "d51393051ecfa84b7f332b5b8cc36d9263e45ae5c0a43e972fa9e66f6dbc30b3",
+    "deployment": "RAM executable over v11 kernel; fixed SD not cold-booted on hardware"
+  },
+  "fix1_reduction_vs_previous_v10_percent": 24.25687895788241,
+  "previous_v10_normal_seconds_per_update": 3.338763935384542,
+  "reduction_vs_previous_v10_percent": 24.012354698731798,
+  "profiled_legacy_seconds_per_update": 3.481513406153845,
+  "profiled_fast_seconds_per_update": 3.2423868453333324,
+  "driver_time_unit": "Per-update milliseconds; original raw counter keys retain _us suffix in comparison.json although values were converted to ms.",
+  "same_run_profile_comparison": {
+    "apps": {
+      "legacy_ms": 432.1461538461538,
+      "fast_ms": 454.71986666666663
+    },
+    "workspace": {
+      "legacy_ms": 114.73569230769232,
+      "fast_ms": 115.63026666666666
+    },
+    "state_publish": {
+      "legacy_ms": 1101.9452307692309,
+      "fast_ms": 1055.9414666666667
+    },
+    "compose": {
+      "legacy_ms": 1901.6533846153845,
+      "fast_ms": 1620.3113999999998
+    },
+    "blend": {
+      "legacy_ms": 605.0610769230769,
+      "fast_ms": 370.71486666666664
+    },
+    "output_publish": {
+      "legacy_ms": 298.36684615384615,
+      "fast_ms": 155.51273333333333
+    }
+  },
+  "functional_steps_completed": 10,
+  "functional_result": "PARTIAL_DYNAMIC_GEOMETRY_DELAY",
+  "functional_implementation": "v11-fix1 in RAM; original v11 motion creation timed out and is preserved as a failure",
+  "dma_errors": 0,
+  "dma_timeouts": 0,
+  "limitations": [
+    "Short steady-state samples, previous v10 is an earlier boot; profiling itself costs time.",
+    "2fps cap is not achieved; no RTL or new timing closure claim.",
+    "Device acknowledgements and selected actual HDMI captures do not establish pixel-perfect motion.",
+    "Pre-existing rough text/colored edges remain visible.",
+    "The new fix1 SD image was audited and QEMU-booted, but has not been cold-booted on the physical board.",
+    "The physical 25-stage motion test was not completed: step 11 spent several minutes generating new geometry masks on CPU. Ten view stages completed."
+  ]
+}

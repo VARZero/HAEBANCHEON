@@ -1,0 +1,181 @@
+{
+  "result": "PASS_IMPLEMENTATION_PHYSICAL_BOARD_UNTESTED",
+  "part": "xc7a200tfbg484-2",
+  "resources": {
+    "lut": 119141.0,
+    "ff": 76182.0,
+    "bram_tiles": 110.0,
+    "dsp": 62.0,
+    "occupied_slices": 33131.0
+  },
+  "timing_ns": {
+    "wns": 0.093,
+    "tns": 0.0,
+    "whs": 0.011,
+    "ths": 0.0,
+    "wpws": 0.0,
+    "tpws": 0.0
+  },
+  "period_ns": {
+    "cpu_raw": 20.0,
+    "clk_pll_i": 10.0,
+    "pixel_raw": 13.468,
+    "serial_raw": 2.694,
+    "sd_native_clk": 40.0
+  },
+  "internal_setup_slack_ns": {
+    "cpu_raw": 0.099,
+    "clk_pll_i": 0.093,
+    "pixel_raw": 1.341
+  },
+  "critical_paths": {
+    "cpu_raw": {
+      "source": "system/soc/cpu/ctrl_valid_reg/C",
+      "destination": "system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/G_WINDOW[0].U_FDU/G_SLOT[2].o_sidefx_reg[2]/D",
+      "data_delay_ns": 19.495,
+      "logic_delay_ns": 5.264,
+      "routing_delay_ns": 14.231,
+      "logic_levels": 33,
+      "slack_ns": 0.099
+    },
+    "clk_pll_i": {
+      "source": "boot/state_reg[0]/C",
+      "destination": "storage/phy/sd_dat_o_reg[2]/D",
+      "data_delay_ns": 9.076,
+      "logic_delay_ns": 1.595,
+      "routing_delay_ns": 7.481,
+      "logic_levels": 8,
+      "slack_ns": 0.093
+    },
+    "pixel_raw": {
+      "source": "display/py_reg[12]/C",
+      "destination": "hdmi_output/transmitter/DataEncoders[2].DataEncoder/n1d_1_reg[1]/D",
+      "data_delay_ns": 11.862,
+      "logic_delay_ns": 1.551,
+      "routing_delay_ns": 10.311,
+      "logic_levels": 8,
+      "slack_ns": 1.341
+    }
+  },
+  "module_resources": {
+    "mig": {
+      "lut": 5926,
+      "ff": 5025,
+      "bram36": 0,
+      "bram18": 0,
+      "dsp": 0
+    },
+    "hdmi": {
+      "lut": 200,
+      "ff": 139,
+      "bram36": 0,
+      "bram18": 0,
+      "dsp": 0
+    },
+    "cache_pair": {
+      "lut": 4009,
+      "ff": 1484,
+      "bram36": 8,
+      "bram18": 0,
+      "dsp": 0
+    },
+    "l1i": {
+      "lut": 2154,
+      "ff": 655,
+      "bram36": 4,
+      "bram18": 0,
+      "dsp": 0
+    },
+    "l1d": {
+      "lut": 1823,
+      "ff": 690,
+      "bram36": 4,
+      "bram18": 0,
+      "dsp": 0
+    },
+    "dma0": {
+      "lut": 608,
+      "ff": 351,
+      "bram36": 0,
+      "bram18": 0,
+      "dsp": 0
+    },
+    "dma1": {
+      "lut": 500,
+      "ff": 338,
+      "bram36": 0,
+      "bram18": 0,
+      "dsp": 0
+    },
+    "dma2": {
+      "lut": 499,
+      "ff": 338,
+      "bram36": 0,
+      "bram18": 0,
+      "dsp": 0
+    },
+    "projection0": {
+      "lut": 3763,
+      "ff": 6062,
+      "bram36": 1,
+      "bram18": 3,
+      "dsp": 11
+    },
+    "projection1": {
+      "lut": 3939,
+      "ff": 6023,
+      "bram36": 1,
+      "bram18": 3,
+      "dsp": 11
+    },
+    "output": {
+      "lut": 21594,
+      "ff": 24620,
+      "bram36": 20,
+      "bram18": 2,
+      "dsp": 36
+    }
+  },
+  "setup_uncertainty_ns": {
+    "cpu_raw": 0.3,
+    "clk_pll_i": 0.3
+  },
+  "cdc_warning_critical": 0,
+  "known_mig_drc_warnings": {
+    "BUFC-1": 4,
+    "REQP-1709": 1
+  },
+  "bitstream_sha256": "9bb855886be0ac55d983f9a72ab0e6c23317b7f4fe27e13430cb2de17d7d4e07",
+  "checkpoint_sha256": "085f2087f26de3fc0d9d796894738bcf968be89f79e59ed574692b774662d4fa",
+  "implementation_input_checkpoint": "D:\\temp\\haebancheon-l1-16k-dma3\\output_fanout_prepare\\fanout_optimized.dcp",
+  "implementation_input_checkpoint_sha256": "645a730794e8090cc7c720bf56e9e42de45e2efe7cd0ff8fb823fe925ea56b7b",
+  "synthesis_optimized_checkpoint_sha256": "d6e7509c30e022cff6144f23a163b82cf78b3ff3afc3cbf1f52b652808646c21",
+  "implementation_source_manifest_sha256": "a97d6a12b6afec02329a7aff88f7de4f4fa123b8e61e93e3af1d50b02219544b",
+  "mig_inputs": [
+    {
+      "path": "D:\\temp\\haebancheon-l1-dma3\\mig_ip\\kfb_bosio_mig.srcs\\sources_1\\ip\\mig_7series_0\\mig_7series_0.xci",
+      "sha256": "615e58ab0d62eb54f9e8662abadac00f49ab5cd3b459a0e0ce1565ed80bdadba",
+      "last_write_utc": "2026-11-13T13:47:01.4754699Z"
+    },
+    {
+      "path": "D:\\temp\\haebancheon-l1-dma3\\mig_ip\\kfb_bosio_mig.gen\\sources_1\\ip\\mig_7series_0\\mig_7series_0.dcp",
+      "sha256": "571055ec0128e5dc1526d11ff48646ddbf900058d28ac1aafcb7acbbd15403cf",
+      "last_write_utc": "2026-11-13T13:50:00.4375605Z"
+    }
+  ],
+  "synthesis_directory": "D:\\temp\\haebancheon-l1-16k-dma3\\board_synth_lru_v1",
+  "implementation_directory": "D:\\temp\\haebancheon-l1-16k-dma3\\board_route_lru_fanout_v1",
+  "source_match": true,
+  "physical_board_tested": false,
+  "fully_routed": true,
+  "unconstrained_internal_endpoints": 0,
+  "external_io_scope": "Existing asynchronous-input constraints and official TMDS paths; receiver/PCB timing and physical board behavior not validated here.",
+  "implementation_scripts_sha256": {
+    "audit_board.tcl": "68b8c3f88dfb9b39da47751333748b89414d00b6048b5ca2ab71c6ce8dec90d9",
+    "audit_sd_io.tcl": "b8b43a92ffbe5a6db1144d9fb48be8c5eb2ed1ca3c7f4982ba400b15405b4735",
+    "prepare_output_fanout.tcl": "0b8cf7df58aae37015cdaf692b3f98eefcffd903e1d7f416077e2314a06e380a",
+    "route_board.tcl": "9a7b5c341cc0c00aac549ff438d952a232d70ca800074c21933172706d69cb6f",
+    "route_from_placed.tcl": "5c610d211c15e39897f9b0bb226608e4fe70491f77e33439e498756d154a7a3e"
+  },
+  "raw_tool_critical_warnings": []
+}

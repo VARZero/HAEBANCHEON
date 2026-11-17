@@ -1,0 +1,4 @@
+/tmp/d9-peek 1; sleep 30; /tmp/d9-peek 1; echo DIRTY9_7c7234ec_RC:$?
+BENCH_SAMPLE {"compose_ms":2225.2351000006456,"renders":16,"uptime":83.13612039999862,"generation":31,"commits":17,"dma_errors":0,"dma_upload_bytes":91968608,"pool_upload_bytes":1984000,"partial_uploads":14,"full_uploads":5,"phase":"composing","snapshot_age":3.9967940200003795,"render_error":null,"app_error":null}
+BENCH_SAMPLE {"compose_ms":1648.6296200000652,"renders":25,"uptime":117.96735261999856,"generation":40,"commits":26,"dma_errors":0,"dma_upload_bytes":92314208,"pool_upload_bytes":2329600,"partial_uploads":23,"full_uploads":5,"phase":"composing","snapshot_age":3.0484795199990913,"render_error":null,"app_error":null}
+DIRTY9_7c7234ec_RC:0

@@ -1,0 +1,14 @@
+{
+  "result": "PASS_ASSETS_AND_PROJECTED_SCENES",
+  "checks": [
+    "132 precomputed UI variants bit-exact against prior executable",
+    "full scenes exact after movement, partial edit, fill, restore, hover, repeated publication; cache eviction with live mapping, resident reuse and mutation invalidation exercised",
+    "first desktop has zero RGB buffer/materializations/fills; direct_upload selected; no rounded/circle drawing",
+    "missing/truncated/metadata CRC/header/payload length asset safely falls back with identical pixels",
+    "optional payload CRC detects corruption; normal path validates bounded header/key/length only"
+  ],
+  "variants": 132,
+  "hardware": false,
+  "baseline_sha256": "3db81667ab2d8c0a0323aca674628116922828373ad9430734db94f85b5da460",
+  "candidate_sha256": "22ded84b1fe5a47cefe62396bccb8eebbd4df1580956d46305965f5932ea7e0b"
+}

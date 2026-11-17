@@ -1,0 +1,392 @@
+--- boayo-tiles-v2/software/boayo/native/src/backend.hpp
++++ boayo-tiles-v3/software/boayo/native/src/backend.hpp
+@@ -19,6 +19,7 @@
+                        const std::array<int32_t, 180> &camera) = 0;
+   virtual void pose(const std::array<int32_t, 180> &camera) = 0;
+   virtual void stop() = 0;
++  virtual void batch(const std::vector<bo_batch_entry> &);
+   virtual void blend(const bo_tile_blend &) = 0;
+   virtual bool copy(unsigned,unsigned,unsigned,unsigned,size_t) { return false; }
+   virtual bool fill(unsigned,unsigned,size_t,unsigned) { return false; }
+@@ -38,6 +39,7 @@
+   void present(unsigned, unsigned, unsigned, const std::array<int32_t, 180> &) override;
+   void pose(const std::array<int32_t, 180> &) override;
+   void stop() override;
++  void batch(const std::vector<bo_batch_entry> &) override;
+   void blend(const bo_tile_blend &) override;
+   bool copy(unsigned,unsigned,unsigned,unsigned,size_t) override;
+   bool fill(unsigned,unsigned,size_t,unsigned) override;
+@@ -65,6 +67,7 @@
+   void present(unsigned, unsigned, unsigned, const std::array<int32_t, 180> &) override;
+   void pose(const std::array<int32_t, 180> &) override;
+   void stop() override;
++  void batch(const std::vector<bo_batch_entry> &) override;
+   void blend(const bo_tile_blend &) override;
+   bool copy(unsigned,unsigned,unsigned,unsigned,size_t) override;
+   bool fill(unsigned,unsigned,size_t,unsigned) override;
+@@ -105,6 +108,7 @@
+              std::shared_ptr<const Texture> immutable = {});
+ };
+ struct Layer {
++  uint64_t layout_version=0;
+   std::vector<uint64_t> tile_content_revision;
+   J key, shape;
+   uint64_t revision = 0;
+--- boayo-tiles-v2/software/boayo/native/src/plan.cpp
++++ boayo-tiles-v3/software/boayo/native/src/plan.cpp
+@@ -8,7 +8,7 @@
+ #include <cstdlib>
+ namespace boayo {
+ namespace {
+-thread_local uint64_t loads=0,hits=0,misses=0,rejected=0;
++thread_local uint64_t loads=0,hits=0,misses=0,rejected=0,builtin_loads=0,payload_scan_bytes=0;
+ struct Entry {std::string key;std::shared_ptr<const ProjectionPlan> plan;};
+ thread_local std::list<Entry> cache;
+ uint32_t word(const uint8_t *p){return uint32_t(p[0])|(uint32_t(p[1])<<8)|(uint32_t(p[2])<<16)|(uint32_t(p[3])<<24);}
+@@ -16,7 +16,7 @@
+   static const auto table=[] {std::array<uint32_t,256> t{};for(unsigned i=0;i<256;++i){uint32_t v=i;for(int j=0;j<8;++j)v=(v>>1)^((v&1)?0xedb88320u:0);t[i]=v;}return t;}();
+   for(size_t i=0;i<n;++i)c=table[(c^p[i])&255]^(c>>8);return c;
+ }
+-std::shared_ptr<const ProjectionPlan> read_plan(const std::string &path,const std::string &key,unsigned width,unsigned height){
++std::shared_ptr<const ProjectionPlan> read_plan(const std::string &path,const std::string &key,unsigned width,unsigned height,bool builtin){
+   int fd=open(path.c_str(),O_RDONLY|O_CLOEXEC);if(fd<0)return {};
+   struct Close {int fd;~Close(){close(fd);}} closer{fd};
+   std::array<uint8_t,4096> h{};struct stat st{};
+@@ -32,7 +32,10 @@
+   try{storage=std::make_shared<Texture>(static_cast<const uint32_t *>(mapped),bytes/4);}
+   catch(...){munmap(mapped,bytes);throw;}
+   auto body=static_cast<const uint8_t *>(mapped);
+-  require(~crc(body,bytes)==word(h.data()+20),"plan payload CRC");
++  // Immutable initramfs plans are exhaustively checked by the image build.
++  // External /data and BOAYO_PLAN_DIR plans retain full validation.
++  if(!builtin){payload_scan_bytes+=bytes;require(~crc(body,bytes)==word(h.data()+20),"plan payload CRC");}
++  else ++builtin_loads;
+   auto plan=std::make_shared<ProjectionPlan>();plan->storage=std::move(storage);
+   unsigned cursor=n*84;
+   for(unsigned i=0;i<n;++i){auto record=body+i*84;
+@@ -42,8 +45,8 @@
+     require(d[0]==0 && d[1]==id*256 && d[2]==width && d[3]==height && d[4]==width && d[5]==1,"plan descriptor bounds");
+     const uint8_t *mask=nullptr;
+     if(kind==2){require(offset==cursor && bytes-cursor>=1024,"plan mask offset");mask=body+offset;
+-      bool zero=false,one=false;for(unsigned j=0;j<1024;++j){require(mask[j]<=1,"plan mask value");zero|=mask[j]==0;one|=mask[j]==1;}
+-      require(zero && one,"plan mask classification");cursor+=1024;
++      if(!builtin){bool zero=false,one=false;for(unsigned j=0;j<1024;++j){require(mask[j]<=1,"plan mask value");zero|=mask[j]==0;one|=mask[j]==1;}
++        require(zero && one,"plan mask classification");}cursor+=1024;
+     }else require(!offset,"plan uniform mask offset");
+     plan->ids.push_back(id);plan->kinds.push_back(kind);plan->descriptors.push_back(d);plan->masks.push_back(mask);
+   }
+@@ -59,11 +62,11 @@
+   char name[32];std::snprintf(name,sizeof(name),"/p_%08x.bgp",hash);
+   const char *dir=getenv("BOAYO_PLAN_DIR");
+   std::vector<std::string> dirs=dir?std::vector<std::string>{dir}:std::vector<std::string>{"/usr/share/boayo/plans","/data/boayo-plans"};
+-  for(auto &d:dirs){try{auto plan=read_plan(d+name,key,geometry[0],geometry[1]);if(!plan)continue;
++  for(auto &d:dirs){try{auto plan=read_plan(d+name,key,geometry[0],geometry[1],!dir && d=="/usr/share/boayo/plans");if(!plan)continue;
+     ++loads;cache.push_front({key,plan});size_t bytes=0;for(auto i=cache.begin();i!=cache.end();){bytes+=i->plan->storage->size()*4;
+       if(bytes>16u*1024*1024 && i!=cache.begin())i=cache.erase(i);else ++i;}return plan;
+   }catch(const std::runtime_error &e){if(std::string(e.what()).find("plan ")!=0)throw;++rejected;std::fprintf(stderr,"BOAYO_PLAN_REJECT %s: %s\n",name,e.what());}}
+   ++misses;return {};
+ }
+-J projection_plan_stats(){return {{"loads",loads},{"hits",hits},{"misses",misses},{"rejected",rejected},{"revision",BOAYO_PLAN_REV}};}
++J projection_plan_stats(){return {{"builtin_loads",builtin_loads},{"payload_scan_bytes",payload_scan_bytes},{"loads",loads},{"hits",hits},{"misses",misses},{"rejected",rejected},{"revision",BOAYO_PLAN_REV}};}
+ }
+--- boayo-tiles-v2/software/boayo/native/src/plan_revision.hpp
++++ boayo-tiles-v3/software/boayo/native/src/plan_revision.hpp
+@@ -1,2 +1,2 @@
+ #pragma once
+-#define BOAYO_PLAN_REV "72fc16265eca64ceb2c3ce6cf21f6f78ba85f86ba92bcd082bea1528eab1d8ca"
++#define BOAYO_PLAN_REV "3f8a44283801c8d4bcc42b54948530feea3dfdf4bf18f2beb51cdc20f98c8dbe"
+--- boayo-tiles-v2/software/boayo/native/src/resident.cpp
++++ boayo-tiles-v3/software/boayo/native/src/resident.cpp
+@@ -2,6 +2,35 @@
+ #include "frame_trace.hpp"
+ #include <sys/ioctl.h>
+ namespace boayo {
++// The fallback preserves the scalar API for other Device implementations.
++void Device::batch(const std::vector<bo_batch_entry> &entries){
++  for(auto &b:entries){
++    if(b.kind==BO_BATCH_COPY){auto &c=b.op.copy;require(copy(c.src_region,c.src_offset/4,c.dst_region,c.dst_offset/4,c.bytes/4),"batch copy required");}
++    else if(b.kind==BO_BATCH_FILL){auto &f=b.op.fill;require(fill(f.region,f.offset/4,f.bytes/4,f.value),"batch fill required");}
++    else {require(b.kind==BO_BATCH_BLEND,"batch kind");blend(b.op.blend);}
++  }
++}
++void LinuxDevice::batch(const std::vector<bo_batch_entry> &entries){
++  require(dma_features&BO_DMA_BATCH,"batch driver required");
++  for(size_t first=0;first<entries.size();first+=BO_BATCH_MAX){bo_batch b{};
++    b.count=std::min(size_t(BO_BATCH_MAX),entries.size()-first);
++    b.entries=reinterpret_cast<uintptr_t>(entries.data()+first);
++    require(ioctl(fd,BO_BATCH,&b)==0,"batch ioctl failed");
++  }
++}
++void MockDevice::batch(const std::vector<bo_batch_entry> &entries){
++  for(size_t first=0;first<entries.size();first+=BO_BATCH_MAX){
++    size_t n=std::min(size_t(BO_BATCH_MAX),entries.size()-first);
++    trace.push_back({{"op","batch"},{"count",n}});
++    Device::batch(std::vector<bo_batch_entry>(entries.begin()+first,entries.begin()+first+n));
++  }
++}
++static void queue_fill(std::vector<bo_batch_entry> &list,unsigned bank,unsigned tile,unsigned color){
++  bo_batch_entry b{};b.kind=BO_BATCH_FILL;b.op.fill={3+bank,(header+tile*256)*4,1024,color,0};list.push_back(b);
++}
++static void queue_blend(std::vector<bo_batch_entry> &list,const bo_tile_blend &blend){
++  bo_batch_entry b{};b.kind=BO_BATCH_BLEND;b.op.blend=blend;list.push_back(b);
++}
+ void LinuxDevice::blend(const bo_tile_blend &b){
+   require(dma_features&BO_DMA_TILE_BLEND,"tile blend driver required");
+   auto command=b;require(ioctl(fd,BO_TILE_BLEND,&command)==0,"tile blend ioctl failed");
+@@ -37,12 +66,14 @@
+     auto done=dev.run(direct?scene_words:((header+n*256+15)&~15u),texture.size(),counts,direct?bank:2);
+     require(!done.status[0]&&!done.status[1],"resident projection error");
+     for(unsigned core=0;core<2;++core){jobs[core]+=counts[core];total_jobs+=counts[core];}
++    std::vector<bo_batch_entry> blends;
+     if(!direct)for(unsigned i=0;i<n;++i){unsigned index=todo[first+i];bo_tile_blend b{};
+       b.bank=bank;b.tile=c.ids[index];b.scratch_word=header+i*256;
+       const uint8_t *mask=c.mask(index);
+       for(unsigned cell=0;cell<1024;++cell)if(mask[cell])b.mask[cell/32]|=1u<<(cell%32);
+-      dev.blend(b);++blended_tiles;
+-    }
++      queue_blend(blends,b);++blended_tiles;
++    }
++    dev.batch(blends);
+   }
+ }
+ bool ResidentCompositor::update(WM &wm){
+@@ -55,9 +86,10 @@
+     bool fresh=found==p.layers.end() || found->second.key!=key(w);
+     if(fresh){dirty.insert(p.previous_tiles[id].begin(),p.previous_tiles[id].end());auto c=p.make_layer(w);
+       if(found!=p.layers.end()){c.prepared_source=found->second.prepared_source;c.source=std::move(found->second.source);c.revision=found->second.revision;}
++      c.layout_version=generation+1;
+       p.layers[id]=std::move(c);dirty.insert(p.layers[id].ids.begin(),p.layers[id].ids.end());}
+     auto &c=p.layers[id];
+-    if(c.shape!=w.data["shape"]){p.prepare_masks(c,w);dirty.insert(c.ids.begin(),c.ids.end());}
++    if(c.shape!=w.data["shape"]){c.layout_version=generation+1;p.prepare_masks(c,w);dirty.insert(c.ids.begin(),c.ids.end());}
+     p.source_changes(c,w);
+     c.tile_content_revision.resize(c.ids.size());
+     for(unsigned index:c.invalid)c.tile_content_revision[index]=generation+1;
+@@ -68,6 +100,7 @@
+   if(order!=p.previous_order)for(int id:order){auto &c=p.layers[id];dirty.insert(c.ids.begin(),c.ids.end());}
+   J pk=wm.pointer_visible?J::array({wm.paz,wm.pel,true}):J::array({false});
+   if(pk!=p.pointer_key){
++    pointer_version=generation+1;
+     dirty.insert(p.previous_pointer_tiles.begin(),p.previous_pointer_tiles.end());p.pointer_outer.clear();p.pointer_inner.clear();
+     if(wm.pointer_visible){V direction=axes(wm.paz,wm.pel)[0];for(auto &x:direction)x=float(x);
+       for(unsigned t=0;t<tiles;++t){auto tri=p.geometry.triangles[t];V center=unit((tri[0]+tri[1]+tri[2])*(1./3));double min_dot=1;
+@@ -86,7 +119,7 @@
+   }
+   if(!valid)dirty.insert(p.previous_pointer_tiles.begin(),p.previous_pointer_tiles.end());
+   bool any=!dirty.empty();unsigned bank=output.active<0?0:unsigned(output.active)^1;std::array<unsigned,2> jobs{};
+-  std::set<unsigned> redraw;std::map<unsigned,std::string> new_keys;bool scene_changed=!valid;
++  std::set<unsigned> redraw;std::map<unsigned,std::vector<uint64_t>> new_keys;bool scene_changed=!valid;
+   try{
+     // Only the directory/palette are represented on the CPU.
+     output.shadow.resize((header+15)&~15u);
+@@ -94,6 +127,7 @@
+     if(!generation && output.active>=0)bank_metadata[output.active]=output.shadow;
+     ++generation;
+     frame_trace::mark("tiles.prepare.begin",dirty.size());
++    std::vector<bo_batch_entry> prepare;
+     for(unsigned t:dirty){bool occupied=false,first_full=false;
+       for(int id:order){auto &c=p.layers[id];int i=c.lookup[t];if(i>=0 && c.mask_kinds[i]){occupied=true;first_full=c.mask_kinds[i]==1;break;}}
+       bool pointer=p.previous_pointer_tiles.count(t);
+@@ -102,19 +136,17 @@
+       if(!occupied && !pointer){wanted[t]=0;continue;}
+       // Exact input identities, not hashes or cell readback. Preserve old slot
+       // identities through deactivation so an unchanged reactivation can reuse.
+-      J signature=J::array();
++      std::vector<uint64_t> identity;identity.reserve(order.size()*3+1);
+       for(int id:order){auto &c=p.layers[id];int i=c.lookup[t];
+-        if(i>=0 && c.mask_kinds[i])signature.push_back(J::array({id,c.key,c.tile_content_revision[i],c.shape}));}
+-      J outer=J::array(),inner=J::array();
+-      for(unsigned x:p.pointer_outer)if(x/1024==t)outer.push_back(x%1024);
+-      for(unsigned x:p.pointer_inner)if(x/1024==t)inner.push_back(x%1024);
+-      signature.push_back(J::array({outer,inner}));auto identity=signature.dump();
++        if(i>=0 && c.mask_kinds[i]){identity.push_back(uint64_t(id));
++          identity.push_back(c.layout_version);identity.push_back(c.tile_content_revision[i]);}}
++      identity.push_back(pointer?pointer_version:0);
+       unsigned source=bank;
+       if(!stored[source][t] || tile_keys[source][t]!=identity)source^=1;
+       if(stored[source][t] && tile_keys[source][t]==identity){wanted[t]=stored[source][t];scene_changed|=output.active<0 || stored[output.active][t]!=wanted[t];++reused_tiles;continue;}
+       scene_changed=true;wanted[t]=generation;redraw.insert(t);new_keys.emplace(t,std::move(identity));
+       stored[bank][t]=0; // A failed or partial render must never be reused.
+-      if(!first_full){require(dev.fill(3+bank,header+t*256,256,0),"tile DMA fill required");++cleared_tiles;}
++      if(!first_full){queue_fill(prepare,bank,t,0);++cleared_tiles;}
+     }
+     any=scene_changed;
+     // Unchanged active tiles may be stale in the next back bank. Copy only
+@@ -125,16 +157,19 @@
+       do {
+         require(stored[source][t]==wanted[t],"missing resident tile generation");++t;
+       }while(t<tiles && wanted[t] && !redraw.count(t) && stored[bank][t]!=wanted[t]);
+-      require(dev.copy(3+source,header+first*256,3+bank,header+first*256,(t-first)*256),"lazy tile DMA required");
++      bo_batch_entry copy{};copy.kind=BO_BATCH_COPY;
++      copy.op.copy={3+source,(header+first*256)*4,3+bank,(header+first*256)*4,(t-first)*1024,0};prepare.push_back(copy);
+       output.dma_copied_words+=(t-first)*256;lazy_copied_tiles+=t-first;
+       for(unsigned j=first;j<t;++j){stored[bank][j]=wanted[j];tile_keys[bank][j]=tile_keys[source][j];}
+     }
++    dev.batch(prepare);
+     frame_trace::mark("tiles.prepare.end",dirty.size());
+-    for(int id:order){auto &c=p.layers[id];std::vector<unsigned> direct,masked;
++    for(int id:order){auto &c=p.layers[id];std::vector<unsigned> direct,masked;std::vector<bo_batch_entry> solids;
+       for(unsigned i=0;i<c.ids.size();++i)if(redraw.count(c.ids[i])&&c.mask_kinds[i]){
+         if(c.mask_kinds[i]==1 && wm.windows.at(id).solid_revision==wm.windows.at(id).revision){
+-          require(dev.fill(3+bank,header+c.ids[i]*256,256,wm.windows.at(id).solid_index),"solid tile DMA required");++solid_tiles;
++          queue_fill(solids,bank,c.ids[i],wm.windows.at(id).solid_index);++solid_tiles;
+         }else if(c.mask_kinds[i]==1 || c.shape.empty())direct.push_back(i);else masked.push_back(i);}
++      dev.batch(solids);
+       if(direct.empty()&&masked.empty())continue;
+       auto texture=c.prepared_source?WordView(*c.prepared_source):WordView(c.source);auto &pr=p.projectors;
+       if(!c.prepared_source || pr.resident_texture!=c.prepared_source){pr.resident_texture.reset();frame_trace::mark("texture.upload.begin",texture.size());
+@@ -145,7 +180,7 @@
+     for(unsigned pass=0;pass<2;++pass){const auto &pixels=pass?p.pointer_inner:p.pointer_outer;
+       std::map<unsigned,bo_tile_blend> paint;
+       for(unsigned x:pixels)if(redraw.count(x/1024)){auto &b=paint[x/1024];b.bank=bank;b.tile=x/1024;b.mode=1;b.color=pass?255:rgb_index(10,10,10);b.mask[(x%1024)/32]|=1u<<(x%32);}
+-      for(auto &[t,b]:paint)dev.blend(b);
++      std::vector<bo_batch_entry> paints;for(auto &[t,b]:paint)queue_blend(paints,b);dev.batch(paints);
+     }
+     if(any || !valid){frame_trace::mark("output.upload.begin");
+       // Record a version only once all ordered layers and pointer writes finish.
+--- boayo-tiles-v2/software/boayo/native/src/resident.hpp
++++ boayo-tiles-v3/software/boayo/native/src/resident.hpp
+@@ -12,7 +12,9 @@
+   std::array<uint64_t,tiles> wanted{};
+   std::array<std::array<uint64_t,tiles>,2> stored{};
+   std::array<Words,2> bank_metadata;
+-  std::array<std::array<std::string,tiles>,2> tile_keys;
++  // Exact ordered integer tuples; no hash collisions or per-tile JSON.
++  std::array<std::array<std::vector<uint64_t>,tiles>,2> tile_keys;
++  uint64_t pointer_version=0;
+   uint64_t reused_tiles=0;
+   J metrics=J::object();
+   ResidentCompositor(const Geometry &g,Projectors &p,Output &o):planner(g,p,true,true),output(o),dev(p.dev){}
+--- boayo-tiles-v2/software/bosio/common/bosio_batch.h
++++ boayo-tiles-v3/software/bosio/common/bosio_batch.h
+@@ -0,0 +1,33 @@
++#ifndef BOSIO_BATCH_H
++#define BOSIO_BATCH_H
++#include "bosio_tile.h"
++/* Also compiled by the host boundary tests: same validation and dispatch. */
++static int bo_batch_apply(struct bo_engine *e,const struct bo_batch_entry *entries,
++                           unsigned count,const struct bo_tile_io *io)
++{
++    unsigned i;int ret;
++    if(!count || count>BO_BATCH_MAX)return -EINVAL;
++    for(i=0;i<count;i++){
++        const struct bo_batch_entry *b=entries+i;
++        if(b->reserved)return -EINVAL;
++        switch(b->kind){
++        case BO_BATCH_COPY:ret=bo_copy_check(e,&b->op.copy);break;
++        case BO_BATCH_FILL:ret=bo_fill_check(e,&b->op.fill);break;
++        case BO_BATCH_BLEND:ret=bo_tile_check(e,&b->op.blend);break;
++        default:return -EINVAL;
++        }
++        if(ret)return ret;
++    }
++    for(i=0;i<count;i++){
++        const struct bo_batch_entry *b=entries+i;
++        if(b->kind==BO_BATCH_COPY){const struct bo_mem_copy *c=&b->op.copy;
++            ret=io->transfer(io->opaque,bo_offsets[c->dst_region]+c->dst_offset,
++                             bo_offsets[c->src_region]+c->src_offset,c->bytes,0,0);
++        }else if(b->kind==BO_BATCH_FILL){const struct bo_mem_fill *f=&b->op.fill;
++            ret=io->transfer(io->opaque,bo_offsets[f->region]+f->offset,0,f->bytes,1,f->value);
++        }else ret=bo_tile_apply(e,&b->op.blend,io);
++        if(ret){e->poisoned=1;return ret;}
++    }
++    e->io.memory_fence(e->io.opaque);return 0;
++}
++#endif
+--- boayo-tiles-v2/software/bosio/common/bosio_tile.h
++++ boayo-tiles-v3/software/bosio/common/bosio_tile.h
+@@ -13,18 +13,25 @@
+     void (*write)(void *,__u32,__u32);
+ };
+ /* Validation completes before any write; offsets are arena-relative bytes. */
++static int bo_tile_check(struct bo_engine *e,const struct bo_tile_blend *b)
++{
++    int ret;
++    if(b->bank>1 || b->tile>=4220 || b->mode>1 || b->color>255 || b->reserved)
++        return -EINVAL;
++    ret=bo_upload_check(e,BO_SCENE0+b->bank,(BO_HEADER_WORDS+b->tile*BO_TILE_WORDS)*4,1024);
++    if(ret)return ret;
++    if(!b->mode && (b->scratch_word<BO_HEADER_WORDS ||
++        b->scratch_word>BO_SCRATCH_BYTES/4-BO_TILE_WORDS))return -EINVAL;
++    if(b->mode && b->scratch_word)return -EINVAL;
++    return 0;
++}
+ static int bo_tile_apply(struct bo_engine *e,const struct bo_tile_blend *b,
+                          const struct bo_tile_io *io)
+ {
+-    __u32 dst,src,i=0;int ret;
+-    if(b->bank>1 || b->tile>=4220 || b->mode>1 || b->color>255 || b->reserved)
+-        return -EINVAL;
+-    dst=(BO_HEADER_WORDS+b->tile*BO_TILE_WORDS)*4;
+-    ret=bo_upload_check(e,BO_SCENE0+b->bank,dst,1024);if(ret)return ret;
+-    if(!b->mode && (b->scratch_word<BO_HEADER_WORDS ||
+-        b->scratch_word>BO_SCRATCH_BYTES/4-BO_TILE_WORDS))return -EINVAL;
+-    if(b->mode && b->scratch_word)return -EINVAL;
+-    dst+=bo_offsets[BO_SCENE0+b->bank];src=bo_offsets[BO_SCRATCH]+b->scratch_word*4;
++    __u32 dst,src,i=0;int ret=bo_tile_check(e,b);
++    if(ret)return ret;
++    dst=(BO_HEADER_WORDS+b->tile*BO_TILE_WORDS)*4+bo_offsets[BO_SCENE0+b->bank];
++    src=bo_offsets[BO_SCRATCH]+b->scratch_word*4;
+     while(i<256){
+         __u32 nibble=(b->mask[i/8]>>((i%8)*4))&15;
+         if(!nibble){i++;continue;}
+--- boayo-tiles-v2/software/bosio/driver/bosio_kfb.c
++++ boayo-tiles-v3/software/bosio/driver/bosio_kfb.c
+@@ -128,7 +128,7 @@
+ static __u64 hw_now(void *opaque) { return ktime_to_us(ktime_get()); }
+ static void hw_delay(void *opaque,unsigned int us) { usleep_range(us,us+50); }
+ static void hw_barrier(void *opaque) { dma_wmb();dma_rmb(); }
+-#include "../common/bosio_tile.h"
++#include "../common/bosio_batch.h"
+ static int tile_transfer(void *opaque,__u32 dst,__u32 src,__u32 bytes,int fill,__u32 color)
+ {
+     struct bosio_device *d=opaque;
+@@ -165,6 +165,18 @@
+     long ret=0;
+     if(mutex_lock_interruptible(&d->mutex))return -ERESTARTSYS;
+     switch(cmd){
++    case BO_BATCH: {
++        struct bo_batch b;
++        struct bo_batch_entry *entries;
++        struct bo_tile_io io={d,tile_transfer,tile_read,tile_write};
++        if(copy_from_user(&b,u,sizeof(b))){ret=-EFAULT;break;}
++        if(b.reserved || !b.count || b.count>BO_BATCH_MAX || !b.entries || b.entries>ULONG_MAX){ret=-EINVAL;break;}
++        if(!d->channel){ret=-ENODEV;break;}
++        entries=vmemdup_user(u64_to_user_ptr(b.entries),b.count*sizeof(*entries));
++        if(IS_ERR(entries)){ret=PTR_ERR(entries);break;}
++        ret=bo_batch_apply(&d->engine,entries,b.count,&io);
++        kvfree(entries);break;
++    }
+     case BO_TILE_BLEND: {
+         struct bo_tile_blend b;
+         struct bo_tile_io io={d,tile_transfer,tile_read,tile_write};
+@@ -289,7 +301,7 @@
+     if(!dma_has_cap(DMA_MEMCPY,d->channel->device->cap_mask) ||
+        !dma_has_cap(DMA_MEMSET,d->channel->device->cap_mask)){ret=-EINVAL;goto release_channel;}
+     init_completion(&d->dma_wait.done);
+-    d->dma_info.version=1;d->dma_info.features=BO_DMA_COPY|BO_DMA_FILL|BO_DMA_UPLOAD|BO_DMA_RGB_USER|BO_DMA_DIRECT_USER|BO_DMA_TILE_BLEND;
++    d->dma_info.version=1;d->dma_info.features=BO_DMA_COPY|BO_DMA_FILL|BO_DMA_UPLOAD|BO_DMA_RGB_USER|BO_DMA_DIRECT_USER|BO_DMA_TILE_BLEND|BO_DMA_BATCH;
+     d->dma_info.upload_threshold=BO_UPLOAD_DMA_THRESHOLD;
+     /* Board-specific, exclusive no-map DDR; map with the same WC attribute
+      * used by the old coherent pool, without its unconditional 16MiB memset.
+--- boayo-tiles-v2/software/bosio/include/bosio_uapi.h
++++ boayo-tiles-v3/software/bosio/include/bosio_uapi.h
+@@ -72,4 +72,18 @@
+  * Source must remain immutable/mapped until return. ETIMEDOUT poisons the
+  * device and retains mappings/pins until board reset. Never pass bus addresses. */
+ #define BO_UPLOAD_DIRECT _IOW('B', 0x4b, struct bo_upload)
++/* Ordered synchronous commands. Entire list is validated before any write.
++ * On execution failure earlier commands may have completed; device is poisoned.
++ * Entries are copied once, never reread from mutable userspace during execution. */
++#define BO_DMA_BATCH 64u
++#define BO_BATCH_MAX 128u
++#define BO_BATCH_COPY 0u
++#define BO_BATCH_FILL 1u
++#define BO_BATCH_BLEND 2u
++struct bo_batch_entry {
++    __u32 kind, reserved;
++    union { struct bo_mem_copy copy; struct bo_mem_fill fill; struct bo_tile_blend blend; } op;
++};
++struct bo_batch { __u32 count, reserved; __aligned_u64 entries; };
++#define BO_BATCH _IOW('B', 0x4d, struct bo_batch)
+ #endif

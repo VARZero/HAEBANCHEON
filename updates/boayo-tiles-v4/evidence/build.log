@@ -1,0 +1,2 @@
+PASS_BUILD_PLAN p_95ab8291.bgp 160 64128
+PASS kernel/image build; bitstream unchanged; diagnostic trace physical test pending

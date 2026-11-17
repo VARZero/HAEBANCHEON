@@ -1,0 +1,96 @@
+{
+  "observed_at": "2026-11-11T00:43:12.771864",
+  "records": [
+    {
+      "n": 1,
+      "event": "desktop.begin",
+      "wall_us": 140449,
+      "cpu_us": 65858,
+      "value": 0
+    },
+    {
+      "n": 2,
+      "event": "window.create.begin",
+      "wall_us": 2979468,
+      "cpu_us": 1099431,
+      "value": 0
+    },
+    {
+      "n": 3,
+      "event": "rgb.dma.begin",
+      "wall_us": 35970682,
+      "cpu_us": 13625609,
+      "value": 691200
+    },
+    {
+      "n": 4,
+      "event": "rgb.dma.end",
+      "wall_us": 41640126,
+      "cpu_us": 16599815,
+      "value": 691200
+    },
+    {
+      "n": 5,
+      "event": "window.create.end",
+      "wall_us": 44969955,
+      "cpu_us": 18268365,
+      "value": 1
+    },
+    {
+      "n": 6,
+      "event": "window.configure.begin",
+      "wall_us": 45439260,
+      "cpu_us": 18508758,
+      "value": 0
+    },
+    {
+      "n": 7,
+      "event": "window.configure.end",
+      "wall_us": 49498151,
+      "cpu_us": 20533627,
+      "value": 1
+    },
+    {
+      "n": 8,
+      "event": "launcher.allocate.begin",
+      "wall_us": 50109447,
+      "cpu_us": 20826749,
+      "value": 691200
+    },
+    {
+      "n": 9,
+      "event": "surface.clear.begin",
+      "wall_us": 67806864,
+      "cpu_us": 29652717,
+      "value": 691200
+    },
+    {
+      "n": 10,
+      "event": "rgb.dma.begin",
+      "wall_us": 68350074,
+      "cpu_us": 29905002,
+      "value": 691200
+    },
+    {
+      "n": 11,
+      "event": "rgb.dma.end",
+      "wall_us": 78767453,
+      "cpu_us": 35373474,
+      "value": 691200
+    },
+    {
+      "n": 12,
+      "event": "surface.clear.end",
+      "wall_us": 79310408,
+      "cpu_us": 35654586,
+      "value": 691200
+    },
+    {
+      "n": 13,
+      "event": "launcher.allocate.end",
+      "wall_us": 79779506,
+      "cpu_us": 35868547,
+      "value": 691200
+    }
+  ]
+}

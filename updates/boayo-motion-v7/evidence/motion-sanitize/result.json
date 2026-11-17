@@ -1,0 +1,756 @@
+{
+  "result": "PASS_MOCK_MOTION",
+  "hardware": false,
+  "binary_sha256": "d87d5a696e89ac749b0de0312943ef5c50b8ca666106765c89c6238669789c1e",
+  "checks": [
+    "duplicate start, wrong owner and out-of-order step rejected",
+    "25 stages: mixed pitch/yaw/roll, caption drag position/size, overlap/focus, three close captions and restoration",
+    "disconnect and explicit stop release held input, restore pose and preserve original windows",
+    "native motion CLI completes all 25 output-fenced steps",
+    "PTY Z/C roll input and terminal restoration",
+    "Ctrl-C stops after in-flight completion, restores pose/scene and leaves existing app alive"
+  ],
+  "stages": [
+    {
+      "step": 0,
+      "phase": "view-axis",
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      },
+      "rendered_generation": 76,
+      "target_generation": 76,
+      "windows": [
+        2,
+        6,
+        10,
+        14,
+        1,
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        11,
+        12,
+        13,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "step": 1,
+      "phase": "view-axis",
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": -12.0
+      },
+      "rendered_generation": 78,
+      "target_generation": 78,
+      "windows": [
+        2,
+        6,
+        10,
+        14,
+        1,
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        11,
+        12,
+        13,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "step": 2,
+      "phase": "view-axis",
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 12.0
+      },
+      "rendered_generation": 80,
+      "target_generation": 80,
+      "windows": [
+        2,
+        6,
+        10,
+        14,
+        1,
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        11,
+        12,
+        13,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "step": 3,
+      "phase": "view-axis",
+      "view": {
+        "pitch": -8.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      },
+      "rendered_generation": 82,
+      "target_generation": 82,
+      "windows": [
+        2,
+        6,
+        10,
+        14,
+        1,
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        11,
+        12,
+        13,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "step": 4,
+      "phase": "view-axis",
+      "view": {
+        "pitch": 8.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      },
+      "rendered_generation": 83,
+      "target_generation": 83,
+      "windows": [
+        2,
+        6,
+        10,
+        14,
+        1,
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        11,
+        12,
+        13,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "step": 5,
+      "phase": "view-axis",
+      "view": {
+        "pitch": 0.0,
+        "roll": -20.0,
+        "yaw": 0.0
+      },
+      "rendered_generation": 85,
+      "target_generation": 85,
+      "windows": [
+        2,
+        6,
+        10,
+        14,
+        1,
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        11,
+        12,
+        13,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "step": 6,
+      "phase": "view-axis",
+      "view": {
+        "pitch": 0.0,
+        "roll": 20.0,
+        "yaw": 0.0
+      },
+      "rendered_generation": 87,
+      "target_generation": 87,
+      "windows": [
+        2,
+        6,
+        10,
+        14,
+        1,
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        11,
+        12,
+        13,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "step": 7,
+      "phase": "view-mixed",
+      "view": {
+        "pitch": 6.0,
+        "roll": -15.0,
+        "yaw": -8.0
+      },
+      "rendered_generation": 88,
+      "target_generation": 88,
+      "windows": [
+        2,
+        6,
+        10,
+        14,
+        1,
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        11,
+        12,
+        13,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "step": 8,
+      "phase": "view-mixed",
+      "view": {
+        "pitch": -6.0,
+        "roll": 15.0,
+        "yaw": 8.0
+      },
+      "rendered_generation": 90,
+      "target_generation": 90,
+      "windows": [
+        2,
+        6,
+        10,
+        14,
+        1,
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        11,
+        12,
+        13,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "step": 9,
+      "phase": "view-axis",
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      },
+      "rendered_generation": 92,
+      "target_generation": 92,
+      "windows": [
+        2,
+        6,
+        10,
+        14,
+        1,
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        11,
+        12,
+        13,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "step": 10,
+      "phase": "window-azimuth-elevation",
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      },
+      "rendered_generation": 126,
+      "target_generation": 125,
+      "windows": [
+        2,
+        10,
+        14,
+        6,
+        1,
+        3,
+        4,
+        5,
+        8,
+        9,
+        11,
+        12,
+        13,
+        15,
+        16,
+        17,
+        7,
+        18
+      ]
+    },
+    {
+      "step": 11,
+      "phase": "window-azimuth-elevation",
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      },
+      "rendered_generation": 151,
+      "target_generation": 151,
+      "windows": [
+        2,
+        10,
+        14,
+        6,
+        1,
+        3,
+        4,
+        5,
+        8,
+        9,
+        11,
+        12,
+        13,
+        15,
+        16,
+        17,
+        18,
+        7
+      ]
+    },
+    {
+      "step": 12,
+      "phase": "window-azimuth-elevation",
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      },
+      "rendered_generation": 174,
+      "target_generation": 174,
+      "windows": [
+        2,
+        10,
+        14,
+        6,
+        1,
+        3,
+        4,
+        5,
+        8,
+        9,
+        11,
+        12,
+        13,
+        15,
+        16,
+        17,
+        18,
+        7
+      ]
+    },
+    {
+      "step": 13,
+      "phase": "window-width-height",
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      },
+      "rendered_generation": 198,
+      "target_generation": 198,
+      "windows": [
+        2,
+        10,
+        14,
+        6,
+        1,
+        3,
+        4,
+        5,
+        9,
+        11,
+        12,
+        13,
+        15,
+        16,
+        17,
+        18,
+        7,
+        8
+      ]
+    },
+    {
+      "step": 14,
+      "phase": "window-width-height",
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      },
+      "rendered_generation": 218,
+      "target_generation": 218,
+      "windows": [
+        2,
+        10,
+        14,
+        6,
+        1,
+        3,
+        4,
+        5,
+        9,
+        11,
+        12,
+        13,
+        15,
+        16,
+        17,
+        18,
+        7,
+        8
+      ]
+    },
+    {
+      "step": 15,
+      "phase": "overlap",
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      },
+      "rendered_generation": 249,
+      "target_generation": 249,
+      "windows": [
+        2,
+        14,
+        6,
+        10,
+        1,
+        3,
+        4,
+        5,
+        9,
+        12,
+        13,
+        15,
+        16,
+        17,
+        18,
+        7,
+        8,
+        11
+      ]
+    },
+    {
+      "step": 16,
+      "phase": "front-back",
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      },
+      "rendered_generation": 260,
+      "target_generation": 260,
+      "windows": [
+        2,
+        14,
+        10,
+        6,
+        1,
+        3,
+        4,
+        5,
+        9,
+        12,
+        13,
+        15,
+        16,
+        17,
+        18,
+        7,
+        8,
+        11
+      ]
+    },
+    {
+      "step": 17,
+      "phase": "front-back",
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      },
+      "rendered_generation": 271,
+      "target_generation": 271,
+      "windows": [
+        2,
+        14,
+        6,
+        10,
+        1,
+        3,
+        4,
+        5,
+        9,
+        12,
+        13,
+        15,
+        16,
+        17,
+        18,
+        7,
+        8,
+        11
+      ]
+    },
+    {
+      "step": 18,
+      "phase": "second-window-move",
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      },
+      "rendered_generation": 303,
+      "target_generation": 302,
+      "windows": [
+        2,
+        6,
+        10,
+        14,
+        1,
+        3,
+        4,
+        5,
+        9,
+        12,
+        13,
+        16,
+        17,
+        18,
+        7,
+        8,
+        11,
+        15
+      ]
+    },
+    {
+      "step": 19,
+      "phase": "second-window-move",
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      },
+      "rendered_generation": 326,
+      "target_generation": 326,
+      "windows": [
+        2,
+        6,
+        10,
+        14,
+        1,
+        3,
+        4,
+        5,
+        9,
+        12,
+        13,
+        16,
+        17,
+        18,
+        7,
+        8,
+        11,
+        15
+      ]
+    },
+    {
+      "step": 20,
+      "phase": "view-mixed",
+      "view": {
+        "pitch": 4.0,
+        "roll": 15.0,
+        "yaw": 6.0
+      },
+      "rendered_generation": 332,
+      "target_generation": 332,
+      "windows": [
+        2,
+        6,
+        10,
+        14,
+        1,
+        3,
+        4,
+        5,
+        9,
+        12,
+        13,
+        16,
+        17,
+        18,
+        7,
+        8,
+        11,
+        15
+      ]
+    },
+    {
+      "step": 21,
+      "phase": "view-reset",
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      },
+      "rendered_generation": 334,
+      "target_generation": 334,
+      "windows": [
+        2,
+        6,
+        10,
+        14,
+        1,
+        3,
+        4,
+        5,
+        9,
+        12,
+        13,
+        16,
+        17,
+        18,
+        7,
+        8,
+        11,
+        15
+      ]
+    },
+    {
+      "step": 22,
+      "phase": "close-caption",
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      },
+      "rendered_generation": 354,
+      "target_generation": 354,
+      "windows": [
+        2,
+        6,
+        10,
+        1,
+        3,
+        4,
+        5,
+        9,
+        12,
+        13,
+        18,
+        7,
+        8,
+        11
+      ]
+    },
+    {
+      "step": 23,
+      "phase": "close-caption",
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      },
+      "rendered_generation": 374,
+      "target_generation": 374,
+      "windows": [
+        2,
+        6,
+        1,
+        3,
+        4,
+        5,
+        9,
+        18,
+        7,
+        8
+      ]
+    },
+    {
+      "step": 24,
+      "phase": "close-caption",
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      },
+      "rendered_generation": 392,
+      "target_generation": 392,
+      "windows": [
+        2,
+        1,
+        3,
+        4,
+        5,
+        18
+      ]
+    }
+  ]
+}

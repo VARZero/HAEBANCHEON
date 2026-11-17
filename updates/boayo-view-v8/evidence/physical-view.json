@@ -1,0 +1,23 @@
+{
+  "result": "PASS_PHYSICAL_CONTINUOUS_VIEW_WITH_LIMITS",
+  "trial_seconds": 20,
+  "submitted": 201,
+  "mean_updates_per_second_approx": 10.05,
+  "skipped_obsolete_samples": 198,
+  "max_submit_ms": 98.84890000012092,
+  "error": "",
+  "restored_pose": {
+    "yaw": 8.0,
+    "pitch": 4.0,
+    "roll": 8.0
+  },
+  "hdmi_distinct_samples": 8,
+  "current_run_seconds": 300,
+  "limitations": [
+    "camera-only preview pauses window updates/input",
+    "20 Hz target not met; about 10 Hz in measured trial",
+    "existing text/edge pixel artifacts remain",
+    "RAM-only temporary deployment; SD image unchanged"
+  ],
+  "binary_sha256": "f8d34f432a2fc7ab055720e9aab4b4036344c275b60ec2c4240fb32990f585a6"
+}

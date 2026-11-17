@@ -1,0 +1,73 @@
+{
+  "result": "PASS_TRACE_AND_PIXEL_EQUIVALENCE",
+  "events": 67,
+  "checks": [
+    "desktop.begin",
+    "window.create.begin",
+    "window.create.end",
+    "window.configure.begin",
+    "window.configure.end",
+    "launcher.allocate.begin",
+    "surface.clear.begin",
+    "surface.clear.end",
+    "launcher.allocate.end",
+    "rounded.begin",
+    "rounded.row",
+    "rounded.end",
+    "circle.begin",
+    "circle.row",
+    "circle.end",
+    "launcher.text.begin",
+    "launcher.text.end",
+    "launcher.app.begin",
+    "launcher.apps.end",
+    "launcher.image.end",
+    "surface.publish.begin",
+    "surface.scan.row",
+    "surface.scan.end",
+    "surface.copy.begin",
+    "surface.copy.end",
+    "surface.publish.end",
+    "desktop.end",
+    "desktop.scope_exit"
+  ],
+  "desktop": {
+    "windows": [
+      {
+        "always_on_top": true,
+        "azimuth": 0.0,
+        "decorated": false,
+        "elevation": 0.0,
+        "focused": true,
+        "height_deg": 30.0,
+        "input_enabled": true,
+        "mapped": true,
+        "owner": "boayo-desktop",
+        "roll": 0.0,
+        "shape": [
+          [
+            51.2,
+            36.0,
+            537.6,
+            252.0,
+            18.0
+          ]
+        ],
+        "surface_height": 360,
+        "surface_width": 640,
+        "title": "BoAYO Launcher",
+        "width_deg": 42.0,
+        "window_id": 1,
+        "workspace": {},
+        "z": 0
+      }
+    ],
+    "pixels": {
+      "1": "8f465795b9d8167b7fc5fb430bc09b405a44acdbcc0cf051968ed9a8fefac531"
+    },
+    "scene_sha256": "d59641f0520b50902609c2e04ffed23df88fe6d8e4b2f13ec6fe9177c16663db"
+  },
+  "hardware": false,
+  "baseline_sha256": "0e9b0906675deb9dc176c00449e64c0dac11f3008cb425535b409b1eb6293a3d",
+  "candidate_sha256": "cff3249d2352a465e234a270bd0cb825f5986f412cd657388b32c587970a8c2a"
+}

@@ -1,0 +1,7 @@
+{
+  "command": "/tmp/view-apply /tmp/boayo-view-stage /tmp/viewfix.delta /tmp/boayo-view-v8",
+  "seconds": 57.39,
+  "rc": 0,
+  "uart": "/tmp/view-apply /tmp/boayo-view-stage /tmp/viewfix.delta /tmp/boayo-vie\r\r\r\nw-v8; echo BODMA_58dc5afe_RC:$?\r\r\nPATCH_OK\r\r\nBODMA_58dc5afe_RC:0\r\r\n",
+  "observed_at": "2026-11-14T19:13:57.301730"
+}

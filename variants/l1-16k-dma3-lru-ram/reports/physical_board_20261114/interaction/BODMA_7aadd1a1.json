@@ -1,0 +1,7 @@
+{
+  "command": "/bin/busybox tail -n 8 /tmp/boayo-wm.log; ls /usr/share/boayo/plans; cat /proc/33/task/*/stat",
+  "seconds": 5.56,
+  "rc": 0,
+  "uart": "/bin/busybox tail -n 8 /tmp/boayo-wm.log; ls /usr/share/boayo/plans; ca\r\r\r\nt /proc/33/task/*/stat; echo BODMA_7aadd1a1_RC:$?\r\r\ntail: applet not found\r\r\np_d6f47219.bgp        p_d6f47219.bgp.ready\r\r\n33 (boayo-native) S 1 33 33 0 -1 4194368 79 0 0 0 2530 8878 0 0 20 0 2 0 6525 7491584 1722 4294967295 65536 2006305 2642310592 0 0 0 0 4096 16386 1 0 0 17 0 0 0 0 0 0 2007232 2021112 19566592 2642313071 2642313099 2642313099 2642313190 0\r\r\n34 (boayo-native) R 1 33 33 0 -1 4194624 1695 0 30 0 37039 2490 0 0 20 0 2 0 6549 7491584 1722 4294967295 65536 2006305 2642310592 0 0 0 0 4096 16386 0 0 0 -1 0 0 0 0 0 0 2007232 2021112 19566592 2642313071 2642313099 2642313099 2642313190 0\r\r\nBODMA_7aadd1a1_RC:0\r\r\n",
+  "observed_at": "2026-11-14T09:27:42.352991"
+}

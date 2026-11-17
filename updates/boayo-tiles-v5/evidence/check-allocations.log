@@ -1,0 +1,1 @@
+PASS_CHECK_ALLOCATIONS: 4220 successful checks allocate zero; failure still throws exact message

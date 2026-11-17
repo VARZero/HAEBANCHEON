@@ -1,0 +1,8 @@
+{
+  "command": "/tmp/mask-bench",
+  "seconds": 31.573,
+  "rc": 0,
+  "uart": "/tmp/mask-bench; echo INCR11_0fb66f77_RC:$?\r\r\n{\"fast_first_us\":2400705,\"fast_second_us\":2220317,\"integer_samples\":11956,\"pixels\":16384,\"precise_samples\":93,\"reference_us\":25056008,\"result\":\"PASS_RV32_MASK_BENCHMARK\",\"tiles\":16}\r\r\nINCR11_0fb66f77_RC:0\r\r\n",
+  "observed_at": "2026-11-15T02:25:45.830964",
+  "log_start": 597646
+}

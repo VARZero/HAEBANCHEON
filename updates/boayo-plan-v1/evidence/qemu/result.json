@@ -1,0 +1,150 @@
+{
+  "result": "PASS_QEMU_ONLY",
+  "image": "/var/tmp/oryukdo-boayo-plan-v1/release/image/ORYUKDO-KFB-BoAYO-plan-v1.img",
+  "image_sha256": "b46cc8bff5fbd14de2a260e214dd3193e7aabbb6d5db187c55c62731ddfa226b",
+  "hardware": false,
+  "rtl": false,
+  "mock_backend": true,
+  "checks": [
+    "BusyBox shell",
+    "cat /etc/oryukdo-image",
+    "/bin/storage-check --identity",
+    "test -x /bin/bosio-dma-check",
+    "test -r /usr/share/boayo/assets/a0ebce13.bui",
+    "test ! -L /usr/bin/python && test ! -e /usr/bin/python3 && test ! -d /usr/lib/python3.12",
+    "echo $((19+23))",
+    "ddrcheck",
+    "boayo-selftest",
+    "printf '{\"op\":\"test_desktop\",\"args\":{\"op\":\"tick\",\"now\":0},\"app\":\"boayo-desktop\"}\\n{\"op\":\"test_plan_export\",\"args\":{\"window_id\":1,\"path\":\"/tmp/plan-body\"},\"app\":\"boayo-desktop\"}\\n' | BOAYO_PLANS=0 /usr/bin/boayo-native --rpc",
+    "stty -opost -echo",
+    "printf '__PLAN_BEGIN__'; cat /tmp/plan-body; printf '__PLAN_END__\\n'",
+    "stty opost echo",
+    "uncached RV32 descriptor/mask bytes exactly match PC-generated plan",
+    "boayo-dual-selftest",
+    "boayo-start --mock",
+    "boayo-status",
+    "boayo-app dashboard",
+    "boayo-status",
+    "boayo-app telemetry",
+    "boayo-status",
+    "boayo-app pulse",
+    "boayo-status",
+    "echo KEYS_SHELL_RESTORED",
+    "boayo-status",
+    "boayo-stop",
+    "prebuilt first launcher loaded without CPU rounded/circle drawing"
+  ],
+  "rv32_plan_payload_sha256": "84b258f825e683af5c09c6d6224215cbfb4c996f766e908a31e0a414e6868201",
+  "rv32_transport": "SBI console: each LF encoded as CR LF; exact encoded comparison",
+  "first_projection": {
+    "active_tiles": 94,
+    "changed_tiles": 94,
+    "dirty_tiles": 160,
+    "fallback_frames": 0,
+    "geometry_tiles_evaluated_total": 0,
+    "hardware_frames": 1,
+    "jobs_per_core": [
+      48,
+      48
+    ],
+    "mask_samples_evaluated_total": 0,
+    "mode": "kfb-dual-projectors+cpu-tile-composition",
+    "output_words": 1084800,
+    "plan_cache": {
+      "hits": 0,
+      "loads": 1,
+      "misses": 0,
+      "rejected": 0,
+      "revision": "f1c8dad30f9e9a87cfdb3fb0cd2f191edc5527bbef8055c71b4f4f8b5429782f"
+    },
+    "precomputed_layers_total": 1,
+    "projected_windows": [
+      1
+    ],
+    "reused_window_tiles": 0,
+    "sampling": "fixed-point bilinear RGB332",
+    "texture_reuses_total": 0,
+    "texture_upload_words": 230400,
+    "texture_uploads_total": 1,
+    "total_hw_jobs": 96,
+    "update_kind": "full",
+    "windows": [
+      1
+    ],
+    "written_cells_per_core": [
+      49061,
+      49152
+    ]
+  },
+  "final_projection": {
+    "active_tiles": 131,
+    "changed_tiles": 3,
+    "dirty_tiles": 21,
+    "fallback_frames": 0,
+    "geometry_tiles_evaluated_total": 50640,
+    "hardware_frames": 11,
+    "jobs_per_core": [
+      13,
+      12
+    ],
+    "mask_samples_evaluated_total": 495616,
+    "mode": "kfb-dual-projectors+cpu-tile-composition",
+    "output_words": 832,
+    "plan_cache": {
+      "hits": 0,
+      "loads": 1,
+      "misses": 24,
+      "rejected": 0,
+      "revision": "f1c8dad30f9e9a87cfdb3fb0cd2f191edc5527bbef8055c71b4f4f8b5429782f"
+    },
+    "precomputed_layers_total": 1,
+    "projected_windows": [
+      6,
+      10
+    ],
+    "reused_window_tiles": 403,
+    "sampling": "fixed-point bilinear RGB332",
+    "texture_reuses_total": 0,
+    "texture_upload_words": 240000,
+    "texture_uploads_total": 28,
+    "total_hw_jobs": 815,
+    "update_kind": "patch",
+    "windows": [
+      2,
+      6,
+      10,
+      11,
+      12,
+      13
+    ],
+    "written_cells_per_core": [
+      13312,
+      12288
+    ]
+  },
+  "final_output": {
+    "abi": 3,
+    "active_bank": 0,
+    "active_base": 0,
+    "antialias": false,
+    "backend": "kfb-linux-frame-atomic-output",
+    "capability": 0,
+    "commits": 11,
+    "dma_copied_words": 134278,
+    "max_jobs": 64,
+    "max_scene_words": 1084816,
+    "memory_dma": {
+      "available": true,
+      "copy_ops": 808,
+      "fill_ops": 162
+    },
+    "metadata_only": false,
+    "mock_backend": true,
+    "poisoned": 0,
+    "sensor_available": false,
+    "shadow_copied_words": 1190538,
+    "signature": 0,
+    "status": 1048579,
+    "uploaded_words": 134278
+  }
+}

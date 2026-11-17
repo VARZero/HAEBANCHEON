@@ -1,0 +1,95 @@
+{
+  "frames": 6,
+  "snapshot_interval_ms": 6068.649903333608,
+  "per_frame": {
+    "app_present": {
+      "wall_ms": 582.062,
+      "cpu_ms": 381.745,
+      "calls": 1.0
+    },
+    "apps": {
+      "wall_ms": 2590.848,
+      "cpu_ms": 1757.093,
+      "calls": 1.0
+    },
+    "blend": {
+      "wall_ms": 453.34,
+      "cpu_ms": 340.409,
+      "calls": 3.0
+    },
+    "captions": {
+      "wall_ms": 520.645,
+      "cpu_ms": 354.697,
+      "calls": 2.0
+    },
+    "compose": {
+      "wall_ms": 1964.184,
+      "cpu_ms": 1404.848,
+      "calls": 1.0
+    },
+    "descriptors": {
+      "wall_ms": 62.904,
+      "cpu_ms": 42.872,
+      "calls": 3.0
+    },
+    "finish": {
+      "wall_ms": 300.041,
+      "cpu_ms": 239.451,
+      "calls": 1.0
+    },
+    "image": {
+      "wall_ms": 166.386,
+      "cpu_ms": 103.536,
+      "calls": 1.0
+    },
+    "image_publish": {
+      "wall_ms": 9.302,
+      "cpu_ms": 5.455,
+      "calls": 1.0
+    },
+    "layers": {
+      "wall_ms": 243.231,
+      "cpu_ms": 166.641,
+      "calls": 1.0
+    },
+    "output_publish": {
+      "wall_ms": 300.65,
+      "cpu_ms": 261.428,
+      "calls": 1.0
+    },
+    "pointer": {
+      "wall_ms": 12.531,
+      "cpu_ms": 11.005,
+      "calls": 2.0
+    },
+    "projection_wait": {
+      "wall_ms": 109.847,
+      "cpu_ms": 34.429,
+      "calls": 3.0
+    },
+    "state_publish": {
+      "wall_ms": 1420.493,
+      "cpu_ms": 1123.963,
+      "calls": 1.1666666666666667
+    },
+    "texture": {
+      "wall_ms": 140.172,
+      "cpu_ms": 85.858,
+      "calls": 2.0
+    },
+    "tiles_prepare": {
+      "wall_ms": 248.367,
+      "cpu_ms": 161.646,
+      "calls": 1.0
+    },
+    "workspace": {
+      "wall_ms": 869.559,
+      "cpu_ms": 598.908,
+      "calls": 1.0
+    }
+  },
+  "errors": [
+    null,
+    null
+  ]
+}

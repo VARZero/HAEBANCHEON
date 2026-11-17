@@ -1,0 +1,8 @@
+{
+  "command": "sleep 20",
+  "seconds": 21.814,
+  "rc": 0,
+  "uart": "sleep 20; echo DIRTY9_8eed60f7_RC:$?\r\r\n[ 1024.772462] random: crng init done\r\r\n[ 1024.772462] random: crng init done\r\nDIRTY9_8eed60f7_RC:0\r\r\n",
+  "observed_at": "2026-11-14T21:03:13.497799",
+  "log_start": 212863
+}

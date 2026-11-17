@@ -1,0 +1,556 @@
+{
+  "result": "PASS",
+  "hardware": false,
+  "candidate_sha256": "d87d5a696e89ac749b0de0312943ef5c50b8ca666106765c89c6238669789c1e",
+  "baseline_sha256": "2ea698360ad0486782d2d0e11187644582c0319cd048e3c4929ce4395d685a8a",
+  "checks": [
+    {
+      "name": "exact_app_pixels",
+      "cases": 123
+    },
+    {
+      "name": "launcher",
+      "scene_sha256": "d59641f0520b50902609c2e04ffed23df88fe6d8e4b2f13ec6fe9177c16663db",
+      "projection": {
+        "cpu_output_shadow_words": 4480,
+        "cpu_result_download_words": 0,
+        "cpu_scene_words": 0,
+        "device_ready_frames": 1,
+        "dirty_tiles": 160,
+        "fallback_frames": 0,
+        "geometry_tiles_evaluated_total": 0,
+        "hardware_frames": 1,
+        "jobs_per_core": [
+          48,
+          48
+        ],
+        "lazy_copied_tiles_total": 0,
+        "mask_samples_evaluated_total": 0,
+        "masked_tiles_total": 44,
+        "mode": "ddr-resident-dirty-tiles",
+        "packed_mask_tiles_total": 44,
+        "plan_cache": {
+          "builtin_loads": 0,
+          "hits": 0,
+          "loads": 1,
+          "misses": 0,
+          "payload_scan_bytes": 64128,
+          "rejected": 0,
+          "revision": "c830e2bae43593f8c188620447b4ce808ce4894a826a073b44f12b949ad54b7e"
+        },
+        "precomputed_layers_total": 1,
+        "redrawn_tiles": 96,
+        "reused_tiles_total": 0,
+        "solid_tiles_total": 0,
+        "texture_reuses_total": 0,
+        "texture_uploads_total": 1,
+        "tile_fills_total": 44,
+        "total_hw_jobs": 96,
+        "update_kind": "tiles"
+      }
+    },
+    {
+      "name": "dashboard_and_controls",
+      "scene_sha256": "7b84cb606c0b900e2c175189c6310ef3c3906cf3782f222cb8ddf2df523633a3",
+      "projection": {
+        "cpu_output_shadow_words": 4480,
+        "cpu_result_download_words": 0,
+        "cpu_scene_words": 0,
+        "device_ready_frames": 1,
+        "dirty_tiles": 160,
+        "fallback_frames": 0,
+        "geometry_tiles_evaluated_total": 0,
+        "hardware_frames": 2,
+        "jobs_per_core": [
+          76,
+          72
+        ],
+        "lazy_copied_tiles_total": 0,
+        "mask_samples_evaluated_total": 0,
+        "masked_tiles_total": 121,
+        "mode": "ddr-resident-dirty-tiles",
+        "packed_mask_tiles_total": 121,
+        "plan_cache": {
+          "builtin_loads": 0,
+          "hits": 0,
+          "loads": 5,
+          "misses": 0,
+          "payload_scan_bytes": 167280,
+          "rejected": 0,
+          "revision": "c830e2bae43593f8c188620447b4ce808ce4894a826a073b44f12b949ad54b7e"
+        },
+        "precomputed_layers_total": 5,
+        "redrawn_tiles": 135,
+        "reused_tiles_total": 0,
+        "solid_tiles_total": 0,
+        "texture_reuses_total": 0,
+        "texture_uploads_total": 5,
+        "tile_fills_total": 108,
+        "total_hw_jobs": 244,
+        "update_kind": "tiles"
+      }
+    },
+    {
+      "name": "dashboard_tick",
+      "scene_sha256": "7b84cb606c0b900e2c175189c6310ef3c3906cf3782f222cb8ddf2df523633a3",
+      "projection": {
+        "cpu_output_shadow_words": 4480,
+        "cpu_result_download_words": 0,
+        "cpu_scene_words": 0,
+        "device_ready_frames": 1,
+        "dirty_tiles": 124,
+        "fallback_frames": 0,
+        "geometry_tiles_evaluated_total": 0,
+        "hardware_frames": 3,
+        "jobs_per_core": [
+          71,
+          66
+        ],
+        "lazy_copied_tiles_total": 11,
+        "mask_samples_evaluated_total": 0,
+        "masked_tiles_total": 187,
+        "mode": "ddr-resident-dirty-tiles",
+        "packed_mask_tiles_total": 187,
+        "plan_cache": {
+          "builtin_loads": 0,
+          "hits": 0,
+          "loads": 5,
+          "misses": 0,
+          "payload_scan_bytes": 167280,
+          "rejected": 0,
+          "revision": "c830e2bae43593f8c188620447b4ce808ce4894a826a073b44f12b949ad54b7e"
+        },
+        "precomputed_layers_total": 5,
+        "redrawn_tiles": 124,
+        "reused_tiles_total": 0,
+        "solid_tiles_total": 0,
+        "texture_reuses_total": 0,
+        "texture_uploads_total": 9,
+        "tile_fills_total": 161,
+        "total_hw_jobs": 381,
+        "update_kind": "tiles"
+      }
+    },
+    {
+      "name": "telemetry_overlap",
+      "scene_sha256": "a5ba963396f6c6dcf1f6d7a34bc0e73725fd0b767e48c4ab4ea0ea3481e2aa2b",
+      "projection": {
+        "cpu_output_shadow_words": 4480,
+        "cpu_result_download_words": 0,
+        "cpu_scene_words": 0,
+        "device_ready_frames": 1,
+        "dirty_tiles": 176,
+        "fallback_frames": 0,
+        "geometry_tiles_evaluated_total": 0,
+        "hardware_frames": 4,
+        "jobs_per_core": [
+          95,
+          91
+        ],
+        "lazy_copied_tiles_total": 65,
+        "mask_samples_evaluated_total": 0,
+        "masked_tiles_total": 276,
+        "mode": "ddr-resident-dirty-tiles",
+        "packed_mask_tiles_total": 276,
+        "plan_cache": {
+          "builtin_loads": 0,
+          "hits": 0,
+          "loads": 9,
+          "misses": 0,
+          "payload_scan_bytes": 247344,
+          "rejected": 0,
+          "revision": "c830e2bae43593f8c188620447b4ce808ce4894a826a073b44f12b949ad54b7e"
+        },
+        "precomputed_layers_total": 9,
+        "redrawn_tiles": 99,
+        "reused_tiles_total": 60,
+        "solid_tiles_total": 0,
+        "texture_reuses_total": 0,
+        "texture_uploads_total": 16,
+        "tile_fills_total": 201,
+        "total_hw_jobs": 567,
+        "update_kind": "tiles"
+      }
+    },
+    {
+      "name": "telemetry_tick",
+      "scene_sha256": "e4f340635d9e533cae007bb7afe177e596aa6bdc42cb80f6cc9faeb6f4ce9f04",
+      "projection": {
+        "cpu_output_shadow_words": 4480,
+        "cpu_result_download_words": 0,
+        "cpu_scene_words": 0,
+        "device_ready_frames": 1,
+        "dirty_tiles": 176,
+        "fallback_frames": 0,
+        "geometry_tiles_evaluated_total": 0,
+        "hardware_frames": 5,
+        "jobs_per_core": [
+          115,
+          111
+        ],
+        "lazy_copied_tiles_total": 69,
+        "mask_samples_evaluated_total": 0,
+        "masked_tiles_total": 384,
+        "mode": "ddr-resident-dirty-tiles",
+        "packed_mask_tiles_total": 384,
+        "plan_cache": {
+          "builtin_loads": 0,
+          "hits": 0,
+          "loads": 9,
+          "misses": 0,
+          "payload_scan_bytes": 247344,
+          "rejected": 0,
+          "revision": "c830e2bae43593f8c188620447b4ce808ce4894a826a073b44f12b949ad54b7e"
+        },
+        "precomputed_layers_total": 9,
+        "redrawn_tiles": 149,
+        "reused_tiles_total": 64,
+        "solid_tiles_total": 0,
+        "texture_reuses_total": 0,
+        "texture_uploads_total": 21,
+        "tile_fills_total": 270,
+        "total_hw_jobs": 793,
+        "update_kind": "tiles"
+      }
+    },
+    {
+      "name": "three_windows",
+      "scene_sha256": "1cc81ec3cba124a653a0e043f056ae4c92d5fb109a9e0e9150730e0c0ac64476",
+      "projection": {
+        "cpu_output_shadow_words": 4480,
+        "cpu_result_download_words": 0,
+        "cpu_scene_words": 0,
+        "device_ready_frames": 1,
+        "dirty_tiles": 213,
+        "fallback_frames": 0,
+        "geometry_tiles_evaluated_total": 0,
+        "hardware_frames": 6,
+        "jobs_per_core": [
+          125,
+          121
+        ],
+        "lazy_copied_tiles_total": 137,
+        "mask_samples_evaluated_total": 0,
+        "masked_tiles_total": 506,
+        "mode": "ddr-resident-dirty-tiles",
+        "packed_mask_tiles_total": 506,
+        "plan_cache": {
+          "builtin_loads": 0,
+          "hits": 0,
+          "loads": 13,
+          "misses": 0,
+          "payload_scan_bytes": 339456,
+          "rejected": 0,
+          "revision": "c830e2bae43593f8c188620447b4ce808ce4894a826a073b44f12b949ad54b7e"
+        },
+        "precomputed_layers_total": 13,
+        "redrawn_tiles": 119,
+        "reused_tiles_total": 136,
+        "solid_tiles_total": 0,
+        "texture_reuses_total": 1,
+        "texture_uploads_total": 27,
+        "tile_fills_total": 324,
+        "total_hw_jobs": 1039,
+        "update_kind": "tiles"
+      }
+    },
+    {
+      "name": "three_windows_tick",
+      "scene_sha256": "4f8fe6b4646c0a48ef8c278ea730c81fe369c42a106341f0d8a37da70179cca4",
+      "projection": {
+        "cpu_output_shadow_words": 4480,
+        "cpu_result_download_words": 0,
+        "cpu_scene_words": 0,
+        "device_ready_frames": 1,
+        "dirty_tiles": 213,
+        "fallback_frames": 0,
+        "geometry_tiles_evaluated_total": 0,
+        "hardware_frames": 7,
+        "jobs_per_core": [
+          170,
+          165
+        ],
+        "lazy_copied_tiles_total": 143,
+        "mask_samples_evaluated_total": 0,
+        "masked_tiles_total": 663,
+        "mode": "ddr-resident-dirty-tiles",
+        "packed_mask_tiles_total": 663,
+        "plan_cache": {
+          "builtin_loads": 0,
+          "hits": 0,
+          "loads": 13,
+          "misses": 0,
+          "payload_scan_bytes": 339456,
+          "rejected": 0,
+          "revision": "c830e2bae43593f8c188620447b4ce808ce4894a826a073b44f12b949ad54b7e"
+        },
+        "precomputed_layers_total": 13,
+        "redrawn_tiles": 181,
+        "reused_tiles_total": 142,
+        "solid_tiles_total": 0,
+        "texture_reuses_total": 1,
+        "texture_uploads_total": 33,
+        "tile_fills_total": 413,
+        "total_hw_jobs": 1374,
+        "update_kind": "tiles"
+      }
+    },
+    {
+      "name": "close_pulse_reveal",
+      "scene_sha256": "a5162e44b41f4238ce6a380fccec2119de3a3828a1a41c85e66e4fe3a79c6f29",
+      "projection": {
+        "cpu_output_shadow_words": 4480,
+        "cpu_result_download_words": 0,
+        "cpu_scene_words": 0,
+        "device_ready_frames": 1,
+        "dirty_tiles": 213,
+        "fallback_frames": 0,
+        "geometry_tiles_evaluated_total": 0,
+        "hardware_frames": 8,
+        "jobs_per_core": [
+          56,
+          54
+        ],
+        "lazy_copied_tiles_total": 211,
+        "mask_samples_evaluated_total": 0,
+        "masked_tiles_total": 709,
+        "mode": "ddr-resident-dirty-tiles",
+        "packed_mask_tiles_total": 709,
+        "plan_cache": {
+          "builtin_loads": 0,
+          "hits": 0,
+          "loads": 13,
+          "misses": 0,
+          "payload_scan_bytes": 339456,
+          "rejected": 0,
+          "revision": "c830e2bae43593f8c188620447b4ce808ce4894a826a073b44f12b949ad54b7e"
+        },
+        "precomputed_layers_total": 13,
+        "redrawn_tiles": 81,
+        "reused_tiles_total": 210,
+        "solid_tiles_total": 0,
+        "texture_reuses_total": 1,
+        "texture_uploads_total": 35,
+        "tile_fills_total": 441,
+        "total_hw_jobs": 1484,
+        "update_kind": "tiles"
+      }
+    },
+    {
+      "name": "close_telemetry_reveal",
+      "scene_sha256": "00a7cd48342606e8c6580924203f5280dbb9b793fc1b3d13dbc93166fb1e71b2",
+      "projection": {
+        "cpu_output_shadow_words": 4480,
+        "cpu_result_download_words": 0,
+        "cpu_scene_words": 0,
+        "device_ready_frames": 1,
+        "dirty_tiles": 176,
+        "fallback_frames": 0,
+        "geometry_tiles_evaluated_total": 0,
+        "hardware_frames": 9,
+        "jobs_per_core": [
+          32,
+          32
+        ],
+        "lazy_copied_tiles_total": 263,
+        "mask_samples_evaluated_total": 0,
+        "masked_tiles_total": 729,
+        "mode": "ddr-resident-dirty-tiles",
+        "packed_mask_tiles_total": 729,
+        "plan_cache": {
+          "builtin_loads": 0,
+          "hits": 0,
+          "loads": 13,
+          "misses": 0,
+          "payload_scan_bytes": 339456,
+          "rejected": 0,
+          "revision": "c830e2bae43593f8c188620447b4ce808ce4894a826a073b44f12b949ad54b7e"
+        },
+        "precomputed_layers_total": 13,
+        "redrawn_tiles": 64,
+        "reused_tiles_total": 270,
+        "solid_tiles_total": 0,
+        "texture_reuses_total": 1,
+        "texture_uploads_total": 36,
+        "tile_fills_total": 461,
+        "total_hw_jobs": 1548,
+        "update_kind": "tiles"
+      }
+    },
+    {
+      "name": "dashboard_refocus",
+      "scene_sha256": "7b84cb606c0b900e2c175189c6310ef3c3906cf3782f222cb8ddf2df523633a3",
+      "projection": {
+        "cpu_output_shadow_words": 4480,
+        "cpu_result_download_words": 0,
+        "cpu_scene_words": 0,
+        "device_ready_frames": 1,
+        "dirty_tiles": 148,
+        "fallback_frames": 0,
+        "geometry_tiles_evaluated_total": 0,
+        "hardware_frames": 10,
+        "jobs_per_core": [
+          75,
+          71
+        ],
+        "lazy_copied_tiles_total": 263,
+        "mask_samples_evaluated_total": 0,
+        "masked_tiles_total": 804,
+        "mode": "ddr-resident-dirty-tiles",
+        "packed_mask_tiles_total": 804,
+        "plan_cache": {
+          "builtin_loads": 0,
+          "hits": 0,
+          "loads": 13,
+          "misses": 0,
+          "payload_scan_bytes": 339456,
+          "rejected": 0,
+          "revision": "c830e2bae43593f8c188620447b4ce808ce4894a826a073b44f12b949ad54b7e"
+        },
+        "precomputed_layers_total": 13,
+        "redrawn_tiles": 133,
+        "reused_tiles_total": 272,
+        "solid_tiles_total": 0,
+        "texture_reuses_total": 1,
+        "texture_uploads_total": 40,
+        "tile_fills_total": 523,
+        "total_hw_jobs": 1694,
+        "update_kind": "tiles"
+      }
+    },
+    {
+      "name": "camera_angle",
+      "scene_sha256": "7b84cb606c0b900e2c175189c6310ef3c3906cf3782f222cb8ddf2df523633a3",
+      "projection": {
+        "cpu_output_shadow_words": 4480,
+        "cpu_result_download_words": 0,
+        "cpu_scene_words": 0,
+        "device_ready_frames": 1,
+        "dirty_tiles": 0,
+        "fallback_frames": 0,
+        "geometry_tiles_evaluated_total": 0,
+        "hardware_frames": 11,
+        "jobs_per_core": [
+          0,
+          0
+        ],
+        "lazy_copied_tiles_total": 263,
+        "mask_samples_evaluated_total": 0,
+        "masked_tiles_total": 804,
+        "mode": "ddr-resident-dirty-tiles",
+        "packed_mask_tiles_total": 804,
+        "plan_cache": {
+          "builtin_loads": 0,
+          "hits": 0,
+          "loads": 13,
+          "misses": 0,
+          "payload_scan_bytes": 339456,
+          "rejected": 0,
+          "revision": "c830e2bae43593f8c188620447b4ce808ce4894a826a073b44f12b949ad54b7e"
+        },
+        "precomputed_layers_total": 13,
+        "redrawn_tiles": 0,
+        "reused_tiles_total": 272,
+        "solid_tiles_total": 0,
+        "texture_reuses_total": 1,
+        "texture_uploads_total": 40,
+        "tile_fills_total": 523,
+        "total_hw_jobs": 1694,
+        "update_kind": "none"
+      }
+    },
+    {
+      "name": "camera_reset",
+      "scene_sha256": "7b84cb606c0b900e2c175189c6310ef3c3906cf3782f222cb8ddf2df523633a3",
+      "projection": {
+        "cpu_output_shadow_words": 4480,
+        "cpu_result_download_words": 0,
+        "cpu_scene_words": 0,
+        "device_ready_frames": 1,
+        "dirty_tiles": 0,
+        "fallback_frames": 0,
+        "geometry_tiles_evaluated_total": 0,
+        "hardware_frames": 12,
+        "jobs_per_core": [
+          0,
+          0
+        ],
+        "lazy_copied_tiles_total": 263,
+        "mask_samples_evaluated_total": 0,
+        "masked_tiles_total": 804,
+        "mode": "ddr-resident-dirty-tiles",
+        "packed_mask_tiles_total": 804,
+        "plan_cache": {
+          "builtin_loads": 0,
+          "hits": 0,
+          "loads": 13,
+          "misses": 0,
+          "payload_scan_bytes": 339456,
+          "rejected": 0,
+          "revision": "c830e2bae43593f8c188620447b4ce808ce4894a826a073b44f12b949ad54b7e"
+        },
+        "precomputed_layers_total": 13,
+        "redrawn_tiles": 0,
+        "reused_tiles_total": 272,
+        "solid_tiles_total": 0,
+        "texture_reuses_total": 1,
+        "texture_uploads_total": 40,
+        "tile_fills_total": 523,
+        "total_hw_jobs": 1694,
+        "update_kind": "none"
+      }
+    },
+    {
+      "name": "close_all",
+      "scene_sha256": "149ed4f8ab941a19b7dcc2d037ec53a7d5d6ffeb43d44792197cbdc062786a01",
+      "projection": {
+        "cpu_output_shadow_words": 4480,
+        "cpu_result_download_words": 0,
+        "cpu_scene_words": 0,
+        "device_ready_frames": 1,
+        "dirty_tiles": 148,
+        "fallback_frames": 0,
+        "geometry_tiles_evaluated_total": 0,
+        "hardware_frames": 13,
+        "jobs_per_core": [
+          0,
+          0
+        ],
+        "lazy_copied_tiles_total": 263,
+        "mask_samples_evaluated_total": 0,
+        "masked_tiles_total": 804,
+        "mode": "ddr-resident-dirty-tiles",
+        "packed_mask_tiles_total": 804,
+        "plan_cache": {
+          "builtin_loads": 0,
+          "hits": 0,
+          "loads": 13,
+          "misses": 0,
+          "payload_scan_bytes": 339456,
+          "rejected": 0,
+          "revision": "c830e2bae43593f8c188620447b4ce808ce4894a826a073b44f12b949ad54b7e"
+        },
+        "precomputed_layers_total": 13,
+        "redrawn_tiles": 0,
+        "reused_tiles_total": 272,
+        "solid_tiles_total": 0,
+        "texture_reuses_total": 1,
+        "texture_uploads_total": 40,
+        "tile_fills_total": 523,
+        "total_hw_jobs": 1694,
+        "update_kind": "tiles"
+      }
+    },
+    {
+      "name": "asset_metrics",
+      "stats": {
+        "cache_hits": 32,
+        "format": "raw-mapped-00RRGGBB",
+        "loads": 19,
+        "misses": 0,
+        "rejected": 0,
+        "rgb_materializations": 0
+      }
+    }
+  ]
+}

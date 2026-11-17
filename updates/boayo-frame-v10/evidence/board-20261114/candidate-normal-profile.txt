@@ -1,0 +1,3 @@
+/tmp/boayo-frame-v10 profile; echo DIRTY9_770e371f_RC:$?
+{"app_error":null,"performance":{"frame_interval_ms":3281.3404599983187,"frame_limit":2.0,"frame_pacing":"start-to-start","full_update_count":1,"last_apps_ms":843.1768199989165,"last_compose_ms":2687.7611800009618,"last_upload_ms":0.0,"no_op_update_count":0,"patch_update_count":20,"render_count":20,"rendered_generation":35,"update_words":4480,"uptime_seconds":93.67759020000085},"phase":"command","profile":{"enabled":false,"nested":true,"units":"microseconds"},"render_error":null,"snapshot_time":11165.47505632}
+DIRTY9_770e371f_RC:0

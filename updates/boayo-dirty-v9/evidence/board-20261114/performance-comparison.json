@@ -1,0 +1,57 @@
+{
+  "hardware": true,
+  "scenario": "One continuously updating Telemetry window, same SD/kernel/bitstream, prior executable staged in RAM",
+  "baseline_version": "view-v8",
+  "candidate_version": "dirty-v9",
+  "old": {
+    "samples": 12,
+    "distinct_completed_frames": 5,
+    "compose_median_ms": 4873.383119999971,
+    "compose_min_ms": 4140.8120199999985,
+    "compose_max_ms": 6118.818840000131,
+    "dma_errors": 0
+  },
+  "new": {
+    "samples": 12,
+    "distinct_completed_frames": 6,
+    "compose_median_ms": 2413.39628999998,
+    "compose_min_ms": 1661.675099999968,
+    "compose_max_ms": 2659.448820000023,
+    "dma_errors": 0
+  },
+  "compose_reduction_percent": 50.47801023285864,
+  "quiet_v8": {
+    "completed_updates": 4,
+    "snapshot_interval_seconds": 36.816922259999956,
+    "approx_seconds_per_update": 9.204230564999989,
+    "direct_upload_bytes_per_update": 547200.0,
+    "pool_full_upload_delta": null,
+    "pool_partial_upload_delta": null
+  },
+  "quiet_v9_before": {
+    "completed_updates": 6,
+    "snapshot_interval_seconds": 32.74428144000001,
+    "approx_seconds_per_update": 5.457380240000002,
+    "direct_upload_bytes_per_update": 38400.0,
+    "pool_full_upload_delta": 0,
+    "pool_partial_upload_delta": 6
+  },
+  "quiet_v9_restored": {
+    "completed_updates": 6,
+    "snapshot_interval_seconds": 32.472536439999885,
+    "approx_seconds_per_update": 5.412089406666648,
+    "direct_upload_bytes_per_update": 38400.0,
+    "pool_full_upload_delta": 0,
+    "pool_partial_upload_delta": 6
+  },
+  "limitations": [
+    "Small real-board sample, not a universal UI speedup",
+    "Quiet intervals use cached completed-render snapshots; per-update interval is approximate",
+    "Composition duration excludes application update work; transfer staging excluded",
+    "HDMI visual status is reported separately"
+  ],
+  "bitstream_sha256": "9bb855886be0ac55d983f9a72ab0e6c23317b7f4fe27e13430cb2de17d7d4e07",
+  "image_sha256": "e46eca4935109652ad9acb63b3e500b56d505b5dc48b946f6d8bcfc356e51efa",
+  "baseline_sha256": "f8d34f432a2fc7ab055720e9aab4b4036344c275b60ec2c4240fb32990f585a6",
+  "candidate_sha256": "f9d47a22e1b7ffce94d16b31f61f40d632a66deaf837ec2c3d8eb56f398b17e1"
+}

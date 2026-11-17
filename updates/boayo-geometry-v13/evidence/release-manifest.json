@@ -1,0 +1,10 @@
+{
+  "result": "PASS_IDENTICAL_HOST_RV32_SOURCES_AND_SD",
+  "image_sha256": "dccb9042d390db89edc8dd877157aa575cc7f0f2342c77e051b4258435684eab",
+  "image_bytes": 311427072,
+  "app_sha256": "2bc3f60f8ce05531d21e14594362b374d60a5a2c7b8ac58a203e77c48f7e5a06",
+  "physical_test": "same RV32 app staged to RAM on v12 SD/kernel; v13 SD cold boot pending",
+  "bitstream_changed": false,
+  "driver_changed": false,
+  "host_rv32_sources_equal": true
+}

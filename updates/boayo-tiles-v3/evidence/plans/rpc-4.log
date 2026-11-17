@@ -1,0 +1,28 @@
+BOAYO_INITTRACE n=1 event=desktop.begin wall_us=4 cpu_us=1 value=0
+BOAYO_INITTRACE n=2 event=window.create.begin wall_us=119 cpu_us=128 value=0
+BOAYO_INITTRACE n=3 event=window.create.end wall_us=175 cpu_us=189 value=1
+BOAYO_INITTRACE n=4 event=window.configure.begin wall_us=178 cpu_us=191 value=0
+BOAYO_INITTRACE n=5 event=window.configure.end wall_us=187 cpu_us=202 value=1
+BOAYO_INITTRACE n=6 event=asset.map.begin wall_us=213 cpu_us=229 value=0
+BOAYO_INITTRACE n=7 event=asset.loaded wall_us=246 cpu_us=266 value=921600
+BOAYO_INITTRACE n=8 event=surface.publish.move wall_us=250 cpu_us=270 value=1
+BOAYO_INITTRACE n=9 event=desktop.end wall_us=252 cpu_us=272 value=1
+BOAYO_INITTRACE n=10 event=desktop.scope_exit wall_us=254 cpu_us=274 value=0
+BOAYO_FRAME_TRACE n=1 event=frame.begin wall_us=1 cpu_us=1 value=0
+BOAYO_FRAME_TRACE n=2 event=scene.allocate.begin wall_us=8541 cpu_us=9319 value=1084800
+BOAYO_FRAME_TRACE n=3 event=scene.allocate.end wall_us=10848 cpu_us=11835 value=1084800
+BOAYO_FRAME_TRACE n=4 event=plan.load.begin wall_us=10891 cpu_us=11881 value=0
+BOAYO_PLAN_REJECT /p_d522a90b.bgp: plan bounds
+BOAYO_FRAME_TRACE n=5 event=plan.load.end wall_us=11025 cpu_us=12027 value=0
+BOAYO_FRAME_TRACE n=6 event=geometry.compute.begin wall_us=11027 cpu_us=12030 value=0
+BOAYO_FRAME_TRACE n=7 event=geometry.compute.end wall_us=11545 cpu_us=12595 value=160
+BOAYO_PLAN_REJECT /p_d522a90b.bgp: plan bounds
+BOAYO_FRAME_TRACE n=8 event=mask.compute.begin wall_us=11586 cpu_us=12639 value=160
+BOAYO_FRAME_TRACE n=9 event=mask.compute.end wall_us=15402 cpu_us=16804 value=160
+BOAYO_FRAME_TRACE n=10 event=texture.upload.begin wall_us=15563 cpu_us=16979 value=230400
+BOAYO_FRAME_TRACE n=11 event=texture.upload.end wall_us=15779 cpu_us=17214 value=230400
+BOAYO_FRAME_TRACE n=12 event=projectors.begin wall_us=15784 cpu_us=17219 value=96
+BOAYO_FRAME_TRACE n=13 event=projectors.end wall_us=18840 cpu_us=20554 value=96
+BOAYO_FRAME_TRACE n=14 event=tile.compose.begin wall_us=19042 cpu_us=20774 value=4220
+BOAYO_FRAME_TRACE n=15 event=tile.compose.end wall_us=19421 cpu_us=21187 value=94
+BOAYO_FRAME_TRACE n=16 event=frame.scope_exit wall_us=38850 cpu_us=42383 value=0

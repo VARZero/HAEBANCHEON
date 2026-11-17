@@ -1,0 +1,9 @@
+{
+  "source": "D:\\temp\\haebancheon-motion-v7\\board-trial-20261114\\viewfix.delta",
+  "target": "/tmp/viewfix.delta",
+  "bytes": 150602,
+  "fnv1a": 815394371,
+  "sha256": "4e5fe883dacb5f59cb6d67205269d9b00f34078729f64f868d048739800b136c",
+  "seconds": 163.6,
+  "result": "PASS_TRANSFER_FNV"
+}

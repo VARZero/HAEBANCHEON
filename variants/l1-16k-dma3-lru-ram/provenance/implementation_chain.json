@@ -1,0 +1,40 @@
+{
+  "checkpoints": [
+    {
+      "stage": "synthesis",
+      "path": "D:\\temp\\haebancheon-l1-16k-dma3\\board_synth_lru_v1\\optimized.dcp",
+      "sha256": "d6e7509c30e022cff6144f23a163b82cf78b3ff3afc3cbf1f52b652808646c21"
+    },
+    {
+      "stage": "guarded_placement",
+      "path": "D:\\temp\\haebancheon-l1-16k-dma3\\board_route_lru_v1\\placed_optimized.dcp",
+      "sha256": "3167ba0b4bf423ef47f61396cbdb9a554a9395f636a75355ac4dc345973f3ca1"
+    },
+    {
+      "stage": "targeted_enable_replication",
+      "path": "D:\\temp\\haebancheon-l1-16k-dma3\\output_fanout_prepare\\fanout_optimized.dcp",
+      "sha256": "645a730794e8090cc7c720bf56e9e42de45e2efe7cd0ff8fb823fe925ea56b7b"
+    },
+    {
+      "stage": "routed_and_optimized",
+      "path": "D:\\temp\\haebancheon-l1-16k-dma3\\board_route_lru_fanout_v1\\routed.dcp",
+      "sha256": "085f2087f26de3fc0d9d796894738bcf968be89f79e59ed574692b774662d4fa"
+    }
+  ],
+  "target_net": "system/bosio/output0/u_projector/E[0]",
+  "driver_replicas_added": 12,
+  "target_loads_before": 3841,
+  "placement_scripts_sha256": {
+    "audit_board.tcl": "68b8c3f88dfb9b39da47751333748b89414d00b6048b5ca2ab71c6ce8dec90d9",
+    "audit_sd_io.tcl": "b8b43a92ffbe5a6db1144d9fb48be8c5eb2ed1ca3c7f4982ba400b15405b4735",
+    "route_board.tcl": "9a7b5c341cc0c00aac549ff438d952a232d70ca800074c21933172706d69cb6f",
+    "route_guarded.tcl": "8bbc18e6fecb6aeee8774f49fffac70a13eb6092cbcfdf413509caccecd3b51b"
+  },
+  "implementation_scripts_sha256": {
+    "audit_board.tcl": "68b8c3f88dfb9b39da47751333748b89414d00b6048b5ca2ab71c6ce8dec90d9",
+    "audit_sd_io.tcl": "b8b43a92ffbe5a6db1144d9fb48be8c5eb2ed1ca3c7f4982ba400b15405b4735",
+    "prepare_output_fanout.tcl": "0b8cf7df58aae37015cdaf692b3f98eefcffd903e1d7f416077e2314a06e380a",
+    "route_board.tcl": "9a7b5c341cc0c00aac549ff438d952a232d70ca800074c21933172706d69cb6f",
+    "route_from_placed.tcl": "5c610d211c15e39897f9b0bb226608e4fe70491f77e33439e498756d154a7a3e"
+  }
+}

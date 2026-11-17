@@ -1,0 +1,17 @@
+/tmp/mask12c.delta: 37888/253311 bytes; 20.1s
+/tmp/mask12c.delta: 75008/253311 bytes; 40.1s
+/tmp/mask12c.delta: 108032/253311 bytes; 60.2s
+/tmp/mask12c.delta: 144640/253311 bytes; 80.2s
+/tmp/mask12c.delta: 181504/253311 bytes; 100.2s
+/tmp/mask12c.delta: 220160/253311 bytes; 120.3s
+{"source": "D:\\temp\\haebancheon-mask-v12\\board-trial\\mask12.delta", "target": "/tmp/mask12c.delta", "bytes": 253311, "fnv1a": 3813012846, "sha256": "6f7edcafef361affc24f1b25b281b015f15a2fffc273e72a77b12c0205079f19", "seconds": 137.94, "result": "PASS_TRANSFER_FNV"}
+{"command": "/tmp/v11-apply /tmp/boayo-fix1 /tmp/mask12c.delta /tmp/boayo-v12c", "seconds": 59.9, "rc": 0, "uart": "oryukdo# /tmp/v11-apply /tmp/boayo-fix1 /tmp/mask12c.delta /tmp/boayo-v12c; echo\r\r\r\n INCR11_9db571ae_RC:$?\r\r\nPATCH_OK\r\r\nINCR11_9db571ae_RC:0\r\r\n", "observed_at": "2026-11-15T01:54:59.121268", "log_start": 563794}
+{"command": "BOAYO_PROFILE=0 BOAYO_INIT_TRACE=0 /tmp/boayo-v12c start", "seconds": 2.773, "rc": 1, "uart": "BOAYO_PROFILE=0 BOAYO_INIT_TRACE=0 /tmp/boayo-v12c start; echo INCR11_7\r\r\r\n78cebec_RC:$?\r\r\nWM socket exists; inspect boayo-status first\r\r\nINCR11_778cebec_RC:1\r\r\n", "observed_at": "2026-11-15T01:55:01.895064", "log_start": 563946}
+Traceback (most recent call last):
+  File "D:\temp\haebancheon-mask-v12\board-trial\run_cull.py", line 9, in <module>
+    command('BOAYO_PROFILE=0 BOAYO_INIT_TRACE=0 /tmp/boayo-v12c start',120)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\temp\haebancheon-mask-v12\board-trial\board_io.py", line 22, in command
+    assert rc==0,report
+           ^^^^^
+AssertionError: {'command': 'BOAYO_PROFILE=0 BOAYO_INIT_TRACE=0 /tmp/boayo-v12c start', 'seconds': 2.773, 'rc': 1, 'uart': 'BOAYO_PROFILE=0 BOAYO_INIT_TRACE=0 /tmp/boayo-v12c start; echo INCR11_7\r\r\r\n78cebec_RC:$?\r\r\nWM socket exists; inspect boayo-status first\r\r\nINCR11_778cebec_RC:1\r\r\n', 'observed_at': '2026-11-15T01:55:01.895064', 'log_start': 563946}

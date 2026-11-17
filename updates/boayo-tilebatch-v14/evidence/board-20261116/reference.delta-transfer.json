@@ -1,0 +1,9 @@
+{
+  "source": "D:\\temp\\haebancheon-tilebatch-v14\\board-20261116\\reference.delta",
+  "target": "/tmp/reference.delta",
+  "bytes": 245987,
+  "fnv1a": 1028718071,
+  "sha256": "17deac325b2c7968618d6665a9679c1183d095ec0ecd79b0eccda577dbefbce0",
+  "seconds": 158.12,
+  "result": "PASS_TRANSFER_FNV"
+}

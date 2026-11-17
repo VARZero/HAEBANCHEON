@@ -26,4 +26,4 @@ for key in ('image','bitstream'):
 assert json.loads((root/'validation/actual_image_loader.json').read_text())['image_sha256']==board['image_sha256']
 assert json.loads((root/'validation/qemu_shell/result.json').read_text())['image_sha256']==board['image_sha256']
 print(f'PASS SD4 검증 소스 {len(sources)}개, 게시 파일 {len(files)}개, 기능시험 기록, 배선 결과 및 이미지 대응')
-print('실보드 MMC/ext4 검증은 아직 수행하지 않았습니다.')
+print('위 PASS는 v1 제작 기록의 보존 검사입니다. 후속 실보드 결과와 수정은 updates/sd4-linux-v2/README_KO.md를 확인하세요.')

@@ -1,0 +1,8 @@
+{
+  "command": "chmod +x /tmp/v11-sample; /tmp/v11-sample",
+  "seconds": 2.048,
+  "rc": 126,
+  "uart": "chmod +x /tmp/v11-sample; /tmp/v11-sample; echo INCR11_3075f445_RC:$?\r\r\nsh: chmod: not found\r\r\nsh: /tmp/v11-sample: Permission denied\r\r\nINCR11_3075f445_RC:126\r\r\n",
+  "observed_at": "2026-11-15T00:48:04.595363",
+  "log_start": 405643
+}

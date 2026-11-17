@@ -1,0 +1,1 @@
+{"result": "PASS", "scope": "host mock delayed render, not board latency", "phases": ["command", "composing", "ready"], "samples": 74, "maximum_status_ms": 0.3934799999854022, "injected_render_ms": 3000}

@@ -1,0 +1,188 @@
+[
+  {
+    "file": "BODMA_effa2ce7.json",
+    "time": "2026-11-14T18:23:54.899171",
+    "command": "boayo-status",
+    "performance": {
+      "frame_limit": 2.0,
+      "full_update_count": 1,
+      "last_compose_ms": 4410.778059999999,
+      "last_upload_ms": 0.0,
+      "no_op_update_count": 0,
+      "patch_update_count": 1,
+      "render_count": 1,
+      "rendered_generation": 4,
+      "update_words": 4480,
+      "uptime_seconds": 6.471481159999996
+    },
+    "projection": {
+      "cpu_output_shadow_words": 4480,
+      "cpu_result_download_words": 0,
+      "cpu_scene_words": 0,
+      "device_ready_frames": 1,
+      "dirty_tiles": 160,
+      "fallback_frames": 0,
+      "geometry_tiles_evaluated_total": 0,
+      "hardware_frames": 1,
+      "jobs_per_core": [
+        48,
+        48
+      ],
+      "lazy_copied_tiles_total": 0,
+      "mask_samples_evaluated_total": 0,
+      "masked_tiles_total": 44,
+      "mode": "ddr-resident-dirty-tiles",
+      "packed_mask_tiles_total": 44,
+      "plan_cache": {
+        "builtin_loads": 1,
+        "hits": 0,
+        "loads": 1,
+        "misses": 0,
+        "payload_scan_bytes": 0,
+        "rejected": 0,
+        "revision": "c830e2bae43593f8c188620447b4ce808ce4894a826a073b44f12b949ad54b7e"
+      },
+      "precomputed_layers_total": 1,
+      "redrawn_tiles": 96,
+      "reused_tiles_total": 0,
+      "solid_tiles_total": 0,
+      "texture_reuses_total": 0,
+      "texture_uploads_total": 1,
+      "tile_fills_total": 44,
+      "total_hw_jobs": 96,
+      "update_kind": "tiles"
+    },
+    "windows": [
+      "BoAYO Launcher"
+    ],
+    "view": {
+      "pitch": 0.0,
+      "roll": 0.0,
+      "yaw": 0.0
+    }
+  },
+  {
+    "file": "BODMA_b6b0c653.json",
+    "time": "2026-11-14T18:27:39.170794",
+    "command": "boayo-status; ps; cat /tmp/boayo-wm.log",
+    "performance": {
+      "frame_limit": 2.0,
+      "full_update_count": 1,
+      "last_compose_ms": 4410.778059999999,
+      "last_upload_ms": 0.0,
+      "no_op_update_count": 0,
+      "patch_update_count": 1,
+      "render_count": 1,
+      "rendered_generation": 4,
+      "update_words": 4480,
+      "uptime_seconds": 108.12453552000001
+    },
+    "projection": {
+      "cpu_output_shadow_words": 4480,
+      "cpu_result_download_words": 0,
+      "cpu_scene_words": 0,
+      "device_ready_frames": 1,
+      "dirty_tiles": 160,
+      "fallback_frames": 0,
+      "geometry_tiles_evaluated_total": 0,
+      "hardware_frames": 1,
+      "jobs_per_core": [
+        48,
+        48
+      ],
+      "lazy_copied_tiles_total": 0,
+      "mask_samples_evaluated_total": 0,
+      "masked_tiles_total": 44,
+      "mode": "ddr-resident-dirty-tiles",
+      "packed_mask_tiles_total": 44,
+      "plan_cache": {
+        "builtin_loads": 1,
+        "hits": 0,
+        "loads": 1,
+        "misses": 0,
+        "payload_scan_bytes": 0,
+        "rejected": 0,
+        "revision": "c830e2bae43593f8c188620447b4ce808ce4894a826a073b44f12b949ad54b7e"
+      },
+      "precomputed_layers_total": 1,
+      "redrawn_tiles": 96,
+      "reused_tiles_total": 0,
+      "solid_tiles_total": 0,
+      "texture_reuses_total": 0,
+      "texture_uploads_total": 1,
+      "tile_fills_total": 44,
+      "total_hw_jobs": 96,
+      "update_kind": "tiles"
+    },
+    "windows": [
+      "BoAYO Launcher"
+    ],
+    "view": {
+      "pitch": 0.0,
+      "roll": 0.0,
+      "yaw": 0.0
+    }
+  },
+  {
+    "file": "BODMA_f5d087fd.json",
+    "time": "2026-11-14T18:39:12.318157",
+    "command": "boayo-status",
+    "performance": {
+      "frame_limit": 2.0,
+      "full_update_count": 1,
+      "last_compose_ms": 26728.222619999997,
+      "last_upload_ms": 0.0,
+      "no_op_update_count": 0,
+      "patch_update_count": 3,
+      "render_count": 3,
+      "rendered_generation": 73,
+      "update_words": 4480,
+      "uptime_seconds": 755.37014242
+    },
+    "projection": {
+      "cpu_output_shadow_words": 4480,
+      "cpu_result_download_words": 0,
+      "cpu_scene_words": 0,
+      "device_ready_frames": 1,
+      "dirty_tiles": 160,
+      "fallback_frames": 0,
+      "geometry_tiles_evaluated_total": 0,
+      "hardware_frames": 3,
+      "jobs_per_core": [
+        48,
+        48
+      ],
+      "lazy_copied_tiles_total": 0,
+      "mask_samples_evaluated_total": 0,
+      "masked_tiles_total": 255,
+      "mode": "ddr-resident-dirty-tiles",
+      "packed_mask_tiles_total": 255,
+      "plan_cache": {
+        "builtin_loads": 7,
+        "hits": 0,
+        "loads": 7,
+        "misses": 0,
+        "payload_scan_bytes": 0,
+        "rejected": 0,
+        "revision": "c830e2bae43593f8c188620447b4ce808ce4894a826a073b44f12b949ad54b7e"
+      },
+      "precomputed_layers_total": 7,
+      "redrawn_tiles": 96,
+      "reused_tiles_total": 0,
+      "solid_tiles_total": 0,
+      "texture_reuses_total": 0,
+      "texture_uploads_total": 8,
+      "tile_fills_total": 148,
+      "total_hw_jobs": 535,
+      "update_kind": "tiles"
+    },
+    "windows": [
+      "BoAYO Launcher"
+    ],
+    "view": {
+      "pitch": 0.0,
+      "roll": 0.0,
+      "yaw": 0.0
+    }
+  }
+]

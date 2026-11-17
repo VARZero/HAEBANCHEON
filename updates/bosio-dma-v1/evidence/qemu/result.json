@@ -1,0 +1,13 @@
+{
+  "result": "FAIL",
+  "image": "/var/tmp/oryukdo-bosio-dma-v1/release/image/ORYUKDO-KFB-BOSIO-DMA-v1.img",
+  "image_sha256": "2039a806c008e15ee5282e132b969bfaebf113f4c7cbee4b0b89a9288f41e92c",
+  "hardware": false,
+  "rtl": false,
+  "mock_backend": true,
+  "checks": [
+    "BusyBox shell",
+    "cat /etc/oryukdo-image"
+  ],
+  "error": "AssertionError(('/bin/storage-check --identity', b'/bin/storage-check --identity; echo __NATIVE_RC:$?\\r\\r\\nIDENTITY bytes=4584 fnv1a=139061550\\r\\r\\n__NATIVE_RC:0\\r\\r\\noryukdo# '))"
+}

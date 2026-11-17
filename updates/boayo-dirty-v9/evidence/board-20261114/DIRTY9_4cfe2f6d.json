@@ -1,0 +1,8 @@
+{
+  "command": "/tmp/boayo-v8-baseline stop && while test -S /tmp/bosio-wm.sock; do sleep 1; done",
+  "seconds": 6.291,
+  "rc": 0,
+  "uart": "/tmp/boayo-v8-baseline stop && while test -S /tmp/bosio-wm.sock; do sle\r\r\r\nep 1; done; echo DIRTY9_4cfe2f6d_RC:$?\r\r\nDIRTY9_4cfe2f6d_RC:0\r\r\n",
+  "observed_at": "2026-11-14T21:05:03.069082",
+  "log_start": 225289
+}

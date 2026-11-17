@@ -1,0 +1,357 @@
+{
+  "app_error": null,
+  "assets": {
+    "cache_hits": 893,
+    "format": "raw-mapped-00RRGGBB",
+    "loads": 209,
+    "misses": 12,
+    "rejected": 0,
+    "rgb_materializations": 0
+  },
+  "buttons": {
+    "available": false,
+    "last_event_id": 0,
+    "state": 0
+  },
+  "compositor": "cpp-native",
+  "driver_profile": {
+    "available": true,
+    "enabled": false,
+    "fast_paths": true
+  },
+  "focused_window": 2,
+  "generation": 542,
+  "motion": {
+    "active": false,
+    "next_step": 25,
+    "phase": "restored",
+    "steps": 25,
+    "target_generation": 540,
+    "view": {
+      "pitch": 0.0,
+      "roll": 0.0,
+      "yaw": 0.0
+    },
+    "windows": [
+      6,
+      10,
+      14
+    ]
+  },
+  "output": {
+    "abi": 3,
+    "active_bank": 0,
+    "active_base": 3170959360,
+    "antialias": false,
+    "backend": "kfb-linux-frame-atomic-output",
+    "capability": 1146373681,
+    "commits": 67,
+    "dma_copied_words": 413440,
+    "max_jobs": 64,
+    "max_scene_words": 1084816,
+    "memory_dma": {
+      "available": true,
+      "copy_bytes": 74951692,
+      "copy_ops": 21199,
+      "errors": 0,
+      "features": 255,
+      "fill_bytes": 8007680,
+      "fill_ops": 7820,
+      "quarantined": 0,
+      "timeouts": 0,
+      "upload_bytes": 66462032,
+      "upload_ops": 1849,
+      "upload_threshold": 4096
+    },
+    "metadata_only": false,
+    "mock_backend": false,
+    "poisoned": 0,
+    "publish_profile": {
+      "backend": "kernel",
+      "command": 2,
+      "configure_us": 87,
+      "finish_us": 300,
+      "select_us": 26149,
+      "upload_ranges": 0,
+      "upload_us": 43698,
+      "uploaded_words": 0,
+      "user_copy_us": 6763,
+      "validate_us": 35531,
+      "wait_us": 153171
+    },
+    "sensor_available": false,
+    "shadow_copied_words": 0,
+    "signature": 1112748597,
+    "status": 2791440387,
+    "uploaded_words": 1244
+  },
+  "performance": {
+    "frame_interval_ms": 3297.130019999713,
+    "frame_limit": 2.0,
+    "frame_pacing": "start-to-start",
+    "full_update_count": 1,
+    "last_apps_ms": 692.3960999993142,
+    "last_compose_ms": 2051.786739999443,
+    "last_upload_ms": 0.0,
+    "no_op_update_count": 0,
+    "patch_update_count": 66,
+    "render_count": 66,
+    "rendered_generation": 542,
+    "update_words": 4480,
+    "uptime_seconds": 1652.8604921199994
+  },
+  "pointer": {
+    "azimuth": 0.0,
+    "buttons": [],
+    "cancel_serial": 0,
+    "captured_window": null,
+    "dragging": false,
+    "elevation": 0.0,
+    "last_left_press": {
+      "azimuth": 18.91361728563541,
+      "elevation": 11.136823482150847,
+      "window_id": 9
+    },
+    "last_left_release": {
+      "azimuth": 18.91361728563541,
+      "elevation": 11.136823482150847
+    },
+    "left_press_serial": 11,
+    "left_release_serial": 11,
+    "scroll_delta": 0.0,
+    "scroll_serial": 0,
+    "visible": false,
+    "window_id": 2,
+    "zone": "content"
+  },
+  "profile": {
+    "enabled": false,
+    "nested": true,
+    "units": "microseconds"
+  },
+  "projection": {
+    "cpu_output_shadow_words": 4480,
+    "cpu_result_download_words": 0,
+    "cpu_scene_words": 0,
+    "device_ready_frames": 1,
+    "dirty_tiles": 28,
+    "fallback_frames": 0,
+    "geometry_tiles_evaluated_total": 84400,
+    "hardware_frames": 66,
+    "jobs_per_core": [
+      16,
+      16
+    ],
+    "lazy_copied_tiles_total": 1615,
+    "mask_build_us_total": 158684381,
+    "mask_builds": 20,
+    "mask_fast_tiles_total": 296,
+    "mask_integer_samples_total": 277025,
+    "mask_precise_samples_total": 5453,
+    "mask_samples_evaluated_total": 556032,
+    "masked_tiles_total": 4111,
+    "mode": "ddr-resident-dirty-tiles",
+    "packed_mask_tiles_total": 4111,
+    "plan_cache": {
+      "builtin_loads": 13,
+      "hits": 10,
+      "loads": 13,
+      "misses": 40,
+      "payload_scan_bytes": 0,
+      "rejected": 0,
+      "revision": "8f5db34197f157cd8404ab166ed0d9b03742f01656ced910d17d3059a96f9be6"
+    },
+    "precomputed_layers_total": 23,
+    "redrawn_tiles": 28,
+    "reused_tiles_total": 30,
+    "solid_tiles_total": 0,
+    "texture_pool": {
+      "capacity_bytes": 4194304,
+      "evictions": 0,
+      "full_uploads": 17,
+      "partial_uploads": 169,
+      "resident_bytes": 1430400,
+      "resident_windows": 5,
+      "reuses": 120,
+      "staged_copy_bytes": 61152,
+      "upload_bytes": 21360352,
+      "upload_calls": 332
+    },
+    "texture_reuses_total": 120,
+    "texture_uploads_total": 186,
+    "tile_fills_total": 1778,
+    "total_hw_jobs": 10675,
+    "update_kind": "tiles"
+  },
+  "render_error": null,
+  "runtime": "C++17",
+  "scene_owner": null,
+  "service": {
+    "phase": "command",
+    "queued_requests": 0,
+    "snapshot_age_seconds": 1.0223183600000993,
+    "state_is_snapshot": true
+  },
+  "view": {
+    "pitch": 0.0,
+    "roll": 0.0,
+    "yaw": 0.0
+  },
+  "windows": [
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": true,
+      "height_deg": 26.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          14.0
+        ]
+      ],
+      "surface_height": 300,
+      "surface_width": 400,
+      "title": "Telemetry",
+      "width_deg": 36.0,
+      "window_id": 2,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 0
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 30.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "boayo-desktop",
+      "roll": 0.0,
+      "shape": [
+        [
+          51.2,
+          36.0,
+          537.6,
+          252.0,
+          18.0
+        ]
+      ],
+      "surface_height": 360,
+      "surface_width": 640,
+      "title": "BoAYO Launcher",
+      "width_deg": 42.0,
+      "window_id": 1,
+      "workspace": {},
+      "z": 1
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -16.47105751657935,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: Telemetry",
+      "width_deg": 2.88,
+      "window_id": 3,
+      "workspace": {
+        "control": "move",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 2
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": -10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": 3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 4,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 3
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": 10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-2",
+      "roll": -3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 5,
+      "workspace": {
+        "control": "close",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 4
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "command": "/tmp/v14-apply /usr/bin/boayo-native /tmp/reference.delta /tmp/boayo-reference",
+  "seconds": 63.91,
+  "rc": 0,
+  "uart": "oryukdo# /tmp/v14-apply /usr/bin/boayo-native /tmp/reference.delta /tmp/boayo-re\r\r\r\nference; echo V14_b92d1463_RC:$?\r\r\nPATCH_OK\r\r\nV14_b92d1463_RC:0\r\r\n",
+  "observed_at": "2026-11-16T21:54:22.354496",
+  "log_start": 98195
+}

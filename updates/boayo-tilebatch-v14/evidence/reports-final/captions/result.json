@@ -1,0 +1,58 @@
+{
+  "result": "PASS_CAPTION_LIFECYCLE",
+  "hardware": false,
+  "checks": [
+    {
+      "name": "initial",
+      "sha256": "a20a34748e6d690a192c89c47d7dfba4b213dbe335884b9a401c05a2870903f4"
+    },
+    {
+      "name": "unchanged_layout_2",
+      "sha256": "86177252bf1328581554a33ba29bc1fe45c6a278ed9ae06e99ed0001e24de2d4"
+    },
+    {
+      "name": "unchanged_layout_3",
+      "sha256": "6563e960a0468fa29b2afe8e8bfa077162fd59a0c78f350db091bb057072a0b6"
+    },
+    {
+      "name": "unchanged_layout_4",
+      "sha256": "291d0b1c2645896e6a9ac5462ffa3fa718ef321cf80b5e370667783a81224625"
+    },
+    {
+      "name": "minimized",
+      "sha256": "42e5cbc0b1f5b3edd28ecbcc8e54702d79f71b7cf57232ecae84d8b8100cbb03"
+    },
+    {
+      "name": "restore_same_geometry",
+      "sha256": "812f16b31f5e100e9dd7cb7325bc9de5876e88ef569410f0a487aae1dc285cc8"
+    },
+    {
+      "name": "minimized_again",
+      "sha256": "42e5cbc0b1f5b3edd28ecbcc8e54702d79f71b7cf57232ecae84d8b8100cbb03"
+    },
+    {
+      "name": "restore_new_geometry",
+      "sha256": "621c643f8df20ca24d1333026574fad69f2110630cfc053129059562e2f5d5bf"
+    },
+    {
+      "name": "focus_other",
+      "sha256": "63174a649e92e6048cd52a0bf582071b3fd8ae6234042c7637d62f07c5011481"
+    },
+    {
+      "name": "focus_restored",
+      "sha256": "da37b4a2fb6dfd91668715b3510a6ece2788c9d3ebbdd33c91b9d8946b5a8086"
+    },
+    {
+      "name": "hover_close",
+      "sha256": "530fb75d7e2d780f53f350a960d738b3d839f55be0ad7f8036030a936f1a1ca8"
+    },
+    {
+      "name": "leave_close",
+      "sha256": "4d425a5c38f82ee06ec59d27bd07609629552dabee0b95ca2f3a45e4294cb793"
+    },
+    {
+      "name": "close",
+      "sha256": "4eaed6a5b728dac03450da18a4161fb4278d401c686a9a99e433a90a7258e127"
+    }
+  ]
+}

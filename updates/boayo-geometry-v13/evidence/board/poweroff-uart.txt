@@ -1,0 +1,29 @@
+echo o > /proc/sysrq-trigger
+[ 3312.362737] sysrq: Power Off
+[ 3312.362737] sysrq: Power Off
+[ 3312.388292] mmcblk mmc0:0001: shutdown
+[ 3312.388292] mmcblk mmc0:0001: shutdown
+oryukdo# [ 3312.476632] mmc_host mmc0: shutdown_pre
+[ 3312.476632] mmc_host mmc0: shutdown_pre
+[ 3312.505987] platform 200bff8.timer: shutdown
+[ 3312.505987] platform 200bff8.timer: shutdown
+[ 3312.529209] platform 10000000.serial: shutdown
+[ 3312.529209] platform 10000000.serial: shutdown
+[ 3312.552674] bosio-kfb 20000000.bosio: shutdown
+[ 3312.552674] bosio-kfb 20000000.bosio: shutdown
+[ 3312.578915] oryukdo-dma 1000b000.dma-controller: shutdown
+[ 3312.578915] oryukdo-dma 1000b000.dma-controller: shutdown
+[ 3312.607447] oryukdo-dma 1000a000.dma-controller: shutdown
+[ 3312.607447] oryukdo-dma 1000a000.dma-controller: shutdown
+[ 3312.636334] oryukdo-dma 10009000.dma-controller: shutdown
+[ 3312.636334] oryukdo-dma 10009000.dma-controller: shutdown
+[ 3312.662616] oryukdo-sd4 10008000.mmc: shutdown
+[ 3312.662616] oryukdo-sd4 10008000.mmc: shutdown
+[ 3312.689017] riscv-plic c000000.interrupt-controller: shutdown
+[ 3312.689017] riscv-plic c000000.interrupt-controller: shutdown
+[ 3312.718433] simple-pm-bus soc: shutdown
+[ 3312.718433] simple-pm-bus soc: shutdown
+[ 3312.740245] PM: Calling 0xc002fd80
+[ 3312.740245] PM: Calling 0xc002fd80
+[ 3312.759828] reboot: Power down
+[ 3312.759828] reboot: Power down

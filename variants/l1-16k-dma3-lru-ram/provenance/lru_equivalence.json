@@ -1,0 +1,16 @@
+{
+  "result": "PASS_CYCLE_EQUIVALENCE",
+  "initial_lru": "candidate all ones, reference reset zeros",
+  "logs": {
+    "validation/lru_equivalence_seed1.log": "50b93c99ac891fe38dca3d9861b2e452fa194e9b6ac7a358ca4c15175120ddd5",
+    "validation/lru_equivalence_seed7.log": "7c610678d7c3b931e1ca98cb3761fd33c62875a38889c3deb80e7933558c3d43",
+    "validation/lru_equivalence_seed23.log": "3a8007f55a1480355e91c7439e8200c1b5d01d42a0158f5c4a944303ee22816f"
+  },
+  "sources_sha256": {
+    "soc/bosio/or_l1_cache.sv": "751dfcf220186d0270793363e57e5438cd4cdffc585a1df3b2386e87b7e12258",
+    "soc/bosio/or_l1_cpu.sv": "e88137b7a5f2f4e96c7c6be364a4958fff443c1439832fdde16bd6ed7158532a",
+    "soc/tests/lru_reference/or_l1_cache_reference.sv": "085e4a960e6b9019a4ec5781909d1811865f716739a96c48a4b0f204b4cc574a",
+    "soc/tests/lru_reference/or_l1_cpu_reference.sv": "54ff54dd23b5c87e217c0f845db1c31c9f0348b7fb577e57da75c5b2bce00106",
+    "soc/tests/lru_reference/tb_l1.sv": "c53842c3b31e46fabc0d9f3de95d705856f8bf3cd61ddd81355a6b019efefd61"
+  }
+}

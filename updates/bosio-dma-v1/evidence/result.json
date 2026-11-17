@@ -1,0 +1,33 @@
+{
+  "result": "PASS_LOCAL_HARDWARE_PENDING",
+  "image": "D:\\temp\\gen3bosio\\bosio-dma-v1\\ORYUKDO-KFB-BOSIO-DMA-v1.img",
+  "image_sha256": "2039a806c008e15ee5282e132b969bfaebf113f4c7cbee4b0b89a9288f41e92c",
+  "image_bytes": 276824064,
+  "bitstream": "D:\\temp\\gen3bosio\\sd4-dma\\candidate\\ORYUKDO-KFB-SD4-DMA-v1.bit",
+  "bitstream_sha256": "fe1ce8e52f30f1b9bd7bad944a0bf6f981eef9bba01438c0d26b40da6126fdf0",
+  "rtl_changed": false,
+  "checks": {
+    "host_baseline": 9,
+    "host_final": 9,
+    "asan_ubsan_final": 9,
+    "engine": 28,
+    "driver_boundary_model": "PASS",
+    "both_bank_equality": "PASS",
+    "artifact_identity": "PASS",
+    "sd_rtl_loader": "PASS_MOCK_DDR",
+    "qemu": "PASS_MOCK_BOSIO"
+  },
+  "traffic_example": {
+    "cpu_uploaded_words": 34872,
+    "dma_uploaded_words": 17436,
+    "ddr_copied_words": 17436
+  },
+  "physical_dma_tested": false,
+  "physical_hdmi_tested": false,
+  "physical_performance_measured": false,
+  "synthesis_rerun": false,
+  "remaining": [
+    "실보드 DMA/HDMI/WASD 및 시간 측정",
+    "전원 차단 후 /data 정합성·영속성 확인"
+  ]
+}

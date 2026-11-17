@@ -1,0 +1,9 @@
+{
+  "source": "D:\\temp\\haebancheon-frame-v10\\candidate.delta",
+  "target": "/tmp/frame-candidate.delta",
+  "bytes": 244460,
+  "fnv1a": 3384577759,
+  "sha256": "93cc3b6089bb37750ee9e54f44b9005dc4347ad8679ca4aa8330ceeefddf52ff",
+  "seconds": 163.81,
+  "result": "PASS_TRANSFER_FNV"
+}

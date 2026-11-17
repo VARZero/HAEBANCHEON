@@ -1,0 +1,2573 @@
+
+OpenSBI v1.8.1
+   ____                    _____ ____ _____
+  / __ \                  / ____|  _ \_   _|
+ | |  | |_ __   ___ _ __ | (___ | |_) || |
+ | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
+ | |__| | |_) |  __/ | | |____) | |_) || |_
+  \____/| .__/ \___|_| |_|_____/|____/_____|
+        | |
+        |_|
+
+Platform Name               : ORYUKDO Gen3 3D5I
+Platform Features           : medeleg
+Platform HART Count         : 1
+Platform HART Protection    : pmp
+Platform IPI Device         : ---
+Platform Timer Device       : aclint-mtimer @ 50000000Hz
+Platform Console Device     : uart8250
+Platform HSM Device         : ---
+Platform PMU Device         : ---
+Platform Reboot Device      : ---
+Platform Shutdown Device    : ---
+Platform Suspend Device     : ---
+Platform CPPC Device        : ---
+Firmware Base               : 0x80000000
+Firmware Size               : 309 KB
+Firmware RW Offset          : 0x40000
+Firmware RW Size            : 53 KB
+Firmware Heap Offset        : 0x44000
+Firmware Heap Size          : 37 KB (total), 0 KB (reserved), 10 KB (used), 26 KB (free)
+Firmware Scratch Size       : 4096 B (total), 232 B (used), 3864 B (free)
+Runtime SBI Version         : 3.0
+Standard SBI Extensions     : time,rfnc,ipi,base,hsm,pmu,dbcn,fwft,legacy,dbtr,sse
+Experimental SBI Extensions : none
+
+Domain0 Name                : root
+Domain0 Boot HART           : 0
+Domain0 HARTs               : 0*
+Domain0 Region00            : 0x80040000-0x8004ffff M: (F,R,W) S/U: ()
+Domain0 Region01            : 0x80000000-0x8003ffff M: (F,R,X) S/U: ()
+Domain0 Region02            : 0x02004000-0x02004007 M: (I,R,W) S/U: ()
+Domain0 Region03            : 0x0200bff8-0x0200bfff M: (I,R,W) S/U: ()
+Domain0 Region04            : 0x10000000-0x10000fff M: (I,R,W) S/U: (R,W)
+Domain0 Region05            : 0x00000000-0xffffffff M: () S/U: (R,W,X)
+Domain0 Next Address        : 0x80400000
+Domain0 Next Arg1           : 0x87f00000
+Domain0 Next Mode           : S-mode
+Domain0 SysReset            : yes
+Domain0 SysSuspend          : yes
+
+Boot HART ID                : 0
+Boot HART Domain            : root
+Boot HART Priv Version      : v1.12
+Boot HART Base ISA          : rv32imah
+Boot HART ISA Extensions    : sstc,zicntr,zihpm,sdtrig,svade
+Boot HART PMP Count         : 16
+Boot HART PMP Granularity   : 2 bits
+Boot HART PMP Address Bits  : 32
+Boot HART MHPM Info         : 16 (0x0007fff8)
+Boot HART Debug Triggers    : 2 triggers
+Boot HART MIDELEG           : 0x00001666
+Boot HART MEDELEG           : 0x00f0b509
+Linux version 6.12.0-oryukdo-tiles2 (oryukdo@kfb) (riscv64-linux-gnu-gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, GNU ld (GNU Binutils for Ubuntu) 2.42) #1 2026-11-11 00:00:00 UTC
+OF: fdt: Ignoring memory range 0x80000000 - 0x80400000
+Machine model: ORYUKDO Gen3 3D5I
+SBI specification v3.0 detected
+SBI implementation ID=0x1 Version=0x10008
+SBI TIME extension detected
+SBI IPI extension detected
+SBI RFENCE extension detected
+SBI DBCN extension detected
+earlycon: sbi0 at I/O port 0x0 (options '')
+printk: legacy bootconsole [sbi0] enabled
+printk: debug: ignoring loglevel setting.
+printk: debug: skip boot console de-registration.
+OF: reserved mem: 0x80000000..0x8003ffff (256 KiB) nomap non-reusable mmode_resv1@80000000
+OF: reserved mem: 0x80040000..0x8004ffff (64 KiB) nomap non-reusable mmode_resv0@80040000
+OF: reserved mem: 0xbd000000..0xbdffffff (16384 KiB) nomap non-reusable dma-pool@bd000000
+OF: reserved mem: 0xbf800000..0xbfffffff (8192 KiB) nomap non-reusable framebuffer@bf800000
+Zone ranges:
+  Normal   [mem 0x0000000080400000-0x00000000bfffffff]
+Movable zone start for each node
+Early memory node ranges
+  node   0: [mem 0x0000000080400000-0x00000000bcffffff]
+  node   0: [mem 0x00000000bd000000-0x00000000bdffffff]
+  node   0: [mem 0x00000000be000000-0x00000000bf7fffff]
+  node   0: [mem 0x00000000bf800000-0x00000000bfffffff]
+Initmem setup node 0 [mem 0x0000000080400000-0x00000000bfffffff]
+riscv: base ISA extensions aim
+riscv: ELF capabilities aim
+pcpu-alloc: s0 r0 d32768 u32768 alloc=1*32768
+pcpu-alloc: [0] 0 
+Kernel command line: earlycon=sbi console=hvc0 loglevel=7 nokaslr lpj=1000000 rdinit=/init initcall_debug ignore_loglevel keep_bootcon printk.time=1
+[    0.000000] Dentry cache hash table entries: 131072 (order: 7, 524288 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 65536 (order: 6, 262144 bytes, linear)
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 261120
+[    0.000000] mem auto-init: stack:all(zero), heap alloc:off, heap free:off
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    0.000000] NR_IRQS: 64, nr_irqs: 64, preallocated irqs: 0
+[    0.000000] riscv-intc: 32 local interrupts mapped
+[    0.000000] clocksource: riscv_clocksource: mask: 0xffffffffffffffff max_cycles: 0xb8812736b, max_idle_ns: 440795202655 ns
+[    0.000018] sched_clock: 64 bits at 50MHz, resolution 20ns, wraps every 4398046511100ns
+[    0.000577] Calibrating delay loop (skipped) preset value.. 200.00 BogoMIPS (lpj=1000000)
+[    0.000642] pid_max: default: 32768 minimum: 301
+[    0.001110] Mount-cache hash table entries: 2048 (order: 1, 8192 bytes, linear)
+[    0.001152] Mountpoint-cache hash table entries: 2048 (order: 1, 8192 bytes, linear)
+[    0.002796] ORY_BOOT kernel_init_freeable enter
+[    0.010752] calling  0xc028d504 @ 1
+[    0.010811] ASID allocator using 9 bits (512 entries)
+[    0.010849] initcall 0xc028d504 returned 0 after 0 usecs
+[    0.010879] calling  0xc028dc54 @ 1
+[    0.010960] initcall 0xc028dc54 returned 0 after 0 usecs
+[    0.010984] calling  0xc02901b4 @ 1
+[    0.011015] initcall 0xc02901b4 returned 0 after 0 usecs
+[    0.011037] calling  0xc0291300 @ 1
+[    0.011055] initcall 0xc0291300 returned 0 after 0 usecs
+[    0.011084] calling  0xc029413c @ 1
+[    0.011109] initcall 0xc029413c returned 0 after 0 usecs
+[    0.011216] Memory: 1001056K/1044480K available (2589K kernel code, 493K rwdata, 300K rodata, 3746K init, 186K bss, 41876K reserved, 0K cma-reserved)
+[    0.012010] devtmpfs: initialized
+[    0.012880] calling  0xc029a360 @ 1
+[    0.012919] initcall 0xc029a360 returned 0 after 0 usecs
+[    0.012949] calling  0xc028e320 @ 1
+[    0.012988] initcall 0xc028e320 returned 0 after 0 usecs
+[    0.013015] calling  0xc028f1e0 @ 1
+[    0.013044] initcall 0xc028f1e0 returned 0 after 0 usecs
+[    0.013070] calling  0xc0290cdc @ 1
+[    0.013093] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+[    0.013135] initcall 0xc0290cdc returned 0 after 0 usecs
+[    0.013157] calling  0xc02911f8 @ 1
+[    0.013179] futex hash table entries: 256 (order: -1, 3072 bytes, linear)
+[    0.013213] initcall 0xc02911f8 returned 0 after 0 usecs
+[    0.013234] calling  0xc0298dac @ 1
+[    0.013274] initcall 0xc0298dac returned 0 after 0 usecs
+[    0.013310] calling  0xc0298e94 @ 1
+[    0.013347] initcall 0xc0298e94 returned 0 after 0 usecs
+[    0.013370] calling  0xc0298ec0 @ 1
+[    0.013389] initcall 0xc0298ec0 returned 0 after 0 usecs
+[    0.013411] calling  0xc01ceffc @ 1
+[    0.013430] initcall 0xc01ceffc returned 0 after 0 usecs
+[    0.013451] calling  0xc02a158c @ 1
+[    0.013519] initcall 0xc02a158c returned 0 after 0 usecs
+[    0.013548] calling  0xc02a1650 @ 1
+[    0.013569] initcall 0xc02a1650 returned 0 after 0 usecs
+[    0.013595] calling  0xc02a1664 @ 1
+[    0.013622] initcall 0xc02a1664 returned 0 after 0 usecs
+[    0.013656] calling  0xc02a1af0 @ 1
+[    0.013690] initcall 0xc02a1af0 returned 0 after 0 usecs
+[    0.013712] calling  0xc02a25c0 @ 1
+[    0.013849] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+[    0.014035] initcall 0xc02a25c0 returned 0 after 0 usecs
+[    0.014061] calling  0xc02a27c8 @ 1
+[    0.014167] initcall 0xc02a27c8 returned 0 after 0 usecs
+[    0.014195] calling  0xc029038c @ 1
+[    0.014237] initcall 0xc029038c returned 0 after 0 usecs
+[    0.014259] calling  0xc02916d4 @ 1
+[    0.014294] initcall 0xc02916d4 returned 0 after 0 usecs
+[    0.014317] calling  0xc0291724 @ 1
+[    0.014343] initcall 0xc0291724 returned 0 after 0 usecs
+[    0.014373] calling  0xc02949d8 @ 1
+[    0.014454] initcall 0xc02949d8 returned 0 after 0 usecs
+[    0.014480] calling  0xc029c610 @ 1
+[    0.014503] initcall 0xc029c610 returned 0 after 0 usecs
+[    0.014533] calling  0xc029d5f8 @ 1
+[    0.014597] initcall 0xc029d5f8 returned 0 after 0 usecs
+[    0.014621] calling  0xc029de78 @ 1
+[    0.014645] initcall 0xc029de78 returned 0 after 0 usecs
+[    0.014672] calling  0xc02a2e84 @ 1
+[    0.014713] initcall 0xc02a2e84 returned 0 after 0 usecs
+[    0.014748] calling  0xc028b4e4 @ 1
+[    0.014779] initcall 0xc028b4e4 returned 0 after 0 usecs
+[    0.014804] calling  0xc028c8d4 @ 1
+[    0.014831] initcall 0xc028c8d4 returned 0 after 0 usecs
+[    0.014863] calling  0xc0004b64 @ 1
+[    0.070914] cpu0: Ratio of byte access time to unaligned word access is 3.78, unaligned accesses are fast
+[    0.071038] initcall 0xc0004b64 returned 0 after 60000 usecs
+[    0.071078] calling  0xc029c520 @ 1
+[    0.071185] initcall 0xc029c520 returned 0 after 0 usecs
+[    0.071219] calling  0xc029c348 @ 1
+[    0.071272] initcall 0xc029c348 returned 0 after 0 usecs
+[    0.071305] calling  0xc01bb7b8 @ 1
+[    0.071467] initcall 0xc01bb7b8 returned 0 after 0 usecs
+[    0.071501] calling  0xc028c744 @ 1
+[    0.071622] initcall 0xc028c744 returned 0 after 0 usecs
+[    0.071660] calling  0xc0004aec @ 1
+[    0.071694] initcall 0xc0004aec returned 0 after 0 usecs
+[    0.071723] calling  0xc029f1f4 @ 1
+[    0.072763] initcall 0xc029f1f4 returned 0 after 0 usecs
+[    0.072836] calling  0xc028e19c @ 1
+[    0.072876] initcall 0xc028e19c returned 0 after 0 usecs
+[    0.072901] calling  0xc028ecf0 @ 1
+[    0.072923] initcall 0xc028ecf0 returned 0 after 0 usecs
+[    0.072946] calling  0xc028f4fc @ 1
+[    0.072970] initcall 0xc028f4fc returned 0 after 0 usecs
+[    0.072992] calling  0xc028f8e8 @ 1
+[    0.073033] initcall 0xc028f8e8 returned 0 after 0 usecs
+[    0.073063] calling  0xc0291374 @ 1
+[    0.073123] initcall 0xc0291374 returned 0 after 0 usecs
+[    0.073147] calling  0xc02915c8 @ 1
+[    0.073167] initcall 0xc02915c8 returned 0 after 0 usecs
+[    0.073188] calling  0xc02916e0 @ 1
+[    0.073395] initcall 0xc02916e0 returned 0 after 0 usecs
+[    0.073422] calling  0xc02931a8 @ 1
+[    0.073440] initcall 0xc02931a8 returned 0 after 0 usecs
+[    0.073468] calling  0xc0294178 @ 1
+[    0.073490] initcall 0xc0294178 returned 0 after 0 usecs
+[    0.073515] calling  0xc007bf98 @ 1
+[    0.073540] initcall 0xc007bf98 returned 0 after 0 usecs
+[    0.073570] calling  0xc007bf70 @ 1
+[    0.073595] initcall 0xc007bf70 returned 0 after 0 usecs
+[    0.073625] calling  0xc02973e4 @ 1
+[    0.073657] initcall 0xc02973e4 returned 0 after 0 usecs
+[    0.073689] calling  0xc02974a8 @ 1
+[    0.073729] initcall 0xc02974a8 returned 0 after 0 usecs
+[    0.073761] calling  0xc029a3b8 @ 1
+[    0.073832] initcall 0xc029a3b8 returned 0 after 0 usecs
+[    0.073865] calling  0xc029a4e8 @ 1
+[    0.074025] initcall 0xc029a4e8 returned 0 after 0 usecs
+[    0.074050] calling  0xc029a670 @ 1
+[    0.074071] initcall 0xc029a670 returned 0 after 0 usecs
+[    0.074094] calling  0xc029a6d8 @ 1
+[    0.074117] initcall 0xc029a6d8 returned 0 after 0 usecs
+[    0.074139] calling  0xc029a788 @ 1
+[    0.074242] initcall 0xc029a788 returned 0 after 0 usecs
+[    0.074280] calling  0xc029d524 @ 1
+[    0.074373] initcall 0xc029d524 returned 0 after 0 usecs
+[    0.074407] calling  0xc01cf030 @ 1
+[    0.074435] initcall 0xc01cf030 returned 0 after 0 usecs
+[    0.074459] calling  0xc029e864 @ 1
+[    0.074512] initcall 0xc029e864 returned 0 after 0 usecs
+[    0.074544] calling  0xc02a1658 @ 1
+[    0.074577] initcall 0xc02a1658 returned 0 after 0 usecs
+[    0.074601] calling  0xc02a1b58 @ 1
+[    0.075355] initcall 0xc02a1b58 returned 0 after 0 usecs
+[    0.075393] calling  0xc02a1e6c @ 1
+[    0.075418] initcall 0xc02a1e6c returned 0 after 0 usecs
+[    0.075444] calling  0xc02a22c0 @ 1
+[    0.075471] initcall 0xc02a22c0 returned 0 after 0 usecs
+[    0.075494] calling  0xc02a2300 @ 1
+[    0.075689] initcall 0xc02a2300 returned 0 after 0 usecs
+[    0.075720] calling  0xc02a2814 @ 1
+[    0.075822] initcall 0xc02a2814 returned 0 after 0 usecs
+[    0.075847] calling  0xc02a307c @ 1
+[    0.075872] initcall 0xc02a307c returned 0 after 0 usecs
+[    0.075902] calling  0xc028dd74 @ 1
+[    0.075960] initcall 0xc028dd74 returned 0 after 0 usecs
+[    0.075984] calling  0xc0290c28 @ 1
+[C0]
+[C1]
+[C2]
+[N0]
+[X0]
+[X1]
+[X2]
+[X3]
+[X4]
+[X5]
+[N1]
+[    0.076113] clocksource: Switched to clocksource riscv_clocksource
+[C3]
+[C4]
+[    0.076157] initcall 0xc0290c28 returned 0 after 84 usecs
+[    0.076180] calling  0xc0297acc @ 1
+[    0.076226] initcall 0xc0297acc returned 0 after 27 usecs
+[    0.076255] calling  0xc0298bd8 @ 1
+[    0.076297] initcall 0xc0298bd8 returned 0 after 25 usecs
+[    0.076322] calling  0xc0298cec @ 1
+[    0.076354] initcall 0xc0298cec returned 0 after 16 usecs
+[    0.076378] calling  0xc0298d6c @ 1
+[    0.076400] initcall 0xc0298d6c returned 0 after 5 usecs
+[    0.076421] calling  0xc0298f50 @ 1
+[    0.076458] initcall 0xc0298f50 returned 0 after 21 usecs
+[    0.076485] calling  0xc0298f6c @ 1
+[    0.076538] initcall 0xc0298f6c returned 0 after 24 usecs
+[    0.076574] calling  0xc02992bc @ 1
+[    0.076608] initcall 0xc02992bc returned 0 after 8 usecs
+[    0.076639] calling  0xc0299318 @ 1
+[    0.076661] initcall 0xc0299318 returned 0 after 4 usecs
+[    0.076683] calling  0xc0299358 @ 1
+[    0.076708] initcall 0xc0299358 returned 0 after 9 usecs
+[    0.076730] calling  0xc0299390 @ 1
+[    0.076751] initcall 0xc0299390 returned 0 after 4 usecs
+[    0.076779] calling  0xc02993dc @ 1
+[    0.076803] initcall 0xc02993dc returned 0 after 4 usecs
+[    0.076825] calling  0xc029941c @ 1
+[    0.076843] initcall 0xc029941c returned 0 after 3 usecs
+[    0.076864] calling  0xc0299464 @ 1
+[    0.076884] initcall 0xc0299464 returned 0 after 4 usecs
+[    0.076905] calling  0xc02994ac @ 1
+[    0.076927] initcall 0xc02994ac returned 0 after 3 usecs
+[    0.076949] calling  0xc02994e4 @ 1
+[    0.076967] initcall 0xc02994e4 returned 0 after 3 usecs
+[    0.076988] calling  0xc029952c @ 1
+[    0.077009] initcall 0xc029952c returned 0 after 4 usecs
+[    0.077037] calling  0xc0299574 @ 1
+[    0.077064] initcall 0xc0299574 returned 0 after 5 usecs
+[    0.077086] calling  0xc02996fc @ 1
+[    0.077108] initcall 0xc02996fc returned 0 after 7 usecs
+[    0.077135] calling  0xc0299734 @ 1
+[    0.077165] initcall 0xc0299734 returned 0 after 7 usecs
+[    0.077188] calling  0xc029a350 @ 1
+[    0.077212] initcall 0xc029a350 returned 0 after 3 usecs
+[    0.077240] calling  0xc029d210 @ 1
+[    0.077780] initcall 0xc029d210 returned 0 after 518 usecs
+[    0.077819] calling  0xc02a24fc @ 1
+[    0.077847] initcall 0xc02a24fc returned 0 after 8 usecs
+[    0.077876] calling  0xc02a288c @ 1
+[    0.077917] NET: Registered PF_UNIX/PF_LOCAL protocol family
+[    0.077963] initcall 0xc02a288c returned 0 after 67 usecs
+[    0.077994] calling  0xc028aff8 @ 1
+[    0.078085] initcall 0xc028aff8 returned 0 after 69 usecs
+[    0.078119] calling  0xc028c20c @ 1
+[    0.078140] initcall 0xc028c20c returned 0 after 2 usecs
+[    0.078166] calling  0xc028d9a4 @ 1
+[    0.078188] initcall 0xc028d9a4 returned 0 after 5 usecs
+[    0.078211] calling  0xc028d9e0 @ 1
+[    0.078231] initcall 0xc028d9e0 returned 0 after 2 usecs
+[    0.078259] calling  0xc028dcf8 @ 1
+[    0.078293] initcall 0xc028dcf8 returned 0 after 11 usecs
+[    0.078325] calling  0xc0290810 @ 1
+[    0.078350] initcall 0xc0290810 returned 0 after 5 usecs
+[    0.078377] calling  0xc0290b40 @ 1
+[    0.078427] initcall 0xc0290b40 returned 0 after 30 usecs
+[    0.078451] calling  0xc0290d00 @ 1
+[    0.078472] initcall 0xc0290d00 returned 0 after 5 usecs
+[    0.078492] calling  0xc0290d4c @ 1
+[    0.078550] initcall 0xc0290d4c returned 0 after 42 usecs
+[    0.078574] calling  0xc0290db0 @ 1
+[    0.078608] initcall 0xc0290db0 returned 0 after 11 usecs
+[    0.078640] calling  0xc0290e10 @ 1
+[    0.078694] initcall 0xc0290e10 returned 0 after 28 usecs
+[    0.078722] calling  0xc0290ea0 @ 1
+[    0.078749] initcall 0xc0290ea0 returned 0 after 4 usecs
+[    0.078773] calling  0xc0291298 @ 1
+[    0.078801] initcall 0xc0291298 returned 0 after 11 usecs
+[    0.078823] calling  0xc0291514 @ 1
+[    0.078981] ORY_BOOT rootfs begin compressed_bytes=3696640
+[    0.080997] initcall 0xc0291514 returned 0 after 2156 usecs
+[    0.081060] calling  0xc0294000 @ 1
+[    0.081094] workingset: timestamp_bits=30 max_order=18 bucket_order=0
+[    0.081141] initcall 0xc0294000 returned 0 after 56 usecs
+[    0.081172] calling  0xc029426c @ 1
+[    0.081205] initcall 0xc029426c returned 0 after 10 usecs
+[    0.081235] calling  0xc0297470 @ 1
+[    0.081263] initcall 0xc0297470 returned 0 after 6 usecs
+[    0.081295] calling  0xc0297b38 @ 1
+[    0.081338] initcall 0xc0297b38 returned 0 after 18 usecs
+[    0.081371] calling  0xc0297dec @ 1
+[    0.081400] initcall 0xc0297dec returned 0 after 5 usecs
+[    0.081429] calling  0xc02981d8 @ 1
+[    0.081463] initcall 0xc02981d8 returned 0 after 12 usecs
+[    0.081495] calling  0xc0298eec @ 1
+[    0.081524] initcall 0xc0298eec returned 0 after 9 usecs
+[    0.081555] calling  0xc0299914 @ 1
+[    0.081580] initcall 0xc0299914 returned 0 after 4 usecs
+[    0.081610] calling  0xc0299cdc @ 1
+[    0.081753] initcall 0xc0299cdc returned 0 after 121 usecs
+[    0.081780] calling  0xc029a1c8 @ 1
+[    0.081875] initcall 0xc029a1c8 returned 0 after 50 usecs
+[    0.081907] calling  0xc029a4cc @ 1
+[    0.081944] initcall 0xc029a4cc returned 0 after 14 usecs
+[    0.081976] calling  0xc029a7f0 @ 1
+[    0.082014] initcall 0xc029a7f0 returned 0 after 16 usecs
+[    0.082045] calling  0xc029af80 @ 1
+[    0.082078] io scheduler mq-deadline registered
+[    0.082110] initcall 0xc029af80 returned 0 after 46 usecs
+[    0.082142] calling  0xc029af90 @ 1
+[    0.082170] io scheduler kyber registered
+[    0.082188] initcall 0xc029af90 returned 0 after 27 usecs
+[    0.082208] calling  0xc029afa0 @ 1
+[    0.082236] io scheduler bfq registered
+[    0.082257] initcall 0xc029afa0 returned 0 after 36 usecs
+[    0.082279] calling  0xc029b04c @ 1
+[    0.082296] initcall 0xc029b04c returned 0 after 1 usecs
+[    0.082320] calling  0xc029b24c @ 1
+[    0.082362] initcall 0xc029b24c returned 0 after 22 usecs
+[    0.082388] calling  0xc029bd68 @ 1
+[    0.082416] initcall 0xc029bd68 returned 0 after 11 usecs
+[    0.082440] calling  0xc029bd78 @ 1
+[    0.082904] riscv-plic: interrupt-controller@c000000: mapped 2 interrupts with 1 handlers for 2 contexts.
+[    0.083204] probe of c000000.interrupt-controller returned 0 after 712 usecs
+[    0.083271] initcall 0xc029bd78 returned 0 after 813 usecs
+[    0.083301] calling  0xc029bd94 @ 1
+[    0.083362] probe of soc returned 0 after 34 usecs
+[    0.083400] initcall 0xc029bd94 returned 0 after 81 usecs
+[    0.083429] calling  0xc029c288 @ 1
+[    0.083468] initcall 0xc029c288 returned 0 after 13 usecs
+[    0.083499] calling  0xc029c2e0 @ 1
+[    0.083534] initcall 0xc029c2e0 returned 0 after 12 usecs
+[    0.083566] calling  0xc029c338 @ 1
+[    0.083599] initcall 0xc029c338 returned 0 after 12 usecs
+[    0.083630] calling  0xc029c600 @ 1
+[    0.084121] probe of 10009000.dma-controller returned 0 after 459 usecs
+[    0.084162] initcall 0xc029c600 returned 0 after 510 usecs
+[    0.084187] calling  0xc029c76c @ 1
+[    0.084210] initcall 0xc029c76c returned 0 after 4 usecs
+[    0.084233] calling  0xc029c794 @ 1
+[    0.085140] ORY_BOOT rootfs unpack returned error=none extracted_bytes=0
+[    0.085260] initcall 0xc029c794 returned 0 after 1013 usecs
+[    0.085286] calling  0xc029ca0c @ 1
+[    0.085310] initcall 0xc029ca0c returned 0 after 7 usecs
+[    0.085332] calling  0xc029ca7c @ 1
+[    0.085586] printk: legacy console [hvc0] enabled
+[    0.085586] printk: legacy console [hvc0] enabled
+[    0.085655] initcall 0xc029ca7c returned 0 after 308 usecs
+[    0.085655] initcall 0xc029ca7c returned 0 after 308 usecs
+[    0.085704] calling  0xc029ddcc @ 1
+[    0.085704] calling  0xc029ddcc @ 1
+[    0.085755] initcall 0xc029ddcc returned 0 after 22 usecs
+[    0.085755] initcall 0xc029ddcc returned 0 after 22 usecs
+[    0.085799] calling  0xc029de4c @ 1
+[    0.085799] calling  0xc029de4c @ 1
+[    0.085885] initcall 0xc029de4c returned -2 after 53 usecs
+[    0.085885] initcall 0xc029de4c returned -2 after 53 usecs
+[    0.085948] calling  0xc029e740 @ 1
+[    0.085948] calling  0xc029e740 @ 1
+[    0.086623] probe of 20000000.bosio returned 19 after 618 usecs
+[    0.086623] probe of 20000000.bosio returned 19 after 618 usecs
+[    0.086706] initcall 0xc029e740 returned 0 after 715 usecs
+[    0.086706] initcall 0xc029e740 returned 0 after 715 usecs
+[    0.086768] calling  0xc029e7e4 @ 1
+[    0.086768] calling  0xc029e7e4 @ 1
+[    0.086892] initcall 0xc029e7e4 returned 0 after 79 usecs
+[    0.086892] initcall 0xc029e7e4 returned 0 after 79 usecs
+[    0.086959] calling  0xc029e8a8 @ 1
+[    0.086959] calling  0xc029e8a8 @ 1
+[    0.087015] initcall 0xc029e8a8 returned 0 after 15 usecs
+[    0.087015] initcall 0xc029e8a8 returned 0 after 15 usecs
+[    0.087075] calling  0xc029e8b8 @ 1
+[    0.087075] calling  0xc029e8b8 @ 1
+[    0.087130] initcall 0xc029e8b8 returned 0 after 13 usecs
+[    0.087130] initcall 0xc029e8b8 returned 0 after 13 usecs
+[    0.087194] calling  0xc029e8c8 @ 1
+[    0.087194] calling  0xc029e8c8 @ 1
+[    0.087286] initcall 0xc029e8c8 returned 0 after 50 usecs
+[    0.087286] initcall 0xc029e8c8 returned 0 after 50 usecs
+[    0.087348] calling  0xc029e9f4 @ 1
+[    0.087348] calling  0xc029e9f4 @ 1
+[    0.087572] probe of 10008000.mmc returned 19 after 173 usecs
+[    0.087572] probe of 10008000.mmc returned 19 after 173 usecs
+[    0.087647] initcall 0xc029e9f4 returned 0 after 257 usecs
+[    0.087647] initcall 0xc029e9f4 returned 0 after 257 usecs
+[    0.087709] calling  0xc02a2208 @ 1
+[    0.087709] calling  0xc02a2208 @ 1
+[    0.087782] initcall 0xc02a2208 returned 0 after 29 usecs
+[    0.087782] initcall 0xc02a2208 returned 0 after 29 usecs
+[    0.087849] calling  0xc028d9e8 @ 1
+[    0.087849] calling  0xc028d9e8 @ 1
+[    0.087907] initcall 0xc028d9e8 returned 0 after 16 usecs
+[    0.087907] initcall 0xc028d9e8 returned 0 after 16 usecs
+[    0.087967] calling  0xc028dc24 @ 1
+[    0.087967] calling  0xc028dc24 @ 1
+[    0.088016] initcall 0xc028dc24 returned 0 after 7 usecs
+[    0.088016] initcall 0xc028dc24 returned 0 after 7 usecs
+[    0.088074] calling  0xc028ee1c @ 1
+[    0.088074] calling  0xc028ee1c @ 1
+[    0.088425] initcall 0xc028ee1c returned 0 after 308 usecs
+[    0.088425] initcall 0xc028ee1c returned 0 after 308 usecs
+[    0.088489] calling  0xc028f458 @ 1
+[    0.088489] calling  0xc028f458 @ 1
+[    0.088541] initcall 0xc028f458 returned 0 after 10 usecs
+[    0.088541] initcall 0xc028f458 returned 0 after 10 usecs
+[    0.088583] calling  0xc02901f8 @ 1
+[    0.088583] calling  0xc02901f8 @ 1
+[    0.088659] initcall 0xc02901f8 returned 0 after 27 usecs
+[    0.088659] initcall 0xc02901f8 returned 0 after 27 usecs
+[    0.088719] calling  0xc0297174 @ 1
+[    0.088719] calling  0xc0297174 @ 1
+[    0.089449] initcall 0xc0297174 returned 0 after 694 usecs
+[    0.089449] initcall 0xc0297174 returned 0 after 694 usecs
+[    0.089496] calling  0xc0297468 @ 1
+[    0.089496] calling  0xc0297468 @ 1
+[    0.089531] initcall 0xc0297468 returned 0 after 2 usecs
+[    0.089531] initcall 0xc0297468 returned 0 after 2 usecs
+[    0.089581] calling  0xc0297528 @ 1
+[    0.089581] calling  0xc0297528 @ 1
+[    0.089612] initcall 0xc0297528 returned 0 after 4 usecs
+[    0.089612] initcall 0xc0297528 returned 0 after 4 usecs
+[    0.089654] calling  0xc029a374 @ 1
+[    0.089654] calling  0xc029a374 @ 1
+[    0.089694] initcall 0xc029a374 returned 0 after 10 usecs
+[    0.089694] initcall 0xc029a374 returned 0 after 10 usecs
+[    0.089744] calling  0xc029a6c4 @ 1
+[    0.089744] calling  0xc029a6c4 @ 1
+[    0.089774] initcall 0xc029a6c4 returned 0 after 2 usecs
+[    0.089774] initcall 0xc029a6c4 returned 0 after 2 usecs
+[    0.089819] calling  0xc01c18e8 @ 1
+[    0.089819] calling  0xc01c18e8 @ 1
+[    0.089849] initcall 0xc01c18e8 returned 0 after 3 usecs
+[    0.089849] initcall 0xc01c18e8 returned 0 after 3 usecs
+[    0.089889] calling  0xc01c59f4 @ 1
+[    0.089889] calling  0xc01c59f4 @ 1
+[    0.090226] initcall 0xc01c59f4 returned 0 after 309 usecs
+[    0.090226] initcall 0xc01c59f4 returned 0 after 309 usecs
+[    0.090276] calling  0xc029f3a0 @ 1
+[    0.090276] calling  0xc029f3a0 @ 1
+[    0.090327] initcall 0xc029f3a0 returned 0 after 16 usecs
+[    0.090327] initcall 0xc029f3a0 returned 0 after 16 usecs
+[    0.090373] calling  0xc0229680 @ 1
+[    0.090373] calling  0xc0229680 @ 1
+[    0.090417] initcall 0xc0229680 returned 0 after 6 usecs
+[    0.090417] initcall 0xc0229680 returned 0 after 6 usecs
+[    0.090468] calling  0xc02a2200 @ 1
+[    0.090468] calling  0xc02a2200 @ 1
+[    0.090504] initcall 0xc02a2200 returned 0 after 2 usecs
+[    0.090504] initcall 0xc02a2200 returned 0 after 2 usecs
+[    0.090545] calling  0xc02a22f8 @ 1
+[    0.090545] calling  0xc02a22f8 @ 1
+[    0.090574] initcall 0xc02a22f8 returned 0 after 1 usecs
+[    0.090574] initcall 0xc02a22f8 returned 0 after 1 usecs
+[    0.090615] calling  0xc029bf3c @ 1
+[    0.090615] calling  0xc029bf3c @ 1
+[    0.090644] clk: Disabling unused clocks
+[    0.090644] clk: Disabling unused clocks
+[    0.090701] initcall 0xc029bf3c returned 0 after 60 usecs
+[    0.090701] initcall 0xc029bf3c returned 0 after 60 usecs
+[    0.090742] calling  0xc029f1d8 @ 1
+[    0.090742] calling  0xc029f1d8 @ 1
+[    0.090775] initcall 0xc029f1d8 returned 0 after 3 usecs
+[    0.090775] initcall 0xc029f1d8 returned 0 after 3 usecs
+[    0.090820] ORY_BOOT wait_for_initramfs enter
+[    0.090820] ORY_BOOT wait_for_initramfs enter
+[    0.090863] ORY_BOOT wait_for_initramfs done
+[    0.090863] ORY_BOOT wait_for_initramfs done
+[    0.090896] ORY_BOOT console_on_rootfs enter
+[    0.090896] ORY_BOOT console_on_rootfs enter
+[    0.091269] ORY_BOOT console_on_rootfs done
+[    0.091269] ORY_BOOT console_on_rootfs done
+[    0.091317] ORY_BOOT kernel_init_freeable done
+[    0.091317] ORY_BOOT kernel_init_freeable done
+[    0.094900] Freeing unused kernel image (initmem) memory: 3744K
+[    0.094900] Freeing unused kernel image (initmem) memory: 3744K
+[    0.094974] Kernel memory protection not selected by kernel config.
+[    0.094974] Kernel memory protection not selected by kernel config.
+[    0.095024] Run /init as init process
+[    0.095024] Run /init as init process
+[    0.095056]   with arguments:
+[    0.095056]   with arguments:
+[    0.095082]     /init
+[    0.095082]     /init
+[    0.095104]   with environment:
+[    0.095104]   with environment:
+[    0.095132]     HOME=/
+[    0.095132]     HOME=/
+[    0.095154]     TERM=linux
+[    0.095154]     TERM=linux
+[   20.297074] /dev/mmcblk0p2: Can't lookup blockdev
+[   20.297074] /dev/mmcblk0p2: Can't lookup blockdev
+mount: mounting /dev/mmcblk0p2 on /data failed: No such file or directory
+ORYUKDO: /data unavailable; storage repair required
+ORYUKDO BusyBox serial console
+
+
+BusyBox v1.37.0 (2026-11-07 10:24:46 KST) built-in shell (ash)
+Enter 'help' for a list of built-in commands.
+
+oryukdo# cat /etc/oryukdo-image; echo __NATIVE_RC:$?
+ORYUKDO-BoAYO-tiles-v2 / DDR resident dirty tiles / no whole scene clear / raw texture direct DMA / physical test pending
+__NATIVE_RC:0
+oryukdo# /bin/storage-check --identity; echo __NATIVE_RC:$?
+IDENTITY bytes=4584 fnv1a=139061550
+__NATIVE_RC:0
+oryukdo# test -x /bin/bosio-dma-check; echo __NATIVE_RC:$?
+__NATIVE_RC:0
+oryukdo# test -r /usr/share/boayo/assets/a0ebce13.bui; echo __NATIVE_RC:$?
+__NATIVE_RC:0
+oryukdo# test ! -L /usr/bin/python && test ! -e /usr/bin/python3 && test ! -d /u
+sr/lib/python3.12; echo __NATIVE_RC:$?
+__NATIVE_RC:0
+oryukdo# echo $((19+23)); echo __NATIVE_RC:$?
+42
+__NATIVE_RC:0
+oryukdo# ddrcheck; echo __NATIVE_RC:$?
+DDR_HIGH_OK pages=16 first_pa=0xbee00000 last_pa=0xbef0cffc
+__NATIVE_RC:0
+oryukdo# boayo-selftest; echo __NATIVE_RC:$?
+BOAYO_NATIVE_SELFTEST_PASS {"python_golden_geometry":true,"python_golden_pixels":true,"wm_input":true,"hardware_tested":false}
+__NATIVE_RC:0
+oryukdo# printf '{"op":"test_desktop","args":{"op":"tick","now":0},"app":"boayo-
+desktop"}\n{"op":"test_plan_export","args":{"window_id":1,"path":"/tmp/plan-body
+"},"app":"boayo-desktop"}\n' | BOAYO_PLANS=0 /usr/bin/boayo-native --rpc; echo _
+_NATIVE_RC:$?
+{"id":null,"ok":true,"result":true}
+{"id":null,"ok":true,"result":{"boundary":44,"bytes":58496,"count":160,"empty":64,"full":52,"geometry":[640,360,0.0,0.0,0.0,42.0,30.0],"key":"{\"geometry\":[640,360,0.0,0.0,0.0,42.0,30.0],\"revision\":\"72fc16265eca64ceb2c3ce6cf21f6f78ba85f86ba92bcd082bea1528eab1d8ca\",\"shape\":[[51.2,36.0,537.6,252.0,18.0]]}","shape":[[51.2,36.0,537.6,252.0,18.0]]}}
+__NATIVE_RC:0
+oryukdo# stty -opost -echo; echo __NATIVE_RC:$?
+__NATIVE_RC:0
+oryukdo# __PLAN_BEGIN__	                	  €  h  €     *ε
+­σÿ†ƒ Τ
+ &,ÿ© pώÿ#!ϊÿu4
+     ΖύÿÿBÿÿÿ
+                
+  €  h  €     ^¨ΞφR z|μÿ,cυÿ`bη Wσοÿξ έή ¥ξ	     :  Ύ                     €  h  €     ΪU
+­σÿ†ƒ Τ
+ Ϊ(ϊώ© pώÿ#!ϊÿ)ν	     ΖύÿÿBÿÿÿ                  €  h  €     -?φR z|μÿ,cυÿ dµ Wσοÿξ έή Y§	     :  Ύ                     €  h  €     ªΖ
+­σÿ†ƒ Τ
+ +Θώ© pώÿ#!ϊÿέ¥	     ΖύÿÿBÿÿÿ                  €  h  €     ύ‰―φR z|μÿ,cυÿίfƒ Wσοÿξ έή `	     :  Ύ         €4         €  h  €     JΛZ
+­σÿ†ƒ Τ
+ Έ»-© pώÿ#!ϊÿu4
+     ΖύÿÿBÿÿÿ      €8         €  h  €     IDφR z|μÿ,cυÿ~χθWσοÿξ έή ¥ξ	     :  Ύ         €<         €  h  €     <Λ
+­σÿ†ƒ Τ
+ ψ½ϋ © pώÿ#!ϊÿ)ν	     ΖύÿÿBÿÿÿ      €@         €  h  €     mΊ΄φR z|μÿ,cυÿ½ω¶Wσοÿξ έή Y§	     :  Ύ         €D         €  h  €     κ¬;
+­σÿ†ƒ Τ
+ 8ΐΙ © pώÿ#!ϊÿέ¥	     ΖύÿÿBÿÿÿ                  €  h  €     =+%φR z|μÿ,cυÿύϋ„Wσοÿξ έή `	     :  Ύ                     €  h  €     Ή¬
+­σÿ†ƒ Τ
+ wΒ— © pώÿ#!ϊÿ‘^	     ΖύÿÿBÿÿÿ                 €  h  €     lΠ
+­σÿ†ƒ Τ
+ ΦP/© pώÿ#!ϊÿu4
+     ΖύÿÿBÿÿÿ                 €  h  €     έκΉφR z|μÿ,cυÿ›κWσοÿξ έή ¥ξ	     :  Ύ                    €  h  €     Zέ@
+­σÿ†ƒ Τ
+ Sύ© pώÿ#!ϊÿ)ν	     ΖύÿÿBÿÿÿ                 €  h  €     ­[*φR z|μÿ,cυÿΫΈWσοÿξ έή Y§	     :  Ύ                    €  h  €     *N±
+­σÿ†ƒ Τ
+ UUΛ© pώÿ#!ϊÿέ¥	     ΖύÿÿBÿÿÿ      €H         €  h  €     }ΜφR z|μÿ,cυÿ‘†Wσοÿξ έή `	     :  Ύ                     €  h  €     ωΎ!
+­σÿ†ƒ Τ
+ •W™© pώÿ#!ϊÿ‘^	     ΖύÿÿBÿÿÿ                    €  h  €     L=φR z|μÿ,cυÿZ“TWσοÿξ έή Α	     :  Ύ   $               $  €  h  €     ΚF
+­σÿ†ƒ Τ
+ τε0© pώÿ#!ϊÿu4
+     ΖύÿÿBÿÿÿ%               %  €  h  €     /φR z|μÿ,cυÿΉ!μWσοÿξ έή ¥ξ	     :  Ύ   &               &  €  h  €     ~¶
+­σÿ†ƒ Τ
+ 3θώ© pώÿ#!ϊÿ)ν	     ΖύÿÿBÿÿÿ'               '  €  h  €     νόφR z|μÿ,cυÿω#ΊWσοÿξ έή Y§	     :  Ύ   (               (  €  h  €     iο&
+­σÿ†ƒ Τ
+ sκΜ© pώÿ#!ϊÿέ¥	     ΖύÿÿBÿÿÿ)               )  €  h  €     ½mφR z|μÿ,cυÿ8&Wσοÿξ έή `	     :  Ύ   *      €L       *  €  h  €     9`—
+­σÿ†ƒ Τ
+ ³μ© pώÿ#!ϊÿ‘^	     ΖύÿÿBÿÿÿ+                +  €  h  €     ή€φR z|μÿ,cυÿx(VWσοÿξ έή Α	     :  Ύ   ,                ,  €  h  €     	Ρ
+­σÿ†ƒ Τ
+ ςξh© pώÿ#!ϊÿE	     ΖύÿÿBÿÿÿ1               1  €  h  €     
+―»
+­σÿ†ƒ Τ
+ {2© pώÿ#!ϊÿu4
+     ΖύÿÿBÿÿÿ2               2  €  h  €     ” bZηÿ' ¨9 ^ hR  $ΰόÿFBτÿκh     ‹ϋÿÿ„ώÿÿ3               3  €  h  €     ΞφR z|μÿ,cυÿυKο
+Wσοÿξ έή ¥ξ	     :  Ύ   4               4  €  h  €     Α΅
+­σÿ†ƒ Τ
+ o	© pώÿ#!ϊÿ)ν	     ΖύÿÿBÿÿÿ5      €P       5  €  h  €     γMZηÿ' ¨9 JkR  $ΰόÿFBτÿκh     ‹ϋÿÿ„ώÿÿ6      €T       6  €  h  €     Ίί μ¥ σψΨÿXΖκÿ%Βα®ζίÿά Ί½ Jέ     u  |  7      €X       7  €  h  €     ³Δ.Zηÿ' ¨9 OR  $ΰόÿFBτÿRΪ     ‹ϋÿÿ„ώÿÿ8      €\       8  €  h  €     ¬ΰ φR z|μÿ,cυÿRγΎWσοÿξ έή Y§	     :  Ύ   9      €`       9  €  h  €     )Σ‡
+­σÿ†ƒ Τ
+ Μ©Ρ
+© pώÿ#!ϊÿέ¥	     ΖύÿÿBÿÿÿ:                :  €  h  €     “%9Zηÿ' ¨9 ΥtnR  $ΰόÿFBτÿκh     ‹ϋÿÿ„ώÿÿ;                ;  €  h  €     	φR z|μÿ,cυÿ0vςWσοÿξ έή ¥ξ	     :  Ύ   <                <  €  h  €     2Zηÿ' ¨9 Uy
+R  $ΰόÿFBτÿRΪ     ‹ϋÿÿ„ώÿÿ=                =  €  h  €     μvφR z|μÿ,cυÿpxΐWσοÿξ έή Y§	     :  Ύ   >                >  €  h  €     itύ
+­σÿ†ƒ Τ
+ κ>Σ© pώÿ#!ϊÿέ¥	     ΖύÿÿBÿÿÿ?                ?  €  h  €     ΌςζφR z|μÿ,cυÿ―zWσοÿξ έή `	     :  Ύ   @                @  €  h  €     8εm
+­σÿ†ƒ Τ
+ *A΅© pώÿ#!ϊÿ‘^	     ΖύÿÿBÿÿÿ¥                ¥  €  h  €     αKK—Θ
+ κμξÿΖ¶φÿαΌςμτρÿπ] # (     σ  ¦   ¦                ¦  €  h  €     Xύ~i7υÿ :I	 ”θn Άώÿÿάϊÿ>Ύ     ώÿÿZÿÿÿ§                §  €  h  €     +ι(—Θ
+ κμξÿΖ¶φÿιzμτρÿπ] # ‹Ώ     σ  ¦   ¨                ¨  €  h  €     Ά\i7υÿ :I	 ¦ Άώÿÿάϊÿ ό     ώÿÿZÿÿÿ©                ©  €  h  €     u†—Θ
+ κμξÿΖ¶φÿς8Jμτρÿπ] # νύ     σ  ¦   ª                ª  €  h  €     ν7:i7υÿ :I	 ¥dΖ Άώÿÿάϊÿ;	     ώÿÿZÿÿÿ«                «  €  h  €     ΐ#δ—Θ
+ κμξÿΖ¶φÿϊφuμτρÿπ] # P<	     σ  ¦   ―                ―  €  h  €     @Ψi7υÿ :I	 †­	 Άώÿÿάϊÿ>Ύ     ώÿÿZÿÿÿ°                °  €  h  €     ό—Θ
+ κμξÿΖ¶φÿo]μτρÿπ] # ‹Ώ     σ  ¦   ±                ±  €  h  €     ­µi7υÿ :I	 "DΩ	 Άώÿÿάϊÿ ό     ώÿÿZÿÿÿ²      €d       ²  €  h  €     ]™_—Θ
+ κμξÿΖ¶φÿxΦμτρÿπ] # νύ     σ  ¦   ³      €h       ³  €  h  €     ΥJ“i7υÿ :I	 +
+ Άώÿÿάϊÿ;	     ώÿÿZÿÿÿ΄      €l       ΄  €  h  €     ¨6=—Θ
+ κμξÿΖ¶φÿ€”΄μτρÿπ] # P<	     σ  ¦   µ      €p       µ  €  h  €     θpi7υÿ :I	 3ΐ0
+ Άώÿÿάϊÿey	     ώÿÿZÿÿÿ¶      €t       ¶  €  h  €     ςΣ—Θ
+ κμξÿΖ¶φÿRΰμτρÿπ] # ²z	     σ  ¦   »                »  €  h  €     ϋΫ—Θ
+ κμξÿΖ¶φÿυµ›	μτρÿπ] # ‹Ώ     σ  ¦   Ό                Ό  €  h  €     sΐi7υÿ :I	 ¨α Άώÿÿάϊÿ ό     ώÿÿZÿÿÿ½      €x       ½  €  h  €     F¬Έ—Θ
+ κμξÿΖ¶φÿώsΗ	μτρÿπ] # νύ     σ  ¦   Ύ      €|       Ύ  €  h  €     ½]μi7υÿ :I	 ±C Άώÿÿάϊÿ;	     ώÿÿZÿÿÿΏ               Ώ  €  h  €     I–—Θ
+ κμξÿΖ¶φÿ2σ	μτρÿπ] # P<	     σ  ¦   ΐ               ΐ  €  h  €     ϋΙi7υÿ :I	 Ή]o Άώÿÿάϊÿey	     ώÿÿZÿÿÿΑ               Α  €  h  €     Ϊζs—Θ
+ κμξÿΖ¶φÿπ
+μτρÿπ] # ²z	     σ  ¦   Β               Β  €  h  €     Q§i7υÿ :I	 Α› ΆώÿÿάϊÿΘ·	     ώÿÿZÿÿÿΓ               Γ  €  h  €     %„Q—Θ
+ κμξÿΖ¶φÿ®J
+μτρÿπ] # Ή	     σ  ¦   Ι                Ι  €  h  €     [Σgi7υÿ :I	 .V Άώÿÿάϊÿ ό     ώÿÿZÿÿÿΚ                Κ  €  h  €     .Ώ—Θ
+ κμξÿΖ¶φÿ„μτρÿπ] # νύ     σ  ¦   Λ      €€       Λ  €  h  €     ¥pEi7υÿ :I	 7=‚ Άώÿÿάϊÿ;	     ώÿÿZÿÿÿΜ               Μ  €  h  €     x\ο—Θ
+ κμξÿΖ¶φÿΟ1μτρÿπ] # P<	     σ  ¦   Ν               Ν  €  h  €     ο#i7υÿ :I	 ?ϋ­ Άώÿÿάϊÿey	     ώÿÿZÿÿÿΞ               Ξ  €  h  €     ΒωΜ—Θ
+ κμξÿΖ¶φÿ”]μτρÿπ] # ²z	     σ  ¦   Ο               Ο  €  h  €     :« i7υÿ :I	 GΉΩ ΆώÿÿάϊÿΘ·	     ώÿÿZÿÿÿΠ               Π  €  h  €     —ª—Θ
+ κμξÿΖ¶φÿK‰μτρÿπ] # Ή	     σ  ¦   Ρ               Ρ  €  h  €     „Hήi7υÿ :I	 Pw Άώÿÿάϊÿ*φ	     ώÿÿZÿÿÿÒ               Ò  €  h  €     W4—Θ
+ κμξÿΖ¶φÿ¥	µμτρÿπ] # wχ	     σ  ¦   ΰ               ΰ €  h  €     nnnύ€ ΩΝÿUΘζÿ‘—D.9# $ΰόÿ§7σÿΐ u  ‹ϋÿÿύÿÿα               α €  h  €     ωφN »?σÿ; Υ› ΡmΏicξÿξ ,d έ¥	 Ζύÿÿ:  |  β               β €  h  €     1=³€ ΩΝÿUΘζÿ“¨.9# $ΰόÿ§7σÿ²N u  ‹ϋÿÿύÿÿγ               γ €  h  €     Z^q»?σÿ; Υ› ‘kρicξÿξ ,d )ν	 Ζύÿÿ:  |  δ               δ €  h  €     σψ	€ ΩΝÿUΘζÿ’.9# $ΰόÿ§7σÿJέ u  ‹ϋÿÿύÿÿε               ε €  h  €     ΌΕ“»?σÿ; Υ› Ri#icξÿξ ,d u4
+ Ζύÿÿ:  |  θ               θ €  h  €     °άmύvζÿv&2 «7 ζµÒΖάÿά YΘ "½ ‹ϋÿÿu  ψ  ι               ι €  h  €     ο+ƒ € ΩΝÿUΘζÿUmA.9# $ΰόÿ§7σÿΐ u  ‹ϋÿÿύÿÿκ     €„       κ €  h  €     r«²vζÿv&2 «7 g±{ÒΖάÿά YΘ ΊK ‹ϋÿÿu  ψ  λ     €       λ €  h  €     ±ϊΗ€ ΩΝÿUΘζÿΦh¥.9# $ΰόÿ§7σÿ²N u  ‹ϋÿÿύÿÿμ     €       μ €  h  €     5zχ	vζÿv&2 «7 η¬ίÒΖάÿά YΘ RΪ ‹ϋÿÿu  ψ  ν     €       ν €  h  €     tΙ€ ΩΝÿUΘζÿVd	.9# $ΰόÿ§7σÿJέ u  ‹ϋÿÿύÿÿξ     €”       ξ €  h  €     χH<vζÿv&2 «7 h¨CÒΖάÿά YΘ κh ‹ϋÿÿu  ψ  ς               ς €  h  €     ­Sύ€ ΩΝÿUΘζÿ™GΪ.9# $ΰόÿ§7σÿƒ1 u  ‹ϋÿÿύÿÿσ               σ €  h  €     0‚ vζÿv&2 «7 «‹ÒΖάÿά YΘ "½ ‹ϋÿÿu  ψ  τ     €       τ €  h  €     oι—€ ΩΝÿUΘζÿC>.9# $ΰόÿ§7σÿΐ u  ‹ϋÿÿύÿÿυ     €       υ €  h  €     σhΗvζÿv&2 «7 +‡xÒΖάÿά YΘ ΊK ‹ϋÿÿu  ψ  φ              φ €  h  €     2Έά	€ ΩΝÿUΘζÿ>Ά.9# $ΰόÿ§7σÿ²N u  ‹ϋÿÿύÿÿχ              χ €  h  €     µ7vζÿv&2 «7 ¬‚άÒΖάÿά YΘ RΪ ‹ϋÿÿu  ψ  ψ              ψ €  h  €     τ†!€ ΩΝÿUΘζÿ:.9# $ΰόÿ§7σÿJέ u  ‹ϋÿÿύÿÿω              ω €  h  €     xQvζÿv&2 «7 -~@ÒΖάÿά YΘ κh ‹ϋÿÿu  ψ  ώ               ώ €  h  €     ξRύvζÿv&2 «7 ξe­ÒΖάÿά YΘ . ‹ϋÿÿu  ψ  ÿ               ÿ €  h  €     -Ψg € ΩΝÿUΘζÿ]Χ.9# $ΰόÿ§7σÿƒ1 u  ‹ϋÿÿύÿÿ      €          €  h  €     °W—vζÿv&2 «7 oaÒΖάÿά YΘ "½ ‹ϋÿÿu  ψ       €¤        €  h  €     ο¦¬€ ΩΝÿUΘζÿή;.9# $ΰόÿ§7σÿΐ u  ‹ϋÿÿύÿÿ               €  h  €     s&ά	vζÿv&2 «7 π\uÒΖάÿά YΘ ΊK ‹ϋÿÿu  ψ                 €  h  €     ²uρ€ ΩΝÿUΘζÿ_.9# $ΰόÿ§7σÿ²N u  ‹ϋÿÿύÿÿ               €  h  €     5υ vζÿv&2 «7 pXΩÒΖάÿά YΘ RΪ ‹ϋÿÿu  ψ                 €  h  €     tD6€ ΩΝÿUΘζÿί.9# $ΰόÿ§7σÿJέ u  ‹ϋÿÿύÿÿ               €  h  €     ψΓevζÿv&2 «7 ρS=ÒΖάÿά YΘ κh ‹ϋÿÿu  ψ  8              8 €  h  €     Ό@½»?σÿ; Υ› Ϋicξÿξ ,d u4
+ Ζύÿÿ:  |  9              9 €  h  €     6pJvζÿv&2 «7 ϊΣ	ÒΖάÿά YΘ RΪ ‹ϋÿÿu  ψ  :              : €  h  €     Ίί―Eΐ Εμζÿ+dσÿ΄]ώ— pώÿΤ›ωÿ¥ξ	 :  Ζύÿÿ„ώÿÿ;              ; €  h  €     |G»?σÿ; Υ› ½icξÿξ ,d u4
+ Ζύÿÿ:  |  <     €¨       < €  h  €     τ^vζÿv&2 «7 =ήkÒΖάÿά YΘ ΊK ‹ϋÿÿu  ψ  =     €¬       = €  h  €     3®/€ ΩΝÿUΘζÿ¬••.9# $ΰόÿ§7σÿ²N u  ‹ϋÿÿύÿÿ>     €°       > €  h  €     Ϋ–―»?σÿ; Υ› ίμηicξÿξ ,d )ν	 Ζύÿÿ:  |  ?     €΄       ? €  h  €     {>:Eΐ Εμζÿ+dσÿ—Θό — pώÿΤ›ωÿ¥ξ	 :  Ζύÿÿ„ώÿÿ@     €Έ       @ €  h  €     <ώΡ»?σÿ; Υ› κicξÿξ ,d u4
+ Ζύÿÿ:  |  A               A €  h  €     ²Mκvζÿv&2 «7 ΈÒΖάÿά YΘ "½ ‹ϋÿÿu  ψ  B               B €  h  €     ρÿ€ ΩΝÿUΘζÿπo.ύ.9# $ΰόÿ§7σÿΐ u  ‹ϋÿÿύÿÿC               C €  h  €     t/vζÿv&2 «7 ΄hÒΖάÿά YΘ ΊK ‹ϋÿÿu  ψ  D               D €  h  €     Ϊ5ΆEΐ Εμζÿ+dσÿΈ5Ιώ— pώÿΤ›ωÿY§	 :  Ζύÿÿ„ώÿÿE               E €  h  €     ›υ9»?σÿ; Υ› ΑWζ icξÿξ ,d )ν	 Ζύÿÿ:  |  F               F €  h  €     ;ΔEΐ Εμζÿ+dσÿy3ϋώ— pώÿΤ›ωÿ¥ξ	 :  Ζύÿÿ„ώÿÿG               G €  h  €     ύ\\»?σÿ; Υ› ‚Uicξÿξ ,d u4
+ Ζύÿÿ:  |  y     €Ό       y €  h  €     ³ΝRyP YΤÿKοιÿ39ϋώÒ Dύÿ²Πτÿx ζ  όÿÿgύÿÿz               z €  h  €     \( ‡―ιÿ§α+ µ ²ΈVψ-αÿα» N/ v όÿÿζ  ™  {               { €  h  €     ΙΦyP YΤÿKοιÿ"½£ώÒ Dύÿ²ΠτÿΪϋ ζ  όÿÿgύÿÿ|               | €  h  €     δζG_ΣÿOΓW k!, Byώπ[ΒÿΑw ›^ ‚ς# 4ψÿÿΜ  3  }               } €  h  €     ΎΗ΄ς , ±<¨ÿ•ήΣÿ$‚ό¤= ?ϊÿe΅ιÿ+ώ" Μ  4ψÿÿΝϊÿÿ~               ~ €  h  €     }O_ΣÿOΓW k!, !Oπ[ΒÿΑw ›^ ψψ" 4ψÿÿΜ  3                  €  h  €     ι]Όϋς , ±<¨ÿ•ήΣÿιϋ¤= ?ϊÿe΅ιÿ΅" Μ  4ψÿÿΝϊÿÿ‚              ‚ €  h  €     ΝάyP YΤÿKοιÿ8zΥÒ Dύÿ²Πτÿdυ ζ  όÿÿgύÿÿƒ     €ΐ       ƒ €  h  €     v7j‡―ιÿ§α+ µ ¶ω0ψ-αÿα» N/ Λς όÿÿζ  ™  „     €Δ       „ €  h  €     γ§ yP YΤÿKοιÿ'ώ}Ò Dύÿ²Πτÿx ζ  όÿÿgύÿÿ…     €Θ       … €  h  €     ξ‡―ιÿ§α+ µ ¦}Ωψ-αÿα» N/ v όÿÿζ  ™  †     €Μ       † €  h  €     ρεHς , ±<¨ÿ•ήΣÿ-M¤= ?ϊÿe΅ιÿ΄χ# Μ  4ψÿÿΝϊÿÿ‡     €Π       ‡ €  h  €     C›γ_ΣÿOΓW k!, +π[ΒÿΑw ›^ ‚ς# 4ψÿÿΜ  3                  €  h  €     |Pς , ±<¨ÿ•ήΣÿ¤= ?ϊÿe΅ιÿ+ώ" Μ  4ψÿÿΝϊÿÿ‰               ‰ €  h  €     o1λϋ_ΣÿOΓW k!, 	U
+π[ΒÿΑw ›^ ψψ" 4ψÿÿΜ  3                 €  h  €     ηλζyP YΤÿKοιÿ<»―Ò Dύÿ²Πτÿ)r ζ  όÿÿgύÿÿ               €  h  €     F4‡―ιÿ§α+ µ »:
+ψ-αÿα» N/ o όÿÿζ  ™                 €  h  €     ύ¶jyP YΤÿKοιÿ,?XÒ Dύÿ²Πτÿdυ ζ  όÿÿgύÿÿ               €  h  €     ¦Έ‡―ιÿ§α+ µ «Ύ³	ψ-αÿα» N/ Λς όÿÿζ  ™  ‘              ‘ €  h  €     ‚ξyP YΤÿKοιÿΓ Ò Dύÿ²Πτÿx ζ  όÿÿgύÿÿ’     €Τ       ’ €  h  €     wΉw_ΣÿOΓW k!, 4…Έπ[ΒÿΑw ›^ μ$ 4ψÿÿΜ  3  “     €Ψ       “ €  h  €     Qδς , ±<¨ÿ•ήΣÿR¤= ?ϊÿe΅ιÿ΄χ# Μ  4ψÿÿΝϊÿÿ”               ” €  h  €     £O_ΣÿOΓW k!, 	π[ΒÿΑw ›^ ‚ς# 4ψÿÿΜ  3  •               • €  h  €     }0μϋς , ±<¨ÿ•ήΣÿτ•£
+¤= ?ϊÿe΅ιÿ+ώ" Μ  4ψÿÿΝϊÿÿ               €  h  €     ϋ°yP YΤÿKοιÿAό‰
+Ò Dύÿ²Πτÿξξ ζ  όÿÿgύÿÿ›              › €  h  €     ªUώ‡―ιÿ§α+ µ ΐ{εψ-αÿα» N/ Tμ όÿÿζ  ™                 €  h  €     Ζ4yP YΤÿKοιÿ0€2
+Ò Dύÿ²Πτÿ)r ζ  όÿÿgύÿÿ               €  h  €     ΐ ‚‡―ιÿ§α+ µ ―ÿψ-αÿα» N/ o όÿÿζ  ™                 €  h  €     -‘ΈyP YΤÿKοιÿ Ϋ	Ò Dύÿ²Πτÿdυ ζ  όÿÿgύÿÿ               €  h  €     Φλ	‡―ιÿ§α+ µ ƒ6ψ-αÿα» N/ Λς όÿÿζ  ™        €ά         €  h  €     …Έxς , ±<¨ÿ•ήΣÿ¤= ?ϊÿe΅ιÿ>ρ$ Μ  4ψÿÿΝϊÿÿ΅     €ΰ       ΅ €  h  €     λ¶‰‡―ιÿ§α+ µ ίψ-αÿα» N/ v όÿÿζ  ™  Ά               Ά €  h  €     °N€ς , ±<¨ÿ•ήΣÿύX¤= ?ϊÿe΅ιÿ΄χ# Μ  4ψÿÿΝϊÿÿ£               £ €  h  €     ‚ώ‡―ιÿ§α+ µ }‹‡ψ-αÿα» N/ Aω όÿÿζ  ™                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          __PLAN_END__
+__NATIVE_RC:0
+oryukdo# __NATIVE_RC:0
+oryukdo# boayo-dual-selftest; echo __NATIVE_RC:$?
+BOAYO_DUAL_MODEL_PASS {"scope":"integer model, not FPGA","both_cores":true,"bank_ownership":true}
+BOAYO_NATIVE_SELFTEST_PASS {"python_golden_geometry":true,"python_golden_pixels":true,"wm_input":true,"hardware_tested":false}
+__NATIVE_RC:0
+oryukdo# boayo-start --mock; echo __NATIVE_RC:$?
+BoAYO C++ service started; initialization continues. boayo-status / boayo-keys / boayo-stop
+{"features":["windows","pointer","input-injection","button-events","scene-stream","spatial-workspace","pointer-capture"],"headless":true,"m":32,"mock_backend":true,"runtime":"C++17","version":2}
+__NATIVE_RC:0
+oryukdo# bBOAYO_INITTRACE n=1 event=desktop.begin wall_us=216 cpu_us=81 value=0
+BOAYO_INITTRACE n=2 event=window.create.begin wall_us=413 cpu_us=271 value=0
+BOAYO_INITTRACE n=3 event=window.create.end wall_us=625 cpu_us=484 value=1
+BOAYO_INITTRACE n=4 event=window.configure.begin wall_us=683 cpu_us=541 value=0
+BOAYO_INITTRACE n=5 event=window.configure.end wall_us=755 cpu_us=613 value=1
+BOAYO_INITTRACE n=6 event=asset.map.begin wall_us=809 cpu_us=666 value=0
+BOAYO_INITTRACE n=7 event=asset.loaded wall_us=898 cpu_us=758 value=921600
+BOAYO_INITTRACE n=8 event=surface.publish.move wall_us=948 cpu_us=805 value=1
+BOAYO_INITTRACE n=9 event=desktop.end wall_us=981 cpu_us=838 value=1
+BOAYO_INITTRACE n=10 event=desktop.scope_exit wall_us=1012 cpu_us=869 value=0
+oBOAYO_FRAME_TRACE n=1 event=frame.begin wall_us=152 cpu_us=78 value=0
+BOAYO_FRAME_TRACE n=2 event=plan.load.begin wall_us=349 cpu_us=270 value=0
+BOAYO_FRAME_TRACE n=3 event=plan.load.end wall_us=1746 cpu_us=1669 value=1
+BOAYO_FRAME_TRACE n=4 event=tiles.prepare.begin wall_us=2179 cpu_us=2100 value=160
+BOAYO_FRAME_TRACE n=5 event=tiles.prepare.end wall_us=3506 cpu_us=3431 value=160
+BOAYO_FRAME_TRACE n=6 event=texture.upload.begin wall_us=3631 cpu_us=3551 value=230400
+BOAYO_FRAME_TRACE n=7 event=texture.upload.end wall_us=4028 cpu_us=3949 value=230400
+BOAYO_FRAME_TRACE n=8 event=projectors.begin wall_us=4108 cpu_us=4028 value=96
+BOAYO_FRAME_TRACE n=9 event=projectors.end wall_us=12246 cpu_us=12168 value=96
+BOAYO_FRAME_TRACE n=10 event=output.upload.begin wall_us=12347 cpu_us=12267 value=0
+BOAYO_FRAME_TRACE n=11 event=output.present.done wall_us=12803 cpu_us=12724 value=0
+BOAYO_FRAME_TRACE n=12 event=output.upload.end wall_us=12869 cpu_us=12788 value=0
+BOAYO_FRAME_TRACE n=13 event=frame.scope_exit wall_us=13349 cpu_us=13269 value=0
+ayo-status; echo __NATIVE_RC:$?
+{
+  "app_error": null,
+  "buttons": {
+    "available": false,
+    "last_event_id": 0,
+    "state": 0
+  },
+  "compositor": "cpp-native",
+  "focused_window": 1,
+  "generation": 4,
+  "output": {
+    "abi": 3,
+    "active_bank": 1,
+    "active_base": 0,
+    "antialias": false,
+    "backend": "kfb-linux-frame-atomic-output",
+    "capability": 0,
+    "commits": 2,
+    "dma_copied_words": 0,
+    "max_jobs": 64,
+    "max_scene_words": 1084816,
+    "memory_dma": {
+      "available": true,
+      "copy_ops": 0,
+      "fill_ops": 44
+    },
+    "metadata_only": false,
+    "mock_backend": true,
+    "poisoned": 0,
+    "sensor_available": false,
+    "shadow_copied_words": 0,
+    "signature": 0,
+    "status": 131075,
+    "uploaded_words": 8952
+  },
+  "performance": {
+    "frame_limit": 2.0,
+    "full_update_count": 1,
+    "last_compose_ms": 13.082619999998713,
+    "last_upload_ms": 0.0,
+    "no_op_update_count": 0,
+    "patch_update_count": 1,
+    "render_count": 1,
+    "update_words": 4480,
+    "uptime_seconds": 0.014570339999998794
+  },
+  "pointer": {
+    "azimuth": 0.0,
+    "buttons": [],
+    "cancel_serial": 0,
+    "captured_window": null,
+    "dragging": false,
+    "elevation": 0.0,
+    "last_left_press": null,
+    "last_left_release": null,
+    "left_press_serial": 0,
+    "left_release_serial": 0,
+    "scroll_delta": 0.0,
+    "scroll_serial": 0,
+    "visible": false,
+    "window_id": 1,
+    "zone": "content"
+  },
+  "projection": {
+    "cpu_output_shadow_words": 4480,
+    "cpu_result_download_words": 0,
+    "cpu_scene_words": 0,
+    "dirty_tiles": 160,
+    "fallback_frames": 0,
+    "geometry_tiles_evaluated_total": 0,
+    "hardware_frames": 1,
+    "jobs_per_core": [
+      48,
+      48
+    ],
+    "lazy_copied_tiles_total": 0,
+    "mask_samples_evaluated_total": 0,
+    "masked_tiles_total": 44,
+    "mode": "ddr-resident-dirty-tiles",
+    "plan_cache": {
+      "hits": 0,
+      "loads": 1,
+      "misses": 0,
+      "rejected": 0,
+      "revision": "72fc16265eca64ceb2c3ce6cf21f6f78ba85f86ba92bcd082bea1528eab1d8ca"
+    },
+    "precomputed_layers_total": 1,
+    "redrawn_tiles": 96,
+    "reused_tiles_total": 0,
+    "solid_tiles_total": 0,
+    "texture_reuses_total": 0,
+    "texture_uploads_total": 1,
+    "tile_fills_total": 44,
+    "total_hw_jobs": 96,
+    "update_kind": "tiles"
+  },
+  "render_error": null,
+  "runtime": "C++17",
+  "scene_owner": null,
+  "service": {
+    "phase": "ready",
+    "queued_requests": 0,
+    "snapshot_age_seconds": 0.8616778999999966,
+    "state_is_snapshot": true
+  },
+  "windows": [
+    {
+      "always_on_top": true,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": true,
+      "height_deg": 30.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "boayo-desktop",
+      "roll": 0.0,
+      "shape": [
+        [
+          51.2,
+          36.0,
+          537.6,
+          252.0,
+          18.0
+        ]
+      ],
+      "surface_height": 360,
+      "surface_width": 640,
+      "title": "BoAYO Launcher",
+      "width_deg": 42.0,
+      "window_id": 1,
+      "workspace": {},
+      "z": 0
+    }
+  ]
+}
+__NATIVE_RC:0
+oryukdo# boayo-app dashboard; echo __NATIVE_RC:$?
+BOAYO_APP_READY window=2
+__NATIVE_RC:0
+oryukdo# boayo-status; echo __NATIVE_RC:$?
+{
+  "app_error": null,
+  "buttons": {
+    "available": false,
+    "last_event_id": 0,
+    "state": 0
+  },
+  "compositor": "cpp-native",
+  "focused_window": 2,
+  "generation": 17,
+  "output": {
+    "abi": 3,
+    "active_bank": 0,
+    "active_base": 0,
+    "antialias": false,
+    "backend": "kfb-linux-frame-atomic-output",
+    "capability": 0,
+    "commits": 3,
+    "dma_copied_words": 0,
+    "max_jobs": 64,
+    "max_scene_words": 1084816,
+    "memory_dma": {
+      "available": true,
+      "copy_ops": 0,
+      "fill_ops": 117
+    },
+    "metadata_only": false,
+    "mock_backend": true,
+    "poisoned": 0,
+    "sensor_available": false,
+    "shadow_copied_words": 0,
+    "signature": 0,
+    "status": 196611,
+    "uploaded_words": 9087
+  },
+  "performance": {
+    "frame_limit": 2.0,
+    "full_update_count": 1,
+    "last_compose_ms": 127.97502000000094,
+    "last_upload_ms": 0.0,
+    "no_op_update_count": 0,
+    "patch_update_count": 2,
+    "render_count": 2,
+    "update_words": 4480,
+    "uptime_seconds": 2.260418459999997
+  },
+  "pointer": {
+    "azimuth": 0.0,
+    "buttons": [],
+    "cancel_serial": 0,
+    "captured_window": null,
+    "dragging": false,
+    "elevation": 0.0,
+    "last_left_press": null,
+    "last_left_release": null,
+    "left_press_serial": 0,
+    "left_release_serial": 0,
+    "scroll_delta": 0.0,
+    "scroll_serial": 0,
+    "visible": false,
+    "window_id": 2,
+    "zone": "content"
+  },
+  "projection": {
+    "cpu_output_shadow_words": 4480,
+    "cpu_result_download_words": 0,
+    "cpu_scene_words": 0,
+    "dirty_tiles": 160,
+    "fallback_frames": 0,
+    "geometry_tiles_evaluated_total": 16880,
+    "hardware_frames": 2,
+    "jobs_per_core": [
+      76,
+      72
+    ],
+    "lazy_copied_tiles_total": 0,
+    "mask_samples_evaluated_total": 176128,
+    "masked_tiles_total": 121,
+    "mode": "ddr-resident-dirty-tiles",
+    "plan_cache": {
+      "hits": 0,
+      "loads": 1,
+      "misses": 8,
+      "rejected": 0,
+      "revision": "72fc16265eca64ceb2c3ce6cf21f6f78ba85f86ba92bcd082bea1528eab1d8ca"
+    },
+    "precomputed_layers_total": 1,
+    "redrawn_tiles": 135,
+    "reused_tiles_total": 0,
+    "solid_tiles_total": 0,
+    "texture_reuses_total": 0,
+    "texture_uploads_total": 5,
+    "tile_fills_total": 108,
+    "total_hw_jobs": 244,
+    "update_kind": "tiles"
+  },
+  "render_error": null,
+  "runtime": "C++17",
+  "scene_owner": null,
+  "service": {
+    "phase": "ready",
+    "queued_requests": 0,
+    "snapshot_age_seconds": 0.6257211400000031,
+    "state_is_snapshot": true
+  },
+  "windows": [
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": true,
+      "height_deg": 28.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-dashboard-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          544.0,
+          428.0,
+          14.0
+        ]
+      ],
+      "surface_height": 440,
+      "surface_width": 640,
+      "title": "Dashboard",
+      "width_deg": 38.0,
+      "window_id": 2,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 0
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 30.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "boayo-desktop",
+      "roll": 0.0,
+      "shape": [
+        [
+          51.2,
+          36.0,
+          537.6,
+          252.0,
+          18.0
+        ]
+      ],
+      "surface_height": 360,
+      "surface_width": 640,
+      "title": "BoAYO Launcher",
+      "width_deg": 42.0,
+      "window_id": 1,
+      "workspace": {},
+      "z": 1
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -18.91361728563541,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-dashboard-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: Dashboard",
+      "width_deg": 2.88,
+      "window_id": 3,
+      "workspace": {
+        "control": "move",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 2
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 18.91361728563541,
+      "decorated": false,
+      "elevation": -11.136823482150845,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-dashboard-2",
+      "roll": 3.7864391911801647,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: Dashboard",
+      "width_deg": 4.0,
+      "window_id": 4,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 3
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 18.91361728563541,
+      "decorated": false,
+      "elevation": 11.136823482150847,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-dashboard-2",
+      "roll": -3.7864391911801647,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: Dashboard",
+      "width_deg": 4.0,
+      "window_id": 5,
+      "workspace": {
+        "control": "close",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 4
+    }
+  ]
+}
+__NATIVE_RC:0
+oryukdo# boayo-app telemetry; echo __NATIVE_RC:$?
+BOAYO_APP_READY window=6
+__NATIVE_RC:0
+oryukdo# boayo-status; echo __NATIVE_RC:$?
+{
+  "app_error": null,
+  "buttons": {
+    "available": false,
+    "last_event_id": 0,
+    "state": 0
+  },
+  "compositor": "cpp-native",
+  "focused_window": 6,
+  "generation": 39,
+  "output": {
+    "abi": 3,
+    "active_bank": 0,
+    "active_base": 0,
+    "antialias": false,
+    "backend": "kfb-linux-frame-atomic-output",
+    "capability": 0,
+    "commits": 5,
+    "dma_copied_words": 26624,
+    "max_jobs": 64,
+    "max_scene_words": 1084816,
+    "memory_dma": {
+      "available": true,
+      "copy_ops": 23,
+      "fill_ops": 193
+    },
+    "metadata_only": false,
+    "mock_backend": true,
+    "poisoned": 0,
+    "sensor_available": false,
+    "shadow_copied_words": 0,
+    "signature": 0,
+    "status": 327683,
+    "uploaded_words": 9126
+  },
+  "performance": {
+    "frame_limit": 2.0,
+    "full_update_count": 1,
+    "last_compose_ms": 6.441699999996331,
+    "last_upload_ms": 0.0,
+    "no_op_update_count": 0,
+    "patch_update_count": 4,
+    "render_count": 4,
+    "update_words": 4480,
+    "uptime_seconds": 4.828941019999995
+  },
+  "pointer": {
+    "azimuth": 0.0,
+    "buttons": [],
+    "cancel_serial": 0,
+    "captured_window": null,
+    "dragging": false,
+    "elevation": 0.0,
+    "last_left_press": null,
+    "last_left_release": null,
+    "left_press_serial": 0,
+    "left_release_serial": 0,
+    "scroll_delta": 0.0,
+    "scroll_serial": 0,
+    "visible": false,
+    "window_id": 6,
+    "zone": "content"
+  },
+  "projection": {
+    "cpu_output_shadow_words": 4480,
+    "cpu_result_download_words": 0,
+    "cpu_scene_words": 0,
+    "dirty_tiles": 21,
+    "fallback_frames": 0,
+    "geometry_tiles_evaluated_total": 33760,
+    "hardware_frames": 4,
+    "jobs_per_core": [
+      24,
+      21
+    ],
+    "lazy_copied_tiles_total": 104,
+    "mask_samples_evaluated_total": 320512,
+    "masked_tiles_total": 238,
+    "mode": "ddr-resident-dirty-tiles",
+    "plan_cache": {
+      "hits": 0,
+      "loads": 1,
+      "misses": 16,
+      "rejected": 0,
+      "revision": "72fc16265eca64ceb2c3ce6cf21f6f78ba85f86ba92bcd082bea1528eab1d8ca"
+    },
+    "precomputed_layers_total": 1,
+    "redrawn_tiles": 21,
+    "reused_tiles_total": 8,
+    "solid_tiles_total": 0,
+    "texture_reuses_total": 0,
+    "texture_uploads_total": 13,
+    "tile_fills_total": 155,
+    "total_hw_jobs": 517,
+    "update_kind": "tiles"
+  },
+  "render_error": null,
+  "runtime": "C++17",
+  "scene_owner": null,
+  "service": {
+    "phase": "apps",
+    "queued_requests": 0,
+    "snapshot_age_seconds": 0.22747855999999445,
+    "state_is_snapshot": true
+  },
+  "windows": [
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 28.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-dashboard-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          544.0,
+          428.0,
+          14.0
+        ]
+      ],
+      "surface_height": 440,
+      "surface_width": 640,
+      "title": "Dashboard",
+      "width_deg": 38.0,
+      "window_id": 2,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 0
+    },
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": true,
+      "height_deg": 26.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-6",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          14.0
+        ]
+      ],
+      "surface_height": 300,
+      "surface_width": 400,
+      "title": "Telemetry",
+      "width_deg": 36.0,
+      "window_id": 6,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 1
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 30.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "boayo-desktop",
+      "roll": 0.0,
+      "shape": [
+        [
+          51.2,
+          36.0,
+          537.6,
+          252.0,
+          18.0
+        ]
+      ],
+      "surface_height": 360,
+      "surface_width": 640,
+      "title": "BoAYO Launcher",
+      "width_deg": 42.0,
+      "window_id": 1,
+      "workspace": {},
+      "z": 2
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -18.91361728563541,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-dashboard-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: Dashboard",
+      "width_deg": 2.88,
+      "window_id": 3,
+      "workspace": {
+        "control": "move",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 3
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 18.91361728563541,
+      "decorated": false,
+      "elevation": -11.136823482150845,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-dashboard-2",
+      "roll": 3.7864391911801647,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: Dashboard",
+      "width_deg": 4.0,
+      "window_id": 4,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 4
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 18.91361728563541,
+      "decorated": false,
+      "elevation": 11.136823482150847,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-dashboard-2",
+      "roll": -3.7864391911801647,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: Dashboard",
+      "width_deg": 4.0,
+      "window_id": 5,
+      "workspace": {
+        "control": "close",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 5
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -16.47105751657935,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-6",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: Telemetry",
+      "width_deg": 2.88,
+      "window_id": 7,
+      "workspace": {
+        "control": "move",
+        "parent": 6,
+        "role": "caption"
+      },
+      "z": 6
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": -10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-6",
+      "roll": 3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 8,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 6,
+        "role": "caption"
+      },
+      "z": 7
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": 10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-6",
+      "roll": -3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 9,
+      "workspace": {
+        "control": "close",
+        "parent": 6,
+        "role": "caption"
+      },
+      "z": 8
+    }
+  ]
+}
+__NATIVE_RC:0
+oryukdo# boayo-app pulse; echo __NATIVE_RC:$?
+BOAYO_APP_READY window=10
+__NATIVE_RC:0
+oryukdo# boayo-status; echo __NATIVE_RC:$?
+{
+  "app_error": null,
+  "buttons": {
+    "available": false,
+    "last_event_id": 0,
+    "state": 0
+  },
+  "compositor": "cpp-native",
+  "focused_window": 10,
+  "generation": 70,
+  "output": {
+    "abi": 3,
+    "active_bank": 1,
+    "active_base": 0,
+    "antialias": false,
+    "backend": "kfb-linux-frame-atomic-output",
+    "capability": 0,
+    "commits": 8,
+    "dma_copied_words": 28160,
+    "max_jobs": 64,
+    "max_scene_words": 1084816,
+    "memory_dma": {
+      "available": true,
+      "copy_ops": 27,
+      "fill_ops": 300
+    },
+    "metadata_only": false,
+    "mock_backend": true,
+    "poisoned": 0,
+    "sensor_available": false,
+    "shadow_copied_words": 0,
+    "signature": 0,
+    "status": 524291,
+    "uploaded_words": 9132
+  },
+  "performance": {
+    "frame_limit": 2.0,
+    "full_update_count": 1,
+    "last_compose_ms": 145.25161999999625,
+    "last_upload_ms": 0.0,
+    "no_op_update_count": 0,
+    "patch_update_count": 7,
+    "render_count": 7,
+    "update_words": 4480,
+    "uptime_seconds": 6.761705339999999
+  },
+  "pointer": {
+    "azimuth": 0.0,
+    "buttons": [],
+    "cancel_serial": 0,
+    "captured_window": null,
+    "dragging": false,
+    "elevation": 0.0,
+    "last_left_press": null,
+    "last_left_release": null,
+    "left_press_serial": 0,
+    "left_release_serial": 0,
+    "scroll_delta": 0.0,
+    "scroll_serial": 0,
+    "visible": false,
+    "window_id": 10,
+    "zone": "content"
+  },
+  "projection": {
+    "cpu_output_shadow_words": 4480,
+    "cpu_result_download_words": 0,
+    "cpu_scene_words": 0,
+    "dirty_tiles": 144,
+    "fallback_frames": 0,
+    "geometry_tiles_evaluated_total": 50640,
+    "hardware_frames": 7,
+    "jobs_per_core": [
+      169,
+      165
+    ],
+    "lazy_copied_tiles_total": 110,
+    "mask_samples_evaluated_total": 495616,
+    "masked_tiles_total": 398,
+    "mode": "ddr-resident-dirty-tiles",
+    "plan_cache": {
+      "hits": 0,
+      "loads": 1,
+      "misses": 24,
+      "rejected": 0,
+      "revision": "72fc16265eca64ceb2c3ce6cf21f6f78ba85f86ba92bcd082bea1528eab1d8ca"
+    },
+    "precomputed_layers_total": 1,
+    "redrawn_tiles": 122,
+    "reused_tiles_total": 17,
+    "solid_tiles_total": 0,
+    "texture_reuses_total": 0,
+    "texture_uploads_total": 23,
+    "tile_fills_total": 206,
+    "total_hw_jobs": 927,
+    "update_kind": "tiles"
+  },
+  "render_error": null,
+  "runtime": "C++17",
+  "scene_owner": null,
+  "service": {
+    "phase": "apps",
+    "queued_requests": 0,
+    "snapshot_age_seconds": 0.3945175400000025,
+    "state_is_snapshot": true
+  },
+  "windows": [
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 28.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-dashboard-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          544.0,
+          428.0,
+          14.0
+        ]
+      ],
+      "surface_height": 440,
+      "surface_width": 640,
+      "title": "Dashboard",
+      "width_deg": 38.0,
+      "window_id": 2,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 0
+    },
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 26.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-6",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          14.0
+        ]
+      ],
+      "surface_height": 300,
+      "surface_width": 400,
+      "title": "Telemetry",
+      "width_deg": 36.0,
+      "window_id": 6,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 1
+    },
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": true,
+      "height_deg": 28.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-sdk-pulse-10",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          14.0
+        ]
+      ],
+      "surface_height": 300,
+      "surface_width": 400,
+      "title": "SDK Pulse",
+      "width_deg": 38.0,
+      "window_id": 10,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 2
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 30.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "boayo-desktop",
+      "roll": 0.0,
+      "shape": [
+        [
+          51.2,
+          36.0,
+          537.6,
+          252.0,
+          18.0
+        ]
+      ],
+      "surface_height": 360,
+      "surface_width": 640,
+      "title": "BoAYO Launcher",
+      "width_deg": 42.0,
+      "window_id": 1,
+      "workspace": {},
+      "z": 3
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -18.91361728563541,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-dashboard-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: Dashboard",
+      "width_deg": 2.88,
+      "window_id": 3,
+      "workspace": {
+        "control": "move",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 4
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 18.91361728563541,
+      "decorated": false,
+      "elevation": -11.136823482150845,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-dashboard-2",
+      "roll": 3.7864391911801647,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: Dashboard",
+      "width_deg": 4.0,
+      "window_id": 4,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 5
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 18.91361728563541,
+      "decorated": false,
+      "elevation": 11.136823482150847,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-dashboard-2",
+      "roll": -3.7864391911801647,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: Dashboard",
+      "width_deg": 4.0,
+      "window_id": 5,
+      "workspace": {
+        "control": "close",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 6
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -16.47105751657935,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-telemetry-6",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: Telemetry",
+      "width_deg": 2.88,
+      "window_id": 7,
+      "workspace": {
+        "control": "move",
+        "parent": 6,
+        "role": "caption"
+      },
+      "z": 7
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": -10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-telemetry-6",
+      "roll": 3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 8,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 6,
+        "role": "caption"
+      },
+      "z": 8
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": 10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-telemetry-6",
+      "roll": -3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 9,
+      "workspace": {
+        "control": "close",
+        "parent": 6,
+        "role": "caption"
+      },
+      "z": 9
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -17.264823078656832,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-sdk-pulse-10",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: SDK Pulse",
+      "width_deg": 2.88,
+      "window_id": 11,
+      "workspace": {
+        "control": "move",
+        "parent": 10,
+        "role": "caption"
+      },
+      "z": 10
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 17.264823078656832,
+      "decorated": false,
+      "elevation": -11.129687987414206,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-sdk-pulse-10",
+      "roll": 3.433190255028393,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: SDK Pulse",
+      "width_deg": 4.0,
+      "window_id": 12,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 10,
+        "role": "caption"
+      },
+      "z": 11
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 17.264823078656832,
+      "decorated": false,
+      "elevation": 11.129687987414204,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-sdk-pulse-10",
+      "roll": -3.433190255028393,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: SDK Pulse",
+      "width_deg": 4.0,
+      "window_id": 13,
+      "workspace": {
+        "control": "close",
+        "parent": 10,
+        "role": "caption"
+      },
+      "z": 12
+    }
+  ]
+}
+__NATIVE_RC:0
+oryukdo# boayo-keys
+BOAYO_KEYS_READY WASD/arrows=view Space/Enter=center-click R=reset +/-=step Q=exit
+{"pitch":0.0,"yaw":0.0}
+{"pitch":0.0,"yaw":2.0}
+{"pitch":2.0,"yaw":2.0}
+{"pitch":2.0,"yaw":0.0}
+{"pitch":0.0,"yaw":0.0}
+{"pitch":0.0,"pointer":{"azimuth":0.0,"buttons":[],"cancel_serial":0,"captured_window":null,"dragging":false,"elevation":0.0,"last_left_press":{"azimuth":0.0,"elevation":0.0,"window_id":10},"last_left_release":{"azimuth":0.0,"elevation":0.0},"left_press_serial":1,"left_release_serial":1,"scroll_delta":0.0,"scroll_serial":0,"visible":false,"window_id":10,"zone":"content"},"yaw":0.0}
+{"pitch":0.0,"pointer":{"azimuth":0.0,"buttons":[],"cancel_serial":0,"captured_window":null,"dragging":false,"elevation":0.0,"last_left_press":{"azimuth":0.0,"elevation":0.0,"window_id":10},"last_left_release":{"azimuth":0.0,"elevation":0.0},"left_press_serial":2,"left_release_serial":2,"scroll_delta":0.0,"scroll_serial":0,"visible":false,"window_id":10,"zone":"content"},"yaw":0.0}
+{"pitch":0.0,"yaw":0.0}
+
+BOAYO_KEYS_EXIT (WM remains running)
+oryukdo# echo KEYS_SHELL_RESTORED; echo __NATIVE_RC:$?
+KEYS_SHELL_RESTORED
+__NATIVE_RC:0
+oryukdo# boayo-status; echo __NATIVE_RC:$?
+{
+  "app_error": null,
+  "buttons": {
+    "available": false,
+    "last_event_id": 0,
+    "state": 0
+  },
+  "compositor": "cpp-native",
+  "focused_window": 10,
+  "generation": 116,
+  "output": {
+    "abi": 3,
+    "active_bank": 1,
+    "active_base": 0,
+    "antialias": false,
+    "backend": "kfb-linux-frame-atomic-output",
+    "capability": 0,
+    "commits": 14,
+    "dma_copied_words": 60416,
+    "max_jobs": 64,
+    "max_scene_words": 1084816,
+    "memory_dma": {
+      "available": true,
+      "copy_ops": 54,
+      "fill_ops": 404
+    },
+    "metadata_only": false,
+    "mock_backend": true,
+    "poisoned": 0,
+    "sensor_available": false,
+    "shadow_copied_words": 0,
+    "signature": 0,
+    "status": 1245187,
+    "uploaded_words": 9138
+  },
+  "performance": {
+    "frame_limit": 2.0,
+    "full_update_count": 1,
+    "last_compose_ms": 5.655920000002368,
+    "last_upload_ms": 0.0,
+    "no_op_update_count": 0,
+    "patch_update_count": 13,
+    "render_count": 13,
+    "update_words": 4480,
+    "uptime_seconds": 10.101375839999996
+  },
+  "pointer": {
+    "azimuth": 0.0,
+    "buttons": [],
+    "cancel_serial": 0,
+    "captured_window": null,
+    "dragging": false,
+    "elevation": 0.0,
+    "last_left_press": {
+      "azimuth": 0.0,
+      "elevation": 0.0,
+      "window_id": 10
+    },
+    "last_left_release": {
+      "azimuth": 0.0,
+      "elevation": 0.0
+    },
+    "left_press_serial": 2,
+    "left_release_serial": 2,
+    "scroll_delta": 0.0,
+    "scroll_serial": 0,
+    "visible": false,
+    "window_id": 10,
+    "zone": "content"
+  },
+  "projection": {
+    "cpu_output_shadow_words": 4480,
+    "cpu_result_download_words": 0,
+    "cpu_scene_words": 0,
+    "dirty_tiles": 12,
+    "fallback_frames": 0,
+    "geometry_tiles_evaluated_total": 50640,
+    "hardware_frames": 13,
+    "jobs_per_core": [
+      18,
+      18
+    ],
+    "lazy_copied_tiles_total": 236,
+    "mask_samples_evaluated_total": 495616,
+    "masked_tiles_total": 422,
+    "mode": "ddr-resident-dirty-tiles",
+    "plan_cache": {
+      "hits": 0,
+      "loads": 1,
+      "misses": 24,
+      "rejected": 0,
+      "revision": "72fc16265eca64ceb2c3ce6cf21f6f78ba85f86ba92bcd082bea1528eab1d8ca"
+    },
+    "precomputed_layers_total": 1,
+    "redrawn_tiles": 12,
+    "reused_tiles_total": 17,
+    "solid_tiles_total": 0,
+    "texture_reuses_total": 0,
+    "texture_uploads_total": 41,
+    "tile_fills_total": 206,
+    "total_hw_jobs": 1239,
+    "update_kind": "tiles"
+  },
+  "render_error": null,
+  "runtime": "C++17",
+  "scene_owner": null,
+  "service": {
+    "phase": "ready",
+    "queued_requests": 0,
+    "snapshot_age_seconds": 0.13483346000000296,
+    "state_is_snapshot": true
+  },
+  "windows": [
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 28.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-dashboard-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          544.0,
+          428.0,
+          14.0
+        ]
+      ],
+      "surface_height": 440,
+      "surface_width": 640,
+      "title": "Dashboard",
+      "width_deg": 38.0,
+      "window_id": 2,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 0
+    },
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 26.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-telemetry-6",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          14.0
+        ]
+      ],
+      "surface_height": 300,
+      "surface_width": 400,
+      "title": "Telemetry",
+      "width_deg": 36.0,
+      "window_id": 6,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 1
+    },
+    {
+      "always_on_top": false,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": true,
+      "height_deg": 28.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-sdk-pulse-10",
+      "roll": 0.0,
+      "shape": [
+        [
+          48.0,
+          4.0,
+          304.0,
+          288.0,
+          14.0
+        ]
+      ],
+      "surface_height": 300,
+      "surface_width": 400,
+      "title": "SDK Pulse",
+      "width_deg": 38.0,
+      "window_id": 10,
+      "workspace": {
+        "role": "app",
+        "state": "open"
+      },
+      "z": 2
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 0.0,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 30.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "boayo-desktop",
+      "roll": 0.0,
+      "shape": [
+        [
+          51.2,
+          36.0,
+          537.6,
+          252.0,
+          18.0
+        ]
+      ],
+      "surface_height": 360,
+      "surface_width": 640,
+      "title": "BoAYO Launcher",
+      "width_deg": 42.0,
+      "window_id": 1,
+      "workspace": {},
+      "z": 3
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -18.91361728563541,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-dashboard-2",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: Dashboard",
+      "width_deg": 2.88,
+      "window_id": 3,
+      "workspace": {
+        "control": "move",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 4
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 18.91361728563541,
+      "decorated": false,
+      "elevation": -11.136823482150845,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-dashboard-2",
+      "roll": 3.7864391911801647,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: Dashboard",
+      "width_deg": 4.0,
+      "window_id": 4,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 5
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 18.91361728563541,
+      "decorated": false,
+      "elevation": 11.136823482150847,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-dashboard-2",
+      "roll": -3.7864391911801647,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: Dashboard",
+      "width_deg": 4.0,
+      "window_id": 5,
+      "workspace": {
+        "control": "close",
+        "parent": 2,
+        "role": "caption"
+      },
+      "z": 6
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -16.47105751657935,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-telemetry-6",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: Telemetry",
+      "width_deg": 2.88,
+      "window_id": 7,
+      "workspace": {
+        "control": "move",
+        "parent": 6,
+        "role": "caption"
+      },
+      "z": 7
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": -10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-telemetry-6",
+      "roll": 3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 8,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 6,
+        "role": "caption"
+      },
+      "z": 8
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 16.47105751657935,
+      "decorated": false,
+      "elevation": 10.236460295605365,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": false,
+      "owner": "native-telemetry-6",
+      "roll": -3.007712876227515,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: Telemetry",
+      "width_deg": 4.0,
+      "window_id": 9,
+      "workspace": {
+        "control": "close",
+        "parent": 6,
+        "role": "caption"
+      },
+      "z": 9
+    },
+    {
+      "always_on_top": true,
+      "azimuth": -17.264823078656832,
+      "decorated": false,
+      "elevation": 0.0,
+      "focused": false,
+      "height_deg": 10.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-sdk-pulse-10",
+      "roll": 0.0,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          100.0,
+          8.0
+        ]
+      ],
+      "surface_height": 100,
+      "surface_width": 40,
+      "title": "move: SDK Pulse",
+      "width_deg": 2.88,
+      "window_id": 11,
+      "workspace": {
+        "control": "move",
+        "parent": 10,
+        "role": "caption"
+      },
+      "z": 10
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 17.264823078656832,
+      "decorated": false,
+      "elevation": -11.129687987414206,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-sdk-pulse-10",
+      "roll": 3.433190255028393,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "resize_right: SDK Pulse",
+      "width_deg": 4.0,
+      "window_id": 12,
+      "workspace": {
+        "control": "resize_right",
+        "parent": 10,
+        "role": "caption"
+      },
+      "z": 11
+    },
+    {
+      "always_on_top": true,
+      "azimuth": 17.264823078656832,
+      "decorated": false,
+      "elevation": 11.129687987414204,
+      "focused": false,
+      "height_deg": 4.0,
+      "input_enabled": true,
+      "mapped": true,
+      "owner": "native-sdk-pulse-10",
+      "roll": -3.433190255028393,
+      "shape": [
+        [
+          0.0,
+          0.0,
+          40.0,
+          40.0,
+          8.0
+        ]
+      ],
+      "surface_height": 40,
+      "surface_width": 40,
+      "title": "close: SDK Pulse",
+      "width_deg": 4.0,
+      "window_id": 13,
+      "workspace": {
+        "control": "close",
+        "parent": 10,
+        "role": "caption"
+      },
+      "z": 12
+    }
+  ]
+}
+__NATIVE_RC:0
+oryukdo# boayo-stop; echo __NATIVE_RC:$?
+__NATIVE_RC:0
+oryukdo# 

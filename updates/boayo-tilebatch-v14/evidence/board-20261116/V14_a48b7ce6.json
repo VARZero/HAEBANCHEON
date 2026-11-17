@@ -1,0 +1,8 @@
+{
+  "command": "boayo-stop && while test -S /tmp/bosio-wm.sock; do sleep 1; done",
+  "seconds": 10.809,
+  "rc": 0,
+  "uart": "boayo-stop && while test -S /tmp/bosio-wm.sock; do sleep 1; done; echo \r\r\r\nV14_a48b7ce6_RC:$?\r\r\nV14_a48b7ce6_RC:0\r\r\n",
+  "observed_at": "2026-11-16T22:00:21.857684",
+  "log_start": 126609
+}

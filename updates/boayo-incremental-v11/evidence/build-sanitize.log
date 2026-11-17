@@ -1,0 +1,6 @@
+BUILD_SOURCE /var/tmp/haebancheon-incremental-v11/sanitize/source-sanitize-2vXNHY/software/boayo/native
+/var/tmp/haebancheon-incremental-v11/sanitize/source-sanitize-2vXNHY/software/boayo/native/src/resident.cpp: In member function ‘bool boayo::ResidentCompositor::update(boayo::WM&)’:
+/var/tmp/haebancheon-incremental-v11/sanitize/source-sanitize-2vXNHY/software/boayo/native/src/resident.cpp:309:1: warning: the frame size of 33008 bytes is larger than 32768 bytes [-Wframe-larger-than=]
+  309 | }
+      | ^
+BUILD_OK /var/tmp/haebancheon-incremental-v11/sanitize/boayo-native-sanitize

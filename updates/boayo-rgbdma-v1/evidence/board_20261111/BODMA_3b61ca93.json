@@ -1,0 +1,7 @@
+{
+  "command": "boayo-start",
+  "seconds": 36.4,
+  "rc": 0,
+  "uart": "boayo-start; echo BODMA_3b61ca93_RC:$?\r\r\nBOAYO_INITTRACE n=1 event=desktop.begin wall_us=140449 cpu_us=65858 value=0\r\r\nBOAYO_INITTRACE n=2 event=window.create.begin wall_us=2979468 cpu_us=1099431 value=0\r\r\nBoAYO C++ service started; initialization continues. boayo-status / boayo-keys / boayo-stop\r\r\n{\"features\":[\"windows\",\"pointer\",\"input-injection\",\"button-events\",\"scene-stream\",\"spatial-workspace\",\"pointer-capture\"],\"headless\":false,\"m\":32,\"mock_backend\":false,\"runtime\":\"C++17\",\"version\":2}\r\r\nBODMA_3b61ca93_RC:0\r\r\n",
+  "observed_at": "2026-11-11T00:42:14.467553"
+}

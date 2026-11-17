@@ -1,0 +1,45 @@
+{
+  "result": "PASS_BOARD_SHELL_SD_EXT4_RW_REMOUNT",
+  "observed_at": "2026-11-10T22:15:47.618927+09:00",
+  "kernel": "6.12.0-oryukdo-sd4-dma2",
+  "selected_image_sha256": "6a6b92f300faeb80c89108d94d3411c28438b185abaaca8f71dac06216ca2424",
+  "bitstream_sha256": "fe1ce8e52f30f1b9bd7bad944a0bf6f981eef9bba01438c0d26b40da6126fdf0",
+  "bitstream_changed": false,
+  "sd_card": "SDHC 14.6 GiB",
+  "partitions": [
+    "mmcblk0p1",
+    "mmcblk0p2"
+  ],
+  "data_mount": "/dev/mmcblk0p2 /data ext4 rw,relatime",
+  "data_partition_bytes": 268435456,
+  "file_write_fsync_bytes": 262144,
+  "file_re_read_compared_bytes": 262144,
+  "comparison": "every byte against offset-dependent xorshift pattern",
+  "cache_handling": "normal successful unmount and remount before verification; not a power cycle",
+  "sd_irqs_before_write": 104,
+  "sd_irqs_after_write": 1642,
+  "sd_irqs_after_read": 2458,
+  "copy_fill_dma_irqs": 0,
+  "copy_fill_dma_hardware_test": "NOT_RUN",
+  "test_tool_sha256": "b8e0ebadedc9776897d042b1c79b9e627994e0087cfecbd3ce5d6c63d326dcfa",
+  "test_tool_serial_identity": {
+    "result": "PASS",
+    "bytes": 4584,
+    "fnv1a": 139061550,
+    "sha256": "b8e0ebadedc9776897d042b1c79b9e627994e0087cfecbd3ce5d6c63d326dcfa"
+  },
+  "tool_installed_ram": "/bin/storage-check",
+  "tool_saved_sd": "/data/storage-check",
+  "next_boot_tool_command": "cp /data/storage-check /tmp/storage-check && /tmp/storage-check",
+  "persistent_marker": "/data/persistence-check.txt",
+  "power_cycle_persistence": "NOT_RUN",
+  "test_tool_limitations_found": [
+    "The immutable v2 SD image script needs missing BusyBox dd/sha256sum applets.",
+    "Kernel has no /proc/sys/vm/drop_caches and no fadvise syscall; standalone tool uses normal unmount/remount.",
+    "Native --identity must be invoked using a path; bare argv[0] cannot be opened. Full-path identity verified."
+  ],
+  "validation_method": "First tool wrote/fsynced the file but failed at missing drop_caches; revised tool verified that same file after unmount/remount and returned 0.",
+  "full_sd_image_modified": false,
+  "uart_snapshot_sha256": "06eb5cf63ad14a7e9170dda56ff3ec35722ea5cd22ea9fbb542134385ed2b51e",
+  "test_tool_source_sha256": "da1731c27017e65706d6fe60e156c42e9d793931536179c190bdfeca5ebb1fe7"
+}

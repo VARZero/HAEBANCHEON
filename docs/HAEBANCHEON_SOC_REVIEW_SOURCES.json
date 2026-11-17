@@ -1,0 +1,110 @@
+[
+  {
+    "path": "variants/l1-16k-dma3-lru-ram/soc/board/gen3_kfb_bosio.sv",
+    "sha256": "c49f65a57eca3c9ae460bb9dda0cb7e38ebc706004bafd835304c7e3d5e3a34a"
+  },
+  {
+    "path": "variants/l1-16k-dma3-lru-ram/soc/board/kfb_video.sv",
+    "sha256": "f080408bb8e8e17b1083069eea8da1ac8f1598fa93ac8a8b484ae53ebad301b4"
+  },
+  {
+    "path": "variants/l1-16k-dma3-lru-ram/soc/board/kfb_hdmi.sv",
+    "sha256": "aae4ee9243c6bbedb63e7f91db5ee7c30e4bf73dddede46be12834fb5b2caaa4"
+  },
+  {
+    "path": "variants/l1-16k-dma3-lru-ram/soc/board/mig_a.prj",
+    "sha256": "991db2d978326e5a6a5205d4b3dfee8067651cfaca5ddc7e4dbcab9443d699bf"
+  },
+  {
+    "path": "variants/l1-16k-dma3-lru-ram/soc/board/sd_boot.sv",
+    "sha256": "c2d65cb9dc1efb9504618d08fd12d92ac25801adec64103d6cdded4317ae7526"
+  },
+  {
+    "path": "variants/l1-16k-dma3-lru-ram/soc/rtl/gen3_cpu.sv",
+    "sha256": "8dfd14ae693cfd76d9e2dd004577042e9a5faf410a1acc7b2da60bf05537127e"
+  },
+  {
+    "path": "variants/l1-16k-dma3-lru-ram/soc/rtl/gen3_soc.sv",
+    "sha256": "427acdb4bdd093d50d0fcc20fcfac0b3de86ad412b3ea8fe439d5bb5b409f930"
+  },
+  {
+    "path": "variants/l1-16k-dma3-lru-ram/soc/rtl/oryukdo_scheduler_integrated.sv",
+    "sha256": "362ea0cef27e15e75519dd82141fd6f174b60128c5587e54ef2d13eda5a093a2"
+  },
+  {
+    "path": "variants/l1-16k-dma3-lru-ram/soc/rtl/rv32_sv32.sv",
+    "sha256": "9b2d2d0ce42613d32e97f7e1693cbca5f91b6e68bb22740abf809742649e41e0"
+  },
+  {
+    "path": "variants/l1-16k-dma3-lru-ram/soc/bosio/gen3_bosio_soc.sv",
+    "sha256": "ee2bc9518b7dab6888b74eb0e286eecaaa017db2c98f4f83d7e0b946fedd3dc6"
+  },
+  {
+    "path": "variants/l1-16k-dma3-lru-ram/soc/bosio/or_bo_axi_pkg.sv",
+    "sha256": "401972ea81b888f20b52f45f579f50f1f564c8acbcd7b40307430c45fa7653e6"
+  },
+  {
+    "path": "variants/l1-16k-dma3-lru-ram/soc/bosio/or_bo_axi_fabric.sv",
+    "sha256": "09a1cbf1b6c7b87e6c283741276ee1927bedc1499cb287bd707a9204e49c8aba"
+  },
+  {
+    "path": "variants/l1-16k-dma3-lru-ram/soc/bosio/or_storage_dma.sv",
+    "sha256": "3fdbc1db6532c303f8d1c6634a87fd3c4dbd6ced78ad8afa909eed073653113b"
+  },
+  {
+    "path": "variants/l1-16k-dma3-lru-ram/soc/bosio/or_storage_plic.sv",
+    "sha256": "c06a9e0eb51042555bf342d14cdd706cdbde20d138ab1682ac77532d3e002b6f"
+  },
+  {
+    "path": "variants/l1-16k-dma3-lru-ram/soc/bosio/or_sd_storage.sv",
+    "sha256": "ad329cf9ebb4c965733cbc49038037b44461197a90d619b3871ee8b7e164f65a"
+  },
+  {
+    "path": "variants/l1-16k-dma3-lru-ram/soc/vendor/projection/bosio_projector_control_s_axi.v",
+    "sha256": "7a8f904595442d4a95fc22a58348e592847c1445d58f173658c57d17eee6aea8"
+  },
+  {
+    "path": "variants/l1-16k-dma3-lru-ram/soc/vendor/output/bosio_output_top.v",
+    "sha256": "a4d660f2c6a1e156a4e800655bd4d8dc600776e76cb05323257ab6d2c83a2f10"
+  },
+  {
+    "path": "variants/l1-16k-dma3-lru-ram/soc/vendor/output/bosio_ddr_scene_cache.v",
+    "sha256": "14749d8a5202a0a1bb1694bf854eef6d21c42bb826ed3f2d41ad360e8f7bff5d"
+  },
+  {
+    "path": "variants/l1-16k-dma3-lru-ram/software/bosio/gen3-bosio.dts",
+    "sha256": "77b015b4a2a67cc86448c2a5b06f26398c027d9991aa0161ed54a28db25212dc"
+  },
+  {
+    "path": "variants/l1-16k-dma3-lru-ram/software/storage/oryukdo_dma.c",
+    "sha256": "428771883d8664b35ca08747520e923b61b48ca0cf1face85b45113726bb08ca"
+  },
+  {
+    "path": "updates/boayo-tilebatch-v14/build_image.sh",
+    "sha256": "ba22f6387ed0a8f89b0fcd9c0767ea49a9e1a057f93999e1625de008a7d89a0d"
+  },
+  {
+    "path": "updates/boayo-tilebatch-v14/software/bosio/include/bosio_uapi.h",
+    "sha256": "6a3558a31457a02d161cb6b6f44c5ecf1800a213e3d315a92cd8253f342d4fe4"
+  },
+  {
+    "path": "updates/boayo-tilebatch-v14/software/bosio/common/bosio_engine.c",
+    "sha256": "f5b2076dd6c25bcda6d3b1e9ca254f7855f1e0362293c5d592c0a10fc23e4317"
+  },
+  {
+    "path": "updates/boayo-tilebatch-v14/software/bosio/common/bosio_tile.h",
+    "sha256": "1398ada9502732652fba426867d9d3472d3d8466348fc0917a82dc0e4254400d"
+  },
+  {
+    "path": "updates/boayo-tilebatch-v14/software/boayo/native/src/geometry.cpp",
+    "sha256": "3180cee759cb344a954530465067748d90391294cc2dd38c449a3e2b8df618a7"
+  },
+  {
+    "path": "updates/boayo-tilebatch-v14/software/boayo/native/src/resident.cpp",
+    "sha256": "7706de117c58396be88003d8c130868a09b78292a2b837856604de053b521cc4"
+  },
+  {
+    "path": "updates/boayo-tilebatch-v14/BOARD_RESULT_KO.md",
+    "sha256": "c3d3b3ca63b8d5df7e32654523c00093cc015aafb7518c6aa21adb464606fbf6"
+  }
+]

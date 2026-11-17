@@ -1,0 +1,53 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+-----------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2022.2 (win64) Build 3671981 Fri Oct 14 05:00:03 MDT 2022
+| Date         : Sat Nov 14 03:51:19 2026
+| Host         : VieupE-Desk running 64-bit major release  (build 9200)
+| Command      : report_high_fanout_nets -load_types -max_nets 30 -file D:/temp/haebancheon-l1-16k-dma3/output_fanout_prepare/fanout.rpt
+| Design       : gen3_kfb_bosio
+| Device       : xc7a200t
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+High Fan-out Nets Information
+
+1. Fanout Summary
+-----------------
+
++-----------------------------------------------------------------------------+--------+-------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+
+|                                                                             |        |             |         Clock Enable        |          Set/Reset          |         Data & Other        |            Clock            |
++-----------------------------------------------------------------------------+--------+-------------+-------+----+----------------+-------+----+----------------+-------+----+----------------+-------+----+----------------+
+| Net Name                                                                    | Fanout | Driver Type | Slice | IO | BRAM/DSP/OTHER | Slice | IO | BRAM/DSP/OTHER | Slice | IO | BRAM/DSP/OTHER | Slice | IO | BRAM/DSP/OTHER |
++-----------------------------------------------------------------------------+--------+-------------+-------+----+----------------+-------+----+----------------+-------+----+----------------+-------+----+----------------+
+| system/soc/cpu/scheduler/U_INSTRUCTION_STATE_TABLE/U_IST_SOURCE_TABLE/SR[0] |  14823 | LUT1        |     0 |  0 |              0 | 14823 |  0 |              0 |     0 |  0 |              0 |     0 |  0 |              0 |
+| system/fr/clear                                                             |   4786 | LUT1        |     0 |  0 |              0 |  4786 |  0 |              0 |     0 |  0 |              0 |     0 |  0 |              0 |
+| system/bosio/projection0/ap_rst_n_inv                                       |   3355 | LUT1        |     0 |  0 |              0 |  3355 |  0 |              0 |     0 |  0 |              0 |     0 |  0 |              0 |
+| system/soc/cpu/csr/local_release_reg[1]                                     |   2083 | LUT1        |     0 |  0 |              0 |  2083 |  0 |              0 |     0 |  0 |              0 |     0 |  0 |              0 |
+| system/bosio/output0/u_projector/dda[58].row[58][0]_i_1_n_3                 |   1930 | LUT3        |  1930 |  0 |              0 |     0 |  0 |              0 |     0 |  0 |              0 |     0 |  0 |              0 |
+| system/bosio/output0/u_projector/frame_start                                |   1922 | LUT6        |  1922 |  0 |              0 |     0 |  0 |              0 |     0 |  0 |              0 |     0 |  0 |              0 |
+| system/bosio/output0/ddr_cache.u_cache/count_reg[10]_1[0]                   |   1920 | LUT2        |  1920 |  0 |              0 |     0 |  0 |              0 |     0 |  0 |              0 |     0 |  0 |              0 |
+| system/bosio/output0/u_projector/dda[58].cur[58][31]_i_5_n_3                |   1413 | LUT5        |     0 |  0 |              0 |     0 |  0 |              0 |  1413 |  0 |              0 |     0 |  0 |              0 |
+| ddr/u_mig_7series_0_mig/u_ddr3_infrastructure/rstdiv0_sync_r1_reg_rep_n_0   |   1380 | FDPE        |     0 |  0 |              0 |  1334 |  7 |              2 |    35 |  0 |              2 |     0 |  0 |              0 |
+| system/soc/cpu/scheduler/core_release[1]                                    |   1065 | FDRE        |    32 |  0 |              2 |     0 |  0 |              3 |  1028 |  0 |              0 |     0 |  0 |              0 |
+| bridge/SR[0]                                                                |    975 | LUT1        |     0 |  0 |              0 |   975 |  0 |              0 |     0 |  0 |              0 |     0 |  0 |              0 |
+| system/bosio/output0/u_projector/running_reg_2                              |    964 | LUT6        |     0 |  0 |              0 |     0 |  0 |              0 |   964 |  0 |              0 |     0 |  0 |              0 |
+| system/bosio/output0/u_projector/dda[22].cur[22][31]_i_2_n_3                |    952 | LUT6        |     0 |  0 |              0 |     0 |  0 |              0 |   952 |  0 |              0 |     0 |  0 |              0 |
+| system/bosio/output0/u_projector/dda[24].cur[24][6]_i_2_n_3                 |    952 | LUT6        |     0 |  0 |              0 |     0 |  0 |              0 |   952 |  0 |              0 |     0 |  0 |              0 |
+| system/bosio/output0/u_projector/running_reg_1                              |    952 | LUT6        |     0 |  0 |              0 |     0 |  0 |              0 |   952 |  0 |              0 |     0 |  0 |              0 |
+| system/bosio/output0/u_projector/running_reg_3                              |    952 | LUT6        |     0 |  0 |              0 |     0 |  0 |              0 |   952 |  0 |              0 |     0 |  0 |              0 |
+| system/bosio/output0/u_projector/dda[58].row[58][0]_i_11_n_3                |    947 | LUT6        |     0 |  0 |              0 |     0 |  0 |              0 |   947 |  0 |              0 |     0 |  0 |              0 |
+| system/soc/local_release[1]                                                 |    671 | FDRE        |     0 |  0 |              0 |     0 |  0 |              0 |   671 |  0 |              0 |     0 |  0 |              0 |
+| system/soc/cpu/scheduler/U_FLOW_CONTROL_LOGIC/o_kill_oldest_flow[2]         |    653 | FDRE        |     0 |  0 |              0 |     0 |  0 |              0 |   653 |  0 |              0 |     0 |  0 |              0 |
+| system/bosio/output0/ddr_cache.u_cache/wr_reg[0]                            |    647 | FDRE        |     0 |  0 |              0 |     0 |  0 |              0 |   647 |  0 |              0 |     0 |  0 |              0 |
+| system/bosio/output0/u_fifo/wr_ptr_reg[0]                                   |    647 | FDRE        |     0 |  0 |              0 |     0 |  0 |              0 |   647 |  0 |              0 |     0 |  0 |              0 |
+| system/bosio/output0/ddr_cache.u_cache/wr_reg[1]                            |    646 | FDRE        |     0 |  0 |              0 |     0 |  0 |              0 |   646 |  0 |              0 |     0 |  0 |              0 |
+| system/bosio/output0/u_fifo/wr_ptr_reg[1]                                   |    646 | FDRE        |     0 |  0 |              0 |     0 |  0 |              0 |   646 |  0 |              0 |     0 |  0 |              0 |
+| system/bosio/output0/ddr_cache.u_cache/wr_reg[2]                            |    645 | FDRE        |     0 |  0 |              0 |     0 |  0 |              0 |   645 |  0 |              0 |     0 |  0 |              0 |
+| system/bosio/output0/u_fifo/wr_ptr_reg[2]                                   |    645 | FDRE        |     0 |  0 |              0 |     0 |  0 |              0 |   645 |  0 |              0 |     0 |  0 |              0 |
+| system/bosio/output0/ddr_cache.u_cache/wr_reg[3]                            |    644 | FDRE        |     0 |  0 |              0 |     0 |  0 |              0 |   644 |  0 |              0 |     0 |  0 |              0 |
+| system/bosio/output0/u_fifo/wr_ptr_reg[3]                                   |    644 | FDRE        |     0 |  0 |              0 |     0 |  0 |              0 |   644 |  0 |              0 |     0 |  0 |              0 |
+| system/bosio/output0/ddr_cache.u_cache/wr_reg[4]                            |    643 | FDRE        |     0 |  0 |              0 |     0 |  0 |              0 |   643 |  0 |              0 |     0 |  0 |              0 |
+| system/bosio/output0/u_fifo/wr_ptr_reg[4]                                   |    643 | FDRE        |     0 |  0 |              0 |     0 |  0 |              0 |   643 |  0 |              0 |     0 |  0 |              0 |
+| system/bosio/output0/ddr_cache.u_cache/wr_reg[5]                            |    642 | FDRE        |     0 |  0 |              0 |     0 |  0 |              0 |   642 |  0 |              0 |     0 |  0 |              0 |
++-----------------------------------------------------------------------------+--------+-------------+-------+----+----------------+-------+----+----------------+-------+----+----------------+-------+----+----------------+
+
+

@@ -1,0 +1,170 @@
+--- baseline/src/backend.cpp
++++ bosio-dma-v1/src/backend.cpp
+@@ -9,6 +9,8 @@
+                   sizeof(bo_present) == 736 && sizeof(bo_pose) == 724,
+               "BOSIO ABI layout");
+ static_assert(BO_SET_POSE == 0x42d44246UL, "BOSIO pose ioctl");
++static_assert(sizeof(bo_mem_copy)==24 && sizeof(bo_mem_fill)==20 && sizeof(bo_dma_info)==72,
++              "BOSIO optional DMA ABI layout");
+ static void call(int fd, unsigned long op, void *p = nullptr) {
+   if (ioctl(fd, op, p) < 0)
+     throw std::runtime_error("BOSIO ioctl " + std::to_string(op) + ": " + strerror(errno));
+@@ -19,6 +21,13 @@
+   try {
+     auto i = info();
+     require(i.abi == 3 && !i.poisoned, "BOSIO ABI3 required, unpoisoned");
++    bo_dma_info dma{};
++    if(ioctl(fd,BO_GET_DMA_INFO,&dma)==0) {
++      require(dma.version==1 && !dma.quarantined,"unsupported/quarantined BOSIO DMA");
++      dma_features=dma.features;
++      // Scratch belongs to this exclusive client. Display metadata stays unchanged.
++      if(dma_features & BO_DMA_FILL) fill(BO_SCRATCH,0,BO_SCRATCH_BYTES/4,0);
++    } else require(errno==ENOTTY,"BOSIO DMA query: "+std::string(strerror(errno)));
+   } catch (...) {
+     close(fd);
+     fd = -1;
+@@ -87,6 +96,26 @@
+ }
+ void LinuxDevice::stop() {
+   call(fd, BO_STOP);
++}
++bool LinuxDevice::copy(unsigned src,unsigned src_off,unsigned dst,unsigned dst_off,size_t n) {
++  if(!(dma_features & BO_DMA_COPY)) return false;
++  require(n<=UINT32_MAX/4 && src_off<=UINT32_MAX/4 && dst_off<=UINT32_MAX/4,"DMA copy bounds");
++  bo_mem_copy c{src,src_off*4,dst,dst_off*4,uint32_t(n*4),0};
++  call(fd,BO_MEM_COPY,&c);return true;
++}
++bool LinuxDevice::fill(unsigned region,unsigned off,size_t n,unsigned value) {
++  if(!(dma_features & BO_DMA_FILL)) return false;
++  require(n<=UINT32_MAX/4 && off<=UINT32_MAX/4 && value<=255,"DMA fill bounds");
++  bo_mem_fill f{region,off*4,uint32_t(n*4),value,0};
++  call(fd,BO_MEM_FILL,&f);return true;
++}
++J LinuxDevice::dma_status() {
++  if(!dma_features)return {{"available",false}};
++  bo_dma_info d{};call(fd,BO_GET_DMA_INFO,&d);
++  return {{"available",true},{"features",d.features},{"upload_threshold",d.upload_threshold},
++          {"copy_ops",d.copy_ops},{"copy_bytes",d.copy_bytes},{"fill_ops",d.fill_ops},
++          {"fill_bytes",d.fill_bytes},{"upload_ops",d.upload_ops},{"upload_bytes",d.upload_bytes},
++          {"errors",d.errors},{"timeouts",d.timeouts},{"quarantined",d.quarantined}};
+ }
+ MockDevice::MockDevice() {
+   regions[0].resize(0x100000);
+@@ -168,6 +197,32 @@
+   active = -1;
+   trace.push_back({{"op", "stop"}});
+ }
++bool MockDevice::copy(unsigned src,unsigned src_off,unsigned dst,unsigned dst_off,size_t n) {
++  if(!dma_enabled)return false;
++  check();
++  require(src<6 && dst<6 && n && uint64_t(src_off)+n<=regions[src].size() &&
++          uint64_t(dst_off)+n<=regions[dst].size(),"mock DMA copy bounds");
++  require(!(active>=0 && dst==3+unsigned(active)),"active scanout DMA write");
++  require(src!=dst || uint64_t(src_off)+n<=dst_off || uint64_t(dst_off)+n<=src_off,
++          "overlapping DMA copy");
++  std::copy_n(regions[src].begin()+src_off,n,regions[dst].begin()+dst_off);
++  ++dma_copies;
++  trace.push_back({{"op","copy"},{"src",src},{"src_offset",src_off},
++                   {"dst",dst},{"dst_offset",dst_off},{"words",n}});
++  return true;
++}
++bool MockDevice::fill(unsigned region,unsigned off,size_t n,unsigned value) {
++  if(!dma_enabled)return false;
++  check();
++  require(region<6 && n && value<=255 && uint64_t(off)+n<=regions[region].size(),"mock DMA fill bounds");
++  require(!(active>=0 && region==3+unsigned(active)),"active scanout DMA fill");
++  std::fill_n(regions[region].begin()+off,n,uint32_t(value)*0x01010101u);
++  ++dma_fills;trace.push_back({{"op","fill"},{"region",region},{"offset",off},{"words",n},{"value",value}});
++  return true;
++}
++J MockDevice::dma_status() {
++  return {{"available",dma_enabled},{"copy_ops",dma_copies},{"fill_ops",dma_fills}};
++}
+ void Output::commit(size_t scene_size, const std::vector<Range> &ranges) {
+   require(!failed, "previous upload failed; restart required");
+   unsigned target = active < 0 ? 0 : unsigned(active) ^ 1;
+@@ -180,8 +235,8 @@
+     active = target;
+     ++commits;
+     for (auto &r : ranges) {
+-      dev.upload(3 + (target ^ 1), r.offset, r.data, r.count);
+-      uploaded_words += r.count;
++      if(dev.copy(3+target,r.offset,3+(target^1),r.offset,r.count)) dma_copied_words+=r.count;
++      else {dev.upload(3 + (target ^ 1), r.offset, r.data, r.count);uploaded_words += r.count;}
+     }
+   } catch (...) {
+     failed = true;
+@@ -292,6 +347,8 @@
+           {"commits", commits},
+           {"uploaded_words", uploaded_words},
+           {"shadow_copied_words", shadow_copied_words},
++          {"dma_copied_words", dma_copied_words},
++          {"memory_dma", dev.dma_status()},
+           {"metadata_only", blank_only},
+           {"sensor_available", false},
+           {"antialias", false}};
+--- baseline/src/backend.hpp
++++ bosio-dma-v1/src/backend.hpp
+@@ -16,9 +16,13 @@
+                        const std::array<int32_t, 180> &camera) = 0;
+   virtual void pose(const std::array<int32_t, 180> &camera) = 0;
+   virtual void stop() = 0;
++  virtual bool copy(unsigned,unsigned,unsigned,unsigned,size_t) { return false; }
++  virtual bool fill(unsigned,unsigned,size_t,unsigned) { return false; }
++  virtual J dma_status() { return J::object(); }
+ };
+ struct LinuxDevice : Device {
+   int fd = -1;
++  unsigned dma_features = 0;
+   explicit LinuxDevice(const std::string &path = "/dev/bosio0");
+   ~LinuxDevice();
+   bo_info info() override;
+@@ -28,6 +32,9 @@
+   void present(unsigned, unsigned, unsigned, const std::array<int32_t, 180> &) override;
+   void pose(const std::array<int32_t, 180> &) override;
+   void stop() override;
++  bool copy(unsigned,unsigned,unsigned,unsigned,size_t) override;
++  bool fill(unsigned,unsigned,size_t,unsigned) override;
++  J dma_status() override;
+ };
+ struct MockDevice : Device {
+   std::array<Words, 6> regions;
+@@ -36,6 +43,8 @@
+   J trace = J::array();
+   bool poisoned = false;
+   int fail_after = -1;
++  bool dma_enabled = true;
++  uint64_t dma_copies = 0, dma_fills = 0;
+   MockDevice();
+   void check();
+   bo_info info() override;
+@@ -45,6 +54,9 @@
+   void present(unsigned, unsigned, unsigned, const std::array<int32_t, 180> &) override;
+   void pose(const std::array<int32_t, 180> &) override;
+   void stop() override;
++  bool copy(unsigned,unsigned,unsigned,unsigned,size_t) override;
++  bool fill(unsigned,unsigned,size_t,unsigned) override;
++  J dma_status() override;
+ };
+ struct Output {
+   Device &dev;
+@@ -53,6 +65,7 @@
+   bool failed = false;
+   bool blank_only = false;
+   uint64_t commits = 0, uploaded_words = 0, shadow_copied_words = 0;
++  uint64_t dma_copied_words = 0;
+   Words shadow;
+   std::array<int32_t, 180> camera;
+   Output(Device &d, const Geometry &g)
+--- baseline/src/selftest.cpp
++++ bosio-dma-v1/src/selftest.cpp
+@@ -128,7 +128,8 @@
+       Words empty(scene_words, 0);
+       std::fill(empty.begin() + 256, empty.begin() + header, 0xffffffff);
+       sparse.full(empty, true);
+-      require(sparse.uploaded_words == 2 * header, "empty initialization copied tile bodies");
++      require(sparse.uploaded_words == header && sparse.dma_copied_words == header,
++              "empty initialization must upload metadata once and DMA-mirror metadata only");
+       for (unsigned bank : {3u, 4u})
+         require(std::equal(sparse.shadow.begin(), sparse.shadow.begin() + header,
+                            reused.regions[bank].begin()),

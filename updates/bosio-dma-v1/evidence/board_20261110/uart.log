@@ -1,0 +1,1598 @@
+G
+
+OpenSBI v1.8.1
+   ____                    _____ ____ _____
+  / __ \                  / ____|  _ \_   _|
+ | |  | |_ __   ___ _ __ | (___ | |_) || |
+ | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
+ | |__| | |_) |  __/ | | |____) | |_) || |_
+  \____/| .__/ \___|_| |_|_____/|____/_____|
+        | |
+        |_|
+
+Platform Name               : ORYUKDO Gen3 3D5I
+Platform Features           : medeleg
+Platform HART Count         : 1
+Platform HART Protection    : ---
+Platform IPI Device         : ---
+Platform Timer Device       : aclint-mtimer @ 50000000Hz
+Platform Console Device     : uart8250
+Platform HSM Device         : ---
+Platform PMU Device         : ---
+Platform Reboot Device      : ---
+Platform Shutdown Device    : ---
+Platform Suspend Device     : ---
+Platform CPPC Device        : ---
+Firmware Base               : 0x80000000
+Firmware Size               : 309 KB
+Firmware RW Offset          : 0x40000
+Firmware RW Size            : 53 KB
+Firmware Heap Offset        : 0x44000
+Firmware Heap Size          : 37 KB (total), 0 KB (reserved), 9 KB (used), 26 KB (free)
+Firmware Scratch Size       : 4096 B (total), 228 B (used), 3868 B (free)
+Runtime SBI Version         : 3.0
+Standard SBI Extensions     : time,rfnc,ipi,base,hsm,pmu,dbcn,fwft,legacy,sse
+Experimental SBI Extensions : none
+
+Domain0 Name                : root
+Domain0 Boot HART           : 0
+Domain0 HARTs               : 0*
+Domain0 Region00            : 0x80040000-0x8004ffff M: (F,R,W) S/U: ()
+Domain0 Region01            : 0x80000000-0x8003ffff M: (F,R,X) S/U: ()
+Domain0 Region02            : 0x02004000-0x02004007 M: (I,R,W) S/U: ()
+Domain0 Region03            : 0x0200bff8-0x0200bfff M: (I,R,W) S/U: ()
+Domain0 Region04            : 0x10000000-0x10000fff M: (I,R,W) S/U: (R,W)
+Domain0 Region05            : 0x00000000-0xffffffff M: () S/U: (R,W,X)
+Domain0 Next Address        : 0x80400000
+Domain0 Next Arg1           : 0x87f00000
+Domain0 Next Mode           : S-mode
+Domain0 SysReset            : yes
+Domain0 SysSuspend          : yes
+
+Boot HART ID                : 0
+Boot HART Domain            : root
+Boot HART Priv Version      : v1.11
+Boot HART Base ISA          : rv32ima
+Boot HART ISA Extensions    : zicntr,svade
+Boot HART PMP Count         : 0
+Boot HART PMP Granularity   : 0 bits
+Boot HART PMP Address Bits  : 0
+Boot HART MHPM Info         : 0 (0x00000000)
+Boot HART Debug Triggers    : 0 triggers
+Boot HART MIDELEG           : 0x00000222
+Boot HART MEDELEG           : 0x0000b109
+Linux version 6.12.0-oryukdo-bosio-dma1 (oryukdo@kfb) (riscv64-linux-gnu-gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, GNU ld (GNU Binutils for Ubuntu) 2.42) #1 2026-11-10 00:00:00 UTC
+OF: fdt: Ignoring memory range 0x80000000 - 0x80400000
+Machine model: ORYUKDO Gen3 3D5I
+SBI specification v3.0 detected
+SBI implementation ID=0x1 Version=0x10008
+SBI TIME extension detected
+SBI IPI extension detected
+SBI RFENCE extension detected
+SBI DBCN extension detected
+earlycon: sbi0 at I/O port 0x0 (options '')
+printk: legacy bootconsole [sbi0] enabled
+printk: debug: ignoring loglevel setting.
+printk: debug: skip boot console de-registration.
+OF: reserved mem: 0x80000000..0x8003ffff (256 KiB) nomap non-reusable mmode_resv1@80000000
+OF: reserved mem: 0x80040000..0x8004ffff (64 KiB) nomap non-reusable mmode_resv0@80040000
+Reserved memory: created DMA memory pool at 0xbd000000, size 16 MiB
+OF: reserved mem: initialized node dma-pool@bd000000, compatible id shared-dma-pool
+OF: reserved mem: 0xbd000000..0xbdffffff (16384 KiB) nomap non-reusable dma-pool@bd000000
+OF: reserved mem: 0xbf800000..0xbfffffff (8192 KiB) nomap non-reusable framebuffer@bf800000
+Zone ranges:
+  Normal   [mem 0x0000000080400000-0x00000000bfffffff]
+Movable zone start for each node
+Early memory node ranges
+  node   0: [mem 0x0000000080400000-0x00000000bcffffff]
+  node   0: [mem 0x00000000bd000000-0x00000000bdffffff]
+  node   0: [mem 0x00000000be000000-0x00000000bf7fffff]
+  node   0: [mem 0x00000000bf800000-0x00000000bfffffff]
+Initmem setup node 0 [mem 0x0000000080400000-0x00000000bfffffff]
+riscv: base ISA extensions aim
+riscv: ELF capabilities aim
+pcpu-alloc: s0 r0 d32768 u32768 alloc=1*32768
+pcpu-alloc: [0] 0 
+Kernel command line: earlycon=sbi console=hvc0 loglevel=7 nokaslr lpj=1000000 rdinit=/init initcall_debug ignore_loglevel keep_bootcon printk.time=1
+[    0.000000] Dentry cache hash table entries: 131072 (order: 7, 524288 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 65536 (order: 6, 262144 bytes, linear)
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 261120
+[    0.000000] mem auto-init: stack:all(zero), heap alloc:off, heap free:off
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    0.000000] NR_IRQS: 64, nr_irqs: 64, preallocated irqs: 0
+[    0.000000] riscv-intc: 32 local interrupts mapped
+[    0.000000] clocksource: riscv_clocksource: mask: 0xffffffffffffffff max_cycles: 0xb8812736b, max_idle_ns: 440795202655 ns
+[    0.000759] sched_clock: 64 bits at 50MHz, resolution 20ns, wraps every 4398046511100ns
+[    0.066333] Calibrating delay loop (skipped) preset value.. 200.00 BogoMIPS (lpj=1000000)
+[    0.106881] pid_max: default: 32768 minimum: 301
+[    0.271263] Mount-cache hash table entries: 2048 (order: 1, 8192 bytes, linear)
+[    0.312042] Mountpoint-cache hash table entries: 2048 (order: 1, 8192 bytes, linear)
+[    0.730875] ORY_BOOT kernel_init_freeable enter
+[    1.250444] calling  0xc028c984 @ 1
+[    1.279640] ASID allocator disabled (0 bits)
+[    1.302074] initcall 0xc028c984 returned 0 after 10000 usecs
+[    1.336241] calling  0xc028d0d4 @ 1
+[    1.454396] initcall 0xc028d0d4 returned 0 after 50000 usecs
+[    1.488717] calling  0xc028f634 @ 1
+[    1.517432] initcall 0xc028f634 returned 0 after 0 usecs
+[    1.550972] calling  0xc0290780 @ 1
+[    1.579476] initcall 0xc0290780 returned 0 after 0 usecs
+[    1.613008] calling  0xc02935bc @ 1
+[    1.641545] initcall 0xc02935bc returned 0 after 0 usecs
+[    1.691947] Memory: 1002240K/1044480K available (2586K kernel code, 489K rwdata, 300K rodata, 2569K init, 186K bss, 40692K reserved, 0K cma-reserved)
+[    1.949709] devtmpfs: initialized
+[    3.130368] calling  0xc02997e0 @ 1
+[    3.158863] initcall 0xc02997e0 returned 0 after 0 usecs
+[    3.250983] calling  0xc028d7a0 @ 1
+[    3.344300] initcall 0xc028d7a0 returned 0 after 50000 usecs
+[    3.381011] calling  0xc028e660 @ 1
+[    3.430421] initcall 0xc028e660 returned 0 after 10000 usecs
+[    3.463883] calling  0xc029015c @ 1
+[    3.494644] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+[    3.538619] initcall 0xc029015c returned 0 after 20000 usecs
+[    3.572094] calling  0xc0290678 @ 1
+[    3.602141] futex hash table entries: 256 (order: -1, 3072 bytes, linear)
+[    3.641440] initcall 0xc0290678 returned 0 after 20000 usecs
+[    3.675766] calling  0xc029822c @ 1
+[    3.724840] initcall 0xc029822c returned 0 after 10000 usecs
+[    3.758338] calling  0xc0298314 @ 1
+[    3.787769] initcall 0xc0298314 returned 0 after 0 usecs
+[    3.820487] calling  0xc0298340 @ 1
+[    3.849914] initcall 0xc0298340 returned 0 after 0 usecs
+[    3.882633] calling  0xc01ceff4 @ 1
+[    3.912050] initcall 0xc01ceff4 returned 0 after 0 usecs
+[    3.944765] calling  0xc02a09f0 @ 1
+[    4.035944] initcall 0xc02a09f0 returned 0 after 30000 usecs
+[    4.069436] calling  0xc02a0ab4 @ 1
+[    4.098803] initcall 0xc02a0ab4 returned 0 after 0 usecs
+[    4.131545] calling  0xc02a0ac8 @ 1
+[    4.163516] initcall 0xc02a0ac8 returned 0 after 0 usecs
+[    4.196224] calling  0xc02a0f54 @ 1
+[    4.227024] initcall 0xc02a0f54 returned 0 after 0 usecs
+[    4.259757] calling  0xc02a1a24 @ 1
+[    5.089992] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+[    5.150287] initcall 0xc02a1a24 returned 0 after 360000 usecs
+[    5.186646] calling  0xc02a1c2c @ 1
+[    5.222411] initcall 0xc02a1c2c returned 0 after 0 usecs
+[    5.313517] calling  0xc028f80c @ 1
+[    5.405184] initcall 0xc028f80c returned 0 after 50000 usecs
+[    5.438668] calling  0xc0290b54 @ 1
+[    5.482695] initcall 0xc0290b54 returned 0 after 10000 usecs
+[    5.517024] calling  0xc0290ba4 @ 1
+[    5.548567] initcall 0xc0290ba4 returned 0 after 0 usecs
+[    5.582124] calling  0xc0293e58 @ 1
+[    5.612109] initcall 0xc0293e58 returned 0 after 0 usecs
+[    5.645694] calling  0xc029ba8c @ 1
+[    5.688864] initcall 0xc029ba8c returned 0 after 10000 usecs
+[    5.723183] calling  0xc029ca74 @ 1
+[    5.768127] initcall 0xc029ca74 returned 0 after 10000 usecs
+[    5.801632] calling  0xc029d2f4 @ 1
+[    5.834419] initcall 0xc029d2f4 returned 0 after 0 usecs
+[    5.867153] calling  0xc02a22e8 @ 1
+[    5.899389] initcall 0xc02a22e8 returned 0 after 0 usecs
+[    5.991324] calling  0xc028a964 @ 1
+[    6.020971] initcall 0xc028a964 returned 0 after 10000 usecs
+[    6.055284] calling  0xc028bd54 @ 1
+[    6.084219] initcall 0xc028bd54 returned 0 after 0 usecs
+[    6.117772] calling  0xc0004b64 @ 1
+[   10.396003] cpu0: Ratio of byte access time to unaligned word access is 0.01, unaligned accesses are slow
+[   10.438802] initcall 0xc0004b64 returned 0 after 2830000 usecs
+[   10.473852] calling  0xc029b99c @ 1
+[   10.525040] initcall 0xc029b99c returned 0 after 10000 usecs
+[   10.559425] calling  0xc029b7c4 @ 1
+[   10.634697] initcall 0xc029b7c4 returned 0 after 30000 usecs
+[   10.669084] calling  0xc01bb7b0 @ 1
+[   10.776939] initcall 0xc01bb7b0 returned 0 after 50000 usecs
+[   10.811321] calling  0xc028bbc4 @ 1
+[   10.842701] initcall 0xc028bbc4 returned 0 after 0 usecs
+[   10.878732] calling  0xc0004aec @ 1
+[   10.907418] initcall 0xc0004aec returned 0 after 0 usecs
+[   10.941033] calling  0xc029e658 @ 1
+[   12.668109] initcall 0xc029e658 returned 0 after 1100000 usecs
+[   12.760686] calling  0xc028d61c @ 1
+[   12.793915] initcall 0xc028d61c returned 0 after 10000 usecs
+[   12.828299] calling  0xc028e170 @ 1
+[   12.860000] initcall 0xc028e170 returned 0 after 0 usecs
+[   12.893641] calling  0xc028e97c @ 1
+[   12.922310] initcall 0xc028e97c returned 0 after 0 usecs
+[   12.955913] calling  0xc028ed68 @ 1
+[   12.984583] initcall 0xc028ed68 returned 0 after 0 usecs
+[   13.018184] calling  0xc02907f4 @ 1
+[   13.114017] initcall 0xc02907f4 returned 0 after 40000 usecs
+[   13.148400] calling  0xc0290a48 @ 1
+[   13.176995] initcall 0xc0290a48 returned 0 after 0 usecs
+[   13.210601] calling  0xc0290b60 @ 1
+[   13.381325] initcall 0xc0290b60 returned 0 after 90000 usecs
+[   13.414865] calling  0xc0292628 @ 1
+[   13.444249] initcall 0xc0292628 returned 0 after 0 usecs
+[   13.477012] calling  0xc02935f8 @ 1
+[   13.506408] initcall 0xc02935f8 returned 0 after 0 usecs
+[   13.539177] calling  0xc007bf98 @ 1
+[   13.568602] initcall 0xc007bf98 returned 0 after 0 usecs
+[   13.601385] calling  0xc007bf70 @ 1
+[   13.630813] initcall 0xc007bf70 returned 0 after 0 usecs
+[   13.663589] calling  0xc0296864 @ 1
+[   13.698414] initcall 0xc0296864 returned 0 after 0 usecs
+[   13.734417] calling  0xc0296928 @ 1
+[   13.763189] initcall 0xc0296928 returned 0 after 0 usecs
+[   13.796796] calling  0xc0299838 @ 1
+[   13.825836] initcall 0xc0299838 returned 0 after 0 usecs
+[   13.859475] calling  0xc0299968 @ 1
+[   13.936514] initcall 0xc0299968 returned 0 after 30000 usecs
+[   13.970882] calling  0xc0299af0 @ 1
+[   14.004197] initcall 0xc0299af0 returned 0 after 0 usecs
+[   14.037797] calling  0xc0299b58 @ 1
+[   14.066880] initcall 0xc0299b58 returned 0 after 0 usecs
+[   14.100504] calling  0xc0299c08 @ 1
+[   14.247943] initcall 0xc0299c08 returned 0 after 70000 usecs
+[   14.282321] calling  0xc029c9a0 @ 1
+[   14.329671] initcall 0xc029c9a0 returned 0 after 10000 usecs
+[   14.363210] calling  0xc01cf028 @ 1
+[   14.395571] initcall 0xc01cf028 returned 0 after 0 usecs
+[   14.429174] calling  0xc029dce0 @ 1
+[   14.553198] initcall 0xc029dce0 returned 0 after 60000 usecs
+[   14.586727] calling  0xc02a0abc @ 1
+[   14.617973] initcall 0xc02a0abc returned 0 after 0 usecs
+[   14.650725] calling  0xc02a0fbc @ 1
+[   15.045493] initcall 0xc02a0fbc returned 0 after 240000 usecs
+[   15.080356] calling  0xc02a12d0 @ 1
+[   15.111629] initcall 0xc02a12d0 returned 0 after 0 usecs
+[   15.147683] calling  0xc02a1724 @ 1
+[   15.177366] initcall 0xc02a1724 returned 0 after 0 usecs
+[   15.211015] calling  0xc02a1764 @ 1
+[   15.287219] initcall 0xc02a1764 returned 0 after 30000 usecs
+[   15.321620] calling  0xc02a1c78 @ 1
+[   16.163899] initcall 0xc02a1c78 returned 0 after 540000 usecs
+[   16.197925] calling  0xc02a24e0 @ 1
+[   16.227395] initcall 0xc02a24e0 returned 0 after 0 usecs
+[   16.318579] calling  0xc028d1f4 @ 1
+[   16.367350] initcall 0xc028d1f4 returned 0 after 20000 usecs
+[   16.401718] calling  0xc02900a8 @ 1
+[C0]
+[C1]
+[C2]
+[N0]
+[X0]
+[X1]
+[X2]
+[X3]
+[X4]
+[X5]
+[T0]
+[T1]
+[N1[T0]
+[T1]
+][T0]
+[T1]
+[T0]
+[T1]
+
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[TL]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[   16.545049] clocksource: Switched to clocksource riscv_clocksource
+[T0]
+[TL]
+[T1]
+[C3]
+[T0]
+[T1]
+[T0]
+[T1]
+[[T0]
+[T1]
+C[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+4[T0]
+[T1]
+][T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+
+[T0]
+[T1]
+[T0]
+[T1]
+[   17.081924] initcall 0xc02900a8 returned 0 after 630054 usecs
+[   17.124128] calling  0xc0296f4c @ 1
+[   17.202060] initcall 0xc0296f4c returned 0 after 38722 usecs
+[   17.244735] calling  0xc0298058 @ 1
+[   17.304677] initcall 0xc0298058 returned 0 after 21780 usecs
+[   17.354320] calling  0xc029816c @ 1
+[   17.430966] initcall 0xc029816c returned 0 after 33002 usecs
+[   17.475122] calling  0xc02981ec @ 1
+[   17.514915] initcall 0xc02981ec returned 0 after 1636 usecs
+[   17.563223] calling  0xc02983d0 @ 1
+[   17.672800] initcall 0xc02983d0 returned 0 after 69069 usecs
+[   17.722459] calling  0xc02983ec @ 1
+[   17.814978] initcall 0xc02983ec returned 0 after 52003 usecs
+[   17.863140] calling  0xc029873c @ 1
+[   17.904409] initcall 0xc029873c returned 0 after 1620 usecs
+[   17.952711] calling  0xc0298798 @ 1
+[   17.994990] initcall 0xc0298798 returned 0 after 1752 usecs
+[   18.043301] calling  0xc02987d8 @ 1
+[   18.084651] initcall 0xc02987d8 returned 0 after 1723 usecs
+[   18.133170] calling  0xc0298810 @ 1
+[   18.182611] initcall 0xc0298810 returned 0 after 8928 usecs
+[   18.234796] calling  0xc029885c @ 1
+[   18.274076] initcall 0xc029885c returned 0 after 1782 usecs
+[   18.323869] calling  0xc029889c @ 1
+[   18.365410] initcall 0xc029889c returned 0 after 1745 usecs
+[   18.413541] calling  0xc02988e4 @ 1
+[   18.461273] initcall 0xc02988e4 returned 0 after 7252 usecs
+[   18.512550] calling  0xc029892c @ 1
+[   18.554674] initcall 0xc029892c returned 0 after 1638 usecs
+[   18.602977] calling  0xc0298964 @ 1
+[   18.644324] initcall 0xc0298964 returned 0 after 1714 usecs
+[   18.692589] calling  0xc02989ac @ 1
+[   18.734903] initcall 0xc02989ac returned 0 after 1804 usecs
+[   18.783187] calling  0xc02989f4 @ 1
+[   18.823886] initcall 0xc02989f4 returned 0 after 1735 usecs
+[   18.873662] calling  0xc0298b7c @ 1
+[   18.914892] initcall 0xc0298b7c returned 0 after 1609 usecs
+[   18.963170] calling  0xc0298bb4 @ 1
+[   19.012704] initcall 0xc0298bb4 returned 0 after 9056 usecs
+[   19.062503] calling  0xc02997d0 @ 1
+[   19.103721] initcall 0xc02997d0 returned 0 after 731 usecs
+[   19.151998] calling  0xc029c68c @ 1
+[   20.153989] initcall 0xc029c68c returned 0 after 962315 usecs
+[   20.202384] calling  0xc02a1960 @ 1
+[   20.242085] initcall 0xc02a1960 returned 0 after 234 usecs
+[   20.291480] calling  0xc02a1cf0 @ 1
+[   20.353604] NET: Registered PF_UNIX/PF_LOCAL protocol family
+[   20.411342] initcall 0xc02a1cf0 returned 0 after 79552 usecs
+[   20.453816] calling  0xc028a478 @ 1
+[   20.503705] initcall 0xc028a478 returned 0 after 9581 usecs
+[   20.634431] calling  0xc028b68c @ 1
+[   20.673599] initcall 0xc028b68c returned 0 after 190 usecs
+[   20.723196] calling  0xc028ce24 @ 1
+[   20.763900] initcall 0xc028ce24 returned 0 after 1709 usecs
+[   20.821572] calling  0xc028ce60 @ 1
+[   20.861543] initcall 0xc028ce60 returned 0 after 190 usecs
+[   20.904155] calling  0xc028d178 @ 1
+[   20.951743] initcall 0xc028d178 returned 0 after 8690 usecs
+[   21.003042] calling  0xc028fc90 @ 1
+[   21.042931] initcall 0xc028fc90 returned 0 after 276 usecs
+[   21.092535] calling  0xc028ffc0 @ 1
+[   21.282928] initcall 0xc028ffc0 returned 0 after 149712 usecs
+[   21.332162] calling  0xc0290180 @ 1
+[   21.374581] initcall 0xc0290180 returned 0 after 1946 usecs
+[   21.422864] calling  0xc02901cc @ 1
+[   21.512194] initcall 0xc02901cc returned 0 after 48860 usecs
+[   21.553997] calling  0xc0290230 @ 1
+[   21.603378] initcall 0xc0290230 returned 0 after 10383 usecs
+[   21.653009] calling  0xc0290290 @ 1
+[   21.832458] initcall 0xc0290290 returned 0 after 138968 usecs
+[   21.882549] calling  0xc0290320 @ 1
+[   21.922440] initcall 0xc0290320 returned 0 after 274 usecs
+[   21.972056] calling  0xc0290718 @ 1
+[   22.014358] initcall 0xc0290718 returned 0 after 1797 usecs
+[   22.062647] calling  0xc0290994 @ 1
+[   22.334659] ORY_BOOT rootfs begin compressed_bytes=2492928
+[   22.463679] initcall 0xc0290994 returned 0 after 360572 usecs
+[   22.512280] calling  0xc0293480 @ 1
+[   22.552767] workingset: timestamp_bits=30 max_order=18 bucket_order=0
+[   22.602714] initcall 0xc0293480 returned 0 after 49939 usecs
+[   22.652355] calling  0xc02936ec @ 1
+[   22.694657] initcall 0xc02936ec returned 0 after 1815 usecs
+[   22.742955] calling  0xc02968f0 @ 1
+[   22.784364] initcall 0xc02968f0 returned 0 after 1765 usecs
+[   22.835048] calling  0xc0296fb8 @ 1
+[   22.884436] initcall 0xc0296fb8 returned 0 after 10381 usecs
+[   22.932597] calling  0xc029726c @ 1
+[   22.974977] initcall 0xc029726c returned 0 after 1905 usecs
+[   23.023279] calling  0xc0297658 @ 1
+[   23.063504] initcall 0xc0297658 returned 0 after 610 usecs
+[   23.113120] calling  0xc029836c @ 1
+[   23.164250] initcall 0xc029836c returned 0 after 10414 usecs
+[   23.212394] calling  0xc0298d94 @ 1
+[   23.253704] initcall 0xc0298d94 returned 0 after 832 usecs
+[   23.303317] calling  0xc029915c @ 1
+[   23.562120] initcall 0xc029915c returned 0 after 219165 usecs
+[   23.612244] calling  0xc0299648 @ 1
+[   23.712456] initcall 0xc0299648 returned 0 after 59702 usecs
+[   23.755131] calling  0xc029994c @ 1
+[   23.823506] initcall 0xc029994c returned 0 after 30228 usecs
+[   23.873131] calling  0xc0299c70 @ 1
+[   23.922615] initcall 0xc0299c70 returned 0 after 9840 usecs
+[   23.972411] calling  0xc029a400 @ 1
+[   24.012101] io scheduler mq-deadline registered
+[   24.052471] initcall 0xc029a400 returned 0 after 40423 usecs
+[   24.095146] calling  0xc029a410 @ 1
+[   24.133654] io scheduler kyber registered
+[   24.172923] initcall 0xc029a410 returned 0 after 39414 usecs
+[   24.222574] calling  0xc029a420 @ 1
+[   24.284574] io scheduler bfq registered
+[   24.321966] initcall 0xc029a420 returned 0 after 58884 usecs
+[   24.363705] calling  0xc029a4cc @ 1
+[   24.402881] initcall 0xc029a4cc returned 0 after 192 usecs
+[   24.452515] calling  0xc029a6cc @ 1
+[   24.552111] initcall 0xc029a6cc returned 0 after 59087 usecs
+[   24.594809] calling  0xc029b1e8 @ 1
+[   24.692135] initcall 0xc029b1e8 returned 0 after 59120 usecs
+[   24.741887] calling  0xc029b1f8 @ 1
+[   25.154649] riscv-plic: interrupt-controller@c000000: mapped 2 interrupts with 1 handlers for 2 contexts.
+[   25.282167] probe of c000000.interrupt-controller returned 0 after 478793 usecs
+[   25.383712] initcall 0xc029b1f8 returned 0 after 601214 usecs
+[   25.434838] calling  0xc029b210 @ 1
+[   25.592493] probe of soc returned 0 after 100393 usecs
+[   25.713681] initcall 0xc029b210 returned 0 after 241245 usecs
+[   25.762409] calling  0xc029b704 @ 1
+[   25.862331] initcall 0xc029b704 returned 0 after 59338 usecs
+[   25.905103] calling  0xc029b75c @ 1
+[   26.002361] initcall 0xc029b75c returned 0 after 59004 usecs
+[   26.052107] calling  0xc029b7b4 @ 1
+[   26.155158] initcall 0xc029b7b4 returned 0 after 62480 usecs
+[   26.203462] calling  0xc029ba7c @ 1
+[   26.565220] probe of 10009000.dma-controller returned 0 after 302670 usecs
+[   26.651124] initcall 0xc029ba7c returned 0 after 403091 usecs
+[   26.702815] calling  0xc029bbe8 @ 1
+[   26.743621] initcall 0xc029bbe8 returned 0 after 231 usecs
+[   26.793354] calling  0xc029bc10 @ 1
+[   31.571606] initcall 0xc029bc10 returned 0 after 4738540 usecs
+[   31.621962] calling  0xc029be88 @ 1
+[   31.664384] initcall 0xc029be88 returned 0 after 1842 usecs
+[   31.712802] calling  0xc029bef8 @ 1
+[   34.052599] printk: legacy console [hvc0] enabled
+[   34.052599] printk: legacy console [hvc0] enabled
+[   34.124283] initcall 0xc029bef8 returned 0 after 2372471 usecs
+[   34.124283] initcall 0xc029bef8 returned 0 after 2372471 usecs
+[   34.203990] calling  0xc029d248 @ 1
+[   34.203990] calling  0xc029d248 @ 1
+[   34.351779] initcall 0xc029d248 returned 0 after 78641 usecs
+[   34.351779] initcall 0xc029d248 returned 0 after 78641 usecs
+[   34.433735] calling  0xc029d2c8 @ 1
+[   34.433735] calling  0xc029d2c8 @ 1
+[   34.511722] initcall 0xc029d2c8 returned -2 after 8892 usecs
+[   34.511722] initcall 0xc029d2c8 returned -2 after 8892 usecs
+[   34.593599] calling  0xc029dbbc @ 1
+[   34.593599] calling  0xc029dbbc @ 1
+[   35.354061] bosio-kfb 20000000.bosio: assigned reserved memory node dma-pool@bd000000
+[   35.354061] bosio-kfb 20000000.bosio: assigned reserved memory node dma-pool@bd000000
+[   62.583448] ORY_BOOT rootfs unpack returned error=none extracted_bytes=0
+[   62.583448] ORY_BOOT rootfs unpack returned error=none extracted_bytes=0
+[   62.731853] bosio-kfb 20000000.bosio: BOSIO ABI3: dual projectors + BS25, DMA copy/fill/upload, 16MiB arena
+[   62.731853] bosio-kfb 20000000.bosio: BOSIO ABI3: dual projectors + BS25, DMA copy/fill/upload, 16MiB arena
+[   62.893141] probe of 20000000.bosio returned 0 after 28209029 usecs
+[   62.893141] probe of 20000000.bosio returned 0 after 28209029 usecs
+[   63.003835] initcall 0xc029dbbc returned 0 after 28341094 usecs
+[   63.003835] initcall 0xc029dbbc returned 0 after 28341094 usecs
+[   63.083194] calling  0xc029dc60 @ 1
+[   63.083194] calling  0xc029dc60 @ 1
+[   63.162780] initcall 0xc029dc60 returned 0 after 9687 usecs
+[   63.162780] initcall 0xc029dc60 returned 0 after 9687 usecs
+[   63.243730] calling  0xc029dd24 @ 1
+[   63.243730] calling  0xc029dd24 @ 1
+[   63.372134] initcall 0xc029dd24 returned 0 after 59566 usecs
+[   63.372134] initcall 0xc029dd24 returned 0 after 59566 usecs
+[   63.452383] calling  0xc029dd34 @ 1
+[   63.452383] calling  0xc029dd34 @ 1
+[   63.573085] initcall 0xc029dd34 returned 0 after 58798 usecs
+[   63.573085] initcall 0xc029dd34 returned 0 after 58798 usecs
+[   63.653225] calling  0xc029dd44 @ 1
+[   63.653225] calling  0xc029dd44 @ 1
+[   63.823737] initcall 0xc029dd44 returned 0 after 108606 usecs
+[   63.823737] initcall 0xc029dd44 returned 0 after 108606 usecs
+[   63.903956] calling  0xc029de70 @ 1
+[   63.903956] calling  0xc029de70 @ 1
+[   64.333469] probe of 10008000.mmc returned 0 after 340914 usecs
+[   64.333469] probe of 10008000.mmc returned 0 after 340914 usecs
+[   64.451375] initcall 0xc029de70 returned 0 after 478573 usecs
+[   64.451375] initcall 0xc029de70 returned 0 after 478573 usecs
+[   64.533786] calling  0xc02a166c @ 1
+[   64.533786] calling  0xc02a166c @ 1
+[   64.621340] initcall 0xc02a166c returned 0 after 18525 usecs
+[   64.621340] initcall 0xc02a166c returned 0 after 18525 usecs
+[   64.784640] calling  0xc028ce68 @ 1
+[   64.784640] calling  0xc028ce68 @ 1
+[   64.853258] initcall 0xc028ce68 returned 0 after 8081 usecs
+[   64.853258] initcall 0xc028ce68 returned 0 after 8081 usecs
+[   64.932911] calling  0xc028d0a4 @ 1
+[   64.932911] calling  0xc028d0a4 @ 1
+[   65.004604] initcall 0xc028d0a4 returned 0 after 2651 usecs
+[   65.004604] initcall 0xc028d0a4 returned 0 after 2651 usecs
+[   65.083177] calling  0xc028e29c @ 1
+[   65.083177] calling  0xc028e29c @ 1
+[   66.442987] initcall 0xc028e29c returned 0 after 1297552 usecs
+[   66.442987] initcall 0xc028e29c returned 0 after 1297552 usecs
+[   66.524267] calling  0xc028e8d8 @ 1
+[   66.524267] calling  0xc028e8d8 @ 1
+[   66.611662] initcall 0xc028e8d8 returned 0 after 19030 usecs
+[   66.611662] initcall 0xc028e8d8 returned 0 after 19030 usecs
+[   66.693509] calling  0xc028f678 @ 1
+[   66.693509] calling  0xc028f678 @ 1
+[   66.761818] initcall 0xc028f678 returned 0 after 6261 usecs
+[   66.761818] initcall 0xc028f678 returned 0 after 6261 usecs
+[   66.843001] calling  0xc02965f4 @ 1
+[   66.843001] calling  0xc02965f4 @ 1
+[   77.271742] initcall 0xc02965f4 returned 0 after 10359719 usecs
+[   77.271742] initcall 0xc02965f4 returned 0 after 10359719 usecs
+[   77.354242] calling  0xc02968e8 @ 1
+[   77.354242] calling  0xc02968e8 @ 1
+[   77.414947] initcall 0xc02968e8 returned 0 after 193 usecs
+[   77.414947] initcall 0xc02968e8 returned 0 after 193 usecs
+[   77.493772] calling  0xc02969a8 @ 1
+[   77.493772] calling  0xc02969a8 @ 1
+[   77.563097] initcall 0xc02969a8 returned 0 after 281 usecs
+[   77.563097] initcall 0xc02969a8 returned 0 after 281 usecs
+[   77.643283] calling  0xc02997f4 @ 1
+[   77.643283] calling  0xc02997f4 @ 1
+[   77.712591] initcall 0xc02997f4 returned 0 after 7273 usecs
+[   77.712591] initcall 0xc02997f4 returned 0 after 7273 usecs
+[   77.794612] calling  0xc0299b44 @ 1
+[   77.794612] calling  0xc0299b44 @ 1
+[   77.860843] initcall 0xc0299b44 returned 0 after 194 usecs
+[   77.860843] initcall 0xc0299b44 returned 0 after 194 usecs
+[   77.934259] calling  0xc01c18e0 @ 1
+[   77.934259] calling  0xc01c18e0 @ 1
+[   77.995146] initcall 0xc01c18e0 returned 0 after 334 usecs
+[   77.995146] initcall 0xc01c18e0 returned 0 after 334 usecs
+[   78.074936] calling  0xc01c59ec @ 1
+[   78.074936] calling  0xc01c59ec @ 1
+[   78.581305] initcall 0xc01c59ec returned 0 after 440013 usecs
+[   78.581305] initcall 0xc01c59ec returned 0 after 440013 usecs
+[   78.663709] calling  0xc029e804 @ 1
+[   78.663709] calling  0xc029e804 @ 1
+[   78.853502] initcall 0xc029e804 returned 0 after 120804 usecs
+[   78.853502] initcall 0xc029e804 returned 0 after 120804 usecs
+[   78.933902] calling  0xc0228b20 @ 1
+[   78.933902] calling  0xc0228b20 @ 1
+[   79.003120] initcall 0xc0228b20 returned 0 after 193 usecs
+[   79.003120] initcall 0xc0228b20 returned 0 after 193 usecs
+[   79.083255] calling  0xc02a1664 @ 1
+[   79.083255] calling  0xc02a1664 @ 1
+[   79.151280] initcall 0xc02a1664 returned 0 after 5813 usecs
+[   79.151280] initcall 0xc02a1664 returned 0 after 5813 usecs
+[   79.233921] calling  0xc02a175c @ 1
+[   79.233921] calling  0xc02a175c @ 1
+[   79.303131] initcall 0xc02a175c returned 0 after 191 usecs
+[   79.303131] initcall 0xc02a175c returned 0 after 191 usecs
+[   79.383340] calling  0xc029b3b8 @ 1
+[   79.383340] calling  0xc029b3b8 @ 1
+[   79.450836] clk: Disabling unused clocks
+[   79.450836] clk: Disabling unused clocks
+[   79.511317] initcall 0xc029b3b8 returned 0 after 65953 usecs
+[   79.511317] initcall 0xc029b3b8 returned 0 after 65953 usecs
+[   79.592831] calling  0xc029e63c @ 1
+[   79.592831] calling  0xc029e63c @ 1
+[   79.663031] initcall 0xc029e63c returned 0 after 343 usecs
+[   79.663031] initcall 0xc029e63c returned 0 after 343 usecs
+[   79.744132] ORY_BOOT wait_for_initramfs enter
+[   79.744132] ORY_BOOT wait_for_initramfs enter
+[   79.812075] ORY_BOOT wait_for_initramfs done
+[   79.812075] ORY_BOOT wait_for_initramfs done
+[   79.873769] ORY_BOOT console_on_rootfs enter
+[   79.873769] ORY_BOOT console_on_rootfs enter
+[   80.233692] ORY_BOOT console_on_rootfs done
+[   80.233692] ORY_BOOT console_on_rootfs done
+[   80.302875] ORY_BOOT kernel_init_freeable done
+[   80.302875] ORY_BOOT kernel_init_freeable done
+[   82.973866] Freeing unused kernel image (initmem) memory: 2568K
+[   82.973866] Freeing unused kernel image (initmem) memory: 2568K
+[   83.052287] Kernel memory protection not selected by kernel config.
+[   83.052287] Kernel memory protection not selected by kernel config.
+[   83.133761] Run /init as init process
+[   83.133761] Run /init as init process
+[   83.192286]   with arguments:
+[   83.192286]   with arguments:
+[   83.243355]     /init
+[   83.243355]     /init
+[   83.293847]   with environment:
+[   83.293847]   with environment:
+[   83.352709]     HOME=/
+[   83.352709]     HOME=/
+[   83.403436]     TERM=linux
+[   83.403436]     TERM=linux
+[   85.703254] mmc0: host does not support reading read-only switch, assuming write-enable
+[   85.703254] mmc0: host does not support reading read-only switch, assuming write-enable
+[   86.163332] mmc0: new SDHC card at address 0001
+[   86.163332] mmc0: new SDHC card at address 0001
+[   87.554103] mmcblk0: mmc0:0001 SD 14.6 GiB
+[   87.554103] mmcblk0: mmc0:0001 SD 14.6 GiB
+[   90.862119]  mmcblk0: p1 p2
+[   90.862119]  mmcblk0: p1 p2
+[   92.004413] probe of mmc0:0001 returned 0 after 5609203 usecs
+[   92.004413] probe of mmc0:0001 returned 0 after 5609203 usecs
+[   99.370889] EXT4-fs (mmcblk0p2): mounted filesystem 2e4819b1-337f-4288-9fe0-5c784b69f9cc r/w with ordered data mode. Quota mode: disabled.
+[   99.370889] EXT4-fs (mmcblk0p2): mounted filesystem 2e4819b1-337f-4288-9fe0-5c784b69f9cc r/w with ordered data mode. Quota mode: disabled.
+ORYUKDO: SD ext4 /data mounted
+ORYUKDO BusyBox serial console
+
+
+BusyBox v1.37.0 (2026-11-07 10:24:46 KST) built-in shell (ash)
+Enter 'help' for a list of built-in commands.
+
+oryukdo# uname -r; cat /etc/oryukdo-image; cat /proc/mounts; cat /proc/interrupt
+s; echo BODMA_d395ddd6_RC:$?
+6.12.0-oryukdo-bosio-dma1
+ORYUKDO-BOSIO-DMA-v1 / SD4 Linux v2 + BoAYO memory DMA / physical test pending
+rootfs / rootfs rw 0 0
+devtmpfs /dev devtmpfs rw,relatime 0 0
+/dev/mmcblk0p2 /data ext4 rw,relatime 0 0
+proc /proc proc rw,relatime 0 0
+sysfs /sys sysfs rw,relatime 0 0
+           CPU0       
+  1:          0  SiFive PLIC   2 Edge      10009000.dma-controller
+  2:         96  SiFive PLIC   1 Edge      10008000.mmc
+  5:      10369  RISC-V INTC   5 Edge      riscv-timer
+BODMA_d395ddd6_RC:0
+oryukdo# bosio-dma-check; echo BODMA_fca12e95_RC:$?
+PASS BOSIO_DMA upload=4096 copy=4096 fill=4096 overlap_rejected irq_completion
+copy_ops=2 fill_ops=1 upload_ops=1
+BODMA_fca12e95_RC:0
+oryukdo# cat /proc/interrupts; echo BODMA_446d7926_RC:$?
+           CPU0       
+  1:          3  SiFive PLIC   2 Edge      10009000.dma-controller
+  2:         96  SiFive PLIC   1 Edge      10008000.mmc
+  5:      11206  RISC-V INTC   5 Edge      riscv-timer
+BODMA_446d7926_RC:0
+oryukdo# storage-check; echo BODMA_a000c3f3_RC:$?
+WRITE_BEGIN bytes=262144
+WRITE_FSYNC_DONE
+[  220.422286] EXT4-fs (mmcblk0p2): unmounting filesystem 2e4819b1-337f-4288-9fe0-5c784b69f9cc.
+[  220.422286] EXT4-fs (mmcblk0p2): unmounting filesystem 2e4819b1-337f-4288-9fe0-5c784b69f9cc.
+UNMOUNT_DONE
+[  225.952515] EXT4-fs (mmcblk0p2): mounted filesystem 2e4819b1-337f-4288-9fe0-5c784b69f9cc r/w with ordered data mode. Quota mode: disabled.
+[  225.952515] EXT4-fs (mmcblk0p2): mounted filesystem 2e4819b1-337f-4288-9fe0-5c784b69f9cc r/w with ordered data mode. Quota mode: disabled.
+READ_AFTER_REMOUNT_BEGIN
+READ_PROGRESS bytes=65536
+READ_PROGRESS bytes=131072
+READ_PROGRESS bytes=196608
+READ_PROGRESS bytes=262144
+PASS SD ext4 write/read: bytes=262144 exact_byte_compare
+BODMA_a000c3f3_RC:0
+oryukdo# cat /proc/interrupts; sync; echo BODMA_4e0cbcb0_RC:$?
+           CPU0       
+  1:          3  SiFive PLIC   2 Edge      10009000.dma-controller
+  2:       2458  SiFive PLIC   1 Edge      10008000.mmc
+  5:      24860  RISC-V INTC   5 Edge      riscv-timer
+BODMA_4e0cbcb0_RC:0
+oryukdo# boayo-start; echo BODMA_28309894_RC:$?
+BoAYO C++ service started; initialization continues. boayo-status / boayo-keys / boayo-stop
+{"features":["windows","pointer","input-injection","button-events","scene-stream","spatial-workspace","pointer-capture"],"headless":false,"m":32,"mock_backend":false,"runtime":"C++17","version":2}
+BODMA_28309894_RC:0
+oryukdo# boayo-status; cat /tmp/boayo-wm.log; echo BODMA_bf7e8104_RC:$?
+{
+  "app_error": null,
+  "output": {
+    "commits": 0,
+    "mock_backend": false
+  },
+  "projection": {},
+  "render_error": null,
+  "runtime": "C++17",
+  "service": {
+    "phase": "desktop_initialization",
+    "queued_requests": 1,
+    "snapshot_age_seconds": 100.43096660000003,
+    "state_is_snapshot": true
+  },
+  "windows": []
+}
+BOAYO_NATIVE_SERVICE /tmp/bosio-wm.sock initializing; query boayo-status
+BOAYO_NATIVE_INIT backend=BOSIO_ABI3
+BOAYO_BLANK_METADATA_READY words=4480 tile_composition=0 projection_jobs=0
+BODMA_bf7e8104_RC:0
+oryukdo# boayo-status; cat /proc/interrupts; echo BODMA_aa7da536_RC:$?
+{
+  "app_error": null,
+  "output": {
+    "commits": 0,
+    "mock_backend": false
+  },
+  "projection": {},
+  "render_error": null,
+  "runtime": "C++17",
+  "service": {
+    "phase": "desktop_initialization",
+    "queued_requests": 2,
+    "snapshot_age_seconds": 215.09020524,
+    "state_is_snapshot": true
+  },
+  "windows": []
+}
+           CPU0       
+  1:         11  SiFive PLIC   2 Edge      10009000.dma-controller
+  2:       2696  SiFive PLIC   1 Edge      10008000.mmc
+  5:      50207  RISC-V INTC   5 Edge      riscv-timer
+BODMA_aa7da536_RC:0
+oryukdo# ps; cat /tmp/boayo-wm.log; echo BODMA_2c23dbc0_RC:$?
+    1 root       192 S    /init.console
+    2 root         0 SW   [kthreadd]
+    3 root         0 SW   [pool_workqueue_]
+    4 root         0 IW<  [kworker/R-slub_]
+    5 root         0 IW   [kworker/0:0-eve]
+    7 root         0 IW   [kworker/u4:0-ex]
+    8 root         0 IW<  [kworker/R-mm_pe]
+    9 root         0 SW   [ksoftirqd/0]
+   10 root         0 SW   [kdevtmpfs]
+   11 root         0 SW   [oom_reaper]
+   12 root         0 IW<  [kworker/R-write]
+   13 root         0 IW<  [kworker/R-kbloc]
+   14 root         0 SW   [kswapd0]
+   15 root         0 IW   [kworker/u4:1-ev]
+   16 root         0 IW   [kworker/0:1-eve]
+   17 root         0 SW   [khvcd]
+   19 root         0 IW<  [kworker/R-mmc_c]
+   21 root         0 IW<  [kworker/0:1H-kb]
+   27 root       496 S    sh -i
+   35 root         0 IW<  [kworker/0:2H-kb]
+   36 root         0 IW   [kworker/u4:2-ev]
+   37 root         0 SW   [jbd2/mmcblk0p2-]
+   38 root         0 IW<  [kworker/R-ext4-]
+   43 root      3444 R    /usr/bin/boayo-native start
+   49 root       504 R    {ps} sh -i
+BOAYO_NATIVE_SERVICE /tmp/bosio-wm.sock initializing; query boayo-status
+BOAYO_NATIVE_INIT backend=BOSIO_ABI3
+BOAYO_BLANK_METADATA_READY words=4480 tile_composition=0 projection_jobs=0
+BODMA_2c23dbc0_RC:0
+oryukdo# for p in /proc/43/task/*; do cat $p/stat; cat $p/wchan; done; echo BODM
+A_cbb4eb96_RC:$?
+43 (boayo-native) R 1 43 43 0 -1 4194368 40 0 0 0 4242 9972 0 0 20 0 2 0 27773 3526656 684 4294967295 65536 1823417 2641765200 0 0 0 0 4096 16386 0 0 0 17 0 0 0 0 0 0 1827024 1840888 10207232 2641768346 2641768374 2641768374 2641768422 0
+cat: can't open '/proc/43/task/43/wchan': No such file or directory
+44 (boayo-native) R 1 43 43 0 -1 4194624 352 0 0 0 7713 7452 0 0 20 0 2 0 27977 3526656 684 4294967295 65536 1823417 2641765200 0 0 0 0 4096 16386 0 0 0 -1 0 0 0 0 0 0 1827024 1840888 10207232 2641768346 2641768374 2641768374 2641768422 0
+cat: can't open '/proc/43/task/44/wchan': No such file or directory
+BODMA_cbb4eb96_RC:1
+oryukdo# boayo-status; echo BODMA_61080e19_RC:$?
+{
+  "app_error": null,
+  "output": {
+    "commits": 0,
+    "mock_backend": false
+  },
+  "projection": {},
+  "render_error": null,
+  "runtime": "C++17",
+  "service": {
+    "phase": "desktop_initialization",
+    "queued_requests": 3,
+    "snapshot_age_seconds": 568.95062104,
+    "state_is_snapshot": true
+  },
+  "windows": []
+}
+BODMA_61080e19_RC:0
+oryukdo#     G
+
+OpenSBI v1.8.1
+   ____                    _____ ____ _____
+  / __ \                  / ____|  _ \_   _|
+ | |  | |_ __   ___ _ __ | (___ | |_) || |
+ | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
+ | |__| | |_) |  __/ | | |____) | |_) || |_
+  \____/| .__/ \___|_| |_|_____/|____/_____|
+        | |
+        |_|
+
+Platform Name               : ORYUKDO Gen3 3D5I
+Platform Features           : medeleg
+Platform HART Count         : 1
+Platform HART Protection    : ---
+Platform IPI Device         : ---
+Platform Timer Device       : aclint-mtimer @ 50000000Hz
+Platform Console Device     : uart8250
+Platform HSM Device         : ---
+Platform PMU Device         : ---
+Platform Reboot Device      : ---
+Platform Shutdown Device    : ---
+Platform Suspend Device     : ---
+Platform CPPC Device        : ---
+Firmware Base               : 0x80000000
+Firmware Size               : 309 KB
+Firmware RW Offset          : 0x40000
+Firmware RW Size            : 53 KB
+Firmware Heap Offset        : 0x44000
+Firmware Heap Size          : 37 KB (total), 0 KB (reserved), 9 KB (used), 26 KB (free)
+Firmware Scratch Size       : 4096 B (total), 228 B (used), 3868 B (free)
+Runtime SBI Version         : 3.0
+Standard SBI Extensions     : time,rfnc,ipi,base,hsm,pmu,dbcn,fwft,legacy,sse
+Experimental SBI Extensions : none
+
+Domain0 Name                : root
+Domain0 Boot HART           : 0
+Domain0 HARTs               : 0*
+Domain0 Region00            : 0x80040000-0x8004ffff M: (F,R,W) S/U: ()
+Domain0 Region01            : 0x80000000-0x8003ffff M: (F,R,X) S/U: ()
+Domain0 Region02            : 0x02004000-0x02004007 M: (I,R,W) S/U: ()
+Domain0 Region03            : 0x0200bff8-0x0200bfff M: (I,R,W) S/U: ()
+Domain0 Region04            : 0x10000000-0x10000fff M: (I,R,W) S/U: (R,W)
+Domain0 Region05            : 0x00000000-0xffffffff M: () S/U: (R,W,X)
+Domain0 Next Address        : 0x80400000
+Domain0 Next Arg1           : 0x87f00000
+Domain0 Next Mode           : S-mode
+Domain0 SysReset            : yes
+Domain0 SysSuspend          : yes
+
+Boot HART ID                : 0
+Boot HART Domain            : root
+Boot HART Priv Version      : v1.11
+Boot HART Base ISA          : rv32ima
+Boot HART ISA Extensions    : zicntr,svade
+Boot HART PMP Count         : 0
+Boot HART PMP Granularity   : 0 bits
+Boot HART PMP Address Bits  : 0
+Boot HART MHPM Info         : 0 (0x00000000)
+Boot HART Debug Triggers    : 0 triggers
+Boot HART MIDELEG           : 0x00000222
+Boot HART MEDELEG           : 0x0000b109
+Linux version 6.12.0-oryukdo-bosio-dma1 (oryukdo@kfb) (riscv64-linux-gnu-gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, GNU ld (GNU Binutils for Ubuntu) 2.42) #1 2026-11-10 00:00:00 UTC
+OF: fdt: Ignoring memory range 0x80000000 - 0x80400000
+Machine model: ORYUKDO Gen3 3D5I
+SBI specification v3.0 detected
+SBI implementation ID=0x1 Version=0x10008
+SBI TIME extension detected
+SBI IPI extension detected
+SBI RFENCE extension detected
+SBI DBCN extension detected
+earlycon: sbi0 at I/O port 0x0 (options '')
+printk: legacy bootconsole [sbi0] enabled
+printk: debug: ignoring loglevel setting.
+printk: debug: skip boot console de-registration.
+OF: reserved mem: 0x80000000..0x8003ffff (256 KiB) nomap non-reusable mmode_resv1@80000000
+OF: reserved mem: 0x80040000..0x8004ffff (64 KiB) nomap non-reusable mmode_resv0@80040000
+Reserved memory: created DMA memory pool at 0xbd000000, size 16 MiB
+OF: reserved mem: initialized node dma-pool@bd000000, compatible id shared-dma-pool
+OF: reserved mem: 0xbd000000..0xbdffffff (16384 KiB) nomap non-reusable dma-pool@bd000000
+OF: reserved mem: 0xbf800000..0xbfffffff (8192 KiB) nomap non-reusable framebuffer@bf800000
+Zone ranges:
+  Normal   [mem 0x0000000080400000-0x00000000bfffffff]
+Movable zone start for each node
+Early memory node ranges
+  node   0: [mem 0x0000000080400000-0x00000000bcffffff]
+  node   0: [mem 0x00000000bd000000-0x00000000bdffffff]
+  node   0: [mem 0x00000000be000000-0x00000000bf7fffff]
+  node   0: [mem 0x00000000bf800000-0x00000000bfffffff]
+Initmem setup node 0 [mem 0x0000000080400000-0x00000000bfffffff]
+riscv: base ISA extensions aim
+riscv: ELF capabilities aim
+pcpu-alloc: s0 r0 d32768 u32768 alloc=1*32768
+pcpu-alloc: [0] 0 
+Kernel command line: earlycon=sbi console=hvc0 loglevel=7 nokaslr lpj=1000000 rdinit=/init initcall_debug ignore_loglevel keep_bootcon printk.time=1
+[    0.000000] Dentry cache hash table entries: 131072 (order: 7, 524288 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 65536 (order: 6, 262144 bytes, linear)
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 261120
+[    0.000000] mem auto-init: stack:all(zero), heap alloc:off, heap free:off
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    0.000000] NR_IRQS: 64, nr_irqs: 64, preallocated irqs: 0
+[    0.000000] riscv-intc: 32 local interrupts mapped
+[    0.000000] clocksource: riscv_clocksource: mask: 0xffffffffffffffff max_cycles: 0xb8812736b, max_idle_ns: 440795202655 ns
+[    0.000764] sched_clock: 64 bits at 50MHz, resolution 20ns, wraps every 4398046511100ns
+[    0.066397] Calibrating delay loop (skipped) preset value.. 200.00 BogoMIPS (lpj=1000000)
+[    0.106967] pid_max: default: 32768 minimum: 301
+[    0.271447] Mount-cache hash table entries: 2048 (order: 1, 8192 bytes, linear)
+[    0.312283] Mountpoint-cache hash table entries: 2048 (order: 1, 8192 bytes, linear)
+[    0.731371] ORY_BOOT kernel_init_freeable enter
+[    1.251189] calling  0xc028c984 @ 1
+[    1.280390] ASID allocator disabled (0 bits)
+[    1.302835] initcall 0xc028c984 returned 0 after 10000 usecs
+[    1.337000] calling  0xc028d0d4 @ 1
+[    1.455365] initcall 0xc028d0d4 returned 0 after 50000 usecs
+[    1.489735] calling  0xc028f634 @ 1
+[    1.518488] initcall 0xc028f634 returned 0 after 0 usecs
+[    1.552050] calling  0xc0290780 @ 1
+[    1.580597] initcall 0xc0290780 returned 0 after 0 usecs
+[    1.614160] calling  0xc02935bc @ 1
+[    1.642702] initcall 0xc02935bc returned 0 after 0 usecs
+[    1.693138] Memory: 1002240K/1044480K available (2586K kernel code, 489K rwdata, 300K rodata, 2569K init, 186K bss, 40692K reserved, 0K cma-reserved)
+[    1.951056] devtmpfs: initialized
+[    3.132527] calling  0xc02997e0 @ 1
+[    3.161033] initcall 0xc02997e0 returned 0 after 0 usecs
+[    3.253186] calling  0xc028d7a0 @ 1
+[    3.346552] initcall 0xc028d7a0 returned 0 after 50000 usecs
+[    3.383303] calling  0xc028e660 @ 1
+[    3.432768] initcall 0xc028e660 returned 0 after 10000 usecs
+[    3.466268] calling  0xc029015c @ 1
+[    3.497034] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+[    3.541065] initcall 0xc029015c returned 0 after 20000 usecs
+[    3.574586] calling  0xc0290678 @ 1
+[    3.604649] futex hash table entries: 256 (order: -1, 3072 bytes, linear)
+[    3.643956] initcall 0xc0290678 returned 0 after 20000 usecs
+[    3.678305] calling  0xc029822c @ 1
+[    3.727437] initcall 0xc029822c returned 0 after 10000 usecs
+[    3.760942] calling  0xc0298314 @ 1
+[    3.790399] initcall 0xc0298314 returned 0 after 0 usecs
+[    3.823163] calling  0xc0298340 @ 1
+[    3.852615] initcall 0xc0298340 returned 0 after 0 usecs
+[    3.885372] calling  0xc01ceff4 @ 1
+[    3.914807] initcall 0xc01ceff4 returned 0 after 0 usecs
+[    3.947557] calling  0xc02a09f0 @ 1
+[    4.038797] initcall 0xc02a09f0 returned 0 after 30000 usecs
+[    4.072317] calling  0xc02a0ab4 @ 1
+[    4.101735] initcall 0xc02a0ab4 returned 0 after 0 usecs
+[    4.134491] calling  0xc02a0ac8 @ 1
+[    4.166493] initcall 0xc02a0ac8 returned 0 after 0 usecs
+[    4.199256] calling  0xc02a0f54 @ 1
+[    4.230060] initcall 0xc02a0f54 returned 0 after 0 usecs
+[    4.262823] calling  0xc02a1a24 @ 1
+[    5.093151] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+[    5.153507] initcall 0xc02a1a24 returned 0 after 360000 usecs
+[    5.189894] calling  0xc02a1c2c @ 1
+[    5.225717] initcall 0xc02a1c2c returned 0 after 0 usecs
+[    5.317705] calling  0xc028f80c @ 1
+[    5.408633] initcall 0xc028f80c returned 0 after 50000 usecs
+[    5.442997] calling  0xc0290b54 @ 1
+[    5.486186] initcall 0xc0290b54 returned 0 after 10000 usecs
+[    5.520542] calling  0xc0290ba4 @ 1
+[    5.552106] initcall 0xc0290ba4 returned 0 after 0 usecs
+[    5.585701] calling  0xc0293e58 @ 1
+[    5.615720] initcall 0xc0293e58 returned 0 after 0 usecs
+[    5.649328] calling  0xc029ba8c @ 1
+[    5.693380] initcall 0xc029ba8c returned 0 after 10000 usecs
+[    5.726902] calling  0xc029ca74 @ 1
+[    5.771903] initcall 0xc029ca74 returned 0 after 10000 usecs
+[    5.805425] calling  0xc029d2f4 @ 1
+[    5.838255] initcall 0xc029d2f4 returned 0 after 0 usecs
+[    5.871823] calling  0xc02a22e8 @ 1
+[    5.903268] initcall 0xc02a22e8 returned 0 after 0 usecs
+[    5.995219] calling  0xc028a964 @ 1
+[    6.024896] initcall 0xc028a964 returned 0 after 10000 usecs
+[    6.059246] calling  0xc028bd54 @ 1
+[    6.088206] initcall 0xc028bd54 returned 0 after 0 usecs
+[    6.121801] calling  0xc0004b64 @ 1
+[   10.399604] cpu0: Ratio of byte access time to unaligned word access is 0.01, unaligned accesses are slow
+[   10.442459] initcall 0xc0004b64 returned 0 after 2830000 usecs
+[   10.477539] calling  0xc029b99c @ 1
+[   10.528749] initcall 0xc029b99c returned 0 after 10000 usecs
+[   10.563168] calling  0xc029b7c4 @ 1
+[   10.638473] initcall 0xc029b7c4 returned 0 after 30000 usecs
+[   10.672870] calling  0xc01bb7b0 @ 1
+[   10.780792] initcall 0xc01bb7b0 returned 0 after 50000 usecs
+[   10.815215] calling  0xc028bbc4 @ 1
+[   10.846634] initcall 0xc028bbc4 returned 0 after 0 usecs
+[   10.882667] calling  0xc0004aec @ 1
+[   10.911350] initcall 0xc0004aec returned 0 after 0 usecs
+[   10.944993] calling  0xc029e658 @ 1
+[   12.672896] initcall 0xc029e658 returned 0 after 1100000 usecs
+[   12.765547] calling  0xc028d61c @ 1
+[   12.798794] initcall 0xc028d61c returned 0 after 10000 usecs
+[   12.833201] calling  0xc028e170 @ 1
+[   12.864929] initcall 0xc028e170 returned 0 after 0 usecs
+[   12.898563] calling  0xc028e97c @ 1
+[   12.927273] initcall 0xc028e97c returned 0 after 0 usecs
+[   12.960937] calling  0xc028ed68 @ 1
+[   12.989616] initcall 0xc028ed68 returned 0 after 0 usecs
+[   13.023276] calling  0xc02907f4 @ 1
+[   13.119199] initcall 0xc02907f4 returned 0 after 40000 usecs
+[   13.153616] calling  0xc0290a48 @ 1
+[   13.182243] initcall 0xc0290a48 returned 0 after 0 usecs
+[   13.215879] calling  0xc0290b60 @ 1
+[   13.386711] initcall 0xc0290b60 returned 0 after 90000 usecs
+[   13.421118] calling  0xc0292628 @ 1
+[   13.449708] initcall 0xc0292628 returned 0 after 0 usecs
+[   13.483360] calling  0xc02935f8 @ 1
+[   13.511971] initcall 0xc02935f8 returned 0 after 0 usecs
+[   13.545605] calling  0xc007bf98 @ 1
+[   13.574203] initcall 0xc007bf98 returned 0 after 0 usecs
+[   13.607849] calling  0xc007bf70 @ 1
+[   13.636476] initcall 0xc007bf70 returned 0 after 0 usecs
+[   13.670112] calling  0xc0296864 @ 1
+[   13.704134] initcall 0xc0296864 returned 0 after 0 usecs
+[   13.740187] calling  0xc0296928 @ 1
+[   13.768989] initcall 0xc0296928 returned 0 after 0 usecs
+[   13.802625] calling  0xc0299838 @ 1
+[   13.831699] initcall 0xc0299838 returned 0 after 0 usecs
+[   13.865351] calling  0xc0299968 @ 1
+[   13.942466] initcall 0xc0299968 returned 0 after 30000 usecs
+[   13.976894] calling  0xc0299af0 @ 1
+[   14.010224] initcall 0xc0299af0 returned 0 after 0 usecs
+[   14.043866] calling  0xc0299b58 @ 1
+[   14.072989] initcall 0xc0299b58 returned 0 after 0 usecs
+[   14.106621] calling  0xc0299c08 @ 1
+[   14.254077] initcall 0xc0299c08 returned 0 after 70000 usecs
+[   14.288483] calling  0xc029c9a0 @ 1
+[   14.335885] initcall 0xc029c9a0 returned 0 after 10000 usecs
+[   14.369468] calling  0xc01cf028 @ 1
+[   14.401856] initcall 0xc01cf028 returned 0 after 0 usecs
+[   14.435494] calling  0xc029dce0 @ 1
+[   14.559615] initcall 0xc029dce0 returned 0 after 60000 usecs
+[   14.593179] calling  0xc02a0abc @ 1
+[   14.624447] initcall 0xc02a0abc returned 0 after 0 usecs
+[   14.657229] calling  0xc02a0fbc @ 1
+[   15.052290] initcall 0xc02a0fbc returned 0 after 240000 usecs
+[   15.087177] calling  0xc02a12d0 @ 1
+[   15.118472] initcall 0xc02a12d0 returned 0 after 0 usecs
+[   15.154540] calling  0xc02a1724 @ 1
+[   15.184227] initcall 0xc02a1724 returned 0 after 0 usecs
+[   15.217870] calling  0xc02a1764 @ 1
+[   15.294100] initcall 0xc02a1764 returned 0 after 30000 usecs
+[   15.328523] calling  0xc02a1c78 @ 1
+[   16.171462] initcall 0xc02a1c78 returned 0 after 540000 usecs
+[   16.205519] calling  0xc02a24e0 @ 1
+[   16.235005] initcall 0xc02a24e0 returned 0 after 0 usecs
+[   16.326219] calling  0xc028d1f4 @ 1
+[   16.375005] initcall 0xc028d1f4 returned 0 after 20000 usecs
+[   16.409449] calling  0xc02900a8 @ 1
+[C0]
+[C1]
+[C2]
+[N0]
+[X0]
+[X1]
+[X2]
+[X3]
+[X4]
+[X5]
+[T0]
+[T1]
+[N1[T0]
+[T1]
+[T0]
+[T1]
+][T0]
+[T1]
+
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[TL]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[   16.552918] clocksource: Switched to clocksource riscv_clocksource
+[T0]
+[TL]
+[T1]
+[C3][T0]
+[T1]
+
+[T0]
+[T1]
+[[T0]
+[T1]
+[T0]
+[T1]
+C[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+4[T0]
+[T1]
+][T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+[T0]
+[T1]
+
+[T0]
+[T1]
+[   17.169885] initcall 0xc02900a8 returned 0 after 716621 usecs
+[   17.212186] calling  0xc0296f4c @ 1
+[   17.289983] initcall 0xc0296f4c returned 0 after 38760 usecs
+[   17.332707] calling  0xc0298058 @ 1
+[   17.392691] initcall 0xc0298058 returned 0 after 21805 usecs
+[   17.440032] calling  0xc029816c @ 1
+[   17.519071] initcall 0xc029816c returned 0 after 38504 usecs
+[   17.570269] calling  0xc02981ec @ 1
+[   17.611609] initcall 0xc02981ec returned 0 after 1640 usecs
+[   17.659979] calling  0xc02983d0 @ 1
+[   17.769644] initcall 0xc02983d0 returned 0 after 69120 usecs
+[   17.819320] calling  0xc02983ec @ 1
+[   17.911866] initcall 0xc02983ec returned 0 after 52006 usecs
+[   17.960066] calling  0xc029873c @ 1
+[   18.001387] initcall 0xc029873c returned 0 after 1618 usecs
+[   18.051212] calling  0xc0298798 @ 1
+[   18.099105] initcall 0xc0298798 returned 0 after 7371 usecs
+[   18.150647] calling  0xc02987d8 @ 1
+[   18.191309] initcall 0xc02987d8 returned 0 after 1720 usecs
+[   18.241161] calling  0xc0298810 @ 1
+[   18.290608] initcall 0xc0298810 returned 0 after 9792 usecs
+[   18.342013] calling  0xc029885c @ 1
+[   18.382820] initcall 0xc029885c returned 0 after 1781 usecs
+[   18.431158] calling  0xc029889c @ 1
+[   18.471907] initcall 0xc029889c returned 0 after 1747 usecs
+[   18.521724] calling  0xc02988e4 @ 1
+[   18.568646] initcall 0xc02988e4 returned 0 after 1777 usecs
+[   18.619957] calling  0xc029892c @ 1
+[   18.662107] initcall 0xc029892c returned 0 after 1643 usecs
+[   18.710420] calling  0xc0298964 @ 1
+[   18.752670] initcall 0xc0298964 returned 0 after 1721 usecs
+[   18.800988] calling  0xc02989ac @ 1
+[   18.842454] initcall 0xc02989ac returned 0 after 1807 usecs
+[   18.890788] calling  0xc02989f4 @ 1
+[   18.933188] initcall 0xc02989f4 returned 0 after 1734 usecs
+[   18.981333] calling  0xc0298b7c @ 1
+[   19.029076] initcall 0xc0298b7c returned 0 after 7228 usecs
+[   19.080407] calling  0xc0298bb4 @ 1
+[   19.129998] initcall 0xc0298bb4 returned 0 after 9899 usecs
+[   19.180062] calling  0xc02997d0 @ 1
+[   19.220462] initcall 0xc02997d0 returned 0 after 730 usecs
+[   19.270128] calling  0xc029c68c @ 1
+[   20.263151] initcall 0xc029c68c returned 0 after 952334 usecs
+[   20.311664] calling  0xc02a1960 @ 1
+[   20.352424] initcall 0xc02a1960 returned 0 after 233 usecs
+[   20.400599] calling  0xc02a1cf0 @ 1
+[   20.468529] NET: Registered PF_UNIX/PF_LOCAL protocol family
+[   20.522587] initcall 0xc02a1cf0 returned 0 after 82308 usecs
+[   20.570781] calling  0xc028a478 @ 1
+[   20.622068] initcall 0xc028a478 returned 0 after 11608 usecs
+[   20.752817] calling  0xc028b68c @ 1
+[   20.792027] initcall 0xc028b68c returned 0 after 190 usecs
+[   20.840843] calling  0xc028ce24 @ 1
+[   20.888561] initcall 0xc028ce24 returned 0 after 1711 usecs
+[   20.942316] calling  0xc028ce60 @ 1
+[   20.980044] initcall 0xc028ce60 returned 0 after 190 usecs
+[   21.021876] calling  0xc028d178 @ 1
+[   21.069616] initcall 0xc028d178 returned 0 after 8692 usecs
+[   21.119350] calling  0xc028fc90 @ 1
+[   21.160366] initcall 0xc028fc90 returned 0 after 277 usecs
+[   21.210078] calling  0xc028ffc0 @ 1
+[   21.399651] initcall 0xc028ffc0 returned 0 after 149877 usecs
+[   21.442751] calling  0xc0290180 @ 1
+[   21.482872] initcall 0xc0290180 returned 0 after 1950 usecs
+[   21.531219] calling  0xc02901cc @ 1
+[   21.620668] initcall 0xc02901cc returned 0 after 48918 usecs
+[   21.670346] calling  0xc0290230 @ 1
+[   21.721283] initcall 0xc0290230 returned 0 after 11239 usecs
+[   21.770122] calling  0xc0290290 @ 1
+[   21.949772] initcall 0xc0290290 returned 0 after 139126 usecs
+[   21.992939] calling  0xc0290320 @ 1
+[   22.031384] initcall 0xc0290320 returned 0 after 271 usecs
+[   22.081015] calling  0xc0290718 @ 1
+[   22.128822] initcall 0xc0290718 returned 0 after 1795 usecs
+[   22.180399] calling  0xc0290994 @ 1
+[   22.462314] ORY_BOOT rootfs begin compressed_bytes=2492928
+[   22.561514] initcall 0xc0290994 returned 0 after 340584 usecs
+[   22.610162] calling  0xc0293480 @ 1
+[   22.649846] workingset: timestamp_bits=30 max_order=18 bucket_order=0
+[   22.701443] initcall 0xc0293480 returned 0 after 51586 usecs
+[   22.751145] calling  0xc02936ec @ 1
+[   22.799082] initcall 0xc02936ec returned 0 after 7435 usecs
+[   22.850411] calling  0xc02968f0 @ 1
+[   22.892697] initcall 0xc02968f0 returned 0 after 1764 usecs
+[   22.948937] calling  0xc0296fb8 @ 1
+[   22.999861] initcall 0xc0296fb8 returned 0 after 16727 usecs
+[   23.042550] calling  0xc029726c @ 1
+[   23.082626] initcall 0xc029726c returned 0 after 1906 usecs
+[   23.130962] calling  0xc0297658 @ 1
+[   23.172308] initcall 0xc0297658 returned 0 after 607 usecs
+[   23.220469] calling  0xc029836c @ 1
+[   23.271416] initcall 0xc029836c returned 0 after 10418 usecs
+[   23.321077] calling  0xc0298d94 @ 1
+[   23.361561] initcall 0xc0298d94 returned 0 after 831 usecs
+[   23.411229] calling  0xc029915c @ 1
+[   23.671040] initcall 0xc029915c returned 0 after 219262 usecs
+[   23.721190] calling  0xc0299648 @ 1
+[   23.820620] initcall 0xc0299648 returned 0 after 59765 usecs
+[   23.870322] calling  0xc029994c @ 1
+[   23.941076] initcall 0xc029994c returned 0 after 30227 usecs
+[   23.989905] calling  0xc0299c70 @ 1
+[   24.039422] initcall 0xc0299c70 returned 0 after 8988 usecs
+[   24.089262] calling  0xc029a400 @ 1
+[   24.129837] io scheduler mq-deadline registered
+[   24.170446] initcall 0xc029a400 returned 0 after 40663 usecs
+[   24.220130] calling  0xc029a410 @ 1
+[   24.259959] io scheduler kyber registered
+[   24.299243] initcall 0xc029a410 returned 0 after 39426 usecs
+[   24.350424] calling  0xc029a420 @ 1
+[   24.412446] io scheduler bfq registered
+[   24.449914] initcall 0xc029a420 returned 0 after 58959 usecs
+[   24.491758] calling  0xc029a4cc @ 1
+[   24.530969] initcall 0xc029a4cc returned 0 after 193 usecs
+[   24.580631] calling  0xc029a6cc @ 1
+[   24.678701] initcall 0xc029a6cc returned 0 after 53629 usecs
+[   24.722954] calling  0xc029b1e8 @ 1
+[   24.820407] initcall 0xc029b1e8 returned 0 after 59192 usecs
+[   24.870200] calling  0xc029b1f8 @ 1
+[   25.288760] riscv-plic: interrupt-controller@c000000: mapped 2 interrupts with 1 handlers for 2 contexts.
+[   25.410897] probe of c000000.interrupt-controller returned 0 after 479183 usecs
+[   25.512451] initcall 0xc029b1f8 returned 0 after 601645 usecs
+[   25.562751] calling  0xc029b210 @ 1
+[   25.722015] probe of soc returned 0 after 100431 usecs
+[   25.841774] initcall 0xc029b210 returned 0 after 239888 usecs
+[   25.890529] calling  0xc029b704 @ 1
+[   25.990521] initcall 0xc029b704 returned 0 after 59373 usecs
+[   26.040315] calling  0xc029b75c @ 1
+[   26.140203] initcall 0xc029b75c returned 0 after 60104 usecs
+[   26.182193] calling  0xc029b7b4 @ 1
+[   26.289140] initcall 0xc029b7b4 returned 0 after 67847 usecs
+[   26.331952] calling  0xc029ba7c @ 1
+[   26.700187] probe of 10009000.dma-controller returned 0 after 309094 usecs
+[   26.779739] initcall 0xc029ba7c returned 0 after 408662 usecs
+[   26.829979] calling  0xc029bbe8 @ 1
+[   26.870802] initcall 0xc029bbe8 returned 0 after 232 usecs
+[   26.920541] calling  0xc029bc10 @ 1
+[   31.781015] initcall 0xc029bc10 returned 0 after 4821424 usecs
+[   31.829938] calling  0xc029be88 @ 1
+[   31.872395] initcall 0xc029be88 returned 0 after 1843 usecs
+[   31.920855] calling  0xc029bef8 @ 1
+[   34.231892] printk: legacy console [hvc0] enabled
+[   34.231892] printk: legacy console [hvc0] enabled
+[   34.309119] initcall 0xc029bef8 returned 0 after 2348516 usecs
+[   34.309119] initcall 0xc029bef8 returned 0 after 2348516 usecs
+[   34.390923] calling  0xc029d248 @ 1
+[   34.390923] calling  0xc029d248 @ 1
+[   34.531052] initcall 0xc029d248 returned 0 after 77909 usecs
+[   34.531052] initcall 0xc029d248 returned 0 after 77909 usecs
+[   34.611605] calling  0xc029d2c8 @ 1
+[   34.611605] calling  0xc029d2c8 @ 1
+[   34.689755] initcall 0xc029d2c8 returned -2 after 8922 usecs
+[   34.689755] initcall 0xc029d2c8 returned -2 after 8922 usecs
+[   34.762365] calling  0xc029dbbc @ 1
+[   34.762365] calling  0xc029dbbc @ 1
+[   35.521535] bosio-kfb 20000000.bosio: assigned reserved memory node dma-pool@bd000000
+[   35.521535] bosio-kfb 20000000.bosio: assigned reserved memory node dma-pool@bd000000
+[   62.772705] ORY_BOOT rootfs unpack returned error=none extracted_bytes=0
+[   62.772705] ORY_BOOT rootfs unpack returned error=none extracted_bytes=0
+[   62.929785] bosio-kfb 20000000.bosio: BOSIO ABI3: dual projectors + BS25, DMA copy/fill/upload, 16MiB arena
+[   62.929785] bosio-kfb 20000000.bosio: BOSIO ABI3: dual projectors + BS25, DMA copy/fill/upload, 16MiB arena
+[   63.091180] probe of 20000000.bosio returned 0 after 28240321 usecs
+[   63.091180] probe of 20000000.bosio returned 0 after 28240321 usecs
+[   63.200195] initcall 0xc029dbbc returned 0 after 28377106 usecs
+[   63.200195] initcall 0xc029dbbc returned 0 after 28377106 usecs
+[   63.281677] calling  0xc029dc60 @ 1
+[   63.281677] calling  0xc029dc60 @ 1
+[   63.360273] initcall 0xc029dc60 returned 0 after 9697 usecs
+[   63.360273] initcall 0xc029dc60 returned 0 after 9697 usecs
+[   63.440634] calling  0xc029dd24 @ 1
+[   63.440634] calling  0xc029dd24 @ 1
+[   63.561422] initcall 0xc029dd24 returned 0 after 58811 usecs
+[   63.561422] initcall 0xc029dd24 returned 0 after 58811 usecs
+[   63.649501] calling  0xc029dd34 @ 1
+[   63.649501] calling  0xc029dd34 @ 1
+[   63.770329] initcall 0xc029dd34 returned 0 after 58884 usecs
+[   63.770329] initcall 0xc029dd34 returned 0 after 58884 usecs
+[   63.849767] calling  0xc029dd44 @ 1
+[   63.849767] calling  0xc029dd44 @ 1
+[   64.020380] initcall 0xc029dd44 returned 0 after 108668 usecs
+[   64.020380] initcall 0xc029dd44 returned 0 after 108668 usecs
+[   64.101497] calling  0xc029de70 @ 1
+[   64.101497] calling  0xc029de70 @ 1
+[   64.531150] probe of 10008000.mmc returned 0 after 341662 usecs
+[   64.531150] probe of 10008000.mmc returned 0 after 341662 usecs
+[   64.649069] initcall 0xc029de70 returned 0 after 478484 usecs
+[   64.649069] initcall 0xc029de70 returned 0 after 478484 usecs
+[   64.731537] calling  0xc02a166c @ 1
+[   64.731537] calling  0xc02a166c @ 1
+[   64.819060] initcall 0xc02a166c returned 0 after 18402 usecs
+[   64.819060] initcall 0xc02a166c returned 0 after 18402 usecs
+[   64.982484] calling  0xc028ce68 @ 1
+[   64.982484] calling  0xc028ce68 @ 1
+[   65.051169] initcall 0xc028ce68 returned 0 after 8073 usecs
+[   65.051169] initcall 0xc028ce68 returned 0 after 8073 usecs
+[   65.130916] calling  0xc028d0a4 @ 1
+[   65.130916] calling  0xc028d0a4 @ 1
+[   65.200723] initcall 0xc028d0a4 returned 0 after 9005 usecs
+[   65.200723] initcall 0xc028d0a4 returned 0 after 9005 usecs
+[   65.280373] calling  0xc028e29c @ 1
+[   65.280373] calling  0xc028e29c @ 1
+[   66.641882] initcall 0xc028e29c returned 0 after 1299434 usecs
+[   66.641882] initcall 0xc028e29c returned 0 after 1299434 usecs
+[   66.722160] calling  0xc028e8d8 @ 1
+[   66.722160] calling  0xc028e8d8 @ 1
+[   66.801803] initcall 0xc028e8d8 returned 0 after 19036 usecs
+[   66.801803] initcall 0xc028e8d8 returned 0 after 19036 usecs
+[   66.880845] calling  0xc028f678 @ 1
+[   66.880845] calling  0xc028f678 @ 1
+[   66.949180] initcall 0xc028f678 returned 0 after 6256 usecs
+[   66.949180] initcall 0xc028f678 returned 0 after 6256 usecs
+[   67.030333] calling  0xc02965f4 @ 1
+[   67.030333] calling  0xc02965f4 @ 1
+[   77.479862] initcall 0xc02965f4 returned 0 after 10387452 usecs
+[   77.479862] initcall 0xc02965f4 returned 0 after 10387452 usecs
+[   77.560326] calling  0xc02968e8 @ 1
+[   77.560326] calling  0xc02968e8 @ 1
+[   77.621119] initcall 0xc02968e8 returned 0 after 192 usecs
+[   77.621119] initcall 0xc02968e8 returned 0 after 192 usecs
+[   77.700538] calling  0xc02969a8 @ 1
+[   77.700538] calling  0xc02969a8 @ 1
+[   77.770752] initcall 0xc02969a8 returned 0 after 282 usecs
+[   77.770752] initcall 0xc02969a8 returned 0 after 282 usecs
+[   77.851685] calling  0xc02997f4 @ 1
+[   77.851685] calling  0xc02997f4 @ 1
+[   77.922532] initcall 0xc02997f4 returned 0 after 1786 usecs
+[   77.922532] initcall 0xc02997f4 returned 0 after 1786 usecs
+[   78.001211] calling  0xc0299b44 @ 1
+[   78.001211] calling  0xc0299b44 @ 1
+[   78.069066] initcall 0xc0299b44 returned 0 after 5813 usecs
+[   78.069066] initcall 0xc0299b44 returned 0 after 5813 usecs
+[   78.150538] calling  0xc01c18e0 @ 1
+[   78.150538] calling  0xc01c18e0 @ 1
+[   78.220788] initcall 0xc01c18e0 returned 0 after 334 usecs
+[   78.220788] initcall 0xc01c18e0 returned 0 after 334 usecs
+[   78.301680] calling  0xc01c59ec @ 1
+[   78.301680] calling  0xc01c59ec @ 1
+[   78.849692] initcall 0xc01c59ec returned 0 after 478948 usecs
+[   78.849692] initcall 0xc01c59ec returned 0 after 478948 usecs
+[   78.931565] calling  0xc029e804 @ 1
+[   78.931565] calling  0xc029e804 @ 1
+[   79.120674] initcall 0xc029e804 returned 0 after 120045 usecs
+[   79.120674] initcall 0xc029e804 returned 0 after 120045 usecs
+[   79.200736] calling  0xc0228b20 @ 1
+[   79.200736] calling  0xc0228b20 @ 1
+[   79.263143] initcall 0xc0228b20 returned 0 after 193 usecs
+[   79.263143] initcall 0xc0228b20 returned 0 after 193 usecs
+[   79.340314] calling  0xc02a1664 @ 1
+[   79.340314] calling  0xc02a1664 @ 1
+[   79.402591] initcall 0xc02a1664 returned 0 after 191 usecs
+[   79.402591] initcall 0xc02a1664 returned 0 after 191 usecs
+[   79.480936] calling  0xc02a175c @ 1
+[   79.480936] calling  0xc02a175c @ 1
+[   79.548723] initcall 0xc02a175c returned 0 after 192 usecs
+[   79.548723] initcall 0xc02a175c returned 0 after 192 usecs
+[   79.631116] calling  0xc029b3b8 @ 1
+[   79.631116] calling  0xc029b3b8 @ 1
+[   79.691692] clk: Disabling unused clocks
+[   79.691692] clk: Disabling unused clocks
+[   79.750509] initcall 0xc029b3b8 returned 0 after 58795 usecs
+[   79.750509] initcall 0xc029b3b8 returned 0 after 58795 usecs
+[   79.831415] calling  0xc029e63c @ 1
+[   79.831415] calling  0xc029e63c @ 1
+[   79.900837] initcall 0xc029e63c returned 0 after 344 usecs
+[   79.900837] initcall 0xc029e63c returned 0 after 344 usecs
+[   79.981992] ORY_BOOT wait_for_initramfs enter
+[   79.981992] ORY_BOOT wait_for_initramfs enter
+[   80.050849] ORY_BOOT wait_for_initramfs done
+[   80.050849] ORY_BOOT wait_for_initramfs done
+[   80.111110] ORY_BOOT console_on_rootfs enter
+[   80.111110] ORY_BOOT console_on_rootfs enter
+[   80.488569] ORY_BOOT console_on_rootfs done
+[   80.488569] ORY_BOOT console_on_rootfs done
+[   80.552343] ORY_BOOT kernel_init_freeable done
+[   80.552343] ORY_BOOT kernel_init_freeable done
+[   83.230265] Freeing unused kernel image (initmem) memory: 2568K
+[   83.230265] Freeing unused kernel image (initmem) memory: 2568K
+[   83.310286] Kernel memory protection not selected by kernel config.
+[   83.310286] Kernel memory protection not selected by kernel config.
+[   83.388753] Run /init as init process
+[   83.388753] Run /init as init process
+[   83.448931]   with arguments:
+[   83.448931]   with arguments:
+[   83.499980]     /init
+[   83.499980]     /init
+[   83.550511]   with environment:
+[   83.550511]   with environment:
+[   83.609488]     HOME=/
+[   83.609488]     HOME=/
+[   83.660289]     TERM=linux
+[   83.660289]     TERM=linux
+[   85.422398] mmc0: host does not support reading read-only switch, assuming write-enable
+[   85.422398] mmc0: host does not support reading read-only switch, assuming write-enable
+[   85.901419] mmc0: new SDHC card at address 0001
+[   85.901419] mmc0: new SDHC card at address 0001
+[   87.412126] mmcblk0: mmc0:0001 SD 14.6 GiB
+[   87.412126] mmcblk0: mmc0:0001 SD 14.6 GiB
+[   90.812108]  mmcblk0: p1 p2
+[   90.812108]  mmcblk0: p1 p2
+[   91.920342] probe of mmc0:0001 returned 0 after 5787066 usecs
+[   91.920342] probe of mmc0:0001 returned 0 after 5787066 usecs
+[  109.582648] EXT4-fs (mmcblk0p2): recovery complete
+[  109.582648] EXT4-fs (mmcblk0p2): recovery complete
+[  110.381380] EXT4-fs (mmcblk0p2): mounted filesystem 2e4819b1-337f-4288-9fe0-5c784b69f9cc r/w with ordered data mode. Quota mode: disabled.
+[  110.381380] EXT4-fs (mmcblk0p2): mounted filesystem 2e4819b1-337f-4288-9fe0-5c784b69f9cc r/w with ordered data mode. Quota mode: disabled.
+ORYUKDO: SD ext4 /data mounted
+ORYUKDO BusyBox serial console
+
+
+BusyBox v1.37.0 (2026-11-07 10:24:46 KST) built-in shell (ash)
+Enter 'help' for a list of built-in commands.
+
+oryukdo# uname -r; cat /etc/oryukdo-image; echo BODMA_079b0720_RC:$?
+6.12.0-oryukdo-bosio-dma1
+ORYUKDO-BOSIO-DMA-v1 / SD4 Linux v2 + BoAYO memory DMA / physical test pending
+BODMA_079b0720_RC:0
+oryukdo# boayo-start; echo BODMA_bb0f825d_RC:$?
+BoAYO C++ service started; initialization continues. boayo-status / boayo-keys / boayo-stop
+{"features":["windows","pointer","input-injection","button-events","scene-stream","spatial-workspace","pointer-capture"],"headless":false,"m":32,"mock_backend":false,"runtime":"C++17","version":2}
+BODMA_bb0f825d_RC:0
+oryukdo# boayo-status; echo BODMA_c84aaa7d_RC:$?
+{
+  "app_error": null,
+  "output": {
+    "commits": 0,
+    "mock_backend": false
+  },
+  "projection": {},
+  "render_error": null,
+  "runtime": "C++17",
+  "service": {
+    "phase": "desktop_initialization",
+    "queued_requests": 1,
+    "snapshot_age_seconds": 89.78007569999998,
+    "state_is_snapshot": true
+  },
+  "windows": []
+}
+BODMA_c84aaa7d_RC:0
+oryukdo# for p in /proc/[0-9]*/task/[0-9]*/comm; do read n < $p; case $n in boay
+o-native) echo $p;; esac; done; echo BODMA_30abc85e_RC:$?
+/proc/31/task/31/comm
+/proc/31/task/32/comm
+BODMA_30abc85e_RC:0
+oryukdo# stty -echo; cp /bin/true /tmp/boayo-pc; echo PCS_91c61ed4_RC:$?
+PCS_91c61ed4_RC:0
+oryukdo# oryukdo# oryukdo# oryukdo# PCS_270fea18_RC:0
+oryukdo# oryukdo# oryukdo# echo SAMPLER_TRANSPORT_RECOVERED
+SAMPLER_TRANSPORT_RECOVERED
+oryukdo# read n < /proc/31/comm; if [ "$n" = boayo-native ]; then kill -STOP 31;
+ fi; sync; storage-check --unmount-data; echo BODMA_bfe1a227_RC:$?
+[ 1118.319606] EXT4-fs (mmcblk0p2): unmounting filesystem 2e4819b1-337f-4288-9fe0-5c784b69f9cc.
+[ 1118.319606] EXT4-fs (mmcblk0p2): unmounting filesystem 2e4819b1-337f-4288-9fe0-5c784b69f9cc.
+PASS unmount /data
+BODMA_bfe1a227_RC:0
+oryukdo# 

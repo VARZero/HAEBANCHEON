@@ -1,0 +1,27 @@
+ echo INCR11_e76dcef3_RC:$?
+
+BOAYO_MOTION_BEGIN loop=1 steps=25
+
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-axis","seconds":14.378239659999963,"step":1,"view":{"pitch":0.0,"roll":0.0,"yaw":0.0}}
+
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-axis","seconds":14.578702739999926,"step":2,"view":{"pitch":0.0,"roll":0.0,"yaw":-12.0}}
+
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-axis","seconds":14.228350280000086,"step":3,"view":{"pitch":0.0,"roll":0.0,"yaw":12.0}}
+
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-axis","seconds":14.307069700000056,"step":4,"view":{"pitch":-8.0,"roll":0.0,"yaw":0.0}}
+
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-axis","seconds":14.09638842000004,"step":5,"view":{"pitch":8.0,"roll":0.0,"yaw":0.0}}
+
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-axis","seconds":14.648201100000051,"step":6,"view":{"pitch":0.0,"roll":-20.0,"yaw":0.0}}
+
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-axis","seconds":14.715580820000014,"step":7,"view":{"pitch":0.0,"roll":20.0,"yaw":0.0}}
+
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-mixed","seconds":15.380093640000041,"step":8,"view":{"pitch":6.0,"roll":-15.0,"yaw":-8.0}}
+
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-mixed","seconds":14.11872029999995,"step":9,"view":{"pitch":-6.0,"roll":15.0,"yaw":8.0}}
+
+BOAYO_MOTION_STEP {"output_complete":true,"phase":"view-axis","seconds":13.843827260000126,"step":10,"view":{"pitch":0.0,"roll":0.0,"yaw":0.0}}
+
+[ 1927.047946] random: crng init done
+
+[ 1927.047946] random: crng init done

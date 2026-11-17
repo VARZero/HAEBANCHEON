@@ -1,0 +1,9 @@
+{
+  "source": "D:\\temp\\haebancheon-geometry-v13\\board-trial\\v13.delta",
+  "target": "/tmp/v13.delta",
+  "bytes": 312610,
+  "fnv1a": 870920834,
+  "sha256": "a9678a3c228c938d70a72af562681bd652eb782cd221b7774a4d45d38e28b6e1",
+  "seconds": 195.84,
+  "result": "PASS_TRANSFER_FNV"
+}

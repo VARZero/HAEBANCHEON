@@ -1,0 +1,17 @@
+{
+  "result": "PASS_LOCAL_DIAGNOSTIC_IMAGE_HARDWARE_PENDING",
+  "image": "D:\\temp\\gen3bosio\\boayo-launchtrace-v1\\ORYUKDO-KFB-BoAYO-launchtrace-v1.img",
+  "image_sha256": "4aa56a1358e94a2d5bd8663e7b811a4fa602af30764294a434af9fefb3bd8f20",
+  "bytes": 276824064,
+  "kernel": "6.12.0-oryukdo-launchtrace1",
+  "host_regression_tests": 9,
+  "pixel_and_scene_equivalence": "PASS",
+  "trace_events": 67,
+  "qemu_uart_trace": "PASS",
+  "qemu_boayo": "PASS_MOCK_BACKEND",
+  "sd_rtl": "PASS_MOCK_DDR",
+  "bitstream_changed": false,
+  "hardware_tested": false,
+  "performance_fix": false,
+  "bitstream_sha256": "fe1ce8e52f30f1b9bd7bad944a0bf6f981eef9bba01438c0d26b40da6126fdf0"
+}

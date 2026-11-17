@@ -1,0 +1,7 @@
+{
+  "command": "cat /tmp/view-play.log; /tmp/boayo-view-v8 view-status",
+  "seconds": 5.81,
+  "rc": 0,
+  "uart": "cat /tmp/view-play.log; /tmp/boayo-view-v8 view-status; echo BODMA_2bf7\r\r\r\n2d67_RC:$?\r\r\nBOAYO_VIEW_BEGIN {\"active\":true,\"error\":\"\",\"max_submit_ms\":0.0,\"mode\":\"camera-only; window updates paused\",\"period_ms\":50.0,\"pitch\":4.0,\"roll\":8.0,\"skipped\":0,\"submit_ms\":0.0,\"submitted\":0,\"yaw\":8.0}\r\r\nBOAYO_VIEW_END {\"active\":false,\"error\":\"\",\"max_submit_ms\":98.84890000012092,\"mode\":\"camera-only; window updates paused\",\"period_ms\":50.0,\"pitch\":4.0,\"roll\":8.0,\"skipped\":198,\"submit_ms\":46.025919999920006,\"submitted\":201,\"yaw\":8.0}\r\r\n{\"active\":false,\"error\":\"\",\"max_submit_ms\":98.84890000012092,\"mode\":\"camera-only; window updates paused\",\"period_ms\":50.0,\"pitch\":4.0,\"roll\":8.0,\"skipped\":198,\"submit_ms\":46.025919999920006,\"submitted\":201,\"yaw\":8.0}\r\r\nBODMA_2bf72d67_RC:0\r\r\n",
+  "observed_at": "2026-11-14T19:15:41.418431"
+}

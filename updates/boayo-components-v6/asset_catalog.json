@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "owner": "HAEBANCHEON / BoAYO",
+  "applications": [
+    {"kind":"dashboard", "placements":[[0,0],[-12,0],[12,0]]},
+    {"kind":"telemetry", "placements":[[0,0],[-12,0],[12,0]]},
+    {"kind":"sdk-pulse", "placements":[[0,0],[-12,0],[12,0]]}
+  ],
+  "shared_components": ["move", "resize_right", "close"],
+  "fallback": "Uncatalogued geometry remains functional through CPU computation. No angle snapping or feature removal."
+}

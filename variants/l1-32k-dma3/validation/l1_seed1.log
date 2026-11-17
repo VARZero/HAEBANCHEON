@@ -1,0 +1,2 @@
+PASS L1_32K_2WAY capacity I/D, LRU, byte stores, DMA visibility, refill races, independent responses, errors, random checks=5493 cycles=132010
+- soc/tests/tb_l1.sv:93: Verilog $finish

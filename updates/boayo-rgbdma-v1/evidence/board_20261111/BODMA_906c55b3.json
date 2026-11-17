@@ -1,0 +1,7 @@
+{
+  "command": "uname -r; cat /etc/oryukdo-image",
+  "seconds": 5.83,
+  "rc": 0,
+  "uart": "uname -r; cat /etc/oryukdo-image; echo BODMA_906c55b3_RC:$?\r\r\n6.12.0-oryukdo-rgbdma1\r\r\nORYUKDO-BoAYO-rgbdma-v1 / RGB background DMA / physical test pending\r\r\nBODMA_906c55b3_RC:0\r\r\n",
+  "observed_at": "2026-11-11T00:40:07.499855"
+}

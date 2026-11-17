@@ -1,0 +1,432 @@
+{
+  "10": {
+    "app_error": null,
+    "driver_profile": {
+      "available": true,
+      "batch_calls": 163,
+      "batch_copy_dma_us": 480191,
+      "batch_copy_us": 227566,
+      "batch_execute_us": 32883220,
+      "batch_fill_dma_us": 2189983,
+      "batch_validate_us": 123717,
+      "enabled": true,
+      "fast_paths": true,
+      "publish_calls": 32,
+      "publish_compare_us": 691225,
+      "publish_copy_us": 317289,
+      "publish_diff_us": 1462965,
+      "publish_finish_us": 31526,
+      "publish_mmio_us": 4244,
+      "publish_poll_us": 14338,
+      "publish_polls": 82,
+      "publish_sleep_us": 1474938,
+      "publish_transfer_us": 12950,
+      "publish_validate_us": 1109454,
+      "tile_calls": 1014,
+      "tile_cpu_us": 8015016,
+      "tile_cpu_words": 93819,
+      "tile_dma_bytes": 151148,
+      "tile_dma_calls": 469,
+      "tile_dma_us": 6864805,
+      "tile_fence_us": 270109,
+      "tile_mask_us": 6757836,
+      "units": "microseconds",
+      "version": 1
+    },
+    "output_profile": {
+      "backend": "kernel",
+      "command": 2,
+      "configure_us": 87,
+      "finish_us": 302,
+      "select_us": 23810,
+      "upload_ranges": 0,
+      "upload_us": 46173,
+      "uploaded_words": 0,
+      "user_copy_us": 9944,
+      "validate_us": 33907,
+      "wait_us": 86945
+    },
+    "performance": {
+      "frame_interval_ms": 10104.054779999842,
+      "frame_limit": 2.0,
+      "frame_pacing": "start-to-start",
+      "full_update_count": 1,
+      "last_apps_ms": 1690.5099199998403,
+      "last_compose_ms": 4513.14820000016,
+      "last_upload_ms": 0.0,
+      "no_op_update_count": 0,
+      "patch_update_count": 31,
+      "render_count": 31,
+      "rendered_generation": 179,
+      "update_words": 4480,
+      "uptime_seconds": 289.0328526200001
+    },
+    "phase": "apps",
+    "profile": {
+      "app_present": [
+        37822277,
+        25491498,
+        141
+      ],
+      "apps": [
+        64256349,
+        42590405,
+        97
+      ],
+      "blend": [
+        36400931,
+        25253903,
+        220
+      ],
+      "captions": [
+        9487714,
+        6874861,
+        253
+      ],
+      "compose": [
+        129354655,
+        79440826,
+        31
+      ],
+      "descriptors": [
+        8017432,
+        5048656,
+        220
+      ],
+      "enabled": true,
+      "finish": [
+        12997983,
+        8205182,
+        31
+      ],
+      "image": [
+        12580062,
+        8021227,
+        108
+      ],
+      "image_publish": [
+        842351,
+        573577,
+        108
+      ],
+      "layers": [
+        20430289,
+        13039484,
+        31
+      ],
+      "nested": true,
+      "output_publish": [
+        5498205,
+        3879883,
+        31
+      ],
+      "pointer": [
+        735174,
+        400118,
+        62
+      ],
+      "projection_wait": [
+        10892119,
+        3127323,
+        220
+      ],
+      "state_publish": [
+        62343612,
+        41905116,
+        46
+      ],
+      "texture": [
+        16529547,
+        9392247,
+        128
+      ],
+      "tiles_prepare": [
+        13037732,
+        8411113,
+        31
+      ],
+      "units": "microseconds",
+      "workspace": [
+        20303512,
+        14169616,
+        97
+      ]
+    },
+    "projection": {
+      "cpu_output_shadow_words": 4480,
+      "cpu_result_download_words": 0,
+      "cpu_scene_words": 0,
+      "device_ready_frames": 1,
+      "dirty_tiles": 28,
+      "fallback_frames": 0,
+      "geometry_builds": 0,
+      "geometry_cull_us_total": 0,
+      "geometry_descriptor_us_total": 0,
+      "geometry_insert_us_total": 0,
+      "geometry_prepare_us_total": 0,
+      "geometry_tiles_evaluated_total": 0,
+      "hardware_frames": 31,
+      "jobs_per_core": [
+        57,
+        57
+      ],
+      "lazy_copied_tiles_total": 173,
+      "mask_build_us_total": 0,
+      "mask_builds": 0,
+      "mask_fast_tiles_total": 0,
+      "mask_integer_samples_total": 0,
+      "mask_precise_samples_total": 0,
+      "mask_samples_evaluated_total": 0,
+      "masked_tiles_total": 1014,
+      "mode": "ddr-resident-dirty-tiles",
+      "packed_mask_tiles_total": 1014,
+      "plan_cache": {
+        "builtin_loads": 10,
+        "hits": 1,
+        "loads": 10,
+        "misses": 0,
+        "payload_scan_bytes": 0,
+        "rejected": 0,
+        "revision": "967005ee422f912c39464b07fc4c366acb1c3b33fb2e972b2449e0dd8eb4a19f"
+      },
+      "precomputed_layers_total": 11,
+      "redrawn_tiles": 28,
+      "reused_tiles_total": 0,
+      "solid_tiles_total": 0,
+      "texture_pool": {
+        "capacity_bytes": 4194304,
+        "evictions": 0,
+        "full_uploads": 11,
+        "partial_uploads": 69,
+        "resident_bytes": 3545600,
+        "resident_windows": 11,
+        "reuses": 48,
+        "staged_copy_bytes": 9800,
+        "upload_bytes": 6755400,
+        "upload_calls": 137
+      },
+      "texture_reuses_total": 48,
+      "texture_uploads_total": 80,
+      "tile_fills_total": 403,
+      "total_hw_jobs": 3176,
+      "update_kind": "tiles"
+    },
+    "render_error": null,
+    "snapshot_time": 2423.60799962
+  },
+  "11": {
+    "app_error": null,
+    "driver_profile": {
+      "available": true,
+      "batch_calls": 181,
+      "batch_copy_dma_us": 716419,
+      "batch_copy_us": 268118,
+      "batch_execute_us": 40191566,
+      "batch_fill_dma_us": 2806288,
+      "batch_validate_us": 147923,
+      "enabled": true,
+      "fast_paths": true,
+      "publish_calls": 34,
+      "publish_compare_us": 718351,
+      "publish_copy_us": 337724,
+      "publish_diff_us": 1552369,
+      "publish_finish_us": 36207,
+      "publish_mmio_us": 4510,
+      "publish_poll_us": 15059,
+      "publish_polls": 88,
+      "publish_sleep_us": 1611081,
+      "publish_transfer_us": 17934,
+      "publish_validate_us": 1180547,
+      "tile_calls": 1249,
+      "tile_cpu_us": 9361520,
+      "tile_cpu_words": 109121,
+      "tile_dma_bytes": 204452,
+      "tile_dma_calls": 590,
+      "tile_dma_us": 9163752,
+      "tile_fence_us": 328927,
+      "tile_mask_us": 8035821,
+      "units": "microseconds",
+      "version": 1
+    },
+    "output_profile": {
+      "backend": "kernel",
+      "command": 1,
+      "configure_us": 88,
+      "finish_us": 4415,
+      "select_us": 1194,
+      "upload_ranges": 20,
+      "upload_us": 60362,
+      "uploaded_words": 55,
+      "user_copy_us": 9261,
+      "validate_us": 37683,
+      "wait_us": 96380
+    },
+    "performance": {
+      "frame_interval_ms": 39788.426560000065,
+      "frame_limit": 2.0,
+      "frame_pacing": "start-to-start",
+      "full_update_count": 1,
+      "last_apps_ms": 1835.5591599997751,
+      "last_compose_ms": 82690.53777999988,
+      "last_upload_ms": 0.0,
+      "no_op_update_count": 0,
+      "patch_update_count": 33,
+      "render_count": 33,
+      "rendered_generation": 216,
+      "update_words": 4480,
+      "uptime_seconds": 415.2046014800003
+    },
+    "phase": "apps",
+    "profile": {
+      "app_present": [
+        41149814,
+        27436207,
+        157
+      ],
+      "apps": [
+        94990828,
+        65302619,
+        104
+      ],
+      "blend": [
+        44163148,
+        29962695,
+        240
+      ],
+      "captions": [
+        11304211,
+        8250836,
+        299
+      ],
+      "compose": [
+        216959842,
+        128105532,
+        33
+      ],
+      "descriptors": [
+        9595571,
+        5785647,
+        240
+      ],
+      "enabled": true,
+      "finish": [
+        14016872,
+        8846959,
+        33
+      ],
+      "image": [
+        13689819,
+        8625823,
+        117
+      ],
+      "image_publish": [
+        907746,
+        619770,
+        117
+      ],
+      "layers": [
+        86340381,
+        49990196,
+        33
+      ],
+      "nested": true,
+      "output_publish": [
+        5881727,
+        4123566,
+        33
+      ],
+      "pointer": [
+        825137,
+        458735,
+        66
+      ],
+      "projection_wait": [
+        12705971,
+        3626943,
+        240
+      ],
+      "state_publish": [
+        67734329,
+        45797077,
+        49
+      ],
+      "texture": [
+        22774366,
+        12746822,
+        140
+      ],
+      "tiles_prepare": [
+        15078442,
+        9473778,
+        33
+      ],
+      "units": "microseconds",
+      "workspace": [
+        42732343,
+        31254812,
+        104
+      ]
+    },
+    "projection": {
+      "cpu_output_shadow_words": 4480,
+      "cpu_result_download_words": 0,
+      "cpu_scene_words": 0,
+      "device_ready_frames": 1,
+      "dirty_tiles": 190,
+      "fallback_frames": 0,
+      "geometry_builds": 4,
+      "geometry_cull_us_total": 10617392,
+      "geometry_descriptor_us_total": 16738819,
+      "geometry_insert_us_total": 359337,
+      "geometry_prepare_us_total": 209627,
+      "geometry_tiles_evaluated_total": 484,
+      "hardware_frames": 33,
+      "jobs_per_core": [
+        214,
+        208
+      ],
+      "lazy_copied_tiles_total": 173,
+      "mask_build_us_total": 32615582,
+      "mask_builds": 4,
+      "mask_fast_tiles_total": 59,
+      "mask_integer_samples_total": 52043,
+      "mask_precise_samples_total": 991,
+      "mask_samples_evaluated_total": 113664,
+      "masked_tiles_total": 1249,
+      "mode": "ddr-resident-dirty-tiles",
+      "packed_mask_tiles_total": 1249,
+      "plan_cache": {
+        "builtin_loads": 10,
+        "hits": 1,
+        "loads": 10,
+        "misses": 8,
+        "payload_scan_bytes": 0,
+        "rejected": 0,
+        "revision": "967005ee422f912c39464b07fc4c366acb1c3b33fb2e972b2449e0dd8eb4a19f"
+      },
+      "precomputed_layers_total": 11,
+      "redrawn_tiles": 158,
+      "reused_tiles_total": 0,
+      "solid_tiles_total": 0,
+      "texture_pool": {
+        "capacity_bytes": 4194304,
+        "evictions": 0,
+        "full_uploads": 14,
+        "partial_uploads": 76,
+        "resident_bytes": 3574400,
+        "resident_windows": 14,
+        "reuses": 50,
+        "staged_copy_bytes": 19600,
+        "upload_bytes": 8630800,
+        "upload_calls": 156
+      },
+      "texture_reuses_total": 50,
+      "texture_uploads_total": 90,
+      "tile_fills_total": 503,
+      "total_hw_jobs": 3712,
+      "update_kind": "tiles"
+    },
+    "render_error": null,
+    "snapshot_time": 2549.72706424
+  }
+}

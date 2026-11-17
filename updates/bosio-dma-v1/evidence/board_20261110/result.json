@@ -1,0 +1,136 @@
+{
+  "result": "PASS_BOARD_DMA_SD_BOAYO_LAUNCHER_UNVERIFIED",
+  "observed_at": "2026-11-10T23:24:02.169225",
+  "kernel": "6.12.0-oryukdo-bosio-dma1",
+  "bitstream_sha256": "fe1ce8e52f30f1b9bd7bad944a0bf6f981eef9bba01438c0d26b40da6126fdf0",
+  "selected_image_sha256": "2039a806c008e15ee5282e132b969bfaebf113f4c7cbee4b0b89a9288f41e92c",
+  "dma_check": {
+    "result": "PASS",
+    "upload_bytes": 4096,
+    "copy_bytes": 4096,
+    "fill_bytes": 4096,
+    "overlap_rejected": true,
+    "irq_before": 0,
+    "irq_after": 3
+  },
+  "sd_check": {
+    "result": "PASS",
+    "bytes": 262144,
+    "method": "write+fsync+normal unmount/remount+every byte compare",
+    "power_cycle_persistence_tested": false
+  },
+  "boayo": {
+    "mode": "physical BOSIO",
+    "started": true,
+    "blank_metadata_ready": true,
+    "blank_metadata_words": 4480,
+    "dma_irq_after_blank": 11,
+    "last_reported_phase": "desktop_initialization",
+    "launcher_observed": false,
+    "hdmi_functional_pass": false,
+    "wasd_tested": false
+  },
+  "interruption": "사용자가 전원선을 건드렸다고 알림. 재인가 확인 및 재구성 대기.",
+  "notes": [
+    "캡처 장치는 정상 수신했으나 마지막 프레임은 검은 화면. HDMI2 연결 여부를 확인하던 중 전원 이벤트가 발생함.",
+    "상태 조회 87~103초, 첫 데스크톱 초기화 지연 원인은 미확정.",
+    "/proc/task/wchan은 이 커널에 없어서 해당 진단 명령만 실패. 실제 stat 읽기는 성공."
+  ],
+  "commands": [
+    {
+      "command": "uname -r; cat /etc/oryukdo-image; cat /proc/mounts; cat /proc/interrupts",
+      "seconds": 11.13,
+      "rc": 0,
+      "uart": "uname -r; cat /etc/oryukdo-image; cat /proc/mounts; cat /proc/interrupt\r\r\r\ns; echo BODMA_d395ddd6_RC:$?\r\r\n6.12.0-oryukdo-bosio-dma1\r\r\nORYUKDO-BOSIO-DMA-v1 / SD4 Linux v2 + BoAYO memory DMA / physical test pending\r\r\nrootfs / rootfs rw 0 0\r\r\ndevtmpfs /dev devtmpfs rw,relatime 0 0\r\r\n/dev/mmcblk0p2 /data ext4 rw,relatime 0 0\r\r\nproc /proc proc rw,relatime 0 0\r\r\nsysfs /sys sysfs rw,relatime 0 0\r\r\n           CPU0       \r\r\n  1:          0  SiFive PLIC   2 Edge      10009000.dma-controller\r\r\n  2:         96  SiFive PLIC   1 Edge      10008000.mmc\r\r\n  5:      10369  RISC-V INTC   5 Edge      riscv-timer\r\r\nBODMA_d395ddd6_RC:0\r\r\n",
+      "observed_at": "2026-11-10T23:08:54.563347"
+    },
+    {
+      "command": "bosio-dma-check",
+      "seconds": 4.31,
+      "rc": 0,
+      "uart": "bosio-dma-check; echo BODMA_fca12e95_RC:$?\r\r\nPASS BOSIO_DMA upload=4096 copy=4096 fill=4096 overlap_rejected irq_completion\r\r\ncopy_ops=2 fill_ops=1 upload_ops=1\r\r\nBODMA_fca12e95_RC:0\r\r\n",
+      "observed_at": "2026-11-10T23:08:58.877198"
+    },
+    {
+      "command": "cat /proc/interrupts",
+      "seconds": 4.32,
+      "rc": 0,
+      "uart": "cat /proc/interrupts; echo BODMA_446d7926_RC:$?\r\r\n           CPU0       \r\r\n  1:          3  SiFive PLIC   2 Edge      10009000.dma-controller\r\r\n  2:         96  SiFive PLIC   1 Edge      10008000.mmc\r\r\n  5:      11206  RISC-V INTC   5 Edge      riscv-timer\r\r\nBODMA_446d7926_RC:0\r\r\n",
+      "observed_at": "2026-11-10T23:09:03.195594"
+    },
+    {
+      "command": "storage-check",
+      "seconds": 135.65,
+      "rc": 0,
+      "uart": "oryukdo# storage-check; echo BODMA_a000c3f3_RC:$?\r\r\nWRITE_BEGIN bytes=262144\r\r\nWRITE_FSYNC_DONE\r\r\n[  220.422286] EXT4-fs (mmcblk0p2): unmounting filesystem 2e4819b1-337f-4288-9fe0-5c784b69f9cc.\r\r\n[  220.422286] EXT4-fs (mmcblk0p2): unmounting filesystem 2e4819b1-337f-4288-9fe0-5c784b69f9cc.\r\nUNMOUNT_DONE\r\r\n[  225.952515] EXT4-fs (mmcblk0p2): mounted filesystem 2e4819b1-337f-4288-9fe0-5c784b69f9cc r/w with ordered data mode. Quota mode: disabled.\r\r\n[  225.952515] EXT4-fs (mmcblk0p2): mounted filesystem 2e4819b1-337f-4288-9fe0-5c784b69f9cc r/w with ordered data mode. Quota mode: disabled.\r\nREAD_AFTER_REMOUNT_BEGIN\r\r\nREAD_PROGRESS bytes=65536\r\r\nREAD_PROGRESS bytes=131072\r\r\nREAD_PROGRESS bytes=196608\r\r\nREAD_PROGRESS bytes=262144\r\r\nPASS SD ext4 write/read: bytes=262144 exact_byte_compare\r\r\nBODMA_a000c3f3_RC:0\r\r\n",
+      "observed_at": "2026-11-10T23:11:18.850210"
+    },
+    {
+      "command": "cat /proc/interrupts; sync",
+      "seconds": 12.35,
+      "rc": 0,
+      "uart": "oryukdo# cat /proc/interrupts; sync; echo BODMA_4e0cbcb0_RC:$?\r\r\n           CPU0       \r\r\n  1:          3  SiFive PLIC   2 Edge      10009000.dma-controller\r\r\n  2:       2458  SiFive PLIC   1 Edge      10008000.mmc\r\r\n  5:      24860  RISC-V INTC   5 Edge      riscv-timer\r\r\nBODMA_4e0cbcb0_RC:0\r\r\n",
+      "observed_at": "2026-11-10T23:11:31.202981"
+    },
+    {
+      "command": "boayo-start",
+      "seconds": 34.62,
+      "rc": 0,
+      "uart": "boayo-start; echo BODMA_28309894_RC:$?\r\r\nBoAYO C++ service started; initialization continues. boayo-status / boayo-keys / boayo-stop\r\r\n{\"features\":[\"windows\",\"pointer\",\"input-injection\",\"button-events\",\"scene-stream\",\"spatial-workspace\",\"pointer-capture\"],\"headless\":false,\"m\":32,\"mock_backend\":false,\"runtime\":\"C++17\",\"version\":2}\r\r\nBODMA_28309894_RC:0\r\r\n",
+      "observed_at": "2026-11-10T23:12:11.005777"
+    },
+    {
+      "command": "boayo-status; cat /tmp/boayo-wm.log",
+      "seconds": 101.35,
+      "rc": 0,
+      "uart": "boayo-status; cat /tmp/boayo-wm.log; echo BODMA_bf7e8104_RC:$?\r\r\n{\r\r\n  \"app_error\": null,\r\r\n  \"output\": {\r\r\n    \"commits\": 0,\r\r\n    \"mock_backend\": false\r\r\n  },\r\r\n  \"projection\": {},\r\r\n  \"render_error\": null,\r\r\n  \"runtime\": \"C++17\",\r\r\n  \"service\": {\r\r\n    \"phase\": \"desktop_initialization\",\r\r\n    \"queued_requests\": 1,\r\r\n    \"snapshot_age_seconds\": 100.43096660000003,\r\r\n    \"state_is_snapshot\": true\r\r\n  },\r\r\n  \"windows\": []\r\r\n}\r\r\nBOAYO_NATIVE_SERVICE /tmp/bosio-wm.sock initializing; query boayo-status\r\r\nBOAYO_NATIVE_INIT backend=BOSIO_ABI3\r\r\nBOAYO_BLANK_METADATA_READY words=4480 tile_composition=0 projection_jobs=0\r\r\nBODMA_bf7e8104_RC:0\r\r\n",
+      "observed_at": "2026-11-10T23:13:58.294701"
+    },
+    {
+      "command": "boayo-status; cat /proc/interrupts",
+      "seconds": 103.33,
+      "rc": 0,
+      "uart": "boayo-status; cat /proc/interrupts; echo BODMA_aa7da536_RC:$?\r\r\n{\r\r\n  \"app_error\": null,\r\r\n  \"output\": {\r\r\n    \"commits\": 0,\r\r\n    \"mock_backend\": false\r\r\n  },\r\r\n  \"projection\": {},\r\r\n  \"render_error\": null,\r\r\n  \"runtime\": \"C++17\",\r\r\n  \"service\": {\r\r\n    \"phase\": \"desktop_initialization\",\r\r\n    \"queued_requests\": 2,\r\r\n    \"snapshot_age_seconds\": 215.09020524,\r\r\n    \"state_is_snapshot\": true\r\r\n  },\r\r\n  \"windows\": []\r\r\n}\r\r\n           CPU0       \r\r\n  1:         11  SiFive PLIC   2 Edge      10009000.dma-controller\r\r\n  2:       2696  SiFive PLIC   1 Edge      10008000.mmc\r\r\n  5:      50207  RISC-V INTC   5 Edge      riscv-timer\r\r\nBODMA_aa7da536_RC:0\r\r\n",
+      "observed_at": "2026-11-10T23:15:51.329033"
+    },
+    {
+      "command": "ps; cat /tmp/boayo-wm.log",
+      "seconds": 95.91,
+      "rc": 0,
+      "uart": "ps; cat /tmp/boayo-wm.log; echo BODMA_2c23dbc0_RC:$?\r\r\n    1 root       192 S    /init.console\r\r\n    2 root         0 SW   [kthreadd]\r\r\n    3 root         0 SW   [pool_workqueue_]\r\r\n    4 root         0 IW<  [kworker/R-slub_]\r\r\n    5 root         0 IW   [kworker/0:0-eve]\r\r\n    7 root         0 IW   [kworker/u4:0-ex]\r\r\n    8 root         0 IW<  [kworker/R-mm_pe]\r\r\n    9 root         0 SW   [ksoftirqd/0]\r\r\n   10 root         0 SW   [kdevtmpfs]\r\r\n   11 root         0 SW   [oom_reaper]\r\r\n   12 root         0 IW<  [kworker/R-write]\r\r\n   13 root         0 IW<  [kworker/R-kbloc]\r\r\n   14 root         0 SW   [kswapd0]\r\r\n   15 root         0 IW   [kworker/u4:1-ev]\r\r\n   16 root         0 IW   [kworker/0:1-eve]\r\r\n   17 root         0 SW   [khvcd]\r\r\n   19 root         0 IW<  [kworker/R-mmc_c]\r\r\n   21 root         0 IW<  [kworker/0:1H-kb]\r\r\n   27 root       496 S    sh -i\r\r\n   35 root         0 IW<  [kworker/0:2H-kb]\r\r\n   36 root         0 IW   [kworker/u4:2-ev]\r\r\n   37 root         0 SW   [jbd2/mmcblk0p2-]\r\r\n   38 root         0 IW<  [kworker/R-ext4-]\r\r\n   43 root      3444 R    /usr/bin/boayo-native start\r\r\n   49 root       504 R    {ps} sh -i\r\r\nBOAYO_NATIVE_SERVICE /tmp/bosio-wm.sock initializing; query boayo-status\r\r\nBOAYO_NATIVE_INIT backend=BOSIO_ABI3\r\r\nBOAYO_BLANK_METADATA_READY words=4480 tile_composition=0 projection_jobs=0\r\r\nBODMA_2c23dbc0_RC:0\r\r\n",
+      "observed_at": "2026-11-10T23:17:45.895332"
+    },
+    {
+      "command": "for p in /proc/43/task/*; do cat $p/stat; cat $p/wchan; done",
+      "seconds": 78.17,
+      "rc": 1,
+      "uart": "for p in /proc/43/task/*; do cat $p/stat; cat $p/wchan; done; echo BODM\r\r\r\nA_cbb4eb96_RC:$?\r\r\n43 (boayo-native) R 1 43 43 0 -1 4194368 40 0 0 0 4242 9972 0 0 20 0 2 0 27773 3526656 684 4294967295 65536 1823417 2641765200 0 0 0 0 4096 16386 0 0 0 17 0 0 0 0 0 0 1827024 1840888 10207232 2641768346 2641768374 2641768374 2641768422 0\r\r\ncat: can't open '/proc/43/task/43/wchan': No such file or directory\r\r\n44 (boayo-native) R 1 43 43 0 -1 4194624 352 0 0 0 7713 7452 0 0 20 0 2 0 27977 3526656 684 4294967295 65536 1823417 2641765200 0 0 0 0 4096 16386 0 0 0 -1 0 0 0 0 0 0 1827024 1840888 10207232 2641768346 2641768374 2641768374 2641768422 0\r\r\ncat: can't open '/proc/43/task/44/wchan': No such file or directory\r\r\nBODMA_cbb4eb96_RC:1\r\r\n",
+      "observed_at": "2026-11-10T23:19:27.631847"
+    },
+    {
+      "command": "boayo-status",
+      "seconds": 87.17,
+      "rc": 0,
+      "uart": "boayo-status; echo BODMA_61080e19_RC:$?\r\r\n{\r\r\n  \"app_error\": null,\r\r\n  \"output\": {\r\r\n    \"commits\": 0,\r\r\n    \"mock_backend\": false\r\r\n  },\r\r\n  \"projection\": {},\r\r\n  \"render_error\": null,\r\r\n  \"runtime\": \"C++17\",\r\r\n  \"service\": {\r\r\n    \"phase\": \"desktop_initialization\",\r\r\n    \"queued_requests\": 3,\r\r\n    \"snapshot_age_seconds\": 568.95062104,\r\r\n    \"state_is_snapshot\": true\r\r\n  },\r\r\n  \"windows\": []\r\r\n}\r\r\nBODMA_61080e19_RC:0\r\r\n",
+      "observed_at": "2026-11-10T23:21:35.876018"
+    }
+  ],
+  "power_off_preparation": {
+    "application_paused": true,
+    "sync_completed": true,
+    "data_unmounted": true,
+    "uart_marker": "PASS unmount /data",
+    "physical_power_off_observed": false
+  },
+  "second_boot": {
+    "new_kernel_verified": true,
+    "boayo_started": true,
+    "last_phase": "desktop_initialization",
+    "launcher_or_hdmi_verified": false
+  },
+  "pc_sampling": {
+    "success": false,
+    "reason": "UART helper transfer acknowledgement matcher failed before any ptrace sample; transfer stopped and terminal echo restored."
+  },
+  "recorded_at": "2026-11-10T23:53:24.522762"
+}

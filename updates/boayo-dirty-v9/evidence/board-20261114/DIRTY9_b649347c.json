@@ -1,0 +1,8 @@
+{
+  "command": "boayo-stop",
+  "seconds": 4.276,
+  "rc": 0,
+  "uart": "boayo-stop; echo DIRTY9_b649347c_RC:$?\r\r\nDIRTY9_b649347c_RC:0\r\r\n",
+  "observed_at": "2026-11-14T21:01:36.162008",
+  "log_start": 210838
+}

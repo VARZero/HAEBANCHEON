@@ -1,0 +1,6 @@
+{
+  "sd_unmounted": true,
+  "service_stopped": true,
+  "kernel_poweroff_message": true,
+  "physical_power_switch": "manual"
+}

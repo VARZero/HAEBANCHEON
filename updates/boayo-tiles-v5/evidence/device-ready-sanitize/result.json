@@ -1,0 +1,11 @@
+{
+  "result": "PASS_DEVICE_READY",
+  "checks": [
+    "independent C++/Python device commands exactly equal",
+    "prepared and generic execution paths produce identical first scene",
+    "missing/truncated/bad offsets/descriptors/batch/directory safely fall back to identical scene",
+    "7 injected failures: no incomplete presentation; retries blocked without further writes"
+  ],
+  "candidate_sha256": "02e52ca8377304ec3790e1e64561801c1a2e4e08c3f1814f8380d9493de351d7",
+  "hardware": false
+}

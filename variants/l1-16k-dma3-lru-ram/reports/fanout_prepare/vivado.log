@@ -1,0 +1,166 @@
+#-----------------------------------------------------------
+# Vivado v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 05:00:03 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Sat Nov 14 03:49:38 2026
+# Process ID: 16340
+# Current directory: D:/ORYUKDO-Gen3_AB_integrated_unverified/ORYUKDO-Gen3
+# Command line: vivado.exe -mode batch -source D:/ORYUKDO-Gen3_AB_integrated_unverified/ORYUKDO-Gen3/work/ORYUKDO-3d5i_BOSIO_SoC/variants/l1-16k-dma3-lru-ram/soc/board/prepare_output_fanout.tcl -log D:/temp/haebancheon-l1-16k-dma3/output_fanout_prepare/vivado.log -journal D:/temp/haebancheon-l1-16k-dma3/output_fanout_prepare/vivado.jou -tclargs D:/temp/haebancheon-l1-16k-dma3/board_route_lru_v1/placed_optimized.dcp D:/temp/haebancheon-l1-16k-dma3/output_fanout_prepare
+# Log file: D:/temp/haebancheon-l1-16k-dma3/output_fanout_prepare/vivado.log
+# Journal file: D:/temp/haebancheon-l1-16k-dma3/output_fanout_prepare/vivado.jou
+# Running On: VieupE-Desk, OS: Windows, CPU Frequency: 3793 MHz, CPU Physical cores: 16, Host memory: 33412 MB
+#-----------------------------------------------------------
+source D:/ORYUKDO-Gen3_AB_integrated_unverified/ORYUKDO-Gen3/work/ORYUKDO-3d5i_BOSIO_SoC/variants/l1-16k-dma3-lru-ram/soc/board/prepare_output_fanout.tcl
+# set_param general.maxThreads 2
+# set input [file normalize [lindex $argv 0]]
+# set out [file normalize [lindex $argv 1]]
+# file mkdir $out
+# open_checkpoint $input
+Command: open_checkpoint D:/temp/haebancheon-l1-16k-dma3/board_route_lru_v1/placed_optimized.dcp
+
+Starting open_checkpoint Task
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.023 . Memory (MB): peak = 448.422 ; gain = 0.000
+INFO: [Device 21-403] Loading part xc7a200tfbg484-2
+Netlist sorting complete. Time (s): cpu = 00:00:02 ; elapsed = 00:00:01 . Memory (MB): peak = 1381.199 ; gain = 7.664
+INFO: [Netlist 29-17] Analyzing 18213 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 1 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2022.2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Timing 38-478] Restoring timing data from binary archive.
+INFO: [Timing 38-479] Binary timing data restore complete.
+INFO: [Project 1-856] Restoring constraints from binary archive.
+INFO: [Constraints 18-5170] The checkpoint was created with non-default parameter values which do not match the current Vivado settings.  Mismatching parameters are:
+  general.maxThreads
+INFO: [Project 1-853] Binary constraint restore complete.
+Reading XDEF placement.
+Reading placer database...
+Reading XDEF routing.
+Read XDEF Files: Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 2768.328 ; gain = 163.965
+Restored from archive | CPU: 9.000000 secs | Memory: 0.000000 MB |
+Finished XDEF File Restore: Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 2768.328 ; gain = 163.965
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.054 . Memory (MB): peak = 2768.328 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 1365 instances were transformed.
+  IOBUF => IOBUF (IBUF, OBUFT): 9 instances
+  IOBUFDS_DIFF_OUT_INTERMDISABLE => IOBUFDS_DIFF_OUT_INTERMDISABLE (IBUFDS_INTERMDISABLE_INT(x2), INV, OBUFTDS(x2)): 4 instances
+  IOBUF_INTERMDISABLE => IOBUF_INTERMDISABLE (IBUF_INTERMDISABLE, OBUFT): 32 instances
+  OBUFDS => OBUFDS_DUAL_BUF (INV, OBUFDS(x2)): 1 instance 
+  RAM128X1D => RAM128X1D (MUXF7(x2), RAMD64E(x4)): 152 instances
+  RAM16X1S => RAM32X1S (RAMS32): 96 instances
+  RAM256X1S => RAM256X1S (MUXF7(x2), MUXF8, RAMS64E(x4)): 122 instances
+  RAM32M => RAM32M (RAMD32(x6), RAMS32(x2)): 352 instances
+  RAM32X1D => RAM32X1D (RAMD32(x2)): 25 instances
+  RAM64M => RAM64M (RAMD64E(x4)): 544 instances
+  RAM64X1D => RAM64X1D (RAMD64E(x2)): 28 instances
+
+INFO: [Project 1-604] Checkpoint was created with Vivado v2022.2 (64-bit) build 3671981
+OpenCheckpoint Checksum | Checksum: 10416ce54
+----- Checksum: PlaceDB: 37f0840b ShapeSum: cc264a49 RouteDB: 00000000 
+open_checkpoint: Time (s): cpu = 00:00:48 ; elapsed = 00:00:53 . Memory (MB): peak = 2768.328 ; gain = 2319.906
+# set target_name {system/bosio/output0/u_projector/E[0]}
+# set nets [get_nets -hier -filter [format {NAME == "%s"} $target_name]]
+# if {[llength $nets]!=1} {error "Observed projector enable net not found: $target_name"}
+# set loads [get_pins -leaf -of_objects $nets -filter {DIRECTION == IN}]
+# set drivers [get_pins -leaf -of_objects $nets -filter {DIRECTION == OUT}]
+# if {[llength $loads]<512 || [llength $drivers]!=1} {error "Unexpected target connectivity"}
+# set driver [get_cells -of_objects $drivers]
+# if {![string match LUT* [get_property REF_NAME $driver]]} {error "Expected combinational LUT driver"}
+# set fd [open $out/target.txt w]
+# puts $fd "net=$nets\ndriver=$driver\nloads_before=[llength $loads]"
+# close $fd
+# set_property FORCE_MAX_FANOUT 128 $nets
+# phys_opt_design -force_replication_on_nets $nets
+Command: phys_opt_design -force_replication_on_nets [get_nets -hier -filter {NAME == "system/bosio/output0/u_projector/E[0]"}]
+Attempting to get a license for feature 'Implementation' and/or device 'xc7a200t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a200t'
+INFO: [Vivado_Tcl 4-166] Using parent net 'system/bosio/output0/u_display_transform/v1_reg_16[0]' of the net 'system/bosio/output0/u_projector/E[0]'
+
+Starting Initial Update Timing Task
+
+Time (s): cpu = 00:00:31 ; elapsed = 00:00:18 . Memory (MB): peak = 2981.367 ; gain = 213.039
+INFO: [Vivado_Tcl 4-1435] PhysOpt_Tcl_Interface Runtime Before Starting Physical Synthesis Task | CPU: 32.00s |  WALL: 19.39s
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.054 . Memory (MB): peak = 2982.238 ; gain = 0.871
+
+Starting Physical Synthesis Task
+
+Phase 1 Physical Synthesis Initialization
+INFO: [Physopt 32-721] Multithreading enabled for phys_opt_design using a maximum of 2 CPUs
+WARNING: [Place 30-34] Design utilization is very high. Please run report_utilization command to see design utilization.
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=0.265 | TNS=0.000 |
+Phase 1 Physical Synthesis Initialization | Checksum: 10086d519
+
+Time (s): cpu = 00:00:24 ; elapsed = 00:00:12 . Memory (MB): peak = 3156.738 ; gain = 174.500
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=0.000 | TNS=0.000 |
+
+Phase 2 Very High Fanout Optimization
+INFO: [Physopt 32-76] Pass 1. Identified 1 candidate net for fanout optimization.
+INFO: [Physopt 32-81] Processed net system/bosio/output0/u_display_transform/v1_reg_16[0]. Replicated 12 times.
+INFO: [Physopt 32-232] Optimized 1 net. Created 12 new instances.
+INFO: [Physopt 32-775] End 1 Pass. Optimized 1 net or cell. Created 12 new cells, deleted 0 existing cell and moved 0 existing cell
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=0.000 | TNS=0.000 |
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.147 . Memory (MB): peak = 3164.672 ; gain = 0.000
+Phase 2 Very High Fanout Optimization | Checksum: 11fb559f0
+
+Time (s): cpu = 00:00:30 ; elapsed = 00:00:17 . Memory (MB): peak = 3164.672 ; gain = 182.434
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.049 . Memory (MB): peak = 3164.672 ; gain = 0.000
+INFO: [Physopt 32-603] Post Physical Optimization Timing Summary | WNS=0.265 | TNS=0.000 |
+
+Summary of Physical Synthesis Optimizations
+============================================
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+|  Optimization       |  WNS Gain (ns)  |  TNS Gain (ns)  |  Added Cells  |  Removed Cells  |  Optimized Cells/Nets  |  Dont Touch  |  Iterations  |  Elapsed   |
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+|  Very High Fanout   |          0.000  |          0.000  |           12  |              0  |                     1  |           0  |           1  |  00:00:03  |
+|  Total              |          0.000  |          0.000  |           12  |              0  |                     1  |           0  |           1  |  00:00:03  |
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.050 . Memory (MB): peak = 3164.906 ; gain = 0.000
+Ending Physical Synthesis Task | Checksum: 15799a372
+
+Time (s): cpu = 00:00:32 ; elapsed = 00:00:18 . Memory (MB): peak = 3164.906 ; gain = 182.668
+INFO: [Common 17-83] Releasing license: Implementation
+13 Infos, 1 Warnings, 0 Critical Warnings and 0 Errors encountered.
+phys_opt_design completed successfully
+phys_opt_design: Time (s): cpu = 00:01:04 ; elapsed = 00:00:38 . Memory (MB): peak = 3164.906 ; gain = 396.578
+# report_high_fanout_nets -load_types -max_nets 30 -file $out/fanout.rpt
+report_high_fanout_nets: Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 3164.906 ; gain = 0.000
+report_high_fanout_nets: Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 3164.906 ; gain = 0.000
+# report_utilization -file $out/utilization.rpt
+# report_timing_summary -file $out/timing.rpt
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -2, Delay Type: min_max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 2 CPUs
+WARNING: [Timing 38-436] There are set_bus_skew constraint(s) in this design. Please run report_bus_skew to ensure that bus skew requirements are met.
+report_timing_summary: Time (s): cpu = 00:00:39 ; elapsed = 00:00:23 . Memory (MB): peak = 3175.824 ; gain = 10.918
+# report_drc -no_waivers -file $out/drc.rpt
+Command: report_drc -no_waivers -file D:/temp/haebancheon-l1-16k-dma3/output_fanout_prepare/drc.rpt
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'D:/Xilinx2202/Vivado/2022.2/data/ip'.
+INFO: [DRC 23-27] Running DRC with 2 threads
+INFO: [Vivado_Tcl 2-168] The results of DRC are in file D:/temp/haebancheon-l1-16k-dma3/output_fanout_prepare/drc.rpt.
+report_drc completed successfully
+report_drc: Time (s): cpu = 00:00:26 ; elapsed = 00:00:14 . Memory (MB): peak = 3733.125 ; gain = 557.301
+# set fd [open $out/drc.rpt];
+# set drc [read $fd];
+# close $fd
+# if {[regexp -line {^[A-Z0-9-]+#[0-9]+ (Error|Critical Warning)} $drc] ||
+#     [regexp -line {^(DPIP-1|DPOP-1|DPOP-2|REQP-1839|REQP-1840|RBOR-1)#[0-9]+} $drc]} {
+#  error "Targeted fanout optimization introduced DRC violations"
+# }
+# write_checkpoint -force $out/fanout_optimized.dcp
+INFO: [Timing 38-480] Writing timing data to binary archive.
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Write XDEF Complete: Time (s): cpu = 00:00:21 ; elapsed = 00:00:10 . Memory (MB): peak = 3733.125 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'D:/temp/haebancheon-l1-16k-dma3/output_fanout_prepare/fanout_optimized.dcp' has been generated.
+write_checkpoint: Time (s): cpu = 00:00:35 ; elapsed = 00:00:25 . Memory (MB): peak = 3733.125 ; gain = 0.000
+# puts "TARGETED_PROJECTOR_ENABLE_PREPARED_NOT_ROUTED"
+TARGETED_PROJECTOR_ENABLE_PREPARED_NOT_ROUTED
+# close_design
+# exit
+INFO: [Common 17-206] Exiting Vivado at Sat Nov 14 03:52:24 2026...

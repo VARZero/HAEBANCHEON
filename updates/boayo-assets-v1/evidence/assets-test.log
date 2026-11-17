@@ -1,0 +1,13 @@
+{
+  "result": "PASS_ASSETS_AND_PROJECTED_SCENES",
+  "checks": [
+    "132 precomputed UI variants bit-exact against prior executable",
+    "full scenes exact after movement, partial edit, fill, restore, hover, repeated publication; resident reuse and mutation invalidation exercised",
+    "first desktop uses asset with no rounded/circle CPU drawing",
+    "missing/truncated/CRC/header/overflow asset safely falls back with identical pixels"
+  ],
+  "variants": 132,
+  "hardware": false,
+  "baseline_sha256": "3db81667ab2d8c0a0323aca674628116922828373ad9430734db94f85b5da460",
+  "candidate_sha256": "195b22ba233585dd37a45ebad9ecbe601f26902c8e5ea1d126098fbe14299f27"
+}

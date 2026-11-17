@@ -1,0 +1,350 @@
+{
+  "result": "PASS_DEVICE_ACKNOWLEDGED",
+  "steps": [
+    {
+      "output_complete": true,
+      "phase": "view-axis",
+      "seconds": 14.622168939999938,
+      "step": 1,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "view-axis",
+      "seconds": 15.012312920000113,
+      "step": 2,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": -12.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "view-axis",
+      "seconds": 14.739328960000421,
+      "step": 3,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 12.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "view-axis",
+      "seconds": 14.709997939999994,
+      "step": 4,
+      "view": {
+        "pitch": -8.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "view-axis",
+      "seconds": 14.527952219999861,
+      "step": 5,
+      "view": {
+        "pitch": 8.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "view-axis",
+      "seconds": 15.160978019999675,
+      "step": 6,
+      "view": {
+        "pitch": 0.0,
+        "roll": -20.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "view-axis",
+      "seconds": 14.70922556000005,
+      "step": 7,
+      "view": {
+        "pitch": 0.0,
+        "roll": 20.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "view-mixed",
+      "seconds": 15.089856539999346,
+      "step": 8,
+      "view": {
+        "pitch": 6.0,
+        "roll": -15.0,
+        "yaw": -8.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "view-mixed",
+      "seconds": 15.133133520000229,
+      "step": 9,
+      "view": {
+        "pitch": -6.0,
+        "roll": 15.0,
+        "yaw": 8.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "view-axis",
+      "seconds": 13.901761160000206,
+      "step": 10,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "window-azimuth-elevation",
+      "seconds": 224.69943411999975,
+      "step": 11,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "window-azimuth-elevation",
+      "seconds": 216.5040860600002,
+      "step": 12,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "window-azimuth-elevation",
+      "seconds": 45.33789168000021,
+      "step": 13,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "window-width-height",
+      "seconds": 217.22030551999978,
+      "step": 14,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "window-width-height",
+      "seconds": 30.19989796000027,
+      "step": 15,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "overlap",
+      "seconds": 223.80822695999996,
+      "step": 16,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "front-back",
+      "seconds": 28.240832899999987,
+      "step": 17,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "front-back",
+      "seconds": 26.671634439999252,
+      "step": 18,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "second-window-move",
+      "seconds": 220.70517931999984,
+      "step": 19,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "second-window-move",
+      "seconds": 44.70480139999927,
+      "step": 20,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "view-mixed",
+      "seconds": 23.46405085999959,
+      "step": 21,
+      "view": {
+        "pitch": 4.0,
+        "roll": 15.0,
+        "yaw": 6.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "view-reset",
+      "seconds": 15.88035446000049,
+      "step": 22,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "close-caption",
+      "seconds": 26.317577459999484,
+      "step": 23,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "close-caption",
+      "seconds": 22.35944489999929,
+      "step": 24,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    },
+    {
+      "output_complete": true,
+      "phase": "close-caption",
+      "seconds": 17.52523078000013,
+      "step": 25,
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      }
+    }
+  ],
+  "app_sha256": "c6e9114ca5398f84e0c7bc2522bda71be7f064a6781e950f4bd20e6ecca0dc51",
+  "scope": "Physical v12 final app in RAM over v11 kernel; unchanged bitstream; 25 motion stages and restore. HDMI visual evidence separate.",
+  "projection": {
+    "cpu_output_shadow_words": 4480,
+    "cpu_result_download_words": 0,
+    "cpu_scene_words": 0,
+    "device_ready_frames": 1,
+    "dirty_tiles": 28,
+    "fallback_frames": 0,
+    "geometry_tiles_evaluated_total": 84400,
+    "hardware_frames": 66,
+    "jobs_per_core": [
+      16,
+      16
+    ],
+    "lazy_copied_tiles_total": 1615,
+    "mask_build_us_total": 158684381,
+    "mask_builds": 20,
+    "mask_fast_tiles_total": 296,
+    "mask_integer_samples_total": 277025,
+    "mask_precise_samples_total": 5453,
+    "mask_samples_evaluated_total": 556032,
+    "masked_tiles_total": 4111,
+    "mode": "ddr-resident-dirty-tiles",
+    "packed_mask_tiles_total": 4111,
+    "plan_cache": {
+      "builtin_loads": 13,
+      "hits": 10,
+      "loads": 13,
+      "misses": 40,
+      "payload_scan_bytes": 0,
+      "rejected": 0,
+      "revision": "8f5db34197f157cd8404ab166ed0d9b03742f01656ced910d17d3059a96f9be6"
+    },
+    "precomputed_layers_total": 23,
+    "redrawn_tiles": 28,
+    "reused_tiles_total": 30,
+    "solid_tiles_total": 0,
+    "texture_pool": {
+      "capacity_bytes": 4194304,
+      "evictions": 0,
+      "full_uploads": 17,
+      "partial_uploads": 169,
+      "resident_bytes": 1430400,
+      "resident_windows": 5,
+      "reuses": 120,
+      "staged_copy_bytes": 61152,
+      "upload_bytes": 21360352,
+      "upload_calls": 332
+    },
+    "texture_reuses_total": 120,
+    "texture_uploads_total": 186,
+    "tile_fills_total": 1778,
+    "total_hw_jobs": 10675,
+    "update_kind": "tiles"
+  },
+  "dma": {
+    "available": true,
+    "copy_bytes": 74951692,
+    "copy_ops": 21199,
+    "errors": 0,
+    "features": 255,
+    "fill_bytes": 8007680,
+    "fill_ops": 7820,
+    "quarantined": 0,
+    "timeouts": 0,
+    "upload_bytes": 66462032,
+    "upload_ops": 1849,
+    "upload_threshold": 4096
+  }
+}

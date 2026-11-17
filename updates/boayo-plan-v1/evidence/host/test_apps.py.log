@@ -1,0 +1,1 @@
+{"result": "PASS", "requests": 44, "coverage": "caption placement, move, resize, minimize, restore, cancellation, close, storage seam/collisions"}

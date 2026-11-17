@@ -1,0 +1,22 @@
+{
+  "observed_at": "2026-11-10T21:36:46.935955+09:00",
+  "bitstream_sha256": "fe1ce8e52f30f1b9bd7bad944a0bf6f981eef9bba01438c0d26b40da6126fdf0",
+  "programming": "PASS",
+  "kernel": "6.12.0-oryukdo-sd4-dma1",
+  "linux_shell_command_roundtrip": "PASS",
+  "card_identification": "PASS_SDHC_0001",
+  "sd_irq_count_observed": 21,
+  "mmc_block_device": "FAIL_EINVAL",
+  "ext4_data_mount": "FAIL",
+  "file_write_read": "NOT_RUN_NO_BLOCK_DEVICE",
+  "memcpy_fill_dma_hardware_test": "NOT_RUN",
+  "persistent_power_cycle_test": "NOT_RUN",
+  "findings": [
+    "blk_validate_limits at c016034c rejects max_hw_sectors=1 below PAGE_SECTORS=8; MMC host advertises max_blk_count=1 and max_req_size=512.",
+    "BusyBox CONFIG_FEATURE_MOUNT_FLAGS disabled; identical BusyBox binary hash confirmed against build. noatime reaches ext4 as unknown parameter.",
+    "Linux shell works; no mmcblk0 block device or /data mount. Card command IRQs do not establish successful DMA data I/O."
+  ],
+  "source_modified": false,
+  "board_reset_after_boot": false,
+  "live_view": "view_uart.ps1 tails uart.log; capture remains open with a 30 minute bound from start"
+}

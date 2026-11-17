@@ -1,0 +1,19 @@
+{
+  "result": "PASS_QEMU_ONLY",
+  "image": "/var/tmp/haebancheon-geometry-v13/release/image/HAEBANCHEON-KFB-BoAYO-geometry-v13.img",
+  "image_sha256": "dccb9042d390db89edc8dd877157aa575cc7f0f2342c77e051b4258435684eab",
+  "hardware": false,
+  "rtl": false,
+  "mock_backend": true,
+  "checks": [
+    "BusyBox shell",
+    "cat /etc/oryukdo-image",
+    "/bin/storage-check --identity",
+    "test -x /bin/bosio-dma-check",
+    "test -r /usr/share/boayo/assets/a0ebce13.bui",
+    "test ! -L /usr/bin/python && test ! -e /usr/bin/python3 && test ! -d /usr/lib/python3.12",
+    "echo $((19+23))",
+    "ddrcheck",
+    "boayo-selftest"
+  ]
+}

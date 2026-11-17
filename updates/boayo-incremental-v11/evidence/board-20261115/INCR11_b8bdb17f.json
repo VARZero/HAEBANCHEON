@@ -1,0 +1,8 @@
+{
+  "command": "/usr/bin/boayo-native motion 1 0",
+  "seconds": 132.314,
+  "rc": 1,
+  "uart": "/usr/bin/boayo-native motion 1 0; echo INCR11_b8bdb17f_RC:$?\r\r\nWM reply failed or timed out\r\r\nINCR11_b8bdb17f_RC:1\r\r\n",
+  "observed_at": "2026-11-15T00:42:06.464938",
+  "log_start": 383278
+}

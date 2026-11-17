@@ -1,0 +1,103 @@
+{
+  "result": "IN_PROGRESS",
+  "records": [
+    {
+      "n": 1,
+      "event": "desktop.begin",
+      "wall_us": 169863,
+      "cpu_us": 63925,
+      "value": 0,
+      "observed_at": "2026-11-11T00:02:06.975048"
+    },
+    {
+      "n": 2,
+      "event": "window.create.begin",
+      "wall_us": 3809248,
+      "cpu_us": 1221977,
+      "value": 0,
+      "observed_at": "2026-11-11T00:02:10.978551",
+      "since_previous_wall_us": 3639385,
+      "since_previous_cpu_us": 1158052
+    },
+    {
+      "n": 3,
+      "event": "window.create.end",
+      "wall_us": 96245849,
+      "cpu_us": 44099039,
+      "value": 1,
+      "observed_at": "2026-11-11T00:03:43.076445",
+      "since_previous_wall_us": 92436601,
+      "since_previous_cpu_us": 42877062
+    },
+    {
+      "n": 4,
+      "event": "window.configure.begin",
+      "wall_us": 96639616,
+      "cpu_us": 44280258,
+      "value": 0,
+      "observed_at": "2026-11-11T00:03:44.083176",
+      "since_previous_wall_us": 393767,
+      "since_previous_cpu_us": 181219
+    },
+    {
+      "n": 5,
+      "event": "window.configure.end",
+      "wall_us": 101357141,
+      "cpu_us": 46656181,
+      "value": 1,
+      "observed_at": "2026-11-11T00:03:48.092949",
+      "since_previous_wall_us": 4717525,
+      "since_previous_cpu_us": 2375923
+    },
+    {
+      "n": 6,
+      "event": "launcher.allocate.begin",
+      "wall_us": 101759794,
+      "cpu_us": 46869953,
+      "value": 691200,
+      "observed_at": "2026-11-11T00:03:49.100253",
+      "since_previous_wall_us": 402653,
+      "since_previous_cpu_us": 213772
+    },
+    {
+      "n": 7,
+      "event": "surface.clear.begin",
+      "wall_us": 119586473,
+      "cpu_us": 55984397,
+      "value": 691200,
+      "observed_at": "2026-11-11T00:04:07.123979",
+      "since_previous_wall_us": 17826679,
+      "since_previous_cpu_us": 9114444
+    },
+    {
+      "n": 8,
+      "event": "surface.clear.end",
+      "wall_us": 431200043,
+      "cpu_us": 212159672,
+      "value": 691200,
+      "observed_at": "2026-11-11T00:09:18.424148",
+      "since_previous_wall_us": 311613570,
+      "since_previous_cpu_us": 156175275
+    },
+    {
+      "n": 9,
+      "event": "launcher.allocate.end",
+      "wall_us": 431618935,
+      "cpu_us": 212371708,
+      "value": 691200,
+      "observed_at": "2026-11-11T00:09:18.424191",
+      "since_previous_wall_us": 418892,
+      "since_previous_cpu_us": 212036
+    },
+    {
+      "n": 10,
+      "event": "rounded.begin",
+      "wall_us": 432079317,
+      "cpu_us": 212612808,
+      "value": 0,
+      "observed_at": "2026-11-11T00:09:19.431495",
+      "since_previous_wall_us": 460382,
+      "since_previous_cpu_us": 241100
+    }
+  ]
+}

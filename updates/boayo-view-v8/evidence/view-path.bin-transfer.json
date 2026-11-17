@@ -1,0 +1,9 @@
+{
+  "source": "D:\\temp\\haebancheon-motion-v7\\board-trial-20261114\\view-path.bin",
+  "target": "/tmp/view-path.bin",
+  "bytes": 87860,
+  "fnv1a": 3706887705,
+  "sha256": "354d03f25e318e3462be096476f9eb9a3c72b9e98bc70bc2f83a0595e934cfbb",
+  "seconds": 92.75,
+  "result": "PASS_TRANSFER_FNV"
+}
