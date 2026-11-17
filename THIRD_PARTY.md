@@ -2,7 +2,7 @@
 
 ## 현재 L1/DMA3 구성의 외부 IP 분리
 
-새 `variants/l1-*` 폴더에는 MIG 생성 RTL/XCI와 HDMI IP 본문을 추가하지 않는다. MIG는 Vivado 2022.2에서 `mig_a.prj`로 생성하며 XPM도 설치본을 사용한다. 공식 Digilent HDMI는 BSD 고지를 유지한 고정 upstream URL/해시로 별도 준비한다(`scripts/prepare_current_hdmi.py`). 자체 연결 RTL·보드 제약은 게시한다. 아래 루트/SD4의 이미 추적된 외부 소스와 과거 이력은 그대로 보존한다.
+모든 구성에서 MIG 생성 RTL/XCI와 HDMI IP 본문을 Git에서 제외한다. MIG는 Vivado 2022.2에서 `mig_a.prj`로 생성하며 XPM도 설치본을 사용한다. 공식 Digilent HDMI는 BSD 고지를 유지한 고정 upstream URL/해시로 별도 준비한다(`scripts/prepare_current_hdmi.py`). 자체 연결 RTL·보드 제약은 게시한다. 루트/SD4의 기존 HDMI IP 본문도 최신 트리에서 제거했으며 과거 이력만 유지한다. [공통 준비 방법](docs/외부_HDMI.md)을 따른다.
 
 이 저장소에는 서로 다른 라이선스의 구성 요소가 있다. 저장소 전체를 하나의 라이선스로 재지정하지 않는다. 원본 저작권 및 라이선스 고지는 그대로 보존한다.
 
@@ -10,8 +10,8 @@
 |---|---|
 | ORYUKDO 스케줄러 | VARZero/ORYUKDO, 기존 Apache-2.0 고지 `LICENSES/ORYUKDO-Apache-2.0.txt` |
 | BOSIO 투영·출력·센서 | 각 `soc/vendor/*/LICENSE`의 Apache-2.0 고지 |
-| 공식 Digilent rgb2dvi | `soc/board/vendor/digilent_rgb2dvi/`, BSD 고지와 upstream 해시 유지 |
-| 비교용 Puzhi HDMI 원본 | `soc/board/vendor/hdmi/`, 원본 보존 및 별도 무결성 검사, 실제 빌드에는 사용하지 않음 |
+| 공식 Digilent rgb2dvi | 고정 upstream에서 별도 다운로드, 소스의 BSD 고지와 저장소의 해시 목록 유지 |
+| 비교용 Puzhi HDMI 원본 | `soc/board/vendor/hdmi/`, 원본 HDL은 Git 제외, 과거 해시 목록만 보존, 실제 빌드에는 사용하지 않음 |
 | AMD MIG / XPM | 설치된 Vivado에서 생성·참조. 생성 RTL과 Vivado 라이브러리를 이 저장소에 재배포하지 않음 |
 | Linux 6.12 | GPL-2.0-only 및 Linux syscall 예외, `LICENSES/Linux-*`, 전체 소스의 개별 SPDX 고지 |
 | SD4 Linux MMC·DMAengine 드라이버 | `variants/sd4-dma/software/storage/oryukdo_sd.c`, `oryukdo_dma.c`의 GPL-2.0-only SPDX 고지 |

@@ -7,10 +7,15 @@ from urllib.request import urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT = ROOT / 'variants/l1-16k-dma3-lru-ram/soc/board/vendor/digilent_rgb2dvi'
+CONFIGURATIONS = {
+    'root': ROOT,
+    **{name: ROOT / 'variants' / name for name in
+       ('sd4-dma', 'l1-16k-dma3', 'l1-32k-dma3', 'l1-16k-dma3-lru-ram')},
+}
 
 
-def prepare(destination, check_only=False):
-    manifest = json.loads((DEFAULT / 'upstream_sources.json').read_text(encoding='utf-8'))
+def prepare(destination, check_only=False, manifest_path=None):
+    manifest = json.loads((manifest_path or DEFAULT / 'upstream_sources.json').read_text(encoding='utf-8'))
     prefix = ('https://raw.githubusercontent.com/Digilent/vivado-library/'
               + manifest['commit'] + '/ip/rgb2dvi/')
     count = 0
@@ -39,7 +44,14 @@ def prepare(destination, check_only=False):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--check-only', action='store_true')
-    parser.add_argument('--destination', type=Path, default=DEFAULT,
+    parser.add_argument('--configuration', choices=CONFIGURATIONS, default='l1-16k-dma3-lru-ram')
+    parser.add_argument('--all', action='store_true', help='prepare all five published configurations')
+    parser.add_argument('--destination', type=Path,
                         help='fresh-checkout test or alternate copy; build defaults to the variant vendor path')
     args = parser.parse_args()
-    prepare(args.destination.resolve(), args.check_only)
+    if args.all and args.destination:
+        parser.error('--all and --destination cannot be combined')
+    for name in (CONFIGURATIONS if args.all else [args.configuration]):
+        vendor = CONFIGURATIONS[name] / 'soc/board/vendor/digilent_rgb2dvi'
+        print('Configuration: ' + name)
+        prepare((args.destination or vendor).resolve(), args.check_only, vendor / 'upstream_sources.json')

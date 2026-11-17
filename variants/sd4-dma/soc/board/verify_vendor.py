@@ -1,21 +1,18 @@
-"""Reject local edits to both preserved board-example and selected official IP."""
+"""Verify the separately fetched official HDMI IP; unused example IP is not required."""
 from pathlib import Path
 import hashlib, json
 
 def verify():
-    here=Path(__file__).resolve().parent
-    original=here/'vendor/hdmi'
-    checked=0
-    for name,expected in json.loads((original/'original_sha256.json').read_text()).items():
-        assert hashlib.sha256((original/name).read_bytes()).hexdigest()==expected, name
-        checked+=1
-    selected=here/'vendor/digilent_rgb2dvi'
+    selected=Path(__file__).resolve().parent/'vendor/digilent_rgb2dvi'
     manifest=json.loads((selected/'upstream_sources.json').read_text())
     for item in manifest['files']:
-        assert hashlib.sha256((selected/item['file']).read_bytes()).hexdigest()==item['sha256'], item['file']
-        checked+=1
-    return checked,manifest['commit']
+        path=selected/item['file']
+        if not path.is_file():
+            raise RuntimeError('HDMI IP missing; run python scripts/prepare_current_hdmi.py --all from repository root: '+str(path))
+        if hashlib.sha256(path.read_bytes()).hexdigest()!=item['sha256']:
+            raise RuntimeError('HDMI upstream hash mismatch: '+str(path))
+    return len(manifest['files']),manifest['commit']
 
 if __name__=='__main__':
     count,commit=verify()
-    print(f'PASS VENDOR_SOURCE_INTEGRITY files={count} official_commit={commit}')
+    print(f'PASS EXTERNAL_HDMI_INTEGRITY files={count} official_commit={commit}')

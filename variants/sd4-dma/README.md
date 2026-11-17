@@ -1,3 +1,5 @@
+> **HDMI IP 준비:** 이 구성도 [공통 외부 다운로드 방식](../../docs/외부_HDMI.md)을 사용한다. 저장소 루트에서 `python scripts/prepare_current_hdmi.py --all` 실행 후 빌드한다. IP 본문은 Git에 포함하지 않는다.
+
 # SD 4비트·DMA·영구 파일시스템 구성
 
 2026-11-10에 로컬 검증과 PZ-A7200T-KFB 전체 보드 구현을 완료한 독립 작업본이다.

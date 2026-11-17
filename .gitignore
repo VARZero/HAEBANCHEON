@@ -14,6 +14,10 @@ __pycache__/
 /variants/l1-*/soc/board/vendor/hdmi/
 /variants/l1-*/soc/board/vendor/digilent_rgb2dvi/src/
 /variants/l1-*/soc/board/vendor/digilent_rgb2dvi/component.xml
+# All configurations use separately fetched HDMI IP, including root and SD4.
+**/soc/board/vendor/hdmi/*.vhd
+**/soc/board/vendor/digilent_rgb2dvi/src/
+**/soc/board/vendor/digilent_rgb2dvi/component.xml
 *.bit
 *.dcp
 *.img

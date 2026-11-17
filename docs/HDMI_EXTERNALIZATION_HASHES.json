@@ -1,0 +1,205 @@
+{
+  "README.md": {
+    "previous_sha256": [
+      "3000fad612b7d9a43cfdb90cfb4904f710aeb02461f02a8db940f4d1391b9f18"
+    ],
+    "published_sha256": "554d40b3c7f7b08185351a6821c909d3993d968cb2dde3188cb413123c57c702",
+    "reason": "External HDMI preparation, verification or documentation; no datapath RTL edit"
+  },
+  "THIRD_PARTY.md": {
+    "previous_sha256": [
+      "c364e7f24fac6fdfceb458fe60222b2bea5ad01faab96a44f2c90b317e210c01"
+    ],
+    "published_sha256": "18c20cde03faaa0d725c55f6f2a01049f3736ab2d8ec28b4288be87b0510e011",
+    "reason": "External HDMI preparation, verification or documentation; no datapath RTL edit"
+  },
+  "docs/검증.md": {
+    "previous_sha256": [
+      "70e758a31c61e99878a21eade84f56b187a44a7fd69a01f71709bbf442e3dd74"
+    ],
+    "published_sha256": "343e1a52eac9dd22fab57002f715a1d3a4560b73b491427409b436fe53385082",
+    "reason": "External HDMI preparation, verification or documentation; no datapath RTL edit"
+  },
+  "docs/빌드.md": {
+    "previous_sha256": [
+      "f4446609f85eaba358b6dadf1498fee0a7b51d05d90f48390d0f6406b1db2a70"
+    ],
+    "published_sha256": "51ed82fe4d453f27c3bfd335bd8a7f87cf4f2b93baa14b7f9be9caf87af5f121",
+    "reason": "External HDMI preparation, verification or documentation; no datapath RTL edit"
+  },
+  "docs/소스_구성.md": {
+    "previous_sha256": [
+      "2de48ef330683301354781b5e4037b3c3e2576a1a65a8ff355457320763eecb9"
+    ],
+    "published_sha256": "0115cb216f4b10220fd4b79f832b38168c3b573e790ed3ebdf1a62f8044da57d",
+    "reason": "External HDMI preparation, verification or documentation; no datapath RTL edit"
+  },
+  "docs/현재_비트스트림.md": {
+    "previous_sha256": [
+      "08f9c4b6a651112ee7f6200fb80464c1576a95079d9f42b466a5bae79f570d43"
+    ],
+    "published_sha256": "7afb0b11957d4c33dbcc26358baa8fd10f6fcc7d244174947bf936180893ac6b",
+    "reason": "External HDMI preparation, verification or documentation; no datapath RTL edit"
+  },
+  "scripts/prepare_current_hdmi.py": {
+    "previous_sha256": [
+      "591df8db4f36391d473a733783484ee401f09208a9338500396c9caa40d9df32"
+    ],
+    "published_sha256": "de1c12541bd35f4c35fd7b43726a0d73f20e98569fc657946fe2a1e36a9a38f3",
+    "reason": "External HDMI preparation, verification or documentation; no datapath RTL edit"
+  },
+  "scripts/verify_current_rtl.py": {
+    "previous_sha256": [
+      "49b44e84b5491c3e4e84b01b543ed911b231e193e1121b1e65b4ca03511c5db3"
+    ],
+    "published_sha256": "50e1ed4238d97de8800d19c07e4cdf95d99e8a8ba2d9d15c04612ddd50b53315",
+    "reason": "External HDMI preparation, verification or documentation; no datapath RTL edit"
+  },
+  "scripts/verify_sd4_publication.py": {
+    "previous_sha256": [
+      "76bd777f7e0a45e2506eac58d16d27cdad2866788c6e1982b60e30fd682e58b5"
+    ],
+    "published_sha256": "b5d585421c106f9624b37cf49599fbf03870211b6358d9d9300b65d7f9530d4a",
+    "reason": "External HDMI preparation, verification or documentation; no datapath RTL edit"
+  },
+  "scripts/verify_sources.py": {
+    "previous_sha256": [
+      "95f3ff66e1a3853c0b4eb209f1ef6dd7bdd800a618bf336238c6c48a4bc6a781"
+    ],
+    "published_sha256": "94cd494a5508b04a71ddb5323819639aeea9ac6165cf6ef25fdf6711772b853b",
+    "reason": "External HDMI preparation, verification or documentation; no datapath RTL edit"
+  },
+  "soc/board/build_board.tcl": {
+    "previous_sha256": [
+      "324a60952dca673143f9369ad96ea04128aceb06e5a25ac780090bf78baebe3f"
+    ],
+    "published_sha256": "342ba17dc51324fd16bd19afc2a127f09ad20fe8169e817eab3a2e979815ae38",
+    "reason": "External HDMI preparation, verification or documentation; no datapath RTL edit"
+  },
+  "soc/board/verify_vendor.py": {
+    "previous_sha256": [
+      "5bb3c7f20aacb01e6092b38b1ad2ecab60544b1b1c013fa1462d098f593e91b6"
+    ],
+    "published_sha256": "af4b9ef44fba1c727681700cd07c135e307783770c9674874e84944dc348a7b4",
+    "reason": "External HDMI preparation, verification or documentation; no datapath RTL edit"
+  },
+  "soc/tools/test_hdmi_xsim.py": {
+    "previous_sha256": [
+      "e40b271e5bfe922517109b93c51e7afa2e3d25413299f0a7a73640428f6961cb"
+    ],
+    "published_sha256": "b9ba37e9bfbbb8f7e8bc752287b19959406ca64b6832cc47d059e5e1e3f156f3",
+    "reason": "External HDMI preparation, verification or documentation; no datapath RTL edit"
+  },
+  "variants/l1-16k-dma3-lru-ram/README.md": {
+    "previous_sha256": [
+      "9d63244800d824017fcd52978fe6c834809a53a50c17863b5fb31c95089c996d"
+    ],
+    "published_sha256": "f5961973ef8306cb0053fcc5f7da9995363283d15dcc3351d8029db82fc4f981",
+    "reason": "External HDMI preparation, verification or documentation; no datapath RTL edit"
+  },
+  "variants/l1-16k-dma3-lru-ram/soc/board/build_board.tcl": {
+    "previous_sha256": [
+      "41bd0ab3a9ea1cc54da324c044314bb2d9d0dedd195001da0107c33c38864a0e"
+    ],
+    "published_sha256": "144c897ee3225593e3b51ad6c87559009a8dfb3ed11dede1eac69c4365f05a54",
+    "reason": "External HDMI preparation, verification or documentation; no datapath RTL edit"
+  },
+  "variants/l1-16k-dma3-lru-ram/soc/board/verify_vendor.py": {
+    "previous_sha256": [
+      "5bb3c7f20aacb01e6092b38b1ad2ecab60544b1b1c013fa1462d098f593e91b6"
+    ],
+    "published_sha256": "af4b9ef44fba1c727681700cd07c135e307783770c9674874e84944dc348a7b4",
+    "reason": "External HDMI preparation, verification or documentation; no datapath RTL edit"
+  },
+  "variants/l1-16k-dma3-lru-ram/soc/tools/test_hdmi_xsim.py": {
+    "previous_sha256": [
+      "e40b271e5bfe922517109b93c51e7afa2e3d25413299f0a7a73640428f6961cb"
+    ],
+    "published_sha256": "b9ba37e9bfbbb8f7e8bc752287b19959406ca64b6832cc47d059e5e1e3f156f3",
+    "reason": "External HDMI preparation, verification or documentation; no datapath RTL edit"
+  },
+  "variants/l1-16k-dma3/README.md": {
+    "previous_sha256": [
+      "b673dd6d8bdb3e825beb94120a67733eac1ce4e68cc19073cdabef654dd7f54c"
+    ],
+    "published_sha256": "6295592e6380315e74ec8ac514ed6bdfe415f1ca5e17a1f07ead2f1ece48b758",
+    "reason": "External HDMI preparation, verification or documentation; no datapath RTL edit"
+  },
+  "variants/l1-16k-dma3/soc/board/build_board.tcl": {
+    "previous_sha256": [
+      "927365b0ab9af2988f598ec095dd1ecd7e016f8aab64e37360278b8dc93e858b"
+    ],
+    "published_sha256": "346f28ff5b2169b15f564b34d510aea68d86848a8a129c49bb72d6d80533060c",
+    "reason": "External HDMI preparation, verification or documentation; no datapath RTL edit"
+  },
+  "variants/l1-16k-dma3/soc/board/verify_vendor.py": {
+    "previous_sha256": [
+      "5bb3c7f20aacb01e6092b38b1ad2ecab60544b1b1c013fa1462d098f593e91b6"
+    ],
+    "published_sha256": "af4b9ef44fba1c727681700cd07c135e307783770c9674874e84944dc348a7b4",
+    "reason": "External HDMI preparation, verification or documentation; no datapath RTL edit"
+  },
+  "variants/l1-16k-dma3/soc/tools/test_hdmi_xsim.py": {
+    "previous_sha256": [
+      "e40b271e5bfe922517109b93c51e7afa2e3d25413299f0a7a73640428f6961cb"
+    ],
+    "published_sha256": "b9ba37e9bfbbb8f7e8bc752287b19959406ca64b6832cc47d059e5e1e3f156f3",
+    "reason": "External HDMI preparation, verification or documentation; no datapath RTL edit"
+  },
+  "variants/l1-32k-dma3/README.md": {
+    "previous_sha256": [
+      "88a3877f483e6a115775ac7129c5e6b87d0de0279a3b10caaa4824bdfd2344c0"
+    ],
+    "published_sha256": "fa2683fe2d4d1f6a6327289f3cf21e96b5b1ce4f09a057dc56c516b5438ce6b8",
+    "reason": "External HDMI preparation, verification or documentation; no datapath RTL edit"
+  },
+  "variants/l1-32k-dma3/soc/board/build_board.tcl": {
+    "previous_sha256": [
+      "927365b0ab9af2988f598ec095dd1ecd7e016f8aab64e37360278b8dc93e858b"
+    ],
+    "published_sha256": "346f28ff5b2169b15f564b34d510aea68d86848a8a129c49bb72d6d80533060c",
+    "reason": "External HDMI preparation, verification or documentation; no datapath RTL edit"
+  },
+  "variants/l1-32k-dma3/soc/board/verify_vendor.py": {
+    "previous_sha256": [
+      "5bb3c7f20aacb01e6092b38b1ad2ecab60544b1b1c013fa1462d098f593e91b6"
+    ],
+    "published_sha256": "af4b9ef44fba1c727681700cd07c135e307783770c9674874e84944dc348a7b4",
+    "reason": "External HDMI preparation, verification or documentation; no datapath RTL edit"
+  },
+  "variants/l1-32k-dma3/soc/tools/test_hdmi_xsim.py": {
+    "previous_sha256": [
+      "e40b271e5bfe922517109b93c51e7afa2e3d25413299f0a7a73640428f6961cb"
+    ],
+    "published_sha256": "b9ba37e9bfbbb8f7e8bc752287b19959406ca64b6832cc47d059e5e1e3f156f3",
+    "reason": "External HDMI preparation, verification or documentation; no datapath RTL edit"
+  },
+  "variants/sd4-dma/README.md": {
+    "previous_sha256": [
+      "fa7ebc83785aae1060e5a509e3678f6bc25283d614810d6efacc804e7e05fcda"
+    ],
+    "published_sha256": "c7b1d11bfcb6cc730d1065b61f8635f2e31f95abe9303f02967c49d6ae448225",
+    "reason": "External HDMI preparation, verification or documentation; no datapath RTL edit"
+  },
+  "variants/sd4-dma/soc/board/build_board.tcl": {
+    "previous_sha256": [
+      "324a60952dca673143f9369ad96ea04128aceb06e5a25ac780090bf78baebe3f"
+    ],
+    "published_sha256": "342ba17dc51324fd16bd19afc2a127f09ad20fe8169e817eab3a2e979815ae38",
+    "reason": "External HDMI preparation, verification or documentation; no datapath RTL edit"
+  },
+  "variants/sd4-dma/soc/board/verify_vendor.py": {
+    "previous_sha256": [
+      "5bb3c7f20aacb01e6092b38b1ad2ecab60544b1b1c013fa1462d098f593e91b6"
+    ],
+    "published_sha256": "af4b9ef44fba1c727681700cd07c135e307783770c9674874e84944dc348a7b4",
+    "reason": "External HDMI preparation, verification or documentation; no datapath RTL edit"
+  },
+  "variants/sd4-dma/soc/tools/test_hdmi_xsim.py": {
+    "previous_sha256": [
+      "e40b271e5bfe922517109b93c51e7afa2e3d25413299f0a7a73640428f6961cb"
+    ],
+    "published_sha256": "b9ba37e9bfbbb8f7e8bc752287b19959406ca64b6832cc47d059e5e1e3f156f3",
+    "reason": "External HDMI preparation, verification or documentation; no datapath RTL edit"
+  }
+}

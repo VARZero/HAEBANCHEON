@@ -1,4 +1,6 @@
-> **2026-11-17 현재 비트스트림 소스 게시:** [현재 구성·외부 IP 준비·재현 방법](docs/현재_비트스트림.md)을 먼저 읽어 주세요. 실제 사용 RTL은 `variants/l1-16k-dma3-lru-ram/`이며 L1I/D 각각16KiB·DMA3·MIG DDR1GiB·HDMI2를 포함합니다. MIG 생성물과 새 구성의 HDMI IP 원본은 제외하고 설정·연결 RTL·고정 upstream 해시를 제공합니다. [전체 주소·인터럽트·요청 구조체](docs/HAEBANCHEON_SOC_REVIEW_PROMPT_KO.txt). 아래 날짜별 항목은 당시 기록이며 최신 실보드 결과와 구분합니다.
+> **HDMI 외부 의존성 통일 (2026-11-17):** 루트·SD4·L1 구성 모두 IP 본문은 Git에서 제외합니다. [공통 준비·검사 방법](docs/외부_HDMI.md)의 `python scripts/prepare_current_hdmi.py --all`을 먼저 실행하세요. 기존 로컬 파일은 보존하며 과거 커밋은 재작성하지 않았습니다.
+
+> **2026-11-17 현재 비트스트림 소스 게시:** [현재 구성·외부 IP 준비·재현 방법](docs/현재_비트스트림.md)을 먼저 읽어 주세요. 실제 사용 RTL은 `variants/l1-16k-dma3-lru-ram/`이며 L1I/D 각각16KiB·DMA3·MIG DDR1GiB·HDMI2를 포함합니다. MIG 생성물과 모든 구성의 HDMI IP 원본은 제외하고 설정·연결 RTL·고정 upstream 해시를 제공합니다. [전체 주소·인터럽트·요청 구조체](docs/HAEBANCHEON_SOC_REVIEW_PROMPT_KO.txt). 아래 날짜별 항목은 당시 기록이며 최신 실보드 결과와 구분합니다.
 
 > **2026-11-16 BoAYO v14 실보드 후속:** [변경·SD](updates/boayo-tilebatch-v14/README_KO.md), [로컬 검증](updates/boayo-tilebatch-v14/RESULTS_KO.md), [실보드 비교](updates/boayo-tilebatch-v14/BOARD_RESULT_KO.md). Linux 부팅·HDMI 출력은 확인했으나, 같은 보드·커널·사각형 UI 비교에서 Telemetry 2.618→3.444초, SDK Pulse 2.391→3.029초로 느려졌다. 작은 반복 글자 시험의 요청 수 640→80회 감소는 전체 앱 속도 개선이 아니며, v14는 현재 성능 회귀로 기록한다. RTL·드라이버·비트스트림은 유지한다.
 

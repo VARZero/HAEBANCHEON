@@ -1,0 +1,20 @@
+{
+  "result": "PASS_CLEAN_CHECKOUT_EXTERNAL_HDMI",
+  "date": "2026-11-17",
+  "audited_tree": "ccd67251e0228af1b599963f947ad1cfc8cdffc0",
+  "configurations": 5,
+  "downloaded_verified_files": 55,
+  "git_removed_payload_files": 30,
+  "missing_ip_rejected": true,
+  "tampered_upstream_rejected_without_overwrite": true,
+  "unrecorded_rtl_edit_rejected": true,
+  "legacy_unused_example_required": false,
+  "source_verifiers": [
+    "root",
+    "sd4",
+    "current"
+  ],
+  "rtl_changed": false,
+  "synthesis_rerun": false,
+  "board_access": false
+}

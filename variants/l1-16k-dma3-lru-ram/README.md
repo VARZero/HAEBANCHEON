@@ -1,3 +1,5 @@
+> **HDMI IP 준비:** 이 구성도 [공통 외부 다운로드 방식](../../docs/외부_HDMI.md)을 사용한다. 저장소 루트에서 `python scripts/prepare_current_hdmi.py --all` 실행 후 빌드한다. IP 본문은 Git에 포함하지 않는다.
+
 # 해반천 — L1I/D 16KiB·2Way, DMA 3개
 
 > **2026-11-17 게시 안내:** 이 폴더가 현재 비트스트림의 RTL 기준이다. [외부 HDMI IP 준비·MIG 생성·구조와 재현](../../docs/현재_비트스트림.md), [후속 v14 실보드 결과](../../updates/boayo-tilebatch-v14/BOARD_RESULT_KO.md)를 확인한다. 아래의 “실보드 미확인”은 최초 제작 당시 기록이다. 이번 게시에서 RTL 또는 기존 결과 해시는 변경하지 않았다.

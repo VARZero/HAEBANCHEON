@@ -4,6 +4,7 @@ import hashlib
 import json
 import subprocess
 from pathlib import Path
+from publication_hashes import check_published
 
 ROOT = Path(__file__).resolve().parents[1]
 REL = Path('variants/l1-16k-dma3-lru-ram')
@@ -19,17 +20,14 @@ def verify(require_tracked=False):
     manifest = json.loads((BASE / 'provenance/implementation_source_manifest.json').read_text())
     local, external = 0, 0
     shell_eol_only = []
+    tool_updates = []
     for name, expected in manifest.items():
         if name.startswith(EXTERNAL):
             external += 1
             continue
-        if digest(BASE / name) != expected:
-            # The original Windows inventory recorded CRLF shell scripts;
-            # .gitattributes deliberately publishes them as executable LF text.
-            raw = (BASE / name).read_bytes()
-            original = raw.replace(b'\r\n', b'\n').replace(b'\n', b'\r\n')
-            assert name.endswith('.sh') and hashlib.sha256(original).hexdigest() == expected, 'Implementation source mismatch: ' + name
-            shell_eol_only.append(name)
+        kind = check_published(BASE, name, expected)
+        if kind == 'shell_eol_only': shell_eol_only.append(name)
+        if kind == 'publication_tool_update': tool_updates.append(name)
         local += 1
     required = [line.strip() for line in (BASE / 'soc/bosio_sources.f').read_text().splitlines() if line.strip()]
     required += ['soc/board/' + name for name in (
@@ -55,6 +53,9 @@ def verify(require_tracked=False):
             if not name.startswith(EXTERNAL):
                 assert (REL / name).as_posix() in tracked, 'Not staged/tracked: ' + name
         for name in tracked:
+            assert '/vendor/digilent_rgb2dvi/src/' not in name, name
+            assert not name.endswith('/vendor/digilent_rgb2dvi/component.xml'), name
+            assert not ('/vendor/hdmi/' in name and name.endswith('.vhd')), name
             if name.startswith('variants/l1-'):
                 assert '/soc/board/vendor/hdmi/' not in name, name
                 assert '/soc/board/vendor/digilent_rgb2dvi/src/' not in name, name
@@ -62,6 +63,7 @@ def verify(require_tracked=False):
     result = dict(result='PASS_SOURCE_PUBLICATION_AUDIT', checked_source_files=local,
                   external_source_records=external, required_build_inputs=len(required),
                   shell_line_endings_only=shell_eol_only,
+                  publication_tool_updates=tool_updates,
                   stored_rtl_logs=len(validation['checks']), stored_lru_logs=len(lru['logs']),
                   bitstream_sha256=release['bitstream']['sha256'],
                   scope='Preserved sources/evidence only; no synthesis or physical board rerun')

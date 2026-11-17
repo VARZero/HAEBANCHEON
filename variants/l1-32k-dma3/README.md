@@ -1,3 +1,5 @@
+> **HDMI IP 준비:** 이 구성도 [공통 외부 다운로드 방식](../../docs/외부_HDMI.md)을 사용한다. 저장소 루트에서 `python scripts/prepare_current_hdmi.py --all` 실행 후 빌드한다. IP 본문은 Git에 포함하지 않는다.
+
 # 해반천 — L1 32KiB × 2 / DMA 3개 구성
 
 기준은 보존된 `variants/sd4-dma`와 BoAYO `updates/boayo-tiles-v5`다. 이 32KiB 구성은 기능 검증과 합성을 마친 비교용 원본이다. 사용자가 면적 여유를 우선해 I/D 각각 16KiB를 선택했으므로, 32KiB 구현 실행은 배선 전에 중단했다. 배선 후 타이밍 PASS나 완성된 32KiB 비트스트림은 없다. 현재 구현 대상은 `variants/l1-16k-dma3`다. `provenance/baseline_sd4_dma`는 기존 보드 결과이며 이 후보의 PASS 증거가 아니다.

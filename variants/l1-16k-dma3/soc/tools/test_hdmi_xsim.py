@@ -1,6 +1,8 @@
 from pathlib import Path
 import subprocess,re
 root=Path(__file__).resolve().parents[2]
+import runpy
+runpy.run_path(str(root/'soc/board/verify_vendor.py'))['verify']()
 out=root/'soc/reports/hdmi_official_xsim';out.mkdir(parents=True,exist_ok=True)
 bin_dir=Path('D:/Xilinx2202/Vivado/2022.2/bin')
 def run(tool,*args):

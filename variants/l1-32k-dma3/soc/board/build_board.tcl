@@ -1,5 +1,11 @@
 set here [file normalize [file dirname [info script]]]
 set root [file normalize $here/../..]
+# External HDMI payload is intentionally absent from Git.
+foreach p {DVI_Constants.vhd SyncAsync.vhd SyncAsyncReset.vhd ClockGen.vhd TMDS_Encoder.vhd OutputSERDES.vhd rgb2dvi.vhd rgb2dvi.xdc rgb2dvi_clocks.xdc} {
+    if {![file exists $here/vendor/digilent_rgb2dvi/src/$p]} {
+        error "HDMI IP missing. From repository root run: python scripts/prepare_current_hdmi.py --all"
+    }
+}
 set out [file normalize [lindex $argv 0]]
 file mkdir $out
 cd $out
