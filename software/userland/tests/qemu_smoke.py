@@ -154,6 +154,15 @@ def main():
                                       "grep ' /tmp tmpfs ' /proc/mounts && grep ' /run tmpfs ' /proc/mounts && grep ' /dev/pts devpts ' /proc/mounts",
                                       'free -m; df -h / /tmp /data',
                                       'userland-check',
+                                      "bosioctl --help | grep -F 'project [0|1|both]'",
+                                      'test -r /usr/include/bosio_uapi.h',
+                                      "bosio-tiles help | grep -F 'bosio-tiles start'",
+                                      "boayo-native help | grep -F 'boayo-native start'",
+                                      "bosio-tiles dual-selftest | grep -F BOAYO_NATIVE_SELFTEST_PASS",
+                                      "(set -e; bosio-tiles start --mock; trap 'bosio-tiles stop' EXIT; "
+                                      "boayo start; boayo app pulse; "
+                                      "boayo status | grep -F 'SDK Pulse'; boayo stop; "
+                                      "bosio-tiles status | grep -F '\"running\": false')",
                                       "echo PERSIST_OK > /data/persistence-test; sync"]
                             if args.expect_examples:
                                 checks += ['hello', 'hello-python']

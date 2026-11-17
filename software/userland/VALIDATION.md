@@ -1,4 +1,21 @@
-# 검증 기록 — 2026-11-17
+# 개발 SD 이미지 검증 기록
+
+## 보시오·보아요 통합 이미지 — 2026-11-18
+
+통합 배포 파일 `HAEBANCHEON-BOSIO-BoAYO-SD.img.xz`는 아래 초기 개발 이미지에 최신 `bosioctl`, `bosio-tiles`, `boayo`와 BOSIO 앱용 헤더를 넣어 만들었다. MBR부터 첫 파티션까지 바이트가 동일하며, ext4 검사와 압축 해제 전후 원본 이미지 일치를 확인했다. 소스에서 다시 빌드하려면 [개발 이미지 빌드 절차](README.md#빌드)를 따른다.
+
+| 배포 파일 | 크기 | SHA-256 |
+|---|---:|---|
+| `HAEBANCHEON-BOSIO-BoAYO-SD.img` | 1,081,081,856 bytes | `ec4fefb451a080a5edc41708b78b7b2d4d8226b25e9cb3e562825c6f0dd8f93d` |
+| `HAEBANCHEON-BOSIO-BoAYO-SD.img.xz` | 41,712,788 bytes | `ac6600f073ba08e2d6543f3767d921840c7409668b3c1e1ee169b8a32f43d220` |
+
+- 배포 이미지의 QEMU 시험에서 BusyBox 셸, Vim, Python 3, GCC/G++, C·Python 앱, 보시오 모의 실행, 보아요 런처와 SDK Pulse 실행·종료, 두 번째 부팅의 데이터 보존과 복구 셸을 확인했다. [QEMU 결과](validation/qemu-bosio-boayo-release.json)
+- 호스트 모의 환경에서 보아요 시작·재시작, Dashboard·Telemetry·SDK Pulse 창, 보아요를 종료한 뒤 다른 앱 창이 유지되는 것을 확인했다. 동일 데이터 재전송은 무갱신이었고, 2D 픽셀 두 개를 바꾼 시험은 8바이트를 전송하고 전체 732개 중 6개 투영 작업을 실행했다. 부분 갱신 결과는 전체 렌더링과 일치했다.
+- Verilator의 투영 스크래치 시험은 코어 0, 코어 1, 동시 투영을 검증했다. 기존 출력 통합 시험의 DDR 읽기 횟수 검사 실패는 변경 전 코드에서도 재현됐다.
+
+통합 이미지의 QEMU 시험은 보시오 모의 백엔드를 사용한다. FPGA에서의 SD·DMA 동작, HDMI 출력과 프레임 성능은 확인하지 않았다.
+
+## 초기 개발 이미지 — 2026-11-17
 
 저장소 기준 커밋 `c526c63`에서 시작했다. Ubuntu 24.04 / WSL2
 `6.6.87.2-microsoft-standard-WSL2`, 호스트 GCC 13.3.0, Python 3.12.3,

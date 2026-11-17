@@ -1,5 +1,5 @@
 from pathlib import Path
-import hashlib,json
+import hashlib,json,sys
 s=Path(__file__).resolve().parent/'src'
 h=hashlib.sha256()
 for name in ('geometry.cpp','geometry.hpp','fixed_geometry.inc','common.hpp','wm.cpp','backend.cpp','backend.hpp','mask.hpp','culling.hpp','culling_bounds.inc','rejection_bounds.inc','geometry_math.hpp','geometry_reference.inc','plan.cpp','plan.hpp'):
@@ -12,4 +12,5 @@ if compat.exists():
  if proof['source_revision']==revision:
   assert proof['verified_plans']==37 and proof['result']=='PASS_EXACT_PAYLOADS'
   header+='#define BOAYO_PLAN_COMPAT_REV "'+proof['payload_revision']+'"\n'
-(s/'plan_revision.hpp').write_bytes(header.encode())
+output=Path(sys.argv[1]) if len(sys.argv)>1 else s/'plan_revision.hpp'
+output.write_bytes(header.encode())

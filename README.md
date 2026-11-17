@@ -31,13 +31,13 @@ python scripts/verify_current_rtl.py --require-tracked
 - **빌드:** [현재 비트스트림 안내](docs/현재_비트스트림.md)의 Vivado 재구현 절차를 따릅니다.
 - **외부 IP:** HDMI 원본은 고정 버전으로 내려받고, MIG는 Vivado 2022.2에서 보존 설정으로 생성합니다. [전체 구성의 IP 준비 방법](docs/외부_HDMI.md)
 - **SD 이미지:** 버전별 안내와 검증 기록은 `updates/`에 있습니다. 현재 소프트웨어 기준은 [BoAYO v14](updates/boayo-tilebatch-v14/README_KO.md)입니다. 새 환경의 SD 빌드에는 추가 커널·userspace 준비가 필요합니다.
-- **Linux 개발 환경:** [재현 가능한 BusyBox·Vim·Python 3·GCC 빌드](software/userland/README.md)는 현재 RTL용 별도 SD 개발 이미지입니다. 자체 앱 빌드·배포, 복구 셸, 메모리·저장장치 한계와 검증 범위를 설명합니다.
+- **통합 개발 SD 이미지:** [Linux·보시오·보아요 빌드 안내](software/userland/README.md). 현재 RTL에서 BusyBox, Vim, Python 3, GCC/G++와 자체 앱을 실행하고, 보시오의 2D 타일 갱신·투영·출력 위에 보아요 런처와 앱을 띄웁니다.
 
 비트스트림·SD 이미지·MIG 생성물·외부 HDMI IP 원본은 Git에 포함하지 않습니다.
 
 ## 확인된 결과와 남은 문제
 
-Linux 셸과 BoAYO의 실보드 HDMI 출력을 확인했습니다. 다만 **v14의 앱 갱신 성능은 비교본보다 느려졌으며**, 최적화 완료 상태가 아닙니다. [실보드 비교 결과](updates/boayo-tilebatch-v14/BOARD_RESULT_KO.md)
+기존 v14 이미지에서 Linux 셸과 BoAYO의 실보드 HDMI 출력을 확인했습니다. **v14의 앱 갱신 성능은 비교본보다 느렸습니다.** 통합 개발 SD 이미지는 QEMU 부팅과 모의 UI 실행을 확인했으며 실보드 검증은 남아 있습니다. [v14 실보드 비교 결과](updates/boayo-tilebatch-v14/BOARD_RESULT_KO.md) · [통합 이미지 검증 기록](software/userland/VALIDATION.md)
 
 | 현재 구성의 보존된 배선 결과 | 값 |
 |---|---:|

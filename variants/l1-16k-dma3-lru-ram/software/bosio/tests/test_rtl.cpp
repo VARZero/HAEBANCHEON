@@ -79,10 +79,43 @@ struct Bench {
   check(peek(bo_offsets[BO_SCENE0+bank]+(BO_HEADER_WORDS+512)*4)==0xcccccccc,"tail guard clobbered");
  }
 };
+
+static void test_scratch(Bench &b)
+{
+ const unsigned texture[]={0xff0000,0x00ff00};
+ const unsigned tile_offset=BO_HEADER_WORDS*4;
+ const unsigned guard=0xccccccccu;
+ const unsigned colors[]={0xe0e0e0e0u,0x1c1c1c1cu};
+ std::vector<unsigned> scratch(BO_DEMO_WORDS,guard);
+ b.upload(BO_TEXTURE,texture,2);
+ for(unsigned c=0;c<2;c++){
+  bo_demo_descriptor(b.desc[c],c,3);
+  b.upload(BO_DESC0+c,b.desc[c],BO_DESC_WORDS);
+ }
+ const auto active=b.d.active_scene;
+ for(unsigned mask=1;mask<=3;mask++){
+  b.upload(BO_SCRATCH,scratch.data(),scratch.size());
+  auto j=b.job(2);j.jobs[0]=mask&1;j.jobs[1]=(mask>>1)&1;
+  check(!bo_run(&b.engine,&j,b.desc[0],b.desc[1]),"scratch projection");
+  check(!bo_download_check(&b.engine,BO_SCRATCH,tile_offset,2*BO_TILE_WORDS*4),"scratch readback rejected");
+  for(unsigned c=0;c<2;c++){
+   check(j.cells[c]==j.jobs[c]*1024,"incorrect per-core scratch cell count");
+   for(unsigned n=0;n<BO_TILE_WORDS;n++)
+    check(b.peek(bo_offsets[BO_SCRATCH]+tile_offset+(c*BO_TILE_WORDS+n)*4)==
+          (j.jobs[c]?colors[c]:guard),"scratch tile mismatch");
+  }
+  check(b.peek(bo_offsets[BO_SCRATCH]+tile_offset-4)==guard,"scratch header overwritten");
+  check(b.peek(bo_offsets[BO_SCRATCH]+tile_offset+2*BO_TILE_WORDS*4)==guard,"scratch tail overwritten");
+  check(b.d.active_scene==active && !b.d.reads_out,"scratch started output");
+ }
+ std::printf("PASS SCRATCH seed=%u projection0/projection1/both and readback\n",b.seed);
+}
+
 int main(int argc,char **argv){
  try{
   Verilated::commandArgs(argc,argv);unsigned seed=argc>1?std::strtoul(argv[1],nullptr,0):1;Bench b(seed);
   struct bo_info info{};check(!bo_info(&b.engine,&info)&&info.signature==0x42533235,"signature");
+  if(argc>2 && !std::strcmp(argv[2],"--scratch")){test_scratch(b);return 0;}
   b.build(0,false);
   auto bad=b.job(0);auto before=b.cycles;
   b.desc[1][1]=b.desc[0][1];check(bo_run(&b.engine,&bad,b.desc[0],b.desc[1])==-EINVAL,"overlap accepted");
@@ -102,6 +135,7 @@ int main(int argc,char **argv){
   check(b.d.reads_out>=8960,"output did not fetch scenes");
   check(!bo_upload_check(&b.engine,BO_SCENE0,0,4),"old scene not released after active-base ack");
   std::printf("PASS DUAL_TO_OUTPUT seed=%u cycles=%llu pixels=%llu frames=%llu dma_writes=%u,%u output_reads=%u\n",seed,b.cycles,b.pixels,b.frames,b.d.writes0,b.d.writes1,b.d.reads_out);
+
   /* A blocked frame switch must time out and freeze all buffer reuse. */
   b.stalled=true;p=b.present(0);p.timeout_ms=1;
   check(bo_present(&b.engine,&p,b.scene[0].data())==-ETIMEDOUT,"missing frame timeout");

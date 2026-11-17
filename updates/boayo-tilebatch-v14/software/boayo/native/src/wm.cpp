@@ -404,42 +404,33 @@ J WM::dispatch(const J &r) {
     else if(w.dirty_regions_revision!=w.revision)pending={{w.dirty[0],w.dirty[1],w.dirty[2],w.dirty[3]}};
 
     int sw = w.data["surface_width"], sh = w.data["surface_height"];
-    if(op=="fill"){w.surface.resize(size_t(sw)*sh*3);}else w.ensure_surface();
-    w.prepared.reset();
-    int x = 0, y = 0, ww = sw, hh = sh;
-    Bytes raw;
     if (op == "fill") {
       auto c = a.at("rgb");
       require(c.is_array() && c.size() == 3, "rgb must contain three bytes");
       for (auto &v : c)
         require(v.is_number_integer() && v.get<int>() >= 0 && v.get<int>() <= 255,
                 "rgb must contain three bytes");
+      w.surface.resize(size_t(sw)*sh*3);
       fill_rgb(w.surface.data(), w.surface.size(),
                {c[0].get<uint8_t>(),c[1].get<uint8_t>(),c[2].get<uint8_t>()});
-      w.dirty = {0, 0, sw, sh};
+      pending={{0,0,sw,sh}};
     } else {
-      x = a.at("x");
-      y = a.at("y");
-      ww = a.at("width");
-      hh = a.at("height");
+      int x=a.at("x"), y=a.at("y"), ww=a.at("width"), hh=a.at("height");
       require(x >= 0 && y >= 0 && ww >= 1 && hh >= 1 && int64_t(x) + ww <= sw &&
                   int64_t(y) + hh <= sh,
               "surface update is out of bounds");
-      raw = unbase64(a.at("rgb24"));
+      auto raw = unbase64(a.at("rgb24"));
       require(raw.size() == size_t(ww) * hh * 3, "rgb24 byte count does not match rectangle");
-      for (int row = 0; row < hh; row++)
-        std::copy_n(raw.data() + row * ww * 3, ww * 3, w.surface.data() + ((y + row) * sw + x) * 3);
-      if (!w.dirty[2])
-        w.dirty = {x, y, ww, hh};
-      else {
-        auto old = w.dirty;
-        int x0 = std::min(x, old[0]), y0 = std::min(y, old[1]);
-        w.dirty = {x0, y0, std::max(x + ww, old[0] + old[2]) - x0,
-                   std::max(y + hh, old[1] + old[3]) - y0};
-      }
+      w.ensure_surface();
+      auto changed=patch_rgb_tiles(w.surface,sw,{x,y,ww,hh},raw);
+      if(changed.empty())return true;
+      pending.insert(pending.end(),changed.begin(),changed.end());
     }
-    if(op=="fill")pending={{0,0,sw,sh}};else pending.push_back({x,y,ww,hh});
+    w.prepared.reset();
     w.dirty_regions=tiled_regions(pending,sw,sh);
+    Rect dirty{};
+    for(auto r:w.dirty_regions)dirty=bounds(dirty,r);
+    w.dirty={dirty.x,dirty.y,dirty.w,dirty.h};
     ++w.revision;w.dirty_regions_revision=w.revision;
     w.solid_revision=op=="fill"?w.revision:0;
     if(op=="fill"){auto c=a.at("rgb");w.solid_index=(c[0].get<unsigned>()&224)|((c[1].get<unsigned>()&224)>>3)|(c[2].get<unsigned>()>>6);}

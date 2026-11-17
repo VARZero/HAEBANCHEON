@@ -53,7 +53,8 @@ struct App {
 struct Workspace {
   WM &wm;
   SceneStateCache state_cache;
-  std::string owner = "boayo-desktop";
+  static constexpr const char *owner_name = "boayo-desktop";
+  std::string owner = owner_name;
   std::map<int, int> cards;
   std::map<int, J> targets, card_keys;
   std::map<std::string, int> feedback;
