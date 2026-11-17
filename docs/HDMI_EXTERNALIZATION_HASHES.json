@@ -3,7 +3,7 @@
     "previous_sha256": [
       "3000fad612b7d9a43cfdb90cfb4904f710aeb02461f02a8db940f4d1391b9f18"
     ],
-    "published_sha256": "554d40b3c7f7b08185351a6821c909d3993d968cb2dde3188cb413123c57c702",
+    "published_sha256": "3a63862ef8c5f993b11af5758d8beb70c831dd9c8d91150a99285e10319956e7",
     "reason": "External HDMI preparation, verification or documentation; no datapath RTL edit"
   },
   "THIRD_PARTY.md": {
