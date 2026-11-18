@@ -1,6 +1,6 @@
 // Parameterized level-triggered sources, standard PLIC M/S contexts for hart 0.
 // A claimed source cannot be re-pended until its owning context completes it.
-module or_storage_plic #(parameter int SOURCES=2, INDEX_BITS=$clog2(SOURCES), ID_BITS=$clog2(SOURCES+1))(
+module or_storage_plic #(parameter int SOURCES=2, ID_BITS=$clog2(SOURCES+1))(
  input wire clk,reset_n,input wire [SOURCES-1:0] sources,
  input or_bo_axi_pkg::al_req_t req,output or_bo_axi_pkg::al_rsp_t rsp,
  output wire m_irq,s_irq
@@ -11,14 +11,24 @@ module or_storage_plic #(parameter int SOURCES=2, INDEX_BITS=$clog2(SOURCES), ID
   .ready(1'b1),.error,.read_data);
  logic [2:0] priority_value[SOURCES],threshold[2];
  logic [SOURCES-1:0] enabled[2],pending,in_service,service_owner;
+ logic [SOURCES-1:0] eligible[2],winner[2],higher[2][SOURCES];
  logic [ID_BITS-1:0] selected[2];
  wire [21:0] offset=address[21:0];
  assign m_irq=selected[0]!=0;assign s_irq=selected[1]!=0;
  always_comb begin
    for(int c=0;c<2;c++) begin
+     // Compare candidates in parallel; claims use the same one-hot winner.
+     // A lower source ID wins equal priority.
+     for(int i=0;i<SOURCES;i++)
+       eligible[c][i]=pending[i] && enabled[c][i] && priority_value[i]>threshold[c];
      selected[c]=0;
-     for(int i=SOURCES-1;i>=0;i--) if(pending[i] && enabled[c][i] && priority_value[i]>threshold[c] &&
-       (selected[c]==0 || priority_value[i]>=priority_value[INDEX_BITS'(selected[c]-1'b1)])) selected[c]=ID_BITS'(i+1);
+     for(int i=0;i<SOURCES;i++) begin
+       for(int j=0;j<SOURCES;j++)
+         higher[c][i][j]=eligible[c][j] &&
+           (j<i ? priority_value[j]>=priority_value[i] : priority_value[j]>priority_value[i]);
+       winner[c][i]=eligible[c][i] && !(|higher[c][i]);
+       selected[c]|=winner[c][i] ? ID_BITS'(i+1) : '0;
+     end
    end
    read_data=0;
    case(offset)
@@ -49,12 +59,13 @@ module or_storage_plic #(parameter int SOURCES=2, INDEX_BITS=$clog2(SOURCES), ID
         default:;
        endcase
        if(store)for(int i=0;i<SOURCES;i++)if(offset==22'(4*(i+1)))priority_value[i]<=write_data[2:0];
-       for(int c=0;c<2;c++) if(offset==(c==0?22'h200004:22'h201004)) begin
-         if(!store && selected[c]!=0) begin
-           pending[INDEX_BITS'(selected[c]-1'b1)]<=0;in_service[INDEX_BITS'(selected[c]-1'b1)]<=1;service_owner[INDEX_BITS'(selected[c]-1'b1)]<=1'(c);
-         end else if(store && write_data>=1 && write_data<=SOURCES &&
-           in_service[INDEX_BITS'(write_data-1'b1)] && service_owner[INDEX_BITS'(write_data-1'b1)]==1'(c)) in_service[INDEX_BITS'(write_data-1'b1)]<=0;
-       end
+       for(int c=0;c<2;c++) if(offset==(c==0?22'h200004:22'h201004))
+         for(int i=0;i<SOURCES;i++) begin
+           if(!store && winner[c][i]) begin
+             pending[i]<=0;in_service[i]<=1;service_owner[i]<=1'(c);
+           end else if(store && write_data==32'(i+1) &&
+             in_service[i] && service_owner[i]==1'(c)) in_service[i]<=0;
+         end
      end
    end
  end

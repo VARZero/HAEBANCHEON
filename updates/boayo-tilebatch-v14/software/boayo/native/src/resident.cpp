@@ -60,8 +60,19 @@ void MockDevice::batch(const std::vector<bo_batch_entry> &entries){
     Device::batch(std::vector<bo_batch_entry>(entries.begin()+first,entries.begin()+first+n));
   }
 }
+static void queue_fill(std::vector<bo_batch_entry> &list,const bo_mem_fill &fill){
+  if(!list.empty() && list.back().kind==BO_BATCH_FILL){
+    auto &previous=list.back().op.fill;
+    if(previous.region==fill.region && previous.value==fill.value &&
+       previous.offset+previous.bytes==fill.offset){
+      previous.bytes+=fill.bytes;
+      return;
+    }
+  }
+  bo_batch_entry b{};b.kind=BO_BATCH_FILL;b.op.fill=fill;list.push_back(b);
+}
 static void queue_fill(std::vector<bo_batch_entry> &list,unsigned bank,unsigned tile,unsigned color){
-  bo_batch_entry b{};b.kind=BO_BATCH_FILL;b.op.fill={3+bank,(header+tile*256)*4,1024,color,0};list.push_back(b);
+  queue_fill(list,{3+bank,(header+tile*256)*4,1024,color,0});
 }
 static void queue_blend(std::vector<bo_batch_entry> &list,const bo_tile_blend &blend){
   bo_batch_entry b{};b.kind=BO_BATCH_BLEND;b.op.blend=blend;list.push_back(b);
@@ -191,7 +202,12 @@ bool ResidentCompositor::update(WM &wm){
         unsigned t=c.ids[i];wanted[t]=generation;stored[bank][t]=0;redraw.insert(t);
         new_keys.emplace(t,std::vector<uint64_t>{uint64_t(id),c.layout_version,c.tile_content_revision[i],0});
       }
-      if(masked)dev.batch_view(reinterpret_cast<const bo_batch_entry *>(r+r[12+bank]),masked);
+      if(masked){
+        const auto *fills=reinterpret_cast<const bo_batch_entry *>(r+r[12+bank]);
+        std::vector<bo_batch_entry> prepare;
+        for(unsigned i=0;i<masked;++i)queue_fill(prepare,fills[i].op.fill);
+        dev.batch(prepare);
+      }
       cleared_tiles+=masked;frame_trace::mark("ready.prepare.end",redraw.size());
       frame_trace::mark("texture.upload.begin",texture.size());
       profile::Scope upload_timing(profile::texture);
@@ -217,8 +233,18 @@ bool ResidentCompositor::update(WM &wm){
     }else{
     frame_trace::mark("tiles.prepare.begin",dirty.size());
     std::vector<bo_batch_entry> prepare;
-    for(unsigned t:dirty){bool occupied=false,first_full=false;
-      for(int id:order){auto &c=p.layers[id];int i=c.lookup[t];if(i>=0 && c.mask_kinds[i]){occupied=true;first_full=c.mask_kinds[i]==1;break;}}
+    std::vector<size_t> first_visible(tiles,order.size());
+    for(unsigned t:dirty){
+      bool first_full=false;
+      // The highest full covering layer replaces every cell below it.
+      for(size_t layer=order.size();layer>0;--layer){
+        auto &c=p.layers[order[layer-1]];int i=c.lookup[t];
+        if(i<0 || !c.mask_kinds[i])continue;
+        first_visible[t]=layer-1;
+        first_full=c.mask_kinds[i]==1;
+        if(first_full)break;
+      }
+      bool occupied=first_visible[t]!=order.size();
       bool pointer=p.previous_pointer_tiles.count(t);
       unsigned entry=(occupied||pointer)?t*1024:0xffffffffu;
       scene_changed|=output.shadow[256+t]!=entry;output.shadow[256+t]=entry;
@@ -226,7 +252,8 @@ bool ResidentCompositor::update(WM &wm){
       // Exact input identities, not hashes or cell readback. Preserve old slot
       // identities through deactivation so an unchanged reactivation can reuse.
       std::vector<uint64_t> identity;identity.reserve(order.size()*3+1);
-      for(int id:order){auto &c=p.layers[id];int i=c.lookup[t];
+      for(size_t layer=first_visible[t];layer<order.size();++layer){
+        int id=order[layer];auto &c=p.layers[id];int i=c.lookup[t];
         if(i>=0 && c.mask_kinds[i]){identity.push_back(uint64_t(id));
           identity.push_back(c.layout_version);identity.push_back(c.tile_content_revision[i]);}}
       identity.push_back(pointer?pointer_version:0);
@@ -254,8 +281,10 @@ bool ResidentCompositor::update(WM &wm){
     dev.batch(prepare);
     frame_trace::mark("tiles.prepare.end",dirty.size());
     phase.stop();
-    for(int id:order){auto &c=p.layers[id];std::vector<unsigned> direct,masked;std::vector<bo_batch_entry> solids;
-      for(unsigned i=0;i<c.ids.size();++i)if(redraw.count(c.ids[i])&&c.mask_kinds[i]){
+    for(size_t layer=0;layer<order.size();++layer){
+      int id=order[layer];auto &c=p.layers[id];std::vector<unsigned> direct,masked;std::vector<bo_batch_entry> solids;
+      for(unsigned i=0;i<c.ids.size();++i)if(redraw.count(c.ids[i]) && c.mask_kinds[i] &&
+                                             first_visible[c.ids[i]]<=layer){
         if(c.mask_kinds[i]==1 && wm.windows.at(id).solid_revision==wm.windows.at(id).revision){
           queue_fill(solids,bank,c.ids[i],wm.windows.at(id).solid_index);++solid_tiles;
         }else if(c.mask_kinds[i]==1 || c.shape.empty())direct.push_back(i);else masked.push_back(i);}

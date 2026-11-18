@@ -9,8 +9,20 @@ struct bo_io {
     void (*delay_us)(void *, unsigned int);
     void (*memory_fence)(void *);
 };
+enum {
+    BO_PROJECTION_GIE = 0x04,
+    BO_PROJECTION_IER = 0x08,
+    BO_PROJECTION_ISR = 0x0c,
+    BO_PROJECTION_IRQ_DONE = 1u << 0,
+};
+struct bo_projection_irq_ops {
+    void (*arm)(void *, unsigned int);
+    int (*wait)(void *, unsigned int, __u64);
+    void (*disarm)(void *, unsigned int);
+};
 struct bo_engine {
     struct bo_io io;
+    const struct bo_projection_irq_ops *irq;
     __u32 dma_base;
     int active, poisoned, configured;
     __u32 resolution, camera[180];

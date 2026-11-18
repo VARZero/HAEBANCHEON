@@ -79,11 +79,13 @@ module gen3_bosio_soc(
        .sd_start(1'b0),.sd_to_memory(1'b0),.sd_address(32'b0),.sd_bytes(10'b0),
        .sd_ready(),.sd_done(),.sd_error(),.buffer_address(),.buffer_wdata(),.buffer_we(),.buffer_rdata(8'b0));
     end
-    or_storage_plic #(.SOURCES(4)) plic(.clk(fabric_clk),.reset_n(fabric_reset_n),.sources({extra_dma_irq,dma_irq,sd_irq}),
+    wire [1:0] projection_irq;
+    // Keep SD and DMA at sources 1–4. Projectors 0 and 1 use sources 5 and 6.
+    or_storage_plic #(.SOURCES(6)) plic(.clk(fabric_clk),.reset_n(fabric_reset_n),.sources({projection_irq,extra_dma_irq,dma_irq,sd_irq}),
       .req(lite[9]),.rsp(lite_rsp[9]),.m_irq,.s_irq);
     or_bo_axi_fabric #(.MASTERS(7)) fabric(.clk(fabric_clk),.reset_n(fabric_reset_n),.masters,.replies,.memory,.memory_reply,.lite,.lite_reply(lite_rsp),
         .lock_request(lock_sync),.lock_grant(grant_fabric),.snoop_valid,.snoop_address,.snoop_ready,.active_master(),.busy());
-    wire sensor_enable,sensor_ready,sensor_error;wire [1:0] projection_irq;
+    wire sensor_enable,sensor_ready,sensor_error;
     gen3_axi_uart uart1(.clk(fabric_clk),.reset_n(fabric_reset_n),.req(lite[4]),.rsp(lite_rsp[4]),.rx(gp_uart_rx),.tx(gp_uart_tx));
     gen3_axi_spi spi1(.clk(fabric_clk),.reset_n(fabric_reset_n),.req(lite[5]),.rsp(lite_rsp[5]),
         .miso(gp_spi_miso),.mosi(gp_spi_mosi),.sck(gp_spi_sck),.cs_n(gp_spi_cs_n));

@@ -25,7 +25,8 @@ for name in libgcc.a libgcc_eh.a crtbegin.o crtbeginS.o crtbeginT.o crtend.o crt
 done
 mkdir -p "$target/data/apps" "$target/data/src" "$target/dev/pts"
 chmod 0755 "$target/usr/bin/userland-check" "$target/usr/bin/app-install"
-"$cc" -Os -Wall -Wextra -Werror -s -o "$target/usr/bin/bosioctl" "$bosio/tools/bosioctl.c"
+"$cc" -Os -Wall -Wextra -Werror -s -o "$target/usr/bin/bosioctl" \
+    "$bosio/tools/bosioctl.c" "$bosio/tools/bosio_bench.c"
 install -m 0644 "$bosio/include/bosio_uapi.h" "$target/usr/include/bosio_uapi.h"
 # Use the same UAPI as the kernel and the same cross toolchain as the rootfs.
 (

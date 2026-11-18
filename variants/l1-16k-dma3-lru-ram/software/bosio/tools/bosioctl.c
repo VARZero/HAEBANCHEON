@@ -7,6 +7,7 @@
 #include <sys/ioctl.h>
 #include <unistd.h>
 #include "../common/bosio_demo.h"
+#include "bosio_bench.h"
 static void call(int fd,unsigned long op,void *arg)
 {if(ioctl(fd,op,arg)<0){perror("bosio ioctl");exit(1);}}
 
@@ -82,13 +83,16 @@ static void project_check(int fd, unsigned cores)
 
 static void usage(FILE *stream)
 {
-    fprintf(stream, "usage: bosioctl info | project [0|1|both] | demo\n");
+    fprintf(stream, "usage: bosioctl info | project [0|1|both] | demo | "
+                    "bench [tiles [rounds]] | bench-resident [tiles [rounds]]\n");
 }
 
 int main(int argc,char **argv)
 {
     int fd;struct bo_info info;
     unsigned cores = 3;
+    if (argc >= 2 && (!strcmp(argv[1], "bench") || !strcmp(argv[1], "bench-resident")))
+        return bosio_bench(argc - 2, argv + 2, !strcmp(argv[1], "bench-resident"));
     if (argc == 2 && !strcmp(argv[1], "--help")) {
         usage(stdout);
         return 0;

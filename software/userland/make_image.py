@@ -26,7 +26,7 @@ def sha(path):
 
 
 def check_bosio_output_map(dtb):
-    """Validate the DT resources for the current L1-16K DMA3 LRU-RAM bitstream."""
+    """Validate the DT resources for the L1-16K DMA3 LRU-RAM IRQ bitstream."""
     def get(*args):
         return subprocess.check_output(['fdtget', *args], text=True).split()
 
@@ -34,6 +34,7 @@ def check_bosio_output_map(dtb):
         return [int(value, 16) for value in get('-t', 'x', dtb, node, prop)]
 
     bosio = '/soc/bosio@20000000'
+    plic = '/soc/interrupt-controller@c000000'
     arena = '/reserved-memory/dma-pool@bd000000'
     frames = '/reserved-memory/framebuffer@bf800000'
     for node, base, size in [(arena, 0xbd000000, 0x01000000),
@@ -49,10 +50,17 @@ def check_bosio_output_map(dtb):
             or cells(bosio, 'reg') != [0x20000000, 0x80, 0x20010000, 0x80, 0x20020000, 0x80]):
         raise ValueError('Incorrect BOSIO MMIO map or disabled controller')
 
+    if (cells(plic, 'riscv,ndev') != [6]
+            or cells(bosio, 'interrupt-parent') != cells(plic, 'phandle')
+            or cells(bosio, 'interrupts') != [5, 6]
+            or get(dtb, bosio, 'interrupt-names') != ['projection0', 'projection1']):
+        raise ValueError('Incorrect BOSIO projection completion IRQ map')
+
     # kfb_video uses a fixed pair of 4 MiB slots and stores each RGB888 pixel
     # in one 32-bit word. Only the leading 1280 * 720 words of each slot are used.
     return {
         'output_mmio': {'base': '0x20020000', 'bytes': 0x80},
+        'projection_plic_sources': {'projection0': 5, 'projection1': 6},
         'scene_arena': {'base': '0xbd000000', 'bytes': 0x01000000, 'no_map': True},
         'hdmi_scanout': {
             'base': '0xbf800000', 'bytes': 0x00800000, 'no_map': True,
@@ -152,7 +160,7 @@ def main():
                     sha256=sha(target), rootfs_sha256=sha(rootfs),
                     opensbi_sha256=sha(fw / 'fw_jump.bin'),
                     kernel_sha256=sha(fw / 'Image'), hardware_tested=False,
-                    requires='Current L1-16K DMA3 LRU-RAM bitstream; unchanged RTL',
+                    requires='L1-16K DMA3 LRU-RAM bitstream with projection PLIC sources 5 and 6',
                     source_date_epoch=lock['source_date_epoch'])
     inputs = list(HERE.rglob('*')) + list((BOARD / 'software/bosio').rglob('*'))
     inputs += [BOARD / 'software/storage' / name for name in

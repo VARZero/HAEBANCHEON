@@ -24,7 +24,7 @@ boayo keys
   → 직렬 콘솔 셸 → Vim / Python / GCC / 사용자 앱
 ```
 
-- RTL, FPGA 초기화, 클럭, 캐시, SD loader, 주소·인터럽트, DDR 예약 영역은 수정하지 않는다.
+- 투영코어 완료 신호는 PLIC 5·6번에 연결한다. SD·DMA는 기존 1~4번을 사용한다. 새 DTB에는 두 투영 IRQ가 연결된 비트스트림을 사용한다.
 - `sources.json`의 SHA256으로 저장소의 OpenSBI 바이너리를 확인한다. 이것은 **기존 바이너리 재사용**이며 OpenSBI 재빌드를 주장하지 않는다. v1.8.1 소스 커밋·라이선스는 `../../provenance/firmware_origin.json`에 있다.
 - 현재 구성의 `gen3-bosio.dts`, SD·DMA·BOSIO 드라이버와 storage 커널 설정을 사용한다. 커널은 고정 Linux 6.12 아카이브 + 저장소의 trace-v2 패치를 복원해 만든다.
 - [보시오 출력 메모리맵과 투영코어 제어](BOSIO_OUTPUT.md)에 출력·투영 주소와 `bosioctl` 사용법을 정리했다. 이미지 빌드는 실제 DTB의 레지스터 주소와 DDR 예약을 검사한다.
@@ -168,9 +168,9 @@ sync
 QEMU는 이미지에서 추출한 **동일 OpenSBI와 커널**을 C/F/D/V 확장을 끄고 실행하지만 QEMU용 DT(10MHz timer, virtio disk)를 사용한다. 실제 보드 DT는 이미지 안에서 그대로 보존된다. 시험 복사본에서만 쓰며 원본 SD 이미지는 변경하지 않는다.
 파티션 없는 경우의 복구 셸과 두 번 부팅 사이의 `/data` 보존도 검사한다. UART 로그·시험 DT·`result.json`을 출력 폴더에 남긴다.
 
-**QEMU 통과는 보드 검증이 아니다.** 물리 SD4/인터럽트/DMA·캐시 일치, MIG, ORYUKDO CPU, BOSIO/HDMI, 콜드부트 시간과 대규모 컴파일 성능은 해당 비트스트림과 실제 보드에서 별도로 확인해야 한다. RTL을 수정하지 않았으므로 이번 작업에서 합성·배선을 다시 수행할 필요는 없지만, 새 사용자 공간의 실보드 실행 가능성을 그것만으로 보장하지 않는다.
+실제 SD4, PLIC IRQ, DMA 캐시 일치, MIG, ORYUKDO CPU와 BOSIO/HDMI는 IRQ 비트스트림과 실제 보드에서 확인한다. 콜드부트 시간과 대규모 컴파일 성능도 보드에서 측정한다.
 
-실제 수행한 검증과 측정은 [VALIDATION.md](VALIDATION.md)에 기록한다. Linux 6.12와 OpenSBI를 보존한 개발 구성으로, 커널 보안 업데이트까지 수행한 배포판은 아니다.
+2026-11-19 실보드에서 QSPI 구성 시작, SD ext4 부팅과 두 투영코어 IRQ를 확인했다. 보시오 부분 갱신 시험은 통과했고, 보아요 기본 런처의 첫 화면 게시 완료는 시험 중단 시점까지 확인하지 못했다. 실제 수행한 검증과 측정은 [VALIDATION.md](VALIDATION.md)에 기록한다. Linux 6.12와 OpenSBI를 보존한 개발 구성으로, 커널 보안 업데이트까지 수행한 배포판은 아니다.
 
 ## 관련 원본
 

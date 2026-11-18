@@ -16,6 +16,7 @@ python3 - "$out/sources.f" <<'PY'
 from pathlib import Path
 import sys
 names=['soc/bosio/or_bo_axi_pkg.sv','soc/bosio/or_bo_axi_fabric.sv','soc/bosio/or_bo_bosio_axi.sv','soc/rtl/gen3_mul33_pipe.sv']
+names += ['soc/bosio/gen3_axil_regs.sv', 'soc/bosio/or_storage_plic.sv']
 names += [n for n in Path('soc/bosio_sources.f').read_text().splitlines() if n.startswith('soc/vendor/')]
 names += ['software/bosio/tests/bo_driver_ram.sv','software/bosio/tests/tb_bosio_driver.sv']
 Path(sys.argv[1]).write_text('\n'.join(names)+'\n')

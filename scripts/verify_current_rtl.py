@@ -18,6 +18,8 @@ def digest(path):
 
 def verify(require_tracked=False):
     manifest = json.loads((BASE / 'provenance/implementation_source_manifest.json').read_text())
+    irq = json.loads((BASE / 'provenance/projection_irq_sources.json').read_text())
+    irq_updates = []
     local, external = 0, 0
     shell_eol_only = []
     tool_updates = []
@@ -25,7 +27,14 @@ def verify(require_tracked=False):
         if name.startswith(EXTERNAL):
             external += 1
             continue
-        kind = check_published(BASE, name, expected)
+        if name in irq['changes']:
+            change = irq['changes'][name]
+            assert change['baseline_sha256'] == expected, name
+            assert digest(BASE / name) == change['sha256'], name
+            irq_updates.append(name)
+            kind = 'projection_irq_update'
+        else:
+            kind = check_published(BASE, name, expected)
         if kind == 'shell_eol_only': shell_eol_only.append(name)
         if kind == 'publication_tool_update': tool_updates.append(name)
         local += 1
@@ -64,9 +73,11 @@ def verify(require_tracked=False):
                   external_source_records=external, required_build_inputs=len(required),
                   shell_line_endings_only=shell_eol_only,
                   publication_tool_updates=tool_updates,
+                  projection_irq_updates=irq_updates,
                   stored_rtl_logs=len(validation['checks']), stored_lru_logs=len(lru['logs']),
                   bitstream_sha256=release['bitstream']['sha256'],
-                  scope='Preserved sources/evidence only; no synthesis or physical board rerun')
+                  projection_irq_bitstream_sha256=irq['bitstream_sha256'],
+                  scope='Source hashes and preserved evidence; historical polling release and explicit IRQ updates')
     print(json.dumps(result, indent=2))
     return result
 

@@ -76,5 +76,57 @@ def main(binary):
         fresh.close()
 
 
+def test_background_and_move(binary):
+    def overlay(renderer, azimuth):
+        wid = renderer.call("create_window", title="Overlap", surface_width=257,
+                            surface_height=129, width_deg=112, height_deg=70,
+                            azimuth=azimuth)["window_id"]
+        renderer.call("fill", window_id=wid, rgb=[255, 0, 0])
+        return wid
+
+    image = bytearray(bytes((16, 180, 32)) * (257 * 129))
+    incremental, fresh = Renderer(binary), Renderer(binary)
+    try:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            incremental.update(image)
+            upper = overlay(incremental, 0)
+            first_path = root / "initial"
+            first = incremental.call("test_resident_render", path=str(first_path))
+            initial = first_path.with_suffix(".scene").read_bytes()
+            assert any(op["op"] == "fill" and op["value"] == 0 and op["words"] > 256
+                       for op in first["trace"]), "adjacent background fills were not merged"
+            assert any(op["op"] == "fill" and op["value"] == 0xe0 and op["words"] > 256
+                       for op in first["trace"]), "adjacent solid fills were not merged"
+
+            for y in range(62, 67):
+                pos = (y * 257 + 126) * 3
+                image[pos:pos + 15] = bytes((32, 32, 240)) * 5
+            incremental.update(image)
+            hidden, covered = incremental.render(root / "covered")
+            assert covered == initial
+            assert hidden["jobs_per_core"] == [0, 0] and hidden["update_kind"] == "none"
+            assert (hidden["texture_pool"]["upload_bytes"] ==
+                    first["projection"]["texture_pool"]["upload_bytes"])
+
+            incremental.call("configure_window", window_id=upper, azimuth=48)
+            _, moved = incremental.render(root / "moved")
+            fresh.update(image)
+            fresh_upper = overlay(fresh, 48)
+            _, full = fresh.render(root / "fresh-moved")
+            assert moved != initial and moved == full, "move failed to restore the underlying layer"
+
+            incremental.call("configure_window", window_id=upper, mapped=False)
+            fresh.call("configure_window", window_id=fresh_upper, mapped=False)
+            _, exposed = incremental.render(root / "exposed")
+            _, full_exposed = fresh.render(root / "fresh-exposed")
+            assert exposed == full_exposed, "hiding failed to restore the underlying layer"
+            print("PASS merged background/solid fills, occluded edit, and restoration after move")
+    finally:
+        incremental.close()
+        fresh.close()
+
+
 if __name__ == "__main__":
     main(sys.argv[1])
+    test_background_and_move(sys.argv[1])

@@ -8,7 +8,9 @@
 #include <linux/mm.h>
 #include <linux/scatterlist.h>
 #include <linux/fs.h>
+#include <linux/interrupt.h>
 #include <linux/io.h>
+#include <linux/jiffies.h>
 #include <linux/ktime.h>
 #include <linux/miscdevice.h>
 #include <linux/module.h>
@@ -36,11 +38,17 @@ struct bo_rgb_mapping {
 #ifdef MODULE
 #error "BOSIO must be built in: outstanding DMA must survive close and timeout"
 #endif
+struct bosio_projection_irq {
+    void __iomem *regs;
+    struct completion done;
+};
 struct bosio_device {
     struct miscdevice misc;
     struct mutex mutex;
     struct bo_engine engine;
+    u32 (*run_desc)[BO_MAX_JOBS * BO_DESC_WORDS];
     void __iomem *regs[3];
+    struct bosio_projection_irq projection_irq[2];
     void *arena;
     dma_addr_t dma;
     bool opened;
@@ -233,8 +241,17 @@ static long bosio_ioctl(struct file *file,unsigned int cmd,unsigned long arg)
     }
     case BO_RUN: {
         struct bo_run run;
+        unsigned int c;
+
         if(copy_from_user(&run,u,sizeof(run))){ret=-EFAULT;break;}
-        ret=bo_run(&d->engine,&run,d->arena+bo_offsets[BO_DESC0],d->arena+bo_offsets[BO_DESC1]);
+        /* The ioctl mutex keeps the DDR descriptors stable until both cores finish. */
+        if(!d->engine.poisoned && run.jobs[0]<=BO_MAX_JOBS && run.jobs[1]<=BO_MAX_JOBS){
+            dma_rmb();
+            for(c=0;c<2;c++)if(run.jobs[c])
+                memcpy(d->run_desc[c],d->arena+bo_offsets[BO_DESC0+c],
+                       run.jobs[c]*BO_DESC_WORDS*sizeof(u32));
+        }
+        ret=bo_run(&d->engine,&run,d->run_desc[0],d->run_desc[1]);
         if(copy_to_user(u,&run,sizeof(run)))ret=-EFAULT;
         break;
     }
@@ -298,6 +315,98 @@ static const struct file_operations bosio_fops={
     .owner=THIS_MODULE,.open=bosio_open,.release=bosio_release,
     .unlocked_ioctl=bosio_ioctl,
 };
+static void projection_ack(void __iomem *regs, u32 mask)
+{
+    /* HLS ISR bits toggle on write. Only acknowledge bits asserted on read. */
+    if (mask) {
+        writel(mask, regs + BO_PROJECTION_ISR);
+        readl(regs + BO_PROJECTION_ISR);
+    }
+}
+
+static irqreturn_t bosio_projection_done(int irq, void *data)
+{
+    struct bosio_projection_irq *core = data;
+    u32 pending = readl(core->regs + BO_PROJECTION_ISR) & BO_PROJECTION_IRQ_DONE;
+
+    if (!pending)
+        return IRQ_NONE;
+    projection_ack(core->regs, pending);
+    complete(&core->done);
+    return IRQ_HANDLED;
+}
+
+static void bosio_projection_arm(void *opaque, unsigned int index)
+{
+    struct bosio_device *d = opaque;
+    struct bosio_projection_irq *core = &d->projection_irq[index];
+    void __iomem *regs = core->regs;
+
+    reinit_completion(&core->done);
+    projection_ack(regs, readl(regs + BO_PROJECTION_ISR) & 3u);
+    writel(BO_PROJECTION_IRQ_DONE, regs + BO_PROJECTION_IER);
+    writel(1, regs + BO_PROJECTION_GIE);
+}
+
+static int bosio_projection_wait(void *opaque, unsigned int index, __u64 deadline)
+{
+    struct bosio_device *d = opaque;
+    struct completion *done = &d->projection_irq[index].done;
+    __u64 now = hw_now(opaque);
+
+    if (now >= deadline)
+        return try_wait_for_completion(done) ? 0 : -ETIMEDOUT;
+    return wait_for_completion_timeout(done, usecs_to_jiffies((unsigned int)(deadline - now)))
+           ? 0 : -ETIMEDOUT;
+}
+
+static void bosio_projection_disarm(void *opaque, unsigned int index)
+{
+    struct bosio_device *d = opaque;
+    void __iomem *regs = d->projection_irq[index].regs;
+
+    writel(0, regs + BO_PROJECTION_GIE);
+    writel(0, regs + BO_PROJECTION_IER);
+    readl(regs + BO_PROJECTION_IER);
+}
+
+static const struct bo_projection_irq_ops bosio_projection_irq_ops = {
+    .arm = bosio_projection_arm,
+    .wait = bosio_projection_wait,
+    .disarm = bosio_projection_disarm,
+};
+
+static int bosio_projection_setup(struct platform_device *pdev, struct bosio_device *d)
+{
+    static const char * const names[] = { "projection0", "projection1" };
+    static const char * const actions[] = { "bosio-projection0", "bosio-projection1" };
+    struct device *dev = &pdev->dev;
+    unsigned int index;
+    int irq, ret;
+
+    if (!of_property_present(dev->of_node, "interrupts") &&
+        !of_property_present(dev->of_node, "interrupts-extended") &&
+        !of_property_present(dev->of_node, "interrupt-names"))
+        return 0;
+
+    for (index = 0; index < ARRAY_SIZE(names); index++) {
+        struct bosio_projection_irq *core = &d->projection_irq[index];
+
+        irq = platform_get_irq_byname(pdev, names[index]);
+        if (irq < 0)
+            return dev_err_probe(dev, irq, "%s completion IRQ unavailable\n", names[index]);
+        core->regs = d->regs[index];
+        init_completion(&core->done);
+        bosio_projection_disarm(d, index);
+        projection_ack(core->regs, readl(core->regs + BO_PROJECTION_ISR) & 3u);
+        ret = devm_request_irq(dev, irq, bosio_projection_done, 0, actions[index], core);
+        if (ret)
+            return dev_err_probe(dev, ret, "cannot request %s completion IRQ\n", names[index]);
+    }
+    d->engine.irq = &bosio_projection_irq_ops;
+    return 0;
+}
+
 static int bosio_probe(struct platform_device *pdev)
 {
     struct device *dev=&pdev->dev;
@@ -308,6 +417,8 @@ static int bosio_probe(struct platform_device *pdev)
     struct bo_io io;
     int c,ret;
     d=devm_kzalloc(dev,sizeof(*d),GFP_KERNEL);if(!d)return -ENOMEM;
+    d->run_desc=devm_kmalloc(dev,2*sizeof(*d->run_desc),GFP_KERNEL);
+    if(!d->run_desc)return -ENOMEM;
     for(c=0;c<3;c++){
         struct resource *r=platform_get_resource(pdev,IORESOURCE_MEM,c);
         if(!r || resource_size(r)!=0x80 || r->start!=0x20000000+c*0x10000)return -EINVAL;
@@ -344,6 +455,8 @@ static int bosio_probe(struct platform_device *pdev)
         ret=-ENODEV;goto free_dma;
     }
     for(c=0;c<2;c++)if(!(readl(d->regs[c])&4)){ret=-EBUSY;goto free_dma;}
+    ret=bosio_projection_setup(pdev,d);
+    if(ret)goto free_dma;
     /* Metadata is uploaded before enable. Each newly visible tile is fully
      * written or selectively filled before publication; old DDR is unreachable. */
     mutex_init(&d->mutex);
@@ -353,7 +466,9 @@ static int bosio_probe(struct platform_device *pdev)
     if(!d->rgb_pattern){ret=-ENOMEM;goto free_dma;}
     ret=misc_register(&d->misc);if(ret)goto free_rgb;
     platform_set_drvdata(pdev,d);
-    dev_info(dev,"BOSIO ABI3: dual projectors + BS25, DMA copy/fill/upload/RGB-user, 16MiB arena\n");
+    dev_info(dev,"BOSIO ABI3: dual projectors (%s) + BS25, DMA copy/fill/upload/RGB-user, 16MiB arena\n",
+             d->engine.irq ? "completion IRQs" : "polling");
+    dev_info(dev,"descriptor validation uses cached snapshots and sorted output ranges\n");
     return 0;
 free_rgb:
     dma_free_coherent(dmaengine_get_dma_device(d->channel),BO_RGB_PATTERN_BYTES,
