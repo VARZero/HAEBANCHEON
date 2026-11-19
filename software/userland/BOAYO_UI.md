@@ -1,5 +1,7 @@
 # 보아요 UI
 
+현재 소스는 [WM 데몬과 별도 앱 프로세스](WM_DAEMON.md) 구조로 전환했다. `boayo start`는 WM을 시작하며 `boayo launcher`로 별도 런처를 연다. 아래의 2026-11-19 실보드 시간은 전환 전 개발 SD의 측정값이다.
+
 보아요는 런처, 앱 창, 입력과 창 배치를 담당한다. 보시오 타일 미들웨어가 UI 이미지의 변경을 추적하고 투영코어와 출력코어를 구동한다. 두 명령은 같은 서비스를 사용하며 보시오가 `/dev/bosio0`을 단독으로 연다.
 
 처음 표시하거나 창 위치를 바꾸면 보아요는 뒤쪽 장면 뱅크에서 영향받는 타일의 배경과 아래쪽 창을 복원하고, 보이는 내용을 투영한 뒤 화면을 전환한다. 기본 배경은 검정이다. 비어 있는 타일은 장면 디렉터리에서 검정으로 표시하고, 픽셀을 채워야 하는 곳은 같은 색의 연속 타일을 DMA 한 구간으로 묶는다.
@@ -9,11 +11,12 @@
 ```sh
 bosio-tiles start
 boayo start
+boayo launcher
 boayo status
 boayo keys
 ```
 
-`boayo start`가 받은 `target_generation`은 런처를 만든 장면 버전이다. `boayo status`의 `performance.rendered_generation`이 그 값에 도달하면 해당 버전이 출력 경로에 반영된 것이다. 키 입력 화면에서 W/A/S/D로 시점을 움직이고 Space 또는 Enter로 가운데를 누른다. Q를 누르면 키 입력 화면을 닫고 콘솔로 돌아온다.
+런처를 새로 여는 `boayo launcher` 응답의 `target_generation`은 런처 이미지를 제출한 장면 버전이다. `boayo status`의 `performance.rendered_generation`이 그 값에 도달하면 해당 버전이 출력 경로에 반영된 것이다. 키 입력 화면에서 W/A/S/D로 시점을 움직이고 Space 또는 Enter로 가운데를 누른다. Q를 누르면 키 입력 화면을 닫고 콘솔로 돌아온다.
 
 ```sh
 boayo app dashboard
@@ -21,10 +24,9 @@ boayo app telemetry
 boayo app pulse
 boayo launcher
 boayo stop
-bosio-tiles stop
 ```
 
-`boayo stop`은 런처와 보아요가 연 앱 창을 닫는다. 보시오에 연결된 별도 앱의 창은 계속 표시할 수 있다. 보아요는 `boayo start`로 다시 열 수 있다. `bosio-tiles stop`은 미들웨어와 출력까지 종료한다.
+`boayo stop`과 `bosio-tiles stop`은 WM과 WM이 실행한 앱 프로세스 및 출력을 종료한다. UI 프로세스만 닫으려면 프로토콜의 `ui_stop`을 사용한다.
 
 QEMU에서는 첫 명령을 `bosio-tiles start --mock`으로 바꿔 같은 UI 흐름을 시험한다. 일반 부팅은 직렬 콘솔로 시작한다. 내장 UI와 앱은 실행 시 그림을 생성하며 v14 배포 이미지에 있던 사전 생성 에셋과 투영 계획은 별도다.
 

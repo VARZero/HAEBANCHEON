@@ -11,6 +11,7 @@ static void mark_regions(WM&wm,Window&w,const std::vector<Rect>&changed){
   w.dirty={all.x,all.y,all.w,all.h};++w.revision;w.dirty_regions_revision=w.revision;++wm.generation;
 }
 void publish(WM &wm,int id,const Surface&s,bool first){
+  if (wm.publish_surface) { wm.publish_surface(id, s, first); return; }
   auto&w=wm.window(id);s.ensure_pixels();w.ensure_surface();
   require(w.surface.size()==s.pixels.size(),"surface size mismatch");
   std::vector<Rect> changed;
@@ -26,6 +27,7 @@ void publish(WM &wm,int id,const Surface&s,bool first){
   w.prepared=s.prepared;mark_regions(wm,w,changed);
 }
 void publish(WM &wm,int id,Surface&&s,bool first){
+  if (wm.publish_surface) { wm.publish_surface(id, s, first); return; }
   if(!first && !s.prepared){publish(wm,id,static_cast<const Surface&>(s),false);return;}
   auto&w=wm.window(id);
   require(w.data["surface_width"]==s.width && w.data["surface_height"]==s.height,"surface size mismatch");
@@ -37,6 +39,16 @@ void publish(WM &wm,int id,Surface&&s,bool first){
 void publish_region(WM&wm,int id,const Surface&part,int x,int y){
   auto&w=wm.window(id);int width=w.data["surface_width"],height=w.data["surface_height"];
   require(x>=0 && y>=0 && part.width>0 && part.height>0 && int64_t(x)+part.width<=width && int64_t(y)+part.height<=height,"surface patch bounds");
+  if (wm.publish_surface) {
+    part.ensure_pixels();
+    w.ensure_surface();
+    Surface image(width, height, w.surface, {});
+    for (int row = 0; row < part.height; ++row)
+      std::copy_n(part.pixels.data()+size_t(row)*part.width*3, part.width*3,
+                  image.pixels.data()+(size_t(y+row)*width+x)*3);
+    wm.publish_surface(id, image, false);
+    return;
+  }
   part.ensure_pixels();w.ensure_surface();w.prepared.reset();
   for(int row=0;row<part.height;row++)std::copy_n(part.pixels.data()+size_t(row)*part.width*3,part.width*3,w.surface.data()+(size_t(y+row)*width+x)*3);
   mark_regions(wm,w,{{x,y,part.width,part.height}});

@@ -200,6 +200,7 @@ bool ResidentCompositor::update(WM &wm){
       std::copy_n(r+r[16],tiles,output.shadow.begin()+256);
       for(unsigned i=0;i<c.ids.size();++i)if(c.mask_kinds[i]){
         unsigned t=c.ids[i];wanted[t]=generation;stored[bank][t]=0;redraw.insert(t);
+        active_tiles.insert(t);
         new_keys.emplace(t,std::vector<uint64_t>{uint64_t(id),c.layout_version,c.tile_content_revision[i],0});
       }
       if(masked){
@@ -248,7 +249,8 @@ bool ResidentCompositor::update(WM &wm){
       bool pointer=p.previous_pointer_tiles.count(t);
       unsigned entry=(occupied||pointer)?t*1024:0xffffffffu;
       scene_changed|=output.shadow[256+t]!=entry;output.shadow[256+t]=entry;
-      if(!occupied && !pointer){wanted[t]=0;continue;}
+      if(!occupied && !pointer){wanted[t]=0;active_tiles.erase(t);continue;}
+      active_tiles.insert(t);
       // Exact input identities, not hashes or cell readback. Preserve old slot
       // identities through deactivation so an unchanged reactivation can reuse.
       std::vector<uint64_t> identity;identity.reserve(order.size()*3+1);
@@ -267,12 +269,14 @@ bool ResidentCompositor::update(WM &wm){
     any=scene_changed;
     // Unchanged active tiles may be stale in the next back bank. Copy only
     // missing versions, before presentation. Never touch inactive cell slots.
-    if(any || !valid)for(unsigned t=0;t<tiles;){
-      if(!wanted[t] || redraw.count(t) || stored[bank][t]==wanted[t]){++t;continue;}
+    if(any || !valid)for(auto it=active_tiles.begin();it!=active_tiles.end();){
+      unsigned t=*it;
+      if(redraw.count(t) || stored[bank][t]==wanted[t]){++it;continue;}
       unsigned first=t,source=bank^1;
       do {
         require(stored[source][t]==wanted[t],"missing resident tile generation");++t;
-      }while(t<tiles && wanted[t] && !redraw.count(t) && stored[bank][t]!=wanted[t]);
+        ++it;
+      }while(it!=active_tiles.end() && *it==t && !redraw.count(t) && stored[bank][t]!=wanted[t]);
       bo_batch_entry copy{};copy.kind=BO_BATCH_COPY;
       copy.op.copy={3+source,(header+first*256)*4,3+bank,(header+first*256)*4,(t-first)*1024,0};prepare.push_back(copy);
       output.dma_copied_words+=(t-first)*256;lazy_copied_tiles+=t-first;
@@ -326,17 +330,22 @@ bool ResidentCompositor::update(WM &wm){
   phase.next(profile::finish);
   for(int id:order){auto &c=p.layers[id];c.invalid.clear();wm.windows[id].dirty={};wm.windows[id].dirty_regions.clear();if(layout_changed.count(id) || !p.previous_tiles.count(id))p.previous_tiles[id]={c.ids.begin(),c.ids.end()};}
   p.previous_order=order;valid=true;++frames;
-  metrics={{"texture_pool",textures.status()},{"device_ready_frames",ready_frames},{"packed_mask_tiles_total",packed_mask_tiles},{"redrawn_tiles",redraw.size()},{"reused_tiles_total",reused_tiles},{"lazy_copied_tiles_total",lazy_copied_tiles},{"solid_tiles_total",solid_tiles},{"mode","ddr-resident-dirty-tiles"},{"hardware_frames",frames},{"fallback_frames",0},
+  last_dirty=dirty.size();last_redrawn=redraw.size();last_jobs=jobs;last_changed=any;
+  if(collect_metrics)metrics=status();
+  return any;
+}
+J ResidentCompositor::status() const {
+  const auto &p=planner;
+  return {{"texture_pool",textures.status()},{"device_ready_frames",ready_frames},{"packed_mask_tiles_total",packed_mask_tiles},{"redrawn_tiles",last_redrawn},{"reused_tiles_total",reused_tiles},{"lazy_copied_tiles_total",lazy_copied_tiles},{"solid_tiles_total",solid_tiles},{"mode","ddr-resident-dirty-tiles"},{"hardware_frames",frames},{"fallback_frames",0},
     {"geometry_tiles_evaluated_total",p.geometry_tiles_evaluated},{"mask_samples_evaluated_total",p.mask_samples_evaluated},
     {"geometry_builds",p.geometry_builds},{"geometry_prepare_us_total",p.geometry_prepare_us},{"geometry_cull_us_total",p.geometry_cull_us},{"geometry_descriptor_us_total",p.geometry_descriptor_us},{"geometry_insert_us_total",p.geometry_insert_us},
     {"mask_builds",p.mask_builds},{"mask_build_us_total",p.mask_build_us},{"mask_fast_tiles_total",p.mask_fast_tiles},
     {"mask_integer_samples_total",p.mask_integer_samples},{"mask_precise_samples_total",p.mask_precise_samples},
     {"precomputed_layers_total",p.precomputed_layers},{"plan_cache",projection_plan_stats()},
-    {"jobs_per_core",jobs},{"total_hw_jobs",total_jobs},{"dirty_tiles",dirty.size()},
+    {"jobs_per_core",last_jobs},{"total_hw_jobs",total_jobs},{"dirty_tiles",last_dirty},
     {"cpu_scene_words",p.scene.size()},{"cpu_output_shadow_words",output.shadow.size()},
     {"cpu_result_download_words",0},{"tile_fills_total",cleared_tiles},{"masked_tiles_total",blended_tiles},
     {"texture_uploads_total",textures.full_uploads+textures.partial_uploads},{"texture_reuses_total",textures.reuses},
-    {"update_kind",any?"tiles":"none"}};
-  return any;
+    {"update_kind",last_changed?"tiles":"none"}};
 }
 }

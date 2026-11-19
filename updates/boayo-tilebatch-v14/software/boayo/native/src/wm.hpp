@@ -5,11 +5,14 @@
 #include "texture.hpp"
 #include "dirty_regions.hpp"
 namespace boayo {
+struct SharedSurface;
+struct Surface;
 struct Window {
   J data;
   mutable Bytes surface;
   void ensure_surface() const;
   std::shared_ptr<const Texture> prepared;
+  std::shared_ptr<SharedSurface> shared;
   uint64_t revision = 1;
   uint64_t solid_revision=0;
   unsigned solid_index=0;
@@ -24,6 +27,9 @@ struct Hit {
 };
 class WM {
 public:
+  // Used only by application processes. The daemon owns the real WM state.
+  std::function<J(const J &)> remote;
+  std::function<void(int, const Surface &, bool)> publish_surface;
   std::map<int, Window> windows;
   std::vector<int> order;
   std::map<std::string, std::deque<J>> events;

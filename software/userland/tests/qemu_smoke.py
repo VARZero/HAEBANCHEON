@@ -159,10 +159,10 @@ def main():
                                       "bosio-tiles help | grep -F 'bosio-tiles start'",
                                       "boayo-native help | grep -F 'boayo-native start'",
                                       "bosio-tiles dual-selftest | grep -F BOAYO_NATIVE_SELFTEST_PASS",
-                                      "(set -e; bosio-tiles start --mock; trap 'bosio-tiles stop' EXIT; "
-                                      "boayo start; boayo app pulse; "
+                                      "(set -e; bosio-tiles start --mock; trap 'test ! -S /tmp/bosio-wm.sock || bosio-tiles stop' EXIT; "
+                                      "boayo start; boayo launcher; boayo app pulse; "
                                       "boayo status | grep -F 'SDK Pulse'; boayo stop; "
-                                      "bosio-tiles status | grep -F '\"running\": false')",
+                                      "while test -S /tmp/bosio-wm.sock; do sleep 1; done)",
                                       "echo PERSIST_OK > /data/persistence-test; sync"]
                             if args.expect_examples:
                                 checks += ['hello', 'hello-python']

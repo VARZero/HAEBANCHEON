@@ -21,6 +21,7 @@ def check(path, kind):
                     'CONFIG_MMC_BLOCK', 'CONFIG_MMC_ORYUKDO', 'CONFIG_ORYUKDO_DMA',
                     'CONFIG_SIFIVE_PLIC', 'CONFIG_MSDOS_PARTITION', 'CONFIG_HVC_RISCV_SBI',
                     'CONFIG_VIRTIO_MMIO', 'CONFIG_VIRTIO_BLK', 'CONFIG_TMPFS', 'CONFIG_FILE_LOCKING']
+        required += ['CONFIG_SHMEM', 'CONFIG_MEMFD_CREATE']
         forbidden = ['CONFIG_64BIT', 'CONFIG_FPU', 'CONFIG_RISCV_ISA_C']
     wrong = [key for key in required if values.get(key) != 'y']
     wrong += [key for key in forbidden if values.get(key) == 'y']

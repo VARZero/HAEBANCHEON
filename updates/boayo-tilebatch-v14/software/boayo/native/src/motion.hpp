@@ -23,7 +23,7 @@ struct MotionExercise {
   J stop(double now) {
     if(!active)return state();
     if(wm.input_sources.count(owner) && wm.input_sources.at(owner).count("left"))
-      wm.input_button(owner,"left",false);
+      call("input_button",{{"button","left"},{"pressed",false}});
     // Remove only windows created by this exercise; leave existing apps alive.
     for(int id:ids){auto it=desktop.running.find(id);if(it!=desktop.running.end()){
       it->second->close();wm.disconnect(it->second->owner);desktop.running.erase(it);}}
@@ -41,7 +41,7 @@ struct MotionExercise {
     }
     if(saved_focus && wm.windows.count(saved_focus))wm.focus_window(saved_focus,false);
     pose(saved_yaw,saved_pitch,saved_roll);
-    desktop.update(now);token=wm.generation;phase="restored";return state();
+    desktop.update(now);token=call("sync_scene").get<uint64_t>();phase="restored";return state();
   }
   J start(const std::string &who,double now) {
     require(!active,"motion exercise already active");
@@ -54,7 +54,7 @@ struct MotionExercise {
     active=true;phase="creating";
     try{
       for(const char *kind:{"dashboard","telemetry","sdk-pulse"})ids.push_back(desktop.launch(kind));
-      pose(0,0,0);desktop.update(now);token=wm.generation;phase="ready";return state();
+      pose(0,0,0);desktop.update(now);token=call("sync_scene").get<uint64_t>();phase="ready";return state();
     }catch(...){stop(now);throw;}
   }
   App &app(unsigned index){require(index<ids.size(),"motion window index");
@@ -89,7 +89,7 @@ struct MotionExercise {
     else if(next==20){phase="view-mixed";pose(6,4,15);}
     else if(next==21){phase="view-reset";pose(0,0,0);}
     else {phase="close-caption";control(24-next,"close",0,0,now);}
-    desktop.update(now);token=wm.generation;++next;return state();
+    desktop.update(now);token=call("sync_scene").get<uint64_t>();++next;return state();
   }
 };
 }

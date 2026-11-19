@@ -26,7 +26,7 @@ from concurrent.futures import ThreadPoolExecutor
 import subprocess,sys
 compiler,source,target,*flags=sys.argv[1:]
 source=Path(source);objects=source.parent/'objects';objects.mkdir(exist_ok=True)
-units=[source/'src'/(n+'.cpp') for n in ('resident','plan','assets','geometry','wm','ui','backend','apps','runtime','selftest','main')]
+units=[source/'src'/(n+'.cpp') for n in ('resident','plan','assets','geometry','wm','ui','backend','apps','app_process','runtime','selftest','main')]
 units.append(source/'reference/wm/native/bosio_compositor.cpp')
 def compile_unit(p):
     obj=objects/(p.stem+'.o')

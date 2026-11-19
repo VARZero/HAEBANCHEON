@@ -75,7 +75,7 @@ cp "$board/software/storage/linux.config" "$out/kernel/.config"
 cfg=("$src/scripts/config" --file "$out/kernel/.config")
 "${cfg[@]}" --set-str INITRAMFS_SOURCE "$out/bootstrap.list" \
     --set-str LOCALVERSION '-haebancheon-userland' \
-    --enable BINFMT_SCRIPT --enable FILE_LOCKING --enable SHMEM --enable TMPFS \
+    --enable BINFMT_SCRIPT --enable FILE_LOCKING --enable SHMEM --enable MEMFD_CREATE --enable TMPFS \
     --enable DEVTMPFS --enable UNIX98_PTYS --enable EXT4_FS \
     --enable MMC --enable MMC_BLOCK --enable MMC_ORYUKDO \
     --enable DMADEVICES --enable ORYUKDO_DMA --enable SIFIVE_PLIC \
