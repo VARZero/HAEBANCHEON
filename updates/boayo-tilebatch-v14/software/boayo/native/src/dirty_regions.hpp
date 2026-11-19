@@ -2,8 +2,32 @@
 #include "texture.hpp"
 namespace boayo {
 struct Rect {int x=0,y=0,w=0,h=0;};
+inline constexpr int source_tile_edge=32;
 inline Rect intersect(Rect a,Rect b){int x=std::max(a.x,b.x),y=std::max(a.y,b.y);return {x,y,std::max(0,std::min(a.x+a.w,b.x+b.w)-x),std::max(0,std::min(a.y+a.h,b.y+b.h)-y)};}
 inline Rect bounds(Rect a,Rect b){if(!a.w || !a.h)return b;if(!b.w || !b.h)return a;int x=std::min(a.x,b.x),y=std::min(a.y,b.y);return {x,y,std::max(a.x+a.w,b.x+b.w)-x,std::max(a.y+a.h,b.y+b.h)-y};}
+
+// The caller validates the image and patch dimensions. Keep the damage from
+// each tile separate so sparse changes across the image do not dirty the gap.
+inline std::vector<Rect> patch_rgb_tiles(Bytes &image, int stride, Rect patch, const Bytes &rgb) {
+ std::vector<Rect> changed;
+ const int edge=source_tile_edge;
+ for(int ty=patch.y/edge;ty<=(patch.y+patch.h-1)/edge;++ty)
+  for(int tx=patch.x/edge;tx<=(patch.x+patch.w-1)/edge;++tx){
+   Rect part=intersect(patch,{tx*edge,ty*edge,edge,edge}), damage{};
+   for(int y=part.y;y<part.y+part.h;++y){
+    auto src=rgb.data()+(size_t(y-patch.y)*patch.w+part.x-patch.x)*3;
+    auto dst=image.data()+(size_t(y)*stride+part.x)*3;
+    if(std::equal(src,src+part.w*3,dst))continue;
+    for(int x=part.x;x<part.x+part.w;++x,src+=3,dst+=3){
+     if(std::equal(src,src+3,dst))continue;
+     std::copy_n(src,3,dst);
+     damage=bounds(damage,{x,y,1,1});
+    }
+   }
+   if(damage.w)changed.push_back(damage);
+  }
+ return changed;
+}
 inline void add_rect(std::vector<Rect>&rs,Rect r){
  if(r.w<=0||r.h<=0)return;
  // Coalesce overlap/touch without joining distant widgets. Bound metadata growth.
@@ -18,12 +42,13 @@ inline void add_rect(std::vector<Rect>&rs,Rect r){
 // Preserve disjoint subrectangles inside each bin; never fill a gap merely
 // because two updates share a tile (that would re-upload the background).
 inline std::vector<Rect> tiled_regions(const std::vector<Rect>&input,unsigned w,unsigned h){
- std::map<unsigned,std::vector<Rect>> bins;const unsigned columns=(w+31)/32;
+ std::map<unsigned,std::vector<Rect>> bins;
+ const unsigned edge=source_tile_edge,columns=(w+edge-1)/edge;
  for(auto r:input){r=intersect(r,{0,0,int(w),int(h)});if(!r.w||!r.h)continue;
   if(r.x==0 && r.y==0 && unsigned(r.w)==w && unsigned(r.h)==h)return {r};
-  for(unsigned y=r.y/32;y<=unsigned(r.y+r.h-1)/32;++y)
-   for(unsigned x=r.x/32;x<=unsigned(r.x+r.w-1)/32;++x){unsigned id=y*columns+x;
-    auto q=intersect(r,{int(x*32),int(y*32),32,32});bins[id].push_back(q);}
+  for(unsigned y=r.y/edge;y<=unsigned(r.y+r.h-1)/edge;++y)
+   for(unsigned x=r.x/edge;x<=unsigned(r.x+r.w-1)/edge;++x){unsigned id=y*columns+x;
+    auto q=intersect(r,{int(x*edge),int(y*edge),int(edge),int(edge)});bins[id].push_back(q);}
  }
  std::vector<Rect> pieces;for(auto &[id,rs]:bins)for(auto r:rs)pieces.push_back(r);
  std::sort(pieces.begin(),pieces.end(),[](Rect a,Rect b){return std::tie(a.y,a.h,a.x)<std::tie(b.y,b.h,b.x);});

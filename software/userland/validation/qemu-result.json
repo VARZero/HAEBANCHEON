@@ -1,0 +1,22 @@
+{
+  "result": "PASS_QEMU_ONLY",
+  "hardware": false,
+  "rtl": false,
+  "image_sha256": "a516e8a9acf66439a158602d78e1cac4d3cd692dbe99d9196bfc261e83d03ffa",
+  "checks": [
+    "grep ' / ext4 ' /proc/mounts",
+    "cat /etc/oryukdo-image",
+    "grep ' /tmp tmpfs ' /proc/mounts && grep ' /run tmpfs ' /proc/mounts && grep ' /dev/pts devpts ' /proc/mounts",
+    "free -m; df -h / /tmp /data",
+    "userland-check",
+    "echo PERSIST_OK > /data/persistence-test; sync",
+    "hello",
+    "hello-python",
+    "test $(cat /data/persistence-test) = PERSIST_OK",
+    "rm /data/persistence-test; sync",
+    "missing disk: usable recovery shell"
+  ],
+  "differences": [
+    "QEMU-only DT: 10MHz timer, virtio disk, no native board peripherals"
+  ]
+}

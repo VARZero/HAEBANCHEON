@@ -42,6 +42,8 @@ struct LinuxDevice : Device {
   int fd = -1;
   unsigned dma_features = 0;
   bo_publish_profile last_publish{};
+  bool metadata_bank_tag_supported=false;
+  std::array<uint32_t,header> publish_metadata{};
   explicit LinuxDevice(const std::string &path = "/dev/bosio0");
   ~LinuxDevice();
   bo_info info() override;
@@ -144,6 +146,7 @@ struct Layer {
   std::array<int, tiles> lookup;
   Layer() { lookup.fill(-1); }
 };
+bool geometry_matches(const Layer &, const Window &);
 struct Composition {
   Words words;
   // Borrowed only until the next Compositor::update; the worker consumes it synchronously.

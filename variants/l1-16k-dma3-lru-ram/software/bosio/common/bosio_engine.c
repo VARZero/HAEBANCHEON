@@ -1,9 +1,11 @@
 #include "bosio_engine.h"
 #ifdef __KERNEL__
 #include <linux/errno.h>
+#include <linux/sort.h>
 #include <linux/string.h>
 #else
 #include <errno.h>
+#include <stdlib.h>
 #include <string.h>
 #endif
 const __u32 bo_offsets[BO_REGIONS] = {0x900000, 0, 0x2000, 0x10000, 0x450000, 0xd00000};
@@ -95,9 +97,74 @@ int bo_fill_check(struct bo_engine *e,const struct bo_mem_fill *f)
     if(f->reserved || f->value>255)return -EINVAL;
     return bo_upload_check(e,f->region,f->offset,f->bytes);
 }
+static int projection_result(struct bo_engine *e, struct bo_run *j, unsigned int c)
+{
+    if(rd(e,c,0x10,&j->status[c])||rd(e,c,0x5c,&j->cells[c]))return -EIO;
+    return 0;
+}
+static int projection_poll(struct bo_engine *e, struct bo_run *j, __u64 end)
+{
+    unsigned int c,done=0;
+    __u32 ctrl;
+
+    for(c=0;c<2;c++)if(!j->jobs[c])done|=1u<<c;
+    while(done!=3){
+        for(c=0;c<2;c++)if(!(done&(1u<<c))){
+            if(rd(e,c,0,&ctrl))return -EIO;
+            if(ctrl&2){ /* ap_done is clear-on-read. */
+                if(projection_result(e,j,c))return -EIO;
+                done|=1u<<c;
+            }
+        }
+        if(done!=3 && expired(e,end))return -ETIMEDOUT;
+    }
+    return 0;
+}
+static int projection_wait_irq(struct bo_engine *e, struct bo_run *j, __u64 end)
+{
+    unsigned int c;
+    __u32 ctrl;
+    int ret;
+
+    for(c=0;c<2;c++)if(j->jobs[c]){
+        ret=e->irq->wait(e->io.opaque,c,end);
+        if(ret)return ret;
+        if(rd(e,c,0,&ctrl)||!(ctrl&2)||projection_result(e,j,c))return -EIO;
+    }
+    return 0;
+}
+static int compare_output_offset(const void *left, const void *right)
+{
+    __u32 a=*(const __u32 *)left, b=*(const __u32 *)right;
+
+    return (a>b)-(a<b);
+}
+static int projection_validate(const struct bo_run *j, const __u32 *const desc[2])
+{
+    __u32 offsets[2*BO_MAX_JOBS];
+    unsigned int c,n,count=0;
+
+    for(c=0;c<2;c++)for(n=0;n<j->jobs[c];n++){
+        const __u32 *d=desc[c]+n*BO_DESC_WORDS;
+        if(d[1]<BO_HEADER_WORDS || d[1]>j->scene_words-BO_TILE_WORDS ||
+           !d[2] || d[2]>2048 || !d[3] || d[3]>2048 || d[4]<d[2] ||
+           (__u64)d[0]+(__u64)(d[3]-1)*d[4]+d[2]>j->texture_words)return -EINVAL;
+        offsets[count++]=d[1];
+    }
+    /* Tiles have equal length. Sort only the offsets and compare neighbors. */
+#ifdef __KERNEL__
+    sort(offsets,count,sizeof(offsets[0]),compare_output_offset,NULL);
+#else
+    qsort(offsets,count,sizeof(offsets[0]),compare_output_offset);
+#endif
+    for(n=1;n<count;n++)
+        if(offsets[n]-offsets[n-1]<BO_TILE_WORDS)return -EINVAL;
+    return 0;
+}
 int bo_run(struct bo_engine *e,struct bo_run *j,const __u32 *d0,const __u32 *d1)
 {
-    const __u32 *desc[2]={d0,d1}; unsigned int c,n,k,m; __u32 value,done=0;__u64 end;
+    const __u32 *desc[2]={d0,d1}; unsigned int c; __u32 value;__u64 end;
+    int ret;
     if(e->poisoned)return -EIO;
     if(j->bank>2 || !scene_ok(j->scene_words) || !timeout_ok(j->timeout_ms) ||
        (j->bank==2 && j->scene_words>BO_SCRATCH_BYTES/4) ||
@@ -105,44 +172,35 @@ int bo_run(struct bo_engine *e,struct bo_run *j,const __u32 *d0,const __u32 *d1)
        j->jobs[0]>BO_MAX_JOBS || j->jobs[1]>BO_MAX_JOBS)return -EINVAL;
     if(j->bank<2 && (int)j->bank==e->active)return -EBUSY;
     memset(j->status,0,sizeof(j->status));memset(j->cells,0,sizeof(j->cells));
-    /* Validate every descriptor before starting either core. No physical pointers in descriptors. */
-    for(c=0;c<2;c++)for(n=0;n<j->jobs[c];n++){
-        const __u32 *d=desc[c]+n*18;
-        if(d[1]<BO_HEADER_WORDS || d[1]>j->scene_words-BO_TILE_WORDS ||
-           !d[2] || d[2]>2048 || !d[3] || d[3]>2048 || d[4]<d[2] ||
-           (__u64)d[0]+(__u64)(d[3]-1)*d[4]+d[2]>j->texture_words)return -EINVAL;
-        for(k=0;k<=c;k++)for(m=0;m<(k==c?n:j->jobs[k]);m++){
-            __u32 other=desc[k][m*18+1];
-            if(d[1]<other+BO_TILE_WORDS && other<d[1]+BO_TILE_WORDS)return -EINVAL;
-        }
-    }
     if(!j->jobs[0]&&!j->jobs[1])return 0; /* A clean update does not launch hardware. */
+    ret=projection_validate(j,desc);
+    if(ret)return ret;
     for(c=0;c<2;c++)if(j->jobs[c]){
         if(rd(e,c,0,&value))return poison(e,-EIO);
         if(!(value&4))return -EBUSY;
     }
     e->io.memory_fence(e->io.opaque);
     for(c=0;c<2;c++){
-        if(!j->jobs[c]){done|=1u<<c;continue;}
-        if(wr(e,c,4,0)||wr(e,c,8,0)|| /* Polling: no unconnected interrupt dependency. */
+        if(!j->jobs[c])continue;
+        if(wr(e,c,BO_PROJECTION_GIE,0)||wr(e,c,BO_PROJECTION_IER,0)||
            wr(e,c,0x18,e->dma_base+bo_offsets[BO_TEXTURE])||wr(e,c,0x1c,0)||
            wr(e,c,0x24,e->dma_base+bo_offsets[BO_DESC0+c])||wr(e,c,0x28,0)||
            wr(e,c,0x30,e->dma_base+bo_offsets[BO_SCENE0+j->bank])||wr(e,c,0x34,0)||
            wr(e,c,0x3c,j->texture_words)||wr(e,c,0x44,j->jobs[c]*18)||
            wr(e,c,0x4c,j->scene_words)||wr(e,c,0x54,j->jobs[c]))return poison(e,-EIO);
     }
-    for(c=0;c<2;c++)if(j->jobs[c]&&wr(e,c,0,1))return poison(e,-EIO);
-    end=deadline(e,j->timeout_ms);
-    while(done!=3){
-        for(c=0;c<2;c++)if(!(done&(1u<<c))){
-            if(rd(e,c,0,&value))return poison(e,-EIO);
-            if(value&2){ /* ap_done is clear-on-read; latch each core independently. */
-                done|=1u<<c;
-                if(rd(e,c,0x10,&j->status[c])||rd(e,c,0x5c,&j->cells[c]))return poison(e,-EIO);
-            }
-        }
-        if(done!=3 && expired(e,end))return poison(e,-ETIMEDOUT);
+    if(e->irq)
+        for(c=0;c<2;c++)if(j->jobs[c])e->irq->arm(e->io.opaque,c);
+    for(c=0;c<2;c++)if(j->jobs[c]&&wr(e,c,0,1)){
+        ret=-EIO;
+        goto finish;
     }
+    end=deadline(e,j->timeout_ms);
+    ret=e->irq ? projection_wait_irq(e,j,end) : projection_poll(e,j,end);
+finish:
+    if(e->irq)
+        for(c=0;c<2;c++)if(j->jobs[c])e->irq->disarm(e->io.opaque,c);
+    if(ret)return poison(e,ret);
     e->io.memory_fence(e->io.opaque);
     return (j->status[0]||j->status[1])?-EIO:0;
 }

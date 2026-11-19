@@ -46,3 +46,11 @@ CPU → Sv32 물리 주소 → L1I/L1D → 기존 AXI CDC → 7-master fabric �
 모든 Tcl은 `soc/board/`에 있다. 원본 실행에서는 `route_guarded.tcl`이 생성한 배치 체크포인트에서 이어갔다. `place_only.tcl`은 같은 배치·DSP 보호·제약을 적용하고 route 직전에 멈추는 재현용 진입점이다. 배치의 PASS를 최종 배선 PASS로 간주하지 않는다.
 
 비트스트림과 SD 경로·해시는 `provenance/release_manifest.json`, 구현 체크포인트 연결은 `implementation_chain.json`, 원본 리포트는 `reports/`에 있다. 실보드 업로드·Linux 부팅·HDMI·첫 화면 시간은 아직 측정하지 않았다.
+
+## 투영 완료 IRQ 빌드
+
+현재 소스의 투영코어 0·1은 PLIC 5·6번을 사용한다. `provenance/release_manifest.json`의 기존 비트스트림은 이전 SD 이미지와 짝을 이룬다. 새 장치 트리를 쓰려면 현재 RTL로 비트스트림을 만들고 [Linux 개발 이미지](../../software/userland/README.md)도 함께 빌드한다.
+
+`build_area_medium_synth.tcl SYNTH_DIR MIG_XCI`로 합성한다. 기존 배선 체크포인트가 있으면 `route_timing_closure.tcl SYNTH_DIR/optimized.dcp ROUTE_DIR REFERENCE_ROUTED_DCP`로 배치와 배선을 재사용할 수 있다. `PASS KFB_BOSIO_BOARD_ROUTE`가 기록된 비트스트림을 사용한다. 보드에서 두 IRQ의 실제 전달과 DDR 상주 타일 갱신 시간을 확인하는 명령은 [보시오 타일 미들웨어](../../software/userland/BOSIO_TILES.md)에 있다.
+
+2026-11-19 후속 시험에서 IRQ 비트스트림의 QSPI 구성과 Linux ext4 부팅, 두 투영코어 IRQ, 보시오 부분 갱신을 확인했다. Setup +0.140ns·Hold +0.011ns와 명시된 소스 변경은 [IRQ 해시 기록](provenance/projection_irq_sources.json)에 있다. 위의 기존 provenance·배선 수치는 이전 polling 기준본의 기록이다. 보아요 런처의 첫 화면 게시와 실제 HDMI 캡처는 시험 중단 시점까지 확인하지 못했다. [개발 이미지 검증 결과](../../software/userland/VALIDATION.md)

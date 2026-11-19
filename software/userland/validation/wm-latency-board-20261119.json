@@ -1,0 +1,521 @@
+{
+  "observed_date_kst": "2026-11-19",
+  "board": "PZ-A7200T-KFB / XC7A200T",
+  "source_commit": "edd66f3cf397faa422b48cb3914d58f2c1d0f0df",
+  "binary_sha256": "8678c98087bbd9f25550cb61ad8f80d82e706b3fc2574df2c2db14f5b7f62210",
+  "physical_backend": "kfb-linux-frame-atomic-output",
+  "conditions": {
+    "launcher_and_other_apps_closed": true,
+    "source_surface": [
+      64,
+      64
+    ],
+    "window_degrees": [
+      16,
+      12
+    ],
+    "patch_origin": [
+      12,
+      9
+    ],
+    "source_resident_in_ddr": true,
+    "warmup_per_size": 1,
+    "measured_rounds_per_size": 21,
+    "frame_limit": 60,
+    "profiling_enabled": false,
+    "timed_interval": "commit IPC request through output publication acknowledgement"
+  },
+  "deployment": "Temporary RAM executable; installed SD executable, kernel, DTB and bitstream unchanged",
+  "command": "boayo bench-small 21 (installed benchmark client unchanged)",
+  "baseline_source_commit": "e6b1f8de85d490cbff7b92fa454877be9dd97bbb",
+  "wake_pipe_only": {
+    "benchmarks": [
+      {
+        "edge": 1,
+        "includes": "commit IPC to output acknowledgement",
+        "median_ms": 834.4302800005607,
+        "p95_ms": 864.0726000003269,
+        "rounds": 21,
+        "target_met": false,
+        "target_ms": 300
+      },
+      {
+        "edge": 8,
+        "includes": "commit IPC to output acknowledgement",
+        "median_ms": 912.4384599999757,
+        "p95_ms": 943.7826200000927,
+        "rounds": 21,
+        "target_met": false,
+        "target_ms": 300
+      }
+    ],
+    "projection_irqs": {
+      "0": {
+        "before": 64,
+        "after": 110,
+        "delta": 46
+      },
+      "1": {
+        "before": 64,
+        "after": 110,
+        "delta": 46
+      }
+    },
+    "final_state": {
+      "app_error": null,
+      "app_processes": [],
+      "assets": {
+        "cache_hits": 0,
+        "format": "raw-mapped-00RRGGBB",
+        "loads": 0,
+        "misses": 0,
+        "rejected": 0,
+        "rgb_materializations": 0
+      },
+      "buttons": {
+        "available": false,
+        "last_event_id": 0,
+        "state": 0
+      },
+      "compositor": "cpp-native",
+      "driver_profile": {
+        "available": false,
+        "enabled": false
+      },
+      "focused_window": null,
+      "generation": 48,
+      "motion": {
+        "active": false,
+        "phase": "client-process"
+      },
+      "output": {
+        "abi": 3,
+        "active_bank": 1,
+        "active_base": 3175415808,
+        "antialias": false,
+        "backend": "kfb-linux-frame-atomic-output",
+        "capability": 1146373681,
+        "commits": 48,
+        "dma_copied_words": 8704,
+        "max_jobs": 64,
+        "max_scene_words": 1084816,
+        "memory_dma": {
+          "available": true,
+          "copy_bytes": 301220,
+          "copy_ops": 558,
+          "errors": 0,
+          "features": 255,
+          "fill_bytes": 479232,
+          "fill_ops": 268,
+          "quarantined": 0,
+          "timeouts": 0,
+          "upload_bytes": 147632,
+          "upload_ops": 476,
+          "upload_threshold": 4096
+        },
+        "metadata_only": false,
+        "mock_backend": false,
+        "poisoned": 0,
+        "publish_profile": {
+          "backend": "kernel",
+          "command": 1,
+          "configure_us": 88,
+          "finish_us": 4427,
+          "select_us": 9697,
+          "upload_ranges": 10,
+          "upload_us": 50451,
+          "uploaded_words": 36,
+          "user_copy_us": 9270,
+          "validate_us": 35461,
+          "wait_us": 78582
+        },
+        "sensor_available": false,
+        "shadow_copied_words": 0,
+        "signature": 1112748597,
+        "status": 1188954115,
+        "uploaded_words": 144
+      },
+      "performance": {
+        "frame_interval_ms": 1620.3319599999304,
+        "frame_limit": 60.0,
+        "frame_pacing": "start-to-start",
+        "full_update_count": 1,
+        "last_apps_ms": 0.0,
+        "last_compose_ms": 609.8947199998292,
+        "last_upload_ms": 0.0,
+        "no_op_update_count": 0,
+        "patch_update_count": 47,
+        "render_count": 47,
+        "rendered_generation": 48,
+        "update_words": 4480,
+        "uptime_seconds": 96.23223169999983
+      },
+      "pointer": {
+        "azimuth": 0.0,
+        "buttons": [],
+        "cancel_serial": 0,
+        "captured_window": null,
+        "dragging": false,
+        "elevation": 0.0,
+        "last_left_press": null,
+        "last_left_release": null,
+        "left_press_serial": 0,
+        "left_release_serial": 0,
+        "scroll_delta": 0.0,
+        "scroll_serial": 0,
+        "visible": false,
+        "window_id": null,
+        "zone": null
+      },
+      "profile": {
+        "enabled": false,
+        "nested": true,
+        "units": "microseconds"
+      },
+      "projection": {
+        "cpu_output_shadow_words": 4480,
+        "cpu_result_download_words": 0,
+        "cpu_scene_words": 0,
+        "device_ready_frames": 0,
+        "dirty_tiles": 36,
+        "fallback_frames": 0,
+        "geometry_builds": 1,
+        "geometry_cull_us_total": 1513314,
+        "geometry_descriptor_us_total": 1505785,
+        "geometry_insert_us_total": 60519,
+        "geometry_prepare_us_total": 22527,
+        "geometry_tiles_evaluated_total": 108,
+        "hardware_frames": 47,
+        "jobs_per_core": [
+          0,
+          0
+        ],
+        "lazy_copied_tiles_total": 34,
+        "mask_build_us_total": 2180897,
+        "mask_builds": 1,
+        "mask_fast_tiles_total": 8,
+        "mask_integer_samples_total": 0,
+        "mask_precise_samples_total": 0,
+        "mask_samples_evaluated_total": 28672,
+        "masked_tiles_total": 0,
+        "mode": "ddr-resident-dirty-tiles",
+        "packed_mask_tiles_total": 0,
+        "plan_cache": {
+          "builtin_loads": 0,
+          "hits": 0,
+          "loads": 0,
+          "misses": 2,
+          "payload_scan_bytes": 0,
+          "rejected": 0,
+          "revision": "1f02ae6d11f51ceb0ea3c3863de9bdfe176b2880ddd7d83381a3349f98fdc367"
+        },
+        "precomputed_layers_total": 0,
+        "redrawn_tiles": 0,
+        "reused_tiles_total": 0,
+        "solid_tiles_total": 0,
+        "texture_pool": {
+          "asset_cache_evictions": 0,
+          "asset_cache_hits": 0,
+          "asset_cache_misses": 0,
+          "asset_cache_upload_bytes": 0,
+          "asset_copy_batches": 0,
+          "asset_copy_bytes": 0,
+          "asset_copy_requests": 0,
+          "asset_resident_bytes": 0,
+          "capacity_bytes": 4194304,
+          "evictions": 0,
+          "full_uploads": 1,
+          "partial_uploads": 45,
+          "resident_bytes": 0,
+          "resident_windows": 0,
+          "reuses": 0,
+          "source_tile_size": 32,
+          "source_tiles_updated": 52,
+          "staged_copy_bytes": 0,
+          "total_resident_bytes": 0,
+          "upload_bytes": 38488,
+          "upload_calls": 200
+        },
+        "texture_reuses_total": 0,
+        "texture_uploads_total": 46,
+        "tile_fills_total": 184,
+        "total_hw_jobs": 248,
+        "update_kind": "tiles"
+      },
+      "render_error": null,
+      "runtime": "C++17",
+      "scene_owner": null,
+      "service": {
+        "phase": "ready",
+        "queued_requests": 0,
+        "snapshot_age_seconds": 1.9811575199992149,
+        "state_is_snapshot": true
+      },
+      "ui": {
+        "launcher_window": null,
+        "running": false
+      },
+      "view": {
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0
+      },
+      "windows": [],
+      "wm_pid": 163
+    }
+  },
+  "benchmarks": [
+    {
+      "edge": 1,
+      "includes": "commit IPC to output acknowledgement",
+      "median_ms": 773.4579799998755,
+      "p95_ms": 796.9954800000778,
+      "rounds": 21,
+      "target_met": false,
+      "target_ms": 300
+    },
+    {
+      "edge": 8,
+      "includes": "commit IPC to output acknowledgement",
+      "median_ms": 838.0704599994715,
+      "p95_ms": 865.8253999992667,
+      "rounds": 21,
+      "target_met": false,
+      "target_ms": 300
+    }
+  ],
+  "projection_irqs": {
+    "0": {
+      "before": 110,
+      "after": 156,
+      "delta": 46
+    },
+    "1": {
+      "before": 110,
+      "after": 156,
+      "delta": 46
+    }
+  },
+  "final_state": {
+    "app_error": null,
+    "app_processes": [],
+    "assets": {
+      "cache_hits": 0,
+      "format": "raw-mapped-00RRGGBB",
+      "loads": 0,
+      "misses": 0,
+      "rejected": 0,
+      "rgb_materializations": 0
+    },
+    "buttons": {
+      "available": false,
+      "last_event_id": 0,
+      "state": 0
+    },
+    "compositor": "cpp-native",
+    "driver_profile": {
+      "available": false,
+      "enabled": false
+    },
+    "focused_window": null,
+    "generation": 48,
+    "motion": {
+      "active": false,
+      "phase": "client-process"
+    },
+    "output": {
+      "abi": 3,
+      "active_bank": 1,
+      "active_base": 3175415808,
+      "antialias": false,
+      "backend": "kfb-linux-frame-atomic-output",
+      "capability": 1146373681,
+      "commits": 48,
+      "dma_copied_words": 8704,
+      "max_jobs": 64,
+      "max_scene_words": 1084816,
+      "memory_dma": {
+        "available": true,
+        "copy_bytes": 386812,
+        "copy_ops": 780,
+        "errors": 0,
+        "features": 255,
+        "fill_bytes": 667648,
+        "fill_ops": 376,
+        "quarantined": 0,
+        "timeouts": 0,
+        "upload_bytes": 186120,
+        "upload_ops": 676,
+        "upload_threshold": 4096
+      },
+      "metadata_only": false,
+      "mock_backend": false,
+      "poisoned": 0,
+      "publish_profile": {
+        "backend": "kernel",
+        "command": 1,
+        "configure_us": 88,
+        "finish_us": 4158,
+        "select_us": 9851,
+        "upload_ranges": 10,
+        "upload_us": 51248,
+        "uploaded_words": 36,
+        "user_copy_us": 6457,
+        "validate_us": 35534,
+        "wait_us": 108592
+      },
+      "sensor_available": false,
+      "shadow_copied_words": 0,
+      "signature": 1112748597,
+      "status": 1423638531,
+      "uploaded_words": 144
+    },
+    "performance": {
+      "frame_interval_ms": 1589.4054600003074,
+      "frame_limit": 60.0,
+      "frame_pacing": "start-to-start",
+      "full_update_count": 1,
+      "last_apps_ms": 0.0,
+      "last_compose_ms": 551.5416200005347,
+      "last_upload_ms": 0.0,
+      "no_op_update_count": 0,
+      "patch_update_count": 47,
+      "render_count": 47,
+      "rendered_generation": 48,
+      "update_words": 4480,
+      "uptime_seconds": 89.49275649999981
+    },
+    "pointer": {
+      "azimuth": 0.0,
+      "buttons": [],
+      "cancel_serial": 0,
+      "captured_window": null,
+      "dragging": false,
+      "elevation": 0.0,
+      "last_left_press": null,
+      "last_left_release": null,
+      "left_press_serial": 0,
+      "left_release_serial": 0,
+      "scroll_delta": 0.0,
+      "scroll_serial": 0,
+      "visible": false,
+      "window_id": null,
+      "zone": null
+    },
+    "profile": {
+      "enabled": false,
+      "nested": true,
+      "units": "microseconds"
+    },
+    "projection": {
+      "cpu_output_shadow_words": 4480,
+      "cpu_result_download_words": 0,
+      "cpu_scene_words": 0,
+      "device_ready_frames": 0,
+      "dirty_tiles": 36,
+      "fallback_frames": 0,
+      "geometry_builds": 1,
+      "geometry_cull_us_total": 1507618,
+      "geometry_descriptor_us_total": 1500789,
+      "geometry_insert_us_total": 65303,
+      "geometry_prepare_us_total": 35744,
+      "geometry_tiles_evaluated_total": 108,
+      "hardware_frames": 47,
+      "jobs_per_core": [
+        0,
+        0
+      ],
+      "lazy_copied_tiles_total": 34,
+      "mask_build_us_total": 2099485,
+      "mask_builds": 1,
+      "mask_fast_tiles_total": 8,
+      "mask_integer_samples_total": 0,
+      "mask_precise_samples_total": 0,
+      "mask_samples_evaluated_total": 28672,
+      "masked_tiles_total": 0,
+      "mode": "ddr-resident-dirty-tiles",
+      "packed_mask_tiles_total": 0,
+      "plan_cache": {
+        "builtin_loads": 0,
+        "hits": 0,
+        "loads": 0,
+        "misses": 2,
+        "payload_scan_bytes": 0,
+        "rejected": 0,
+        "revision": "1f02ae6d11f51ceb0ea3c3863de9bdfe176b2880ddd7d83381a3349f98fdc367"
+      },
+      "precomputed_layers_total": 0,
+      "redrawn_tiles": 0,
+      "reused_tiles_total": 0,
+      "solid_tiles_total": 0,
+      "texture_pool": {
+        "asset_cache_evictions": 0,
+        "asset_cache_hits": 0,
+        "asset_cache_misses": 0,
+        "asset_cache_upload_bytes": 0,
+        "asset_copy_batches": 0,
+        "asset_copy_bytes": 0,
+        "asset_copy_requests": 0,
+        "asset_resident_bytes": 0,
+        "capacity_bytes": 4194304,
+        "evictions": 0,
+        "full_uploads": 1,
+        "partial_uploads": 45,
+        "resident_bytes": 0,
+        "resident_windows": 0,
+        "reuses": 0,
+        "source_tile_size": 32,
+        "source_tiles_updated": 52,
+        "staged_copy_bytes": 0,
+        "total_resident_bytes": 0,
+        "upload_bytes": 38488,
+        "upload_calls": 200
+      },
+      "texture_reuses_total": 0,
+      "texture_uploads_total": 46,
+      "tile_fills_total": 184,
+      "total_hw_jobs": 248,
+      "update_kind": "tiles"
+    },
+    "render_error": null,
+    "runtime": "C++17",
+    "scene_owner": null,
+    "service": {
+      "phase": "ready",
+      "queued_requests": 0,
+      "snapshot_age_seconds": 2.10581749999983,
+      "state_is_snapshot": true
+    },
+    "ui": {
+      "launcher_window": null,
+      "running": false
+    },
+    "view": {
+      "pitch": 0.0,
+      "roll": 0.0,
+      "yaw": 0.0
+    },
+    "windows": [],
+    "wm_pid": 184
+  },
+  "comparison": [
+    {
+      "edge": 1,
+      "before_median_ms": 1115.5050999999503,
+      "after_median_ms": 773.4579799998755,
+      "before_p95_ms": 1173.9347600000656,
+      "after_p95_ms": 796.9954800000778,
+      "median_reduction_percent": 30.66298128086461
+    },
+    {
+      "edge": 8,
+      "before_median_ms": 1230.9963399999333,
+      "after_median_ms": 838.0704599994715,
+      "before_p95_ms": 1286.1893200000623,
+      "after_p95_ms": 865.8253999992667,
+      "median_reduction_percent": 31.91933779433358
+    }
+  ],
+  "physical_300ms_target_met": false,
+  "scope": "Physical driver, DDR, both projection IRQs and output publication; no HDMI image capture or optical latency measurement"
+}

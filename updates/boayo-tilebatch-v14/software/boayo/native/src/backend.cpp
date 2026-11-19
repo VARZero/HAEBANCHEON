@@ -56,6 +56,7 @@ LinuxDevice::LinuxDevice(const std::string &path) {
   try {
     auto i = info();
     require(i.abi == 3 && !i.poisoned, "BOSIO ABI3 required, unpoisoned");
+    metadata_bank_tag_supported=i.signature==0x42533235u;
     bo_dma_info dma{};
     if(ioctl(fd,BO_GET_DMA_INFO,&dma)==0) {
       require(dma.version==1 && !dma.quarantined,"unsupported/quarantined BOSIO DMA");
@@ -519,6 +520,14 @@ static J geometry_key(const Window &w) {
   return J::array({d["surface_width"], d["surface_height"], d["azimuth"], d["elevation"], d["roll"],
                    d["width_deg"], d["height_deg"]});
 }
+bool geometry_matches(const Layer &c, const Window &w) {
+  static constexpr const char *fields[]{"surface_width", "surface_height", "azimuth", "elevation",
+                                       "roll", "width_deg", "height_deg"};
+  if (!c.key.is_array() || c.key.size() != 7) return false;
+  for (unsigned i = 0; i < 7; ++i)
+    if (c.key[i] != w.data.at(fields[i])) return false;
+  return true;
+}
 Layer Compositor::make_layer(const Window &w) {
   Layer c;
   c.key = geometry_key(w);
@@ -692,7 +701,7 @@ Composition Compositor::update(WM &wm, bool full) {
   for (int id : order) {
     auto &w = wm.windows[id];
     auto found = layers.find(id);
-    if (found == layers.end() || found->second.key != geometry_key(w)) {
+    if (found == layers.end() || !geometry_matches(found->second, w)) {
       dirty.insert(previous_tiles[id].begin(), previous_tiles[id].end());
       auto c = make_layer(w);
       if(found!=layers.end() && found->second.prepared_source) {

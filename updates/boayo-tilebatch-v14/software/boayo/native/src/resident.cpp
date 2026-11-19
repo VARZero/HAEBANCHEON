@@ -1,6 +1,7 @@
 #include "resident.hpp"
 #include "profile.hpp"
 #include "frame_trace.hpp"
+#include "bosio_publish_metadata.h"
 #include <sys/ioctl.h>
 namespace boayo {
 unsigned Device::publish(unsigned bank,unsigned count,unsigned res,const std::array<int32_t,180> &camera,const Words &metadata){
@@ -9,7 +10,14 @@ unsigned Device::publish(unsigned bank,unsigned count,unsigned res,const std::ar
 unsigned LinuxDevice::publish(unsigned bank,unsigned count,unsigned res,const std::array<int32_t,180> &camera,const Words &metadata){
   require(dma_features&BO_DMA_PUBLISH,"metadata publish driver required");require(metadata.size()>=header,"publish metadata length");
   bo_publish p{};p.present.bank=bank;p.present.scene_words=count;p.present.resolution=res;p.present.timeout_ms=30000;
-  std::copy(camera.begin(),camera.end(),p.present.camera);p.words=header;p.metadata=reinterpret_cast<uintptr_t>(metadata.data());
+  std::copy(camera.begin(),camera.end(),p.present.camera);p.words=header;
+  const char *tag=getenv("BOSIO_METADATA_BANK_TAG");
+  if(metadata_bank_tag_supported && (!tag || std::strcmp(tag,"0")!=0)){
+    // Transport-only snapshot: never change the caller's logical palette.
+    std::copy_n(metadata.data(),header,publish_metadata.data());
+    publish_metadata[0]=bosio_bs25_palette_bank_tag(publish_metadata[0],bank);
+    p.metadata=reinterpret_cast<uintptr_t>(publish_metadata.data());
+  }else p.metadata=reinterpret_cast<uintptr_t>(metadata.data());
   require(ioctl(fd,BO_PUBLISH,&p)==0,"metadata publish ioctl failed");last_publish=p.profile;
   frame_trace::mark("publish.user_copy_us",p.profile.user_copy_us);
   frame_trace::mark("publish.validate_us",p.profile.validate_us);
@@ -60,8 +68,19 @@ void MockDevice::batch(const std::vector<bo_batch_entry> &entries){
     Device::batch(std::vector<bo_batch_entry>(entries.begin()+first,entries.begin()+first+n));
   }
 }
+static void queue_fill(std::vector<bo_batch_entry> &list,const bo_mem_fill &fill){
+  if(!list.empty() && list.back().kind==BO_BATCH_FILL){
+    auto &previous=list.back().op.fill;
+    if(previous.region==fill.region && previous.value==fill.value &&
+       previous.offset+previous.bytes==fill.offset){
+      previous.bytes+=fill.bytes;
+      return;
+    }
+  }
+  bo_batch_entry b{};b.kind=BO_BATCH_FILL;b.op.fill=fill;list.push_back(b);
+}
 static void queue_fill(std::vector<bo_batch_entry> &list,unsigned bank,unsigned tile,unsigned color){
-  bo_batch_entry b{};b.kind=BO_BATCH_FILL;b.op.fill={3+bank,(header+tile*256)*4,1024,color,0};list.push_back(b);
+  queue_fill(list,{3+bank,(header+tile*256)*4,1024,color,0});
 }
 static void queue_blend(std::vector<bo_batch_entry> &list,const bo_tile_blend &blend){
   bo_batch_entry b{};b.kind=BO_BATCH_BLEND;b.op.blend=blend;list.push_back(b);
@@ -84,7 +103,6 @@ bool ResidentCompositor::supported(const WM &wm){
      w.data["surface_width"].get<unsigned>()>2048 || w.data["surface_height"].get<unsigned>()>2048))return false;
   return true;
 }
-static J key(const Window &w){auto &d=w.data;return J::array({d["surface_width"],d["surface_height"],d["azimuth"],d["elevation"],d["roll"],d["width_deg"],d["height_deg"]});}
 void ResidentCompositor::execute(Layer &c,const std::vector<unsigned> &todo,unsigned bank,bool direct,std::array<unsigned,2> &jobs,unsigned texture_offset,unsigned texture_end){
   for(size_t first=0;first<todo.size();first+=128){
     profile::Scope phase(profile::descriptors);
@@ -123,7 +141,7 @@ bool ResidentCompositor::update(WM &wm){
   for(int id:p.previous_order)if(std::find(order.begin(),order.end(),id)==order.end())dirty.insert(p.previous_tiles[id].begin(),p.previous_tiles[id].end());
   for(auto i=p.layers.begin();i!=p.layers.end();)if(!wm.windows.count(i->first))i=p.layers.erase(i);else ++i;
   for(int id:order){auto &w=wm.windows.at(id);auto found=p.layers.find(id);
-    bool fresh=found==p.layers.end() || found->second.key!=key(w);
+    bool fresh=found==p.layers.end() || !geometry_matches(found->second,w);
     if(fresh){layout_changed.insert(id);dirty.insert(p.previous_tiles[id].begin(),p.previous_tiles[id].end());auto c=p.make_layer(w);
       if(found!=p.layers.end()){c.prepared_source=found->second.prepared_source;c.source=std::move(found->second.source);c.revision=found->second.revision;}
       c.layout_version=generation+1;
@@ -132,9 +150,15 @@ bool ResidentCompositor::update(WM &wm){
     bool shape_changed=c.shape!=w.data["shape"];uint64_t old_revision=c.revision;
     if(shape_changed){c.layout_version=generation+1;p.prepare_masks(c,w);dirty.insert(c.ids.begin(),c.ids.end());}
     textures.note(id,w);
+    // For an existing CPU source, source_changes already intersects descriptors
+    // with the tighter bounds of pixels that actually changed. A single damage
+    // rectangle needs no second intersection. Prepared/CPU transitions and
+    // disjoint damage still require the region filter below.
+    bool existing_cpu_source=!w.prepared && !c.prepared_source && !c.source.empty();
     p.source_changes(c,w);
     if(!fresh && !shape_changed && old_revision!=w.revision){
       const auto changed_regions=window_regions(w);
+      if(!(existing_cpu_source && w.dirty[2]>0 && changed_regions.size()==1))
       for(auto it=c.invalid.begin();it!=c.invalid.end();) {
         bool hit=false;for(auto r:changed_regions)if(rect_affects(c.desc[*it],r)){hit=true;break;}
         if(hit)++it;else it=c.invalid.erase(it);
@@ -189,9 +213,15 @@ bool ResidentCompositor::update(WM &wm){
       std::copy_n(r+r[16],tiles,output.shadow.begin()+256);
       for(unsigned i=0;i<c.ids.size();++i)if(c.mask_kinds[i]){
         unsigned t=c.ids[i];wanted[t]=generation;stored[bank][t]=0;redraw.insert(t);
+        active_tiles.insert(t);
         new_keys.emplace(t,std::vector<uint64_t>{uint64_t(id),c.layout_version,c.tile_content_revision[i],0});
       }
-      if(masked)dev.batch_view(reinterpret_cast<const bo_batch_entry *>(r+r[12+bank]),masked);
+      if(masked){
+        const auto *fills=reinterpret_cast<const bo_batch_entry *>(r+r[12+bank]);
+        std::vector<bo_batch_entry> prepare;
+        for(unsigned i=0;i<masked;++i)queue_fill(prepare,fills[i].op.fill);
+        dev.batch(prepare);
+      }
       cleared_tiles+=masked;frame_trace::mark("ready.prepare.end",redraw.size());
       frame_trace::mark("texture.upload.begin",texture.size());
       profile::Scope upload_timing(profile::texture);
@@ -217,16 +247,28 @@ bool ResidentCompositor::update(WM &wm){
     }else{
     frame_trace::mark("tiles.prepare.begin",dirty.size());
     std::vector<bo_batch_entry> prepare;
-    for(unsigned t:dirty){bool occupied=false,first_full=false;
-      for(int id:order){auto &c=p.layers[id];int i=c.lookup[t];if(i>=0 && c.mask_kinds[i]){occupied=true;first_full=c.mask_kinds[i]==1;break;}}
+    for(unsigned t:dirty){
+      first_visible[t]=order.size();
+      bool first_full=false;
+      // The highest full covering layer replaces every cell below it.
+      for(size_t layer=order.size();layer>0;--layer){
+        auto &c=p.layers[order[layer-1]];int i=c.lookup[t];
+        if(i<0 || !c.mask_kinds[i])continue;
+        first_visible[t]=layer-1;
+        first_full=c.mask_kinds[i]==1;
+        if(first_full)break;
+      }
+      bool occupied=first_visible[t]!=order.size();
       bool pointer=p.previous_pointer_tiles.count(t);
       unsigned entry=(occupied||pointer)?t*1024:0xffffffffu;
       scene_changed|=output.shadow[256+t]!=entry;output.shadow[256+t]=entry;
-      if(!occupied && !pointer){wanted[t]=0;continue;}
+      if(!occupied && !pointer){wanted[t]=0;active_tiles.erase(t);continue;}
+      active_tiles.insert(t);
       // Exact input identities, not hashes or cell readback. Preserve old slot
       // identities through deactivation so an unchanged reactivation can reuse.
       std::vector<uint64_t> identity;identity.reserve(order.size()*3+1);
-      for(int id:order){auto &c=p.layers[id];int i=c.lookup[t];
+      for(size_t layer=first_visible[t];layer<order.size();++layer){
+        int id=order[layer];auto &c=p.layers[id];int i=c.lookup[t];
         if(i>=0 && c.mask_kinds[i]){identity.push_back(uint64_t(id));
           identity.push_back(c.layout_version);identity.push_back(c.tile_content_revision[i]);}}
       identity.push_back(pointer?pointer_version:0);
@@ -240,12 +282,14 @@ bool ResidentCompositor::update(WM &wm){
     any=scene_changed;
     // Unchanged active tiles may be stale in the next back bank. Copy only
     // missing versions, before presentation. Never touch inactive cell slots.
-    if(any || !valid)for(unsigned t=0;t<tiles;){
-      if(!wanted[t] || redraw.count(t) || stored[bank][t]==wanted[t]){++t;continue;}
+    if(any || !valid)for(auto it=active_tiles.begin();it!=active_tiles.end();){
+      unsigned t=*it;
+      if(redraw.count(t) || stored[bank][t]==wanted[t]){++it;continue;}
       unsigned first=t,source=bank^1;
       do {
         require(stored[source][t]==wanted[t],"missing resident tile generation");++t;
-      }while(t<tiles && wanted[t] && !redraw.count(t) && stored[bank][t]!=wanted[t]);
+        ++it;
+      }while(it!=active_tiles.end() && *it==t && !redraw.count(t) && stored[bank][t]!=wanted[t]);
       bo_batch_entry copy{};copy.kind=BO_BATCH_COPY;
       copy.op.copy={3+source,(header+first*256)*4,3+bank,(header+first*256)*4,(t-first)*1024,0};prepare.push_back(copy);
       output.dma_copied_words+=(t-first)*256;lazy_copied_tiles+=t-first;
@@ -254,8 +298,10 @@ bool ResidentCompositor::update(WM &wm){
     dev.batch(prepare);
     frame_trace::mark("tiles.prepare.end",dirty.size());
     phase.stop();
-    for(int id:order){auto &c=p.layers[id];std::vector<unsigned> direct,masked;std::vector<bo_batch_entry> solids;
-      for(unsigned i=0;i<c.ids.size();++i)if(redraw.count(c.ids[i])&&c.mask_kinds[i]){
+    for(size_t layer=0;layer<order.size();++layer){
+      int id=order[layer];auto &c=p.layers[id];std::vector<unsigned> direct,masked;std::vector<bo_batch_entry> solids;
+      for(unsigned i=0;i<c.ids.size();++i)if(redraw.count(c.ids[i]) && c.mask_kinds[i] &&
+                                             first_visible[c.ids[i]]<=layer){
         if(c.mask_kinds[i]==1 && wm.windows.at(id).solid_revision==wm.windows.at(id).revision){
           queue_fill(solids,bank,c.ids[i],wm.windows.at(id).solid_index);++solid_tiles;
         }else if(c.mask_kinds[i]==1 || c.shape.empty())direct.push_back(i);else masked.push_back(i);}
@@ -297,17 +343,22 @@ bool ResidentCompositor::update(WM &wm){
   phase.next(profile::finish);
   for(int id:order){auto &c=p.layers[id];c.invalid.clear();wm.windows[id].dirty={};wm.windows[id].dirty_regions.clear();if(layout_changed.count(id) || !p.previous_tiles.count(id))p.previous_tiles[id]={c.ids.begin(),c.ids.end()};}
   p.previous_order=order;valid=true;++frames;
-  metrics={{"texture_pool",textures.status()},{"device_ready_frames",ready_frames},{"packed_mask_tiles_total",packed_mask_tiles},{"redrawn_tiles",redraw.size()},{"reused_tiles_total",reused_tiles},{"lazy_copied_tiles_total",lazy_copied_tiles},{"solid_tiles_total",solid_tiles},{"mode","ddr-resident-dirty-tiles"},{"hardware_frames",frames},{"fallback_frames",0},
+  last_dirty=dirty.size();last_redrawn=redraw.size();last_jobs=jobs;last_changed=any;
+  if(collect_metrics)metrics=status();
+  return any;
+}
+J ResidentCompositor::status() const {
+  const auto &p=planner;
+  return {{"texture_pool",textures.status()},{"device_ready_frames",ready_frames},{"packed_mask_tiles_total",packed_mask_tiles},{"redrawn_tiles",last_redrawn},{"reused_tiles_total",reused_tiles},{"lazy_copied_tiles_total",lazy_copied_tiles},{"solid_tiles_total",solid_tiles},{"mode","ddr-resident-dirty-tiles"},{"hardware_frames",frames},{"fallback_frames",0},
     {"geometry_tiles_evaluated_total",p.geometry_tiles_evaluated},{"mask_samples_evaluated_total",p.mask_samples_evaluated},
     {"geometry_builds",p.geometry_builds},{"geometry_prepare_us_total",p.geometry_prepare_us},{"geometry_cull_us_total",p.geometry_cull_us},{"geometry_descriptor_us_total",p.geometry_descriptor_us},{"geometry_insert_us_total",p.geometry_insert_us},
     {"mask_builds",p.mask_builds},{"mask_build_us_total",p.mask_build_us},{"mask_fast_tiles_total",p.mask_fast_tiles},
     {"mask_integer_samples_total",p.mask_integer_samples},{"mask_precise_samples_total",p.mask_precise_samples},
     {"precomputed_layers_total",p.precomputed_layers},{"plan_cache",projection_plan_stats()},
-    {"jobs_per_core",jobs},{"total_hw_jobs",total_jobs},{"dirty_tiles",dirty.size()},
+    {"jobs_per_core",last_jobs},{"total_hw_jobs",total_jobs},{"dirty_tiles",last_dirty},
     {"cpu_scene_words",p.scene.size()},{"cpu_output_shadow_words",output.shadow.size()},
     {"cpu_result_download_words",0},{"tile_fills_total",cleared_tiles},{"masked_tiles_total",blended_tiles},
     {"texture_uploads_total",textures.full_uploads+textures.partial_uploads},{"texture_reuses_total",textures.reuses},
-    {"update_kind",any?"tiles":"none"}};
-  return any;
+    {"update_kind",last_changed?"tiles":"none"}};
 }
 }

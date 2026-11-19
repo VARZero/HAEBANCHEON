@@ -1,0 +1,33 @@
+#!/bin/sh
+set -eu
+work=$(mktemp -d /data/tmp/userland-check.XXXXXX)
+name=$(basename "$work")
+test ! -e "/data/apps/$name"
+trap 'rm -rf "$work"; rm -f "/data/apps/$name"' EXIT HUP INT TERM
+busybox | head -n 1
+vim --version | head -n 1
+python3 --version
+gcc --version | head -n 1
+printf 'old\n' > "$work/vim.txt"
+vim -u NONE -i NONE -n -es "$work/vim.txt" -c '%s/old/new/' -c wq
+test "$(cat "$work/vim.txt")" = new
+python3 -c 'import ctypes, json, math, sqlite3, zlib; assert math.sqrt(81)==9; assert zlib.decompress(zlib.compress(b"RV32"))==b"RV32"; print("PYTHON_OK")'
+cat > "$work/hello.c" <<'EOF'
+#include <stdio.h>
+#include <math.h>
+int main(void) { volatile double n = 81; printf("C_OK %.0f\n", sqrt(n)); return 0; }
+EOF
+gcc -O2 "$work/hello.c" -lm -o "$work/hello"
+test "$("$work/hello")" = 'C_OK 9'
+gcc -static "$work/hello.c" -lm -o "$work/hello-static"
+test "$("$work/hello-static")" = 'C_OK 9'
+cat > "$work/hello.cc" <<'EOF'
+#include <iostream>
+#include <vector>
+int main() { std::vector<int> v{19, 23}; std::cout << "CPP_OK " << v.at(0)+v.at(1) << '\n'; }
+EOF
+g++ "$work/hello.cc" -o "$work/hello-cpp"
+test "$("$work/hello-cpp")" = 'CPP_OK 42'
+app-install "$work/hello" "$name"
+test "$("/data/apps/$name")" = 'C_OK 9'
+echo USERLAND_CHECK_OK

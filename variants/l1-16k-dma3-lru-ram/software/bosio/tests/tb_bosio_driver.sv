@@ -8,7 +8,8 @@ module tb_bosio_driver(
  input wire video_ready,output wire video_valid,video_sof,video_eol,
  output wire [23:0] video_data,
  output reg [31:0] writes0,writes1,reads_out,
- output wire [31:0] active_scene
+ output wire [31:0] active_scene,
+ output wire projection_s_irq
 );
  import or_bo_axi_pkg::*;
  ax_req_t masters[4],memory;ax_rsp_t replies[4],memory_reply;
@@ -16,6 +17,7 @@ module tb_bosio_driver(
  ax_req_t dma[3];ax_rsp_t dma_reply[3];
  wire [1:0] owner;wire busy,snoop,lock_grant;wire [31:0] snoop_addr;
  wire [1:0] irq;
+ al_rsp_t plic_reply;
  reg active,write_op,aw_sent,w_sent,ar_sent;
  reg [31:0] address,wdata;
  always_comb begin
@@ -29,6 +31,7 @@ module tb_bosio_driver(
   masters[0].arvalid=active&&!write_op&&!ar_sent;
   masters[0].rready=active&&!write_op;
   for(int n=0;n<LITE_PORTS;n++)lite_reply[n]='0;
+  lite_reply[9]=plic_reply;
   for(int n=0;n<3;n++)begin
    masters[n+1]=dma[n];dma_reply[n]=replies[n+1];
    controls[n]=lite[n+1];lite_reply[n+1]=control_replies[n];
@@ -51,6 +54,8 @@ module tb_bosio_driver(
  end
  or_bo_axi_fabric fabric(.clk,.reset_n,.masters,.replies,.memory,.memory_reply,.lite,.lite_reply,
   .lock_request(1'b0),.lock_grant,.snoop_valid(snoop),.snoop_address(snoop_addr),.snoop_ready(1'b1),.active_master(owner),.busy);
+ or_storage_plic #(.SOURCES(6)) plic(.clk,.reset_n,.sources({irq,4'b0}),
+  .req(lite[9]),.rsp(plic_reply),.m_irq(),.s_irq(projection_s_irq));
  or_bo_bosio_axi cores(.clk,.reset_n,.control(controls),.control_reply(control_replies),.dma,.dma_reply,
   .sensor_enable(1'b0),.sensor_ready(),.sensor_error(),.projection_irq(irq),
   .video_ready,.video_data,.video_valid,.video_sof,.video_eol,

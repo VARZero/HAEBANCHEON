@@ -4,6 +4,7 @@
 #include <sys/ioctl.h>
 #include <cerrno>
 namespace boayo {
+#if defined(BO_PROFILE_CONTROL) && defined(BO_GET_PROFILE)
 inline thread_local bool driver_diag_available=false,driver_fast=true;
 inline void setup_driver_profile(Device &device){
   auto *linux=dynamic_cast<LinuxDevice *>(&device);if(!linux)return;
@@ -25,4 +26,11 @@ inline J driver_profile_status(Device &device){
 #undef BO_JSON_DIAG
   return result;
 }
+#else
+// The stock ABI3 board driver does not expose the v14 diagnostic extensions.
+inline void setup_driver_profile(Device &) {}
+inline J driver_profile_status(Device &) {
+  return {{"available",false},{"enabled",false}};
+}
+#endif
 }

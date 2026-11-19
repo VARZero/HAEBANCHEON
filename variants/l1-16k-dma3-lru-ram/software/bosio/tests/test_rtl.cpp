@@ -19,6 +19,7 @@ struct Bench {
  unsigned held_data=0,held_marks=0;
  std::vector<unsigned> scene[2];
  unsigned desc[2][18]{};
+ unsigned delivered=0;
  Bench(unsigned s):seed(s){
   d.clk=0;d.reset_n=0;d.control_valid=0;d.mem_we=0;d.mem_index=0;d.video_ready=0;
   for(int i=0;i<20;i++)tick();d.reset_n=1;for(int i=0;i<20;i++)tick();
@@ -40,16 +41,61 @@ struct Bench {
   }
   d.clk=1;d.eval();cycles++;
  }
- int access(unsigned core,unsigned reg,unsigned *v,bool write){
-  d.control_valid=1;d.control_write=write;d.control_address=0x20000000+core*0x10000+reg;d.control_wdata=*v;
+ int access_at(unsigned address,unsigned *v,bool write){
+  d.control_valid=1;d.control_write=write;d.control_address=address;d.control_wdata=*v;
   for(unsigned n=0;n<200000;n++){tick();if(d.control_done){*v=d.control_rdata;int r=d.control_error?-EIO:0;d.control_valid=0;tick();return r;}}
   throw std::runtime_error("AXI MMIO timeout");
+ }
+ int access(unsigned core,unsigned reg,unsigned *v,bool write){
+  return access_at(0x20000000+core*0x10000+reg,v,write);
  }
  static int read_cb(void *p,unsigned c,__u32 r,__u32 *v){return ((Bench*)p)->access(c,r,v,false);}
  static int write_cb(void *p,unsigned c,__u32 r,__u32 v){return ((Bench*)p)->access(c,r,&v,true);}
  static __u64 now_cb(void *p){return ((Bench*)p)->cycles/100;}
  static void delay_cb(void *p,unsigned us){auto *b=(Bench*)p;for(unsigned n=0;n<us*100;n++)b->tick();}
  static void barrier_cb(void *p){((Bench*)p)->tick();}
+ static void irq_arm(void *p,unsigned core){
+  auto *b=(Bench*)p;
+  unsigned pending=0;
+  check(!read_cb(p,core,BO_PROJECTION_ISR,&pending),"read projection ISR");
+  if(pending)check(!write_cb(p,core,BO_PROJECTION_ISR,pending),"clear stale ISR");
+  b->delivered&=~(1u<<core);
+  check(!write_cb(p,core,BO_PROJECTION_IER,BO_PROJECTION_IRQ_DONE),"enable projection event");
+  check(!write_cb(p,core,BO_PROJECTION_GIE,1),"enable projection IRQ");
+ }
+ static int irq_wait(void *p,unsigned core,__u64 end){
+  auto *b=(Bench*)p;
+  while(!(b->delivered&(1u<<core))){
+   if(!b->d.projection_s_irq){
+    if(now_cb(p)>=end)return -ETIMEDOUT;
+    b->tick();continue;
+   }
+   unsigned claim=0,pending=0;
+   check(!b->access_at(0x0c201004,&claim,false)&&(claim==5||claim==6),"claim projection PLIC source");
+   const unsigned source=claim-5;
+   check(!(b->delivered&(1u<<source)),"duplicate projection IRQ");
+   check(!read_cb(p,source,BO_PROJECTION_ISR,&pending)&&pending==BO_PROJECTION_IRQ_DONE,
+         "projection completion ISR");
+   check(!write_cb(p,source,BO_PROJECTION_ISR,pending),"acknowledge projection ISR");
+   check(!read_cb(p,source,BO_PROJECTION_ISR,&pending)&&!pending,"projection ISR deassert");
+   check(!b->access_at(0x0c201004,&claim,true),"complete PLIC source");
+   b->delivered|=1u<<source;
+  }
+  return 0;
+ }
+ static void irq_disarm(void *p,unsigned core){
+  check(!write_cb(p,core,BO_PROJECTION_GIE,0),"disable projection IRQ");
+  check(!write_cb(p,core,BO_PROJECTION_IER,0),"disable projection event");
+ }
+ void enable_projection_irqs(){
+  static const bo_projection_irq_ops ops{irq_arm,irq_wait,irq_disarm};
+  unsigned priority=1, enabled=0x60;
+  check(!access_at(0x0c000014,&priority,true),"PLIC source 5 priority");
+  priority=1;
+  check(!access_at(0x0c000018,&priority,true),"PLIC source 6 priority");
+  check(!access_at(0x0c002080,&enabled,true),"PLIC S-context enable");
+  engine.irq=&ops;
+ }
  void upload(unsigned region,const unsigned *data,unsigned words){
   check(bo_upload_check(&engine,region,0,words*4)==0,"upload rejected");
   for(unsigned n=0;n<words;n++){d.mem_index=bo_offsets[region]/4+n;d.mem_wdata=data[n];d.mem_we=1;tick();}
@@ -79,10 +125,48 @@ struct Bench {
   check(peek(bo_offsets[BO_SCENE0+bank]+(BO_HEADER_WORDS+512)*4)==0xcccccccc,"tail guard clobbered");
  }
 };
+
+static void test_scratch(Bench &b)
+{
+ const unsigned texture[]={0xff0000,0x00ff00};
+ const unsigned tile_offset=BO_HEADER_WORDS*4;
+ const unsigned guard=0xccccccccu;
+ const unsigned colors[]={0xe0e0e0e0u,0x1c1c1c1cu};
+ std::vector<unsigned> scratch(BO_DEMO_WORDS,guard);
+ b.upload(BO_TEXTURE,texture,2);
+ for(unsigned c=0;c<2;c++){
+  bo_demo_descriptor(b.desc[c],c,3);
+  b.upload(BO_DESC0+c,b.desc[c],BO_DESC_WORDS);
+ }
+ const auto active=b.d.active_scene;
+ for(unsigned mask=1;mask<=3;mask++){
+  b.upload(BO_SCRATCH,scratch.data(),scratch.size());
+  auto j=b.job(2);j.jobs[0]=mask&1;j.jobs[1]=(mask>>1)&1;
+  check(!bo_run(&b.engine,&j,b.desc[0],b.desc[1]),"scratch projection");
+  if(b.engine.irq)check(b.delivered==mask&&!b.d.projection_s_irq,"unexpected completion IRQ");
+  check(!bo_download_check(&b.engine,BO_SCRATCH,tile_offset,2*BO_TILE_WORDS*4),"scratch readback rejected");
+  for(unsigned c=0;c<2;c++){
+   check(j.cells[c]==j.jobs[c]*1024,"incorrect per-core scratch cell count");
+   for(unsigned n=0;n<BO_TILE_WORDS;n++)
+    check(b.peek(bo_offsets[BO_SCRATCH]+tile_offset+(c*BO_TILE_WORDS+n)*4)==
+          (j.jobs[c]?colors[c]:guard),"scratch tile mismatch");
+  }
+  check(b.peek(bo_offsets[BO_SCRATCH]+tile_offset-4)==guard,"scratch header overwritten");
+  check(b.peek(bo_offsets[BO_SCRATCH]+tile_offset+2*BO_TILE_WORDS*4)==guard,"scratch tail overwritten");
+  check(b.d.active_scene==active && !b.d.reads_out,"scratch started output");
+  b.delivered=0;
+ }
+ std::printf("PASS SCRATCH seed=%u %s projection0/projection1/both and readback\n",
+             b.seed,b.engine.irq?"PLIC IRQ":"polling");
+}
+
 int main(int argc,char **argv){
  try{
   Verilated::commandArgs(argc,argv);unsigned seed=argc>1?std::strtoul(argv[1],nullptr,0):1;Bench b(seed);
   struct bo_info info{};check(!bo_info(&b.engine,&info)&&info.signature==0x42533235,"signature");
+  if(argc>2 && !std::strcmp(argv[2],"--scratch")){
+   test_scratch(b);b.enable_projection_irqs();test_scratch(b);return 0;
+  }
   b.build(0,false);
   auto bad=b.job(0);auto before=b.cycles;
   b.desc[1][1]=b.desc[0][1];check(bo_run(&b.engine,&bad,b.desc[0],b.desc[1])==-EINVAL,"overlap accepted");
@@ -102,6 +186,7 @@ int main(int argc,char **argv){
   check(b.d.reads_out>=8960,"output did not fetch scenes");
   check(!bo_upload_check(&b.engine,BO_SCENE0,0,4),"old scene not released after active-base ack");
   std::printf("PASS DUAL_TO_OUTPUT seed=%u cycles=%llu pixels=%llu frames=%llu dma_writes=%u,%u output_reads=%u\n",seed,b.cycles,b.pixels,b.frames,b.d.writes0,b.d.writes1,b.d.reads_out);
+
   /* A blocked frame switch must time out and freeze all buffer reuse. */
   b.stalled=true;p=b.present(0);p.timeout_ms=1;
   check(bo_present(&b.engine,&p,b.scene[0].data())==-ETIMEDOUT,"missing frame timeout");

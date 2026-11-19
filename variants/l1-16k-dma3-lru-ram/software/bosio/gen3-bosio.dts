@@ -64,7 +64,7 @@
             #address-cells = <0>;
             #interrupt-cells = <1>;
             interrupt-controller;
-            riscv,ndev = <4>;
+            riscv,ndev = <6>;
             interrupts-extended = <&cpu_intc 11>, <&cpu_intc 9>;
         };
         mmc@10008000 {
@@ -106,6 +106,9 @@
             compatible = "oryukdo,kfb-bosio-v1";
             reg = <0x20000000 0x80>, <0x20010000 0x80>, <0x20020000 0x80>;
             reg-names = "projection0", "projection1", "output";
+            interrupt-parent = <&plic>;
+            interrupts = <5 6>;
+            interrupt-names = "projection0", "projection1";
             memory-region = <&bosio_dma>;
             dma-coherent;
             dmas = <&bosio_memory_dma 0>;

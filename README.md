@@ -31,14 +31,16 @@ python scripts/verify_current_rtl.py --require-tracked
 - **빌드:** [현재 비트스트림 안내](docs/현재_비트스트림.md)의 Vivado 재구현 절차를 따릅니다.
 - **외부 IP:** HDMI 원본은 고정 버전으로 내려받고, MIG는 Vivado 2022.2에서 보존 설정으로 생성합니다. [전체 구성의 IP 준비 방법](docs/외부_HDMI.md)
 - **SD 이미지:** 버전별 안내와 검증 기록은 `updates/`에 있습니다. 현재 소프트웨어 기준은 [BoAYO v14](updates/boayo-tilebatch-v14/README_KO.md)입니다. 새 환경의 SD 빌드에는 추가 커널·userspace 준비가 필요합니다.
+- **통합 개발 SD 이미지:** [Linux·보시오·보아요 빌드 안내](software/userland/README.md). 투영 완료 IRQ가 PLIC 5·6번에 연결된 RTL로 BusyBox, Vim, Python 3, GCC/G++와 자체 앱을 실행합니다. 보시오는 2D 32×32 타일 변경 추적, 배경 복원, 두 투영코어와 DMA를 통한 부분 갱신을 제공합니다. [타일 미들웨어·측정 도구](software/userland/BOSIO_TILES.md)
+- **보아요 WM 데몬:** [공유 메모리·별도 앱 프로세스](software/userland/WM_DAEMON.md). 빈 WM에서 시작하고 런처와 앱을 각각 실행합니다. 작은 변경은 RGB24 공유 버퍼와 변경 사각형 알림으로 전달하며 `boayo bench-small`로 요청부터 출력 완료까지 측정합니다.
 
 비트스트림·SD 이미지·MIG 생성물·외부 HDMI IP 원본은 Git에 포함하지 않습니다.
 
 ## 확인된 결과와 남은 문제
 
-Linux 셸과 BoAYO의 실보드 HDMI 출력을 확인했습니다. 다만 **v14의 앱 갱신 성능은 비교본보다 느려졌으며**, 최적화 완료 상태가 아닙니다. [실보드 비교 결과](updates/boayo-tilebatch-v14/BOARD_RESULT_KO.md)
+기존 v14 이미지에서 Linux 셸과 BoAYO의 실보드 HDMI 출력을 확인했습니다. **v14의 앱 갱신 성능은 비교본보다 느렸습니다.** 최신 개발 SD는 QSPI에서 FPGA 구성을 시작해 Linux ext4 부팅, 두 투영코어 완료 IRQ와 보시오 부분 갱신을 실보드에서 확인했습니다. 보아요 창 이동은 23.4초, 8×8 픽셀 수정은 4.3초였으며, 기본 런처의 첫 화면 게시와 실제 HDMI 캡처는 검증이 남아 있습니다. [v14 실보드 비교 결과](updates/boayo-tilebatch-v14/BOARD_RESULT_KO.md) · [통합 이미지 검증 기록](software/userland/VALIDATION.md)
 
-| 현재 구성의 보존된 배선 결과 | 값 |
+| 2026-11-17 polling 기준본의 보존된 배선 결과 | 값 |
 |---|---:|
 | CPU / fabric 클럭 | 50 / 100 MHz |
 | LUT / FF | 119,141 / 76,182 |
@@ -46,7 +48,7 @@ Linux 셸과 BoAYO의 실보드 HDMI 출력을 확인했습니다. 다만 **v14�
 | Setup WNS / Hold WHS | +0.093 ns / +0.011 ns |
 | TNS / THS | 0 / 0 |
 
-MIG와 HDMI를 포함한 전체 보드 결과입니다. 타이밍 여유가 작으므로 새 빌드는 해당 배선 결과로 판단해야 합니다. [검증·자원·임계 경로 상세](variants/l1-16k-dma3-lru-ram/RESULTS_KO.md)
+위 수치는 MIG와 HDMI를 포함한 이전 polling 기준본입니다. 투영 IRQ 후속 비트스트림은 Setup +0.140ns, Hold +0.011ns를 확인했습니다. 소스 변경과 해시는 [IRQ 후속 기록](variants/l1-16k-dma3-lru-ram/provenance/projection_irq_sources.json)에 있습니다. 타이밍 여유가 작으므로 새 빌드는 해당 배선 결과로 판단해야 합니다. [검증·자원·임계 경로 상세](variants/l1-16k-dma3-lru-ram/RESULTS_KO.md)
 
 ## 문서와 소스 위치
 

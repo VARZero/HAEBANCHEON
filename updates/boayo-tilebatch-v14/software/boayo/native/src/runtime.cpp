@@ -3,6 +3,8 @@
 #include "driver_profile.hpp"
 #include "frame_pacer.hpp"
 #include "runtime.hpp"
+#include "ipc.hpp"
+#include "app_process.hpp"
 #include "frame_trace.hpp"
 #include "resident.hpp"
 #include "apps.hpp"
@@ -38,84 +40,43 @@ static void on_signal(int) {
 static double seconds() {
   return std::chrono::duration<double>(std::chrono::steady_clock::now().time_since_epoch()).count();
 }
-static std::string socket_path() {
-  const char *p = getenv("BOAYO_SOCKET");
-  return p ? p : "/tmp/bosio-wm.sock";
-}
-struct FD {
-  int fd = -1;
-  FD() = default;
-  explicit FD(int f) : fd(f) {}
-  ~FD() {
-    if (fd >= 0)
-      ::close(fd);
-  }
-  FD(const FD &) = delete;
-  FD &operator=(const FD &) = delete;
-};
-static sockaddr_un address(const std::string &path) {
-  sockaddr_un a{};
-  a.sun_family = AF_UNIX;
-  require(path.size() < sizeof(a.sun_path), "socket path too long");
-  std::copy(path.begin(), path.end(), a.sun_path);
-  return a;
-}
-struct Client {
-  FD sock;
-  std::string app, buffer;
-  unsigned sequence = 0;
-  explicit Client(std::string name = "native-control", std::string path = socket_path())
-      : sock(::socket(AF_UNIX, SOCK_STREAM | SOCK_CLOEXEC, 0)),
-        app(std::move(name) + ":" + std::to_string(getpid())) {
-    require(sock.fd >= 0, "socket creation");
-    auto a = address(path);
-    require(connect(sock.fd, reinterpret_cast<sockaddr *>(&a), sizeof(a)) == 0,
-            "connect WM: " + std::string(strerror(errno)));
-    timeval timeout{120, 0};
-    setsockopt(sock.fd, SOL_SOCKET, SO_RCVTIMEO, &timeout, sizeof(timeout));
-    setsockopt(sock.fd, SOL_SOCKET, SO_SNDTIMEO, &timeout, sizeof(timeout));
-  }
-  J call(const std::string &op, J args = J::object()) {
-    J r = {{"id", ++sequence}, {"app", app}, {"op", op}, {"args", args}};
-    std::string s = r.dump() + "\n";
-    size_t off = 0;
-    while (off < s.size()) {
-      auto n = send(sock.fd, s.data() + off, s.size() - off, MSG_NOSIGNAL);
-      if (n < 0 && errno == EINTR)
-        continue;
-      require(n > 0, "WM write failed");
-      off += n;
-    }
-    while (buffer.find('\n') == std::string::npos) {
-      char chunk[8192];
-      auto n = recv(sock.fd, chunk, sizeof(chunk), 0);
-      if (n < 0 && errno == EINTR)
-        continue;
-      require(n > 0, "WM reply failed or timed out");
-      buffer.append(chunk, n);
-      require(buffer.size() <= 8 * 1024 * 1024, "WM reply too large");
-    }
-    auto end = buffer.find('\n');
-    auto response = J::parse(buffer.substr(0, end));
-    buffer.erase(0, end + 1);
-    require(response.at("id") == sequence, "IPC sequence mismatch");
-    require(response.at("ok").get<bool>(), response.value("error", std::string("WM error")));
-    return response.at("result");
-  }
-};
 struct Work {
   J request;
   std::set<std::string> disconnect;
   std::promise<J> reply;
+  double submitted = seconds();
 };
 struct Bridge {
+  int reply_pipe[2]{-1, -1};
+  Bridge() {
+    require(pipe2(reply_pipe, O_CLOEXEC | O_NONBLOCK) == 0, "WM reply pipe creation failed");
+  }
+  ~Bridge() {
+    close(reply_pipe[0]);
+    close(reply_pipe[1]);
+  }
+  void notify_reply() {
+    const char byte = 1;
+    // A full pipe already represents an outstanding wake-up.
+    (void)!write(reply_pipe[1], &byte, 1);
+  }
   std::mutex mutex;
   std::condition_variable cv;
   std::deque<std::shared_ptr<Work>> queue;
   std::atomic<bool> stop{false};
+  std::atomic<bool> refresh_requested{false};
+  uint64_t completed_generation = 0;
+  uint64_t accepted_generation = 0;
+  double last_present_ms = 0;
+  struct Waiter { uint64_t generation; std::shared_ptr<std::promise<J>> reply; };
+  std::vector<Waiter> waiters;
+  J processes = J::array();
+  J ui = {{"running", false}, {"launcher_window", nullptr}};
+  pid_t motion_pid = 0;
   std::string stage = "initializing";
   double updated = seconds();
   J cached = {{"runtime", "C++17"},        {"windows", J::array()},   {"output", {{"commits", 0}}},
+              {"ui", {{"running", false}}},
               {"projection", J::object()}, {"render_error", nullptr}, {"app_error", nullptr}};
   void phase(const std::string &value) {
     std::lock_guard<std::mutex> lock(mutex);
@@ -132,15 +93,58 @@ struct Bridge {
     updated=seconds();
   }
   J status() {
+    refresh_requested = true;
+    cv.notify_one();
     std::lock_guard<std::mutex> lock(mutex);
     J result = cached;
     result["service"] = {{"phase", stage},
                          {"snapshot_age_seconds", seconds() - updated},
                          {"queued_requests", queue.size()},
                          {"state_is_snapshot", true}};
+    result["ui"] = ui;
+    result["app_processes"] = processes;
+    result["wm_pid"] = getpid();
+    result["motion"]["active"] = motion_pid != 0;
     return result;
   }
-  J profile_status(){std::lock_guard<std::mutex> lock(mutex);return {{"projection",cached.value("projection",J::object())},{"output_profile",cached.contains("output")?cached["output"].value("publish_profile",J::object()):J::object()},{"driver_profile",cached.value("driver_profile",J::object())},{"profile",cached.value("profile",J::object())},{"performance",cached.value("performance",J::object())},{"phase",stage},{"snapshot_time",updated},{"render_error",cached.value("render_error",J(nullptr))},{"app_error",cached.value("app_error",J(nullptr))}};}
+  std::future<J> wait_present(uint64_t generation) {
+    auto reply = std::make_shared<std::promise<J>>();
+    auto future = reply->get_future();
+    std::lock_guard<std::mutex> guard(mutex);
+    require(generation <= accepted_generation, "unknown presentation generation");
+    require(waiters.size() < 128, "too many presentation waiters");
+    if (completed_generation >= generation)
+      reply->set_value({{"generation", completed_generation}, {"request_to_present_ms", last_present_ms}});
+    else {
+      require(stage != "failed" && cached.value("render_error", J(nullptr)).is_null(),
+              "renderer failed");
+      waiters.push_back({generation, reply});
+    }
+    return future;
+  }
+  void accepted(uint64_t generation) {
+    std::lock_guard<std::mutex> guard(mutex);
+    accepted_generation = generation;
+  }
+  void presented(uint64_t generation, double latency_ms) {
+    std::lock_guard<std::mutex> guard(mutex);
+    completed_generation = generation;
+    last_present_ms = latency_ms;
+    for (auto it = waiters.begin(); it != waiters.end();)
+      if (it->generation <= generation) {
+        it->reply->set_value({{"generation", generation}, {"request_to_present_ms", latency_ms}});
+        it = waiters.erase(it);
+      } else ++it;
+    notify_reply();
+  }
+  void fail_waiters(const std::string &message) {
+    std::lock_guard<std::mutex> guard(mutex);
+    for (auto &waiter : waiters)
+      waiter.reply->set_exception(std::make_exception_ptr(std::runtime_error(message)));
+    waiters.clear();
+    notify_reply();
+  }
+  J profile_status(){refresh_requested=true;cv.notify_one();std::lock_guard<std::mutex> lock(mutex);return {{"projection",cached.value("projection",J::object())},{"output_profile",cached.contains("output")?cached["output"].value("publish_profile",J::object()):J::object()},{"driver_profile",cached.value("driver_profile",J::object())},{"profile",cached.value("profile",J::object())},{"performance",cached.value("performance",J::object())},{"phase",stage},{"snapshot_time",updated},{"render_error",cached.value("render_error",J(nullptr))},{"app_error",cached.value("app_error",J(nullptr))}};}
   J view_cached={{"active",false}};
   void view_publish(J value){std::lock_guard<std::mutex> lock(mutex);view_cached=std::move(value);}
   J view_status(){std::lock_guard<std::mutex> lock(mutex);return view_cached;}
@@ -155,8 +159,7 @@ struct Bridge {
   }
   J motion_progress() {
     std::lock_guard<std::mutex> lock(mutex);
-    return {{"rendered_generation",cached.contains("performance")?
-      cached["performance"].value("rendered_generation",uint64_t(0)):uint64_t(0)},
+    return {{"rendered_generation",completed_generation},
       {"render_error",cached.value("render_error",J(nullptr))},
       {"app_error",cached.value("app_error",J(nullptr))},{"phase",stage}};
   }
@@ -183,6 +186,7 @@ static void worker(bool mock, Bridge &b) {
   // Own it on the heap; this contains no full scene pixel buffer.
   auto resident_state=std::make_unique<ResidentCompositor>(geometry,projectors,output);
   auto &resident=*resident_state;
+  resident.collect_metrics=false;
   const char *renderer=getenv("BOAYO_RENDERER");
   bool use_resident=!renderer || std::string(renderer)!="legacy";
   wm.pose = [&](double y, double p, double r) { output.set_pose(y, p, r); };
@@ -192,16 +196,14 @@ static void worker(bool mock, Bridge &b) {
   std::cout << "BOAYO_BLANK_METADATA_READY words=" << output.shadow.size()
             << " tile_composition=0 projection_jobs=0" << std::endl;
   // Do not acknowledge a compositor frame: the first visible scene must be full.
-  b.phase("desktop_initialization");
-  Desktop desktop(wm);
-  MotionExercise motion(wm,desktop);
   ViewPlayback playback(output,wm);
   double view_report_at=0;
-  uint64_t rendered = 0, render_count = 0, full_count = 1, patch_count = 0, no_op_count = 0,
+  uint64_t rendered = wm.generation;
+  uint64_t render_count = 0, full_count = 1, patch_count = 0, no_op_count = 0,
            words = output.shadow.size();
   FramePacer pacer;
   double apps_ms=0;
-  double fps = 2, last_tick = 0, started = seconds(), compose_ms = 0,
+  double fps = 60, started = seconds(), compose_ms = 0,
          upload_ms = 0;
   J error = nullptr, app_error = nullptr;
 
@@ -227,11 +229,11 @@ static void worker(bool mock, Bridge &b) {
       state["render_error"] = error;
       state["app_error"] = app_error;
       state["scene_owner"] = scene_owner.empty() ? J(nullptr) : J(scene_owner);
-      state["projection"] = compositor.metrics;
+      state["projection"] = use_resident ? resident.status() : compositor.metrics;
       state["assets"] = asset_status();
       state["runtime"] = "C++17";
       state["view"]={{"yaw",wm.view_yaw},{"pitch",wm.view_pitch},{"roll",wm.view_roll}};
-      state["motion"]=motion.state();
+      state["motion"]={{"active",false},{"phase","client-process"}};
       state["profile"] = profile::snapshot();
       state["driver_profile"] = driver_profile_status(*dev);
       state["performance"] = {{"render_count", render_count},
@@ -252,7 +254,7 @@ static void worker(bool mock, Bridge &b) {
     std::string op = r.at("op"), owner = r.value("app", std::string("anonymous"));
     auto args = r.value("args", J::object());
     if(op=="view_play") {
-      require(!motion.active && wm.generation==rendered,"wait for an idle, presented scene");
+      require(wm.generation==rendered,"wait for an idle, presented scene");
       require(wm.buttons.empty() && !wm.capture,"release pointer buttons before view playback");
       playback.start(args.at("path"),owner,seconds(),args.value("duration",60.));
       playback.start_time=seconds();playback.end_time=playback.start_time+args.value("duration",60.);
@@ -260,12 +262,6 @@ static void worker(bool mock, Bridge &b) {
     }
     if(op=="view_stop"){playback.stop();b.view_publish(playback.state());return playback.state();}
     require(!playback.active || op=="get_state" || op=="view_state","stop view playback before modifying windows/input");
-    if (op == "motion_start") return motion.start(owner,seconds());
-    if (op == "motion_step") return motion.step(owner,args.at("step"),rendered,seconds());
-    if (op == "motion_stop") {
-      if(args.value("owned",false))require(!motion.active || motion.owner==owner,"motion stop ownership mismatch");
-      return motion.stop(seconds());
-    }
     if (op == "sync_scene") return wm.generation;
     if (op == "claim_scene") {
       require(scene_owner.empty() || scene_owner == owner,
@@ -327,12 +323,15 @@ static void worker(bool mock, Bridge &b) {
       return true;
     }
     if (op == "get_state") {J state=state_cache.state(wm);state.update(state_fields());return state;}
-    if (op == "launch_app")
-      return desktop.launch(args.at("kind"), args.value("azimuth", 0.),
-                            args.value("elevation", 0.));
     if (op == "show_launcher") {
-      desktop.show(args.value("azimuth", wm.view_yaw), args.value("elevation", wm.view_pitch));
-      return true;
+      for (auto &[id, w] : wm.windows)
+        if (w.data["workspace"].value("role", std::string()) == "launcher") {
+          wm.dispatch({{"op","configure_window"},{"app",w.data["owner"]},
+              {"args",{{"window_id",id},{"mapped",true}}}});
+          wm.focus_window(id);
+          return true;
+        }
+      return false;
     }
     if (op == "shutdown") {
       b.stop = true;
@@ -343,14 +342,18 @@ static void worker(bool mock, Bridge &b) {
 
   auto publish = [&] { profile::Scope timing(profile::state_publish);state_cache.state(wm);b.publish_delta(state_cache,state_fields()); };
   publish();
+  b.accepted(rendered);
+  b.presented(rendered, 0);
+  double pending_since = 0;
+  bool shared_updates = false;
   b.phase("ready");
-  std::cout << "BOAYO_NATIVE_READY blank_committed_launcher_pending" << std::endl;
+  std::cout << "BOSIO_TILES_READY blank_committed" << std::endl;
   while (!b.stop) {
     std::deque<std::shared_ptr<Work>> work;
     {
       std::unique_lock<std::mutex> lock(b.mutex);
       b.cv.wait_for(lock, std::chrono::milliseconds(20),
-                    [&] { return b.stop || !b.queue.empty(); });
+                    [&] { return b.stop || !b.queue.empty() || b.refresh_requested.load(); });
       work.swap(b.queue);
     }
     for (auto &job : work) {
@@ -359,19 +362,26 @@ static void worker(bool mock, Bridge &b) {
         if (!job->disconnect.empty()) {
           for (const auto &owner : job->disconnect) {
             if(playback.active && playback.owner==owner){playback.stop();b.view_publish(playback.state());}
-            if(motion.active && motion.owner==owner) motion.stop(seconds());
             wm.disconnect(owner);
             release_scene(owner);
           }
           publish();
         } else {
+          auto before = wm.generation;
           J result = dispatch(job->request);
-          if(!playback.active)publish();
+          b.accepted(wm.generation);
+          if (wm.generation != before && !pending_since) pending_since = job->submitted;
+          const std::string op = job->request.at("op");
+          shared_updates |= op == "commit_surface";
+          if (!playback.active && op != "commit_surface" && op != "app_events" &&
+              op != "poll_events" && op != "sync_scene") publish();
           job->reply.set_value(std::move(result));
+          b.notify_reply();
         }
       } catch (...) {
         if (job->disconnect.empty())
           job->reply.set_exception(std::current_exception());
+        b.notify_reply();
       }
       b.phase("ready");
     }
@@ -386,21 +396,7 @@ static void worker(bool mock, Bridge &b) {
       if(playback.active)continue;
       publish();b.phase("ready");
     }
-    if (now - last_tick >= 1. / 30) {
-      b.phase("apps");
-      const auto app_start=seconds();
-      try {
-        desktop.update(now);
-        app_error = nullptr;
-      } catch (const std::exception &e) {
-        app_error = e.what();
-        std::cerr << "BOAYO_APP_ERROR " << e.what() << std::endl;
-      }
-      apps_ms=(seconds()-app_start)*1000;
-      last_tick = now;
-      b.phase("ready");
-    }
-    now=seconds(); // Apps may have consumed the entire frame period.
+    now=seconds();
     if ((wm.generation != rendered || scene_generation != last_scene) &&
         pacer.due(now,fps)) {
       pacer.begin(now);
@@ -413,7 +409,7 @@ static void worker(bool mock, Bridge &b) {
         auto start = seconds();
         if(use_resident) {
           require(scene_owner.empty() && ResidentCompositor::supported(wm),"resident renderer needs undecorated windows below 160 degrees; explicit BOAYO_RENDERER=legacy supports other modes");
-          bool changed=resident.update(wm);compositor.metrics=resident.metrics;
+          bool changed=resident.update(wm);
           compose_ms=(seconds()-start)*1000;upload_ms=0;
           if(changed)++patch_count;else ++no_op_count;
           if(!render_count)std::cout << "BOAYO_FIRST_FRAME_PRESENT_DONE" << std::endl;
@@ -460,15 +456,19 @@ static void worker(bool mock, Bridge &b) {
         last_scene = scene_generation;
         }
         error = nullptr;
+        b.presented(rendered, pending_since ? (seconds()-pending_since)*1000 : 0);
+        pending_since = 0;
       } catch (const std::exception &e) {
         compositor.invalidate();
         error = e.what();
         std::cerr << "BOSIO_RENDER_ERROR " << e.what() << std::endl;
+        b.fail_waiters(e.what());
       }
       // No end-of-work sleep: processing time already counts toward the limit.
-      publish();
+      if (!shared_updates || !error.is_null()) publish();
       b.phase("ready");
     }
+    if (b.refresh_requested.exchange(false)) publish();
   }
   b.phase("stopping");
   dev->stop();
@@ -476,17 +476,111 @@ static void worker(bool mock, Bridge &b) {
 struct Pending {
   J id;
   std::future<J> result;
+  std::string operation;
+  int window = 0;
 };
 struct Peer {
-  explicit Peer(int socket) : fd(socket) {}
+  Peer(int socket, pid_t process, uint64_t session)
+      : fd(socket), pid(process), prefix("peer-"+std::to_string(session)+":") {}
   Peer(const Peer &) = delete;
   Peer &operator=(const Peer &) = delete;
   Peer(Peer &&) noexcept = default;
   Peer &operator=(Peer &&) noexcept = default;
   int fd;
+  pid_t pid;
+  std::string prefix;
   std::string input, output;
   std::set<std::string> owners;
   std::deque<Pending> pending;
+};
+struct ApplicationProcesses {
+  struct Child {
+    pid_t pid;
+    std::string kind;
+    int window = 0;
+    std::shared_ptr<std::promise<J>> ready;
+  };
+  std::vector<Child> children;
+  Bridge &bridge;
+  std::string socket;
+  ApplicationProcesses(Bridge &b, std::string path) : bridge(b), socket(std::move(path)) {}
+  void publish() {
+    std::lock_guard<std::mutex> guard(bridge.mutex);
+    bridge.processes = J::array();
+    bridge.ui = {{"running", false}, {"launcher_window", nullptr}};
+    for (auto &child : children) {
+      bridge.processes.push_back({{"pid",child.pid},{"kind",child.kind},{"window_id",child.window}});
+      if (child.kind == "launcher")
+        bridge.ui = {{"running",true},{"launcher_window",child.window},{"pid",child.pid}};
+    }
+  }
+  std::future<J> launch(std::string kind, const J &args) {
+    if (kind == "pulse") kind = "sdk-pulse";
+    require(kind == "launcher" || kind == "dashboard" || kind == "telemetry" || kind == "sdk-pulse",
+            "unknown application kind");
+    require(children.size() < 32, "application process limit");
+    auto ready = std::make_shared<std::promise<J>>();
+    auto future = ready->get_future();
+    pid_t pid = spawn_application(kind, socket, args.value("azimuth", 0.), args.value("elevation", 0.));
+    children.push_back({pid,kind,0,ready});
+    publish();
+    return future;
+  }
+  bool has_launcher() const {
+    return std::any_of(children.begin(), children.end(),
+                       [](const Child &c) { return c.kind == "launcher"; });
+  }
+  void window_created(pid_t pid, const J &result) {
+    if (!result.is_object() || !result.contains("workspace")) return;
+    std::string role = result["workspace"].value("role", std::string());
+    if (role != "app" && role != "launcher") return;
+    for (auto &child : children) if (child.pid == pid && !child.window) {
+      child.window = result.at("window_id");
+      publish();
+      break;
+    }
+  }
+  void committed(pid_t pid, int window, const J &result) {
+    for (auto &child : children)
+      if (child.pid == pid && child.window == window && child.ready) {
+        if (child.kind == "launcher")
+          child.ready->set_value({{"running",true},{"launcher_window",window},
+                                 {"target_generation",result.at("generation")},{"pid",pid}});
+        else child.ready->set_value(window);
+        child.ready.reset();
+        bridge.notify_reply();
+        break;
+      }
+  }
+  void reap() {
+    bool changed = false;
+    for (auto it = children.begin(); it != children.end();) {
+      int status;
+      if (waitpid(it->pid, &status, WNOHANG) == it->pid) {
+        if (it->ready) it->ready->set_exception(
+            std::make_exception_ptr(std::runtime_error("application exited before its first image")));
+        it = children.erase(it);
+        changed = true;
+      } else ++it;
+    }
+    if (changed) publish();
+  }
+  void stop() { for (auto &child : children) kill(child.pid, SIGTERM); }
+  void finish() {
+    stop();
+    double deadline = seconds()+2;
+    while (!children.empty() && seconds() < deadline) {
+      reap();
+      std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    }
+    for (auto &child : children) {
+      kill(child.pid, SIGKILL);
+      waitpid(child.pid, nullptr, 0);
+      if (child.ready) child.ready->set_exception(
+          std::make_exception_ptr(std::runtime_error("WM stopped")));
+    }
+    children.clear();
+  }
 };
 static int serve(bool mock, const std::string &path) {
   signal(SIGTERM, on_signal);
@@ -504,6 +598,7 @@ static int serve(bool mock, const std::string &path) {
   chmod(path.c_str(), 0600);
   require(listen(server.fd, 16) == 0, "socket listen failed");
   Bridge b;
+  ApplicationProcesses applications(b, path);
   b.cached["output"]["mock_backend"] = mock;
   std::thread render_thread([&] {
     try {
@@ -514,22 +609,48 @@ static int serve(bool mock, const std::string &path) {
         b.cached["render_error"] = e.what();
       }
       b.phase("failed");
+      b.fail_waiters(e.what());
       std::cerr << "BOAYO_WORKER_ERROR " << e.what() << std::endl;
       std::lock_guard<std::mutex> lock(b.mutex);
       for (auto &job : b.queue)
         if (job->disconnect.empty())
           job->reply.set_exception(std::current_exception());
       b.queue.clear();
+      b.notify_reply();
     }
   });
   std::cout << "BOAYO_NATIVE_SERVICE " << path << " initializing; query boayo-status" << std::endl;
   std::vector<Peer> peers;
-  auto submit = [&](const J &r) -> std::future<J> {
+  auto submit = [&](const J &r, pid_t peer_pid) -> std::future<J> {
     auto job = std::make_shared<Work>();
     auto future = job->reply.get_future();
     std::string op = r.at("op");
     auto args = r.value("args", J::object());
-    if (op == "get_state")
+    if (op == "register_motion") {
+      std::lock_guard<std::mutex> guard(b.mutex);
+      require(!b.motion_pid || b.motion_pid == peer_pid, "motion exercise already active");
+      b.motion_pid = peer_pid;
+      job->reply.set_value(true);
+      return future;
+    }
+    if (op == "motion_stop") {
+      std::lock_guard<std::mutex> guard(b.mutex);
+      if (b.motion_pid) kill(b.motion_pid, SIGTERM);
+      job->reply.set_value({{"stopping",b.motion_pid != 0}});
+      return future;
+    }
+    if (op == "wait_present")
+      return b.wait_present(args.at("generation").get<uint64_t>());
+    if (op == "launch_app")
+      return applications.launch(args.at("kind"), args);
+    if ((op == "ui_start" || op == "show_launcher") && !applications.has_launcher())
+      return applications.launch("launcher", args);
+    if (op == "ui_stop") {
+      applications.stop();
+      job->reply.set_value({{"running",false}});
+    } else if (op == "ui_start")
+      job->reply.set_value({{"running",true}});
+    else if (op == "get_state")
       job->reply.set_value(b.status());
     else if (op == "profile_progress")
       job->reply.set_value(b.profile_status());
@@ -570,33 +691,47 @@ static int serve(bool mock, const std::string &path) {
   auto cleanup = [&] {
     b.stop = true;
     b.cv.notify_all();
+    b.fail_waiters("WM stopped");
+    applications.finish();
     render_thread.join();
     for (auto &p : peers)
       close(p.fd);
     unlink(path.c_str());
   };
+  uint64_t next_session = 0;
   try {
     while (!b.stop && !interrupted) {
-      std::vector<pollfd> fds{{server.fd, POLLIN, 0}};
+      applications.reap();
+      std::vector<pollfd> fds{{server.fd, POLLIN, 0}, {b.reply_pipe[0], POLLIN, 0}};
+      bool buffered_request = false;
       for (auto &p : peers)
+      {
         fds.push_back({p.fd, short(POLLIN | (p.output.empty() ? 0 : POLLOUT)), 0});
-      int n = poll(fds.data(), fds.size(), 10);
+        buffered_request |= p.pending.empty() && p.input.find('\n') != std::string::npos;
+      }
+      int n = poll(fds.data(), fds.size(), buffered_request ? 0 : 200);
       if (n < 0 && errno == EINTR)
         continue;
       require(n >= 0, "server poll failed");
+      if (fds[1].revents & POLLIN) {
+        char bytes[256];
+        while (read(b.reply_pipe[0], bytes, sizeof(bytes)) > 0) {}
+      }
       if (fds[0].revents & POLLIN) {
         int fd = accept4(server.fd, nullptr, nullptr, SOCK_CLOEXEC | SOCK_NONBLOCK);
         if (fd >= 0) {
-          if (peers.size() < 64)
-            peers.emplace_back(fd);
+          ucred credentials{};
+          socklen_t length = sizeof(credentials);
+          if (peers.size() < 64 && getsockopt(fd, SOL_SOCKET, SO_PEERCRED, &credentials, &length) == 0)
+            peers.emplace_back(fd, credentials.pid, ++next_session);
           else
             close(fd);
         }
       }
-      for (size_t i = 0; i + 1 < fds.size(); i++) {
+      for (size_t i = 0; i + 2 < fds.size(); i++) {
         auto &p = peers[i];
-        bool dead = fds[i + 1].revents & (POLLERR | POLLNVAL);
-        if (fds[i + 1].revents & (POLLIN | POLLHUP)) {
+        bool dead = fds[i + 2].revents & (POLLERR | POLLNVAL);
+        if (fds[i + 2].revents & (POLLIN | POLLHUP)) {
           char buf[16384];
           auto size = recv(p.fd, buf, sizeof(buf), 0);
           if (size > 0)
@@ -616,8 +751,11 @@ static int serve(bool mock, const std::string &path) {
           try {
             auto r = J::parse(line);
             id = r.value("id", J(nullptr));
-            p.owners.insert(r.value("app", std::string("anonymous")));
-            p.pending.push_back({id, submit(r)});
+            std::string owner = p.prefix+r.value("app", std::string("anonymous"));
+            r["app"] = owner;
+            p.owners.insert(owner);
+            p.pending.push_back({id, submit(r, p.pid), r.at("op").get<std::string>(),
+                                r.value("args", J::object()).value("window_id", 0)});
           } catch (const std::exception &e) {
             p.output += J({{"id", id}, {"ok", false}, {"error", e.what()}}).dump() + "\n";
           }
@@ -627,7 +765,10 @@ static int serve(bool mock, const std::string &path) {
           auto &pending = p.pending.front();
           J response;
           try {
-            response = {{"id", pending.id}, {"ok", true}, {"result", pending.result.get()}};
+            J result = pending.result.get();
+            if (pending.operation == "create_window") applications.window_created(p.pid, result);
+            if (pending.operation == "commit_surface") applications.committed(p.pid, pending.window, result);
+            response = {{"id", pending.id}, {"ok", true}, {"result", std::move(result)}};
           } catch (const std::exception &e) {
             response = {{"id", pending.id}, {"ok", false}, {"error", e.what()}};
           }
@@ -644,12 +785,17 @@ static int serve(bool mock, const std::string &path) {
             dead = true;
         }
         if (dead) {
+          {
+            std::lock_guard<std::mutex> guard(b.mutex);
+            if (p.pid == b.motion_pid) b.motion_pid = 0;
+          }
           auto job = std::make_shared<Work>();
           job->disconnect = std::move(p.owners);
           if (!job->disconnect.empty()) {
             std::lock_guard<std::mutex> guard(b.mutex);
             if (b.stage != "failed")
               b.queue.push_back(job);
+            b.cv.notify_one();
           }
           close(p.fd);
           p.fd = -1;
@@ -783,7 +929,12 @@ static int motion_cli(int loops,int hold_ms,int max_steps=MotionExercise::steps)
   const bool trace=getenv("BOAYO_MOTION_PROFILE")!=nullptr;
   require(loops>=1 && loops<=100,"motion loops must be 1..100");
   require(hold_ms>=0 && hold_ms<=10000,"motion hold must be 0..10000 ms");
-  Client c("motion-exercise");signal(SIGINT,on_signal);signal(SIGTERM,on_signal);
+  Client c("motion-exercise");
+  RemoteWM remote(socket_path());
+  Desktop desktop(remote.wm);
+  MotionExercise exercise(remote.wm, desktop);
+  signal(SIGINT,on_signal);signal(SIGTERM,on_signal);
+  c.call("register_motion");
   interrupted=0;bool owned=false;
   auto wait=[&](uint64_t target,bool cancellable=true){
     double deadline=seconds()+900;
@@ -799,33 +950,54 @@ static int motion_cli(int loops,int hold_ms,int max_steps=MotionExercise::steps)
   };
   try{
     for(int loop=0;loop<loops && !interrupted;++loop){
-      auto r=c.call("motion_start");owned=true;
+      auto r=exercise.start("motion-exercise",seconds());owned=true;
       std::cout<<"BOAYO_MOTION_BEGIN loop="<<loop+1<<" steps="<<max_steps<<std::endl;
       if(!wait(r["target_generation"]))break;
       for(int i=0;i<max_steps && !interrupted;++i){
-        double start=seconds();r=c.call("motion_step",{{"step",i}});
+        double start=seconds();r=exercise.step("motion-exercise",i,c.call("motion_progress").at("rendered_generation"),seconds());
         if(!wait(r["target_generation"]))break;
         std::cout<<"BOAYO_MOTION_STEP "<<J({{"step",i+1},{"phase",r["phase"]},{"view",r["view"]},{"seconds",seconds()-start},{"output_complete",true}}).dump()<<std::endl;
         if(trace && i>=9)std::cout<<"BOAYO_MOTION_PROFILE "<<J({{"step",i+1},{"counters",c.call("profile_progress")}}).dump()<<std::endl;
         double end=seconds()+hold_ms/1000.;while(!interrupted && seconds()<end)std::this_thread::sleep_for(std::chrono::milliseconds(20));
       }
-      auto end=c.call("motion_stop",{{"owned",true}});owned=false;wait(end["target_generation"],false);
+      auto end=exercise.stop(seconds());owned=false;wait(end["target_generation"],false);
     }
-    if(owned){auto end=c.call("motion_stop",{{"owned",true}});owned=false;wait(end["target_generation"],false);}
+    if(owned){auto end=exercise.stop(seconds());owned=false;wait(end["target_generation"],false);}
     std::cout<<(interrupted?"BOAYO_MOTION_STOPPED restored":"BOAYO_MOTION_COMPLETE device-acknowledged; HDMI visual check separate")<<std::endl;
     return interrupted?130:0;
-  }catch(...){if(owned){try{c.call("motion_stop",{{"owned",true}});}catch(...){}}throw;}
+  }catch(...){if(owned){try{exercise.stop(seconds());}catch(...){}}throw;}
 }
 int runtime_main(int argc, char **argv) {
+  if (argc == 6 && std::string(argv[1]) == "--app-process")
+    return application_main(argv[2], argv[3], std::stod(argv[4]), std::stod(argv[5]));
+  std::string program = argv[0];
+  program.erase(0, program.find_last_of('/') + 1);
+  bool bosio_tiles = program == "bosio-tiles" || program == "bosio-tiles-rv32";
+  bool boayo_ui = program == "boayo";
+  const char *cli = bosio_tiles ? "bosio-tiles" : "boayo-native";
   std::string command = argc > 1 ? argv[1] : "help";
+  if (boayo_ui && (command == "help" || command == "--help")) {
+    std::cout << "boayo start [--mock] | serve [--mock] | stop | status | launcher | keys | app dashboard|telemetry|pulse | bench-small [rounds]\n"
+                 "One WM daemon; launcher and apps run in separate processes.\n";
+    return 0;
+  }
+  if (boayo_ui && command == "start" && access(socket_path().c_str(), F_OK) == 0) {
+    require(argc == 2, "usage: boayo start | stop");
+    Client client("boayo-ui");
+    std::cout << client.call("ping").dump() << std::endl;
+    return 0;
+  }
   bool mock = false;
   for (int i = 2; i < argc; i++)
     if (std::string(argv[i]) == "--mock" || std::string(argv[i]) == "--headless")
       mock = true;
-  if (command == "serve")
+  if (command == "serve") {
     return serve(mock, socket_path());
+  }
   if (command == "selftest" || command == "dual-selftest")
     return selftest(command == "dual-selftest");
+  if (command == "bench-small")
+    return benchmark_shared_surface(socket_path(), argc > 2 ? std::stoul(argv[2]) : 21);
   if (command == "start") {
     struct stat s {};
     require(lstat(socket_path().c_str(), &s) != 0 && errno == ENOENT,
@@ -862,9 +1034,12 @@ int runtime_main(int argc, char **argv) {
       if (lstat(socket_path().c_str(), &s) == 0) {
         Client c;
         auto p = c.call("ping");
-        std::cout << "BoAYO C++ service started; initialization continues. boayo-status / "
-                     "boayo-keys / boayo-stop\n"
-                  << p.dump() << std::endl;
+        if (bosio_tiles)
+          std::cout << "BOSIO tile middleware started. bosio-tiles status | keys | stop\n";
+        else
+          std::cout << "BoAYO C++ service started; initialization continues. boayo-status / "
+                       "boayo-keys / boayo-stop\n";
+        std::cout << p.dump() << std::endl;
         return 0;
       }
       std::this_thread::sleep_for(std::chrono::milliseconds(200));
@@ -890,7 +1065,7 @@ int runtime_main(int argc, char **argv) {
     return keys(argc > 2 ? std::stod(argv[2]) : 2.);
   if (command == "help") {
     std::cout
-        << "boayo-native start [--mock] | stop | status | keys [degrees] | view yaw pitch [roll] | view-set yaw pitch roll | view-play path [seconds] | view-stop | view-status | motion [loops] [hold_ms] [steps] | motion-stop | move "
+        << cli << " start [--mock] | stop | status | keys [degrees] | view yaw pitch [roll] | view-set yaw pitch roll | view-play path [seconds] | view-stop | view-status | motion [loops] [hold_ms] [steps] | motion-stop | move "
            "yaw pitch | click | center-click | app dashboard|telemetry|pulse | launcher\n";
     return 0;
   }
@@ -919,7 +1094,7 @@ int runtime_main(int argc, char **argv) {
     std::cout << "BOAYO_APP_READY window=" << c.call("launch_app", {{"kind", argv[2]}}).dump()
               << std::endl;
   } else if (command == "launcher")
-    c.call("show_launcher");
+    std::cout << c.call("show_launcher").dump() << std::endl;
   else
     throw std::runtime_error("unknown command");
   return 0;

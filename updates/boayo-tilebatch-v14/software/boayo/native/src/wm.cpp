@@ -1,5 +1,6 @@
 #include "wm.hpp"
 #include "rgb_fill.hpp"
+#include "shared_surface.hpp"
 namespace boayo {
 void Window::ensure_surface() const {
   if(!surface.empty())return;
@@ -92,6 +93,7 @@ void WM::raise(int id) {
   }
 }
 J WM::focus_window(int id, bool up) {
+  if (remote) return dispatch({{"op","focus_window"},{"args",{{"window_id",id},{"raise_window",up}}}});
   auto &w = window(id);
   require(w.data["mapped"].get<bool>() && w.data["input_enabled"].get<bool>(),
           "cannot focus an inactive window");
@@ -102,6 +104,7 @@ J WM::focus_window(int id, bool up) {
   return public_window(id);
 }
 void WM::destroy(const std::string &owner, int id) {
+  if (remote) { dispatch({{"op","destroy_window"},{"app",owner},{"args",{{"window_id",id}}}}); return; }
   window(id, &owner);
   if (capture == id)
     capture = 0;
@@ -114,6 +117,7 @@ void WM::destroy(const std::string &owner, int id) {
   ++generation;
 }
 void WM::disconnect(const std::string &owner) {
+  if (remote) { dispatch({{"op","close_windows"},{"app",owner}}); return; }
   auto held = input_sources[owner];
   input_sources.erase(owner);
   for (auto &b : held) {
@@ -303,9 +307,11 @@ J WM::state() const {
           {"windows", ws}};
 }
 J WM::dispatch(const J &r) {
+  if (remote) return remote(r);
   std::string op = r.at("op"), owner = r.value("app", std::string("anonymous"));
   J a = r.value("args", J::object());
   int id = a.value("window_id", 0);
+  if (op == "sync_scene") return generation;
   if (op == "create_window") {
     require(windows.size() < 64, "window limit reached");
     int sw = a.value("surface_width", 320), sh = a.value("surface_height", 200);
@@ -397,53 +403,88 @@ J WM::dispatch(const J &r) {
     ++generation;
     return true;
   }
-  if (op == "fill" || op == "update_surface") {
+  if (op == "create_surface") {
+    auto &w = window(id, &owner);
+    if (!w.shared) {
+      size_t used = 0;
+      for (auto &[key, existing] : windows)
+        if (existing.shared) used += existing.shared->slot_bytes*2;
+      unsigned width = w.data["surface_width"], height = w.data["surface_height"];
+      require(used+size_t(width)*height*6 <= 64*1024*1024, "shared surface budget exhausted");
+      w.shared = std::make_shared<SharedSurface>(width, height);
+    }
+    return w.shared->description();
+  }
+  if (op == "close_windows") {
+    disconnect(owner);
+    return true;
+  }
+  if (op == "app_events") {
+    auto events = dispatch({{"op", "poll_events"}, {"app", owner}, {"args", a}});
+    int apps = 0, stored = 0;
+    for (auto &[key, w] : windows)
+      if (w.data["workspace"].value("role", std::string()) == "app") {
+        ++apps;
+        stored += w.data["workspace"].value("state", std::string()) == "minimized";
+      }
+    return {{"events", events}, {"focused_window", focus},
+            {"view", {view_yaw, view_pitch, view_roll}}, {"apps", apps}, {"stored", stored}};
+  }
+  if (op == "fill" || op == "update_surface" || op == "commit_surface") {
     auto &w = window(id, &owner);
     auto pending=w.dirty_regions;
     if(!w.dirty[2])pending.clear();
     else if(w.dirty_regions_revision!=w.revision)pending={{w.dirty[0],w.dirty[1],w.dirty[2],w.dirty[3]}};
 
     int sw = w.data["surface_width"], sh = w.data["surface_height"];
-    if(op=="fill"){w.surface.resize(size_t(sw)*sh*3);}else w.ensure_surface();
-    w.prepared.reset();
-    int x = 0, y = 0, ww = sw, hh = sh;
-    Bytes raw;
     if (op == "fill") {
       auto c = a.at("rgb");
       require(c.is_array() && c.size() == 3, "rgb must contain three bytes");
       for (auto &v : c)
         require(v.is_number_integer() && v.get<int>() >= 0 && v.get<int>() <= 255,
                 "rgb must contain three bytes");
+      w.surface.resize(size_t(sw)*sh*3);
       fill_rgb(w.surface.data(), w.surface.size(),
                {c[0].get<uint8_t>(),c[1].get<uint8_t>(),c[2].get<uint8_t>()});
-      w.dirty = {0, 0, sw, sh};
+      pending={{0,0,sw,sh}};
+    } else if (op == "commit_surface") {
+      require(bool(w.shared), "create_surface first");
+      auto patches = w.shared->snapshot(a);
+      w.ensure_surface();
+      bool changed_pixels = false;
+      for (auto &patch : patches) {
+        auto changed = patch_rgb_tiles(w.surface, sw, patch.area, patch.rgb);
+        changed_pixels |= !changed.empty();
+        pending.insert(pending.end(), changed.begin(), changed.end());
+      }
+      w.shared->sequence = a.at("sequence").get<uint64_t>();
+      ++w.shared->commits;
+      for (auto &patch : patches) w.shared->copied_bytes += patch.rgb.size();
+      if (!changed_pixels)
+        return {{"generation", generation}, {"changed", false}, {"sequence", w.shared->sequence}};
     } else {
-      x = a.at("x");
-      y = a.at("y");
-      ww = a.at("width");
-      hh = a.at("height");
+      int x=a.at("x"), y=a.at("y"), ww=a.at("width"), hh=a.at("height");
       require(x >= 0 && y >= 0 && ww >= 1 && hh >= 1 && int64_t(x) + ww <= sw &&
                   int64_t(y) + hh <= sh,
               "surface update is out of bounds");
-      raw = unbase64(a.at("rgb24"));
+      auto raw = unbase64(a.at("rgb24"));
       require(raw.size() == size_t(ww) * hh * 3, "rgb24 byte count does not match rectangle");
-      for (int row = 0; row < hh; row++)
-        std::copy_n(raw.data() + row * ww * 3, ww * 3, w.surface.data() + ((y + row) * sw + x) * 3);
-      if (!w.dirty[2])
-        w.dirty = {x, y, ww, hh};
-      else {
-        auto old = w.dirty;
-        int x0 = std::min(x, old[0]), y0 = std::min(y, old[1]);
-        w.dirty = {x0, y0, std::max(x + ww, old[0] + old[2]) - x0,
-                   std::max(y + hh, old[1] + old[3]) - y0};
-      }
+      w.ensure_surface();
+      auto changed=patch_rgb_tiles(w.surface,sw,{x,y,ww,hh},raw);
+      if(changed.empty())return true;
+      pending.insert(pending.end(),changed.begin(),changed.end());
     }
-    if(op=="fill")pending={{0,0,sw,sh}};else pending.push_back({x,y,ww,hh});
+    w.prepared.reset();
     w.dirty_regions=tiled_regions(pending,sw,sh);
+    Rect dirty{};
+    for(auto r:w.dirty_regions)dirty=bounds(dirty,r);
+    w.dirty={dirty.x,dirty.y,dirty.w,dirty.h};
     ++w.revision;w.dirty_regions_revision=w.revision;
     w.solid_revision=op=="fill"?w.revision:0;
     if(op=="fill"){auto c=a.at("rgb");w.solid_index=(c[0].get<unsigned>()&224)|((c[1].get<unsigned>()&224)>>3)|(c[2].get<unsigned>()>>6);}
     ++generation;
+    if (op == "commit_surface")
+      return {{"generation", generation}, {"changed", true}, {"sequence", w.shared->sequence}};
     return true;
   }
   if (op == "pointer_warp" || op == "input_warp")
