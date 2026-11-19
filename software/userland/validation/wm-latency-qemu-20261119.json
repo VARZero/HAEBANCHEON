@@ -1,0 +1,11 @@
+{
+  "scope": "QEMU RV32 Linux, shared memory and mock BOSIO",
+  "physical_board_tested": false,
+  "target_ms": 300,
+  "binary_sha256": "8678c98087bbd9f25550cb61ad8f80d82e706b3fc2574df2c2db14f5b7f62210",
+  "checks": [
+    "python3 /data/test_wm_daemon.py /usr/bin/bosio-tiles",
+    "(set -e; boayo start --mock; trap 'boayo stop' EXIT; boayo bench-small 5; boayo status)"
+  ],
+  "result": "PASS_QEMU_WM_MOCK"
+}
