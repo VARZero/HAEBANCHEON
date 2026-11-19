@@ -79,6 +79,48 @@ CSV의 `ioctls`는 커널에 요청한 횟수다. DMA 배치 한 번에도 타�
 
 ## 빌드와 회귀 시험
 
+### 기존 커널에서 메타데이터 비교 비용 줄이기
+
+BS25의 출력 타일을 한 개만 옮겨도 `BO_PUBLISH`는 4,476워드(17,904바이트)의 메타데이터를 받는다. 기존 드라이버는 이전 장면과 같은지 앞에서부터 비교해 전체 메타데이터 적재와 기존 메타데이터 재사용 중 하나를 선택한다. 색상표 뒤의 높은 번호 타일만 바뀌면 긴 동일 구간을 먼저 비교한다. 실보드에서 이 선택 구간은 약 144ms였다. 타일 투영 시간이 아니다.
+
+유저 게시 경로는 BS25 색상표 첫 워드의 미사용 상위 바이트에 장면 뱅크별로 다른 값(1/2)을 넣는다. 기존 출력 RTL은 색상표에 `rdata[23:0]`만 저장하므로 모든 RGB 색상은 유지된다. 비교는 처음 네 바이트에서 끝나고, 검증·DMA·게시 완료 대기는 기존 드라이버를 그대로 사용한다. 이 변경은 **커널·DTB·RTL·비트스트림을 수정하지 않는다.**
+
+태그를 뱅크별 고정값으로 유지하므로 예열 뒤 추가 색상표 쓰기가 발생하지 않는다. `LinuxDevice::publish`는 17,904바이트의 전송용 스냅샷에만 태그를 넣고 호출자의 논리 색상표는 수정하지 않는다. 알려진 BS25 시그니처에서만 활성화하며, 이 변경으로 다시 빌드한 실행 파일은 `BOSIO_METADATA_BANK_TAG=0`으로 기존 게시 경로를 선택할 수 있다.
+
+2026-11-19 같은 실보드·같은 실행 파일에서 각 조건 예열 1회 후 21회 측정했다. 흰색 1KiB 타일 데이터를 두 뱅크에 한 번 설치하고 타일을 켜거나 8개 디렉터리 위치로 옮겼다. 아래 시간은 디렉터리 갱신·전송용 스냅샷 복사·`BO_PUBLISH`부터 드라이버 완료까지다. 원본 이미지·투영·좌표 계산·WM·IPC는 포함하지 않는다.
+
+| 동작 | 기존 중앙값 | 개선 중앙값 | 기존 P95 | 개선 P95 |
+|---|---:|---:|---:|---:|
+| 타일 1개 활성화 | 269.164ms | 129.268ms | 285.006ms | 139.173ms |
+| 타일 1개 위치 이동 | 139.128ms | 129.247ms | 269.153ms | 139.162ms |
+
+활성화의 메타데이터 선택/비교 중앙값은 144.174ms에서 0.136ms로 줄었다. 이동의 긴 지연도 제거됐다. 실제 추가 업로드는 양쪽 모두 활성화 0워드·이동 2워드였고, 장치 오류는 없었다. 이 시험은 투영하지 않아 두 투영 IRQ 카운터는 변하지 않았다. [실보드 원시 비교·프로파일](validation/bosio-bank-tag-board-20261119.json)
+
+이 방법은 동일 메타데이터의 patch 명령 대신 전체 메타데이터 적재 명령을 선택하게 한다. 따라서 내용만 바뀌는 다른 작업에서는 메타데이터 DDR 읽기 비용을 포함해 별도로 비교해야 한다. 현재 커널의 전체 범위 검증 약 35ms, 뱅크별 차이 탐색·스냅샷 처리 약 49ms와 출력 전환 대기는 남는다. WM 전체 지연과 실제 모니터 표시 시간은 이번 시험에서 측정하지 않았다.
+
+직접 측정 프로그램은 [bosio_tile_publish_board.c](tests/bosio_tile_publish_board.c)다. 기존 교차 컴파일러로 다음처럼 빌드하고 기존 앱 배포 방식으로 보드에 옮긴다.
+
+```sh
+NATIVE=updates/boayo-tilebatch-v14/software/boayo/native
+"$OUT/buildroot/host/bin/riscv32-buildroot-linux-musl-gcc" \
+  -std=c11 -O2 -static -march=rv32ima_zicsr_zifencei -mabi=ilp32 \
+  -I "$NATIVE/src" -I updates/boayo-tilebatch-v14/software/bosio/include \
+  software/userland/tests/bosio_tile_publish_board.c -o /var/tmp/bosio-tile-publish
+# 보드에서 WM을 종료한 뒤, 전송한 프로그램을 실행
+boayo stop
+/tmp/bosio-tile-publish
+/tmp/bosio-tile-publish --bank-tag
+```
+
+현재 출력 RTL을 그대로 시뮬레이션해 256개 색상의 상위 바이트 변경 전후 512픽셀이 동일함을 검사한다. 실제 `LinuxDevice` 게시 코드는 ioctl 기록기로 태그·뱅크·호출자 데이터 불변성·기존 경로 선택·다른 시그니처·오류 처리를 검사한다.
+
+```sh
+bash software/userland/tests/check_bosio_palette_tag.sh /var/tmp/bosio-tag-rtl
+bash "$NATIVE/build.sh" /var/tmp/bosio-tag-host host
+python3 software/userland/tests/check_bosio_publish_transport.py \
+  /var/tmp/bosio-tag-host/boayo-native-host.build.json
+```
+
 Linux/WSL의 저장소 루트에서 실행한다.
 
 ```sh

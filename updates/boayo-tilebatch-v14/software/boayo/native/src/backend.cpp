@@ -56,6 +56,7 @@ LinuxDevice::LinuxDevice(const std::string &path) {
   try {
     auto i = info();
     require(i.abi == 3 && !i.poisoned, "BOSIO ABI3 required, unpoisoned");
+    metadata_bank_tag_supported=i.signature==0x42533235u;
     bo_dma_info dma{};
     if(ioctl(fd,BO_GET_DMA_INFO,&dma)==0) {
       require(dma.version==1 && !dma.quarantined,"unsupported/quarantined BOSIO DMA");

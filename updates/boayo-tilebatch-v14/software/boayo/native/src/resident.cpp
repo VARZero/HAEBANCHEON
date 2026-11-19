@@ -1,6 +1,7 @@
 #include "resident.hpp"
 #include "profile.hpp"
 #include "frame_trace.hpp"
+#include "bosio_publish_metadata.h"
 #include <sys/ioctl.h>
 namespace boayo {
 unsigned Device::publish(unsigned bank,unsigned count,unsigned res,const std::array<int32_t,180> &camera,const Words &metadata){
@@ -9,7 +10,14 @@ unsigned Device::publish(unsigned bank,unsigned count,unsigned res,const std::ar
 unsigned LinuxDevice::publish(unsigned bank,unsigned count,unsigned res,const std::array<int32_t,180> &camera,const Words &metadata){
   require(dma_features&BO_DMA_PUBLISH,"metadata publish driver required");require(metadata.size()>=header,"publish metadata length");
   bo_publish p{};p.present.bank=bank;p.present.scene_words=count;p.present.resolution=res;p.present.timeout_ms=30000;
-  std::copy(camera.begin(),camera.end(),p.present.camera);p.words=header;p.metadata=reinterpret_cast<uintptr_t>(metadata.data());
+  std::copy(camera.begin(),camera.end(),p.present.camera);p.words=header;
+  const char *tag=getenv("BOSIO_METADATA_BANK_TAG");
+  if(metadata_bank_tag_supported && (!tag || std::strcmp(tag,"0")!=0)){
+    // Transport-only snapshot: never change the caller's logical palette.
+    std::copy_n(metadata.data(),header,publish_metadata.data());
+    publish_metadata[0]=bosio_bs25_palette_bank_tag(publish_metadata[0],bank);
+    p.metadata=reinterpret_cast<uintptr_t>(publish_metadata.data());
+  }else p.metadata=reinterpret_cast<uintptr_t>(metadata.data());
   require(ioctl(fd,BO_PUBLISH,&p)==0,"metadata publish ioctl failed");last_publish=p.profile;
   frame_trace::mark("publish.user_copy_us",p.profile.user_copy_us);
   frame_trace::mark("publish.validate_us",p.profile.validate_us);
