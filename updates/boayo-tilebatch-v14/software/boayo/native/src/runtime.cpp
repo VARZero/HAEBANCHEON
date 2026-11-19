@@ -47,6 +47,19 @@ struct Work {
   double submitted = seconds();
 };
 struct Bridge {
+  int reply_pipe[2]{-1, -1};
+  Bridge() {
+    require(pipe2(reply_pipe, O_CLOEXEC | O_NONBLOCK) == 0, "WM reply pipe creation failed");
+  }
+  ~Bridge() {
+    close(reply_pipe[0]);
+    close(reply_pipe[1]);
+  }
+  void notify_reply() {
+    const char byte = 1;
+    // A full pipe already represents an outstanding wake-up.
+    (void)!write(reply_pipe[1], &byte, 1);
+  }
   std::mutex mutex;
   std::condition_variable cv;
   std::deque<std::shared_ptr<Work>> queue;
@@ -122,12 +135,14 @@ struct Bridge {
         it->reply->set_value({{"generation", generation}, {"request_to_present_ms", latency_ms}});
         it = waiters.erase(it);
       } else ++it;
+    notify_reply();
   }
   void fail_waiters(const std::string &message) {
     std::lock_guard<std::mutex> guard(mutex);
     for (auto &waiter : waiters)
       waiter.reply->set_exception(std::make_exception_ptr(std::runtime_error(message)));
     waiters.clear();
+    notify_reply();
   }
   J profile_status(){refresh_requested=true;cv.notify_one();std::lock_guard<std::mutex> lock(mutex);return {{"projection",cached.value("projection",J::object())},{"output_profile",cached.contains("output")?cached["output"].value("publish_profile",J::object()):J::object()},{"driver_profile",cached.value("driver_profile",J::object())},{"profile",cached.value("profile",J::object())},{"performance",cached.value("performance",J::object())},{"phase",stage},{"snapshot_time",updated},{"render_error",cached.value("render_error",J(nullptr))},{"app_error",cached.value("app_error",J(nullptr))}};}
   J view_cached={{"active",false}};
@@ -361,10 +376,12 @@ static void worker(bool mock, Bridge &b) {
           if (!playback.active && op != "commit_surface" && op != "app_events" &&
               op != "poll_events" && op != "sync_scene") publish();
           job->reply.set_value(std::move(result));
+          b.notify_reply();
         }
       } catch (...) {
         if (job->disconnect.empty())
           job->reply.set_exception(std::current_exception());
+        b.notify_reply();
       }
       b.phase("ready");
     }
@@ -531,6 +548,7 @@ struct ApplicationProcesses {
                                  {"target_generation",result.at("generation")},{"pid",pid}});
         else child.ready->set_value(window);
         child.ready.reset();
+        bridge.notify_reply();
         break;
       }
   }
@@ -598,6 +616,7 @@ static int serve(bool mock, const std::string &path) {
         if (job->disconnect.empty())
           job->reply.set_exception(std::current_exception());
       b.queue.clear();
+      b.notify_reply();
     }
   });
   std::cout << "BOAYO_NATIVE_SERVICE " << path << " initializing; query boayo-status" << std::endl;
@@ -683,13 +702,21 @@ static int serve(bool mock, const std::string &path) {
   try {
     while (!b.stop && !interrupted) {
       applications.reap();
-      std::vector<pollfd> fds{{server.fd, POLLIN, 0}};
+      std::vector<pollfd> fds{{server.fd, POLLIN, 0}, {b.reply_pipe[0], POLLIN, 0}};
+      bool buffered_request = false;
       for (auto &p : peers)
+      {
         fds.push_back({p.fd, short(POLLIN | (p.output.empty() ? 0 : POLLOUT)), 0});
-      int n = poll(fds.data(), fds.size(), 2);
+        buffered_request |= p.pending.empty() && p.input.find('\n') != std::string::npos;
+      }
+      int n = poll(fds.data(), fds.size(), buffered_request ? 0 : 200);
       if (n < 0 && errno == EINTR)
         continue;
       require(n >= 0, "server poll failed");
+      if (fds[1].revents & POLLIN) {
+        char bytes[256];
+        while (read(b.reply_pipe[0], bytes, sizeof(bytes)) > 0) {}
+      }
       if (fds[0].revents & POLLIN) {
         int fd = accept4(server.fd, nullptr, nullptr, SOCK_CLOEXEC | SOCK_NONBLOCK);
         if (fd >= 0) {
@@ -701,10 +728,10 @@ static int serve(bool mock, const std::string &path) {
             close(fd);
         }
       }
-      for (size_t i = 0; i + 1 < fds.size(); i++) {
+      for (size_t i = 0; i + 2 < fds.size(); i++) {
         auto &p = peers[i];
-        bool dead = fds[i + 1].revents & (POLLERR | POLLNVAL);
-        if (fds[i + 1].revents & (POLLIN | POLLHUP)) {
+        bool dead = fds[i + 2].revents & (POLLERR | POLLNVAL);
+        if (fds[i + 2].revents & (POLLIN | POLLHUP)) {
           char buf[16384];
           auto size = recv(p.fd, buf, sizeof(buf), 0);
           if (size > 0)

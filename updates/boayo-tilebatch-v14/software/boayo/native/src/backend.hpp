@@ -144,6 +144,7 @@ struct Layer {
   std::array<int, tiles> lookup;
   Layer() { lookup.fill(-1); }
 };
+bool geometry_matches(const Layer &, const Window &);
 struct Composition {
   Words words;
   // Borrowed only until the next Compositor::update; the worker consumes it synchronously.

@@ -13,6 +13,9 @@ struct ResidentCompositor {
   uint64_t generation=0,solid_tiles=0,lazy_copied_tiles=0;
   std::array<uint64_t,tiles> wanted{};
   std::set<unsigned> active_tiles;
+  // Only dirty entries are read in a frame; avoid clearing a sphere-sized
+  // scratch vector (and evicting the small CPU cache) for a one-pixel edit.
+  std::array<size_t,tiles> first_visible{};
   std::array<std::array<uint64_t,tiles>,2> stored{};
   // Exact ordered integer tuples; no hash collisions or per-tile JSON.
   std::array<std::array<std::vector<uint64_t>,tiles>,2> tile_keys;

@@ -519,6 +519,14 @@ static J geometry_key(const Window &w) {
   return J::array({d["surface_width"], d["surface_height"], d["azimuth"], d["elevation"], d["roll"],
                    d["width_deg"], d["height_deg"]});
 }
+bool geometry_matches(const Layer &c, const Window &w) {
+  static constexpr const char *fields[]{"surface_width", "surface_height", "azimuth", "elevation",
+                                       "roll", "width_deg", "height_deg"};
+  if (!c.key.is_array() || c.key.size() != 7) return false;
+  for (unsigned i = 0; i < 7; ++i)
+    if (c.key[i] != w.data.at(fields[i])) return false;
+  return true;
+}
 Layer Compositor::make_layer(const Window &w) {
   Layer c;
   c.key = geometry_key(w);
@@ -692,7 +700,7 @@ Composition Compositor::update(WM &wm, bool full) {
   for (int id : order) {
     auto &w = wm.windows[id];
     auto found = layers.find(id);
-    if (found == layers.end() || found->second.key != geometry_key(w)) {
+    if (found == layers.end() || !geometry_matches(found->second, w)) {
       dirty.insert(previous_tiles[id].begin(), previous_tiles[id].end());
       auto c = make_layer(w);
       if(found!=layers.end() && found->second.prepared_source) {

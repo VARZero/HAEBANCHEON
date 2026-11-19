@@ -95,7 +95,6 @@ bool ResidentCompositor::supported(const WM &wm){
      w.data["surface_width"].get<unsigned>()>2048 || w.data["surface_height"].get<unsigned>()>2048))return false;
   return true;
 }
-static J key(const Window &w){auto &d=w.data;return J::array({d["surface_width"],d["surface_height"],d["azimuth"],d["elevation"],d["roll"],d["width_deg"],d["height_deg"]});}
 void ResidentCompositor::execute(Layer &c,const std::vector<unsigned> &todo,unsigned bank,bool direct,std::array<unsigned,2> &jobs,unsigned texture_offset,unsigned texture_end){
   for(size_t first=0;first<todo.size();first+=128){
     profile::Scope phase(profile::descriptors);
@@ -134,7 +133,7 @@ bool ResidentCompositor::update(WM &wm){
   for(int id:p.previous_order)if(std::find(order.begin(),order.end(),id)==order.end())dirty.insert(p.previous_tiles[id].begin(),p.previous_tiles[id].end());
   for(auto i=p.layers.begin();i!=p.layers.end();)if(!wm.windows.count(i->first))i=p.layers.erase(i);else ++i;
   for(int id:order){auto &w=wm.windows.at(id);auto found=p.layers.find(id);
-    bool fresh=found==p.layers.end() || found->second.key!=key(w);
+    bool fresh=found==p.layers.end() || !geometry_matches(found->second,w);
     if(fresh){layout_changed.insert(id);dirty.insert(p.previous_tiles[id].begin(),p.previous_tiles[id].end());auto c=p.make_layer(w);
       if(found!=p.layers.end()){c.prepared_source=found->second.prepared_source;c.source=std::move(found->second.source);c.revision=found->second.revision;}
       c.layout_version=generation+1;
@@ -143,9 +142,15 @@ bool ResidentCompositor::update(WM &wm){
     bool shape_changed=c.shape!=w.data["shape"];uint64_t old_revision=c.revision;
     if(shape_changed){c.layout_version=generation+1;p.prepare_masks(c,w);dirty.insert(c.ids.begin(),c.ids.end());}
     textures.note(id,w);
+    // For an existing CPU source, source_changes already intersects descriptors
+    // with the tighter bounds of pixels that actually changed. A single damage
+    // rectangle needs no second intersection. Prepared/CPU transitions and
+    // disjoint damage still require the region filter below.
+    bool existing_cpu_source=!w.prepared && !c.prepared_source && !c.source.empty();
     p.source_changes(c,w);
     if(!fresh && !shape_changed && old_revision!=w.revision){
       const auto changed_regions=window_regions(w);
+      if(!(existing_cpu_source && w.dirty[2]>0 && changed_regions.size()==1))
       for(auto it=c.invalid.begin();it!=c.invalid.end();) {
         bool hit=false;for(auto r:changed_regions)if(rect_affects(c.desc[*it],r)){hit=true;break;}
         if(hit)++it;else it=c.invalid.erase(it);
@@ -234,8 +239,8 @@ bool ResidentCompositor::update(WM &wm){
     }else{
     frame_trace::mark("tiles.prepare.begin",dirty.size());
     std::vector<bo_batch_entry> prepare;
-    std::vector<size_t> first_visible(tiles,order.size());
     for(unsigned t:dirty){
+      first_visible[t]=order.size();
       bool first_full=false;
       // The highest full covering layer replaces every cell below it.
       for(size_t layer=order.size();layer>0;--layer){
