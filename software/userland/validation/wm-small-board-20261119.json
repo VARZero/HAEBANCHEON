@@ -1,0 +1,267 @@
+{
+  "observed_date_kst": "2026-11-19",
+  "board": "PZ-A7200T-KFB / XC7A200T",
+  "source_commit": "e6b1f8de85d490cbff7b92fa454877be9dd97bbb",
+  "image": "HAEBANCHEON-BoAYO-WM-SD.img",
+  "image_label": "HAEBANCHEON RV32IMA development rootfs + BOSIO IRQ/sorted validation + BoAYO shared-memory WM daemon",
+  "command": "boayo bench-small 21",
+  "physical_backend": "kfb-linux-frame-atomic-output",
+  "conditions": {
+    "launcher_and_other_apps_closed": true,
+    "source_surface": [
+      64,
+      64
+    ],
+    "window_degrees": [
+      16,
+      12
+    ],
+    "patch_origin": [
+      12,
+      9
+    ],
+    "source_resident_in_ddr": true,
+    "warmup_per_size": 1,
+    "measured_rounds_per_size": 21,
+    "frame_limit": 60,
+    "profiling_enabled": false,
+    "timed_interval": "commit IPC request through output publication acknowledgement"
+  },
+  "benchmarks": [
+    {
+      "edge": 1,
+      "includes": "commit IPC to output acknowledgement",
+      "median_ms": 1115.5050999999503,
+      "p95_ms": 1173.9347600000656,
+      "rounds": 21,
+      "target_met": false,
+      "target_ms": 300
+    },
+    {
+      "edge": 8,
+      "includes": "commit IPC to output acknowledgement",
+      "median_ms": 1230.9963399999333,
+      "p95_ms": 1286.1893200000623,
+      "rounds": 21,
+      "target_met": false,
+      "target_ms": 300
+    }
+  ],
+  "projection_irqs": {
+    "0": {
+      "before": 0,
+      "after": 46,
+      "delta": 46
+    },
+    "1": {
+      "before": 0,
+      "after": 46,
+      "delta": 46
+    }
+  },
+  "final_state": {
+    "app_error": null,
+    "app_processes": [],
+    "assets": {
+      "cache_hits": 0,
+      "format": "raw-mapped-00RRGGBB",
+      "loads": 0,
+      "misses": 0,
+      "rejected": 0,
+      "rgb_materializations": 0
+    },
+    "buttons": {
+      "available": false,
+      "last_event_id": 0,
+      "state": 0
+    },
+    "compositor": "cpp-native",
+    "driver_profile": {
+      "available": false,
+      "enabled": false
+    },
+    "focused_window": null,
+    "generation": 48,
+    "motion": {
+      "active": false,
+      "phase": "client-process"
+    },
+    "output": {
+      "abi": 3,
+      "active_bank": 1,
+      "active_base": 3175415808,
+      "antialias": false,
+      "backend": "kfb-linux-frame-atomic-output",
+      "capability": 1146373681,
+      "commits": 48,
+      "dma_copied_words": 8704,
+      "max_jobs": 64,
+      "max_scene_words": 1084816,
+      "memory_dma": {
+        "available": true,
+        "copy_bytes": 133676,
+        "copy_ops": 242,
+        "errors": 0,
+        "features": 255,
+        "fill_bytes": 188416,
+        "fill_ops": 108,
+        "quarantined": 0,
+        "timeouts": 0,
+        "upload_bytes": 74296,
+        "upload_ops": 202,
+        "upload_threshold": 4096
+      },
+      "metadata_only": false,
+      "mock_backend": false,
+      "poisoned": 0,
+      "publish_profile": {
+        "backend": "kernel",
+        "command": 1,
+        "configure_us": 85,
+        "finish_us": 7021,
+        "select_us": 9960,
+        "upload_ranges": 10,
+        "upload_us": 49658,
+        "uploaded_words": 36,
+        "user_copy_us": 9728,
+        "validate_us": 35980,
+        "wait_us": 145858
+      },
+      "sensor_available": false,
+      "shadow_copied_words": 0,
+      "signature": 1112748597,
+      "status": 1382088707,
+      "uploaded_words": 4548
+    },
+    "performance": {
+      "frame_interval_ms": 3593.9904000000524,
+      "frame_limit": 60.0,
+      "frame_pacing": "start-to-start",
+      "full_update_count": 1,
+      "last_apps_ms": 0.0,
+      "last_compose_ms": 1021.9384399999853,
+      "last_upload_ms": 0.0,
+      "no_op_update_count": 0,
+      "patch_update_count": 47,
+      "render_count": 47,
+      "rendered_generation": 48,
+      "update_words": 4480,
+      "uptime_seconds": 127.82997474000001
+    },
+    "pointer": {
+      "azimuth": 0.0,
+      "buttons": [],
+      "cancel_serial": 0,
+      "captured_window": null,
+      "dragging": false,
+      "elevation": 0.0,
+      "last_left_press": null,
+      "last_left_release": null,
+      "left_press_serial": 0,
+      "left_release_serial": 0,
+      "scroll_delta": 0.0,
+      "scroll_serial": 0,
+      "visible": false,
+      "window_id": null,
+      "zone": null
+    },
+    "profile": {
+      "enabled": false,
+      "nested": true,
+      "units": "microseconds"
+    },
+    "projection": {
+      "cpu_output_shadow_words": 4480,
+      "cpu_result_download_words": 0,
+      "cpu_scene_words": 0,
+      "device_ready_frames": 0,
+      "dirty_tiles": 36,
+      "fallback_frames": 0,
+      "geometry_builds": 1,
+      "geometry_cull_us_total": 2966180,
+      "geometry_descriptor_us_total": 4504084,
+      "geometry_insert_us_total": 159968,
+      "geometry_prepare_us_total": 44983,
+      "geometry_tiles_evaluated_total": 108,
+      "hardware_frames": 47,
+      "jobs_per_core": [
+        0,
+        0
+      ],
+      "lazy_copied_tiles_total": 34,
+      "mask_build_us_total": 6264259,
+      "mask_builds": 1,
+      "mask_fast_tiles_total": 8,
+      "mask_integer_samples_total": 0,
+      "mask_precise_samples_total": 0,
+      "mask_samples_evaluated_total": 28672,
+      "masked_tiles_total": 0,
+      "mode": "ddr-resident-dirty-tiles",
+      "packed_mask_tiles_total": 0,
+      "plan_cache": {
+        "builtin_loads": 0,
+        "hits": 0,
+        "loads": 0,
+        "misses": 2,
+        "payload_scan_bytes": 0,
+        "rejected": 0,
+        "revision": "1f02ae6d11f51ceb0ea3c3863de9bdfe176b2880ddd7d83381a3349f98fdc367"
+      },
+      "precomputed_layers_total": 0,
+      "redrawn_tiles": 0,
+      "reused_tiles_total": 0,
+      "solid_tiles_total": 0,
+      "texture_pool": {
+        "asset_cache_evictions": 0,
+        "asset_cache_hits": 0,
+        "asset_cache_misses": 0,
+        "asset_cache_upload_bytes": 0,
+        "asset_copy_batches": 0,
+        "asset_copy_bytes": 0,
+        "asset_copy_requests": 0,
+        "asset_resident_bytes": 0,
+        "capacity_bytes": 4194304,
+        "evictions": 0,
+        "full_uploads": 1,
+        "partial_uploads": 45,
+        "resident_bytes": 0,
+        "resident_windows": 0,
+        "reuses": 0,
+        "source_tile_size": 32,
+        "source_tiles_updated": 52,
+        "staged_copy_bytes": 0,
+        "total_resident_bytes": 0,
+        "upload_bytes": 38488,
+        "upload_calls": 200
+      },
+      "texture_reuses_total": 0,
+      "texture_uploads_total": 46,
+      "tile_fills_total": 184,
+      "total_hw_jobs": 248,
+      "update_kind": "tiles"
+    },
+    "render_error": null,
+    "runtime": "C++17",
+    "scene_owner": null,
+    "service": {
+      "phase": "ready",
+      "queued_requests": 0,
+      "snapshot_age_seconds": 3.050363460000085,
+      "state_is_snapshot": true
+    },
+    "ui": {
+      "launcher_window": null,
+      "running": false
+    },
+    "view": {
+      "pitch": 0.0,
+      "roll": 0.0,
+      "yaw": 0.0
+    },
+    "windows": [],
+    "wm_pid": 108
+  },
+  "physical_300ms_target_met": false,
+  "scope": "Physical driver, DDR, projection IRQs and output publication; no HDMI image capture",
+  "operational_note": "The launcher's initial composition was active. Its WM was stopped and restarted with an empty scene to isolate the benchmark."
+}
