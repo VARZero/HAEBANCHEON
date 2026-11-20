@@ -1,0 +1,66 @@
+{
+  "base_commit": "5f6ff539fae3e529ef53c1d90952dbe72ba609ea",
+  "compiler": "riscv32-buildroot-linux-musl-g++",
+  "isa": "rv32ima_zicsr_zifencei",
+  "abi": "ilp32",
+  "sources": {
+    "src/application_buffer.hpp": "2f89dcea22451d712926a8e443c28bbcf0a155212d2c7780dcfd9724332097ff",
+    "src/boayo_app.cpp": "8c53b41d9194558ca12b3fddc73c52dea85fa927da7c95ad6c3b1521a9d0ecba",
+    "src/boayo_service.cpp": "4ee4a05a6d018447ba0aa61c5de18279c111857cafec1882375786ffc582686a",
+    "src/content.hpp": "cfc0fbe91c1d7bc38c3e7a06545c5e71a2606275da6538f4623238a35287911c",
+    "src/content_render.inc": "70301555805435f2830dc7a7b9b7242b8120a1d2ac14b1d9ba17b5de9a1e3eeb",
+    "src/fast_camera.hpp": "e3bc0ae75fb98ef203af79f1e5f30027bc0000cfc95d7d552be8dbccf8d5f48f",
+    "src/fast_projection.hpp": "da143ba753418511a8215f909f8d4c9aa3e6c16aa11b3d23627e970b9bc8e182",
+    "src/generate_geometry.cpp": "93198d44a3b75edcde3419c9c7e6b429bb289770edbbbf0e003ab5063c21b585",
+    "src/triangle_wm.cpp": "823e9c4d5b7892cea43998e211166f6708880ceca4670eb8ad3c592d262a9d79",
+    "build.sh": "fcc888d64416c83f95d041495d71b18a77312e41c048bf2c7175abc657849176",
+    "tests/test_boayo.py": "47d8d0bda082987b941478d1b32c8a6b2f3acf7b870fe16faba4a545b18cf65a",
+    "tests/check_projection.cpp": "d08c5290547751db54c1d645b536033dc2133a107b59f12a127c240790b7f505",
+    "src/texture_cache.hpp": "065c27f34ef4807d012a815b998860cefc258fe0a3f4b2d4ff83590729aa02da",
+    "src/window_transform.hpp": "59a9c54cec6add636d3a26ed05f0e2812d99b226ced75180e8b3fe8e22f3810e"
+  },
+  "binaries": {
+    "triangle-boayo-v5": {
+      "bytes": 2197448,
+      "sha256": "54fcca3b19d0ba2f1f7c4c392527ac97df8ae9a4c090af5dbdbb9f6679f5477f"
+    },
+    "unchanged_triangle_app_v3": {
+      "bytes": 1226392,
+      "sha256": "8d420c13e0eae7bb835434ec2cbf7104066580a00ef7c65a7a14becd23d2c41a"
+    }
+  },
+  "numerical_checks": {
+    "texture_allocator_operations": 10000,
+    "descriptor_visibility_exact": 4321280,
+    "guarded_fallbacks": 73506,
+    "conservatively_rejected": 3927344,
+    "cached_projection_basis": "exact"
+  },
+  "host_validation": {
+    "asan_ubsan_api_formats": [
+      "RGB24",
+      "XRGB8888",
+      "RGB332"
+    ],
+    "forced_eviction_64KiB_RGB332": "pass",
+    "sparse_8x8_bytes": 256,
+    "contiguous_upload_comparison": "pass",
+    "solid_regression": "pass",
+    "incremental_vs_full_content": "pass",
+    "camera_q24_max_error": 1
+  },
+  "board": {
+    "service_pid": 329,
+    "TRIANGLE_SPARSE_UPLOAD": "0",
+    "deployment_log": "TRI_12a631065e.log",
+    "start_log": "TRI_84c9389335.log",
+    "benchmarks": {
+      "packed": "TRI_6406b397b8.log",
+      "rows": "TRI_b71ce3da56.log"
+    },
+    "samples_each": 45,
+    "pose_samples_each": 61,
+    "live_app_pid": 335,
+    "live_demo_log": "TRI_4f840687ff.log"
+  }
+}

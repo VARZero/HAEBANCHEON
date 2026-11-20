@@ -1,0 +1,1759 @@
+{
+  "scope": "Physical board, persistent BoAYO Client and RGB24 shared surfaces; no optical latency",
+  "logs": [
+    "updates/triangle-wm/evidence/TRI_d2b4fc0613.log",
+    "updates/triangle-wm/evidence/TRI_6c0f5dc162.log"
+  ],
+  "metrics": [
+    {
+      "name": "보아요 / 최초 앱 콘텐츠",
+      "key": "initial_content",
+      "n": 1,
+      "median_ms": 3104.188,
+      "p95_ms": 3104.188,
+      "max_ms": 3104.188,
+      "scope": "앱 호출 → 출력 완료 응답 (광학 지연 제외)",
+      "accept_median_ms": 1571.9
+    },
+    {
+      "name": "보아요 / 8×8 부분 갱신",
+      "key": "partial_8x8",
+      "n": 11,
+      "median_ms": 555.351,
+      "p95_ms": 784.423,
+      "max_ms": 784.423,
+      "scope": "앱 호출 → 출력 완료 응답 (광학 지연 제외)",
+      "accept_median_ms": 229.613
+    },
+    {
+      "name": "보아요 / 콘텐츠 창 이동",
+      "key": "content_move",
+      "n": 7,
+      "median_ms": 1684.559,
+      "p95_ms": 1762.325,
+      "max_ms": 1762.325,
+      "scope": "앱 호출 → 출력 완료 응답 (광학 지연 제외)",
+      "accept_median_ms": 394.799
+    },
+    {
+      "name": "보아요 / 콘텐츠 창 크기 변경",
+      "key": "content_resize",
+      "n": 7,
+      "median_ms": 1908.93,
+      "p95_ms": 1928.285,
+      "max_ms": 1928.285,
+      "scope": "앱 호출 → 출력 완료 응답 (광학 지연 제외)",
+      "accept_median_ms": 400.666
+    },
+    {
+      "name": "보아요 / 원래 위치·크기 복원",
+      "key": "content_restore_size",
+      "n": 1,
+      "median_ms": 1715.042,
+      "p95_ms": 1715.042,
+      "max_ms": 1715.042,
+      "scope": "앱 호출 → 출력 완료 응답 (광학 지연 제외)",
+      "accept_median_ms": 404.185
+    },
+    {
+      "name": "보아요 / 두 번째 앱 콘텐츠",
+      "key": "second_content",
+      "n": 1,
+      "median_ms": 2891.63,
+      "p95_ms": 2891.63,
+      "max_ms": 2891.63,
+      "scope": "앱 호출 → 출력 완료 응답 (광학 지연 제외)",
+      "accept_median_ms": 1489.535
+    },
+    {
+      "name": "보아요 / 세 번째 앱 콘텐츠",
+      "key": "third_content",
+      "n": 1,
+      "median_ms": 3094.758,
+      "p95_ms": 3094.758,
+      "max_ms": 3094.758,
+      "scope": "앱 호출 → 출력 완료 응답 (광학 지연 제외)",
+      "accept_median_ms": 1477.356
+    },
+    {
+      "name": "보아요 / 겹친 콘텐츠 창 이동",
+      "key": "overlap_move",
+      "n": 5,
+      "median_ms": 2035.956,
+      "p95_ms": 2044.989,
+      "max_ms": 2044.989,
+      "scope": "앱 호출 → 출력 완료 응답 (광학 지연 제외)",
+      "accept_median_ms": 376.96
+    },
+    {
+      "name": "보아요 / 창 순서 변경",
+      "key": "raise",
+      "n": 1,
+      "median_ms": 961.473,
+      "p95_ms": 961.473,
+      "max_ms": 961.473,
+      "scope": "앱 호출 → 출력 완료 응답 (광학 지연 제외)",
+      "accept_median_ms": 328.098
+    },
+    {
+      "name": "보아요 / 겹친 창 닫기",
+      "key": "close",
+      "n": 2,
+      "median_ms": 592.683,
+      "p95_ms": 711.944,
+      "max_ms": 711.944,
+      "scope": "앱 호출 → 출력 완료 응답 (광학 지연 제외)",
+      "accept_median_ms": 179.944
+    },
+    {
+      "name": "보아요 / 출력 시점 변경",
+      "key": "view_pose",
+      "n": 7,
+      "median_ms": 234.246,
+      "p95_ms": 249.914,
+      "max_ms": 249.914,
+      "scope": "앱 호출 → 출력 완료 응답 (광학 지연 제외)"
+    },
+    {
+      "name": "보아요 / 앱이 자기 창 닫기",
+      "key": "destroy_owned",
+      "n": 1,
+      "median_ms": 491.488,
+      "p95_ms": 491.488,
+      "max_ms": 491.488,
+      "scope": "앱 호출 → 출력 완료 응답 (광학 지연 제외)",
+      "accept_median_ms": 207.106
+    },
+    {
+      "name": "기존 보아요 실행 파일 / 1×1 갱신",
+      "n": 5,
+      "median_ms": 533.585,
+      "p95_ms": 538.641,
+      "max_ms": null,
+      "scope": "기존 commit → wait_present 경로"
+    },
+    {
+      "name": "기존 보아요 실행 파일 / 8×8 갱신",
+      "n": 5,
+      "median_ms": 554.736,
+      "p95_ms": 563.201,
+      "max_ms": null,
+      "scope": "기존 commit → wait_present 경로"
+    }
+  ],
+  "samples": [
+    {
+      "accept_ms": 1571.9000000003725,
+      "name": "initial_content",
+      "present_ms": 3104.187580000609,
+      "render": {
+        "active_bank": 0,
+        "changed_tiles": 40,
+        "content_changed_tiles": 40,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          20,
+          20
+        ],
+        "metadata_ms": 51.169,
+        "owned_tiles": 72,
+        "projected_tiles": 40,
+        "projection_ms": 264.0781200007041,
+        "publish_ms": 120.58943999909388,
+        "published": true,
+        "render_ms": 1474.802799999452,
+        "service_render_ms": 1535.8953599989036,
+        "texture_upload_bytes": 138240,
+        "validate_ms": 35.151,
+        "wait_ms": 18.983
+      },
+      "result": {
+        "changed": true,
+        "copied_bytes": 103680,
+        "generation": 17,
+        "sequence": 1,
+        "window_id": 2
+      }
+    },
+    {
+      "accept_ms": 244.4451599996537,
+      "name": "partial_8x8",
+      "present_ms": 784.4232999999076,
+      "render": {
+        "active_bank": 1,
+        "changed_tiles": 4,
+        "content_changed_tiles": 4,
+        "copied_tiles": 36,
+        "jobs_per_core": [
+          2,
+          2
+        ],
+        "metadata_ms": 49.676,
+        "owned_tiles": 72,
+        "projected_tiles": 4,
+        "projection_ms": 26.97344000080193,
+        "publish_ms": 132.04948000020522,
+        "published": true,
+        "render_ms": 464.57360000022163,
+        "service_render_ms": 532.8102200001013,
+        "texture_upload_bytes": 7680,
+        "validate_ms": 36.796,
+        "wait_ms": 29.742
+      },
+      "result": {
+        "changed": true,
+        "copied_bytes": 192,
+        "generation": 18,
+        "sequence": 2,
+        "window_id": 2
+      }
+    },
+    {
+      "accept_ms": 230.05267999880016,
+      "name": "partial_8x8",
+      "present_ms": 534.1799799986184,
+      "render": {
+        "active_bank": 0,
+        "changed_tiles": 4,
+        "content_changed_tiles": 4,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          2,
+          2
+        ],
+        "metadata_ms": 49.342,
+        "owned_tiles": 72,
+        "projected_tiles": 4,
+        "projection_ms": 40.70005999892601,
+        "publish_ms": 117.6166799996281,
+        "published": true,
+        "render_ms": 242.9206399992836,
+        "service_render_ms": 301.87493999983417,
+        "texture_upload_bytes": 7680,
+        "validate_ms": 35.251,
+        "wait_ms": 15.041
+      },
+      "result": {
+        "changed": true,
+        "copied_bytes": 192,
+        "generation": 19,
+        "sequence": 3,
+        "window_id": 2
+      }
+    },
+    {
+      "accept_ms": 229.30848000012338,
+      "name": "partial_8x8",
+      "present_ms": 541.4777400009334,
+      "render": {
+        "active_bank": 1,
+        "changed_tiles": 4,
+        "content_changed_tiles": 4,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          2,
+          2
+        ],
+        "metadata_ms": 50.116,
+        "owned_tiles": 72,
+        "projected_tiles": 4,
+        "projection_ms": 47.859539999990375,
+        "publish_ms": 112.23756000072171,
+        "published": true,
+        "render_ms": 245.0635000004695,
+        "service_render_ms": 304.52035999951477,
+        "texture_upload_bytes": 7680,
+        "validate_ms": 36.563,
+        "wait_ms": 10.259
+      },
+      "result": {
+        "changed": true,
+        "copied_bytes": 192,
+        "generation": 20,
+        "sequence": 4,
+        "window_id": 2
+      }
+    },
+    {
+      "accept_ms": 220.838560000062,
+      "name": "partial_8x8",
+      "present_ms": 548.0816400013864,
+      "render": {
+        "active_bank": 0,
+        "changed_tiles": 4,
+        "content_changed_tiles": 4,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          2,
+          2
+        ],
+        "metadata_ms": 50.794,
+        "owned_tiles": 72,
+        "projected_tiles": 4,
+        "projection_ms": 35.510439998688526,
+        "publish_ms": 123.32206000064616,
+        "published": true,
+        "render_ms": 262.2726400004467,
+        "service_render_ms": 319.30603999899176,
+        "texture_upload_bytes": 7680,
+        "validate_ms": 33.242,
+        "wait_ms": 21.083
+      },
+      "result": {
+        "changed": true,
+        "copied_bytes": 192,
+        "generation": 21,
+        "sequence": 5,
+        "window_id": 2
+      }
+    },
+    {
+      "accept_ms": 229.6133999992162,
+      "name": "partial_8x8",
+      "present_ms": 551.4689600002021,
+      "render": {
+        "active_bank": 1,
+        "changed_tiles": 4,
+        "content_changed_tiles": 4,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          2,
+          2
+        ],
+        "metadata_ms": 49.788,
+        "owned_tiles": 72,
+        "projected_tiles": 4,
+        "projection_ms": 47.84183999981906,
+        "publish_ms": 112.207739999576,
+        "published": true,
+        "render_ms": 245.30996000066807,
+        "service_render_ms": 304.25067999931343,
+        "texture_upload_bytes": 7680,
+        "validate_ms": 33.259,
+        "wait_ms": 13.934
+      },
+      "result": {
+        "changed": true,
+        "copied_bytes": 192,
+        "generation": 22,
+        "sequence": 6,
+        "window_id": 2
+      }
+    },
+    {
+      "accept_ms": 228.9050799999386,
+      "name": "partial_8x8",
+      "present_ms": 550.3361000008881,
+      "render": {
+        "active_bank": 0,
+        "changed_tiles": 4,
+        "content_changed_tiles": 4,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          2,
+          2
+        ],
+        "metadata_ms": 49.158,
+        "owned_tiles": 72,
+        "projected_tiles": 4,
+        "projection_ms": 39.05748000033782,
+        "publish_ms": 131.122980001237,
+        "published": true,
+        "render_ms": 265.1175600003626,
+        "service_render_ms": 325.78945999921416,
+        "texture_upload_bytes": 7680,
+        "validate_ms": 35.611,
+        "wait_ms": 30.378
+      },
+      "result": {
+        "changed": true,
+        "copied_bytes": 192,
+        "generation": 23,
+        "sequence": 7,
+        "window_id": 2
+      }
+    },
+    {
+      "accept_ms": 220.76477999985218,
+      "name": "partial_8x8",
+      "present_ms": 558.5106400009245,
+      "render": {
+        "active_bank": 1,
+        "changed_tiles": 4,
+        "content_changed_tiles": 4,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          2,
+          2
+        ],
+        "metadata_ms": 49.061,
+        "owned_tiles": 72,
+        "projected_tiles": 4,
+        "projection_ms": 49.262540000199806,
+        "publish_ms": 130.05926000005275,
+        "published": true,
+        "render_ms": 264.751040000192,
+        "service_render_ms": 324.09743999960483,
+        "texture_upload_bytes": 7680,
+        "validate_ms": 35.703,
+        "wait_ms": 29.635
+      },
+      "result": {
+        "changed": true,
+        "copied_bytes": 192,
+        "generation": 24,
+        "sequence": 8,
+        "window_id": 2
+      }
+    },
+    {
+      "accept_ms": 228.5004399996251,
+      "name": "partial_8x8",
+      "present_ms": 556.490399999544,
+      "render": {
+        "active_bank": 0,
+        "changed_tiles": 4,
+        "content_changed_tiles": 4,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          2,
+          2
+        ],
+        "metadata_ms": 49.331,
+        "owned_tiles": 72,
+        "projected_tiles": 4,
+        "projection_ms": 48.67008000110218,
+        "publish_ms": 130.87678000010783,
+        "published": true,
+        "render_ms": 265.26449999983015,
+        "service_render_ms": 322.3689399983414,
+        "texture_upload_bytes": 7680,
+        "validate_ms": 35.488,
+        "wait_ms": 30.858
+      },
+      "result": {
+        "changed": true,
+        "copied_bytes": 192,
+        "generation": 25,
+        "sequence": 9,
+        "window_id": 2
+      }
+    },
+    {
+      "accept_ms": 247.0374800004065,
+      "name": "partial_8x8",
+      "present_ms": 588.7557600010186,
+      "render": {
+        "active_bank": 1,
+        "changed_tiles": 4,
+        "content_changed_tiles": 4,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          2,
+          2
+        ],
+        "metadata_ms": 50.528,
+        "owned_tiles": 72,
+        "projected_tiles": 4,
+        "projection_ms": 53.504460000112886,
+        "publish_ms": 136.27685999927053,
+        "published": true,
+        "render_ms": 294.89947999900323,
+        "service_render_ms": 353.3986200000072,
+        "texture_upload_bytes": 7680,
+        "validate_ms": 35.651,
+        "wait_ms": 37.147
+      },
+      "result": {
+        "changed": true,
+        "copied_bytes": 192,
+        "generation": 26,
+        "sequence": 10,
+        "window_id": 2
+      }
+    },
+    {
+      "accept_ms": 235.34869999997318,
+      "name": "partial_8x8",
+      "present_ms": 555.3509999997914,
+      "render": {
+        "active_bank": 0,
+        "changed_tiles": 4,
+        "content_changed_tiles": 4,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          2,
+          2
+        ],
+        "metadata_ms": 49.508,
+        "owned_tiles": 72,
+        "projected_tiles": 4,
+        "projection_ms": 45.525900000939146,
+        "publish_ms": 133.2101199986937,
+        "published": true,
+        "render_ms": 265.16171999901417,
+        "service_render_ms": 321.861300000819,
+        "texture_upload_bytes": 7680,
+        "validate_ms": 32.951,
+        "wait_ms": 35.018
+      },
+      "result": {
+        "changed": true,
+        "copied_bytes": 192,
+        "generation": 27,
+        "sequence": 11,
+        "window_id": 2
+      }
+    },
+    {
+      "accept_ms": 254.74368000030518,
+      "name": "partial_8x8",
+      "present_ms": 564.137780001387,
+      "render": {
+        "active_bank": 1,
+        "changed_tiles": 4,
+        "content_changed_tiles": 4,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          2,
+          2
+        ],
+        "metadata_ms": 47.322,
+        "owned_tiles": 72,
+        "projected_tiles": 4,
+        "projection_ms": 47.265080000215676,
+        "publish_ms": 131.66049999927054,
+        "published": true,
+        "render_ms": 274.99988000090525,
+        "service_render_ms": 332.9974799999036,
+        "texture_upload_bytes": 7680,
+        "validate_ms": 33.401,
+        "wait_ms": 31.254
+      },
+      "result": {
+        "changed": true,
+        "copied_bytes": 192,
+        "generation": 28,
+        "sequence": 12,
+        "window_id": 2
+      }
+    },
+    {
+      "accept_ms": 442.9738199990243,
+      "name": "content_move",
+      "present_ms": 1762.3248599991202,
+      "render": {
+        "active_bank": 0,
+        "changed_tiles": 80,
+        "content_changed_tiles": 49,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          25,
+          24
+        ],
+        "metadata_ms": 50.213,
+        "owned_tiles": 60,
+        "projected_tiles": 49,
+        "projection_ms": 108.76595999980054,
+        "publish_ms": 130.41850000081467,
+        "published": true,
+        "render_ms": 1344.7399600008794,
+        "service_render_ms": 1410.4082999983802,
+        "texture_upload_bytes": 0,
+        "validate_ms": 36.847,
+        "wait_ms": 28.156
+      },
+      "result": {
+        "azimuth": -5.0,
+        "decorated": false,
+        "elevation": -2.0,
+        "generation": 29,
+        "height_deg": 14.0,
+        "mapped": true,
+        "padding_deg": 2.0,
+        "roll": 0,
+        "surface_height": 144,
+        "surface_width": 240,
+        "title": "BoAYO triangle application",
+        "width_deg": 20.0,
+        "window_id": 2
+      }
+    },
+    {
+      "accept_ms": 448.23383999988437,
+      "name": "content_move",
+      "present_ms": 1702.1568200010806,
+      "render": {
+        "active_bank": 1,
+        "changed_tiles": 88,
+        "content_changed_tiles": 50,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          25,
+          25
+        ],
+        "metadata_ms": 52.529,
+        "owned_tiles": 60,
+        "projected_tiles": 50,
+        "projection_ms": 112.39872000078321,
+        "publish_ms": 110.4431999992812,
+        "published": true,
+        "render_ms": 1279.3663799984643,
+        "service_render_ms": 1333.6380800010375,
+        "texture_upload_bytes": 0,
+        "validate_ms": 33.322,
+        "wait_ms": 7.31
+      },
+      "result": {
+        "azimuth": 5.0,
+        "decorated": false,
+        "elevation": 2.0,
+        "generation": 30,
+        "height_deg": 14.0,
+        "mapped": true,
+        "padding_deg": 2.0,
+        "roll": 0,
+        "surface_height": 144,
+        "surface_width": 240,
+        "title": "BoAYO triangle application",
+        "width_deg": 20.0,
+        "window_id": 2
+      }
+    },
+    {
+      "accept_ms": 388.37523999996483,
+      "name": "content_move",
+      "present_ms": 1684.5590599998832,
+      "render": {
+        "active_bank": 0,
+        "changed_tiles": 88,
+        "content_changed_tiles": 49,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          25,
+          24
+        ],
+        "metadata_ms": 50.099,
+        "owned_tiles": 60,
+        "projected_tiles": 49,
+        "projection_ms": 111.07547999927192,
+        "publish_ms": 135.88975999846298,
+        "published": true,
+        "render_ms": 1295.0791199982632,
+        "service_render_ms": 1351.7025999990437,
+        "texture_upload_bytes": 0,
+        "validate_ms": 37.5,
+        "wait_ms": 35.523
+      },
+      "result": {
+        "azimuth": -5.0,
+        "decorated": false,
+        "elevation": -2.0,
+        "generation": 31,
+        "height_deg": 14.0,
+        "mapped": true,
+        "padding_deg": 2.0,
+        "roll": 0,
+        "surface_height": 144,
+        "surface_width": 240,
+        "title": "BoAYO triangle application",
+        "width_deg": 20.0,
+        "window_id": 2
+      }
+    },
+    {
+      "accept_ms": 409.33585999906063,
+      "name": "content_move",
+      "present_ms": 1689.3230600003153,
+      "render": {
+        "active_bank": 1,
+        "changed_tiles": 88,
+        "content_changed_tiles": 50,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          25,
+          25
+        ],
+        "metadata_ms": 50.072,
+        "owned_tiles": 60,
+        "projected_tiles": 50,
+        "projection_ms": 111.20501999903354,
+        "publish_ms": 139.65577999988454,
+        "published": true,
+        "render_ms": 1284.6838200002821,
+        "service_render_ms": 1349.5949400003155,
+        "texture_upload_bytes": 0,
+        "validate_ms": 35.299,
+        "wait_ms": 39.189
+      },
+      "result": {
+        "azimuth": 5.0,
+        "decorated": false,
+        "elevation": 2.0,
+        "generation": 32,
+        "height_deg": 14.0,
+        "mapped": true,
+        "padding_deg": 2.0,
+        "roll": 0,
+        "surface_height": 144,
+        "surface_width": 240,
+        "title": "BoAYO triangle application",
+        "width_deg": 20.0,
+        "window_id": 2
+      }
+    },
+    {
+      "accept_ms": 389.61865999922156,
+      "name": "content_move",
+      "present_ms": 1647.712479999289,
+      "render": {
+        "active_bank": 0,
+        "changed_tiles": 88,
+        "content_changed_tiles": 49,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          25,
+          24
+        ],
+        "metadata_ms": 50.065,
+        "owned_tiles": 60,
+        "projected_tiles": 49,
+        "projection_ms": 114.74806000114768,
+        "publish_ms": 114.86616000001959,
+        "published": true,
+        "render_ms": 1254.733079998914,
+        "service_render_ms": 1311.4071800009697,
+        "texture_upload_bytes": 0,
+        "validate_ms": 33.109,
+        "wait_ms": 16.397
+      },
+      "result": {
+        "azimuth": -5.0,
+        "decorated": false,
+        "elevation": -2.0,
+        "generation": 33,
+        "height_deg": 14.0,
+        "mapped": true,
+        "padding_deg": 2.0,
+        "roll": 0,
+        "surface_height": 144,
+        "surface_width": 240,
+        "title": "BoAYO triangle application",
+        "width_deg": 20.0,
+        "window_id": 2
+      }
+    },
+    {
+      "accept_ms": 394.7987600006163,
+      "name": "content_move",
+      "present_ms": 1683.505060000345,
+      "render": {
+        "active_bank": 1,
+        "changed_tiles": 88,
+        "content_changed_tiles": 50,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          25,
+          25
+        ],
+        "metadata_ms": 49.926,
+        "owned_tiles": 60,
+        "projected_tiles": 50,
+        "projection_ms": 113.86984000091616,
+        "publish_ms": 139.4317600006616,
+        "published": true,
+        "render_ms": 1284.66034000121,
+        "service_render_ms": 1343.3571200002916,
+        "texture_upload_bytes": 0,
+        "validate_ms": 35.567,
+        "wait_ms": 38.958
+      },
+      "result": {
+        "azimuth": 5.0,
+        "decorated": false,
+        "elevation": 2.0,
+        "generation": 34,
+        "height_deg": 14.0,
+        "mapped": true,
+        "padding_deg": 2.0,
+        "roll": 0,
+        "surface_height": 144,
+        "surface_width": 240,
+        "title": "BoAYO triangle application",
+        "width_deg": 20.0,
+        "window_id": 2
+      }
+    },
+    {
+      "accept_ms": 389.3455200009048,
+      "name": "content_move",
+      "present_ms": 1638.4126000013202,
+      "render": {
+        "active_bank": 0,
+        "changed_tiles": 88,
+        "content_changed_tiles": 49,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          25,
+          24
+        ],
+        "metadata_ms": 50.439,
+        "owned_tiles": 60,
+        "projected_tiles": 49,
+        "projection_ms": 110.0977400001284,
+        "publish_ms": 110.27798000031908,
+        "published": true,
+        "render_ms": 1244.9916799996572,
+        "service_render_ms": 1301.4367600007972,
+        "texture_upload_bytes": 0,
+        "validate_ms": 35.513,
+        "wait_ms": 9.228
+      },
+      "result": {
+        "azimuth": -5.0,
+        "decorated": false,
+        "elevation": -2.0,
+        "generation": 35,
+        "height_deg": 14.0,
+        "mapped": true,
+        "padding_deg": 2.0,
+        "roll": 0,
+        "surface_height": 144,
+        "surface_width": 240,
+        "title": "BoAYO triangle application",
+        "width_deg": 20.0,
+        "window_id": 2
+      }
+    },
+    {
+      "accept_ms": 414.9790999982506,
+      "name": "content_resize",
+      "present_ms": 1914.3237599991262,
+      "render": {
+        "active_bank": 1,
+        "changed_tiles": 73,
+        "content_changed_tiles": 60,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          30,
+          30
+        ],
+        "metadata_ms": 50.233,
+        "owned_tiles": 73,
+        "projected_tiles": 60,
+        "projection_ms": 150.04339999904914,
+        "publish_ms": 119.3699999985256,
+        "published": true,
+        "render_ms": 1504.265759998816,
+        "service_render_ms": 1562.8768199985643,
+        "texture_upload_bytes": 0,
+        "validate_ms": 35.277,
+        "wait_ms": 18.057
+      },
+      "result": {
+        "azimuth": -5.0,
+        "decorated": false,
+        "elevation": -2.0,
+        "generation": 36,
+        "height_deg": 16.0,
+        "mapped": true,
+        "padding_deg": 2.0,
+        "roll": 0,
+        "surface_height": 144,
+        "surface_width": 240,
+        "title": "BoAYO triangle application",
+        "width_deg": 24.0,
+        "window_id": 2
+      }
+    },
+    {
+      "accept_ms": 395.09497999958694,
+      "name": "content_resize",
+      "present_ms": 1695.090459998697,
+      "render": {
+        "active_bank": 0,
+        "changed_tiles": 73,
+        "content_changed_tiles": 49,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          25,
+          24
+        ],
+        "metadata_ms": 49.446,
+        "owned_tiles": 60,
+        "projected_tiles": 49,
+        "projection_ms": 113.71132000022044,
+        "publish_ms": 135.94517999990785,
+        "published": true,
+        "render_ms": 1294.1007600002195,
+        "service_render_ms": 1355.563639999673,
+        "texture_upload_bytes": 0,
+        "validate_ms": 35.893,
+        "wait_ms": 37.767
+      },
+      "result": {
+        "azimuth": -5.0,
+        "decorated": false,
+        "elevation": -2.0,
+        "generation": 37,
+        "height_deg": 14.0,
+        "mapped": true,
+        "padding_deg": 2.0,
+        "roll": 0,
+        "surface_height": 144,
+        "surface_width": 240,
+        "title": "BoAYO triangle application",
+        "width_deg": 20.0,
+        "window_id": 2
+      }
+    },
+    {
+      "accept_ms": 416.53444000147283,
+      "name": "content_resize",
+      "present_ms": 1910.8672800008208,
+      "render": {
+        "active_bank": 1,
+        "changed_tiles": 73,
+        "content_changed_tiles": 60,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          30,
+          30
+        ],
+        "metadata_ms": 50.308,
+        "owned_tiles": 73,
+        "projected_tiles": 60,
+        "projection_ms": 149.44112000011955,
+        "publish_ms": 115.43986000106088,
+        "published": true,
+        "render_ms": 1484.6319400003267,
+        "service_render_ms": 1543.7065599999187,
+        "texture_upload_bytes": 0,
+        "validate_ms": 33.055,
+        "wait_ms": 17.0
+      },
+      "result": {
+        "azimuth": -5.0,
+        "decorated": false,
+        "elevation": -2.0,
+        "generation": 38,
+        "height_deg": 16.0,
+        "mapped": true,
+        "padding_deg": 2.0,
+        "roll": 0,
+        "surface_height": 144,
+        "surface_width": 240,
+        "title": "BoAYO triangle application",
+        "width_deg": 24.0,
+        "window_id": 2
+      }
+    },
+    {
+      "accept_ms": 378.5583399999887,
+      "name": "content_resize",
+      "present_ms": 1651.9160199984908,
+      "render": {
+        "active_bank": 0,
+        "changed_tiles": 73,
+        "content_changed_tiles": 49,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          25,
+          24
+        ],
+        "metadata_ms": 50.279,
+        "owned_tiles": 60,
+        "projected_tiles": 49,
+        "projection_ms": 113.62290000033681,
+        "publish_ms": 110.27877999913471,
+        "published": true,
+        "render_ms": 1265.1103000007424,
+        "service_render_ms": 1322.1585600003891,
+        "texture_upload_bytes": 0,
+        "validate_ms": 35.227,
+        "wait_ms": 9.663
+      },
+      "result": {
+        "azimuth": -5.0,
+        "decorated": false,
+        "elevation": -2.0,
+        "generation": 39,
+        "height_deg": 14.0,
+        "mapped": true,
+        "padding_deg": 2.0,
+        "roll": 0,
+        "surface_height": 144,
+        "surface_width": 240,
+        "title": "BoAYO triangle application",
+        "width_deg": 20.0,
+        "window_id": 2
+      }
+    },
+    {
+      "accept_ms": 400.66592000052333,
+      "name": "content_resize",
+      "present_ms": 1908.9298800006509,
+      "render": {
+        "active_bank": 1,
+        "changed_tiles": 73,
+        "content_changed_tiles": 60,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          30,
+          30
+        ],
+        "metadata_ms": 50.607,
+        "owned_tiles": 73,
+        "projected_tiles": 60,
+        "projection_ms": 148.41815999898245,
+        "publish_ms": 110.52073999962886,
+        "published": true,
+        "render_ms": 1495.103540000855,
+        "service_render_ms": 1553.6778799996682,
+        "texture_upload_bytes": 0,
+        "validate_ms": 35.118,
+        "wait_ms": 9.733
+      },
+      "result": {
+        "azimuth": -5.0,
+        "decorated": false,
+        "elevation": -2.0,
+        "generation": 40,
+        "height_deg": 16.0,
+        "mapped": true,
+        "padding_deg": 2.0,
+        "roll": 0,
+        "surface_height": 144,
+        "surface_width": 240,
+        "title": "BoAYO triangle application",
+        "width_deg": 24.0,
+        "window_id": 2
+      }
+    },
+    {
+      "accept_ms": 386.9211400002241,
+      "name": "content_resize",
+      "present_ms": 1688.8980000000447,
+      "render": {
+        "active_bank": 0,
+        "changed_tiles": 73,
+        "content_changed_tiles": 49,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          25,
+          24
+        ],
+        "metadata_ms": 49.707,
+        "owned_tiles": 60,
+        "projected_tiles": 49,
+        "projection_ms": 124.19688000045426,
+        "publish_ms": 138.96265999937896,
+        "published": true,
+        "render_ms": 1294.9499799997284,
+        "service_render_ms": 1351.8854800004192,
+        "texture_upload_bytes": 0,
+        "validate_ms": 35.739,
+        "wait_ms": 38.44
+      },
+      "result": {
+        "azimuth": -5.0,
+        "decorated": false,
+        "elevation": -2.0,
+        "generation": 41,
+        "height_deg": 14.0,
+        "mapped": true,
+        "padding_deg": 2.0,
+        "roll": 0,
+        "surface_height": 144,
+        "surface_width": 240,
+        "title": "BoAYO triangle application",
+        "width_deg": 20.0,
+        "window_id": 2
+      }
+    },
+    {
+      "accept_ms": 418.8138200007379,
+      "name": "content_resize",
+      "present_ms": 1928.284660000354,
+      "render": {
+        "active_bank": 1,
+        "changed_tiles": 73,
+        "content_changed_tiles": 60,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          30,
+          30
+        ],
+        "metadata_ms": 50.403,
+        "owned_tiles": 73,
+        "projected_tiles": 60,
+        "projection_ms": 143.46327999919595,
+        "publish_ms": 139.391959999557,
+        "published": true,
+        "render_ms": 1505.103280000185,
+        "service_render_ms": 1564.0997600003175,
+        "texture_upload_bytes": 0,
+        "validate_ms": 35.42,
+        "wait_ms": 37.35
+      },
+      "result": {
+        "azimuth": -5.0,
+        "decorated": false,
+        "elevation": -2.0,
+        "generation": 42,
+        "height_deg": 16.0,
+        "mapped": true,
+        "padding_deg": 2.0,
+        "roll": 0,
+        "surface_height": 144,
+        "surface_width": 240,
+        "title": "BoAYO triangle application",
+        "width_deg": 24.0,
+        "window_id": 2
+      }
+    },
+    {
+      "accept_ms": 404.18511999957263,
+      "name": "content_restore_size",
+      "present_ms": 1715.042179999873,
+      "render": {
+        "active_bank": 0,
+        "changed_tiles": 83,
+        "content_changed_tiles": 40,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          20,
+          20
+        ],
+        "metadata_ms": 50.572,
+        "owned_tiles": 72,
+        "projected_tiles": 40,
+        "projection_ms": 113.2112799987226,
+        "publish_ms": 114.07046000022092,
+        "published": true,
+        "render_ms": 1314.6431200002553,
+        "service_render_ms": 1370.819499999925,
+        "texture_upload_bytes": 0,
+        "validate_ms": 32.916,
+        "wait_ms": 15.298
+      },
+      "result": {
+        "azimuth": 0.0,
+        "decorated": false,
+        "elevation": 0.0,
+        "generation": 43,
+        "height_deg": 14.0,
+        "mapped": true,
+        "padding_deg": 2.0,
+        "roll": 0,
+        "surface_height": 144,
+        "surface_width": 240,
+        "title": "BoAYO triangle application",
+        "width_deg": 20.0,
+        "window_id": 2
+      }
+    },
+    {
+      "accept_ms": 1489.5351199992,
+      "name": "second_content",
+      "present_ms": 2891.6300200000405,
+      "render": {
+        "active_bank": 1,
+        "changed_tiles": 30,
+        "content_changed_tiles": 30,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          15,
+          15
+        ],
+        "metadata_ms": 50.131,
+        "owned_tiles": 107,
+        "projected_tiles": 30,
+        "projection_ms": 232.22721999991336,
+        "publish_ms": 116.06766000113566,
+        "published": true,
+        "render_ms": 1335.1484200011328,
+        "service_render_ms": 1393.8730800000485,
+        "texture_upload_bytes": 138240,
+        "validate_ms": 36.883,
+        "wait_ms": 16.097
+      },
+      "result": {
+        "changed": true,
+        "copied_bytes": 103680,
+        "generation": 46,
+        "sequence": 1,
+        "window_id": 3
+      }
+    },
+    {
+      "accept_ms": 1477.3562000002712,
+      "name": "third_content",
+      "present_ms": 3094.758080000058,
+      "render": {
+        "active_bank": 0,
+        "changed_tiles": 44,
+        "content_changed_tiles": 44,
+        "copied_tiles": 30,
+        "jobs_per_core": [
+          22,
+          22
+        ],
+        "metadata_ms": 49.982,
+        "owned_tiles": 107,
+        "projected_tiles": 44,
+        "projection_ms": 259.262959998523,
+        "publish_ms": 121.0616200005461,
+        "published": true,
+        "render_ms": 1524.4167600012588,
+        "service_render_ms": 1591.0943400012911,
+        "texture_upload_bytes": 138240,
+        "validate_ms": 34.984,
+        "wait_ms": 20.517
+      },
+      "result": {
+        "changed": true,
+        "copied_bytes": 103680,
+        "generation": 47,
+        "sequence": 1,
+        "window_id": 4
+      }
+    },
+    {
+      "accept_ms": 380.7466199994087,
+      "name": "overlap_move",
+      "present_ms": 2044.9891599994153,
+      "render": {
+        "active_bank": 1,
+        "changed_tiles": 59,
+        "content_changed_tiles": 49,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          25,
+          24
+        ],
+        "metadata_ms": 50.006,
+        "owned_tiles": 112,
+        "projected_tiles": 49,
+        "projection_ms": 453.971939999974,
+        "publish_ms": 129.98598000012862,
+        "published": true,
+        "render_ms": 1654.3676199999027,
+        "service_render_ms": 1714.6095400003105,
+        "texture_upload_bytes": 276480,
+        "validate_ms": 36.091,
+        "wait_ms": 27.455
+      },
+      "result": {
+        "azimuth": -12.0,
+        "decorated": false,
+        "elevation": -3.0,
+        "generation": 48,
+        "height_deg": 14.0,
+        "mapped": true,
+        "padding_deg": 2.0,
+        "roll": 0,
+        "surface_height": 144,
+        "surface_width": 240,
+        "title": "BoAYO triangle application",
+        "width_deg": 20.0,
+        "window_id": 4
+      }
+    },
+    {
+      "accept_ms": 376.4488599989563,
+      "name": "overlap_move",
+      "present_ms": 1696.9462799988687,
+      "render": {
+        "active_bank": 0,
+        "changed_tiles": 69,
+        "content_changed_tiles": 43,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          22,
+          21
+        ],
+        "metadata_ms": 50.544,
+        "owned_tiles": 97,
+        "projected_tiles": 43,
+        "projection_ms": 111.89028000080725,
+        "publish_ms": 135.30254000033892,
+        "published": true,
+        "render_ms": 1294.8384400006034,
+        "service_render_ms": 1354.7041800011357,
+        "texture_upload_bytes": 0,
+        "validate_ms": 33.355,
+        "wait_ms": 35.752
+      },
+      "result": {
+        "azimuth": -5.0,
+        "decorated": false,
+        "elevation": -3.0,
+        "generation": 49,
+        "height_deg": 14.0,
+        "mapped": true,
+        "padding_deg": 2.0,
+        "roll": 0,
+        "surface_height": 144,
+        "surface_width": 240,
+        "title": "BoAYO triangle application",
+        "width_deg": 20.0,
+        "window_id": 4
+      }
+    },
+    {
+      "accept_ms": 376.9596400000155,
+      "name": "overlap_move",
+      "present_ms": 2035.956499999389,
+      "render": {
+        "active_bank": 1,
+        "changed_tiles": 69,
+        "content_changed_tiles": 55,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          25,
+          25
+        ],
+        "metadata_ms": 49.568,
+        "owned_tiles": 112,
+        "projected_tiles": 50,
+        "projection_ms": 451.45161999971606,
+        "publish_ms": 125.4337200007285,
+        "published": true,
+        "render_ms": 1644.5485000003828,
+        "service_render_ms": 1703.993300001457,
+        "texture_upload_bytes": 276480,
+        "validate_ms": 33.237,
+        "wait_ms": 26.092
+      },
+      "result": {
+        "azimuth": -12.0,
+        "decorated": false,
+        "elevation": -3.0,
+        "generation": 50,
+        "height_deg": 14.0,
+        "mapped": true,
+        "padding_deg": 2.0,
+        "roll": 0,
+        "surface_height": 144,
+        "surface_width": 240,
+        "title": "BoAYO triangle application",
+        "width_deg": 20.0,
+        "window_id": 4
+      }
+    },
+    {
+      "accept_ms": 377.14733999967575,
+      "name": "overlap_move",
+      "present_ms": 1696.9397999998182,
+      "render": {
+        "active_bank": 0,
+        "changed_tiles": 69,
+        "content_changed_tiles": 43,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          22,
+          21
+        ],
+        "metadata_ms": 49.902,
+        "owned_tiles": 97,
+        "projected_tiles": 43,
+        "projection_ms": 118.20887999965635,
+        "publish_ms": 131.99256000007153,
+        "published": true,
+        "render_ms": 1294.7624400003406,
+        "service_render_ms": 1354.2968799993105,
+        "texture_upload_bytes": 0,
+        "validate_ms": 36.057,
+        "wait_ms": 30.492
+      },
+      "result": {
+        "azimuth": -5.0,
+        "decorated": false,
+        "elevation": -3.0,
+        "generation": 51,
+        "height_deg": 14.0,
+        "mapped": true,
+        "padding_deg": 2.0,
+        "roll": 0,
+        "surface_height": 144,
+        "surface_width": 240,
+        "title": "BoAYO triangle application",
+        "width_deg": 20.0,
+        "window_id": 4
+      }
+    },
+    {
+      "accept_ms": 371.34560000151396,
+      "name": "overlap_move",
+      "present_ms": 2040.1210400015116,
+      "render": {
+        "active_bank": 1,
+        "changed_tiles": 69,
+        "content_changed_tiles": 55,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          25,
+          25
+        ],
+        "metadata_ms": 49.81,
+        "owned_tiles": 112,
+        "projected_tiles": 50,
+        "projection_ms": 450.97205999991274,
+        "publish_ms": 129.75794000158203,
+        "published": true,
+        "render_ms": 1644.7337200006586,
+        "service_render_ms": 1704.423079998378,
+        "texture_upload_bytes": 276480,
+        "validate_ms": 35.792,
+        "wait_ms": 28.439
+      },
+      "result": {
+        "azimuth": -12.0,
+        "decorated": false,
+        "elevation": -3.0,
+        "generation": 52,
+        "height_deg": 14.0,
+        "mapped": true,
+        "padding_deg": 2.0,
+        "roll": 0,
+        "surface_height": 144,
+        "surface_width": 240,
+        "title": "BoAYO triangle application",
+        "width_deg": 20.0,
+        "window_id": 4
+      }
+    },
+    {
+      "accept_ms": 328.0984000004828,
+      "name": "raise",
+      "present_ms": 961.4734200015664,
+      "render": {
+        "active_bank": 0,
+        "changed_tiles": 64,
+        "content_changed_tiles": 40,
+        "copied_tiles": 16,
+        "jobs_per_core": [
+          20,
+          20
+        ],
+        "metadata_ms": 51.703,
+        "owned_tiles": 112,
+        "projected_tiles": 40,
+        "projection_ms": 275.61315999992075,
+        "publish_ms": 134.74184000006062,
+        "published": true,
+        "render_ms": 674.9562999993941,
+        "service_render_ms": 742.0568599991384,
+        "texture_upload_bytes": 138240,
+        "validate_ms": 32.989,
+        "wait_ms": 34.711
+      },
+      "result": {
+        "azimuth": 0.0,
+        "decorated": false,
+        "elevation": 0.0,
+        "generation": 53,
+        "height_deg": 14.0,
+        "mapped": true,
+        "padding_deg": 2.0,
+        "roll": 0,
+        "surface_height": 144,
+        "surface_width": 240,
+        "title": "BoAYO triangle application",
+        "width_deg": 20.0,
+        "window_id": 2
+      }
+    },
+    {
+      "accept_ms": 198.24099999852479,
+      "name": "close",
+      "present_ms": 711.9443199988455,
+      "render": {
+        "active_bank": 1,
+        "changed_tiles": 25,
+        "content_changed_tiles": 0,
+        "copied_tiles": 40,
+        "jobs_per_core": [
+          0,
+          0
+        ],
+        "metadata_ms": 51.576,
+        "owned_tiles": 87,
+        "projected_tiles": 0,
+        "projection_ms": 0.37307999991753604,
+        "publish_ms": 111.11903999881179,
+        "published": true,
+        "render_ms": 414.2282799984969,
+        "service_render_ms": 482.55647999940265,
+        "texture_upload_bytes": 0,
+        "validate_ms": 35.571,
+        "wait_ms": 8.767
+      },
+      "result": {
+        "generation": 54,
+        "window_id": 4
+      }
+    },
+    {
+      "accept_ms": 161.64661999978125,
+      "name": "close",
+      "present_ms": 473.42133999988437,
+      "render": {
+        "active_bank": 0,
+        "changed_tiles": 15,
+        "content_changed_tiles": 0,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          0,
+          0
+        ],
+        "metadata_ms": 49.958,
+        "owned_tiles": 72,
+        "projected_tiles": 0,
+        "projection_ms": 0.36081999860471115,
+        "publish_ms": 120.06549999932759,
+        "published": true,
+        "render_ms": 213.8563399985287,
+        "service_render_ms": 271.65226000033726,
+        "texture_upload_bytes": 0,
+        "validate_ms": 35.099,
+        "wait_ms": 19.351
+      },
+      "result": {
+        "generation": 55,
+        "window_id": 3
+      }
+    },
+    {
+      "name": "view_pose",
+      "present_ms": 233.71590000018477,
+      "result": {
+        "operation": "pose",
+        "pitch": -2.0,
+        "pose_ms": 21.490200000698678,
+        "roll": 0,
+        "scene_commits": 55,
+        "total_ms": 51.78723999961221,
+        "yaw": -5.0
+      }
+    },
+    {
+      "name": "view_pose",
+      "present_ms": 234.24641999974847,
+      "result": {
+        "operation": "pose",
+        "pitch": 2.0,
+        "pose_ms": 37.177860000156215,
+        "roll": 0,
+        "scene_commits": 55,
+        "total_ms": 63.87421999897924,
+        "yaw": 5.0
+      }
+    },
+    {
+      "name": "view_pose",
+      "present_ms": 237.18898000009358,
+      "result": {
+        "operation": "pose",
+        "pitch": -2.0,
+        "pose_ms": 41.67240000060701,
+        "roll": 0,
+        "scene_commits": 55,
+        "total_ms": 70.70785999894724,
+        "yaw": -5.0
+      }
+    },
+    {
+      "name": "view_pose",
+      "present_ms": 233.15066000074148,
+      "result": {
+        "operation": "pose",
+        "pitch": 2.0,
+        "pose_ms": 37.98205999919446,
+        "roll": 0,
+        "scene_commits": 55,
+        "total_ms": 64.3266200004291,
+        "yaw": 5.0
+      }
+    },
+    {
+      "name": "view_pose",
+      "present_ms": 212.41826000064611,
+      "result": {
+        "operation": "pose",
+        "pitch": -2.0,
+        "pose_ms": 17.524999999295687,
+        "roll": 0,
+        "scene_commits": 55,
+        "total_ms": 43.73023999869474,
+        "yaw": -5.0
+      }
+    },
+    {
+      "name": "view_pose",
+      "present_ms": 249.9140600003302,
+      "result": {
+        "operation": "pose",
+        "pitch": 2.0,
+        "pose_ms": 37.56466000049841,
+        "roll": 0,
+        "scene_commits": 55,
+        "total_ms": 64.35382000017853,
+        "yaw": 5.0
+      }
+    },
+    {
+      "name": "view_pose",
+      "present_ms": 240.88933999836445,
+      "result": {
+        "operation": "pose",
+        "pitch": -2.0,
+        "pose_ms": 45.53480000140553,
+        "roll": 0,
+        "scene_commits": 55,
+        "total_ms": 71.84120000056282,
+        "yaw": -5.0
+      }
+    },
+    {
+      "accept_ms": 207.10589999891818,
+      "name": "destroy_owned",
+      "present_ms": 491.48787999898195,
+      "render": {
+        "active_bank": 1,
+        "changed_tiles": 72,
+        "content_changed_tiles": 0,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          0,
+          0
+        ],
+        "metadata_ms": 50.603,
+        "owned_tiles": 0,
+        "projected_tiles": 0,
+        "projection_ms": 0.3294199996162206,
+        "publish_ms": 140.95303999965836,
+        "published": true,
+        "render_ms": 199.14586000049894,
+        "service_render_ms": 251.07270000080462,
+        "texture_upload_bytes": 0,
+        "validate_ms": 32.979,
+        "wait_ms": 27.781
+      },
+      "result": {
+        "generation": 56,
+        "window_id": 2
+      }
+    }
+  ],
+  "create": [
+    {
+      "create_and_map_ms": 1736.1445000004023,
+      "window_id": 2
+    }
+  ],
+  "pose_sweeps": [
+    {
+      "max_ms": 45.271679999132175,
+      "median_ms": 45.08588000135205,
+      "n": 61,
+      "operation": "pose_sweep",
+      "p95_ms": 45.23596000035468,
+      "preparation_ms": 1665.1612200003,
+      "samples_ms": [
+        36.19228000025032,
+        45.23596000035468,
+        35.269379999590456,
+        45.12928000076499,
+        45.09420000067621,
+        35.42043999914313,
+        45.10434000076202,
+        45.15343999992183,
+        35.38332000061928,
+        45.16234000038821,
+        45.0782200005051,
+        35.295760000735754,
+        45.069740001054015,
+        45.18839999946067,
+        35.29807999984769,
+        45.22304000056465,
+        45.09390000021085,
+        35.352200000488665,
+        45.14897999979439,
+        45.180420000178856,
+        35.27519999988726,
+        45.256539999172674,
+        45.11890000139829,
+        35.4962000001251,
+        45.21613999895635,
+        45.15918000106467,
+        35.283360000903485,
+        45.17169999962789,
+        45.101760000761715,
+        35.27567999844905,
+        45.1565399998799,
+        45.16890000013518,
+        35.32586000073934,
+        45.271679999132175,
+        45.08588000135205,
+        35.30916000090656,
+        45.06729999957315,
+        45.17010000017763,
+        35.38716000002751,
+        45.150780000767554,
+        45.08182000063243,
+        35.36621999955969,
+        45.04848000033235,
+        45.085280000421335,
+        35.300260000440176,
+        45.19099999924947,
+        45.102500000211876,
+        35.41889999905834,
+        45.178020000093966,
+        45.12882000017271,
+        36.36179999921296,
+        35.263219999251305,
+        45.07793999982823,
+        35.46900000037567,
+        45.173619999332004,
+        45.15854000055697,
+        35.28403999916918,
+        45.25441999976465,
+        45.082880000336445,
+        35.27484000005643,
+        45.15202000038698
+      ],
+      "scope": "precomputed camera submit to output acknowledgment; excludes pacing",
+      "total_ms": 5817.008419999183
+    }
+  ],
+  "legacy_benchmarks": [
+    {
+      "edge": 1,
+      "includes": "commit IPC to output acknowledgement",
+      "median_ms": 533.5851199997705,
+      "p95_ms": 538.640619999569,
+      "rounds": 5,
+      "target_met": false,
+      "target_ms": 300
+    },
+    {
+      "edge": 8,
+      "includes": "commit IPC to output acknowledgement",
+      "median_ms": 554.7357800005557,
+      "p95_ms": 563.2006400010141,
+      "rounds": 5,
+      "target_met": false,
+      "target_ms": 300
+    }
+  ],
+  "complete": true,
+  "measured_service_sha256": "eb1fb6500b451d27e1aab3bd6c4e88d147ef8a836af8c853a472f0946e8705ad",
+  "measured_application_sha256": "0e6f51a66cd4ff7400e219211754449a434a027316cbac0a8a0311574a8a3787",
+  "runtime_observation": {
+    "log": "evidence/TRI_6cd47c4b75.log",
+    "concurrent_status_cli_demo_update_ms": 1330.8398599997163,
+    "note": "A later live counter update overlapped an additional CLI process; isolated benchmark latency is not a bound under contention."
+  }
+}

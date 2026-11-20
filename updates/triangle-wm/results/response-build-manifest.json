@@ -1,0 +1,66 @@
+{
+  "base_commit": "5f6ff539fae3e529ef53c1d90952dbe72ba609ea",
+  "compiler": "riscv32-buildroot-linux-musl-g++",
+  "isa": "rv32ima_zicsr_zifencei",
+  "abi": "ilp32",
+  "sources": {
+    "src/application_buffer.hpp": "2f89dcea22451d712926a8e443c28bbcf0a155212d2c7780dcfd9724332097ff",
+    "src/boayo_app.cpp": "8c53b41d9194558ca12b3fddc73c52dea85fa927da7c95ad6c3b1521a9d0ecba",
+    "src/boayo_service.cpp": "55afe872f06c2e40d64f96edb70f7683e29bcec7022d9291cdd762b487b97a13",
+    "src/content.hpp": "cfc0fbe91c1d7bc38c3e7a06545c5e71a2606275da6538f4623238a35287911c",
+    "src/content_render.inc": "c0f0d865361abbaae1cfeab7afcafcfd976f23554cffecbf6ca579abf8d87e4c",
+    "src/fast_camera.hpp": "e3bc0ae75fb98ef203af79f1e5f30027bc0000cfc95d7d552be8dbccf8d5f48f",
+    "src/fast_projection.hpp": "da143ba753418511a8215f909f8d4c9aa3e6c16aa11b3d23627e970b9bc8e182",
+    "src/generate_geometry.cpp": "93198d44a3b75edcde3419c9c7e6b429bb289770edbbbf0e003ab5063c21b585",
+    "src/triangle_wm.cpp": "bcc20b5714ce6fa8ceb1c1e5b0e2ab3f1dc40c61108aa8b1b51902b5b10904f1",
+    "build.sh": "fcc888d64416c83f95d041495d71b18a77312e41c048bf2c7175abc657849176",
+    "tests/test_boayo.py": "249939a88404d0fe64f9e1769f9535580f0dc1755b477d87ccc0b3d5bc281629",
+    "tests/check_projection.cpp": "d08c5290547751db54c1d645b536033dc2133a107b59f12a127c240790b7f505",
+    "src/texture_cache.hpp": "065c27f34ef4807d012a815b998860cefc258fe0a3f4b2d4ff83590729aa02da",
+    "src/window_transform.hpp": "59a9c54cec6add636d3a26ed05f0e2812d99b226ced75180e8b3fe8e22f3810e",
+    "src/json_object.hpp": "88c75641e9a3888c1afdc3d096f8fa53f4e014255e182d913fc5ea19c3b6e80b"
+  },
+  "binaries": {
+    "triangle-boayo-v6": {
+      "bytes": 2205640,
+      "sha256": "7fce5d21590ac5e848bc9ec6bca601d218a2f7c28b1bf1ac722e142663a36677"
+    },
+    "unchanged_triangle_app_v3": {
+      "bytes": 1226392,
+      "sha256": "8d420c13e0eae7bb835434ec2cbf7104066580a00ef7c65a7a14becd23d2c41a"
+    }
+  },
+  "numerical_checks": {
+    "texture_allocator_operations": 10000,
+    "descriptor_visibility_exact": 4321280,
+    "guarded_fallbacks": 73506,
+    "conservatively_rejected": 3927344,
+    "cached_projection_basis": "exact"
+  },
+  "host_validation": {
+    "asan_ubsan_api_formats": [
+      "RGB24",
+      "XRGB8888",
+      "RGB332"
+    ],
+    "stable_deferred_diagnostics": "pass",
+    "quoted_unicode_titles": "pass",
+    "forced_eviction_and_explicit_sparse_upload": "pass",
+    "solid_regression": "pass",
+    "incremental_vs_full_content": "pass",
+    "camera_q24_max_error": 1
+  },
+  "board_validation": {
+    "binary_verification_log": "evidence/TRI_0630005b19.log",
+    "service_start_log": "evidence/TRI_0a65eded77.log",
+    "benchmark_log": "evidence/TRI_15fef0a8ab.log",
+    "operation_samples": 45,
+    "pose_steps": 61,
+    "benchmark_exit_status": 0,
+    "service_pid": 351,
+    "demo_pid": 357,
+    "demo_start_log": "evidence/TRI_f61f7bfcb6.log",
+    "upload_mode": "contiguous",
+    "source_hashes_verified_after_benchmark": true
+  }
+}

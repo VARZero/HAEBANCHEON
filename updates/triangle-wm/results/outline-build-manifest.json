@@ -1,0 +1,78 @@
+{
+  "base_commit": "5f6ff539fae3e529ef53c1d90952dbe72ba609ea",
+  "sources": {
+    "src/application_buffer.hpp": "2f89dcea22451d712926a8e443c28bbcf0a155212d2c7780dcfd9724332097ff",
+    "src/boayo_app.cpp": "8c53b41d9194558ca12b3fddc73c52dea85fa927da7c95ad6c3b1521a9d0ecba",
+    "src/boayo_service.cpp": "55afe872f06c2e40d64f96edb70f7683e29bcec7022d9291cdd762b487b97a13",
+    "src/content.hpp": "cfc0fbe91c1d7bc38c3e7a06545c5e71a2606275da6538f4623238a35287911c",
+    "src/content_render.inc": "c0f0d865361abbaae1cfeab7afcafcfd976f23554cffecbf6ca579abf8d87e4c",
+    "src/fast_camera.hpp": "e3bc0ae75fb98ef203af79f1e5f30027bc0000cfc95d7d552be8dbccf8d5f48f",
+    "src/fast_projection.hpp": "da143ba753418511a8215f909f8d4c9aa3e6c16aa11b3d23627e970b9bc8e182",
+    "src/generate_geometry.cpp": "93198d44a3b75edcde3419c9c7e6b429bb289770edbbbf0e003ab5063c21b585",
+    "src/json_object.hpp": "88c75641e9a3888c1afdc3d096f8fa53f4e014255e182d913fc5ea19c3b6e80b",
+    "src/outline.hpp": "b237019060f890d52993af73bf475a45261f85840117a4acf0da58ff16b53942",
+    "src/texture_cache.hpp": "065c27f34ef4807d012a815b998860cefc258fe0a3f4b2d4ff83590729aa02da",
+    "src/triangle_wm.cpp": "f223f2ebfa639b7ac80a491bf32b48c14df04afa6e69b9d7d7172b8b0f06437e",
+    "src/window_transform.hpp": "59a9c54cec6add636d3a26ed05f0e2812d99b226ced75180e8b3fe8e22f3810e",
+    "build.sh": "ffe1696105c5d032763c3994e56616df78b97cc9fd7a4ffd28ec58977e01feaa",
+    "tools/generate_neighbors.py": "e55e9ee6224f52e8d3bc93c056b63394d92a0be58e5e87cb6ce0777714edfc52",
+    "tests/check_outline.cpp": "f80f8f44a05da29056c0225de4e84bceb77877adb761a4328fa631ba4c4c7ac7"
+  },
+  "binary": {
+    "name": "triangle-boayo-v7",
+    "bytes": 2262984,
+    "sha256": "74b9304a69c7426a746aebda47d36610d1a7d5b80c597d24143f8b149786391f"
+  },
+  "runtime": "RV32IMA static, same compiler as v6",
+  "validation": {
+    "outline_cases": 600,
+    "changed_footprints": 377,
+    "removed_content_free_tiles": 675,
+    "default_tiles": [
+      72,
+      70
+    ],
+    "topology_edges": 12660,
+    "split_edges": 780,
+    "projection_exact_cases": 4321280,
+    "asan_ubsan_formats": [
+      "RGB24",
+      "XRGB8888",
+      "RGB332"
+    ],
+    "solid": "pass",
+    "incremental_vs_full": "pass"
+  },
+  "baseline": {
+    "service": "v6",
+    "service_pid": 363,
+    "start_log": "evidence/TRI_842d1112f1.log",
+    "benchmark_log": "evidence/TRI_f037535c68.log",
+    "samples": 45,
+    "pose_steps": 61
+  },
+  "unchanged_application": {
+    "path": "/tmp/triangle-app-v3",
+    "format": "RGB332",
+    "sha256": "8d420c13e0eae7bb835434ec2cbf7104066580a00ef7c65a7a14becd23d2c41a"
+  },
+  "deployment": {
+    "verification_log": "evidence/TRI_c67b502207.log",
+    "service_start_log": "evidence/TRI_a8d71cf740.log",
+    "service_pid": 377,
+    "mode": "trim",
+    "temporary": true
+  },
+  "board_runs": {
+    "v6-raw": "evidence/TRI_f037535c68.log",
+    "v7-trim": "evidence/TRI_d35716e0a2.log",
+    "v7-raw": "evidence/TRI_1932227fb7.log"
+  },
+  "live": {
+    "service_pid": 391,
+    "demo_pid": 393,
+    "mode": "trim",
+    "start_log": "evidence/TRI_ce4c480192.log"
+  },
+  "source_hashes_verified_after_board_runs": true
+}

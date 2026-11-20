@@ -1,0 +1,17 @@
+{
+  "final_binary_sha256": "a5d379e5e7711537f55fd8d5588e9c53b602942cf00ad05fb69376f85e9b3340",
+  "source_sha256": {
+    "src\\content.hpp": "613ba35f957e1aff5d52da110d486e226179e9767801e27c4a144149370bdbda",
+    "src\\content_render.inc": "aef7a6d609ea3a70dc5b3c7a57bdb520f40966c59b0359fac5f9ccd480504501",
+    "src\\fast_camera.hpp": "e3bc0ae75fb98ef203af79f1e5f30027bc0000cfc95d7d552be8dbccf8d5f48f",
+    "src\\generate_geometry.cpp": "5d7838959c8731d115aecd883d08ba249f04446088f033d8c313ed74d95a092a",
+    "src\\triangle_wm.cpp": "b23e1deb8fa99a4402ec26abf0bb70eebe3ea9db460ae1a441a20f8e3a9991c1"
+  },
+  "validation": [
+    "host solid regression passed",
+    "host incremental/full pixel comparison passed",
+    "host ASan/UBSan passed",
+    "camera 1196 poses max Q24 coefficient error 1",
+    "delta reconstructed binary matched target SHA256"
+  ]
+}

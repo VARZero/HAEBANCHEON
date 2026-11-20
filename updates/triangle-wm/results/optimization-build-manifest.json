@@ -1,0 +1,63 @@
+{
+  "base_commit": "5f6ff539fae3e529ef53c1d90952dbe72ba609ea",
+  "compiler": "riscv32-buildroot-linux-musl-g++",
+  "isa": "rv32ima_zicsr_zifencei",
+  "abi": "ilp32",
+  "sources": {
+    "src/application_buffer.hpp": "2f89dcea22451d712926a8e443c28bbcf0a155212d2c7780dcfd9724332097ff",
+    "src/boayo_app.cpp": "8c53b41d9194558ca12b3fddc73c52dea85fa927da7c95ad6c3b1521a9d0ecba",
+    "src/boayo_service.cpp": "3ab378c13b6f2b5b69748dea345a6e80b080dd8e399ddaf3a4f23622f60ff63b",
+    "src/content.hpp": "cfc0fbe91c1d7bc38c3e7a06545c5e71a2606275da6538f4623238a35287911c",
+    "src/content_render.inc": "775d0aa439e1b8dc57cb89a5e331979c917b76613bc868d4b6e525b83d0dd27b",
+    "src/fast_camera.hpp": "e3bc0ae75fb98ef203af79f1e5f30027bc0000cfc95d7d552be8dbccf8d5f48f",
+    "src/fast_projection.hpp": "c8b5d818bbe4c79872e9926f5e07267b142c1cdbe7c3ca4c46e745ce24ab0ef1",
+    "src/generate_geometry.cpp": "fc94c158f6233dfa16fc627f42ca2d9033c403a764a60ab5a84bed5447b29e38",
+    "src/triangle_wm.cpp": "e27b3cc8d9d52d1138a9681a2391ca8a8ac37d718fc5c73aad04974e194ddeac",
+    "build.sh": "fcc888d64416c83f95d041495d71b18a77312e41c048bf2c7175abc657849176",
+    "tests/test_boayo.py": "237e3cd0064919759bd8d8760448064b1e020ee7c357ef912fbb339d10183d45",
+    "tests/check_projection.cpp": "64f62250ac1ad8d65dfb19d259cee30e759c99a873965608f765434ba1419419"
+  },
+  "binaries": {
+    "triangle-boayo-v3": {
+      "bytes": 2181048,
+      "sha256": "38d97314ccfa8f83d0dc6af90bfce3456f356c65bc35e1f4752aabd90afac88f"
+    },
+    "triangle-app-v3": {
+      "bytes": 1226392,
+      "sha256": "8d420c13e0eae7bb835434ec2cbf7104066580a00ef7c65a7a14becd23d2c41a"
+    }
+  },
+  "validation": {
+    "projection_exact_comparisons": 1350400,
+    "reference_rounding_fallbacks": 5521,
+    "indexed_painter_palette_colors": 256,
+    "asan_ubsan_api_formats": [
+      "RGB24",
+      "XRGB8888",
+      "RGB332"
+    ],
+    "native_client_mock_samples_per_format": 45,
+    "original_solid_content_camera_regression": "pass",
+    "camera_q24_max_error": 1,
+    "mixed_format_overlap": "pass"
+  },
+  "board": {
+    "deployment_logs": [
+      "TRI_05ec99b44f.log",
+      "TRI_09426c3822.log"
+    ],
+    "benchmark_logs": {
+      "RGB24": "TRI_b0eac543d6.log",
+      "XRGB8888": "TRI_025a017228.log",
+      "RGB332": "TRI_8b39cd945d.log"
+    },
+    "samples": {
+      "RGB24": 45,
+      "XRGB8888": 13,
+      "RGB332": 45
+    },
+    "live_service_pid": 270,
+    "live_rgb332_app_pid": 286,
+    "live_launch_log": "TRI_961f31bded.log"
+  }
+}

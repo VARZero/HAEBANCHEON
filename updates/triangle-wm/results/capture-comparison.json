@@ -1,0 +1,14 @@
+[
+  {
+    "stage": 4,
+    "capture_mean_absolute_error": 0.0,
+    "capture_fraction_pixels_changed_over_10": 0.0,
+    "scope": "two final HDMI JPEG captures; not a complete per-frame reference test"
+  },
+  {
+    "stage": 5,
+    "capture_mean_absolute_error": 0.0,
+    "capture_fraction_pixels_changed_over_10": 0.0,
+    "scope": "two final HDMI JPEG captures; not a complete per-frame reference test"
+  }
+]

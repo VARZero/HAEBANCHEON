@@ -1,0 +1,57 @@
+{
+  "base_commit": "5f6ff539fae3e529ef53c1d90952dbe72ba609ea",
+  "compiler": "riscv32-buildroot-linux-musl-g++",
+  "isa": "rv32ima_zicsr_zifencei",
+  "abi": "ilp32",
+  "sources": {
+    "src/application_buffer.hpp": "2f89dcea22451d712926a8e443c28bbcf0a155212d2c7780dcfd9724332097ff",
+    "src/boayo_app.cpp": "8c53b41d9194558ca12b3fddc73c52dea85fa927da7c95ad6c3b1521a9d0ecba",
+    "src/boayo_service.cpp": "5bcad8026ba0f2a29e9f0787112cd5e6b52dfa607dbd5c08d6616be11381c76a",
+    "src/content.hpp": "cfc0fbe91c1d7bc38c3e7a06545c5e71a2606275da6538f4623238a35287911c",
+    "src/content_render.inc": "19208f424495afb1d348c87bd6580c20247369d77cea5eab322b2c10a065defb",
+    "src/fast_camera.hpp": "e3bc0ae75fb98ef203af79f1e5f30027bc0000cfc95d7d552be8dbccf8d5f48f",
+    "src/fast_projection.hpp": "da143ba753418511a8215f909f8d4c9aa3e6c16aa11b3d23627e970b9bc8e182",
+    "src/generate_geometry.cpp": "93198d44a3b75edcde3419c9c7e6b429bb289770edbbbf0e003ab5063c21b585",
+    "src/triangle_wm.cpp": "b1d80d02373eb4ef96466322f93c172da9252d04d6fea5a6d7705dae96a523cc",
+    "build.sh": "fcc888d64416c83f95d041495d71b18a77312e41c048bf2c7175abc657849176",
+    "tests/test_boayo.py": "88914f1f9604aae97856fe34d986178a53fc9d29d382c9f7c8c2d5729565b3d8",
+    "tests/check_projection.cpp": "fd7a752dbb83f86cb8d8ce94b65dc5f7e7ae992c6d52b0af88ae80dc38e2c23e"
+  },
+  "binaries": {
+    "triangle-boayo-v4": {
+      "bytes": 2185160,
+      "sha256": "0ffa02bf0634a6b1deebaf55e14762cbaf1690c58f591abb94fe150b7402998f"
+    },
+    "unchanged_triangle_app_v3": {
+      "bytes": 1226392,
+      "sha256": "8d420c13e0eae7bb835434ec2cbf7104066580a00ef7c65a7a14becd23d2c41a"
+    }
+  },
+  "numerical_checks": {
+    "multiply_128bit_reference": 100000,
+    "descriptor_visibility_exact": 4321280,
+    "guarded_fallbacks": 73506,
+    "conservatively_rejected": 3927344
+  },
+  "host_validation": {
+    "asan_ubsan_api_formats": [
+      "RGB24",
+      "XRGB8888",
+      "RGB332"
+    ],
+    "fully_hidden_fractional_move_and_reveal": "pass",
+    "solid_regression": "pass",
+    "incremental_vs_full_content": "pass",
+    "camera_q24_max_error": 1
+  },
+  "board": {
+    "service_pid": 300,
+    "deployment_log": "TRI_2edfe3106c.log",
+    "service_start_log": "TRI_4c99e312d1.log",
+    "benchmark_log": "TRI_3918f4ae67.log",
+    "samples": 45,
+    "pose_samples": 61,
+    "live_app_pid": 306,
+    "live_demo_log": "TRI_61d60708fe.log"
+  }
+}

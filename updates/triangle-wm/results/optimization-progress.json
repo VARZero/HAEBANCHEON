@@ -1,0 +1,2531 @@
+{
+  "baseline_file": "updates/triangle-wm/results/boayo-board-20261120.json",
+  "baseline_metrics": [
+    {
+      "name": "보아요 / 최초 앱 콘텐츠",
+      "key": "initial_content",
+      "n": 1,
+      "median_ms": 3104.188,
+      "p95_ms": 3104.188,
+      "max_ms": 3104.188,
+      "scope": "앱 호출 → 출력 완료 응답 (광학 지연 제외)",
+      "accept_median_ms": 1571.9
+    },
+    {
+      "name": "보아요 / 8×8 부분 갱신",
+      "key": "partial_8x8",
+      "n": 11,
+      "median_ms": 555.351,
+      "p95_ms": 784.423,
+      "max_ms": 784.423,
+      "scope": "앱 호출 → 출력 완료 응답 (광학 지연 제외)",
+      "accept_median_ms": 229.613
+    },
+    {
+      "name": "보아요 / 콘텐츠 창 이동",
+      "key": "content_move",
+      "n": 7,
+      "median_ms": 1684.559,
+      "p95_ms": 1762.325,
+      "max_ms": 1762.325,
+      "scope": "앱 호출 → 출력 완료 응답 (광학 지연 제외)",
+      "accept_median_ms": 394.799
+    },
+    {
+      "name": "보아요 / 콘텐츠 창 크기 변경",
+      "key": "content_resize",
+      "n": 7,
+      "median_ms": 1908.93,
+      "p95_ms": 1928.285,
+      "max_ms": 1928.285,
+      "scope": "앱 호출 → 출력 완료 응답 (광학 지연 제외)",
+      "accept_median_ms": 400.666
+    },
+    {
+      "name": "보아요 / 원래 위치·크기 복원",
+      "key": "content_restore_size",
+      "n": 1,
+      "median_ms": 1715.042,
+      "p95_ms": 1715.042,
+      "max_ms": 1715.042,
+      "scope": "앱 호출 → 출력 완료 응답 (광학 지연 제외)",
+      "accept_median_ms": 404.185
+    },
+    {
+      "name": "보아요 / 두 번째 앱 콘텐츠",
+      "key": "second_content",
+      "n": 1,
+      "median_ms": 2891.63,
+      "p95_ms": 2891.63,
+      "max_ms": 2891.63,
+      "scope": "앱 호출 → 출력 완료 응답 (광학 지연 제외)",
+      "accept_median_ms": 1489.535
+    },
+    {
+      "name": "보아요 / 세 번째 앱 콘텐츠",
+      "key": "third_content",
+      "n": 1,
+      "median_ms": 3094.758,
+      "p95_ms": 3094.758,
+      "max_ms": 3094.758,
+      "scope": "앱 호출 → 출력 완료 응답 (광학 지연 제외)",
+      "accept_median_ms": 1477.356
+    },
+    {
+      "name": "보아요 / 겹친 콘텐츠 창 이동",
+      "key": "overlap_move",
+      "n": 5,
+      "median_ms": 2035.956,
+      "p95_ms": 2044.989,
+      "max_ms": 2044.989,
+      "scope": "앱 호출 → 출력 완료 응답 (광학 지연 제외)",
+      "accept_median_ms": 376.96
+    },
+    {
+      "name": "보아요 / 창 순서 변경",
+      "key": "raise",
+      "n": 1,
+      "median_ms": 961.473,
+      "p95_ms": 961.473,
+      "max_ms": 961.473,
+      "scope": "앱 호출 → 출력 완료 응답 (광학 지연 제외)",
+      "accept_median_ms": 328.098
+    },
+    {
+      "name": "보아요 / 겹친 창 닫기",
+      "key": "close",
+      "n": 2,
+      "median_ms": 592.683,
+      "p95_ms": 711.944,
+      "max_ms": 711.944,
+      "scope": "앱 호출 → 출력 완료 응답 (광학 지연 제외)",
+      "accept_median_ms": 179.944
+    },
+    {
+      "name": "보아요 / 출력 시점 변경",
+      "key": "view_pose",
+      "n": 7,
+      "median_ms": 234.246,
+      "p95_ms": 249.914,
+      "max_ms": 249.914,
+      "scope": "앱 호출 → 출력 완료 응답 (광학 지연 제외)"
+    },
+    {
+      "name": "보아요 / 앱이 자기 창 닫기",
+      "key": "destroy_owned",
+      "n": 1,
+      "median_ms": 491.488,
+      "p95_ms": 491.488,
+      "max_ms": 491.488,
+      "scope": "앱 호출 → 출력 완료 응답 (광학 지연 제외)",
+      "accept_median_ms": 207.106
+    },
+    {
+      "name": "기존 보아요 실행 파일 / 1×1 갱신",
+      "n": 5,
+      "median_ms": 533.585,
+      "p95_ms": 538.641,
+      "max_ms": null,
+      "scope": "기존 commit → wait_present 경로"
+    },
+    {
+      "name": "기존 보아요 실행 파일 / 8×8 갱신",
+      "n": 5,
+      "median_ms": 554.736,
+      "p95_ms": 563.201,
+      "max_ms": null,
+      "scope": "기존 commit → wait_present 경로"
+    }
+  ],
+  "runs": {
+    "RGB24": {
+      "log": "updates/triangle-wm/evidence/TRI_b0eac543d6.log",
+      "samples": [
+        {
+          "accept_ms": 1489.6027199998498,
+          "name": "initial_content",
+          "present_ms": 2841.1261599995196,
+          "render": {
+            "active_bank": 1,
+            "changed_tiles": 40,
+            "content_changed_tiles": 40,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              20,
+              20
+            ],
+            "metadata_ms": 49.08,
+            "owned_tiles": 72,
+            "plan_fallbacks": 0,
+            "plan_ms": 814.6463800003403,
+            "plan_tiles": 72,
+            "projected_tiles": 40,
+            "projection_ms": 253.1368799991469,
+            "publish_ms": 135.3296199995384,
+            "published": true,
+            "render_ms": 1284.908940000605,
+            "service_render_ms": 1352.9050600009214,
+            "texture_upload_bytes": 138240,
+            "validate_ms": 33.85,
+            "wait_ms": 36.994
+          },
+          "result": {
+            "changed": true,
+            "copied_bytes": 103680,
+            "generation": 2,
+            "sequence": 1,
+            "window_id": 1
+          }
+        },
+        {
+          "accept_ms": 227.9609600007534,
+          "name": "partial_8x8",
+          "present_ms": 779.6344200000167,
+          "render": {
+            "active_bank": 0,
+            "changed_tiles": 4,
+            "content_changed_tiles": 4,
+            "copied_tiles": 36,
+            "jobs_per_core": [
+              2,
+              2
+            ],
+            "metadata_ms": 49.342,
+            "owned_tiles": 72,
+            "plan_fallbacks": 0,
+            "plan_ms": 0.0,
+            "plan_tiles": 0,
+            "projected_tiles": 4,
+            "projection_ms": 22.391180000340682,
+            "publish_ms": 116.29901999913272,
+            "published": true,
+            "render_ms": 444.503499998973,
+            "service_render_ms": 525.2324800003407,
+            "texture_upload_bytes": 7680,
+            "validate_ms": 33.476,
+            "wait_ms": 17.819
+          },
+          "result": {
+            "changed": true,
+            "copied_bytes": 192,
+            "generation": 3,
+            "sequence": 2,
+            "window_id": 1
+          }
+        },
+        {
+          "accept_ms": 229.52563999965787,
+          "name": "partial_8x8",
+          "present_ms": 572.280059998855,
+          "render": {
+            "active_bank": 1,
+            "changed_tiles": 4,
+            "content_changed_tiles": 4,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              2,
+              2
+            ],
+            "metadata_ms": 49.284,
+            "owned_tiles": 72,
+            "plan_fallbacks": 0,
+            "plan_ms": 0.0,
+            "plan_tiles": 0,
+            "projected_tiles": 4,
+            "projection_ms": 48.41274000136764,
+            "publish_ms": 132.1241799996642,
+            "published": true,
+            "render_ms": 275.02219999951194,
+            "service_render_ms": 340.8551199991052,
+            "texture_upload_bytes": 7680,
+            "validate_ms": 32.88,
+            "wait_ms": 34.525
+          },
+          "result": {
+            "changed": true,
+            "copied_bytes": 192,
+            "generation": 4,
+            "sequence": 3,
+            "window_id": 1
+          }
+        },
+        {
+          "accept_ms": 208.24994000047445,
+          "name": "partial_8x8",
+          "present_ms": 569.7040600012988,
+          "render": {
+            "active_bank": 0,
+            "changed_tiles": 4,
+            "content_changed_tiles": 4,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              2,
+              2
+            ],
+            "metadata_ms": 49.676,
+            "owned_tiles": 72,
+            "plan_fallbacks": 0,
+            "plan_ms": 0.0,
+            "plan_tiles": 0,
+            "projected_tiles": 4,
+            "projection_ms": 39.58219999913126,
+            "publish_ms": 141.503279999597,
+            "published": true,
+            "render_ms": 275.09224000095855,
+            "service_render_ms": 342.07248000166146,
+            "texture_upload_bytes": 7680,
+            "validate_ms": 35.686,
+            "wait_ms": 39.996
+          },
+          "result": {
+            "changed": true,
+            "copied_bytes": 192,
+            "generation": 5,
+            "sequence": 4,
+            "window_id": 1
+          }
+        },
+        {
+          "accept_ms": 219.60019999928772,
+          "name": "partial_8x8",
+          "present_ms": 548.7691799998283,
+          "render": {
+            "active_bank": 1,
+            "changed_tiles": 4,
+            "content_changed_tiles": 4,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              2,
+              2
+            ],
+            "metadata_ms": 49.563,
+            "owned_tiles": 72,
+            "plan_fallbacks": 0,
+            "plan_ms": 0.0,
+            "plan_tiles": 0,
+            "projected_tiles": 4,
+            "projection_ms": 39.4782799994573,
+            "publish_ms": 112.40809999981138,
+            "published": true,
+            "render_ms": 254.78382000073907,
+            "service_render_ms": 320.42032000026666,
+            "texture_upload_bytes": 7680,
+            "validate_ms": 32.871,
+            "wait_ms": 14.754
+          },
+          "result": {
+            "changed": true,
+            "copied_bytes": 192,
+            "generation": 6,
+            "sequence": 5,
+            "window_id": 1
+          }
+        },
+        {
+          "accept_ms": 212.64853999949992,
+          "name": "partial_8x8",
+          "present_ms": 530.0996599998325,
+          "render": {
+            "active_bank": 0,
+            "changed_tiles": 4,
+            "content_changed_tiles": 4,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              2,
+              2
+            ],
+            "metadata_ms": 49.448,
+            "owned_tiles": 72,
+            "plan_fallbacks": 0,
+            "plan_ms": 0.0,
+            "plan_tiles": 0,
+            "projected_tiles": 4,
+            "projection_ms": 37.443639999764855,
+            "publish_ms": 113.33524000110629,
+            "published": true,
+            "render_ms": 235.67602000002807,
+            "service_render_ms": 302.20765999911237,
+            "texture_upload_bytes": 7680,
+            "validate_ms": 33.06,
+            "wait_ms": 15.399
+          },
+          "result": {
+            "changed": true,
+            "copied_bytes": 192,
+            "generation": 7,
+            "sequence": 6,
+            "window_id": 1
+          }
+        },
+        {
+          "accept_ms": 204.38093999959528,
+          "name": "partial_8x8",
+          "present_ms": 563.2987000010908,
+          "render": {
+            "active_bank": 1,
+            "changed_tiles": 4,
+            "content_changed_tiles": 4,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              2,
+              2
+            ],
+            "metadata_ms": 49.217,
+            "owned_tiles": 72,
+            "plan_fallbacks": 0,
+            "plan_ms": 0.0,
+            "plan_tiles": 0,
+            "projected_tiles": 4,
+            "projection_ms": 40.50961999928404,
+            "publish_ms": 133.63226000001305,
+            "published": true,
+            "render_ms": 265.12342000023637,
+            "service_render_ms": 331.7153600000893,
+            "texture_upload_bytes": 7680,
+            "validate_ms": 32.854,
+            "wait_ms": 35.89
+          },
+          "result": {
+            "changed": true,
+            "copied_bytes": 192,
+            "generation": 8,
+            "sequence": 7,
+            "window_id": 1
+          }
+        },
+        {
+          "accept_ms": 220.40348000079393,
+          "name": "partial_8x8",
+          "present_ms": 537.7853600010276,
+          "render": {
+            "active_bank": 0,
+            "changed_tiles": 4,
+            "content_changed_tiles": 4,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              2,
+              2
+            ],
+            "metadata_ms": 49.599,
+            "owned_tiles": 72,
+            "plan_fallbacks": 0,
+            "plan_ms": 0.0,
+            "plan_tiles": 0,
+            "projected_tiles": 4,
+            "projection_ms": 55.08420000114711,
+            "publish_ms": 103.92685999977402,
+            "published": true,
+            "render_ms": 244.59161999948265,
+            "service_render_ms": 312.2942400004831,
+            "texture_upload_bytes": 7680,
+            "validate_ms": 33.309,
+            "wait_ms": 5.948
+          },
+          "result": {
+            "changed": true,
+            "copied_bytes": 192,
+            "generation": 9,
+            "sequence": 8,
+            "window_id": 1
+          }
+        },
+        {
+          "accept_ms": 219.080399999395,
+          "name": "partial_8x8",
+          "present_ms": 550.0988799985498,
+          "render": {
+            "active_bank": 1,
+            "changed_tiles": 4,
+            "content_changed_tiles": 4,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              2,
+              2
+            ],
+            "metadata_ms": 49.134,
+            "owned_tiles": 72,
+            "plan_fallbacks": 0,
+            "plan_ms": 0.0,
+            "plan_tiles": 0,
+            "projected_tiles": 4,
+            "projection_ms": 46.963819999291445,
+            "publish_ms": 120.95632000091427,
+            "published": true,
+            "render_ms": 254.98378000156663,
+            "service_render_ms": 320.82373999946867,
+            "texture_upload_bytes": 7680,
+            "validate_ms": 34.909,
+            "wait_ms": 20.939
+          },
+          "result": {
+            "changed": true,
+            "copied_bytes": 192,
+            "generation": 10,
+            "sequence": 9,
+            "window_id": 1
+          }
+        },
+        {
+          "accept_ms": 223.18385999836028,
+          "name": "partial_8x8",
+          "present_ms": 542.2912399992347,
+          "render": {
+            "active_bank": 0,
+            "changed_tiles": 4,
+            "content_changed_tiles": 4,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              2,
+              2
+            ],
+            "metadata_ms": 49.886,
+            "owned_tiles": 72,
+            "plan_fallbacks": 0,
+            "plan_ms": 0.0,
+            "plan_tiles": 0,
+            "projected_tiles": 4,
+            "projection_ms": 48.13948000082746,
+            "publish_ms": 112.24057999970682,
+            "published": true,
+            "render_ms": 245.15658000018448,
+            "service_render_ms": 313.3228400001826,
+            "texture_upload_bytes": 7680,
+            "validate_ms": 33.539,
+            "wait_ms": 13.687
+          },
+          "result": {
+            "changed": true,
+            "copied_bytes": 192,
+            "generation": 11,
+            "sequence": 10,
+            "window_id": 1
+          }
+        },
+        {
+          "accept_ms": 246.64446000009775,
+          "name": "partial_8x8",
+          "present_ms": 571.5413600001484,
+          "render": {
+            "active_bank": 1,
+            "changed_tiles": 4,
+            "content_changed_tiles": 4,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              2,
+              2
+            ],
+            "metadata_ms": 49.683,
+            "owned_tiles": 72,
+            "plan_fallbacks": 0,
+            "plan_ms": 0.0,
+            "plan_tiles": 0,
+            "projected_tiles": 4,
+            "projection_ms": 41.112259999863454,
+            "publish_ms": 132.6160799999343,
+            "published": true,
+            "render_ms": 284.8320600005536,
+            "service_render_ms": 350.60325999984343,
+            "texture_upload_bytes": 7680,
+            "validate_ms": 33.557,
+            "wait_ms": 34.23
+          },
+          "result": {
+            "changed": true,
+            "copied_bytes": 192,
+            "generation": 12,
+            "sequence": 11,
+            "window_id": 1
+          }
+        },
+        {
+          "accept_ms": 232.07897999882698,
+          "name": "partial_8x8",
+          "present_ms": 545.5150999985635,
+          "render": {
+            "active_bank": 0,
+            "changed_tiles": 4,
+            "content_changed_tiles": 4,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              2,
+              2
+            ],
+            "metadata_ms": 50.021,
+            "owned_tiles": 72,
+            "plan_fallbacks": 0,
+            "plan_ms": 0.0,
+            "plan_tiles": 0,
+            "projected_tiles": 4,
+            "projection_ms": 39.677979999396484,
+            "publish_ms": 117.84051999893563,
+            "published": true,
+            "render_ms": 252.71590000011201,
+            "service_render_ms": 313.77057999998215,
+            "texture_upload_bytes": 7680,
+            "validate_ms": 35.455,
+            "wait_ms": 14.638
+          },
+          "result": {
+            "changed": true,
+            "copied_bytes": 192,
+            "generation": 13,
+            "sequence": 12,
+            "window_id": 1
+          }
+        },
+        {
+          "accept_ms": 452.7339800000191,
+          "name": "content_move",
+          "present_ms": 1600.5178000014275,
+          "render": {
+            "active_bank": 1,
+            "changed_tiles": 80,
+            "content_changed_tiles": 49,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              25,
+              24
+            ],
+            "metadata_ms": 50.188,
+            "owned_tiles": 60,
+            "plan_fallbacks": 0,
+            "plan_ms": 863.8361000012083,
+            "plan_tiles": 60,
+            "projected_tiles": 49,
+            "projection_ms": 113.43848000069556,
+            "publish_ms": 136.19805999951495,
+            "published": true,
+            "render_ms": 1184.733440000855,
+            "service_render_ms": 1250.3044400000363,
+            "texture_upload_bytes": 0,
+            "validate_ms": 34.947,
+            "wait_ms": 38.256
+          },
+          "result": {
+            "azimuth": -5.0,
+            "decorated": false,
+            "elevation": -2.0,
+            "generation": 14,
+            "height_deg": 14.0,
+            "mapped": true,
+            "padding_deg": 2.0,
+            "roll": 0,
+            "surface_height": 144,
+            "surface_width": 240,
+            "title": "BoAYO triangle application",
+            "width_deg": 20.0,
+            "window_id": 1
+          }
+        },
+        {
+          "accept_ms": 390.41017999872565,
+          "name": "content_move",
+          "present_ms": 1523.2250800002366,
+          "render": {
+            "active_bank": 0,
+            "changed_tiles": 88,
+            "content_changed_tiles": 50,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              25,
+              25
+            ],
+            "metadata_ms": 50.402,
+            "owned_tiles": 60,
+            "plan_fallbacks": 0,
+            "plan_ms": 794.8071999999229,
+            "plan_tiles": 60,
+            "projected_tiles": 50,
+            "projection_ms": 111.20669999945676,
+            "publish_ms": 140.27372000055038,
+            "published": true,
+            "render_ms": 1114.431539999714,
+            "service_render_ms": 1180.4624799988233,
+            "texture_upload_bytes": 0,
+            "validate_ms": 35.68,
+            "wait_ms": 37.826
+          },
+          "result": {
+            "azimuth": 5.0,
+            "decorated": false,
+            "elevation": 2.0,
+            "generation": 15,
+            "height_deg": 14.0,
+            "mapped": true,
+            "padding_deg": 2.0,
+            "roll": 0,
+            "surface_height": 144,
+            "surface_width": 240,
+            "title": "BoAYO triangle application",
+            "width_deg": 20.0,
+            "window_id": 1
+          }
+        },
+        {
+          "accept_ms": 387.4243800006807,
+          "name": "content_move",
+          "present_ms": 1507.4779800008982,
+          "render": {
+            "active_bank": 1,
+            "changed_tiles": 88,
+            "content_changed_tiles": 49,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              25,
+              24
+            ],
+            "metadata_ms": 49.788,
+            "owned_tiles": 60,
+            "plan_fallbacks": 0,
+            "plan_ms": 795.3499400009605,
+            "plan_tiles": 60,
+            "projected_tiles": 49,
+            "projection_ms": 110.11818000042695,
+            "publish_ms": 130.33223999991606,
+            "published": true,
+            "render_ms": 1114.6477199999936,
+            "service_render_ms": 1180.9851599991816,
+            "texture_upload_bytes": 0,
+            "validate_ms": 35.569,
+            "wait_ms": 29.155
+          },
+          "result": {
+            "azimuth": -5.0,
+            "decorated": false,
+            "elevation": -2.0,
+            "generation": 16,
+            "height_deg": 14.0,
+            "mapped": true,
+            "padding_deg": 2.0,
+            "roll": 0,
+            "surface_height": 144,
+            "surface_width": 240,
+            "title": "BoAYO triangle application",
+            "width_deg": 20.0,
+            "window_id": 1
+          }
+        },
+        {
+          "accept_ms": 399.7943799998611,
+          "name": "content_move",
+          "present_ms": 1549.157120000571,
+          "render": {
+            "active_bank": 0,
+            "changed_tiles": 88,
+            "content_changed_tiles": 50,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              25,
+              25
+            ],
+            "metadata_ms": 50.086,
+            "owned_tiles": 60,
+            "plan_fallbacks": 0,
+            "plan_ms": 788.2456600000296,
+            "plan_tiles": 60,
+            "projected_tiles": 50,
+            "projection_ms": 111.60036000001128,
+            "publish_ms": 134.6548800011078,
+            "published": true,
+            "render_ms": 1124.9212399998214,
+            "service_render_ms": 1191.032440001436,
+            "texture_upload_bytes": 0,
+            "validate_ms": 32.73,
+            "wait_ms": 36.682
+          },
+          "result": {
+            "azimuth": 5.0,
+            "decorated": false,
+            "elevation": 2.0,
+            "generation": 17,
+            "height_deg": 14.0,
+            "mapped": true,
+            "padding_deg": 2.0,
+            "roll": 0,
+            "surface_height": 144,
+            "surface_width": 240,
+            "title": "BoAYO triangle application",
+            "width_deg": 20.0,
+            "window_id": 1
+          }
+        },
+        {
+          "accept_ms": 381.33616000041366,
+          "name": "content_move",
+          "present_ms": 1487.2505600005388,
+          "render": {
+            "active_bank": 1,
+            "changed_tiles": 88,
+            "content_changed_tiles": 49,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              25,
+              24
+            ],
+            "metadata_ms": 50.284,
+            "owned_tiles": 60,
+            "plan_fallbacks": 0,
+            "plan_ms": 797.5135400010913,
+            "plan_tiles": 60,
+            "projected_tiles": 49,
+            "projection_ms": 117.0481800018024,
+            "publish_ms": 105.54486000000907,
+            "published": true,
+            "render_ms": 1105.1456999994116,
+            "service_render_ms": 1169.786340000428,
+            "texture_upload_bytes": 0,
+            "validate_ms": 33.447,
+            "wait_ms": 6.822
+          },
+          "result": {
+            "azimuth": -5.0,
+            "decorated": false,
+            "elevation": -2.0,
+            "generation": 18,
+            "height_deg": 14.0,
+            "mapped": true,
+            "padding_deg": 2.0,
+            "roll": 0,
+            "surface_height": 144,
+            "surface_width": 240,
+            "title": "BoAYO triangle application",
+            "width_deg": 20.0,
+            "window_id": 1
+          }
+        },
+        {
+          "accept_ms": 384.11638000048697,
+          "name": "content_move",
+          "present_ms": 1493.683860000223,
+          "render": {
+            "active_bank": 0,
+            "changed_tiles": 88,
+            "content_changed_tiles": 50,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              25,
+              25
+            ],
+            "metadata_ms": 50.489,
+            "owned_tiles": 60,
+            "plan_fallbacks": 0,
+            "plan_ms": 799.8039800004335,
+            "plan_tiles": 60,
+            "projected_tiles": 50,
+            "projection_ms": 124.1816399997333,
+            "publish_ms": 104.93608000069798,
+            "published": true,
+            "render_ms": 1095.4381999999896,
+            "service_render_ms": 1161.2608599989471,
+            "texture_upload_bytes": 0,
+            "validate_ms": 33.406,
+            "wait_ms": 6.055
+          },
+          "result": {
+            "azimuth": 5.0,
+            "decorated": false,
+            "elevation": 2.0,
+            "generation": 19,
+            "height_deg": 14.0,
+            "mapped": true,
+            "padding_deg": 2.0,
+            "roll": 0,
+            "surface_height": 144,
+            "surface_width": 240,
+            "title": "BoAYO triangle application",
+            "width_deg": 20.0,
+            "window_id": 1
+          }
+        },
+        {
+          "accept_ms": 386.8082800004631,
+          "name": "content_move",
+          "present_ms": 1517.8408000003546,
+          "render": {
+            "active_bank": 1,
+            "changed_tiles": 88,
+            "content_changed_tiles": 49,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              25,
+              24
+            ],
+            "metadata_ms": 49.889,
+            "owned_tiles": 60,
+            "plan_fallbacks": 0,
+            "plan_ms": 788.1641600015428,
+            "plan_tiles": 60,
+            "projected_tiles": 49,
+            "projection_ms": 124.33773999873665,
+            "publish_ms": 136.3067799993587,
+            "published": true,
+            "render_ms": 1134.748660000696,
+            "service_render_ms": 1199.647539999205,
+            "texture_upload_bytes": 0,
+            "validate_ms": 35.43,
+            "wait_ms": 38.16
+          },
+          "result": {
+            "azimuth": -5.0,
+            "decorated": false,
+            "elevation": -2.0,
+            "generation": 20,
+            "height_deg": 14.0,
+            "mapped": true,
+            "padding_deg": 2.0,
+            "roll": 0,
+            "surface_height": 144,
+            "surface_width": 240,
+            "title": "BoAYO triangle application",
+            "width_deg": 20.0,
+            "window_id": 1
+          }
+        },
+        {
+          "accept_ms": 391.46461999975145,
+          "name": "content_resize",
+          "present_ms": 1713.3510999996215,
+          "render": {
+            "active_bank": 0,
+            "changed_tiles": 73,
+            "content_changed_tiles": 60,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              30,
+              30
+            ],
+            "metadata_ms": 50.764,
+            "owned_tiles": 73,
+            "plan_fallbacks": 1,
+            "plan_ms": 961.6600000008475,
+            "plan_tiles": 73,
+            "projected_tiles": 60,
+            "projection_ms": 145.09960000032152,
+            "publish_ms": 105.3451000007044,
+            "published": true,
+            "render_ms": 1296.0082200006582,
+            "service_render_ms": 1363.9591999999539,
+            "texture_upload_bytes": 0,
+            "validate_ms": 33.418,
+            "wait_ms": 6.05
+          },
+          "result": {
+            "azimuth": -5.0,
+            "decorated": false,
+            "elevation": -2.0,
+            "generation": 21,
+            "height_deg": 16.0,
+            "mapped": true,
+            "padding_deg": 2.0,
+            "roll": 0,
+            "surface_height": 144,
+            "surface_width": 240,
+            "title": "BoAYO triangle application",
+            "width_deg": 24.0,
+            "window_id": 1
+          }
+        },
+        {
+          "accept_ms": 386.761819999665,
+          "name": "content_resize",
+          "present_ms": 1478.8447999991477,
+          "render": {
+            "active_bank": 1,
+            "changed_tiles": 73,
+            "content_changed_tiles": 49,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              25,
+              24
+            ],
+            "metadata_ms": 50.173,
+            "owned_tiles": 60,
+            "plan_fallbacks": 0,
+            "plan_ms": 793.8555000000633,
+            "plan_tiles": 60,
+            "projected_tiles": 49,
+            "projection_ms": 110.96770000040124,
+            "publish_ms": 105.04519999994955,
+            "published": true,
+            "render_ms": 1094.8039799986873,
+            "service_render_ms": 1162.0740399994247,
+            "texture_upload_bytes": 0,
+            "validate_ms": 33.094,
+            "wait_ms": 6.775
+          },
+          "result": {
+            "azimuth": -5.0,
+            "decorated": false,
+            "elevation": -2.0,
+            "generation": 22,
+            "height_deg": 14.0,
+            "mapped": true,
+            "padding_deg": 2.0,
+            "roll": 0,
+            "surface_height": 144,
+            "surface_width": 240,
+            "title": "BoAYO triangle application",
+            "width_deg": 20.0,
+            "window_id": 1
+          }
+        },
+        {
+          "accept_ms": 385.4785000011325,
+          "name": "content_resize",
+          "present_ms": 1707.5950400009751,
+          "render": {
+            "active_bank": 0,
+            "changed_tiles": 73,
+            "content_changed_tiles": 60,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              30,
+              30
+            ],
+            "metadata_ms": 50.482,
+            "owned_tiles": 73,
+            "plan_fallbacks": 1,
+            "plan_ms": 950.8631000007881,
+            "plan_tiles": 73,
+            "projected_tiles": 60,
+            "projection_ms": 142.8107400006411,
+            "publish_ms": 139.46886000121594,
+            "published": true,
+            "render_ms": 1304.7368000006827,
+            "service_render_ms": 1372.4481999997806,
+            "texture_upload_bytes": 0,
+            "validate_ms": 35.845,
+            "wait_ms": 38.129
+          },
+          "result": {
+            "azimuth": -5.0,
+            "decorated": false,
+            "elevation": -2.0,
+            "generation": 23,
+            "height_deg": 16.0,
+            "mapped": true,
+            "padding_deg": 2.0,
+            "roll": 0,
+            "surface_height": 144,
+            "surface_width": 240,
+            "title": "BoAYO triangle application",
+            "width_deg": 24.0,
+            "window_id": 1
+          }
+        },
+        {
+          "accept_ms": 390.73575999960303,
+          "name": "content_resize",
+          "present_ms": 1500.7855799999088,
+          "render": {
+            "active_bank": 1,
+            "changed_tiles": 73,
+            "content_changed_tiles": 49,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              25,
+              24
+            ],
+            "metadata_ms": 50.392,
+            "owned_tiles": 60,
+            "plan_fallbacks": 0,
+            "plan_ms": 778.3627400003752,
+            "plan_tiles": 60,
+            "projected_tiles": 49,
+            "projection_ms": 121.23705999874801,
+            "publish_ms": 110.73317999944265,
+            "published": true,
+            "render_ms": 1095.1725599989004,
+            "service_render_ms": 1159.778360000928,
+            "texture_upload_bytes": 0,
+            "validate_ms": 35.51,
+            "wait_ms": 8.546
+          },
+          "result": {
+            "azimuth": -5.0,
+            "decorated": false,
+            "elevation": -2.0,
+            "generation": 24,
+            "height_deg": 14.0,
+            "mapped": true,
+            "padding_deg": 2.0,
+            "roll": 0,
+            "surface_height": 144,
+            "surface_width": 240,
+            "title": "BoAYO triangle application",
+            "width_deg": 20.0,
+            "window_id": 1
+          }
+        },
+        {
+          "accept_ms": 387.4157999996096,
+          "name": "content_resize",
+          "present_ms": 1707.9210800006986,
+          "render": {
+            "active_bank": 0,
+            "changed_tiles": 73,
+            "content_changed_tiles": 60,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              30,
+              30
+            ],
+            "metadata_ms": 49.875,
+            "owned_tiles": 73,
+            "plan_fallbacks": 1,
+            "plan_ms": 958.2896800002345,
+            "plan_tiles": 73,
+            "projected_tiles": 60,
+            "projection_ms": 146.0865200006083,
+            "publish_ms": 131.1572199992952,
+            "published": true,
+            "render_ms": 1305.1075599996693,
+            "service_render_ms": 1373.0041400012851,
+            "texture_upload_bytes": 0,
+            "validate_ms": 35.558,
+            "wait_ms": 30.377
+          },
+          "result": {
+            "azimuth": -5.0,
+            "decorated": false,
+            "elevation": -2.0,
+            "generation": 25,
+            "height_deg": 16.0,
+            "mapped": true,
+            "padding_deg": 2.0,
+            "roll": 0,
+            "surface_height": 144,
+            "surface_width": 240,
+            "title": "BoAYO triangle application",
+            "width_deg": 24.0,
+            "window_id": 1
+          }
+        },
+        {
+          "accept_ms": 373.31111999973655,
+          "name": "content_resize",
+          "present_ms": 1507.7182799987495,
+          "render": {
+            "active_bank": 1,
+            "changed_tiles": 73,
+            "content_changed_tiles": 49,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              25,
+              24
+            ],
+            "metadata_ms": 49.314,
+            "owned_tiles": 60,
+            "plan_fallbacks": 0,
+            "plan_ms": 795.6901399993512,
+            "plan_tiles": 60,
+            "projected_tiles": 49,
+            "projection_ms": 117.62086000089766,
+            "publish_ms": 120.08461999903375,
+            "published": true,
+            "render_ms": 1124.5710799994413,
+            "service_render_ms": 1189.187119998678,
+            "texture_upload_bytes": 0,
+            "validate_ms": 35.883,
+            "wait_ms": 19.067
+          },
+          "result": {
+            "azimuth": -5.0,
+            "decorated": false,
+            "elevation": -2.0,
+            "generation": 26,
+            "height_deg": 14.0,
+            "mapped": true,
+            "padding_deg": 2.0,
+            "roll": 0,
+            "surface_height": 144,
+            "surface_width": 240,
+            "title": "BoAYO triangle application",
+            "width_deg": 20.0,
+            "window_id": 1
+          }
+        },
+        {
+          "accept_ms": 415.3938999995589,
+          "name": "content_resize",
+          "present_ms": 1737.6027600001544,
+          "render": {
+            "active_bank": 0,
+            "changed_tiles": 73,
+            "content_changed_tiles": 60,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              30,
+              30
+            ],
+            "metadata_ms": 49.759,
+            "owned_tiles": 73,
+            "plan_fallbacks": 1,
+            "plan_ms": 965.0474600002781,
+            "plan_tiles": 73,
+            "projected_tiles": 60,
+            "projection_ms": 147.99390000007406,
+            "publish_ms": 132.04699999914737,
+            "published": true,
+            "render_ms": 1314.8077000005287,
+            "service_render_ms": 1382.4158400002489,
+            "texture_upload_bytes": 0,
+            "validate_ms": 35.577,
+            "wait_ms": 30.793
+          },
+          "result": {
+            "azimuth": -5.0,
+            "decorated": false,
+            "elevation": -2.0,
+            "generation": 27,
+            "height_deg": 16.0,
+            "mapped": true,
+            "padding_deg": 2.0,
+            "roll": 0,
+            "surface_height": 144,
+            "surface_width": 240,
+            "title": "BoAYO triangle application",
+            "width_deg": 24.0,
+            "window_id": 1
+          }
+        },
+        {
+          "accept_ms": 389.9340400006622,
+          "name": "content_restore_size",
+          "present_ms": 1527.81712000072,
+          "render": {
+            "active_bank": 1,
+            "changed_tiles": 83,
+            "content_changed_tiles": 40,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              20,
+              20
+            ],
+            "metadata_ms": 51.128,
+            "owned_tiles": 72,
+            "plan_fallbacks": 0,
+            "plan_ms": 830.4215999996813,
+            "plan_tiles": 72,
+            "projected_tiles": 40,
+            "projection_ms": 112.66054000043368,
+            "publish_ms": 110.19317999853229,
+            "published": true,
+            "render_ms": 1134.7426799984532,
+            "service_render_ms": 1200.697020000007,
+            "texture_upload_bytes": 0,
+            "validate_ms": 34.782,
+            "wait_ms": 9.279
+          },
+          "result": {
+            "azimuth": 0.0,
+            "decorated": false,
+            "elevation": 0.0,
+            "generation": 28,
+            "height_deg": 14.0,
+            "mapped": true,
+            "padding_deg": 2.0,
+            "roll": 0,
+            "surface_height": 144,
+            "surface_width": 240,
+            "title": "BoAYO triangle application",
+            "width_deg": 20.0,
+            "window_id": 1
+          }
+        },
+        {
+          "accept_ms": 1450.6383800003678,
+          "name": "second_content",
+          "present_ms": 2715.5850600004196,
+          "render": {
+            "active_bank": 0,
+            "changed_tiles": 30,
+            "content_changed_tiles": 30,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              15,
+              15
+            ],
+            "metadata_ms": 51.618,
+            "owned_tiles": 107,
+            "plan_fallbacks": 0,
+            "plan_ms": 708.5513599995465,
+            "plan_tiles": 59,
+            "projected_tiles": 30,
+            "projection_ms": 231.081500000073,
+            "publish_ms": 135.17161999880045,
+            "published": true,
+            "render_ms": 1165.0769199986826,
+            "service_render_ms": 1231.8424800014327,
+            "texture_upload_bytes": 138240,
+            "validate_ms": 33.005,
+            "wait_ms": 35.134
+          },
+          "result": {
+            "changed": true,
+            "copied_bytes": 103680,
+            "generation": 31,
+            "sequence": 1,
+            "window_id": 2
+          }
+        },
+        {
+          "accept_ms": 1518.1834399998188,
+          "name": "third_content",
+          "present_ms": 2967.213200001046,
+          "render": {
+            "active_bank": 1,
+            "changed_tiles": 44,
+            "content_changed_tiles": 44,
+            "copied_tiles": 30,
+            "jobs_per_core": [
+              22,
+              22
+            ],
+            "metadata_ms": 49.947,
+            "owned_tiles": 107,
+            "plan_fallbacks": 0,
+            "plan_ms": 778.7692000001698,
+            "plan_tiles": 62,
+            "projected_tiles": 44,
+            "projection_ms": 260.17137999951956,
+            "publish_ms": 124.29895999957807,
+            "published": true,
+            "render_ms": 1384.8168200001965,
+            "service_render_ms": 1459.2795799999294,
+            "texture_upload_bytes": 138240,
+            "validate_ms": 32.878,
+            "wait_ms": 25.541
+          },
+          "result": {
+            "changed": true,
+            "copied_bytes": 103680,
+            "generation": 32,
+            "sequence": 1,
+            "window_id": 3
+          }
+        },
+        {
+          "accept_ms": 373.15833999961615,
+          "name": "overlap_move",
+          "present_ms": 1891.3637600000948,
+          "render": {
+            "active_bank": 0,
+            "changed_tiles": 59,
+            "content_changed_tiles": 49,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              25,
+              24
+            ],
+            "metadata_ms": 50.176,
+            "owned_tiles": 112,
+            "plan_fallbacks": 0,
+            "plan_ms": 831.799219999084,
+            "plan_tiles": 61,
+            "projected_tiles": 49,
+            "projection_ms": 449.4674000015948,
+            "publish_ms": 120.02535999999964,
+            "published": true,
+            "render_ms": 1495.183500001076,
+            "service_render_ms": 1562.6918799989653,
+            "texture_upload_bytes": 276480,
+            "validate_ms": 35.63,
+            "wait_ms": 17.73
+          },
+          "result": {
+            "azimuth": -12.0,
+            "decorated": false,
+            "elevation": -3.0,
+            "generation": 33,
+            "height_deg": 14.0,
+            "mapped": true,
+            "padding_deg": 2.0,
+            "roll": 0,
+            "surface_height": 144,
+            "surface_width": 240,
+            "title": "BoAYO triangle application",
+            "width_deg": 20.0,
+            "window_id": 3
+          }
+        },
+        {
+          "accept_ms": 370.5213400013745,
+          "name": "overlap_move",
+          "present_ms": 1542.9147800002247,
+          "render": {
+            "active_bank": 1,
+            "changed_tiles": 69,
+            "content_changed_tiles": 43,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              22,
+              21
+            ],
+            "metadata_ms": 50.879,
+            "owned_tiles": 97,
+            "plan_fallbacks": 0,
+            "plan_ms": 799.7503400001733,
+            "plan_tiles": 60,
+            "projected_tiles": 43,
+            "projection_ms": 118.46163999871351,
+            "publish_ms": 139.86402000045928,
+            "published": true,
+            "render_ms": 1144.6142400000099,
+            "service_render_ms": 1213.2809400009137,
+            "texture_upload_bytes": 0,
+            "validate_ms": 35.754,
+            "wait_ms": 38.192
+          },
+          "result": {
+            "azimuth": -5.0,
+            "decorated": false,
+            "elevation": -3.0,
+            "generation": 34,
+            "height_deg": 14.0,
+            "mapped": true,
+            "padding_deg": 2.0,
+            "roll": 0,
+            "surface_height": 144,
+            "surface_width": 240,
+            "title": "BoAYO triangle application",
+            "width_deg": 20.0,
+            "window_id": 3
+          }
+        },
+        {
+          "accept_ms": 378.826099999249,
+          "name": "overlap_move",
+          "present_ms": 1882.4755199998617,
+          "render": {
+            "active_bank": 0,
+            "changed_tiles": 69,
+            "content_changed_tiles": 55,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              25,
+              25
+            ],
+            "metadata_ms": 49.987,
+            "owned_tiles": 112,
+            "plan_fallbacks": 0,
+            "plan_ms": 819.8243000006187,
+            "plan_tiles": 61,
+            "projected_tiles": 50,
+            "projection_ms": 447.990540000319,
+            "publish_ms": 129.20794000092428,
+            "published": true,
+            "render_ms": 1495.1550800014957,
+            "service_render_ms": 1561.6158000011637,
+            "texture_upload_bytes": 276480,
+            "validate_ms": 35.489,
+            "wait_ms": 28.059
+          },
+          "result": {
+            "azimuth": -12.0,
+            "decorated": false,
+            "elevation": -3.0,
+            "generation": 35,
+            "height_deg": 14.0,
+            "mapped": true,
+            "padding_deg": 2.0,
+            "roll": 0,
+            "surface_height": 144,
+            "surface_width": 240,
+            "title": "BoAYO triangle application",
+            "width_deg": 20.0,
+            "window_id": 3
+          }
+        },
+        {
+          "accept_ms": 374.7606000006199,
+          "name": "overlap_move",
+          "present_ms": 1547.9672999996692,
+          "render": {
+            "active_bank": 1,
+            "changed_tiles": 69,
+            "content_changed_tiles": 43,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              22,
+              21
+            ],
+            "metadata_ms": 49.851,
+            "owned_tiles": 97,
+            "plan_fallbacks": 0,
+            "plan_ms": 809.667219999028,
+            "plan_tiles": 60,
+            "projected_tiles": 43,
+            "projection_ms": 115.8761599999707,
+            "publish_ms": 131.21268000031705,
+            "published": true,
+            "render_ms": 1144.6216399999685,
+            "service_render_ms": 1213.4810200004722,
+            "texture_upload_bytes": 0,
+            "validate_ms": 35.828,
+            "wait_ms": 28.453
+          },
+          "result": {
+            "azimuth": -5.0,
+            "decorated": false,
+            "elevation": -3.0,
+            "generation": 36,
+            "height_deg": 14.0,
+            "mapped": true,
+            "padding_deg": 2.0,
+            "roll": 0,
+            "surface_height": 144,
+            "surface_width": 240,
+            "title": "BoAYO triangle application",
+            "width_deg": 20.0,
+            "window_id": 3
+          }
+        },
+        {
+          "accept_ms": 361.6172400005162,
+          "name": "overlap_move",
+          "present_ms": 1888.5155400000513,
+          "render": {
+            "active_bank": 0,
+            "changed_tiles": 69,
+            "content_changed_tiles": 55,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              25,
+              25
+            ],
+            "metadata_ms": 49.643,
+            "owned_tiles": 112,
+            "plan_fallbacks": 0,
+            "plan_ms": 800.725519999105,
+            "plan_tiles": 61,
+            "projected_tiles": 50,
+            "projection_ms": 461.1177399983717,
+            "publish_ms": 120.80631999924663,
+            "published": true,
+            "render_ms": 1474.905379998745,
+            "service_render_ms": 1542.8878200000327,
+            "texture_upload_bytes": 276480,
+            "validate_ms": 35.313,
+            "wait_ms": 19.277
+          },
+          "result": {
+            "azimuth": -12.0,
+            "decorated": false,
+            "elevation": -3.0,
+            "generation": 37,
+            "height_deg": 14.0,
+            "mapped": true,
+            "padding_deg": 2.0,
+            "roll": 0,
+            "surface_height": 144,
+            "surface_width": 240,
+            "title": "BoAYO triangle application",
+            "width_deg": 20.0,
+            "window_id": 3
+          }
+        },
+        {
+          "accept_ms": 302.12796000018716,
+          "name": "raise",
+          "present_ms": 967.3679200001061,
+          "render": {
+            "active_bank": 1,
+            "changed_tiles": 64,
+            "content_changed_tiles": 40,
+            "copied_tiles": 16,
+            "jobs_per_core": [
+              20,
+              20
+            ],
+            "metadata_ms": 51.287,
+            "owned_tiles": 112,
+            "plan_fallbacks": 0,
+            "plan_ms": 0.0,
+            "plan_tiles": 0,
+            "projected_tiles": 40,
+            "projection_ms": 279.85805999924196,
+            "publish_ms": 116.17239999941376,
+            "published": true,
+            "render_ms": 644.7953400002007,
+            "service_render_ms": 725.2013200013607,
+            "texture_upload_bytes": 138240,
+            "validate_ms": 35.699,
+            "wait_ms": 15.9
+          },
+          "result": {
+            "azimuth": 0.0,
+            "decorated": false,
+            "elevation": 0.0,
+            "generation": 38,
+            "height_deg": 14.0,
+            "mapped": true,
+            "padding_deg": 2.0,
+            "roll": 0,
+            "surface_height": 144,
+            "surface_width": 240,
+            "title": "BoAYO triangle application",
+            "width_deg": 20.0,
+            "window_id": 1
+          }
+        },
+        {
+          "accept_ms": 193.01472000032663,
+          "name": "close",
+          "present_ms": 716.5059799998999,
+          "render": {
+            "active_bank": 0,
+            "changed_tiles": 25,
+            "content_changed_tiles": 0,
+            "copied_tiles": 40,
+            "jobs_per_core": [
+              0,
+              0
+            ],
+            "metadata_ms": 50.185,
+            "owned_tiles": 87,
+            "plan_fallbacks": 0,
+            "plan_ms": 0.0,
+            "plan_tiles": 0,
+            "projected_tiles": 0,
+            "projection_ms": 0.351460001184023,
+            "publish_ms": 112.9730800003017,
+            "published": true,
+            "render_ms": 405.08369999952265,
+            "service_render_ms": 475.92556000017794,
+            "texture_upload_bytes": 0,
+            "validate_ms": 33.495,
+            "wait_ms": 13.777
+          },
+          "result": {
+            "generation": 39,
+            "window_id": 3
+          }
+        },
+        {
+          "accept_ms": 184.72626000083983,
+          "name": "close",
+          "present_ms": 498.4430200010538,
+          "render": {
+            "active_bank": 1,
+            "changed_tiles": 15,
+            "content_changed_tiles": 0,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              0,
+              0
+            ],
+            "metadata_ms": 52.469,
+            "owned_tiles": 72,
+            "plan_fallbacks": 0,
+            "plan_ms": 0.0,
+            "plan_tiles": 0,
+            "projected_tiles": 0,
+            "projection_ms": 0.3322400007164106,
+            "publish_ms": 131.58952000048885,
+            "published": true,
+            "render_ms": 214.3080200003169,
+            "service_render_ms": 281.89516000020376,
+            "texture_upload_bytes": 0,
+            "validate_ms": 33.256,
+            "wait_ms": 30.687
+          },
+          "result": {
+            "generation": 40,
+            "window_id": 2
+          }
+        },
+        {
+          "name": "view_pose",
+          "present_ms": 220.78480000048876,
+          "result": {
+            "operation": "pose",
+            "pitch": -2.0,
+            "pose_ms": 27.414420001150575,
+            "roll": 0,
+            "scene_commits": 40,
+            "total_ms": 53.804659999514115,
+            "yaw": -5.0
+          }
+        },
+        {
+          "name": "view_pose",
+          "present_ms": 219.61263999901712,
+          "result": {
+            "operation": "pose",
+            "pitch": 2.0,
+            "pose_ms": 16.83816000149818,
+            "roll": 0,
+            "scene_commits": 40,
+            "total_ms": 43.10142000031192,
+            "yaw": 5.0
+          }
+        },
+        {
+          "name": "view_pose",
+          "present_ms": 250.4027800001204,
+          "result": {
+            "operation": "pose",
+            "pitch": -2.0,
+            "pose_ms": 47.778280000784434,
+            "roll": 0,
+            "scene_commits": 40,
+            "total_ms": 74.10155999968993,
+            "yaw": -5.0
+          }
+        },
+        {
+          "name": "view_pose",
+          "present_ms": 249.52772000059485,
+          "result": {
+            "operation": "pose",
+            "pitch": 2.0,
+            "pose_ms": 47.07963999862841,
+            "roll": 0,
+            "scene_commits": 40,
+            "total_ms": 73.42190000053961,
+            "yaw": 5.0
+          }
+        },
+        {
+          "name": "view_pose",
+          "present_ms": 250.42874000035226,
+          "result": {
+            "operation": "pose",
+            "pitch": -2.0,
+            "pose_ms": 40.87358000106178,
+            "roll": 0,
+            "scene_commits": 40,
+            "total_ms": 74.33088000107091,
+            "yaw": -5.0
+          }
+        },
+        {
+          "name": "view_pose",
+          "present_ms": 249.7824200000614,
+          "result": {
+            "operation": "pose",
+            "pitch": 2.0,
+            "pose_ms": 47.02894000001834,
+            "roll": 0,
+            "scene_commits": 40,
+            "total_ms": 73.32445999963966,
+            "yaw": 5.0
+          }
+        },
+        {
+          "name": "view_pose",
+          "present_ms": 249.64972000010312,
+          "result": {
+            "operation": "pose",
+            "pitch": -2.0,
+            "pose_ms": 47.634739999921294,
+            "roll": 0,
+            "scene_commits": 40,
+            "total_ms": 74.01813999967999,
+            "yaw": -5.0
+          }
+        },
+        {
+          "accept_ms": 190.4553799983114,
+          "name": "destroy_owned",
+          "present_ms": 482.3047799989581,
+          "render": {
+            "active_bank": 0,
+            "changed_tiles": 72,
+            "content_changed_tiles": 0,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              0,
+              0
+            ],
+            "metadata_ms": 50.656,
+            "owned_tiles": 0,
+            "plan_fallbacks": 0,
+            "plan_ms": 0.0,
+            "plan_tiles": 0,
+            "projected_tiles": 0,
+            "projection_ms": 0.3315800004202174,
+            "publish_ms": 133.36956000057398,
+            "published": true,
+            "render_ms": 195.6490800002939,
+            "service_render_ms": 253.55644000046595,
+            "texture_upload_bytes": 0,
+            "validate_ms": 33.334,
+            "wait_ms": 34.279
+          },
+          "result": {
+            "generation": 41,
+            "window_id": 1
+          }
+        }
+      ],
+      "metrics": [
+        {
+          "key": "initial_content",
+          "n": 1,
+          "median_ms": 2841.126,
+          "p95_ms": 2841.126,
+          "max_ms": 2841.126,
+          "accept_median_ms": 1489.603,
+          "plan_ms_median": 814.646,
+          "render_ms_median": 1284.909,
+          "projection_ms_median": 253.137,
+          "publish_ms_median": 135.33,
+          "projected_tiles_median": 40,
+          "texture_upload_bytes_median": 138240
+        },
+        {
+          "key": "partial_8x8",
+          "n": 11,
+          "median_ms": 550.099,
+          "p95_ms": 779.634,
+          "max_ms": 779.634,
+          "accept_median_ms": 220.403,
+          "plan_ms_median": 0.0,
+          "render_ms_median": 254.984,
+          "projection_ms_median": 40.51,
+          "publish_ms_median": 117.841,
+          "projected_tiles_median": 4,
+          "texture_upload_bytes_median": 7680
+        },
+        {
+          "key": "content_move",
+          "n": 7,
+          "median_ms": 1517.841,
+          "p95_ms": 1600.518,
+          "max_ms": 1600.518,
+          "accept_median_ms": 387.424,
+          "plan_ms_median": 795.35,
+          "render_ms_median": 1114.648,
+          "projection_ms_median": 113.438,
+          "publish_ms_median": 134.655,
+          "projected_tiles_median": 49,
+          "texture_upload_bytes_median": 0
+        },
+        {
+          "key": "content_resize",
+          "n": 7,
+          "median_ms": 1707.595,
+          "p95_ms": 1737.603,
+          "max_ms": 1737.603,
+          "accept_median_ms": 387.416,
+          "plan_ms_median": 950.863,
+          "render_ms_median": 1296.008,
+          "projection_ms_median": 142.811,
+          "publish_ms_median": 120.085,
+          "projected_tiles_median": 60,
+          "texture_upload_bytes_median": 0
+        },
+        {
+          "key": "content_restore_size",
+          "n": 1,
+          "median_ms": 1527.817,
+          "p95_ms": 1527.817,
+          "max_ms": 1527.817,
+          "accept_median_ms": 389.934,
+          "plan_ms_median": 830.422,
+          "render_ms_median": 1134.743,
+          "projection_ms_median": 112.661,
+          "publish_ms_median": 110.193,
+          "projected_tiles_median": 40,
+          "texture_upload_bytes_median": 0
+        },
+        {
+          "key": "second_content",
+          "n": 1,
+          "median_ms": 2715.585,
+          "p95_ms": 2715.585,
+          "max_ms": 2715.585,
+          "accept_median_ms": 1450.638,
+          "plan_ms_median": 708.551,
+          "render_ms_median": 1165.077,
+          "projection_ms_median": 231.082,
+          "publish_ms_median": 135.172,
+          "projected_tiles_median": 30,
+          "texture_upload_bytes_median": 138240
+        },
+        {
+          "key": "third_content",
+          "n": 1,
+          "median_ms": 2967.213,
+          "p95_ms": 2967.213,
+          "max_ms": 2967.213,
+          "accept_median_ms": 1518.183,
+          "plan_ms_median": 778.769,
+          "render_ms_median": 1384.817,
+          "projection_ms_median": 260.171,
+          "publish_ms_median": 124.299,
+          "projected_tiles_median": 44,
+          "texture_upload_bytes_median": 138240
+        },
+        {
+          "key": "overlap_move",
+          "n": 5,
+          "median_ms": 1882.476,
+          "p95_ms": 1891.364,
+          "max_ms": 1891.364,
+          "accept_median_ms": 373.158,
+          "plan_ms_median": 809.667,
+          "render_ms_median": 1474.905,
+          "projection_ms_median": 447.991,
+          "publish_ms_median": 129.208,
+          "projected_tiles_median": 49,
+          "texture_upload_bytes_median": 276480
+        },
+        {
+          "key": "raise",
+          "n": 1,
+          "median_ms": 967.368,
+          "p95_ms": 967.368,
+          "max_ms": 967.368,
+          "accept_median_ms": 302.128,
+          "plan_ms_median": 0.0,
+          "render_ms_median": 644.795,
+          "projection_ms_median": 279.858,
+          "publish_ms_median": 116.172,
+          "projected_tiles_median": 40,
+          "texture_upload_bytes_median": 138240
+        },
+        {
+          "key": "close",
+          "n": 2,
+          "median_ms": 607.475,
+          "p95_ms": 716.506,
+          "max_ms": 716.506,
+          "accept_median_ms": 188.87,
+          "plan_ms_median": 0.0,
+          "render_ms_median": 309.696,
+          "projection_ms_median": 0.342,
+          "publish_ms_median": 122.281,
+          "projected_tiles_median": 0.0,
+          "texture_upload_bytes_median": 0.0
+        },
+        {
+          "key": "view_pose",
+          "n": 7,
+          "median_ms": 249.65,
+          "p95_ms": 250.429,
+          "max_ms": 250.429
+        },
+        {
+          "key": "destroy_owned",
+          "n": 1,
+          "median_ms": 482.305,
+          "p95_ms": 482.305,
+          "max_ms": 482.305,
+          "accept_median_ms": 190.455,
+          "plan_ms_median": 0.0,
+          "render_ms_median": 195.649,
+          "projection_ms_median": 0.332,
+          "publish_ms_median": 133.37,
+          "projected_tiles_median": 0,
+          "texture_upload_bytes_median": 0
+        }
+      ],
+      "creates": [
+        {
+          "create_and_map_ms": 1669.2889200001955,
+          "window_id": 1
+        }
+      ],
+      "pose_sweeps": [
+        {
+          "max_ms": 45.362960001511965,
+          "median_ms": 45.0940000009723,
+          "n": 61,
+          "operation": "pose_sweep",
+          "p95_ms": 45.292540000446024,
+          "preparation_ms": 1665.1570399990305,
+          "samples_ms": [
+            39.14133999933256,
+            45.34221999892907,
+            35.424699999566656,
+            45.048339999993914,
+            45.14455999924394,
+            35.377960000914754,
+            45.02734000016062,
+            40.8056399992347,
+            35.31863999887719,
+            45.02857999978005,
+            45.291599999472965,
+            35.378600001422456,
+            45.102899999619694,
+            45.16743999920436,
+            35.290460000396706,
+            45.292540000446024,
+            45.1842200000101,
+            35.26567999870167,
+            45.29261999959999,
+            45.09169999982987,
+            35.30606000094849,
+            45.17203999967023,
+            45.204519999970216,
+            35.56404000119073,
+            45.22365999946487,
+            45.0940000009723,
+            35.43078000075184,
+            45.17324000153167,
+            45.074120000208495,
+            35.484140000335174,
+            45.07462000037776,
+            41.8322999994416,
+            35.38534000108484,
+            45.117379999283,
+            45.25599999942642,
+            35.344379999514786,
+            45.04884000016318,
+            45.1840000005177,
+            35.42170000037004,
+            45.18622000068717,
+            45.24828000103298,
+            35.2861400006077,
+            45.123779998903046,
+            45.208780000393745,
+            35.38229999867326,
+            45.15838000043004,
+            45.213899998998386,
+            35.45997999935935,
+            45.196459999715444,
+            45.174719998613,
+            35.3908599990973,
+            45.246120000228984,
+            45.16187999979593,
+            35.30262000094808,
+            45.18800000005285,
+            45.362960001511965,
+            35.383280001042294,
+            45.17917999874044,
+            45.17608000060136,
+            35.37111999867193,
+            45.17835999831732
+          ],
+          "scope": "precomputed camera submit to output acknowledgment; excludes pacing",
+          "total_ms": 5827.474220001022
+        }
+      ]
+    },
+    "XRGB8888": {
+      "log": "updates/triangle-wm/evidence/TRI_025a017228.log",
+      "samples": [
+        {
+          "accept_ms": 1459.2907199990004,
+          "name": "initial_content",
+          "present_ms": 2850.500359999016,
+          "render": {
+            "active_bank": 0,
+            "changed_tiles": 40,
+            "content_changed_tiles": 40,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              20,
+              20
+            ],
+            "metadata_ms": 49.79,
+            "owned_tiles": 72,
+            "plan_fallbacks": 0,
+            "plan_ms": 830.7060000006459,
+            "plan_tiles": 72,
+            "projected_tiles": 40,
+            "projection_ms": 268.780020000122,
+            "publish_ms": 131.1223800003063,
+            "published": true,
+            "render_ms": 1295.16478000005,
+            "service_render_ms": 1360.5115999998816,
+            "texture_upload_bytes": 138240,
+            "validate_ms": 32.956,
+            "wait_ms": 29.415
+          },
+          "result": {
+            "changed": true,
+            "copied_bytes": 138240,
+            "generation": 43,
+            "sequence": 1,
+            "window_id": 4
+          }
+        },
+        {
+          "accept_ms": 237.72140000015497,
+          "name": "partial_8x8",
+          "present_ms": 778.1993799991906,
+          "render": {
+            "active_bank": 1,
+            "changed_tiles": 4,
+            "content_changed_tiles": 4,
+            "copied_tiles": 36,
+            "jobs_per_core": [
+              2,
+              2
+            ],
+            "metadata_ms": 51.058,
+            "owned_tiles": 72,
+            "plan_fallbacks": 0,
+            "plan_ms": 0.0,
+            "plan_tiles": 0,
+            "projected_tiles": 4,
+            "projection_ms": 22.873859999890556,
+            "publish_ms": 115.25175999850035,
+            "published": true,
+            "render_ms": 451.2767399992299,
+            "service_render_ms": 525.6605800004763,
+            "texture_upload_bytes": 7680,
+            "validate_ms": 33.194,
+            "wait_ms": 15.37
+          },
+          "result": {
+            "changed": true,
+            "copied_bytes": 256,
+            "generation": 44,
+            "sequence": 2,
+            "window_id": 4
+          }
+        },
+        {
+          "accept_ms": 213.11758000031114,
+          "name": "partial_8x8",
+          "present_ms": 562.3884000014514,
+          "render": {
+            "active_bank": 0,
+            "changed_tiles": 4,
+            "content_changed_tiles": 4,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              2,
+              2
+            ],
+            "metadata_ms": 47.012,
+            "owned_tiles": 72,
+            "plan_fallbacks": 0,
+            "plan_ms": 0.0,
+            "plan_tiles": 0,
+            "projected_tiles": 4,
+            "projection_ms": 37.01790000013716,
+            "publish_ms": 131.40874000055192,
+            "published": true,
+            "render_ms": 254.72150000132388,
+            "service_render_ms": 322.1330600008514,
+            "texture_upload_bytes": 7680,
+            "validate_ms": 35.32,
+            "wait_ms": 31.194
+          },
+          "result": {
+            "changed": true,
+            "copied_bytes": 256,
+            "generation": 45,
+            "sequence": 3,
+            "window_id": 4
+          }
+        },
+        {
+          "accept_ms": 214.24196000024676,
+          "name": "partial_8x8",
+          "present_ms": 559.8337399996817,
+          "render": {
+            "active_bank": 1,
+            "changed_tiles": 4,
+            "content_changed_tiles": 4,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              2,
+              2
+            ],
+            "metadata_ms": 49.202,
+            "owned_tiles": 72,
+            "plan_fallbacks": 0,
+            "plan_ms": 0.0,
+            "plan_tiles": 0,
+            "projected_tiles": 4,
+            "projection_ms": 35.33584000069823,
+            "publish_ms": 123.44318000032217,
+            "published": true,
+            "render_ms": 254.86504000036803,
+            "service_render_ms": 321.8903999986651,
+            "texture_upload_bytes": 7680,
+            "validate_ms": 33.134,
+            "wait_ms": 25.156
+          },
+          "result": {
+            "changed": true,
+            "copied_bytes": 256,
+            "generation": 46,
+            "sequence": 4,
+            "window_id": 4
+          }
+        },
+        {
+          "accept_ms": 229.99279999919236,
+          "name": "partial_8x8",
+          "present_ms": 580.1868999991566,
+          "render": {
+            "active_bank": 0,
+            "changed_tiles": 4,
+            "content_changed_tiles": 4,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              2,
+              2
+            ],
+            "metadata_ms": 49.508,
+            "owned_tiles": 72,
+            "plan_fallbacks": 0,
+            "plan_ms": 0.0,
+            "plan_tiles": 0,
+            "projected_tiles": 4,
+            "projection_ms": 49.54496000027575,
+            "publish_ms": 140.40344000022742,
+            "published": true,
+            "render_ms": 275.15563999986625,
+            "service_render_ms": 341.69896000094013,
+            "texture_upload_bytes": 7680,
+            "validate_ms": 37.205,
+            "wait_ms": 38.613
+          },
+          "result": {
+            "changed": true,
+            "copied_bytes": 256,
+            "generation": 47,
+            "sequence": 5,
+            "window_id": 4
+          }
+        },
+        {
+          "accept_ms": 229.5329599995166,
+          "name": "partial_8x8",
+          "present_ms": 554.5913399998099,
+          "render": {
+            "active_bank": 1,
+            "changed_tiles": 4,
+            "content_changed_tiles": 4,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              2,
+              2
+            ],
+            "metadata_ms": 49.896,
+            "owned_tiles": 72,
+            "plan_fallbacks": 0,
+            "plan_ms": 0.0,
+            "plan_tiles": 0,
+            "projected_tiles": 4,
+            "projection_ms": 39.492939999036025,
+            "publish_ms": 110.43314000016835,
+            "published": true,
+            "render_ms": 245.12130000039178,
+            "service_render_ms": 315.6213000002026,
+            "texture_upload_bytes": 7680,
+            "validate_ms": 35.934,
+            "wait_ms": 9.483
+          },
+          "result": {
+            "changed": true,
+            "copied_bytes": 256,
+            "generation": 48,
+            "sequence": 6,
+            "window_id": 4
+          }
+        },
+        {
+          "accept_ms": 229.7152599990368,
+          "name": "partial_8x8",
+          "present_ms": 559.8640399985015,
+          "render": {
+            "active_bank": 0,
+            "changed_tiles": 4,
+            "content_changed_tiles": 4,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              2,
+              2
+            ],
+            "metadata_ms": 47.093,
+            "owned_tiles": 72,
+            "plan_fallbacks": 0,
+            "plan_ms": 0.0,
+            "plan_tiles": 0,
+            "projected_tiles": 4,
+            "projection_ms": 39.88434000166308,
+            "publish_ms": 134.6650799987401,
+            "published": true,
+            "render_ms": 268.5752199995477,
+            "service_render_ms": 332.7664600001299,
+            "texture_upload_bytes": 7680,
+            "validate_ms": 35.173,
+            "wait_ms": 32.275
+          },
+          "result": {
+            "changed": true,
+            "copied_bytes": 256,
+            "generation": 49,
+            "sequence": 7,
+            "window_id": 4
+          }
+        },
+        {
+          "accept_ms": 220.99623999930918,
+          "name": "partial_8x8",
+          "present_ms": 545.6620799992234,
+          "render": {
+            "active_bank": 1,
+            "changed_tiles": 4,
+            "content_changed_tiles": 4,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              2,
+              2
+            ],
+            "metadata_ms": 50.088,
+            "owned_tiles": 72,
+            "plan_fallbacks": 0,
+            "plan_ms": 0.0,
+            "plan_tiles": 0,
+            "projected_tiles": 4,
+            "projection_ms": 38.48323999955028,
+            "publish_ms": 116.35256000045047,
+            "published": true,
+            "render_ms": 241.53128000034485,
+            "service_render_ms": 309.67122000038216,
+            "texture_upload_bytes": 7680,
+            "validate_ms": 35.34,
+            "wait_ms": 13.001
+          },
+          "result": {
+            "changed": true,
+            "copied_bytes": 256,
+            "generation": 50,
+            "sequence": 8,
+            "window_id": 4
+          }
+        },
+        {
+          "accept_ms": 227.02897999994457,
+          "name": "partial_8x8",
+          "present_ms": 540.5057800002396,
+          "render": {
+            "active_bank": 0,
+            "changed_tiles": 4,
+            "content_changed_tiles": 4,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              2,
+              2
+            ],
+            "metadata_ms": 51.136,
+            "owned_tiles": 72,
+            "plan_fallbacks": 0,
+            "plan_ms": 0.0,
+            "plan_tiles": 0,
+            "projected_tiles": 4,
+            "projection_ms": 38.583039999139146,
+            "publish_ms": 119.27975999969931,
+            "published": true,
+            "render_ms": 244.64291999902343,
+            "service_render_ms": 311.4506799993251,
+            "texture_upload_bytes": 7680,
+            "validate_ms": 35.405,
+            "wait_ms": 16.989
+          },
+          "result": {
+            "changed": true,
+            "copied_bytes": 256,
+            "generation": 51,
+            "sequence": 9,
+            "window_id": 4
+          }
+        },
+        {
+          "accept_ms": 239.9165199995041,
+          "name": "partial_8x8",
+          "present_ms": 582.4826800003648,
+          "render": {
+            "active_bank": 1,
+            "changed_tiles": 4,
+            "content_changed_tiles": 4,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              2,
+              2
+            ],
+            "metadata_ms": 49.124,
+            "owned_tiles": 72,
+            "plan_fallbacks": 0,
+            "plan_ms": 0.0,
+            "plan_tiles": 0,
+            "projected_tiles": 4,
+            "projection_ms": 42.487400000027264,
+            "publish_ms": 139.38170000074024,
+            "published": true,
+            "render_ms": 284.3517800010886,
+            "service_render_ms": 351.94177999983367,
+            "texture_upload_bytes": 7680,
+            "validate_ms": 37.949,
+            "wait_ms": 37.235
+          },
+          "result": {
+            "changed": true,
+            "copied_bytes": 256,
+            "generation": 52,
+            "sequence": 10,
+            "window_id": 4
+          }
+        },
+        {
+          "accept_ms": 248.4966599997133,
+          "name": "partial_8x8",
+          "present_ms": 587.1212999988347,
+          "render": {
+            "active_bank": 0,
+            "changed_tiles": 4,
+            "content_changed_tiles": 4,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              2,
+              2
+            ],
+            "metadata_ms": 51.396,
+            "owned_tiles": 72,
+            "plan_fallbacks": 0,
+            "plan_ms": 0.0,
+            "plan_tiles": 0,
+            "projected_tiles": 4,
+            "projection_ms": 60.67097999948601,
+            "publish_ms": 134.16888000028848,
+            "published": true,
+            "render_ms": 284.84623999975156,
+            "service_render_ms": 351.75582000010763,
+            "texture_upload_bytes": 7680,
+            "validate_ms": 33.015,
+            "wait_ms": 34.774
+          },
+          "result": {
+            "changed": true,
+            "copied_bytes": 256,
+            "generation": 53,
+            "sequence": 11,
+            "window_id": 4
+          }
+        },
+        {
+          "accept_ms": 232.79145999997854,
+          "name": "partial_8x8",
+          "present_ms": 552.9026799984276,
+          "render": {
+            "active_bank": 1,
+            "changed_tiles": 4,
+            "content_changed_tiles": 4,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              2,
+              2
+            ],
+            "metadata_ms": 49.839,
+            "owned_tiles": 72,
+            "plan_fallbacks": 0,
+            "plan_ms": 0.0,
+            "plan_tiles": 0,
+            "projected_tiles": 4,
+            "projection_ms": 45.693820000451524,
+            "publish_ms": 112.02233999938471,
+            "published": true,
+            "render_ms": 245.38157999995747,
+            "service_render_ms": 312.0552199998201,
+            "texture_upload_bytes": 7680,
+            "validate_ms": 33.031,
+            "wait_ms": 13.983
+          },
+          "result": {
+            "changed": true,
+            "copied_bytes": 256,
+            "generation": 54,
+            "sequence": 12,
+            "window_id": 4
+          }
+        },
+        {
+          "accept_ms": 160.4473400004208,
+          "name": "destroy_owned",
+          "present_ms": 464.4585000015795,
+          "render": {
+            "active_bank": 0,
+            "changed_tiles": 72,
+            "content_changed_tiles": 0,
+            "copied_tiles": 0,
+            "jobs_per_core": [
+              0,
+              0
+            ],
+            "metadata_ms": 50.083,
+            "owned_tiles": 0,
+            "plan_fallbacks": 0,
+            "plan_ms": 0.0,
+            "plan_tiles": 0,
+            "projected_tiles": 0,
+            "projection_ms": 0.35722000029636547,
+            "publish_ms": 123.25885999962338,
+            "published": true,
+            "render_ms": 185.8550999986619,
+            "service_render_ms": 254.84899999901245,
+            "texture_upload_bytes": 0,
+            "validate_ms": 33.003,
+            "wait_ms": 22.163
+          },
+          "result": {
+            "generation": 55,
+            "window_id": 4
+          }
+        }
+      ],
+      "metrics": [
+        {
+          "key": "initial_content",
+          "n": 1,
+          "median_ms": 2850.5,
+          "p95_ms": 2850.5,
+          "max_ms": 2850.5,
+          "accept_median_ms": 1459.291,
+          "plan_ms_median": 830.706,
+          "render_ms_median": 1295.165,
+          "projection_ms_median": 268.78,
+          "publish_ms_median": 131.122,
+          "projected_tiles_median": 40,
+          "texture_upload_bytes_median": 138240
+        },
+        {
+          "key": "partial_8x8",
+          "n": 11,
+          "median_ms": 559.864,
+          "p95_ms": 778.199,
+          "max_ms": 778.199,
+          "accept_median_ms": 229.715,
+          "plan_ms_median": 0.0,
+          "render_ms_median": 254.865,
+          "projection_ms_median": 39.493,
+          "publish_ms_median": 123.443,
+          "projected_tiles_median": 4,
+          "texture_upload_bytes_median": 7680
+        },
+        {
+          "key": "destroy_owned",
+          "n": 1,
+          "median_ms": 464.459,
+          "p95_ms": 464.459,
+          "max_ms": 464.459,
+          "accept_median_ms": 160.447,
+          "plan_ms_median": 0.0,
+          "render_ms_median": 185.855,
+          "projection_ms_median": 0.357,
+          "publish_ms_median": 123.259,
+          "projected_tiles_median": 0,
+          "texture_upload_bytes_median": 0
+        }
+      ],
+      "creates": [
+        {
+          "create_and_map_ms": 1699.7895599994808,
+          "window_id": 4
+        }
+      ],
+      "pose_sweeps": []
+    }
+  },
+  "scope": "Same physical FPGA/driver, optimized CPU projection planning, RGB24 vs native XRGB8888 vs native RGB332 application/shared buffers. Projector texture remains RGB32."
+}

@@ -1,0 +1,159 @@
+{
+  "base_commit": "5f6ff539fae3e529ef53c1d90952dbe72ba609ea",
+  "compiler": "riscv32-buildroot-linux-musl-g++",
+  "isa": "rv32ima_zicsr_zifencei",
+  "abi": "ilp32",
+  "link": "static",
+  "binaries": {
+    "triangle-boayo": {
+      "sha256": "eb1fb6500b451d27e1aab3bd6c4e88d147ef8a836af8c853a472f0946e8705ad",
+      "bytes": 1767344
+    },
+    "triangle-app": {
+      "sha256": "0e6f51a66cd4ff7400e219211754449a434a027316cbac0a8a0311574a8a3787",
+      "bytes": 1218200
+    },
+    "triangle-boayo-v2": {
+      "sha256": "e5577aeb0b85735733bcd271df49473f11073d96dc90fbedbfea65c7db3d4d97",
+      "bytes": 1767344
+    }
+  },
+  "benchmark_sources": {
+    "src\\boayo_app.cpp": "2c515455cfb5cf162205c36d53b3cf0d58251140a837c27cc5d7169184bdd25e",
+    "src\\boayo_service.cpp": "b96e001537ca0e4e24856eb45ca5a2b0d83a1489af4ac627f30e5ceb5258b769",
+    "src\\content.hpp": "eb3200b20cd41b7822627405c157cf01e7db121d3288bd4eaf44e85863a80152",
+    "src\\content_render.inc": "46ba1fee5f709de3a6fd48175b52d1e861c167359f792dd17f236144396ea128",
+    "src\\fast_camera.hpp": "e3bc0ae75fb98ef203af79f1e5f30027bc0000cfc95d7d552be8dbccf8d5f48f",
+    "src\\generate_geometry.cpp": "5d7838959c8731d115aecd883d08ba249f04446088f033d8c313ed74d95a092a",
+    "src\\triangle_wm.cpp": "9810646ede040ff74098779e7e319df17070f1e7077dca06eef396ad4d531333",
+    "build.sh": "5de2be1a4587260fd397b667be4f29dd27c59b55237aeaa0711e1886c82e7cb3",
+    "tests\\test_boayo.py": "be0ce47aa4e7cfc9d514e6aadbf13508b744bb5e8abffee81850c68724fe062b"
+  },
+  "sources": {
+    "src/boayo_app.cpp": "2c515455cfb5cf162205c36d53b3cf0d58251140a837c27cc5d7169184bdd25e",
+    "src/boayo_service.cpp": "5ebdd1237fc67035fa236bba417a4de2ed7acf621b762092d7a0a6418dc3b668",
+    "src/content.hpp": "eb3200b20cd41b7822627405c157cf01e7db121d3288bd4eaf44e85863a80152",
+    "src/content_render.inc": "46ba1fee5f709de3a6fd48175b52d1e861c167359f792dd17f236144396ea128",
+    "src/fast_camera.hpp": "e3bc0ae75fb98ef203af79f1e5f30027bc0000cfc95d7d552be8dbccf8d5f48f",
+    "src/generate_geometry.cpp": "5d7838959c8731d115aecd883d08ba249f04446088f033d8c313ed74d95a092a",
+    "src/triangle_wm.cpp": "9810646ede040ff74098779e7e319df17070f1e7077dca06eef396ad4d531333",
+    "build.sh": "5de2be1a4587260fd397b667be4f29dd27c59b55237aeaa0711e1886c82e7cb3",
+    "tests/test_boayo.py": "e67d878349c0004ac4681581cd1259bf6ba58982e3d9ebf65485b965aca6a3c8"
+  },
+  "final_service": "triangle-boayo-v2",
+  "changes_since_benchmark": "Refuse existing non-socket/live socket paths; recover stale sockets only; cap per-peer queued response growth. No renderer or app change.",
+  "final_live_smoke": {
+    "uart_log": "evidence/TRI_0ec857f8b1.log",
+    "sha_verification_log": "evidence/TRI_6af77c31ba.log",
+    "service_pid": 254,
+    "application_pid": 256,
+    "window_id": 1,
+    "samples": [
+      {
+        "accept_ms": 1498.1570999994874,
+        "name": "initial_content",
+        "present_ms": 2999.404379999265,
+        "render": {
+          "active_bank": 1,
+          "changed_tiles": 40,
+          "content_changed_tiles": 40,
+          "copied_tiles": 0,
+          "jobs_per_core": [
+            20,
+            20
+          ],
+          "metadata_ms": 51.581,
+          "owned_tiles": 72,
+          "projected_tiles": 40,
+          "projection_ms": 260.4630600017117,
+          "publish_ms": 119.68785999852116,
+          "published": true,
+          "render_ms": 1424.9250599987136,
+          "service_render_ms": 1492.8321200004575,
+          "texture_upload_bytes": 138240,
+          "validate_ms": 34.565,
+          "wait_ms": 18.133
+        },
+        "result": {
+          "changed": true,
+          "copied_bytes": 103680,
+          "generation": 2,
+          "sequence": 1,
+          "window_id": 1
+        }
+      },
+      {
+        "accept_ms": 280.86887999996543,
+        "name": "demo_update",
+        "present_ms": 817.2774400003254,
+        "render": {
+          "active_bank": 0,
+          "changed_tiles": 10,
+          "content_changed_tiles": 10,
+          "copied_tiles": 30,
+          "jobs_per_core": [
+            5,
+            5
+          ],
+          "metadata_ms": 50.185,
+          "owned_tiles": 72,
+          "projected_tiles": 10,
+          "projection_ms": 70.04997999865736,
+          "publish_ms": 121.27065999993647,
+          "published": true,
+          "render_ms": 435.1448999987042,
+          "service_render_ms": 509.76878000074066,
+          "texture_upload_bytes": 13440,
+          "validate_ms": 35.331,
+          "wait_ms": 19.835
+        },
+        "result": {
+          "changed": true,
+          "copied_bytes": 4032,
+          "generation": 3,
+          "sequence": 2,
+          "window_id": 1
+        }
+      },
+      {
+        "accept_ms": 265.58829999901354,
+        "name": "demo_update",
+        "present_ms": 631.7950999997556,
+        "render": {
+          "active_bank": 1,
+          "changed_tiles": 10,
+          "content_changed_tiles": 10,
+          "copied_tiles": 0,
+          "jobs_per_core": [
+            5,
+            5
+          ],
+          "metadata_ms": 53.762,
+          "owned_tiles": 72,
+          "projected_tiles": 10,
+          "projection_ms": 87.67162000003736,
+          "publish_ms": 111.68300000099407,
+          "published": true,
+          "render_ms": 284.78564000033657,
+          "service_render_ms": 343.00746000008075,
+          "texture_upload_bytes": 13440,
+          "validate_ms": 33.213,
+          "wait_ms": 9.627
+        },
+        "result": {
+          "changed": true,
+          "copied_bytes": 4032,
+          "generation": 4,
+          "sequence": 3,
+          "window_id": 1
+        }
+      }
+    ],
+    "capture": "results/boayo-live.jpg",
+    "validation": [
+      "host API regression including startup collision guards",
+      "AddressSanitizer + UndefinedBehaviorSanitizer API regression",
+      "physical output and repeated live counter updates"
+    ]
+  }
+}

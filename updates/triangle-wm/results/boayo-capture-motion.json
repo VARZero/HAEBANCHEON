@@ -1,0 +1,124 @@
+{
+  "scope": "Image-space purple-window bounds near output-pose exercise; frame indices are not optical latency timestamps.",
+  "frames": [
+    {
+      "frame": 5200,
+      "left": 370,
+      "right": 1179,
+      "top": 49,
+      "bottom": 594
+    },
+    {
+      "frame": 5230,
+      "left": 370,
+      "right": 1179,
+      "top": 49,
+      "bottom": 594
+    },
+    {
+      "frame": 5260,
+      "left": 370,
+      "right": 1179,
+      "top": 49,
+      "bottom": 594
+    },
+    {
+      "frame": 5290,
+      "left": 370,
+      "right": 1179,
+      "top": 49,
+      "bottom": 594
+    },
+    {
+      "frame": 5320,
+      "left": 370,
+      "right": 1179,
+      "top": 49,
+      "bottom": 594
+    },
+    {
+      "frame": 5350,
+      "left": 194,
+      "right": 997,
+      "top": 114,
+      "bottom": 657
+    },
+    {
+      "frame": 5380,
+      "left": 58,
+      "right": 871,
+      "top": 145,
+      "bottom": 692
+    },
+    {
+      "frame": 5410,
+      "left": 16,
+      "right": 835,
+      "top": 54,
+      "bottom": 602
+    },
+    {
+      "frame": 5440,
+      "left": 104,
+      "right": 915,
+      "top": 21,
+      "bottom": 567
+    },
+    {
+      "frame": 5470,
+      "left": 284,
+      "right": 1087,
+      "top": 116,
+      "bottom": 659
+    },
+    {
+      "frame": 5500,
+      "left": 410,
+      "right": 1229,
+      "top": 152,
+      "bottom": 700
+    },
+    {
+      "frame": 5530,
+      "left": 444,
+      "right": 1262,
+      "top": 64,
+      "bottom": 611
+    },
+    {
+      "frame": 5560,
+      "left": 362,
+      "right": 1171,
+      "top": 27,
+      "bottom": 573
+    },
+    {
+      "frame": 5590,
+      "left": 238,
+      "right": 1041,
+      "top": 88,
+      "bottom": 631
+    },
+    {
+      "frame": 5620,
+      "left": 238,
+      "right": 1041,
+      "top": 88,
+      "bottom": 631
+    },
+    {
+      "frame": 5650,
+      "left": 238,
+      "right": 1041,
+      "top": 88,
+      "bottom": 631
+    },
+    {
+      "frame": 5680,
+      "left": 238,
+      "right": 1041,
+      "top": 88,
+      "bottom": 631
+    }
+  ]
+}
