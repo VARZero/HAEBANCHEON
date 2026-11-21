@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "move_present_ms": 1232.0441600000486,
+  "checks": [
+    "actual HDMI loaded",
+    "pointer display off/on",
+    "hidden-pointer drag applied",
+    "pointer capture",
+    "drag release applied",
+    "Escape cancels",
+    "stop releases UART"
+  ],
+  "page_errors": []
+}

@@ -192,7 +192,12 @@ struct Server {
           for(int y=0;y<area.h;y++) {
             const auto *src=patch.rgb.data()+size_t(y)*area.w;
             auto *dst=s.pixels.data()+size_t(area.y+y)*r.width+area.x;
-            for(int x=0;x<area.w;x++) {uint32_t color=lookup[src[x]];if(dst[x]!=color){dst[x]=color;different=true;}}
+            if(!w.has_content){
+              // A first submission has no previous content to compare against.
+              // Unsubmitted pixels retain the initialized background color.
+              for(int x=0;x<area.w;x++)dst[x]=lookup[src[x]];
+              different=true;
+            }else for(int x=0;x<area.w;x++) {uint32_t color=lookup[src[x]];if(dst[x]!=color){dst[x]=color;different=true;}}
           }
         } else if(r.shared->pixel_bytes==4) {
           for(int y=0;y<area.h;y++) {

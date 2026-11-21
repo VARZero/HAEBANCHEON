@@ -42,6 +42,7 @@ struct Engine {
  RenderStats stats;
  bool ui_enabled=false,ui_dirty=true,ui_layout_dirty=true,ui_mask_dirty=true,ui_cold_view=true;UiPointer pointer;
  std::map<unsigned,UiPaint> ui_paints;
+ std::map<unsigned,UiButtonCache> ui_button_cache;
  std::map<unsigned,UiInverse> ui_inverses;
  std::map<unsigned,UiSamples> ui_samples;
  std::array<uint32_t,180> mock_camera{};bool mock_configured=false;

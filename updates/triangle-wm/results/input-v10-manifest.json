@@ -1,0 +1,70 @@
+{
+  "version": "v10",
+  "base_checkpoint": "6fcdce70df59b142b9177d166d1d066caafe3d3b",
+  "service_sha256": "f4a533b0471a8d2b18b69c991cad56745e18ad003d0e13f0ff7688886beb18b5",
+  "build": {
+    "compiler": "riscv32-buildroot-linux-musl-g++",
+    "flags": "-std=c++17 -O2 -g -pthread -ffp-contract=off -static -march=rv32ima_zicsr_zifencei -mabi=ilp32 -s"
+  },
+  "tests": {
+    "host_reference": "PASS: 160 presented states equal v9",
+    "sanitized_reference": "PASS: 160 presented states equal v9 under ASan/UBSan",
+    "visibility": "PASS: hidden tracking, no redundant frame, capture retained across toggles, restored pixels",
+    "compatibility": "PASS: RGB24 XRGB8888 RGB332 under ASan/UBSan, TRIANGLE_INPUT=0",
+    "board": "PASS: 39 samples, applied move/resize/close and canceled outside close",
+    "browser": {
+      "passed": true,
+      "move_present_ms": 1232.0441600000486,
+      "checks": [
+        "actual HDMI loaded",
+        "pointer display off/on",
+        "hidden-pointer drag applied",
+        "pointer capture",
+        "drag release applied",
+        "Escape cancels",
+        "stop releases UART"
+      ],
+      "page_errors": []
+    },
+    "hdmi_visibility": "PASS: actual frames with and without dot inspected",
+    "display_probe": "PASS: four transitions / 120 capture frames retain all three controls and title with app paused; original questioned captures also retain them; app resumed"
+  },
+  "patch": {
+    "sha256": "3cd3afce5cd5376094c9029874d44cd8c395e8629d0cd8d7c7fd0bf802293b60",
+    "board_transfer": "PASS: chunk checksums and decompressed SHA256"
+  },
+  "source_files": {
+    "src/application_buffer.hpp": "2f89dcea22451d712926a8e443c28bbcf0a155212d2c7780dcfd9724332097ff",
+    "src/boayo_app.cpp": "8c53b41d9194558ca12b3fddc73c52dea85fa927da7c95ad6c3b1521a9d0ecba",
+    "src/boayo_service.cpp": "88a12c478081f9566d42bb1f599f50e59fa7a391ed2aa0bd7347110bfb432c64",
+    "src/content.hpp": "cfc0fbe91c1d7bc38c3e7a06545c5e71a2606275da6538f4623238a35287911c",
+    "src/content_render.inc": "539dddca0c4517e591d483c6bcc6412141de9c1e882a97402a034537e7178118",
+    "src/fast_camera.hpp": "e3bc0ae75fb98ef203af79f1e5f30027bc0000cfc95d7d552be8dbccf8d5f48f",
+    "src/fast_projection.hpp": "da143ba753418511a8215f909f8d4c9aa3e6c16aa11b3d23627e970b9bc8e182",
+    "src/generate_geometry.cpp": "93198d44a3b75edcde3419c9c7e6b429bb289770edbbbf0e003ab5063c21b585",
+    "src/input_client.cpp": "5e49599df73188a42e1a975d2ccebd9e20ead893501062c654b01d18d105da07",
+    "src/json_object.hpp": "88c75641e9a3888c1afdc3d096f8fa53f4e014255e182d913fc5ea19c3b6e80b",
+    "src/outline.hpp": "b237019060f890d52993af73bf475a45261f85840117a4acf0da58ff16b53942",
+    "src/texture_cache.hpp": "065c27f34ef4807d012a815b998860cefc258fe0a3f4b2d4ff83590729aa02da",
+    "src/triangle_wm.cpp": "49ef27dffd9ab1311b8601e5fe299b81377f899e4d0417c699e0f7e05e7e0a72",
+    "src/ui_bounds.hpp": "feccfc6139198f876751ab2f664d15a200a858047984a7e409148b0cc1bd55dd",
+    "src/ui_input.inc": "dc911b76c19182590fac0863efdb6a9a6121542b0f8f3099e3f45895559166f8",
+    "src/ui_render.inc": "3b1b4db0a1699c4497242e5286b3600e6021336796a85a0af898b981dbd5ac45",
+    "src/ui_samples.hpp": "eac67ef0c3a9f1b5220679f1208ede1e1cf4bc41e8ef2ffeb71fe158b8d77c6d",
+    "src/ui_types.hpp": "579b979365192f249394e6feecd1a4f73220eeb99256ca94455ea78847922110",
+    "src/window_transform.hpp": "59a9c54cec6add636d3a26ed05f0e2812d99b226ced75180e8b3fe8e22f3810e",
+    "build.sh": "18d2b155ab611ebbc5370771e8b9ab4ebb0eae2d2d204bdc7795bfecb7758a24",
+    "tests/test_input.py": "a15becdc941af29d536fbbff0e2ef647dde93c889a2e31a437d37ee82258846f",
+    "tests/test_boayo.py": "249939a88404d0fe64f9e1769f9535580f0dc1755b477d87ccc0b3d5bc281629",
+    "tests/test_pointer_page.py": "30483bb2f01979eae7f38072087b557960046a6a4e003deeb6cc9fffbda76c73",
+    "tools/pointer_bridge.py": "f635c534180b08a7e5cb8f0b007a65f8df5e61e0dd0166468e4adbef1edd8951",
+    "tools/pointer_monitor.html": "f1f6a6a05f4ad2d7eb7ac9e9923d856b6856c28aedc45b66cd87983a6017f16a"
+  },
+  "deployment": {
+    "verification": "Final board executable SHA256 matched host before execution",
+    "persistent_path": "/root/triangle-wm-v10/triangle-boayo-v10",
+    "runtime_path": "/tmp/triangle-boayo-v10",
+    "copy_and_sync": "PASS: TRI_dc06a7d90e_RC:0",
+    "autostart": false
+  }
+}

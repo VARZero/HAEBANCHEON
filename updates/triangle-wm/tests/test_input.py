@@ -49,7 +49,22 @@ with tempfile.TemporaryDirectory() as folder:
   ctl.do('input_cancel',{'hide':True})
   moved=ctl.call('snapshot')['tile_hashes'];assert moved!=updated,'queued geometry was lost'
   ctl.do('configure_window',{'window_id':first,'azimuth':0});assert updated==ctl.call('snapshot')['tile_hashes']
+  # A first partial RGB332 commit must retain background outside the patch.
+  partial=app.do('create_window',{'surface_width':32,'surface_height':32,'azimuth':-7,'background_index':164})['window_id']
+  info2=app.call('create_surface',{'window_id':partial,'format':'RGB332'});fd2=os.open(info2['path'],os.O_RDWR);partial_pixels=mmap.mmap(fd2,info2['slot_bytes']*2);os.close(fd2)
+  for y in range(4,8):partial_pixels[y*32+4:y*32+8]=b'\xff'*4
+  r=app.do('commit_surface',{'window_id':partial,'slot':0,'sequence':1,'damage':[[4,4,4,4]]});assert r['changed']
+  r=app.do('commit_surface',{'window_id':partial,'slot':0,'sequence':2,'damage':[[4,4,4,4]]});assert not r['changed']
+  app.do('destroy_window',{'window_id':partial});partial_pixels.close();assert updated==ctl.call('snapshot')['tile_hashes']
   second=app.do('create_window',{'width_deg':20,'height_deg':14,'azimuth':7,'background_index':164})['window_id'];app.do('destroy_window',{'window_id':second});assert updated==ctl.call('snapshot')['tile_hashes'],'overlap restore'
+  # Exercise cached normal/hover/pressed button masks with and without a dot.
+  for shown in [False,True]:
+   ctl.do('input_visibility',{'visible':shown})
+   for action in ['close','move','resize']:
+    c=button(action)
+    for dx in [40,0,15,0,-40]:move(c['x']+dx,c['y'])
+    press(c);ctl.do('input_cancel');move(10,10)
+  ctl.do('input_cancel',{'hide':True});assert updated==ctl.call('snapshot')['tile_hashes'],'button cache left stale pixels'
   close=button('close');press(close);release(close['x']+100,close['y']);assert len(ctl.call('get_state')['windows'])==1
   c=button('move');press(c);move(c['x']+40,c['y']-20)
   assert ctl.call('get_state')['windows'][0]['azimuth']==0,'committed before release'

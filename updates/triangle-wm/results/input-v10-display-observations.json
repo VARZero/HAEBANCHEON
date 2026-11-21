@@ -1,0 +1,1229 @@
+{
+  "conditions": "v10; app stopped after an update and renderer drained; capture observations after input wait_present reply, not a full optical timing measurement",
+  "transitions": [
+    {
+      "shown": false,
+      "board_present_ms": 510.52564000012353,
+      "samples": [
+        {
+          "after_reply_ms": 19.78,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 124.19,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 228.56,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 333.36,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 437.78,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 542.36,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 660.25,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 764.54,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 869.07,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 973.3,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1077.74,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1182.61,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1286.64,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1390.93,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1495.66,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1599.85,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1704.88,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1809.59,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1914.37,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2031.06,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2135.52,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2240.36,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2344.98,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2449.94,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2554.51,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2660.19,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2765.39,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2869.75,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2975.03,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 3079.3,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        }
+      ]
+    },
+    {
+      "shown": true,
+      "board_present_ms": 568.0525799999014,
+      "samples": [
+        {
+          "after_reply_ms": 14.26,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 119.39,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 223.74,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 328.71,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 433.56,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 538.92,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 643.91,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 749.02,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 853.47,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 958.52,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1063.15,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1168.05,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1272.31,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1391.94,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1495.97,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1620.47,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1725.41,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1830.51,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1935.52,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2040.09,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2144.61,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2248.78,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2353.81,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2458.53,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2563.59,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2686.55,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2791.3,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2895.81,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 3000.16,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 3104.26,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        }
+      ]
+    },
+    {
+      "shown": false,
+      "board_present_ms": 470.8468400002457,
+      "samples": [
+        {
+          "after_reply_ms": 22.46,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 126.68,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 231.0,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 336.37,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 441.06,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 545.6,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 650.23,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 755.79,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 860.38,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 965.06,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1090.34,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1195.74,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1300.76,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1425.55,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1530.36,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1635.74,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1739.82,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1845.15,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1950.16,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2055.28,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2160.61,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2264.95,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2369.82,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2474.59,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2580.17,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2685.54,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2790.1,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2894.89,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2999.57,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 3103.82,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        }
+      ]
+    },
+    {
+      "shown": true,
+      "board_present_ms": 550.5588799999095,
+      "samples": [
+        {
+          "after_reply_ms": 21.2,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 125.75,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 230.64,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 357.48,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 463.19,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 585.5,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 690.94,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 796.22,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 901.07,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1005.37,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1110.25,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1214.86,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1319.73,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1424.66,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1529.67,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1634.33,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1739.65,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1854.31,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 1959.65,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2064.09,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2191.13,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2314.48,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2418.95,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2524.29,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2629.62,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2734.05,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2838.73,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 2944.7,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 3049.19,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        },
+        {
+          "after_reply_ms": 3153.64,
+          "white_pixels": {
+            "close": 69,
+            "move": 139,
+            "resize": 58,
+            "title": 5006
+          },
+          "all_present": true
+        }
+      ]
+    }
+  ]
+}

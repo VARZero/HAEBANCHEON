@@ -80,7 +80,7 @@
   return false;
  }
  void ui_compose(Words& base,unsigned bank){
-  double start=now();if(ui_layout_dirty){ui_layout();ui_layout_dirty=false;ui_mask_dirty=true;}auto &paint=ui_paints;
+  double start=now();if(ui_layout_dirty){ui_button_cache.clear();ui_layout();ui_layout_dirty=false;ui_mask_dirty=true;}auto &paint=ui_paints;
   if(ui_mask_dirty){paint.clear();
   for(auto&c:ui_controls)paint[c.tile];
   std::set<unsigned> cursor;
@@ -93,14 +93,31 @@
    bool pointer_tile=pointer.visible&&pointer.display&&cursor.count(t)&&affected(d,{pointer.x-12,pointer.y-12,25,25});
    std::vector<UiControl> buttons;for(auto&c:ui_controls)if(c.tile==t)buttons.push_back(c);
    if(!pointer_tile&&buttons.empty())continue;
+   UiButtonCache *cached_button=nullptr;unsigned button_state=0;
+   if(!pointer_tile&&!buttons.empty()){
+    const auto &button=buttons.front();
+    bool hover=pointer.visible&&std::abs(pointer.x-button.x)<=16&&std::abs(pointer.y-button.y)<=16;
+    button_state=hover?(pointer.down?2:1):0;cached_button=&ui_button_cache[t];
+    if(cached_button->valid[button_state]){p=cached_button->paints[button_state];continue;}
+   }
+
    int x0=1280,y0=720,x1=-1,y1=-1;
    auto extend=[&](int x,int y){x0=std::min(x0,x-12);y0=std::min(y0,y-12);x1=std::max(x1,x+12);y1=std::max(y1,y+12);};
    if(pointer_tile)extend(pointer.x,pointer.y);for(auto&b:buttons)extend(b.x,b.y);
    auto inverse=ui_inverses.find(t);if(inverse==ui_inverses.end())inverse=ui_inverses.emplace(t,UiInverse(d)).first;
-   auto *samples=ui_cold_view?nullptr:&ui_samples[t];
+   // Reuse coordinates already populated by the pointer, but do not warm
+   // a new sample grid just to draw a static button.
+   auto *samples=(ui_cold_view||(cached_button&&ui_samples.find(t)==ui_samples.end()))?nullptr:&ui_samples[t];
    for(int inv=0;inv<2;inv++){
    auto bounds=mock&&getenv("TRIANGLE_UI_FULL_SCAN")?UiBounds{}:inverse->second.bounds(inv,x0,y0,x1,y1);
-   for(int row=bounds.r0;row<=bounds.r1;row++)for(int c=bounds.c0;c<=std::min(bounds.c1,row-inv);c++){
+   for(int row=bounds.r0;row<=bounds.r1;row++){
+    int64_t u=0,v=0,z=0;
+    if(!samples){
+     u=int32_t(d[6])+int64_t(row)*int32_t(d[7])+int64_t(bounds.c0-1)*int32_t(d[8])+int64_t(inv)*int32_t(d[9]);
+     v=int32_t(d[10])+int64_t(row)*int32_t(d[11])+int64_t(bounds.c0-1)*int32_t(d[12])+int64_t(inv)*int32_t(d[13]);
+     z=int32_t(d[14])+int64_t(row)*int32_t(d[15])+int64_t(bounds.c0-1)*int32_t(d[16])+int64_t(inv)*int32_t(d[17]);
+    }
+    for(int c=bounds.c0;c<=std::min(bounds.c1,row-inv);c++){
     unsigned cell=row*row+2*c+inv;
     int x,y;
     if(samples){
@@ -109,10 +126,10 @@
      for(auto&button:buttons)relevant|=UiSamples::near(sample,button.x,button.y,12);if(!relevant)continue;
      x=UiSamples::x(sample);y=UiSamples::y(sample);
     }else{
+     u+=int32_t(d[8]);v+=int32_t(d[12]);z+=int32_t(d[16]);
      // A changed output view uses the original sparse calculation once.
      // Filling a new cache's guard cells would delay this first publication.
-     int64_t q[3];for(unsigned k=0;k<3;k++)q[k]=int32_t(d[6+4*k])+int64_t(row)*int32_t(d[7+4*k])+int64_t(c)*int32_t(d[8+4*k])+int64_t(inv)*int32_t(d[9+4*k]);
-     auto u=q[0],v=q[1],z=q[2];if(z<=0||u<0||v<0||u>z*1279||v>z*719)continue;
+     if(z<=0||u<0||v<0||u>z*1279||v>z*719)continue;
      auto near=[&](int px,int py){return u>=int64_t(px-12)*z&&u<=int64_t(px+12)*z&&v>=int64_t(py-12)*z&&v<=int64_t(py+12)*z;};
      bool relevant=pointer_tile&&near(pointer.x,pointer.y);for(auto&button:buttons)relevant|=near(button.x,button.y);if(!relevant)continue;
      x=int((u+z/2)/z);y=int((v+z/2)/z);
@@ -141,7 +158,8 @@
      if(dist<=6){color=pointer.down?2:1;white=true;}
     }
     if(color>=0)p.mask[color][cell/32]|=1u<<(cell%32);
-   }}
+   }}}
+   if(cached_button){cached_button->paints[button_state]=p;cached_button->valid[button_state]=true;}
   }
   // A five-screen-pixel dot can fall between coarse triangle-cell centers.
   if(pointer.visible&&pointer.display&&!white&&near_tile<tiles){auto&p=paint[near_tile];uint32_t bit=1u<<(near_cell%32);p.mask[0][near_cell/32]&=~bit;p.mask[pointer.down?2:1][near_cell/32]|=bit;}

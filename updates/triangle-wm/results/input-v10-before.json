@@ -1,0 +1,499 @@
+{
+  "source": "input-v10-before-ram.txt",
+  "complete": true,
+  "metrics": [
+    {
+      "name": "pointer_move",
+      "n": 9,
+      "median_ms": 609.714,
+      "p95_ms": 752.153,
+      "max_ms": 752.153,
+      "scope": "board control request through wait_present; excludes optical/UART delay"
+    },
+    {
+      "name": "close_press",
+      "n": 2,
+      "median_ms": 725.347,
+      "p95_ms": 871.838,
+      "max_ms": 871.838,
+      "scope": "board control request through wait_present; excludes optical/UART delay"
+    },
+    {
+      "name": "close_cancel",
+      "n": 1,
+      "median_ms": 658.435,
+      "p95_ms": 658.435,
+      "max_ms": 658.435,
+      "scope": "board control request through wait_present; excludes optical/UART delay"
+    },
+    {
+      "name": "move_press",
+      "n": 4,
+      "median_ms": 673.183,
+      "p95_ms": 718.836,
+      "max_ms": 718.836,
+      "scope": "board control request through wait_present; excludes optical/UART delay"
+    },
+    {
+      "name": "drag_pointer",
+      "n": 4,
+      "median_ms": 583.691,
+      "p95_ms": 590.075,
+      "max_ms": 590.075,
+      "scope": "board control request through wait_present; excludes optical/UART delay"
+    },
+    {
+      "name": "move_release",
+      "n": 4,
+      "median_ms": 985.082,
+      "p95_ms": 1056.968,
+      "max_ms": 1056.968,
+      "scope": "board control request through wait_present; excludes optical/UART delay"
+    },
+    {
+      "name": "resize_press",
+      "n": 4,
+      "median_ms": 680.409,
+      "p95_ms": 718.857,
+      "max_ms": 718.857,
+      "scope": "board control request through wait_present; excludes optical/UART delay"
+    },
+    {
+      "name": "resize_release",
+      "n": 4,
+      "median_ms": 1098.134,
+      "p95_ms": 1147.672,
+      "max_ms": 1147.672,
+      "scope": "board control request through wait_present; excludes optical/UART delay"
+    },
+    {
+      "name": "view_pose",
+      "n": 5,
+      "median_ms": 919.844,
+      "p95_ms": 1118.989,
+      "max_ms": 1118.989,
+      "scope": "board control request through wait_present; excludes optical/UART delay"
+    },
+    {
+      "name": "close_release",
+      "n": 1,
+      "median_ms": 548.793,
+      "p95_ms": 548.793,
+      "max_ms": 548.793,
+      "scope": "board control request through wait_present; excludes optical/UART delay"
+    },
+    {
+      "name": "pointer_hide",
+      "n": 1,
+      "median_ms": 314.202,
+      "p95_ms": 314.202,
+      "max_ms": 314.202,
+      "scope": "board control request through wait_present; excludes optical/UART delay"
+    }
+  ],
+  "samples": [
+    {
+      "name": "pointer_move",
+      "present_ms": 752.1528600000311,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 4
+      }
+    },
+    {
+      "name": "pointer_move",
+      "present_ms": 639.4569599999813,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 5
+      }
+    },
+    {
+      "name": "pointer_move",
+      "present_ms": 609.7142400000012,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 6
+      }
+    },
+    {
+      "name": "pointer_move",
+      "present_ms": 614.4193799999775,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 7
+      }
+    },
+    {
+      "name": "pointer_move",
+      "present_ms": 579.7789600000251,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 8
+      }
+    },
+    {
+      "name": "pointer_move",
+      "present_ms": 590.5882399999537,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 9
+      }
+    },
+    {
+      "name": "pointer_move",
+      "present_ms": 587.0152399999788,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 10
+      }
+    },
+    {
+      "name": "pointer_move",
+      "present_ms": 614.7380400000839,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 11
+      }
+    },
+    {
+      "name": "pointer_move",
+      "present_ms": 609.3055399999721,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 12
+      }
+    },
+    {
+      "name": "close_press",
+      "present_ms": 578.855280000018,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 13
+      }
+    },
+    {
+      "name": "close_cancel",
+      "present_ms": 658.43498000002,
+      "result": {
+        "action": 1,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 14
+      }
+    },
+    {
+      "name": "move_press",
+      "present_ms": 590.7461999999359,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 15
+      }
+    },
+    {
+      "name": "drag_pointer",
+      "present_ms": 587.9948800000129,
+      "result": {
+        "action": 2,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 16
+      }
+    },
+    {
+      "name": "move_release",
+      "present_ms": 1056.967880000011,
+      "result": {
+        "action": 2,
+        "applied": true,
+        "captured_window": 0,
+        "generation": 17
+      }
+    },
+    {
+      "name": "move_press",
+      "present_ms": 677.293079999974,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 18
+      }
+    },
+    {
+      "name": "drag_pointer",
+      "present_ms": 590.0754799999995,
+      "result": {
+        "action": 2,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 19
+      }
+    },
+    {
+      "name": "move_release",
+      "present_ms": 941.2266599999275,
+      "result": {
+        "action": 2,
+        "applied": true,
+        "captured_window": 0,
+        "generation": 20
+      }
+    },
+    {
+      "name": "move_press",
+      "present_ms": 718.8358000000007,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 21
+      }
+    },
+    {
+      "name": "drag_pointer",
+      "present_ms": 579.3876399999717,
+      "result": {
+        "action": 2,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 22
+      }
+    },
+    {
+      "name": "move_release",
+      "present_ms": 1022.0160199999809,
+      "result": {
+        "action": 2,
+        "applied": true,
+        "captured_window": 0,
+        "generation": 23
+      }
+    },
+    {
+      "name": "move_press",
+      "present_ms": 669.0720799999544,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 24
+      }
+    },
+    {
+      "name": "drag_pointer",
+      "present_ms": 549.7615200000582,
+      "result": {
+        "action": 2,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 25
+      }
+    },
+    {
+      "name": "move_release",
+      "present_ms": 948.1479600000894,
+      "result": {
+        "action": 2,
+        "applied": true,
+        "captured_window": 0,
+        "generation": 26
+      }
+    },
+    {
+      "name": "resize_press",
+      "present_ms": 718.8573600000236,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 27
+      }
+    },
+    {
+      "name": "resize_release",
+      "present_ms": 1147.6722600000212,
+      "result": {
+        "action": 3,
+        "applied": true,
+        "captured_window": 0,
+        "generation": 28
+      }
+    },
+    {
+      "name": "resize_press",
+      "present_ms": 685.8692599999486,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 29
+      }
+    },
+    {
+      "name": "resize_release",
+      "present_ms": 1141.848340000026,
+      "result": {
+        "action": 3,
+        "applied": true,
+        "captured_window": 0,
+        "generation": 30
+      }
+    },
+    {
+      "name": "resize_press",
+      "present_ms": 632.3028799999738,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 31
+      }
+    },
+    {
+      "name": "resize_release",
+      "present_ms": 1054.4193000000669,
+      "result": {
+        "action": 3,
+        "applied": true,
+        "captured_window": 0,
+        "generation": 32
+      }
+    },
+    {
+      "name": "resize_press",
+      "present_ms": 674.9486800000304,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 33
+      }
+    },
+    {
+      "name": "resize_release",
+      "present_ms": 1047.4704999999376,
+      "result": {
+        "action": 3,
+        "applied": true,
+        "captured_window": 0,
+        "generation": 34
+      }
+    },
+    {
+      "name": "view_pose",
+      "present_ms": 1118.9890600000508,
+      "result": {
+        "operation": "pose",
+        "pitch": 0.0,
+        "pose_ms": 822.6147400000627,
+        "roll": 0,
+        "scene_commits": 35,
+        "total_ms": 969.612340000026,
+        "yaw": -4.0
+      }
+    },
+    {
+      "name": "view_pose",
+      "present_ms": 926.0122399999527,
+      "result": {
+        "operation": "pose",
+        "pitch": 0.0,
+        "pose_ms": 733.0144999999675,
+        "roll": 0,
+        "scene_commits": 36,
+        "total_ms": 776.6545199999655,
+        "yaw": 4.0
+      }
+    },
+    {
+      "name": "view_pose",
+      "present_ms": 864.6493199999677,
+      "result": {
+        "operation": "pose",
+        "pitch": 0.0,
+        "pose_ms": 675.6867200000443,
+        "roll": 0,
+        "scene_commits": 37,
+        "total_ms": 707.9145199999175,
+        "yaw": -4.0
+      }
+    },
+    {
+      "name": "view_pose",
+      "present_ms": 851.2910799999954,
+      "result": {
+        "operation": "pose",
+        "pitch": 0.0,
+        "pose_ms": 670.9148200000072,
+        "roll": 0,
+        "scene_commits": 38,
+        "total_ms": 702.968100000021,
+        "yaw": 4.0
+      }
+    },
+    {
+      "name": "view_pose",
+      "present_ms": 919.8436400000937,
+      "result": {
+        "operation": "pose",
+        "pitch": 0.0,
+        "pose_ms": 754.7169399999802,
+        "roll": 0,
+        "scene_commits": 39,
+        "total_ms": 770.8805999999413,
+        "yaw": 0.0
+      }
+    },
+    {
+      "name": "close_press",
+      "present_ms": 871.837979999953,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 35
+      }
+    },
+    {
+      "name": "close_release",
+      "present_ms": 548.7925400000531,
+      "result": {
+        "action": 1,
+        "applied": true,
+        "captured_window": 0,
+        "generation": 37
+      }
+    },
+    {
+      "name": "pointer_hide",
+      "present_ms": 314.201699999976,
+      "result": {
+        "cancelled": true,
+        "generation": 38
+      }
+    }
+  ]
+}
