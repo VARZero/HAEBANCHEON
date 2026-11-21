@@ -23,6 +23,7 @@ using namespace boayo;
 #include "outline.hpp"
 #include "ui_types.hpp"
 #include "ui_bounds.hpp"
+#include "ui_samples.hpp"
 static uint64_t microseconds_now(){return std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now().time_since_epoch()).count();}
 static double now(){return std::chrono::duration<double>(std::chrono::steady_clock::now().time_since_epoch()).count();}
 static J summary(std::vector<double> a){require(!a.empty(),"empty samples");auto raw=a;std::sort(a.begin(),a.end());return {{"n",a.size()},{"median_ms",a[a.size()/2]},{"p95_ms",a[(a.size()*95+99)/100-1]},{"max_ms",a.back()},{"samples_ms",raw}};}
@@ -39,9 +40,10 @@ struct RenderStats {
 };
 struct Engine {
  RenderStats stats;
- bool ui_enabled=false,ui_dirty=true,ui_layout_dirty=true,ui_mask_dirty=true;UiPointer pointer;
+ bool ui_enabled=false,ui_dirty=true,ui_layout_dirty=true,ui_mask_dirty=true,ui_cold_view=true;UiPointer pointer;
  std::map<unsigned,UiPaint> ui_paints;
  std::map<unsigned,UiInverse> ui_inverses;
+ std::map<unsigned,UiSamples> ui_samples;
  std::array<uint32_t,180> mock_camera{};bool mock_configured=false;
  std::vector<UiControl> ui_controls;std::map<unsigned,unsigned> ui_slots;
  std::array<std::array<UiStamp,256>,2> ui_stamps{};

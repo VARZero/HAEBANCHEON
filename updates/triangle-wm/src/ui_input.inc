@@ -5,18 +5,20 @@
  static std::pair<double,double> angles(V r){return {std::atan2(r[0],-r[2])*180/pi,std::atan2(r[1],std::hypot(r[0],r[2]))*180/pi};}
  J input_status(){
   J controls=J::array();for(auto&c:engine->ui_controls)controls.push_back(json_object("window_id",c.window,"action",c.kind==1?"close":c.kind==2?"move":"resize","x",c.x,"y",c.y,"tile",c.tile,"hit_size",32));
-  return json_object("generation",generation,"x",engine->pointer.x,"y",engine->pointer.y,"visible",engine->pointer.visible,"pressed",engine->pointer.down,"captured_window",capture.id,"controls",controls,"layout","split","commit_on_release",true);
+  return json_object("generation",generation,"x",engine->pointer.x,"y",engine->pointer.y,"visible",engine->pointer.visible&&engine->pointer.display,"display_enabled",engine->pointer.display,"pressed",engine->pointer.down,"captured_window",capture.id,"controls",controls,"layout","split","commit_on_release",true);
  }
  J input(Peer&p,const std::string&op,const J&a){
   require(p.control,"input requires control socket");require(engine->ui_enabled,"interactive mode disabled");
   if(op=="input_status")return input_status();
   require(capture.owner<0||capture.owner==p.fd,"pointer captured by another input connection");
-  if(op=="input_cancel"){bool hide=a.value("hide",false);cancel_input();if(hide)engine->pointer.visible=false;changed(false);return json_object("generation",generation,"cancelled",true);}
+  if(op=="input_visibility"){bool visible=a.at("visible").get<bool>();if(engine->pointer.display!=visible){engine->pointer.display=visible;engine->ui_mask_dirty=true;changed(false,false);}return json_object("generation",generation,"display_enabled",visible);}
+  if(op=="input_cancel"){bool hide=a.value("hide",false);cancel_input();if(hide)engine->pointer.visible=false;changed(false,false);return json_object("generation",generation,"cancelled",true);}
   require(op=="input_move"||op=="input_button","unknown input operation");
   int x=integer(a,"x",engine->pointer.x,0,1279),y=integer(a,"y",engine->pointer.y,0,719);
   bool pressed=op=="input_button"?a.at("pressed").get<bool>():engine->pointer.down;
+  const auto previous=engine->pointer;
   last_input_us=microseconds_now();
-  engine->pointer.x=x;engine->pointer.y=y;engine->pointer.visible=true;engine->ui_mask_dirty=true;
+  engine->pointer.x=x;engine->pointer.y=y;engine->pointer.visible=true;
   bool applied=false;int action=capture.kind;
   if(op=="input_button"&&pressed!=engine->pointer.down){
    if(pressed){auto hit=engine->ui_hit(x,y);capture.owner=p.fd;capture.x=x;capture.y=y;capture.id=hit.window;capture.kind=hit.kind;
@@ -48,6 +50,6 @@
    }
    engine->pointer.down=pressed;if(!pressed)capture={};
   }
-  engine->ui_dirty=true;changed(applied);
+  if(applied||engine->ui_pointer_changed(previous)){engine->ui_mask_dirty=true;changed(applied,applied);}
   return json_object("generation",generation,"applied",applied,"action",action,"captured_window",capture.id);
  }

@@ -1,0 +1,221 @@
+{
+  "conditions": "Final v9, RGB332 demo updating, sequential PC HTTP/UART pointer input; no optical/capture delay",
+  "modes": {
+    "shown": {
+      "metrics": {
+        "board_present_ms": {
+          "n": 9,
+          "median_ms": 1222.024,
+          "p95_ms": 1421.763,
+          "max_ms": 1421.763
+        },
+        "host_roundtrip_ms": {
+          "n": 9,
+          "median_ms": 1418.654,
+          "p95_ms": 1655.349,
+          "max_ms": 1655.349
+        }
+      },
+      "samples": [
+        {
+          "board_present_ms": 1414.1788799995556,
+          "host_roundtrip_ms": 1563.816100000622,
+          "result": {
+            "action": 0,
+            "applied": false,
+            "captured_window": 0,
+            "generation": 49
+          }
+        },
+        {
+          "board_present_ms": 1421.7630599997938,
+          "host_roundtrip_ms": 1655.3490000005695,
+          "result": {
+            "action": 0,
+            "applied": false,
+            "captured_window": 0,
+            "generation": 50
+          }
+        },
+        {
+          "board_present_ms": 1133.6679999995977,
+          "host_roundtrip_ms": 1418.6544999993203,
+          "result": {
+            "action": 0,
+            "applied": false,
+            "captured_window": 0,
+            "generation": 52
+          }
+        },
+        {
+          "board_present_ms": 1249.9241599999368,
+          "host_roundtrip_ms": 1414.3758999998681,
+          "result": {
+            "action": 0,
+            "applied": false,
+            "captured_window": 0,
+            "generation": 53
+          }
+        },
+        {
+          "board_present_ms": 720.0299399998039,
+          "host_roundtrip_ms": 832.6278000004095,
+          "result": {
+            "action": 0,
+            "applied": false,
+            "captured_window": 0,
+            "generation": 54
+          }
+        },
+        {
+          "board_present_ms": 810.8188200006261,
+          "host_roundtrip_ms": 938.2985000002009,
+          "result": {
+            "action": 0,
+            "applied": false,
+            "captured_window": 0,
+            "generation": 55
+          }
+        },
+        {
+          "board_present_ms": 1190.537860000506,
+          "host_roundtrip_ms": 1343.1759000004604,
+          "result": {
+            "action": 0,
+            "applied": false,
+            "captured_window": 0,
+            "generation": 56
+          }
+        },
+        {
+          "board_present_ms": 1375.5223399996758,
+          "host_roundtrip_ms": 1628.4545999997135,
+          "result": {
+            "action": 0,
+            "applied": false,
+            "captured_window": 0,
+            "generation": 57
+          }
+        },
+        {
+          "board_present_ms": 1222.0240799998865,
+          "host_roundtrip_ms": 1509.957299999769,
+          "result": {
+            "action": 0,
+            "applied": false,
+            "captured_window": 0,
+            "generation": 59
+          }
+        }
+      ]
+    },
+    "hidden": {
+      "metrics": {
+        "board_present_ms": {
+          "n": 9,
+          "median_ms": 279.34,
+          "p95_ms": 929.091,
+          "max_ms": 929.091
+        },
+        "host_roundtrip_ms": {
+          "n": 9,
+          "median_ms": 421.869,
+          "p95_ms": 1131.522,
+          "max_ms": 1131.522
+        }
+      },
+      "samples": [
+        {
+          "board_present_ms": 279.33963999990374,
+          "host_roundtrip_ms": 421.86949999995704,
+          "result": {
+            "action": 0,
+            "applied": false,
+            "captured_window": 0,
+            "generation": 60
+          }
+        },
+        {
+          "board_present_ms": 268.8408800000325,
+          "host_roundtrip_ms": 382.3428999994576,
+          "result": {
+            "action": 0,
+            "applied": false,
+            "captured_window": 0,
+            "generation": 60
+          }
+        },
+        {
+          "board_present_ms": 261.5724600004032,
+          "host_roundtrip_ms": 386.62159999967116,
+          "result": {
+            "action": 0,
+            "applied": false,
+            "captured_window": 0,
+            "generation": 60
+          }
+        },
+        {
+          "board_present_ms": 276.9351800000295,
+          "host_roundtrip_ms": 404.3616999997539,
+          "result": {
+            "action": 0,
+            "applied": false,
+            "captured_window": 0,
+            "generation": 60
+          }
+        },
+        {
+          "board_present_ms": 271.85541999991983,
+          "host_roundtrip_ms": 398.022200000014,
+          "result": {
+            "action": 0,
+            "applied": false,
+            "captured_window": 0,
+            "generation": 60
+          }
+        },
+        {
+          "board_present_ms": 720.5161999994889,
+          "host_roundtrip_ms": 868.5963999996602,
+          "result": {
+            "action": 0,
+            "applied": false,
+            "captured_window": 0,
+            "generation": 60
+          }
+        },
+        {
+          "board_present_ms": 499.859800000675,
+          "host_roundtrip_ms": 706.34710000013,
+          "result": {
+            "action": 0,
+            "applied": false,
+            "captured_window": 0,
+            "generation": 60
+          }
+        },
+        {
+          "board_present_ms": 929.0906600002199,
+          "host_roundtrip_ms": 1131.5222000002905,
+          "result": {
+            "action": 0,
+            "applied": false,
+            "captured_window": 0,
+            "generation": 60
+          }
+        },
+        {
+          "board_present_ms": 667.6420800006017,
+          "host_roundtrip_ms": 845.5205000000205,
+          "result": {
+            "action": 0,
+            "applied": false,
+            "captured_window": 0,
+            "generation": 61
+          }
+        }
+      ]
+    }
+  }
+}

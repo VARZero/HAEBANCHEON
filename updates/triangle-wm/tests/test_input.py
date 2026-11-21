@@ -31,9 +31,24 @@ with tempfile.TemporaryDirectory() as folder:
   c=button('move');press(c);rival=Client(path+'.control');rival.call('input_move',{'x':20,'y':20},ok=False);rival.close();assert status()['captured_window']==first;ctl.do('input_cancel')
   ctl.do('input_cancel',{'hide':True});base=ctl.call('snapshot')['tile_hashes']
   for x,y in [(640,360),(10,10),(1270,710),(600,400)]:move(x,y)
+  # Sweep tile edges and revisit the same samples to exercise warm caches.
+  route=[(0,0),(1279,719),(0,719),(1279,0)]+[(x,360+(i%3-1)*31) for i,x in enumerate(range(460,821,30))]
+  for x,y in route+route[::-1]:move(x,y)
   ctl.do('input_cancel',{'hide':True});assert base==ctl.call('snapshot')['tile_hashes'],'cursor trail'
   move(640,360);pixels[:1024]=bytes(reversed(range(256)))*4;app.do('commit_surface',{'window_id':first,'slot':0,'sequence':2,'damage':[[0,0,32,32]]});ctl.do('input_cancel',{'hide':True});updated=ctl.call('snapshot')['tile_hashes'];assert updated!=base
   move(630,360);move(680,390);ctl.do('input_cancel',{'hide':True});assert updated==ctl.call('snapshot')['tile_hashes'],'stale under-cursor content'
+  # A pending scene mutation followed by input in one read must retain damage.
+  requests=[('configure_window',{'window_id':first,'azimuth':2}),('input_move',{'x':611,'y':373})]
+  wire=[]
+  for op,args in requests:
+   ctl.seq+=1;wire.append(json.dumps(dict(id=ctl.seq,op=op,args=args))+'\n')
+  ctl.f.write(''.join(wire).encode())
+  for _ in requests:
+   result=json.loads(ctl.f.readline());assert result['ok'],result
+  ctl.call('wait_present',{'generation':result['result']['generation']})
+  ctl.do('input_cancel',{'hide':True})
+  moved=ctl.call('snapshot')['tile_hashes'];assert moved!=updated,'queued geometry was lost'
+  ctl.do('configure_window',{'window_id':first,'azimuth':0});assert updated==ctl.call('snapshot')['tile_hashes']
   second=app.do('create_window',{'width_deg':20,'height_deg':14,'azimuth':7,'background_index':164})['window_id'];app.do('destroy_window',{'window_id':second});assert updated==ctl.call('snapshot')['tile_hashes'],'overlap restore'
   close=button('close');press(close);release(close['x']+100,close['y']);assert len(ctl.call('get_state')['windows'])==1
   c=button('move');press(c);move(c['x']+40,c['y']-20)
@@ -50,6 +65,30 @@ with tempfile.TemporaryDirectory() as folder:
   # Pose updates rebuild the screen-space overlay without modifying source pixels.
   for y in [-5,5,0]:ctl.do('view_set',{'yaw':y,'pitch':2 if y else 0})
   assert len(status()['controls'])==3
+  if os.environ.get('TEST_INPUT_VISIBILITY'):
+   def extra(op,args=None):
+    r=ctl.call(op,args)
+    if 'generation' in r:ctl.call('wait_present',{'generation':r['generation']})
+    return r
+   original=status();original_hash=ctl.call('snapshot')['tile_hashes']
+   app.call('input_visibility',{'visible':False},ok=False)
+   ctl.call('input_visibility',{'visible':1},ok=False);assert status()==original
+   extra('input_visibility',{'visible':False});hidden=ctl.call('snapshot')['tile_hashes'];assert hidden!=original_hash
+   extra('input_move',{'x':5,'y':5});hidden=ctl.call('snapshot')['tile_hashes']
+   generation=status()['generation']
+   for x,y in [(5,5),(40,30),(10,10)]:
+    extra('input_move',{'x':x,'y':y});state=status()
+    assert not state['visible'] and not state['display_enabled'] and (state['x'],state['y'])==(x,y)
+    assert state['generation']==generation,'hidden motion unnecessarily published'
+    assert ctl.call('snapshot')['tile_hashes']==hidden
+   c=button('move');extra('input_button',{'x':c['x'],'y':c['y'],'pressed':True})
+   assert status()['captured_window']==first and status()['pressed']
+   extra('input_visibility',{'visible':True});assert status()['pressed'] and status()['captured_window']==first
+   extra('input_visibility',{'visible':False});extra('input_move',{'x':c['x']+20,'y':c['y']})
+   assert status()['pressed'] and not status()['visible']
+   extra('input_cancel');extra('input_move',{'x':original['x'],'y':original['y']})
+   extra('input_visibility',{'visible':True});assert ctl.call('snapshot')['tile_hashes']==original_hash
+   print('PASS_INPUT_VISIBILITY: hidden tracking, no redundant publication, capture retained, restored pixels')
   c=button('close');press(c);assert release(c['x'],c['y'])['applied'];assert not ctl.call('get_state')['windows']
   ctl.do('input_cancel',{'hide':True});hashes=ctl.call('snapshot')['tile_hashes'];assert len(set(hashes))==1,'close/cursor left visible tiles'
   pixels.close();app.close();ctl.call('shutdown');ctl.close();assert proc.wait(timeout=10)==0

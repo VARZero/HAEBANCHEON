@@ -40,7 +40,7 @@ struct Server {
   uint64_t generation=0, presented=0;
   int next_id=1, focused=0;
   size_t reserved_bytes=0;
-  bool dirty=false;
+  bool dirty=false,scene_dirty=true;
   double service_render_ms=0;RequestProfile request_profile,last_mutation;
   double yaw=0, pitch=0;
 #include "ui_input.inc"
@@ -77,7 +77,7 @@ struct Server {
     if(listener.fd>=0) unlink(path.c_str());
     if(control.fd>=0) unlink((path+".control").c_str());
   }
-  void changed(bool layout=true) { ++generation; dirty=true;engine->ui_dirty=true;if(layout){engine->ui_layout_dirty=true;engine->ui_mask_dirty=true;} }
+  void changed(bool layout=true,bool scene=true) { ++generation; dirty=true;scene_dirty|=scene;engine->ui_dirty=true;if(layout){engine->ui_layout_dirty=true;engine->ui_mask_dirty=true;} }
   Record &owned(Peer &p,const J &a) {
     int id=integer(a,"window_id",0,1,INT_MAX);
     auto it=records.find(id); require(it!=records.end(),"window not found");
@@ -288,7 +288,7 @@ struct Server {
     std::cout<<"TRIANGLE_BOAYO_READY "<<path<<std::endl;
     std::vector<pollfd> fds;fds.reserve(66);
     while(!stopping) {
-      if(capture.owner>=0&&microseconds_now()-last_input_us>30000000){cancel_input();changed(false);}
+      if(capture.owner>=0&&microseconds_now()-last_input_us>30000000){cancel_input();changed(false,false);}
       fds.clear();fds.push_back({listener.fd,POLLIN,0});fds.push_back({control.fd,POLLIN,0});
       for(auto &[fd,p]:peers) fds.push_back({fd,short(POLLIN|(p.out.empty()?0:POLLOUT)),0});
       int rc=poll(fds.data(),fds.size(),dirty?0:100);
@@ -321,7 +321,7 @@ struct Server {
       // Release shared-slot leases before doing expensive projection work.
       flush();
       if(dirty && !stopping) {
-        double start=now();engine->render(false);service_render_ms=(now()-start)*1000;
+        double start=now();engine->render(false,!scene_dirty);service_render_ms=(now()-start)*1000;scene_dirty=false;
         presented=generation; dirty=false;
         for(auto &[fd,p]:peers) if(!p.wait_id.is_null() && p.wait_generation<=presented) {
           reply(p,p.wait_id,json_object("generation",presented,"presented",true)); p.wait_id=nullptr;

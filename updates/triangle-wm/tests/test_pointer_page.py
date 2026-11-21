@@ -50,6 +50,11 @@ def main():
                         box['y'] + handle['y'] * box['height'] / 720,
                         box['width'] / 1280)
 
+            page.locator('#show-pointer').wait_for(state='visible')
+            idle()
+            page.locator('#show-pointer').uncheck()
+            idle()
+            assert not controls()['display_enabled']
             before = controls()
             handle = next(c for c in before['controls'] if c['action'] == 'move')
             x, y, scale = locate(handle)
@@ -65,6 +70,10 @@ def main():
             moved = status()['last']
             assert moved['ok'] and moved['result']['applied'], moved
             assert not controls()['pressed']
+            assert not controls()['display_enabled'] and not controls()['visible']
+            page.locator('#show-pointer').check()
+            idle()
+            assert controls()['display_enabled'] and controls()['visible']
 
             handle = next(c for c in controls()['controls'] if c['action'] == 'move')
             x, y, _ = locate(handle)
@@ -82,7 +91,7 @@ def main():
             assert not status()['online']
             assert not errors, errors
             report = {'passed': True, 'move_present_ms': moved['present_ms'],
-                      'checks': ['actual HDMI loaded', 'pointer capture', 'drag release applied',
+                      'checks': ['actual HDMI loaded', 'pointer display off/on', 'hidden-pointer drag applied', 'pointer capture', 'drag release applied',
                                  'Escape cancels', 'stop releases UART'], 'page_errors': errors}
         finally:
             browser.close()

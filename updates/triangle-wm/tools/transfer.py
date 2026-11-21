@@ -37,6 +37,6 @@ try:
  wait(rb'RX_DONE\r*\n')
  wait(rb'haebancheon# ')
  write(('gzip -dc '+a.target+'.gz > '+a.target+'; chmod +x '+a.target+'; sha256sum '+a.target+'; echo TRANSFER_READY\n').encode())
- answer=wait(rb'TRANSFER_READY\r*\n',420);expected=hashlib.sha256(payload).hexdigest().encode();assert expected in answer,answer
+ answer=wait(rb'(?:^|\n)TRANSFER_READY\r*\n',420);expected=hashlib.sha256(payload).hexdigest().encode();assert expected in answer,answer
  print(json.dumps({'result':'PASS','target':a.target,'bytes':len(payload),'compressed':len(data),'sha256':expected.decode(),'seconds':time.monotonic()-start}),flush=True)
 finally:p.close();log.close()

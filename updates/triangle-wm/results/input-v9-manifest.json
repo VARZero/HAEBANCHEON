@@ -1,0 +1,71 @@
+{
+  "version": "v9",
+  "base_checkpoint": "c61d6952b7034f06725795b0e06a1b5b67c94051",
+  "service_sha256": "e25a67d2a42e84327dd9b9e7fd98468b0a6b17a149e02d74b168d75d71580818",
+  "build": {
+    "compiler": "riscv32-buildroot-linux-musl-g++",
+    "flags": "-std=c++17 -O2 -g -pthread -ffp-contract=off -static -march=rv32ima_zicsr_zifencei -mabi=ilp32 -s"
+  },
+  "tests": {
+    "host_reference": "PASS: 105 presented states equal to v8",
+    "sanitized_reference": "PASS: 105 presented states equal to v8 under ASan/UBSan",
+    "visibility": "PASS: hidden tracking, no redundant frame, captured drag survives toggles, exact restoration",
+    "compatibility": "PASS: RGB24 XRGB8888 RGB332 with TRIANGLE_INPUT=0 under ASan/UBSan",
+    "quotient": "PASS: 1000000 random and 1332 boundary coordinates equal to exact division under ASan/UBSan",
+    "board": "PASS: 39 samples; applied releases and canceled outside close",
+    "browser": {
+      "passed": true,
+      "move_present_ms": 1784.5506600001827,
+      "checks": [
+        "actual HDMI loaded",
+        "pointer display off/on",
+        "hidden-pointer drag applied",
+        "pointer capture",
+        "drag release applied",
+        "Escape cancels",
+        "stop releases UART"
+      ],
+      "page_errors": []
+    },
+    "hdmi_visibility": "PASS: actual frames with and without dot inspected"
+  },
+  "patch": {
+    "sha256": "687601715db2016e14d5716e90a08d0c57ce23f8a482b01de8b0f430d58a0aa4",
+    "board_transfer": "PASS: chunk checksums and decompressed SHA256"
+  },
+  "source_files": {
+    "src/application_buffer.hpp": "2f89dcea22451d712926a8e443c28bbcf0a155212d2c7780dcfd9724332097ff",
+    "src/boayo_app.cpp": "8c53b41d9194558ca12b3fddc73c52dea85fa927da7c95ad6c3b1521a9d0ecba",
+    "src/boayo_service.cpp": "c0648914e70349694be500a93e20fe4a0d792cc1ff8b3caa9df15bda31b00d1c",
+    "src/content.hpp": "cfc0fbe91c1d7bc38c3e7a06545c5e71a2606275da6538f4623238a35287911c",
+    "src/content_render.inc": "539dddca0c4517e591d483c6bcc6412141de9c1e882a97402a034537e7178118",
+    "src/fast_camera.hpp": "e3bc0ae75fb98ef203af79f1e5f30027bc0000cfc95d7d552be8dbccf8d5f48f",
+    "src/fast_projection.hpp": "da143ba753418511a8215f909f8d4c9aa3e6c16aa11b3d23627e970b9bc8e182",
+    "src/generate_geometry.cpp": "93198d44a3b75edcde3419c9c7e6b429bb289770edbbbf0e003ab5063c21b585",
+    "src/input_client.cpp": "5e49599df73188a42e1a975d2ccebd9e20ead893501062c654b01d18d105da07",
+    "src/json_object.hpp": "88c75641e9a3888c1afdc3d096f8fa53f4e014255e182d913fc5ea19c3b6e80b",
+    "src/outline.hpp": "b237019060f890d52993af73bf475a45261f85840117a4acf0da58ff16b53942",
+    "src/texture_cache.hpp": "065c27f34ef4807d012a815b998860cefc258fe0a3f4b2d4ff83590729aa02da",
+    "src/triangle_wm.cpp": "6b92c666503f97411bf4123de6f48fd6a7a86e4ebd09484dc09f82fd60ff94d1",
+    "src/ui_bounds.hpp": "feccfc6139198f876751ab2f664d15a200a858047984a7e409148b0cc1bd55dd",
+    "src/ui_input.inc": "dc911b76c19182590fac0863efdb6a9a6121542b0f8f3099e3f45895559166f8",
+    "src/ui_render.inc": "ea898c436f184d7d5d1656fe3353cb407773dc2caaa4f1de46715c6f896cbb80",
+    "src/ui_samples.hpp": "eac67ef0c3a9f1b5220679f1208ede1e1cf4bc41e8ef2ffeb71fe158b8d77c6d",
+    "src/ui_types.hpp": "fa8a6067fc5b33da2e3b3570ad1b4b90df96f880110dd3c16007c0123b217fcb",
+    "src/window_transform.hpp": "59a9c54cec6add636d3a26ed05f0e2812d99b226ced75180e8b3fe8e22f3810e",
+    "build.sh": "18d2b155ab611ebbc5370771e8b9ab4ebb0eae2d2d204bdc7795bfecb7758a24",
+    "tests/test_input.py": "a6947fcc02580f903dc2ab8fcac7c06083c156e0c2da8740f6e29239528ba8ad",
+    "tests/check_ui_samples.cpp": "dc2b66b6b57dd2f1ce94869e24e363752031a073d673259e62797f8c0ae485a6",
+    "tests/test_pointer_page.py": "30483bb2f01979eae7f38072087b557960046a6a4e003deeb6cc9fffbda76c73",
+    "tools/pointer_bridge.py": "f635c534180b08a7e5cb8f0b007a65f8df5e61e0dd0166468e4adbef1edd8951",
+    "tools/pointer_monitor.html": "f1f6a6a05f4ad2d7eb7ac9e9923d856b6856c28aedc45b66cd87983a6017f16a",
+    "tools/transfer.py": "025f5d02897935cc1ba8843d1b2b547a9710e464c7a8482f89dde4560f7d920c"
+  },
+  "deployment": {
+    "verification": "Final board executable SHA256 matched the host build before execution",
+    "persistent_path": "/root/triangle-wm-v9/triangle-boayo-v9",
+    "copy_and_sync": "PASS: TRI_80120f92b1_RC:0",
+    "runtime_path": "/tmp/triangle-boayo-v9",
+    "autostart": false
+  }
+}

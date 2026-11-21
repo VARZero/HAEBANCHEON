@@ -1,6 +1,6 @@
  void set_ui_view(double y,double p){
   if(view_yaw==y&&view_pitch==p)return;
-  view_yaw=y;view_pitch=p;view_axes=axes(y,p);ui_projection.reset();ui_transform.reset();ui_descriptors.clear();ui_inverses.clear();ui_dirty=true;ui_layout_dirty=true;ui_mask_dirty=true;
+  view_yaw=y;view_pitch=p;view_axes=axes(y,p);ui_projection.reset();ui_transform.reset();ui_descriptors.clear();ui_inverses.clear();ui_samples.clear();ui_cold_view=true;ui_dirty=true;ui_layout_dirty=true;ui_mask_dirty=true;
  }
  V ui_ray(int x,int y)const{
   return view_axes[0]+view_axes[1]*((x-639.5)*(2*std::tan(rad(24.))/1280))+
@@ -69,35 +69,55 @@
    if(planned_owner[t]==it->window&&std::abs(x-it->x)<=16&&std::abs(y-it->y)<=16)return *it;
   return {};
  }
+ bool ui_pointer_changed(const UiPointer&before)const{
+  bool was_drawn=before.visible&&before.display,drawn=pointer.visible&&pointer.display;
+  if(was_drawn!=drawn||(drawn&&(before.x!=pointer.x||before.y!=pointer.y||before.down!=pointer.down)))return true;
+  for(const auto&c:ui_controls){
+   bool old_hover=before.visible&&std::abs(before.x-c.x)<=16&&std::abs(before.y-c.y)<=16;
+   bool hover=pointer.visible&&std::abs(pointer.x-c.x)<=16&&std::abs(pointer.y-c.y)<=16;
+   if(old_hover!=hover||(hover&&before.down!=pointer.down))return true;
+  }
+  return false;
+ }
  void ui_compose(Words& base,unsigned bank){
   double start=now();if(ui_layout_dirty){ui_layout();ui_layout_dirty=false;ui_mask_dirty=true;}auto &paint=ui_paints;
   if(ui_mask_dirty){paint.clear();
   for(auto&c:ui_controls)paint[c.tile];
   std::set<unsigned> cursor;
-  if(pointer.visible){unsigned t=ui_pick(pointer.x,pointer.y);if(t<tiles)cursor.insert(t);
+  if(pointer.visible&&pointer.display){unsigned t=ui_pick(pointer.x,pointer.y);if(t<tiles)cursor.insert(t);
    for(int round=0;round<2;round++){auto previous=cursor;for(unsigned v:previous)for(auto&e:tile_neighbors[v]){cursor.insert(e[0]);if(e[1]!=65535)cursor.insert(e[1]);}}
    for(unsigned v:cursor)paint[v];
   }
   int nearest=INT_MAX;unsigned near_tile=tiles,near_cell=0;bool white=false;
   for(auto &[t,p]:paint){auto&d=ui_descriptor(t);
-   bool pointer_tile=pointer.visible&&cursor.count(t)&&affected(d,{pointer.x-12,pointer.y-12,25,25});
+   bool pointer_tile=pointer.visible&&pointer.display&&cursor.count(t)&&affected(d,{pointer.x-12,pointer.y-12,25,25});
    std::vector<UiControl> buttons;for(auto&c:ui_controls)if(c.tile==t)buttons.push_back(c);
    if(!pointer_tile&&buttons.empty())continue;
    int x0=1280,y0=720,x1=-1,y1=-1;
    auto extend=[&](int x,int y){x0=std::min(x0,x-12);y0=std::min(y0,y-12);x1=std::max(x1,x+12);y1=std::max(y1,y+12);};
    if(pointer_tile)extend(pointer.x,pointer.y);for(auto&b:buttons)extend(b.x,b.y);
    auto inverse=ui_inverses.find(t);if(inverse==ui_inverses.end())inverse=ui_inverses.emplace(t,UiInverse(d)).first;
+   auto *samples=ui_cold_view?nullptr:&ui_samples[t];
    for(int inv=0;inv<2;inv++){
    auto bounds=mock&&getenv("TRIANGLE_UI_FULL_SCAN")?UiBounds{}:inverse->second.bounds(inv,x0,y0,x1,y1);
    for(int row=bounds.r0;row<=bounds.r1;row++)for(int c=bounds.c0;c<=std::min(bounds.c1,row-inv);c++){
     unsigned cell=row*row+2*c+inv;
-    int64_t u=int32_t(d[6])+int64_t(row)*int32_t(d[7])+int64_t(c)*int32_t(d[8])+inv*int64_t(int32_t(d[9]));
-    int64_t v=int32_t(d[10])+int64_t(row)*int32_t(d[11])+int64_t(c)*int32_t(d[12])+inv*int64_t(int32_t(d[13]));
-    int64_t z=int32_t(d[14])+int64_t(row)*int32_t(d[15])+int64_t(c)*int32_t(d[16])+inv*int64_t(int32_t(d[17]));
-    if(z<=0||u<0||v<0||u>z*1279||v>z*719)continue;
-    auto near=[&](int x,int y,int r){return u>=int64_t(x-r)*z&&u<=int64_t(x+r)*z&&v>=int64_t(y-r)*z&&v<=int64_t(y+r)*z;};
-    bool relevant=pointer_tile&&near(pointer.x,pointer.y,12);for(auto&c:buttons)relevant|=near(c.x,c.y,12);if(!relevant)continue;
-    int x=int((u+z/2)/z),y=int((v+z/2)/z),color=-1;
+    int x,y;
+    if(samples){
+     uint32_t sample=samples->get(d,cell,row,c,inv);if(sample==UINT32_MAX)continue;
+     bool relevant=pointer_tile&&UiSamples::near(sample,pointer.x,pointer.y,12);
+     for(auto&button:buttons)relevant|=UiSamples::near(sample,button.x,button.y,12);if(!relevant)continue;
+     x=UiSamples::x(sample);y=UiSamples::y(sample);
+    }else{
+     // A changed output view uses the original sparse calculation once.
+     // Filling a new cache's guard cells would delay this first publication.
+     int64_t q[3];for(unsigned k=0;k<3;k++)q[k]=int32_t(d[6+4*k])+int64_t(row)*int32_t(d[7+4*k])+int64_t(c)*int32_t(d[8+4*k])+int64_t(inv)*int32_t(d[9+4*k]);
+     auto u=q[0],v=q[1],z=q[2];if(z<=0||u<0||v<0||u>z*1279||v>z*719)continue;
+     auto near=[&](int px,int py){return u>=int64_t(px-12)*z&&u<=int64_t(px+12)*z&&v>=int64_t(py-12)*z&&v<=int64_t(py+12)*z;};
+     bool relevant=pointer_tile&&near(pointer.x,pointer.y);for(auto&button:buttons)relevant|=near(button.x,button.y);if(!relevant)continue;
+     x=int((u+z/2)/z);y=int((v+z/2)/z);
+    }
+    int color=-1;
     for(auto&button:buttons){int dx=x-button.x,dy=y-button.y;
      // Mixed edge tiles may contain both app pixels and WM padding. Never
      // paint a button into a sample covered by the application's descriptor.
@@ -124,9 +144,9 @@
    }}
   }
   // A five-screen-pixel dot can fall between coarse triangle-cell centers.
-  if(pointer.visible&&!white&&near_tile<tiles){auto&p=paint[near_tile];uint32_t bit=1u<<(near_cell%32);p.mask[0][near_cell/32]&=~bit;p.mask[pointer.down?2:1][near_cell/32]|=bit;}
+  if(pointer.visible&&pointer.display&&!white&&near_tile<tiles){auto&p=paint[near_tile];uint32_t bit=1u<<(near_cell%32);p.mask[0][near_cell/32]&=~bit;p.mask[pointer.down?2:1][near_cell/32]|=bit;}
   for(auto it=paint.begin();it!=paint.end();){bool any=false;for(auto&m:it->second.mask)for(auto v:m)any|=v!=0;if(!any)it=paint.erase(it);else ++it;}
-  ui_mask_dirty=false;
+  ui_mask_dirty=false;ui_cold_view=false;
   }
   require(paint.size()<=256,"overlay tile budget");
   for(auto it=ui_slots.begin();it!=ui_slots.end();)if(!paint.count(it->first))it=ui_slots.erase(it);else ++it;

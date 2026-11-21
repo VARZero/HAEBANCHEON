@@ -19,16 +19,19 @@
    "projection_ms",s.projection_ms,"published",true,"render_ms",s.render_ms,"publish_ms",s.publish_ms,"validate_ms",s.profile.validate_us/1000.,
    "metadata_ms",s.profile.upload_us/1000.,"wait_ms",s.profile.wait_us/1000.,"active_bank",s.bank,"ui_ms",ui_ms,"overlay_tiles",ui_tile_count);
  }
- J render(bool describe=true){
-  double begin=now();stats={};plan_ms=0;texture_cache.evictions=0;plan_tiles=plan_fallbacks=plan_rejected=0;auto &next=scratch_metadata;next=metadata;auto&owner=planned_owner;auto&wanted=planned_version;auto &touched=scratch_touched;auto &new_visible=scratch_visible;touched=visible_tiles;new_visible.clear();
+ J render(bool describe=true,bool overlay_only=false){
+  double begin=now();stats={};plan_ms=0;texture_cache.evictions=0;plan_tiles=plan_fallbacks=plan_rejected=0;auto &next=scratch_metadata;next=metadata;auto&owner=planned_owner;auto&wanted=planned_version;auto &touched=scratch_touched;auto &new_visible=scratch_visible;touched.clear();new_visible.clear();
+  unsigned owned=visible_tiles.size(),changed=0,content_changed=0;
+  if(!overlay_only||active<0){touched=visible_tiles;
   for(unsigned t:touched){owner[t]=0;wanted[t]=0;next[256+t]=UINT32_MAX;touched_flag[t]=1;}
   for(int id:order){auto&w=windows.at(id);if(w.visible){for(unsigned t:w.footprint){if(!touched_flag[t]){touched.push_back(t);touched_flag[t]=1;wanted[t]=0;}if(!owner[t])new_visible.push_back(t);owner[t]=id;}}}
   for(int id:order){auto &w=windows.at(id);if(w.visible && w.has_content && !w.plan_ready && std::any_of(w.footprint.begin(),w.footprint.end(),[&](unsigned t){return owner[t]==id;}))prepare(w);}
-  unsigned owned=new_visible.size();for(unsigned t:new_visible){auto&w=windows.at(owner[t]);next[256+t]=colors.at(w.color)*1024;if(w.has_content){auto p=w.plan.find(t);if(p!=w.plan.end())wanted[t]=p->second.version;}}
+  owned=new_visible.size();for(unsigned t:new_visible){auto&w=windows.at(owner[t]);next[256+t]=colors.at(w.color)*1024;if(w.has_content){auto p=w.plan.find(t);if(p!=w.plan.end())wanted[t]=p->second.version;}}
   for(unsigned t:touched)if(!wanted[t]&&slots[t]>=0){free_slots.push_back(slots[t]);slots[t]=-1;versions[0][t]=versions[1][t]=0;}
   for(unsigned t:new_visible)if(wanted[t]){if(slots[t]<0){if(!free_slots.empty()){slots[t]=free_slots.back();free_slots.pop_back();}else{require(next_slot<(ui_enabled?tiles-256:tiles),"scene payload capacity");slots[t]=next_slot++;}versions[0][t]=versions[1][t]=0;}next[256+t]=unsigned(slots[t])*1024;}
-  unsigned changed=0,content_changed=0;for(unsigned t:touched){changed+=next[256+t]!=metadata[256+t]||wanted[t]!=presented[t];content_changed+=wanted[t]&&wanted[t]!=presented[t];}
+  for(unsigned t:touched){changed+=next[256+t]!=metadata[256+t]||wanted[t]!=presented[t];content_changed+=wanted[t]&&wanted[t]!=presented[t];}
   visible_tiles.swap(new_visible);for(unsigned t:touched)touched_flag[t]=0;
+  }
   if(active>=0&&!changed&&!(ui_enabled&&ui_dirty)){stats.owned=owned;stats.render_ms=(now()-begin)*1000;return describe?render_report():J();}
   unsigned bank=active<0?0:unsigned(active)^1;auto &copies=copy_batch;copies.clear();std::map<int,std::vector<unsigned>> project;unsigned copied=0,projected=0,uploaded=0,scatter_bytes=0;std::array<unsigned,2> jobs{};
   for(unsigned t:visible_tiles)if(wanted[t]&&versions[bank][t]!=wanted[t]){

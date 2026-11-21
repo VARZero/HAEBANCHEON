@@ -11,6 +11,8 @@ g++ -std=c++17 -O2 -ffp-contract=off -I"$native" -I"$here/src" -I"$out" "$here/t
 "$out/check-projection"
 g++ -std=c++17 -O2 -ffp-contract=off -I"$native" -I"$uapi" -I"$out" "$here/tests/check_outline.cpp" "$native/geometry.cpp" -o "$out/check-outline"
 "$out/check-outline"
+g++ -std=c++17 -O2 "$here/tests/check_ui_samples.cpp" -o "$out/check-ui-samples"
+"$out/check-ui-samples"
 compiler=g++;flags=(-std=c++17 -O2 -g -pthread -ffp-contract=off)
 if [[ "$mode" == rv32 ]];then compiler=${RV32_CXX:-/var/tmp/haebancheon-userland-validation/buildroot/host/bin/riscv32-buildroot-linux-musl-g++};flags+=(-static -march=rv32ima_zicsr_zifencei -mabi=ilp32 -s);fi
 if [[ "$mode" == sanitize ]];then flags+=(-fsanitize=address,undefined -fno-omit-frame-pointer);fi
