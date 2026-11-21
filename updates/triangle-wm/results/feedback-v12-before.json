@@ -1,0 +1,462 @@
+{
+  "version": "v11",
+  "scope": "Same boot, RAM binaries, freshly recreated RGB332 240x144 demo, updates paused after first demo_update; board-local socket request through wait_present, excludes UART/capture/optical. v11 has pointer-only drag and single-stage release.",
+  "source": "TRI_e7435d111a.log",
+  "samples": [
+    {
+      "name": "pointer_move",
+      "present_ms": 668.6313800001517,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 442
+      }
+    },
+    {
+      "name": "pointer_move",
+      "present_ms": 542.0974199995399,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 443
+      }
+    },
+    {
+      "name": "pointer_move",
+      "present_ms": 515.7558800000697,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 444
+      }
+    },
+    {
+      "name": "pointer_move",
+      "present_ms": 520.4120800001547,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 445
+      }
+    },
+    {
+      "name": "pointer_move",
+      "present_ms": 611.1508400002494,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 446
+      }
+    },
+    {
+      "name": "pointer_move",
+      "present_ms": 519.5475399997085,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 447
+      }
+    },
+    {
+      "name": "pointer_move",
+      "present_ms": 519.4163800003007,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 448
+      }
+    },
+    {
+      "name": "pointer_move",
+      "present_ms": 549.958420000039,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 449
+      }
+    },
+    {
+      "name": "pointer_move",
+      "present_ms": 515.3943599993363,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 450
+      }
+    },
+    {
+      "name": "close_press",
+      "present_ms": 596.349760000594,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 3,
+        "generation": 451
+      }
+    },
+    {
+      "name": "close_cancel",
+      "present_ms": 561.3297399999574,
+      "result": {
+        "action": 1,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 452
+      }
+    },
+    {
+      "name": "move_press",
+      "present_ms": 630.0804800000042,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 3,
+        "generation": 453
+      }
+    },
+    {
+      "name": "drag_pointer",
+      "present_ms": 490.8316200003028,
+      "result": {
+        "action": 2,
+        "applied": false,
+        "captured_window": 3,
+        "generation": 454
+      }
+    },
+    {
+      "name": "move_release",
+      "present_ms": 1072.0570000000298,
+      "result": {
+        "action": 2,
+        "applied": true,
+        "captured_window": 0,
+        "generation": 455
+      }
+    },
+    {
+      "name": "move_press",
+      "present_ms": 634.586959999986,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 3,
+        "generation": 456
+      }
+    },
+    {
+      "name": "drag_pointer",
+      "present_ms": 574.9623800003901,
+      "result": {
+        "action": 2,
+        "applied": false,
+        "captured_window": 3,
+        "generation": 457
+      }
+    },
+    {
+      "name": "move_release",
+      "present_ms": 1058.2252399995923,
+      "result": {
+        "action": 2,
+        "applied": true,
+        "captured_window": 0,
+        "generation": 458
+      }
+    },
+    {
+      "name": "move_press",
+      "present_ms": 700.915740000084,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 3,
+        "generation": 459
+      }
+    },
+    {
+      "name": "drag_pointer",
+      "present_ms": 480.1819799998775,
+      "result": {
+        "action": 2,
+        "applied": false,
+        "captured_window": 3,
+        "generation": 460
+      }
+    },
+    {
+      "name": "move_release",
+      "present_ms": 1008.7992000002414,
+      "result": {
+        "action": 2,
+        "applied": true,
+        "captured_window": 0,
+        "generation": 461
+      }
+    },
+    {
+      "name": "move_press",
+      "present_ms": 585.9786000000313,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 3,
+        "generation": 462
+      }
+    },
+    {
+      "name": "drag_pointer",
+      "present_ms": 476.72998000029474,
+      "result": {
+        "action": 2,
+        "applied": false,
+        "captured_window": 3,
+        "generation": 463
+      }
+    },
+    {
+      "name": "move_release",
+      "present_ms": 989.2220999998972,
+      "result": {
+        "action": 2,
+        "applied": true,
+        "captured_window": 0,
+        "generation": 464
+      }
+    },
+    {
+      "name": "resize_press",
+      "present_ms": 807.472500000149,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 3,
+        "generation": 465
+      }
+    },
+    {
+      "name": "resize_release",
+      "present_ms": 1224.332839999348,
+      "result": {
+        "action": 3,
+        "applied": true,
+        "captured_window": 0,
+        "generation": 466
+      }
+    },
+    {
+      "name": "resize_press",
+      "present_ms": 583.5153999999166,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 3,
+        "generation": 467
+      }
+    },
+    {
+      "name": "resize_release",
+      "present_ms": 1152.602579999715,
+      "result": {
+        "action": 3,
+        "applied": true,
+        "captured_window": 0,
+        "generation": 468
+      }
+    },
+    {
+      "name": "resize_press",
+      "present_ms": 609.0518399998546,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 3,
+        "generation": 469
+      }
+    },
+    {
+      "name": "resize_release",
+      "present_ms": 1092.6867999993265,
+      "result": {
+        "action": 3,
+        "applied": true,
+        "captured_window": 0,
+        "generation": 470
+      }
+    },
+    {
+      "name": "resize_press",
+      "present_ms": 586.24662000034,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 3,
+        "generation": 471
+      }
+    },
+    {
+      "name": "resize_release",
+      "present_ms": 1019.680159999989,
+      "result": {
+        "action": 3,
+        "applied": true,
+        "captured_window": 0,
+        "generation": 472
+      }
+    },
+    {
+      "name": "view_pose",
+      "present_ms": 1089.218960000202,
+      "result": {
+        "operation": "pose",
+        "pitch": 0.0,
+        "pose_ms": 797.6445599997533,
+        "roll": 0,
+        "scene_commits": 436,
+        "total_ms": 932.7006599996821,
+        "yaw": -4.0
+      }
+    },
+    {
+      "name": "view_pose",
+      "present_ms": 877.7719000000507,
+      "result": {
+        "operation": "pose",
+        "pitch": 0.0,
+        "pose_ms": 689.797240000189,
+        "roll": 0,
+        "scene_commits": 437,
+        "total_ms": 722.3135600006572,
+        "yaw": 4.0
+      }
+    },
+    {
+      "name": "view_pose",
+      "present_ms": 827.0841199997813,
+      "result": {
+        "operation": "pose",
+        "pitch": 0.0,
+        "pose_ms": 639.3370999994659,
+        "roll": 0,
+        "scene_commits": 438,
+        "total_ms": 671.931300000324,
+        "yaw": -4.0
+      }
+    },
+    {
+      "name": "view_pose",
+      "present_ms": 764.9996199999005,
+      "result": {
+        "operation": "pose",
+        "pitch": 0.0,
+        "pose_ms": 579.7058400003152,
+        "roll": 0,
+        "scene_commits": 439,
+        "total_ms": 611.8749200004459,
+        "yaw": 4.0
+      }
+    },
+    {
+      "name": "view_pose",
+      "present_ms": 823.1372199999169,
+      "result": {
+        "operation": "pose",
+        "pitch": 0.0,
+        "pose_ms": 654.3508799995834,
+        "roll": 0,
+        "scene_commits": 440,
+        "total_ms": 672.9103999996369,
+        "yaw": 0.0
+      }
+    },
+    {
+      "name": "pointer_hide",
+      "present_ms": 448.7491399999708,
+      "result": {
+        "cancelled": true,
+        "generation": 473
+      }
+    }
+  ],
+  "metrics": [
+    {
+      "name": "pointer_move",
+      "n": 9,
+      "median_ms": 520.412,
+      "p95_ms": 668.631,
+      "max_ms": 668.631
+    },
+    {
+      "name": "close_press",
+      "n": 1,
+      "median_ms": 596.35,
+      "p95_ms": 596.35,
+      "max_ms": 596.35
+    },
+    {
+      "name": "close_cancel",
+      "n": 1,
+      "median_ms": 561.33,
+      "p95_ms": 561.33,
+      "max_ms": 561.33
+    },
+    {
+      "name": "move_press",
+      "n": 4,
+      "median_ms": 632.334,
+      "p95_ms": 700.916,
+      "max_ms": 700.916
+    },
+    {
+      "name": "drag_pointer",
+      "n": 4,
+      "median_ms": 485.507,
+      "p95_ms": 574.962,
+      "max_ms": 574.962
+    },
+    {
+      "name": "move_release",
+      "n": 4,
+      "median_ms": 1033.512,
+      "p95_ms": 1072.057,
+      "max_ms": 1072.057
+    },
+    {
+      "name": "resize_press",
+      "n": 4,
+      "median_ms": 597.649,
+      "p95_ms": 807.473,
+      "max_ms": 807.473
+    },
+    {
+      "name": "resize_release",
+      "n": 4,
+      "median_ms": 1122.645,
+      "p95_ms": 1224.333,
+      "max_ms": 1224.333
+    },
+    {
+      "name": "view_pose",
+      "n": 5,
+      "median_ms": 827.084,
+      "p95_ms": 1089.219,
+      "max_ms": 1089.219
+    },
+    {
+      "name": "pointer_hide",
+      "n": 1,
+      "median_ms": 448.749,
+      "p95_ms": 448.749,
+      "max_ms": 448.749
+    }
+  ]
+}

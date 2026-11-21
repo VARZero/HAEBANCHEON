@@ -1,0 +1,70 @@
+{
+  "passed": true,
+  "scope": "PC HTTP input to first observed USB HDMI frame; includes UART, capture buffering and ~20-70ms polling. Not display optical latency.",
+  "samples": [
+    {
+      "name": "move-preview",
+      "host_to_observed_hdmi_ms": 1147.9698000002827,
+      "host_round_trip_ms": 1242.0940000001792,
+      "frames": 38,
+      "accept_ms": 426.43790000025183,
+      "feedback_ms": 1054.9425400001928,
+      "ok": true,
+      "present_ms": 1060.9782800003886,
+      "result": {
+        "action": 2,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 44
+      }
+    },
+    {
+      "name": "move-release",
+      "host_to_observed_hdmi_ms": 1172.2474999996848,
+      "host_round_trip_ms": 2030.0566999994771,
+      "frames": 48,
+      "accept_ms": 344.7892000004649,
+      "feedback_ms": 1061.27218000032,
+      "ok": true,
+      "present_ms": 1907.9443000005558,
+      "result": {
+        "action": 2,
+        "applied": true,
+        "captured_window": 0,
+        "generation": 45
+      }
+    },
+    {
+      "name": "resize-preview",
+      "host_to_observed_hdmi_ms": 1117.5833000006605,
+      "host_round_trip_ms": 1222.540100000515,
+      "frames": 39,
+      "accept_ms": 424.539319999516,
+      "feedback_ms": 1054.2133400002494,
+      "ok": true,
+      "present_ms": 1059.8610199997202,
+      "result": {
+        "action": 3,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 47
+      }
+    },
+    {
+      "name": "resize-release",
+      "host_to_observed_hdmi_ms": 1158.2241000005524,
+      "host_round_trip_ms": 2158.930400000827,
+      "frames": 55,
+      "accept_ms": 403.90803999919444,
+      "feedback_ms": 1125.0515599995852,
+      "ok": true,
+      "present_ms": 2029.2010599998757,
+      "result": {
+        "action": 3,
+        "applied": true,
+        "captured_window": 0,
+        "generation": 48
+      }
+    }
+  ]
+}

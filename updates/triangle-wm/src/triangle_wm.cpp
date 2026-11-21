@@ -32,7 +32,7 @@ struct TilePlans : std::vector<std::pair<unsigned,TilePlan>> {
  auto find(unsigned id){auto i=std::lower_bound(begin(),end(),id,[](const auto &v,unsigned t){return v.first<t;});return i!=end()&&i->first==id?i:end();}
  TilePlan &at(unsigned id){auto i=find(id);require(i!=end(),"missing tile plan");return i->second;}
 };
-struct Window {int id;double yaw=0,pitch=0,width=20,height=14,padding=2;unsigned color=84;bool visible=true,has_content=false,plan_ready=false;std::vector<unsigned> footprint;Surface surface;TilePlans plan;WindowTransform transform;};
+struct Window {int id;double yaw=0,pitch=0,width=20,height=14,padding=2;unsigned color=84,splash_color=228;bool shell_pending=false,splash_pending=false;bool visible=true,has_content=false,plan_ready=false;std::vector<unsigned> footprint;Surface surface;TilePlans plan;WindowTransform transform;};
 struct RenderStats {
  bool published=false;unsigned changed=0,content_changed=0,owned=0,projected=0,copied=0,uploaded=0,scatter=0,evictions=0,resident=0,bank=0;
  unsigned plan_tiles=0,plan_rejected=0,plan_fallbacks=0;std::array<unsigned,2> jobs{};
@@ -42,6 +42,7 @@ struct Engine {
  RenderStats stats;
  bool ui_enabled=false,ui_dirty=true,ui_layout_dirty=true,ui_mask_dirty=true,ui_cold_view=true;UiPointer pointer;
  std::map<unsigned,UiPaint> ui_paints;
+ UiPreview preview;
  std::map<unsigned,UiButtonCache> ui_button_cache;
  std::map<unsigned,UiInverse> ui_inverses;
  std::map<unsigned,UiSamples> ui_samples;

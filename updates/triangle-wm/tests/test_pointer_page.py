@@ -65,6 +65,9 @@ def main():
             captured = controls()
             assert captured['pressed'] and captured['captured_window'] == handle['window_id']
             page.mouse.move(x + 24 * scale, y, steps=8)
+            idle()
+            preview=controls().get('preview',{})
+            assert preview.get('active') and preview.get('outline_tiles',0)>0,preview
             page.mouse.up()
             idle()
             moved = status()['last']
@@ -90,9 +93,9 @@ def main():
             page.wait_for_function("document.getElementById('status').textContent.includes('UART 콘솔 복원')", timeout=30000)
             assert not status()['online']
             assert not errors, errors
-            report = {'passed': True, 'move_present_ms': moved['present_ms'],
+            report = {'passed': True, 'move_present_ms': moved['present_ms'], 'move_feedback_ms': moved.get('feedback_ms'), 'move_accept_ms': moved.get('accept_ms'),
                       'checks': ['actual HDMI loaded', 'pointer display off/on', 'hidden-pointer drag applied', 'pointer capture', 'drag release applied',
-                                 'Escape cancels', 'stop releases UART'], 'page_errors': errors}
+                                 'actual tile outline during drag', 'Escape cancels', 'stop releases UART'], 'page_errors': errors}
         finally:
             browser.close()
     args.output.write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')

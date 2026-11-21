@@ -27,7 +27,7 @@ triangle-app
 
 The demo draws its own text and rectangles in application memory. The WM now supplies split close/move/resize controls and a pointer; the app does not draw these itself. See [INPUT.md](INPUT.md). The image has the same background color as its padded triangle silhouette. The demo now defaults to native RGB332 drawing and shared slots; `--rgb24` and `--rgb32` select comparison paths. Legacy applications still receive RGB24 when they omit the format.
 
-For the current board session, the staged executables are `/tmp/triangle-boayo-v8` and `/tmp/triangle-app-v3`; substitute those paths in the commands above and below. The live service PID is recorded in `/tmp/triangle-wm.pid`, and the demo PID in `/tmp/triangle-app.pid`. These are temporary development deployments, not boot-time service installation.
+For the current board session, the staged executables are `/tmp/triangle-boayo-v12` and `/tmp/triangle-app-v3`; substitute those paths in the commands above and below. The live service PID is recorded in `/tmp/triangle-wm.pid`, and the demo PID in `/tmp/triangle-app.pid`. These are temporary development deployments, not boot-time service installation.
 
 The service uses `$BOAYO_SOCKET` (default `/tmp/bosio-wm.sock`) for applications and `$BOAYO_SOCKET.control` for internal management. Socket files are mode 0600; peer UIDs must match the WM UID. Window ownership follows the live connection, not the client-provided `app` string. Disconnecting an application removes its windows and releases their shared surfaces. Applications must keep their connection open.
 
@@ -35,7 +35,7 @@ The service uses `$BOAYO_SOCKET` (default `/tmp/bosio-wm.sock`) for applications
 
 Requests: `{"id":1,"app":"example","op":"create_window","args":{...}}`. Responses: `{"id":1,"ok":true,"result":{...}}` or `{"id":1,"ok":false,"error":"..."}`.
 
-1. `create_window`: `title`, `surface_width`, `surface_height`, `azimuth`, `elevation`, `width_deg`, `height_deg`, optional `padding_deg` (default 2), `background_index` (default 84), `mapped`.
+1. `create_window`: `title`, `surface_width`, `surface_height`, `azimuth`, `elevation`, `width_deg`, `height_deg`, optional `padding_deg` (default 2), `background_index` (B, default 84), `splash_index` (S, default 228), `mapped`. See [FEEDBACK.md](FEEDBACK.md) for staged startup and input feedback.
 2. `create_surface` with `window_id` and optional `format` (`RGB24`, `XRGB8888`, or `RGB332`): returns `path`, `format`, `width`, `height`, `stride`, `slots: 2`, `slot_bytes`, and `sequence`. New surfaces default to RGB24; repeated calls without a format return the existing surface. A live format cannot change. Map the entire file read/write using the returned sizes.
 3. Write the changed pixels into either slot, then `commit_surface` with `window_id`, `slot`, a strictly increasing positive `sequence`, and `damage: [[x,y,w,h], ...]` (1–128 in-bounds rectangles).
 4. The commit response releases the slot after copying the declared damage into the WM-owned latest packed image. It returns `generation`, `changed`, and `copied_bytes`. Reusing the slot after this response cannot affect the submitted image.

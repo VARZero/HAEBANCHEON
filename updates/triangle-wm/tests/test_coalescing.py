@@ -173,6 +173,21 @@ with tempfile.TemporaryDirectory(prefix='triangle-coalesce-') as folder:
             reference.app.wait(reference.app.call('commit_surface', dict(window_id=refid,
                                sequence=2, slot=0, damage=[[0, 0, 64, 48]])))
             assert main.ctl.call('snapshot') == reference.ctl.call('snapshot'), (fmt, 'damage cap')
+            # Content accepted during an outline drag survives cancellation; no
+            # preview operation may overwrite or roll back the private latest image.
+            handle=next(c for c in main.ctl.call('input_status')['controls'] if c['window_id']==ident and c['action']=='move')
+            main.ctl.wait(main.ctl.call('input_button',dict(x=handle['x'],y=handle['y'],pressed=True)))
+            main.ctl.wait(main.ctl.call('input_move',dict(x=handle['x']+70,y=handle['y']-20)))
+            assert main.ctl.call('input_status')['preview']['active']
+            pixels[:info['slot_bytes']]=packed(12,fmt)*(64*48)
+            damage=[[4,4,8,8],[40,30,6,6]]
+            for area in damage:paint(expected,area,packed(12,fmt))
+            main.app.wait(main.app.call('commit_surface',dict(window_id=ident,sequence=overflow[-1]['result']['sequence']+1,slot=0,damage=damage)))
+            assert main.ctl.call('input_status')['preview']['active']
+            main.ctl.wait(main.ctl.call('input_cancel',dict(hide=True)))
+            refpixels[:refinfo['slot_bytes']]=expected
+            reference.app.wait(reference.app.call('commit_surface',dict(window_id=refid,sequence=3,slot=0,damage=[[0,0,64,48]])))
+            assert main.ctl.call('snapshot')==reference.ctl.call('snapshot'),(fmt,'content during drag')
             # Geometry changes must use the latest accepted image, even after
             # client slots have been reused and the content was temporarily hidden.
             for server, wid in [(main, ident), (reference, refid)]:

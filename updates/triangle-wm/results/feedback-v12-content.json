@@ -1,0 +1,137 @@
+{
+  "version": "v12",
+  "scope": "Isolated RGB332 240x144 window, shown dot left at its previous position, no live demo; RAM executables; board-local socket through wait_present. Eight 8x8 updates, three groups of 16 requests with 128 disjoint 4x4 rectangles each. Burst latency is whole-group completion, not per-frame latency.",
+  "samples": [
+    {
+      "accept_ms": 178.1481400001794,
+      "name": "single_8x8",
+      "present_ms": 637.1825000001118
+    },
+    {
+      "accept_ms": 189.08244000002742,
+      "name": "single_8x8",
+      "present_ms": 468.05922000017017
+    },
+    {
+      "accept_ms": 173.9389599999413,
+      "name": "single_8x8",
+      "present_ms": 454.80709999985993
+    },
+    {
+      "accept_ms": 177.71752000041306,
+      "name": "single_8x8",
+      "present_ms": 457.1474000001326
+    },
+    {
+      "accept_ms": 178.83483999967575,
+      "name": "single_8x8",
+      "present_ms": 457.70408000051975
+    },
+    {
+      "accept_ms": 173.21681999973953,
+      "name": "single_8x8",
+      "present_ms": 464.95382000040263
+    },
+    {
+      "accept_ms": 171.76783999986947,
+      "name": "single_8x8",
+      "present_ms": 457.0901800002903
+    },
+    {
+      "accept_ms": 180.5099599994719,
+      "name": "single_8x8",
+      "present_ms": 461.3907599998638
+    },
+    {
+      "accept_ms": 18804.002759999596,
+      "coalesced_updates": 14,
+      "first_ack_ms": 4610.87277999986,
+      "last_content_batch": {
+        "converted_pixels": 2048,
+        "invalidated_tiles": 26,
+        "prepare_us": 749592,
+        "regions": 128,
+        "updates": 3,
+        "windows": 1
+      },
+      "name": "burst_16x128_rects",
+      "present_ms": 19851.216939999722,
+      "publications": 2,
+      "round": 1,
+      "submissions": 16,
+      "wire_bytes": 27408
+    },
+    {
+      "accept_ms": 18449.12643999979,
+      "coalesced_updates": 14,
+      "first_ack_ms": 4608.968380000442,
+      "last_content_batch": {
+        "converted_pixels": 2048,
+        "invalidated_tiles": 26,
+        "prepare_us": 737248,
+        "regions": 128,
+        "updates": 3,
+        "windows": 1
+      },
+      "name": "burst_16x128_rects",
+      "present_ms": 19499.203759999946,
+      "publications": 2,
+      "round": 2,
+      "submissions": 16,
+      "wire_bytes": 27408
+    },
+    {
+      "accept_ms": 17464.468039999716,
+      "coalesced_updates": 14,
+      "first_ack_ms": 4284.879019999877,
+      "last_content_batch": {
+        "converted_pixels": 2048,
+        "invalidated_tiles": 26,
+        "prepare_us": 747900,
+        "regions": 128,
+        "updates": 3,
+        "windows": 1
+      },
+      "name": "burst_16x128_rects",
+      "present_ms": 18503.032540000044,
+      "publications": 2,
+      "round": 3,
+      "submissions": 16,
+      "wire_bytes": 27408
+    }
+  ],
+  "metrics": [
+    {
+      "name": "single_8x8",
+      "field": "accept_ms",
+      "n": 8,
+      "median_ms": 177.933,
+      "p95_ms": 189.082,
+      "max_ms": 189.082
+    },
+    {
+      "name": "single_8x8",
+      "field": "present_ms",
+      "n": 8,
+      "median_ms": 459.547,
+      "p95_ms": 637.183,
+      "max_ms": 637.183
+    },
+    {
+      "name": "burst_16x128_rects",
+      "field": "accept_ms",
+      "n": 3,
+      "median_ms": 18449.126,
+      "p95_ms": 18804.003,
+      "max_ms": 18804.003
+    },
+    {
+      "name": "burst_16x128_rects",
+      "field": "present_ms",
+      "n": 3,
+      "median_ms": 19499.204,
+      "p95_ms": 19851.217,
+      "max_ms": 19851.217
+    }
+  ]
+}

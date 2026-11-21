@@ -1,0 +1,115 @@
+{
+  "focused_window": 3,
+  "generation": 212,
+  "performance": {
+    "coalesced_updates": 42,
+    "content_batches": 85,
+    "content_updates": 127,
+    "feedback_generation": 212,
+    "last_content_batch": {
+      "converted_pixels": 1344,
+      "invalidated_tiles": 10,
+      "prepare_us": 63731,
+      "regions": 1,
+      "updates": 1,
+      "windows": 1
+    },
+    "last_render": {
+      "active_bank": 1,
+      "changed_tiles": 10,
+      "content_changed_tiles": 10,
+      "copied_tiles": 0,
+      "jobs_per_core": [
+        5,
+        5
+      ],
+      "metadata_ms": 49.606,
+      "overlay_tiles": 3,
+      "owned_tiles": 71,
+      "plan_fallbacks": 0,
+      "plan_ms": 0.0,
+      "plan_rejected": 0,
+      "plan_tiles": 0,
+      "projected_tiles": 10,
+      "projection_ms": 89.57482000005257,
+      "publish_ms": 202.12025999899197,
+      "published": true,
+      "render_ms": 411.4590999997745,
+      "request_profile": {
+        "damage_us": 419,
+        "dispatch_us": 59280,
+        "footprint_us": 0,
+        "operation": "commit_surface",
+        "parse_us": 43537,
+        "pixels_us": 36620,
+        "reply_us": 18447,
+        "snapshot_us": 3548
+      },
+      "resident_textures": 1,
+      "service_render_ms": 535.1119799997832,
+      "texture_evictions": 0,
+      "texture_scatter_bytes": 0,
+      "texture_upload_bytes": 13440,
+      "ui_ms": 35.817739999401965,
+      "validate_ms": 36.944,
+      "wait_ms": 100.057
+    },
+    "last_shell_render": {
+      "active_bank": 1,
+      "changed_tiles": 43,
+      "content_changed_tiles": 0,
+      "copied_tiles": 0,
+      "jobs_per_core": [
+        0,
+        0
+      ],
+      "metadata_ms": 51.216,
+      "overlay_tiles": 3,
+      "owned_tiles": 71,
+      "plan_fallbacks": 0,
+      "plan_ms": 0.0,
+      "plan_rejected": 0,
+      "plan_tiles": 0,
+      "projected_tiles": 0,
+      "projection_ms": 0.5311400000209687,
+      "publish_ms": 119.41011999988405,
+      "published": true,
+      "render_ms": 679.2424400009622,
+      "resident_textures": 1,
+      "texture_evictions": 0,
+      "texture_scatter_bytes": 0,
+      "texture_upload_bytes": 0,
+      "ui_ms": 496.4384600007179,
+      "validate_ms": 37.284,
+      "wait_ms": 12.099
+    },
+    "publications": 186,
+    "rendered_generation": 212,
+    "shell_publications": 15
+  },
+  "service": {
+    "mock": false,
+    "phase": "ready",
+    "renderer": "triangle"
+  },
+  "windows": [
+    {
+      "azimuth": 0.954844863031866,
+      "background_index": 84,
+      "decorated": false,
+      "elevation": 0.007184920870860978,
+      "generation": 212,
+      "height_deg": 14,
+      "mapped": true,
+      "padding_deg": 2,
+      "phase": "content",
+      "roll": 0,
+      "splash_index": 228,
+      "surface_height": 144,
+      "surface_width": 240,
+      "title": "BoAYO triangle application",
+      "width_deg": 20,
+      "window_id": 3
+    }
+  ]
+}

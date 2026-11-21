@@ -1,3 +1,22 @@
+ // Construct only boundary cells, using the same footprint as the final window.
+ bool ui_preview(Window &proposal,int id,unsigned color){
+  auto ids=footprint(proposal);
+  if(preview.window==id&&preview.footprint==ids)return false;
+  preview={};preview.window=id;preview.color=color;preview.yaw=proposal.yaw;preview.pitch=proposal.pitch;preview.width=proposal.width;preview.height=proposal.height;preview.footprint=std::move(ids);
+  std::array<uint8_t,tiles> inside{};for(unsigned t:preview.footprint)inside[t]=1;
+  for(unsigned t:preview.footprint)for(unsigned edge=0;edge<3;edge++){
+   uint32_t exposed=0;
+   for(unsigned n=0;n<2;n++){unsigned other=tile_neighbors[t][edge][n];if(other!=65535&&!inside[other])exposed|=tile_edge_coverage[t][edge][n];}
+   if(!exposed)continue;
+   auto &mask=preview.masks[t];
+   for(unsigned k=0;k<32;k++)if(exposed&(1u<<k)){
+    unsigned row=edge==0?k:edge==1?31:31-k,col=edge==0?0:edge==1?k:row;
+    unsigned cell=row*row+2*col;mask[cell/32]|=1u<<(cell%32);
+   }
+  }
+  ui_mask_dirty=true;ui_dirty=true;return true;
+ }
+ void ui_clear_preview(){if(preview.window){preview={};ui_mask_dirty=true;ui_dirty=true;}}
  void set_ui_view(double y,double p){
   if(view_yaw==y&&view_pitch==p)return;
   view_yaw=y;view_pitch=p;view_axes=axes(y,p);ui_projection.reset();ui_transform.reset();ui_descriptors.clear();ui_inverses.clear();ui_samples.clear();ui_cold_view=true;ui_dirty=true;ui_layout_dirty=true;ui_mask_dirty=true;
@@ -164,6 +183,7 @@
   // A five-screen-pixel dot can fall between coarse triangle-cell centers.
   if(pointer.visible&&pointer.display&&!white&&near_tile<tiles){auto&p=paint[near_tile];uint32_t bit=1u<<(near_cell%32);p.mask[0][near_cell/32]&=~bit;p.mask[pointer.down?2:1][near_cell/32]|=bit;}
   for(auto it=paint.begin();it!=paint.end();){bool any=false;for(auto&m:it->second.mask)for(auto v:m)any|=v!=0;if(!any)it=paint.erase(it);else ++it;}
+  for(auto &[t,mask]:preview.masks){auto &p=paint[t];p.mask[3]=mask;for(unsigned i=0;i<32;i++)p.mask[3][i]&=~(p.mask[0][i]|p.mask[1][i]|p.mask[2][i]);}
   ui_mask_dirty=false;ui_cold_view=false;
   }
   require(paint.size()<=256,"overlay tile budget");
@@ -172,7 +192,7 @@
   ui_metadata=base;std::vector<bo_batch_entry> ops;
   for(auto &[t,p]:paint){
    if(!ui_slots.count(t)){unsigned s=0;while(used[s])s++;ui_slots[t]=s;used[s]=true;}
-   unsigned slot=ui_slots.at(t),payload=tiles-256+slot,source=base[256+t];uint64_t hash=1469598103934665603ull;
+   unsigned slot=ui_slots.at(t),payload=tiles-256+slot,source=base[256+t];uint64_t hash=1469598103934665603ull^preview.color;
    for(auto&m:p.mask)for(auto v:m)hash=(hash^v)*1099511628211ull;
    auto &stamp=ui_stamps[bank][slot];uint64_t version=planned_version[t];
    if(stamp.tile!=t||stamp.source!=source||stamp.version!=version||stamp.hash!=hash){
@@ -180,8 +200,8 @@
     if(source==UINT32_MAX){op.kind=BO_BATCH_FILL;op.op.fill={BO_SCENE0+bank,(header+payload*256)*4,1024,0,0};}
     else {op.kind=BO_BATCH_COPY;op.op.copy={BO_SCENE0+bank,header*4+source,BO_SCENE0+bank,(header+payload*256)*4,1024,0};}
     ops.push_back(op);
-    for(unsigned c=0;c<3;c++){bool any=false;for(auto v:p.mask[c])any|=v!=0;if(!any)continue;
-     bo_batch_entry blend{};blend.kind=BO_BATCH_BLEND;blend.op.blend.bank=bank;blend.op.blend.tile=payload;blend.op.blend.mode=1;blend.op.blend.color=c==0?0:c==1?255:228;std::copy(p.mask[c].begin(),p.mask[c].end(),blend.op.blend.mask);ops.push_back(blend);
+    for(unsigned c=0;c<4;c++){bool any=false;for(auto v:p.mask[c])any|=v!=0;if(!any)continue;
+     bo_batch_entry blend{};blend.kind=BO_BATCH_BLEND;blend.op.blend.bank=bank;blend.op.blend.tile=payload;blend.op.blend.mode=1;blend.op.blend.color=c==0?0:c==1?255:c==2?228:preview.color;std::copy(p.mask[c].begin(),p.mask[c].end(),blend.op.blend.mask);ops.push_back(blend);
     }
     stamp={t,source,version,hash};
    }

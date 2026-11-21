@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "move_present_ms": 2290.5743599999696,
+  "move_feedback_ms": 1444.921800000593,
+  "move_accept_ms": 699.3745200000703,
+  "checks": [
+    "actual HDMI loaded",
+    "pointer display off/on",
+    "hidden-pointer drag applied",
+    "pointer capture",
+    "drag release applied",
+    "actual tile outline during drag",
+    "Escape cancels",
+    "stop releases UART"
+  ],
+  "page_errors": []
+}

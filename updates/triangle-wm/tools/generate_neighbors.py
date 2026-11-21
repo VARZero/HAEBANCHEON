@@ -79,7 +79,23 @@ def topology(source):
             assert abs(lo-end) < 1e-8 and hi > lo
             end = hi
         assert abs(end-length) < 1e-8
-    return neighbors
+    masks = []
+    for e, ns in enumerate(neighbors):
+        v,w=ends(e); normal=unit(cross(v,w)); basis=cross(normal,v)
+        row=[]
+        for n in sorted(ns,key=lambda n:n//3):
+            a,b=ends(n)
+            lo,hi=sorted((math.atan2(dot(a,basis),dot(a,v)),math.atan2(dot(b,basis),dot(b,v))))
+            mask=0
+            for k in range(32):
+                q=tuple(v[j]*(31.5-k)+w[j]*(k+.5) for j in range(3))
+                angle=math.atan2(dot(q,basis),dot(q,v))
+                if lo-1e-10<=angle<=hi+1e-10:mask|=1<<k
+            row.append(mask)
+        if len(row)==1:row.append(0)
+        assert row[0]|row[1]==0xffffffff
+        masks.append(row)
+    return neighbors,masks
 
 
 if __name__ == '__main__':
@@ -87,7 +103,7 @@ if __name__ == '__main__':
     ap.add_argument('source', type=Path)
     ap.add_argument('output', type=Path)
     args = ap.parse_args()
-    ns = topology(args.source)
+    ns,masks = topology(args.source)
     lines = ['// Generated edge neighbors; 65535 means no second neighbor.',
              '#pragma once', '#include <cstdint>',
              'static constexpr uint16_t tile_neighbors[4220][3][2]={']
@@ -99,6 +115,10 @@ if __name__ == '__main__':
                 ids.append(65535)
             pairs.append('{%d,%d}' % tuple(ids))
         lines.append('{'+','.join(pairs)+'},')
+    lines.append('};')
+    lines.append('static constexpr uint32_t tile_edge_coverage[4220][3][2]={')
+    for t in range(4220):
+        lines.append('{'+','.join('{%du,%du}'%tuple(m) for m in masks[t*3:t*3+3])+'},')
     lines.append('};')
     args.output.write_text('\n'.join(lines)+'\n')
     print('PASS_TOPOLOGY: 12660 edges, reciprocal coverage; 780 split edges')

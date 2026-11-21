@@ -1,0 +1,32 @@
+{
+  "version": "v12",
+  "base_commit": "f55cc8898267f2d751fd1bd5f5babff0f2340041",
+  "build": "RV32 static musl, -O2 -ffp-contract=off -march=rv32ima_zicsr_zifencei -mabi=ilp32",
+  "artifacts": {
+    "evidence/triangle-boayo-v12-final": "ea9ede1f36351dc355d61956985a55d71bb91b99cd6edd6162a39f56121c61dd",
+    "evidence/triangle-input-v12": "fed8b9a498b94079478a132d6ca1b794dae018e92c36b4ece50a3ac61dcaa028",
+    "evidence/feedback-v12-final.patch": "8bca16eb6d25b60ce5bf63db68664e9b244dd9e5360c800c5b457415cffb4f47"
+  },
+  "host_validation": [
+    "check-feedback with ASan/UBSan",
+    "test_input incl. independent dot visibility",
+    "test_coalescing: RGB332/RGB24/XRGB8888 and content during active preview",
+    "test_boayo: RGB332/RGB24/XRGB8888"
+  ],
+  "deployment_verified": true,
+  "board_service": "/tmp/triangle-boayo-v12",
+  "board_input": "/tmp/triangle-input-v12",
+  "persistent_service": "/root/triangle-wm-v12/triangle-boayo-v12",
+  "persistent_input": "/root/triangle-wm-v12/triangle-input-v12",
+  "verification": [
+    "TRI_3242a078f7_RC:0: final service SHA256, persisted service, input cmp and sync",
+    "TRI_1f6fa0d8bd_RC:0: 41 input samples and running service exe path",
+    "TRI_6ac6385f55_RC:0: content benchmark, live demo restored, running service exe path",
+    "TRI_bbb4570388_RC:0: daemon and updating app alive; S=228/B=84; shell projected zero content tiles"
+  ],
+  "live_urls": [
+    "http://127.0.0.1:8766/",
+    "http://127.0.0.1:8767/"
+  ],
+  "fpga_kernel_changed": false
+}

@@ -20,6 +20,8 @@ if [[ "$mode" == sanitize ]];then flags+=(-fsanitize=address,undefined -fno-omit
 sha256sum "$out/triangle-wm" > "$out/triangle-wm.sha256"
 "$compiler" "${flags[@]}" -Wall -Wextra -I"$native" -I"$uapi" -I"$out" "$here/src/boayo_service.cpp" "$native/geometry.cpp" -o "$out/triangle-boayo"
 sha256sum "$out/triangle-boayo" > "$out/triangle-boayo.sha256"
+"$compiler" "${flags[@]}" -I"$native" -I"$uapi" -I"$out" "$here/tests/check_feedback.cpp" "$native/geometry.cpp" -o "$out/check-feedback"
+if [[ "$mode" != rv32 ]]; then "$out/check-feedback"; fi
 "$compiler" "${flags[@]}" -Wall -Wextra -I"$native" "$here/src/boayo_app.cpp" -o "$out/triangle-app"
 sha256sum "$out/triangle-app" > "$out/triangle-app.sha256"
 "$compiler" "${flags[@]}" -Wall -Wextra -I"$native" "$here/src/input_client.cpp" -o "$out/triangle-input"

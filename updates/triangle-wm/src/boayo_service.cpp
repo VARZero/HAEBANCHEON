@@ -27,7 +27,7 @@ struct Record {
 struct Peer {
   int fd; bool control; std::string in, out;
   // One outstanding wait per connection, just like the synchronous app Client.
-  J wait_id; uint64_t wait_generation=0;
+  J wait_id; uint64_t wait_generation=0;bool feedback_wait=false;
 };
 struct RequestProfile {
  std::string op;uint64_t parse_us=0,dispatch_us=0,reply_us=0,snapshot_us=0,pixels_us=0,damage_us=0,footprint_us=0;
@@ -39,12 +39,13 @@ struct Server {
   std::unique_ptr<Engine> engine;
   std::map<int,Peer> peers;
   std::map<int,Record> records;
-  uint64_t generation=0, presented=0;
+  uint64_t generation=0, presented=0, feedback=0;
   int next_id=1, focused=0, next_app_fd=0;
   size_t reserved_bytes=0;
   bool dirty=false,scene_dirty=true;
   uint64_t content_batches=0,content_updates=0,coalesced_updates=0;
   J last_content_batch=J::object();
+  uint64_t shell_publications=0;J last_shell_render=J::object();
   double service_render_ms=0;RequestProfile request_profile,last_mutation;
   double yaw=0, pitch=0;
 #include "ui_input.inc"
@@ -95,7 +96,7 @@ struct Server {
     const auto &r=records.at(id); const auto &w=engine->windows.at(id);
     return json_object("window_id",id,"title",r.title,"surface_width",r.width,"surface_height",r.height,
       "azimuth",coordinate(w.yaw),"elevation",coordinate(w.pitch),"roll",0,"width_deg",coordinate(w.width),"height_deg",coordinate(w.height),
-      "padding_deg",coordinate(w.padding),"mapped",w.visible,"decorated",false,"generation",generation);
+      "padding_deg",coordinate(w.padding),"background_index",w.color,"splash_index",w.splash_color,"phase",w.splash_pending?"splash":(w.shell_pending||!w.plan_ready)?"background":"content","mapped",w.visible,"decorated",false,"generation",generation);
   }
   void erase(int id) {
     if(capture.id==id)cancel_input();
@@ -131,6 +132,7 @@ struct Server {
       w.width=a.value("width_deg",34.); w.height=a.value("height_deg",24.);
       w.padding=a.value("padding_deg",2.); w.visible=a.value("mapped",true);
       w.color=integer(a,"background_index",84,0,255);
+      w.splash_color=integer(a,"splash_index",228,0,255);require(engine->colors.count(w.splash_color),"splash_index must be reserved");w.shell_pending=true;w.splash_pending=true;
       require(engine->colors.count(w.color),"background_index must be 84,164,109,38,228,255");
       require(a.value("roll",0.)==0.,"window roll is not supported");
       Engine::validate(w);auto phase=microseconds_now();w.footprint=engine->footprint(w);request_profile.footprint_us=microseconds_now()-phase;
@@ -144,7 +146,7 @@ struct Server {
       J list=J::array(); for(int id:engine->order) list.push_back(description(id));
       return {{"windows",list},{"generation",generation},{"focused_window",focused},
         {"service",{{"phase","ready"},{"renderer","triangle"},{"mock",engine->mock}}},
-        {"performance",{{"rendered_generation",presented},{"publications",engine->commits},{"content_batches",content_batches},{"content_updates",content_updates},{"coalesced_updates",coalesced_updates},{"last_content_batch",last_content_batch},{"last_render",last_render}}}};
+        {"performance",{{"rendered_generation",presented},{"feedback_generation",feedback},{"shell_publications",shell_publications},{"last_shell_render",last_shell_render},{"publications",engine->commits},{"content_batches",content_batches},{"content_updates",content_updates},{"coalesced_updates",coalesced_updates},{"last_content_batch",last_content_batch},{"last_render",last_render}}}};
     }
     if(op=="app_events" || op=="poll_events")
       return {{"events",J::array()},{"focused_window",focused},{"view",{yaw,pitch,0}},
@@ -157,7 +159,7 @@ struct Server {
       require(std::isfinite(y)&&std::abs(y)<=180&&std::isfinite(pi)&&std::abs(pi)<=85,"view bounds");
       if(capture.owner>=0)cancel_input();
       apply_pending_content();
-      if(engine->active<0) { engine->render(false);service_render_ms=engine->stats.render_ms;presented=generation; dirty=false; }
+      if(engine->active<0)present();
       auto result=engine->operate({{"op","pose"},{"yaw",y},{"pitch",pi}});
       yaw=y; pitch=pi; result["yaw"]=yaw; result["pitch"]=pitch; result["roll"]=0; return result;
     }
@@ -207,6 +209,7 @@ struct Server {
       bool did_change=!w.has_content || total.w;
       if(did_change) {
         bool first_content=!w.has_content;
+        if(!w.shell_pending)w.splash_pending=false;
         if(!w.has_content) { total={0,0,int(r.width),int(r.height)}; w.plan_ready=false; }
         w.has_content=true; s.pending=unite(s.pending,total);
         r.pending.merge(areas);
@@ -278,11 +281,12 @@ struct Server {
       require(p.wait_id.is_null(),"wait_present already pending");
       const auto &op=q.at("op").get_ref<const std::string&>();static const J empty=J::object();const J &a=q.contains("args")?q.at("args"):empty;
       request_profile.parse_us=microseconds_now()-started;
-      if(op=="wait_present") {
+      if(op=="wait_present"||op=="wait_feedback") {
         require(a.at("generation").is_number_integer(),"integer generation required");
         int64_t gen=a.at("generation"); require(gen>=0 && uint64_t(gen)<=generation,"unknown future generation");
-        if(uint64_t(gen)>presented) { p.wait_id=id; p.wait_generation=gen; }
-        else reply(p,id,json_object("generation",presented,"presented",true));
+        bool early=op=="wait_feedback";uint64_t ready=early?feedback:presented;
+        if(uint64_t(gen)>ready) { p.wait_id=id; p.wait_generation=gen;p.feedback_wait=early; }
+        else reply(p,id,json_object("generation",ready,"presented",!early,"feedback",early));
       } else {
         auto phase=microseconds_now();auto result=dispatch(p,op,a);request_profile.dispatch_us=microseconds_now()-phase;phase=microseconds_now();
         reply(p,id,result);request_profile.reply_us=microseconds_now()-phase;
@@ -351,6 +355,25 @@ struct Server {
     // Release copied slots before polling for more already-queued submissions.
     flush();return progress;
   }
+  void present() {
+        double start=now();bool shells=false;
+        for(auto &[id,w]:engine->windows)shells|=w.visible&&w.shell_pending;
+        if(!shells)apply_pending_content();
+        engine->render(false,!scene_dirty);service_render_ms=(now()-start)*1000;scene_dirty=false;
+        if(shells){if(engine->stats.published)++shell_publications;last_shell_render=engine->render_report();}
+        feedback=generation;dirty=false;
+        for(auto &[id,w]:engine->windows)if(w.visible&&w.shell_pending){
+          w.shell_pending=false;
+          if(w.has_content){w.splash_pending=false;dirty=true;scene_dirty=true;engine->ui_dirty=true;engine->ui_layout_dirty=true;engine->ui_mask_dirty=true;}
+        }
+        // Keep pending conversions alive when another window's shell was shown first.
+        if(shells)for(auto &[id,r]:records)if(r.pending.commits){dirty=true;scene_dirty=true;}
+        if(!dirty)presented=generation;
+        for(auto &[fd,p]:peers)if(!p.wait_id.is_null()&&p.wait_generation<=(p.feedback_wait?feedback:presented)) {
+          reply(p,p.wait_id,json_object("generation",p.feedback_wait?feedback:presented,"presented",!p.feedback_wait,"feedback",p.feedback_wait));p.wait_id=nullptr;
+        }
+        flush();
+  }
   void run() {
     std::cout<<"TRIANGLE_BOAYO_READY "<<path<<std::endl;
     while(!stopping) {
@@ -359,12 +382,7 @@ struct Server {
       for(unsigned pass=0;pass<4&&budget&&!stopping;pass++)if(!pump(dirty||pass!=0,budget))break;
       // No debounce sleep: drain a bounded ready backlog, then publish its latest state.
       if(dirty&&!stopping) {
-        double start=now();apply_pending_content();engine->render(false,!scene_dirty);service_render_ms=(now()-start)*1000;scene_dirty=false;
-        presented=generation;dirty=false;
-        for(auto &[fd,p]:peers)if(!p.wait_id.is_null()&&p.wait_generation<=presented) {
-          reply(p,p.wait_id,json_object("generation",presented,"presented",true));p.wait_id=nullptr;
-        }
-        flush();
+        present();
       }
     }
     flush();
@@ -373,6 +391,7 @@ struct Server {
 };
 } // namespace triangle_service
 
+#ifndef TRIANGLE_SERVICE_ONLY
 int main(int argc,char **argv) {
   try {
     signal(SIGPIPE,SIG_IGN); signal(SIGTERM,triangle_service::stop); signal(SIGINT,triangle_service::stop);
@@ -385,3 +404,5 @@ int main(int argc,char **argv) {
     triangle_service::Server server(argc==2 && std::string(argv[1])=="--mock"); server.run();
   } catch(const std::exception &e) { std::cerr<<e.what()<<std::endl; return 1; }
 }
+
+#endif

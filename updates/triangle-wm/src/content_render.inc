@@ -25,8 +25,8 @@
   if(!overlay_only||active<0){touched=visible_tiles;
   for(unsigned t:touched){owner[t]=0;wanted[t]=0;next[256+t]=UINT32_MAX;touched_flag[t]=1;}
   for(int id:order){auto&w=windows.at(id);if(w.visible){for(unsigned t:w.footprint){if(!touched_flag[t]){touched.push_back(t);touched_flag[t]=1;wanted[t]=0;}if(!owner[t])new_visible.push_back(t);owner[t]=id;}}}
-  for(int id:order){auto &w=windows.at(id);if(w.visible && w.has_content && !w.plan_ready && std::any_of(w.footprint.begin(),w.footprint.end(),[&](unsigned t){return owner[t]==id;}))prepare(w);}
-  owned=new_visible.size();for(unsigned t:new_visible){auto&w=windows.at(owner[t]);next[256+t]=colors.at(w.color)*1024;if(w.has_content){auto p=w.plan.find(t);if(p!=w.plan.end())wanted[t]=p->second.version;}}
+  for(int id:order){auto &w=windows.at(id);if(w.visible && w.has_content && !w.shell_pending && !w.plan_ready && std::any_of(w.footprint.begin(),w.footprint.end(),[&](unsigned t){return owner[t]==id;}))prepare(w);}
+  owned=new_visible.size();for(unsigned t:new_visible){auto&w=windows.at(owner[t]);next[256+t]=colors.at(w.splash_pending?w.splash_color:w.color)*1024;if(w.has_content&&!w.shell_pending){auto p=w.plan.find(t);if(p!=w.plan.end())wanted[t]=p->second.version;}}
   for(unsigned t:touched)if(!wanted[t]&&slots[t]>=0){free_slots.push_back(slots[t]);slots[t]=-1;versions[0][t]=versions[1][t]=0;}
   for(unsigned t:new_visible)if(wanted[t]){if(slots[t]<0){if(!free_slots.empty()){slots[t]=free_slots.back();free_slots.pop_back();}else{require(next_slot<(ui_enabled?tiles-256:tiles),"scene payload capacity");slots[t]=next_slot++;}versions[0][t]=versions[1][t]=0;}next[256+t]=unsigned(slots[t])*1024;}
   for(unsigned t:touched){changed+=next[256+t]!=metadata[256+t]||wanted[t]!=presented[t];content_changed+=wanted[t]&&wanted[t]!=presented[t];}

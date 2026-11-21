@@ -1,0 +1,148 @@
+{
+  "scope": "Live RGB332 demo updating every two seconds; shown dot; board-local times exclude UART, host_round_trip includes HTTP/UART but not HDMI detection.",
+  "samples": [
+    {
+      "accept_ms": 258.1166199995205,
+      "feedback_ms": 1387.8432400003076,
+      "ok": true,
+      "present_ms": 1406.0556199997663,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 145
+      },
+      "host_round_trip_ms": 1584.6612000004825
+    },
+    {
+      "accept_ms": 361.81211999990046,
+      "feedback_ms": 1230.0348800001666,
+      "ok": true,
+      "present_ms": 1233.43142000027,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 146
+      },
+      "host_round_trip_ms": 1482.6102000006358
+    },
+    {
+      "accept_ms": 420.0680200001225,
+      "feedback_ms": 1105.3184400005266,
+      "ok": true,
+      "present_ms": 1121.8343799998984,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 147
+      },
+      "host_round_trip_ms": 1354.4478000003437
+    },
+    {
+      "accept_ms": 613.8248600000516,
+      "feedback_ms": 1613.7079400001094,
+      "ok": true,
+      "present_ms": 1630.362959999591,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 149
+      },
+      "host_round_trip_ms": 1863.5826999998244
+    },
+    {
+      "accept_ms": 313.10742000024766,
+      "feedback_ms": 768.5218399995938,
+      "ok": true,
+      "present_ms": 772.1175600001588,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 150
+      },
+      "host_round_trip_ms": 985.2982000011252
+    },
+    {
+      "accept_ms": 229.70215999986976,
+      "feedback_ms": 761.4279800001532,
+      "ok": true,
+      "present_ms": 767.1036000000313,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 151
+      },
+      "host_round_trip_ms": 914.2190000002302
+    },
+    {
+      "accept_ms": 212.43523999955505,
+      "feedback_ms": 691.3438599994406,
+      "ok": true,
+      "present_ms": 697.553239999339,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 152
+      },
+      "host_round_trip_ms": 917.9253000002063
+    },
+    {
+      "accept_ms": 644.2515400005504,
+      "feedback_ms": 1495.1966200005263,
+      "ok": true,
+      "present_ms": 1512.0228200005367,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 153
+      },
+      "host_round_trip_ms": 1773.8146000010602
+    },
+    {
+      "accept_ms": 368.6358599998057,
+      "feedback_ms": 1096.055320000276,
+      "ok": true,
+      "present_ms": 1110.3094399999827,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 154
+      },
+      "host_round_trip_ms": 1369.4634000003134
+    }
+  ],
+  "metrics": {
+    "accept_ms": {
+      "n": 9,
+      "median_ms": 361.812,
+      "p95_ms": 644.252,
+      "max_ms": 644.252
+    },
+    "feedback_ms": {
+      "n": 9,
+      "median_ms": 1105.318,
+      "p95_ms": 1613.708,
+      "max_ms": 1613.708
+    },
+    "present_ms": {
+      "n": 9,
+      "median_ms": 1121.834,
+      "p95_ms": 1630.363,
+      "max_ms": 1630.363
+    },
+    "host_round_trip_ms": {
+      "n": 9,
+      "median_ms": 1369.463,
+      "p95_ms": 1863.583,
+      "max_ms": 1863.583
+    }
+  }
+}
