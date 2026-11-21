@@ -1,0 +1,111 @@
+{
+  "version": "v10",
+  "conditions": "Same boot, one visible window, RGB332 240x144 source, RAM executables, TRIANGLE_SPARSE_UPLOAD=0; board-local socket request through wait_present; optical/capture/UART excluded. Single updates have one 8x8 rectangle and wait each time. Each queued burst has 16 submissions, each containing 128 disjoint 4x4 rectangles; encoded request bytes and shared source pixels prepared before timing.",
+  "complete": true,
+  "samples": [
+    {
+      "accept_ms": 256.70772000029683,
+      "name": "single_8x8",
+      "present_ms": 817.3222199999727
+    },
+    {
+      "accept_ms": 253.42764000035822,
+      "name": "single_8x8",
+      "present_ms": 492.0561400000006
+    },
+    {
+      "accept_ms": 258.02190000005066,
+      "name": "single_8x8",
+      "present_ms": 492.46804000018165
+    },
+    {
+      "accept_ms": 265.9861000003293,
+      "name": "single_8x8",
+      "present_ms": 490.8876200001687
+    },
+    {
+      "accept_ms": 265.3434600001201,
+      "name": "single_8x8",
+      "present_ms": 503.1307000000961
+    },
+    {
+      "accept_ms": 355.220100000035,
+      "name": "single_8x8",
+      "present_ms": 483.2563000000082
+    },
+    {
+      "accept_ms": 270.4999400000088,
+      "name": "single_8x8",
+      "present_ms": 519.5166800003499
+    },
+    {
+      "accept_ms": 250.73237999994308,
+      "name": "single_8x8",
+      "present_ms": 508.8425799999386
+    },
+    {
+      "accept_ms": 36417.94659999991,
+      "first_ack_ms": 8809.872099999804,
+      "name": "burst_16x128_rects",
+      "present_ms": 36907.18169999961,
+      "round": 1,
+      "submissions": 16,
+      "wire_bytes": 27408
+    },
+    {
+      "accept_ms": 36752.19321999978,
+      "first_ack_ms": 8853.651979999617,
+      "name": "burst_16x128_rects",
+      "present_ms": 37261.8308199998,
+      "round": 2,
+      "submissions": 16,
+      "wire_bytes": 27408
+    },
+    {
+      "accept_ms": 36703.756880000234,
+      "first_ack_ms": 8820.011839999817,
+      "name": "burst_16x128_rects",
+      "present_ms": 37161.87005999964,
+      "round": 3,
+      "submissions": 16,
+      "wire_bytes": 27408
+    }
+  ],
+  "metrics": [
+    {
+      "name": "single_8x8",
+      "field": "accept_ms",
+      "n": 8,
+      "median_ms": 261.683,
+      "max_ms": 355.22
+    },
+    {
+      "name": "single_8x8",
+      "field": "present_ms",
+      "n": 8,
+      "median_ms": 497.799,
+      "max_ms": 817.322
+    },
+    {
+      "name": "burst_16x128_rects",
+      "field": "first_ack_ms",
+      "n": 3,
+      "median_ms": 8820.012,
+      "max_ms": 8853.652
+    },
+    {
+      "name": "burst_16x128_rects",
+      "field": "accept_ms",
+      "n": 3,
+      "median_ms": 36703.757,
+      "max_ms": 36752.193
+    },
+    {
+      "name": "burst_16x128_rects",
+      "field": "present_ms",
+      "n": 3,
+      "median_ms": 37161.87,
+      "max_ms": 37261.831
+    }
+  ]
+}

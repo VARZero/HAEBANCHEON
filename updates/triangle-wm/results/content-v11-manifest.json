@@ -1,0 +1,75 @@
+{
+  "version": "v11",
+  "base_checkpoint": "1afbcc329ed4cca40760f7067b1aa86e56773dbe",
+  "service_sha256": "5cf4544ed3e04ed150b56131fc0c5380e68570243d1997fb6b591abb06f54908",
+  "host_sha256": "542f418655981213f36bd0eb30247243efd0bfb64e4c60310c9382db96b3e16c",
+  "sanitized_sha256": "e9bc638289adcf026e17fb6f48a292ae91b2ea5d691eff9009d45ab23fbddde8",
+  "benchmark_sha256": "87a8e910330c0368e9a1b569cfc0ac8e0ac03d529b76d799cc2966265c6d1e69",
+  "patch_sha256": "71939bff9ef5c3babfe078afa92b7d2d1965f2f4a322e0ed2d785045849ec93f",
+  "build": {
+    "compiler": "riscv32-buildroot-linux-musl-g++",
+    "flags": "-std=c++17 -O2 -g -pthread -ffp-contract=off -static -march=rv32ima_zicsr_zifencei -mabi=ilp32 -s"
+  },
+  "tests": {
+    "coalescing": "PASS: RGB332 RGB24 XRGB8888, 40 changed commits -> 4 publications / 36 coalesced per format; matches full reference",
+    "coalescing_sanitized": "PASS: same scenarios under ASan/UBSan plus region cap, pending no-op, slot reuse, invalid requests and simultaneous mixed-format windows",
+    "input_reference": "PASS: 160 presented states equal v10 reference; ASan/UBSan exact match",
+    "compatibility": "PASS: RGB332 RGB24 XRGB8888 under ASan/UBSan with input disabled",
+    "board": "PASS: 8 single updates and 3 bursts; every 16-update burst produced 2 publications / 14 coalesced updates",
+    "browser": {
+      "passed": true,
+      "move_present_ms": 1709.2589199999347,
+      "checks": [
+        "actual HDMI loaded",
+        "pointer display off/on",
+        "hidden-pointer drag applied",
+        "pointer capture",
+        "drag release applied",
+        "Escape cancels",
+        "stop releases UART"
+      ],
+      "page_errors": []
+    },
+    "capture": "Actual HDMI inspected; live RGB332 app running"
+  },
+  "source_files": {
+    "src/application_buffer.hpp": "adf1dd50e31864772128ed98c706f303b798d8fdb652ca03ae6bd33ad9b04e22",
+    "src/boayo_app.cpp": "8c53b41d9194558ca12b3fddc73c52dea85fa927da7c95ad6c3b1521a9d0ecba",
+    "src/boayo_service.cpp": "2154b10dbc9c6f54975e5b17c782e951127e8b8a394f80b07ad4231216bbae3a",
+    "src/content.hpp": "cfc0fbe91c1d7bc38c3e7a06545c5e71a2606275da6538f4623238a35287911c",
+    "src/content_render.inc": "539dddca0c4517e591d483c6bcc6412141de9c1e882a97402a034537e7178118",
+    "src/fast_camera.hpp": "e3bc0ae75fb98ef203af79f1e5f30027bc0000cfc95d7d552be8dbccf8d5f48f",
+    "src/fast_projection.hpp": "da143ba753418511a8215f909f8d4c9aa3e6c16aa11b3d23627e970b9bc8e182",
+    "src/generate_geometry.cpp": "93198d44a3b75edcde3419c9c7e6b429bb289770edbbbf0e003ab5063c21b585",
+    "src/input_client.cpp": "5e49599df73188a42e1a975d2ccebd9e20ead893501062c654b01d18d105da07",
+    "src/json_object.hpp": "88c75641e9a3888c1afdc3d096f8fa53f4e014255e182d913fc5ea19c3b6e80b",
+    "src/outline.hpp": "b237019060f890d52993af73bf475a45261f85840117a4acf0da58ff16b53942",
+    "src/pending_content.hpp": "41f9183d6f95058c76e78e1606868790ae3cc7c67e24df9bb4d4282b4184c4e9",
+    "src/texture_cache.hpp": "065c27f34ef4807d012a815b998860cefc258fe0a3f4b2d4ff83590729aa02da",
+    "src/triangle_wm.cpp": "49ef27dffd9ab1311b8601e5fe299b81377f899e4d0417c699e0f7e05e7e0a72",
+    "src/ui_bounds.hpp": "feccfc6139198f876751ab2f664d15a200a858047984a7e409148b0cc1bd55dd",
+    "src/ui_input.inc": "dc911b76c19182590fac0863efdb6a9a6121542b0f8f3099e3f45895559166f8",
+    "src/ui_render.inc": "3b1b4db0a1699c4497242e5286b3600e6021336796a85a0af898b981dbd5ac45",
+    "src/ui_samples.hpp": "eac67ef0c3a9f1b5220679f1208ede1e1cf4bc41e8ef2ffeb71fe158b8d77c6d",
+    "src/ui_types.hpp": "579b979365192f249394e6feecd1a4f73220eeb99256ca94455ea78847922110",
+    "src/window_transform.hpp": "59a9c54cec6add636d3a26ed05f0e2812d99b226ced75180e8b3fe8e22f3810e",
+    "build.sh": "e9786f9ec13d8a622bd0388da4de5df99010115a0a24786eb71eab1fd7492ad9",
+    "tests/test_coalescing.py": "2afd6655c466e1df9fe7622e5b3c8b2edbd5b9fc23e1ee759d15cbffcc57b036",
+    "tests/coalescing_bench.cpp": "ad930b114bc7a13584e05e2bfc2ee15cf3ee1ded0137344817a56b15c51d64b4",
+    "tests/test_input.py": "a15becdc941af29d536fbbff0e2ef647dde93c889a2e31a437d37ee82258846f",
+    "tests/test_boayo.py": "249939a88404d0fe64f9e1769f9535580f0dc1755b477d87ccc0b3d5bc281629"
+  },
+  "deployment": {
+    "persistent_path": "/root/triangle-wm-v11/triangle-boayo-v11",
+    "runtime_path": "/tmp/triangle-boayo-v11",
+    "benchmark_path": "/root/triangle-wm-v11/coalescing-bench",
+    "verification": "Board SHA256 matched host build before execution; running /proc executable path verified",
+    "copy_and_sync": "PASS: TRI_c09ded016e_RC:0",
+    "runtime_and_app": "PASS: TRI_df82bde3cb_RC:0",
+    "autostart": false
+  },
+  "benchmark_build": {
+    "compiler": "riscv32-buildroot-linux-musl-g++",
+    "flags": "-std=c++17 -O2 -static -s -march=rv32ima_zicsr_zifencei -mabi=ilp32"
+  }
+}

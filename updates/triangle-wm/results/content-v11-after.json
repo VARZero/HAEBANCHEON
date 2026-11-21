@@ -1,0 +1,141 @@
+{
+  "version": "v11",
+  "conditions": "Same boot, one visible window, RGB332 240x144 source, RAM executables, TRIANGLE_SPARSE_UPLOAD=0; board-local socket request through wait_present; optical/capture/UART excluded. Single updates have one 8x8 rectangle and wait each time. Each queued burst has 16 submissions, each containing 128 disjoint 4x4 rectangles; encoded request bytes and shared source pixels prepared before timing.",
+  "complete": true,
+  "samples": [
+    {
+      "accept_ms": 229.88748000003397,
+      "name": "single_8x8",
+      "present_ms": 791.2111199991778
+    },
+    {
+      "accept_ms": 229.64486000034958,
+      "name": "single_8x8",
+      "present_ms": 540.1319000003859
+    },
+    {
+      "accept_ms": 245.08330000005662,
+      "name": "single_8x8",
+      "present_ms": 544.6153400000185
+    },
+    {
+      "accept_ms": 243.5474600000307,
+      "name": "single_8x8",
+      "present_ms": 539.2973800003529
+    },
+    {
+      "accept_ms": 244.55434000026435,
+      "name": "single_8x8",
+      "present_ms": 549.1224800003693
+    },
+    {
+      "accept_ms": 241.14230000041425,
+      "name": "single_8x8",
+      "present_ms": 516.1502200001851
+    },
+    {
+      "accept_ms": 229.74050000030547,
+      "name": "single_8x8",
+      "present_ms": 506.33729999978095
+    },
+    {
+      "accept_ms": 246.58294000010937,
+      "name": "single_8x8",
+      "present_ms": 544.8537600003183
+    },
+    {
+      "accept_ms": 19209.063699999824,
+      "coalesced_updates": 14,
+      "first_ack_ms": 4734.417679999955,
+      "last_content_batch": {
+        "converted_pixels": 2048,
+        "invalidated_tiles": 26,
+        "prepare_us": 749926,
+        "regions": 128,
+        "updates": 3,
+        "windows": 1
+      },
+      "name": "burst_16x128_rects",
+      "present_ms": 20323.580459999852,
+      "publications": 2,
+      "round": 1,
+      "submissions": 16,
+      "wire_bytes": 27408
+    },
+    {
+      "accept_ms": 20055.43230000045,
+      "coalesced_updates": 14,
+      "first_ack_ms": 4907.314860000275,
+      "last_content_batch": {
+        "converted_pixels": 2048,
+        "invalidated_tiles": 26,
+        "prepare_us": 734037,
+        "regions": 128,
+        "updates": 3,
+        "windows": 1
+      },
+      "name": "burst_16x128_rects",
+      "present_ms": 21167.74190000072,
+      "publications": 2,
+      "round": 2,
+      "submissions": 16,
+      "wire_bytes": 27408
+    },
+    {
+      "accept_ms": 20000.97559999954,
+      "coalesced_updates": 14,
+      "first_ack_ms": 4898.263379999436,
+      "last_content_batch": {
+        "converted_pixels": 2048,
+        "invalidated_tiles": 26,
+        "prepare_us": 748209,
+        "regions": 128,
+        "updates": 3,
+        "windows": 1
+      },
+      "name": "burst_16x128_rects",
+      "present_ms": 21129.68432,
+      "publications": 2,
+      "round": 3,
+      "submissions": 16,
+      "wire_bytes": 27408
+    }
+  ],
+  "metrics": [
+    {
+      "name": "single_8x8",
+      "field": "accept_ms",
+      "n": 8,
+      "median_ms": 242.345,
+      "max_ms": 246.583
+    },
+    {
+      "name": "single_8x8",
+      "field": "present_ms",
+      "n": 8,
+      "median_ms": 542.374,
+      "max_ms": 791.211
+    },
+    {
+      "name": "burst_16x128_rects",
+      "field": "first_ack_ms",
+      "n": 3,
+      "median_ms": 4898.263,
+      "max_ms": 4907.315
+    },
+    {
+      "name": "burst_16x128_rects",
+      "field": "accept_ms",
+      "n": 3,
+      "median_ms": 20000.976,
+      "max_ms": 20055.432
+    },
+    {
+      "name": "burst_16x128_rects",
+      "field": "present_ms",
+      "n": 3,
+      "median_ms": 21129.684,
+      "max_ms": 21167.742
+    }
+  ]
+}

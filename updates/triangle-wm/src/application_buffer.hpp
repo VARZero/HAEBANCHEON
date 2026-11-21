@@ -16,10 +16,18 @@ struct ApplicationBuffer {
   unsigned width, height, pixel_bytes;
   std::string format;
   size_t slot_bytes;
+  Bytes latest; // Authoritative packed pixels; independent of released app slots.
   uint64_t sequence = 0, commits = 0, copied_bytes = 0;
 
-  ApplicationBuffer(unsigned w, unsigned h, std::string fmt) : width(w), height(h), pixel_bytes(fmt=="XRGB8888"?4:fmt=="RGB332"?1:3), format(std::move(fmt)), slot_bytes(size_t(w)*h*pixel_bytes) {
+  ApplicationBuffer(unsigned w, unsigned h, std::string fmt, uint32_t background) : width(w), height(h), pixel_bytes(fmt=="XRGB8888"?4:fmt=="RGB332"?1:3), format(std::move(fmt)), slot_bytes(size_t(w)*h*pixel_bytes) {
     require(format=="RGB24" || format=="XRGB8888" || format=="RGB332", "unsupported surface format");
+    latest.resize(slot_bytes);
+    for(size_t i=0;i<size_t(width)*height;i++) {
+      auto *pixel=latest.data()+i*pixel_bytes;
+      if(pixel_bytes==1)pixel[0]=uint8_t(((background>>16)&224)|((background>>11)&28)|((background>>6)&3));
+      else if(pixel_bytes==4)std::memcpy(pixel,&background,4);
+      else {pixel[0]=background>>16;pixel[1]=background>>8;pixel[2]=background;}
+    }
     fd = memfd_create("boayo-surface", MFD_CLOEXEC | MFD_ALLOW_SEALING);
     require(fd >= 0, "memfd_create failed");
     if (ftruncate(fd, slot_bytes*2) ||

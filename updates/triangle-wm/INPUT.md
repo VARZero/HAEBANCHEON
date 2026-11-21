@@ -1,8 +1,8 @@
-# Split WM controls and pointer (v10)
+# Split WM controls and pointer (v11)
 
 `triangle-boayo` now enables internal pointer controls by default. Applications keep the existing BoAYO socket/shared-surface interface. `TRIANGLE_INPUT=0` disables the overlay and preserves the previous rendering and fast pose path.
 
-The original measurements are in [INPUT_RESULTS.md](INPUT_RESULTS.md); v9 CPU improvements and runtime visibility are in [INPUT_OPTIMIZATION.md](INPUT_OPTIMIZATION.md), followed by [button-mask and first-content optimization](INPUT_CACHE.md).
+The original measurements are in [INPUT_RESULTS.md](INPUT_RESULTS.md); v9 CPU improvements and runtime visibility are in [INPUT_OPTIMIZATION.md](INPUT_OPTIMIZATION.md), followed by [button-mask and first-content optimization](INPUT_CACHE.md) and [latest-content coalescing](CONTENT_COALESCING.md).
 
 ## Placement and behavior
 
@@ -25,7 +25,7 @@ The present ABI has no independent cursor plane. Pointer-only publication still 
 The current board kernel exposes no input device. The development input route is PC mouse → loopback HTTP → COM4 → persistent board control socket. It does not require changing the kernel, FPGA or SD boot installation.
 
 ```sh
-TRIANGLE_SPARSE_UPLOAD=0 /tmp/triangle-boayo-v10 > /tmp/triangle-v10-live.log 2>&1 &
+TRIANGLE_SPARSE_UPLOAD=0 /tmp/triangle-boayo-v11 > /tmp/triangle-v11-live.log 2>&1 &
 /tmp/triangle-app-v3 --rgb332 --demo > /tmp/triangle-app-input-v8.log 2>&1 &
 # Finite board-local test (optional --close actually closes the first window):
 /tmp/triangle-input-v8 --close
@@ -43,10 +43,10 @@ The bridge exclusively owns COM4. Use **입력 연결 종료** before running ot
 
 ## Restoring after a reboot
 
-The v10 service is retained in `/root/triangle-wm-v10/`; the unchanged app/input executables remain in `/root/triangle-wm-v8/` on the board's persistent filesystem. This does not install a boot service. Restore the temporary launch paths, then use the run commands above:
+The v11 service is retained in `/root/triangle-wm-v11/`; the unchanged app/input executables remain in `/root/triangle-wm-v8/` on the board's persistent filesystem. This does not install a boot service. Restore the temporary launch paths, then use the run commands above:
 
 ```sh
-cp /root/triangle-wm-v10/triangle-boayo-v10 /tmp/triangle-boayo-v10
+cp /root/triangle-wm-v11/triangle-boayo-v11 /tmp/triangle-boayo-v11
 cp /root/triangle-wm-v8/triangle-app-v3 /tmp/triangle-app-v3
 cp /root/triangle-wm-v8/triangle-input-v8 /tmp/triangle-input-v8
 ```
@@ -72,12 +72,12 @@ Visual mutations return a generation; `wait_present` acknowledges completion. Mo
 ## Validation
 
 ```sh
-TEST_INPUT_VISIBILITY=1 python3 updates/triangle-wm/tests/test_input.py /var/tmp/triangle-v10-host/triangle-boayo
-TEST_INPUT_VISIBILITY=1 python3 updates/triangle-wm/tests/test_input.py /var/tmp/triangle-v10-san/triangle-boayo
-TRIANGLE_INPUT=0 python3 updates/triangle-wm/tests/test_boayo.py /var/tmp/triangle-v10-san/triangle-boayo
+TEST_INPUT_VISIBILITY=1 python3 updates/triangle-wm/tests/test_input.py /var/tmp/triangle-v11-host/triangle-boayo
+TEST_INPUT_VISIBILITY=1 python3 updates/triangle-wm/tests/test_input.py /var/tmp/triangle-v11-san/triangle-boayo
+TRIANGLE_INPUT=0 python3 updates/triangle-wm/tests/test_boayo.py /var/tmp/triangle-v11-san/triangle-boayo
 ```
 
-The mock enforces the driver rule that a changed camera requires `BO_SET_POSE` before `BO_PUBLISH`. The original bounded-raster check uses `TRIANGLE_UI_FULL_SCAN=1`. For v10, a trace comparison against v9 checks identical tile hashes across 160 presented states, including tile-edge round trips, queued geometry followed by pointer motion, first partial RGB332 content, and cached button states with the dot hidden and shown. The optional visibility checks also cover hidden tracking without redundant publication, capture retention and restoring the original pixels. `check_ui_samples.cpp` checks one million random quotients plus integer/normalization boundaries against exact 64-bit division.
+The mock enforces the driver rule that a changed camera requires `BO_SET_POSE` before `BO_PUBLISH`. The original bounded-raster check uses `TRIANGLE_UI_FULL_SCAN=1`. For v10/v11, a trace comparison against v9 checks identical tile hashes across 160 presented states, including tile-edge round trips, queued geometry followed by pointer motion, first partial RGB332 content, and cached button states with the dot hidden and shown. The optional visibility checks also cover hidden tracking without redundant publication, capture retention and restoring the original pixels. `check_ui_samples.cpp` checks one million random quotients plus integer/normalization boundaries against exact 64-bit division.
 
 The input test uses real Unix sockets/shared RGB332 buffers with a mock hardware backend: invalid input atomicity, control ownership, cursor trail restoration, content updates beneath the cursor, overlap restoration, canceled close, move/resize on release, disconnect, view changes, 36 size/position layouts, and final close. The compatibility suite covers all three surface formats with the prior UI-disabled pose contract. ASan/UBSan builds run both suites.
 
@@ -86,5 +86,5 @@ The monitor tolerates a transient Windows snapshot-file lock, and the input page
 For explicit live browser acceptance (moves a real window and stops the bridge):
 
 ```powershell
-python updates/triangle-wm/tests/test_pointer_page.py --url http://127.0.0.1:8767 --output updates/triangle-wm/results/input-v10-browser.json
+python updates/triangle-wm/tests/test_pointer_page.py --url http://127.0.0.1:8767 --output updates/triangle-wm/results/content-v11-browser.json
 ```

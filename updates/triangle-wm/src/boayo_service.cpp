@@ -3,6 +3,7 @@
 #include "triangle_wm.cpp"
 #include "ipc.hpp"
 #include "application_buffer.hpp"
+#include "pending_content.hpp"
 #include <poll.h>
 #include <sys/file.h>
 #include <sys/stat.h>
@@ -21,6 +22,7 @@ static int integer(const J &a, const char *key, int fallback, int lo, int hi) {
 struct Record {
   int owner; std::string title; unsigned width, height;
   std::unique_ptr<ApplicationBuffer> shared;
+  PendingContent pending;
 };
 struct Peer {
   int fd; bool control; std::string in, out;
@@ -38,9 +40,11 @@ struct Server {
   std::map<int,Peer> peers;
   std::map<int,Record> records;
   uint64_t generation=0, presented=0;
-  int next_id=1, focused=0;
+  int next_id=1, focused=0, next_app_fd=0;
   size_t reserved_bytes=0;
   bool dirty=false,scene_dirty=true;
+  uint64_t content_batches=0,content_updates=0,coalesced_updates=0;
+  J last_content_batch=J::object();
   double service_render_ms=0;RequestProfile request_profile,last_mutation;
   double yaw=0, pitch=0;
 #include "ui_input.inc"
@@ -95,7 +99,7 @@ struct Server {
   }
   void erase(int id) {
     if(capture.id==id)cancel_input();
-    const auto &r=records.at(id); reserved_bytes-=size_t(r.width)*r.height*(r.shared?4+2*r.shared->pixel_bytes:10);
+    const auto &r=records.at(id); reserved_bytes-=size_t(r.width)*r.height*(r.shared?4+3*r.shared->pixel_bytes:13);
     records.erase(id); engine->windows.erase(id);
     auto &order=engine->order; order.erase(std::remove(order.begin(),order.end(),id),order.end());
     engine->texture_cache.erase(id);
@@ -121,7 +125,7 @@ struct Server {
       require(!p.control,"create windows using an application connection");
       require(records.size()<64,"window limit");
       unsigned sw=integer(a,"surface_width",320,1,1024), sh=integer(a,"surface_height",200,1,1024);
-      size_t bytes=size_t(sw)*sh*10;
+      size_t bytes=size_t(sw)*sh*13;
       require(reserved_bytes+bytes<=64*1024*1024,"surface memory budget");
       Window w{}; w.id=next_id; w.yaw=a.value("azimuth",0.); w.pitch=a.value("elevation",0.);
       w.width=a.value("width_deg",34.); w.height=a.value("height_deg",24.);
@@ -131,7 +135,7 @@ struct Server {
       require(a.value("roll",0.)==0.,"window roll is not supported");
       Engine::validate(w);auto phase=microseconds_now();w.footprint=engine->footprint(w);request_profile.footprint_us=microseconds_now()-phase;
       std::string title=a.value("title",std::string("Application")); require(title.size()<=256,"title too long");
-      records.emplace(next_id,Record{p.fd,title,sw,sh,{}});
+      records.emplace(next_id,Record{p.fd,title,sw,sh,{},{}});
       engine->windows.emplace(next_id,std::move(w)); engine->order.push_back(next_id);
       reserved_bytes+=bytes; focused=next_id; changed(); return description(next_id++);
     }
@@ -140,7 +144,7 @@ struct Server {
       J list=J::array(); for(int id:engine->order) list.push_back(description(id));
       return {{"windows",list},{"generation",generation},{"focused_window",focused},
         {"service",{{"phase","ready"},{"renderer","triangle"},{"mock",engine->mock}}},
-        {"performance",{{"rendered_generation",presented},{"last_render",last_render}}}};
+        {"performance",{{"rendered_generation",presented},{"publications",engine->commits},{"content_batches",content_batches},{"content_updates",content_updates},{"coalesced_updates",coalesced_updates},{"last_content_batch",last_content_batch},{"last_render",last_render}}}};
     }
     if(op=="app_events" || op=="poll_events")
       return {{"events",J::array()},{"focused_window",focused},{"view",{yaw,pitch,0}},
@@ -152,13 +156,14 @@ struct Server {
       require(a.value("roll",0.)==0.,"view roll is not supported");
       require(std::isfinite(y)&&std::abs(y)<=180&&std::isfinite(pi)&&std::abs(pi)<=85,"view bounds");
       if(capture.owner>=0)cancel_input();
+      apply_pending_content();
       if(engine->active<0) { engine->render(false);service_render_ms=engine->stats.render_ms;presented=generation; dirty=false; }
       auto result=engine->operate({{"op","pose"},{"yaw",y},{"pitch",pi}});
       yaw=y; pitch=pi; result["yaw"]=yaw; result["pitch"]=pitch; result["roll"]=0; return result;
     }
     if(op=="pose_sweep") {
       require(p.control && engine->active>=0,"pose_sweep requires internal control and a scene");
-      auto q=a; q["op"]="pose_sweep"; auto result=engine->operate(q); yaw=pitch=0; return result;
+      apply_pending_content();auto q=a; q["op"]="pose_sweep"; auto result=engine->operate(q); yaw=pitch=0; return result;
     }
     if(op=="snapshot") { require(p.control,"internal operation"); return engine->snapshot(); }
     if(op=="shutdown") { require(p.control,"internal operation"); stopping=1; return {{"stopping",true}}; }
@@ -169,10 +174,10 @@ struct Server {
       require(format=="RGB24" || format=="XRGB8888" || format=="RGB332","unsupported surface format");
       if(r.shared) require(r.shared->format==format,"surface format is immutable");
       else {
-        size_t old_charge=size_t(r.width)*r.height*10;
-        size_t charge=size_t(r.width)*r.height*(4+2*(format=="RGB332"?1:format=="XRGB8888"?4:3));
+        size_t old_charge=size_t(r.width)*r.height*13;
+        size_t charge=size_t(r.width)*r.height*(4+3*(format=="RGB332"?1:format=="XRGB8888"?4:3));
         require(reserved_bytes-old_charge+charge<=64*1024*1024,"surface memory budget");
-        auto shared=std::make_unique<ApplicationBuffer>(r.width,r.height,format);
+        auto shared=std::make_unique<ApplicationBuffer>(r.width,r.height,format,source_color(w.color));
         r.shared=std::move(shared);reserved_bytes=reserved_bytes-old_charge+charge;
       }
       auto result=r.shared->description(); result["window_id"]=id; return result;
@@ -187,31 +192,13 @@ struct Server {
       DamageRect total{}; std::vector<DamageRect> areas; size_t copied=0;
       for(const auto &patch:patches) {
         auto area=patch.area; bool different=false;
-        if(r.shared->pixel_bytes==1) {
-          static const auto lookup=[](){std::array<uint32_t,256> table{};for(unsigned i=0;i<256;i++)table[i]=source_color(i);return table;}();
-          for(int y=0;y<area.h;y++) {
-            const auto *src=patch.rgb.data()+size_t(y)*area.w;
-            auto *dst=s.pixels.data()+size_t(area.y+y)*r.width+area.x;
-            if(!w.has_content){
-              // A first submission has no previous content to compare against.
-              // Unsubmitted pixels retain the initialized background color.
-              for(int x=0;x<area.w;x++)dst[x]=lookup[src[x]];
-              different=true;
-            }else for(int x=0;x<area.w;x++) {uint32_t color=lookup[src[x]];if(dst[x]!=color){dst[x]=color;different=true;}}
-          }
-        } else if(r.shared->pixel_bytes==4) {
-          for(int y=0;y<area.h;y++) {
-            const auto *src=patch.rgb.data()+size_t(y)*area.w*4;
-            auto *dst=s.pixels.data()+size_t(area.y+y)*r.width+area.x;
-            if(std::memcmp(dst,src,size_t(area.w)*4)) {
-              std::memcpy(dst,src,size_t(area.w)*4);different=true;
-            }
-          }
-        } else for(int y=0;y<area.h;y++) for(int x=0;x<area.w;x++) {
-          const auto *rgb=patch.rgb.data()+(size_t(y)*area.w+x)*3;
-          uint32_t color=(uint32_t(rgb[0])<<16)|(uint32_t(rgb[1])<<8)|rgb[2];
-          auto &pixel=s.pixels[size_t(area.y+y)*r.width+area.x+x];
-          if(pixel!=color) { pixel=color; different=true; }
+        // Copy before acknowledging the slot lease. Conversion is deferred until
+        // publication, so overlapping queued submissions convert only their latest pixels.
+        for(int y=0;y<area.h;y++) {
+          size_t bytes=size_t(area.w)*r.shared->pixel_bytes;
+          const auto *src=patch.rgb.data()+size_t(y)*bytes;
+          auto *dst=r.shared->latest.data()+(size_t(area.y+y)*r.width+area.x)*r.shared->pixel_bytes;
+          if(std::memcmp(dst,src,bytes)){std::memcpy(dst,src,bytes);different=true;}
         }
         if(different) { DamageRect d{area.x,area.y,area.w,area.h}; total=unite(total,d); areas.push_back(d); }
         copied+=patch.rgb.size();
@@ -221,8 +208,9 @@ struct Server {
       if(did_change) {
         bool first_content=!w.has_content;
         if(!w.has_content) { total={0,0,int(r.width),int(r.height)}; w.plan_ready=false; }
-        w.has_content=true; s.pending=unite(s.pending,total); s.revision=++engine->serial;
-        for(auto d:areas) engine->damage(w,d);
+        w.has_content=true; s.pending=unite(s.pending,total);
+        r.pending.merge(areas);
+        ++r.pending.commits;
         changed(first_content);
       }
       request_profile.damage_us=microseconds_now()-phase;
@@ -254,6 +242,34 @@ struct Server {
     }
     if(op=="destroy_window") { erase(id); return {{"window_id",id},{"generation",generation}}; }
     throw std::runtime_error("unsupported operation: "+op);
+  }
+  void apply_pending_content() {
+    uint64_t updates=0,windows=0,regions=0,pixels=0,invalidated=0;
+    auto start=microseconds_now();
+    static const auto lookup=[](){std::array<uint32_t,256> t{};for(unsigned i=0;i<256;i++)t[i]=source_color(i);return t;}();
+    for(auto &[id,r]:records)if(r.pending.commits) {
+      auto &w=engine->windows.at(id);auto &s=w.surface;auto &source=*r.shared;
+      updates+=r.pending.commits;++windows;regions+=r.pending.regions.size();
+      for(auto a:r.pending.regions)for(int y=a.y;y<a.y+a.h;y++) {
+        const auto *src=source.latest.data()+(size_t(y)*r.width+a.x)*source.pixel_bytes;
+        auto *dst=s.pixels.data()+size_t(y)*r.width+a.x;pixels+=a.w;
+        if(source.pixel_bytes==4)std::memcpy(dst,src,size_t(a.w)*4);
+        else for(int x=0;x<a.w;x++)dst[x]=source.pixel_bytes==1?lookup[src[x]]:
+          (uint32_t(src[x*3])<<16)|(uint32_t(src[x*3+1])<<8)|src[x*3+2];
+      }
+      // Each affected tile is invalidated once, regardless of queued patch count.
+      if(w.plan_ready)for(auto &[tile,plan]:w.plan) {
+        if(std::any_of(r.pending.regions.begin(),r.pending.regions.end(),[&](DamageRect a){return affected(plan.descriptor,a);})) {
+          plan.version=++engine->serial;++invalidated;
+        }
+      }
+      s.revision=++engine->serial;r.pending.regions.clear();r.pending.commits=0;
+    }
+    if(updates) {
+      ++content_batches;content_updates+=updates;coalesced_updates+=updates-windows;
+      last_content_batch=json_object("updates",updates,"windows",windows,"regions",regions,
+        "converted_pixels",pixels,"invalidated_tiles",invalidated,"prepare_us",microseconds_now()-start);
+    }
   }
   void request(Peer &p,const std::string &line) {
     J id=nullptr;auto started=microseconds_now();request_profile={};
@@ -289,53 +305,71 @@ struct Server {
     }
     for(int fd:gone) disconnect(fd);
   }
+  bool pump(bool nonblocking,unsigned &budget) {
+    std::vector<pollfd> fds;fds.reserve(peers.size()+2);
+    fds.push_back({listener.fd,POLLIN,0});fds.push_back({control.fd,POLLIN,0});
+    bool buffered=false;
+    // Visit control connections first on every sweep; app bursts cannot consume
+    // the whole request budget before an already-ready input connection is read.
+    auto add=[&](int fd,Peer &p){
+      fds.push_back({fd,short(POLLIN|(p.out.empty()?0:POLLOUT)),0});
+      buffered|=p.in.find('\n')!=std::string::npos;
+    };
+    for(auto &[fd,p]:peers)if(p.control)add(fd,p);
+    for(auto &[fd,p]:peers)if(!p.control&&fd>=next_app_fd)add(fd,p);
+    for(auto &[fd,p]:peers)if(!p.control&&fd<next_app_fd)add(fd,p);
+    int rc=poll(fds.data(),fds.size(),nonblocking||buffered?0:100);
+    if(rc<0){if(errno==EINTR)return false;throw std::runtime_error("poll failed");}
+    bool progress=false;
+    for(size_t i=0;i<2;i++)if(fds[i].revents&POLLIN) {
+      int fd=accept4(fds[i].fd,nullptr,nullptr,SOCK_CLOEXEC|SOCK_NONBLOCK);
+      if(fd>=0) {
+        ucred credential{};socklen_t size=sizeof(credential);
+        if(peers.size()>=64||getsockopt(fd,SOL_SOCKET,SO_PEERCRED,&credential,&size)||credential.uid!=geteuid())close(fd);
+        else peers.emplace(fd,Peer{fd,i==1,{},{},nullptr,0});
+        progress=true;
+      }
+    }
+    for(size_t i=2;i<fds.size()&&budget&&!stopping;i++) {
+      int fd=fds[i].fd;auto it=peers.find(fd);if(it==peers.end())continue;
+      auto &p=it->second;bool dead=fds[i].revents&(POLLERR|POLLNVAL);
+      if((fds[i].revents&(POLLIN|POLLHUP))&&p.in.find('\n')==std::string::npos) {
+        char buffer[8192];auto n=recv(fd,buffer,sizeof(buffer),0);
+        if(n>0){p.in.append(buffer,n);progress=true;}
+        else if(n==0||(errno!=EAGAIN&&errno!=EWOULDBLOCK&&errno!=EINTR))dead=true;
+      }
+      if(p.in.size()>65536)dead=true;
+      if(dead){disconnect(fd);progress=true;continue;}
+      if(!p.control)next_app_fd=fd+1;
+      size_t end;unsigned per_peer=4;
+      while(budget&&per_peer--&&!stopping&&(end=p.in.find('\n'))!=std::string::npos) {
+        auto line=p.in.substr(0,end);p.in.erase(0,end+1);request(p,line);--budget;progress=true;
+        if(p.out.size()>1024*1024){dead=true;break;}
+      }
+      if(dead)disconnect(fd);
+    }
+    // Release copied slots before polling for more already-queued submissions.
+    flush();return progress;
+  }
   void run() {
     std::cout<<"TRIANGLE_BOAYO_READY "<<path<<std::endl;
-    std::vector<pollfd> fds;fds.reserve(66);
     while(!stopping) {
       if(capture.owner>=0&&microseconds_now()-last_input_us>30000000){cancel_input();changed(false,false);}
-      fds.clear();fds.push_back({listener.fd,POLLIN,0});fds.push_back({control.fd,POLLIN,0});
-      for(auto &[fd,p]:peers) fds.push_back({fd,short(POLLIN|(p.out.empty()?0:POLLOUT)),0});
-      int rc=poll(fds.data(),fds.size(),dirty?0:100);
-      if(rc<0) { if(errno==EINTR) continue; throw std::runtime_error("poll failed"); }
-      for(size_t i=0;i<2;i++) if(fds[i].revents&POLLIN) {
-        int fd=accept4(fds[i].fd,nullptr,nullptr,SOCK_CLOEXEC|SOCK_NONBLOCK);
-        if(fd>=0) {
-          ucred credential{}; socklen_t size=sizeof(credential);
-          if(peers.size()>=64 || getsockopt(fd,SOL_SOCKET,SO_PEERCRED,&credential,&size) || credential.uid!=geteuid()) close(fd);
-          else peers.emplace(fd,Peer{fd,i==1,{},{},nullptr,0});
-        }
-      }
-      for(size_t i=2;i<fds.size();i++) {
-        int fd=fds[i].fd; auto it=peers.find(fd); if(it==peers.end()) continue;
-        auto &p=it->second; bool dead=fds[i].revents&(POLLERR|POLLNVAL);
-        if(fds[i].revents&(POLLIN|POLLHUP)) {
-          char buffer[8192]; auto n=recv(fd,buffer,sizeof(buffer),0);
-          if(n>0) p.in.append(buffer,n);
-          else if(n==0 || (errno!=EAGAIN && errno!=EWOULDBLOCK && errno!=EINTR)) dead=true;
-        }
-        if(p.in.size()>65536) dead=true;
-        if(dead) { disconnect(fd); continue; }
-        size_t end;
-        while((end=p.in.find('\n'))!=std::string::npos) {
-          auto line=p.in.substr(0,end); p.in.erase(0,end+1); request(p,line);
-          if(p.out.size()>1024*1024) { dead=true; break; }
-        }
-        if(dead) disconnect(fd);
-      }
-      // Release shared-slot leases before doing expensive projection work.
-      flush();
-      if(dirty && !stopping) {
-        double start=now();engine->render(false,!scene_dirty);service_render_ms=(now()-start)*1000;scene_dirty=false;
-        presented=generation; dirty=false;
-        for(auto &[fd,p]:peers) if(!p.wait_id.is_null() && p.wait_generation<=presented) {
-          reply(p,p.wait_id,json_object("generation",presented,"presented",true)); p.wait_id=nullptr;
+      unsigned budget=32;
+      for(unsigned pass=0;pass<4&&budget&&!stopping;pass++)if(!pump(dirty||pass!=0,budget))break;
+      // No debounce sleep: drain a bounded ready backlog, then publish its latest state.
+      if(dirty&&!stopping) {
+        double start=now();apply_pending_content();engine->render(false,!scene_dirty);service_render_ms=(now()-start)*1000;scene_dirty=false;
+        presented=generation;dirty=false;
+        for(auto &[fd,p]:peers)if(!p.wait_id.is_null()&&p.wait_generation<=presented) {
+          reply(p,p.wait_id,json_object("generation",presented,"presented",true));p.wait_id=nullptr;
         }
         flush();
       }
     }
     flush();
   }
+
 };
 } // namespace triangle_service
 
