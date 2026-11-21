@@ -1,0 +1,83 @@
+{
+  "version": "v8",
+  "created": "2026-11-21T01:07:12.986538",
+  "base_checkpoint": "729e415890821a2bc92ce70ac3c92b1a4d2b6e6e",
+  "files": {
+    "src\\application_buffer.hpp": "2f89dcea22451d712926a8e443c28bbcf0a155212d2c7780dcfd9724332097ff",
+    "src\\boayo_app.cpp": "8c53b41d9194558ca12b3fddc73c52dea85fa927da7c95ad6c3b1521a9d0ecba",
+    "src\\boayo_service.cpp": "9125101d6aa31ae04da36eaa226e19194be50980db9f52fe5fcb18dbfe56ee93",
+    "src\\content.hpp": "cfc0fbe91c1d7bc38c3e7a06545c5e71a2606275da6538f4623238a35287911c",
+    "src\\content_render.inc": "46f2866fd670a4be0780d1e1a8148d159ba007343ebe3684bc2e7f67f3e22ce1",
+    "src\\fast_camera.hpp": "e3bc0ae75fb98ef203af79f1e5f30027bc0000cfc95d7d552be8dbccf8d5f48f",
+    "src\\fast_projection.hpp": "da143ba753418511a8215f909f8d4c9aa3e6c16aa11b3d23627e970b9bc8e182",
+    "src\\generate_geometry.cpp": "93198d44a3b75edcde3419c9c7e6b429bb289770edbbbf0e003ab5063c21b585",
+    "src\\input_client.cpp": "5e49599df73188a42e1a975d2ccebd9e20ead893501062c654b01d18d105da07",
+    "src\\json_object.hpp": "88c75641e9a3888c1afdc3d096f8fa53f4e014255e182d913fc5ea19c3b6e80b",
+    "src\\outline.hpp": "b237019060f890d52993af73bf475a45261f85840117a4acf0da58ff16b53942",
+    "src\\texture_cache.hpp": "065c27f34ef4807d012a815b998860cefc258fe0a3f4b2d4ff83590729aa02da",
+    "src\\triangle_wm.cpp": "1e55df82651315feec11b5496cc6f2865390c6bcd24420bcd854babd92c59251",
+    "src\\ui_bounds.hpp": "feccfc6139198f876751ab2f664d15a200a858047984a7e409148b0cc1bd55dd",
+    "src\\ui_input.inc": "fdcd40a9f5ef0ebbc62635cbd69d2675dd19089ead04530e8ef136cd3fee4922",
+    "src\\ui_render.inc": "881f848adfa5e574a6588fe49c026adcb52844c22a81f81bbfe67b165e39c9ec",
+    "src\\ui_types.hpp": "dc83b65a1c7cd85608b13e84d2f7de381e2bd1d681f0fb9db58b25bf3b1304d2",
+    "src\\window_transform.hpp": "59a9c54cec6add636d3a26ed05f0e2812d99b226ced75180e8b3fe8e22f3810e",
+    "build.sh": "7caeeae033e44a35fe87c5b5f562d0b17a6227646d88dec3b8aa89385a182ab1",
+    "tests\\test_input.py": "40a1d5a2d2561cffff15d4d22bd56cb8e024fc4726fe597285d36594236d7cd5",
+    "tests\\test_pointer_page.py": "e626406af3d2d9fe4f0872798edd25f4f5a93aabf60205cde23cd7de1eb3c852",
+    "tools\\pointer_bridge.py": "1eb5a3b9200d9beb7061b94486315103fce65cad6c5618e17a7df9bcb92bfce8",
+    "tools\\pointer_monitor.html": "72a409e50010730083af94fc6e1ac274a383d4e7e5bf733d61044c7f87596330",
+    "tools\\monitor.py": "f03d5ce74377e1d6538cf05e7ea5b59f3e665a4981e273c1ba33bbbc12bae15f",
+    "tools\\analyze_input.py": "82feee87bc8f2711cfc37c1333dd8ce1e6284a92d5d4db1006bf6aea3d0acd39"
+  },
+  "binaries": {
+    "triangle-boayo-v8": "f4734c7c5a69412ea135862cfb45f8b63ee4787d90ca7464c66cc5bdeaeda5c7",
+    "triangle-app-v3": "8d420c13e0eae7bb835434ec2cbf7104066580a00ef7c65a7a14becd23d2c41a",
+    "triangle-input-v8": "12a3863a605ac04374e67f700fb187c62bf80f2224f1a248d12312777bcd3b40"
+  },
+  "tests": {
+    "input_host": "PASS",
+    "input_asan_ubsan": "PASS",
+    "boayo_compatibility_host": "PASS RGB24 XRGB8888 RGB332, TRIANGLE_INPUT=0",
+    "boayo_compatibility_asan_ubsan": "PASS RGB24 XRGB8888 RGB332, TRIANGLE_INPUT=0",
+    "solid_asan_ubsan": "PASS",
+    "content_asan_ubsan": "PASS",
+    "bounded_overlay_reference": "PASS: final cached-integer build, 69 snapshots equal to full-scan reference, including ASan/UBSan",
+    "monitor_snapshot_lock": "PASS: +123 frames while locked for 2 seconds; capture age 0.01 seconds",
+    "live_browser": {
+      "passed": true,
+      "move_present_ms": 1712.6712599997409,
+      "checks": [
+        "actual HDMI loaded",
+        "pointer capture",
+        "drag release applied",
+        "Escape cancels",
+        "stop releases UART"
+      ],
+      "page_errors": []
+    },
+    "board_input": "PASS: 39 samples, including output view and close",
+    "two_window_restoration": "PASS: upper window moved/closed, lower content and resize handle restored",
+    "board_action_assertions": "PASS: all move/resize/close releases applied; outside-close canceled"
+  },
+  "build": {
+    "compiler": "riscv32-buildroot-linux-musl-g++",
+    "flags": "-std=c++17 -O2 -g -pthread -ffp-contract=off -static -march=rv32ima_zicsr_zifencei -mabi=ilp32 -s"
+  },
+  "updated": "2026-11-21T10:23:36.649427",
+  "deployment": {
+    "archive_sha256": "0103cbf3839512631afce75fd63b2e4f8223557b65731e26eb32e3e228a39393",
+    "verification": "Board archive SHA-256 matched; unxz integrity checks and tar extraction succeeded; all three extracted sizes match. Binary hashes above are hashes of the archived host build artifacts.",
+    "persistent_path": "/root/triangle-wm-v8",
+    "persistent_copy_completion": "input-v8-persist-completion.log / TRI_7e55dd89ff_RC:0",
+    "runtime_path": "/tmp",
+    "autostart": false
+  },
+  "evidence": {
+    "input_sanitizer": "input-v8-integer-sanitize.txt",
+    "compatibility_sanitizer": "input-v8-integer-compat-sanitize.txt",
+    "native_input": "input-v8-integer-bench-console.txt",
+    "archive_transfer": "input-v8-resume-transfer.txt",
+    "extraction": "input-v8-resume-extract.txt",
+    "console_restored": "input-v8-console-restored.txt"
+  }
+}

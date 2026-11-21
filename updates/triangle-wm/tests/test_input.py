@@ -1,0 +1,60 @@
+"""Real socket controls, ownership, clean overlay restoration and capture lifecycle."""
+import json,os,socket,subprocess,sys,tempfile,mmap,hashlib
+trace=[]
+
+class Client:
+ def __init__(self,path):
+  self.s=socket.socket(socket.AF_UNIX);self.s.settimeout(30);self.s.connect(path);self.f=self.s.makefile('rwb',buffering=0);self.seq=0
+ def call(self,op,args=None,ok=True):
+  self.seq+=1;self.f.write((json.dumps(dict(id=self.seq,op=op,args=args or {}))+'\n').encode());r=json.loads(self.f.readline());assert r['ok']==ok,r;return r.get('result',r)
+ def do(self,op,args=None):
+  r=self.call(op,args)
+  if 'generation' in r:self.call('wait_present',{'generation':r['generation']})
+  if os.environ.get('INPUT_TRACE_PATH') and 'ctl' in globals():trace.append(hashlib.sha256(json.dumps(ctl.call('snapshot')['tile_hashes']).encode()).hexdigest())
+  return r
+ def close(self):self.f.close();self.s.close()
+
+with tempfile.TemporaryDirectory() as folder:
+ path=folder+'/wm';proc=subprocess.Popen([sys.argv[1],'--mock'],env={**os.environ,'BOAYO_SOCKET':path,'TRIANGLE_INPUT':'1'},stdout=subprocess.PIPE,text=True)
+ try:
+  assert proc.stdout.readline().startswith('TRIANGLE_BOAYO_READY');app=Client(path);ctl=Client(path+'.control')
+  first=app.do('create_window',{'width_deg':20,'height_deg':14,'surface_width':32,'surface_height':32})['window_id']
+  info=app.call('create_surface',{'window_id':first,'format':'RGB332'});fd=os.open(info['path'],os.O_RDWR);pixels=mmap.mmap(fd,info['slot_bytes']*2);os.close(fd)
+  pixels[:1024]=bytes(range(256))*4;app.do('commit_surface',{'window_id':first,'slot':0,'sequence':1,'damage':[[0,0,32,32]]})
+  app.call('input_move',{'x':100,'y':100},ok=False)
+  def status():return ctl.call('input_status')
+  def button(action):return next(c for c in status()['controls'] if c['window_id']==first and c['action']==action)
+  def move(x,y):return ctl.do('input_move',{'x':x,'y':y})
+  def press(c):return ctl.do('input_button',{'x':c['x'],'y':c['y'],'pressed':True})
+  def release(x,y):return ctl.do('input_button',{'x':x,'y':y,'pressed':False})
+  before=status();ctl.call('input_move',{'x':1280,'y':360},ok=False);assert status()==before,'invalid coordinates changed pointer'
+  c=button('move');press(c);rival=Client(path+'.control');rival.call('input_move',{'x':20,'y':20},ok=False);rival.close();assert status()['captured_window']==first;ctl.do('input_cancel')
+  ctl.do('input_cancel',{'hide':True});base=ctl.call('snapshot')['tile_hashes']
+  for x,y in [(640,360),(10,10),(1270,710),(600,400)]:move(x,y)
+  ctl.do('input_cancel',{'hide':True});assert base==ctl.call('snapshot')['tile_hashes'],'cursor trail'
+  move(640,360);pixels[:1024]=bytes(reversed(range(256)))*4;app.do('commit_surface',{'window_id':first,'slot':0,'sequence':2,'damage':[[0,0,32,32]]});ctl.do('input_cancel',{'hide':True});updated=ctl.call('snapshot')['tile_hashes'];assert updated!=base
+  move(630,360);move(680,390);ctl.do('input_cancel',{'hide':True});assert updated==ctl.call('snapshot')['tile_hashes'],'stale under-cursor content'
+  second=app.do('create_window',{'width_deg':20,'height_deg':14,'azimuth':7,'background_index':164})['window_id'];app.do('destroy_window',{'window_id':second});assert updated==ctl.call('snapshot')['tile_hashes'],'overlap restore'
+  close=button('close');press(close);release(close['x']+100,close['y']);assert len(ctl.call('get_state')['windows'])==1
+  c=button('move');press(c);move(c['x']+40,c['y']-20)
+  assert ctl.call('get_state')['windows'][0]['azimuth']==0,'committed before release'
+  assert release(c['x']+40,c['y']-20)['applied'];w=ctl.call('get_state')['windows'][0];assert w['azimuth']!=0
+  c=button('resize');press(c);assert release(c['x']+40,c['y']+25)['applied'];w=ctl.call('get_state')['windows'][0];assert w['width_deg']>20 and w['height_deg']>14
+  for width in [8,12,20,28]:
+   for yaw in [-5,0,5]:
+    for pitch in [-3,0,3]:
+     ctl.do('configure_window',{'window_id':first,'width_deg':width,'height_deg':width*.7,'azimuth':yaw,'elevation':pitch})
+     assert len(status()['controls'])==3,('missing handle',width,yaw,pitch,status())
+  ctl.do('configure_window',{'window_id':first,**{k:w[k] for k in ['width_deg','height_deg','azimuth','elevation']}})
+  c=button('move');press(c);ctl.close();ctl=Client(path+'.control');assert not status()['pressed']
+  # Pose updates rebuild the screen-space overlay without modifying source pixels.
+  for y in [-5,5,0]:ctl.do('view_set',{'yaw':y,'pitch':2 if y else 0})
+  assert len(status()['controls'])==3
+  c=button('close');press(c);assert release(c['x'],c['y'])['applied'];assert not ctl.call('get_state')['windows']
+  ctl.do('input_cancel',{'hide':True});hashes=ctl.call('snapshot')['tile_hashes'];assert len(set(hashes))==1,'close/cursor left visible tiles'
+  pixels.close();app.close();ctl.call('shutdown');ctl.close();assert proc.wait(timeout=10)==0
+  print('PASS_INPUT: placement, permission, no trails, close cancellation, commit-on-release, move, resize, disconnect, pose, close')
+  if os.environ.get('INPUT_TRACE_PATH'):
+   with open(os.environ['INPUT_TRACE_PATH'],'w') as f:json.dump(trace,f)
+ finally:
+  if proc.poll() is None:proc.terminate();proc.wait(timeout=10)

@@ -36,7 +36,11 @@ def capture():
    if ok:latest=jpg.tobytes()
    log.write(json.dumps({'sequence':sequence,'host_monotonic':captured,'mean_bgr':frame.mean(axis=(0,1)).tolist(),'record':record_name})+'\n')
    if captured-last_save>1:
-    (out/'latest.jpg').write_bytes(latest);last_save=captured
+    # A Windows viewer/copy may briefly hold this file without write sharing.
+    # Keep the live stream alive and retry the disk snapshot next second.
+    try:(out/'latest.jpg').write_bytes(latest)
+    except PermissionError:pass
+    last_save=captured
 
 class Handler(BaseHTTPRequestHandler):
  def log_message(self,*a):pass

@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "move_present_ms": 1712.6712599997409,
+  "checks": [
+    "actual HDMI loaded",
+    "pointer capture",
+    "drag release applied",
+    "Escape cancels",
+    "stop releases UART"
+  ],
+  "page_errors": []
+}

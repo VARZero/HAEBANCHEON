@@ -1,0 +1,109 @@
+{
+  "conditions": "RGB332 demo updating during PC HTTP/UART pointer input; excludes optical/capture delay",
+  "metrics": {
+    "board_present_ms": {
+      "n": 9,
+      "median_ms": 1320.24,
+      "p95_ms": 1647.144,
+      "max_ms": 1647.144
+    },
+    "host_roundtrip_ms": {
+      "n": 9,
+      "median_ms": 1565.945,
+      "p95_ms": 1897.632,
+      "max_ms": 1897.632
+    }
+  },
+  "samples": [
+    {
+      "board_present_ms": 1014.4292000001296,
+      "host_roundtrip_ms": 1291.9941000000108,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 124
+      }
+    },
+    {
+      "board_present_ms": 1269.8318400001153,
+      "host_roundtrip_ms": 1402.3544000001493,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 125
+      }
+    },
+    {
+      "board_present_ms": 1512.0466599999927,
+      "host_roundtrip_ms": 1789.611100000002,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 126
+      }
+    },
+    {
+      "board_present_ms": 1320.145659999922,
+      "host_roundtrip_ms": 1565.9450000002835,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 128
+      }
+    },
+    {
+      "board_present_ms": 1482.0853800000623,
+      "host_roundtrip_ms": 1673.1564000001526,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 129
+      }
+    },
+    {
+      "board_present_ms": 848.8971200003289,
+      "host_roundtrip_ms": 1004.8423999996885,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 130
+      }
+    },
+    {
+      "board_present_ms": 1354.5149399996735,
+      "host_roundtrip_ms": 1504.369400000087,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 131
+      }
+    },
+    {
+      "board_present_ms": 1647.1438400000334,
+      "host_roundtrip_ms": 1897.6318999998512,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 132
+      }
+    },
+    {
+      "board_present_ms": 1320.2398999999277,
+      "host_roundtrip_ms": 1606.4006999999947,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 134
+      }
+    }
+  ]
+}

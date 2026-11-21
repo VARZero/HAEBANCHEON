@@ -1,0 +1,382 @@
+{
+  "source": "input-v8-preflight-bench-console.txt",
+  "complete": false,
+  "metrics": [
+    {
+      "name": "pointer_move",
+      "n": 9,
+      "median_ms": 1208.483,
+      "p95_ms": 1302.073,
+      "max_ms": 1302.073,
+      "scope": "board control request through wait_present; excludes optical/UART delay"
+    },
+    {
+      "name": "close_press",
+      "n": 1,
+      "median_ms": 1023.518,
+      "p95_ms": 1023.518,
+      "max_ms": 1023.518,
+      "scope": "board control request through wait_present; excludes optical/UART delay"
+    },
+    {
+      "name": "close_cancel",
+      "n": 1,
+      "median_ms": 1020.735,
+      "p95_ms": 1020.735,
+      "max_ms": 1020.735,
+      "scope": "board control request through wait_present; excludes optical/UART delay"
+    },
+    {
+      "name": "move_press",
+      "n": 4,
+      "median_ms": 1076.289,
+      "p95_ms": 1119.677,
+      "max_ms": 1119.677,
+      "scope": "board control request through wait_present; excludes optical/UART delay"
+    },
+    {
+      "name": "drag_pointer",
+      "n": 4,
+      "median_ms": 873.909,
+      "p95_ms": 904.79,
+      "max_ms": 904.79,
+      "scope": "board control request through wait_present; excludes optical/UART delay"
+    },
+    {
+      "name": "move_release",
+      "n": 4,
+      "median_ms": 1281.007,
+      "p95_ms": 1297.598,
+      "max_ms": 1297.598,
+      "scope": "board control request through wait_present; excludes optical/UART delay"
+    },
+    {
+      "name": "resize_press",
+      "n": 4,
+      "median_ms": 1110.75,
+      "p95_ms": 1124.426,
+      "max_ms": 1124.426,
+      "scope": "board control request through wait_present; excludes optical/UART delay"
+    },
+    {
+      "name": "resize_release",
+      "n": 4,
+      "median_ms": 1473.115,
+      "p95_ms": 1544.645,
+      "max_ms": 1544.645,
+      "scope": "board control request through wait_present; excludes optical/UART delay"
+    }
+  ],
+  "samples": [
+    {
+      "name": "pointer_move",
+      "present_ms": 1283.9749399982393,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 20
+      }
+    },
+    {
+      "name": "pointer_move",
+      "present_ms": 1155.2770199999213,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 21
+      }
+    },
+    {
+      "name": "pointer_move",
+      "present_ms": 1302.0731600001454,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 22
+      }
+    },
+    {
+      "name": "pointer_move",
+      "present_ms": 1193.6871399991214,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 23
+      }
+    },
+    {
+      "name": "pointer_move",
+      "present_ms": 1140.5463799983263,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 24
+      }
+    },
+    {
+      "name": "pointer_move",
+      "present_ms": 1208.482760000974,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 25
+      }
+    },
+    {
+      "name": "pointer_move",
+      "present_ms": 1093.8875399976969,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 26
+      }
+    },
+    {
+      "name": "pointer_move",
+      "present_ms": 1210.7659799978137,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 27
+      }
+    },
+    {
+      "name": "pointer_move",
+      "present_ms": 1271.1108400002122,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 28
+      }
+    },
+    {
+      "name": "close_press",
+      "present_ms": 1023.5180400013924,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 29
+      }
+    },
+    {
+      "name": "close_cancel",
+      "present_ms": 1020.7347000017762,
+      "result": {
+        "action": 1,
+        "applied": false,
+        "captured_window": 0,
+        "generation": 30
+      }
+    },
+    {
+      "name": "move_press",
+      "present_ms": 974.5124000012875,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 31
+      }
+    },
+    {
+      "name": "drag_pointer",
+      "present_ms": 877.7244199998677,
+      "result": {
+        "action": 2,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 32
+      }
+    },
+    {
+      "name": "move_release",
+      "present_ms": 1297.597959998995,
+      "result": {
+        "action": 2,
+        "applied": true,
+        "captured_window": 0,
+        "generation": 33
+      }
+    },
+    {
+      "name": "move_press",
+      "present_ms": 1119.6773599982262,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 34
+      }
+    },
+    {
+      "name": "drag_pointer",
+      "present_ms": 861.8984600007534,
+      "result": {
+        "action": 2,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 35
+      }
+    },
+    {
+      "name": "move_release",
+      "present_ms": 1270.1112600006163,
+      "result": {
+        "action": 2,
+        "applied": true,
+        "captured_window": 0,
+        "generation": 36
+      }
+    },
+    {
+      "name": "move_press",
+      "present_ms": 1059.9986000023782,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 37
+      }
+    },
+    {
+      "name": "drag_pointer",
+      "present_ms": 870.0942799970508,
+      "result": {
+        "action": 2,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 38
+      }
+    },
+    {
+      "name": "move_release",
+      "present_ms": 1270.4650200009346,
+      "result": {
+        "action": 2,
+        "applied": true,
+        "captured_window": 0,
+        "generation": 39
+      }
+    },
+    {
+      "name": "move_press",
+      "present_ms": 1092.578519999981,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 40
+      }
+    },
+    {
+      "name": "drag_pointer",
+      "present_ms": 904.7902799993753,
+      "result": {
+        "action": 2,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 41
+      }
+    },
+    {
+      "name": "move_release",
+      "present_ms": 1291.5482199974358,
+      "result": {
+        "action": 2,
+        "applied": true,
+        "captured_window": 0,
+        "generation": 42
+      }
+    },
+    {
+      "name": "resize_press",
+      "present_ms": 1120.3418800011277,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 43
+      }
+    },
+    {
+      "name": "resize_release",
+      "present_ms": 1402.935079999268,
+      "result": {
+        "action": 3,
+        "applied": true,
+        "captured_window": 0,
+        "generation": 44
+      }
+    },
+    {
+      "name": "resize_press",
+      "present_ms": 1124.4263000003994,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 45
+      }
+    },
+    {
+      "name": "resize_release",
+      "present_ms": 1544.6453199982643,
+      "result": {
+        "action": 3,
+        "applied": true,
+        "captured_window": 0,
+        "generation": 46
+      }
+    },
+    {
+      "name": "resize_press",
+      "present_ms": 1018.5397399999201,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 47
+      }
+    },
+    {
+      "name": "resize_release",
+      "present_ms": 1332.5997999981046,
+      "result": {
+        "action": 3,
+        "applied": true,
+        "captured_window": 0,
+        "generation": 48
+      }
+    },
+    {
+      "name": "resize_press",
+      "present_ms": 1101.1576000005007,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 49
+      }
+    },
+    {
+      "name": "resize_release",
+      "present_ms": 1543.2943000011146,
+      "result": {
+        "action": 3,
+        "applied": true,
+        "captured_window": 0,
+        "generation": 50
+      }
+    }
+  ]
+}

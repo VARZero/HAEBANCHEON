@@ -12,6 +12,7 @@
 #include <unistd.h>
 #include <cerrno>
 #include <csignal>
+#include <climits>
 #include "content.hpp"
 using namespace boayo;
 #include "fast_camera.hpp"
@@ -20,6 +21,8 @@ using namespace boayo;
 #include "window_transform.hpp"
 #include "json_object.hpp"
 #include "outline.hpp"
+#include "ui_types.hpp"
+#include "ui_bounds.hpp"
 static uint64_t microseconds_now(){return std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now().time_since_epoch()).count();}
 static double now(){return std::chrono::duration<double>(std::chrono::steady_clock::now().time_since_epoch()).count();}
 static J summary(std::vector<double> a){require(!a.empty(),"empty samples");auto raw=a;std::sort(a.begin(),a.end());return {{"n",a.size()},{"median_ms",a[a.size()/2]},{"p95_ms",a[(a.size()*95+99)/100-1]},{"max_ms",a.back()},{"samples_ms",raw}};}
@@ -36,6 +39,16 @@ struct RenderStats {
 };
 struct Engine {
  RenderStats stats;
+ bool ui_enabled=false,ui_dirty=true,ui_layout_dirty=true,ui_mask_dirty=true;UiPointer pointer;
+ std::map<unsigned,UiPaint> ui_paints;
+ std::map<unsigned,UiInverse> ui_inverses;
+ std::array<uint32_t,180> mock_camera{};bool mock_configured=false;
+ std::vector<UiControl> ui_controls;std::map<unsigned,unsigned> ui_slots;
+ std::array<std::array<UiStamp,256>,2> ui_stamps{};
+ Words display_metadata,ui_metadata;double ui_ms=0;unsigned ui_tile_count=0;
+ double view_yaw=0,view_pitch=0;std::array<V,3> view_axes=axes(0,0);
+ std::unique_ptr<Geometry::Projection> ui_projection;std::unique_ptr<FastProjection> ui_transform;
+ std::map<unsigned,Descriptor> ui_descriptors;
  bool trim_background=true;
  double plan_ms=0;unsigned plan_tiles=0,plan_fallbacks=0,plan_rejected=0;
  std::array<Descriptor,128> descriptor_batch{};
@@ -60,9 +73,11 @@ struct Engine {
   if(op==BO_MEM_FILL){auto &v=*static_cast<bo_mem_fill*>(p);writable(v.region,v.offset,v.bytes);std::memset(reinterpret_cast<char*>(mock_memory[v.region].data())+v.offset,v.value,v.bytes);}
   else if(op==BO_MEM_COPY){auto&v=*static_cast<bo_mem_copy*>(p);writable(v.dst_region,v.dst_offset,v.bytes);require(uint64_t(v.src_offset)+v.bytes<=mock_memory[v.src_region].size()*4,"copy source bounds");std::memcpy(reinterpret_cast<char*>(mock_memory[v.dst_region].data())+v.dst_offset,reinterpret_cast<char*>(mock_memory[v.src_region].data())+v.src_offset,v.bytes);}
   else if(op==BO_UPLOAD){auto&v=*static_cast<bo_upload*>(p);writable(v.region,v.offset,v.bytes);std::memcpy(reinterpret_cast<char*>(mock_memory[v.region].data())+v.offset,reinterpret_cast<void*>(uintptr_t(v.data)),v.bytes);}
-  else if(op==BO_BATCH){auto&v=*static_cast<bo_batch*>(p);auto*e=reinterpret_cast<bo_batch_entry*>(uintptr_t(v.entries));for(unsigned i=0;i<v.count;i++){if(e[i].kind==BO_BATCH_COPY)call(BO_MEM_COPY,&e[i].op.copy);else if(e[i].kind==BO_BATCH_FILL)call(BO_MEM_FILL,&e[i].op.fill);else throw std::runtime_error("unsupported mock batch");}}
+  else if(op==BO_BATCH){auto&v=*static_cast<bo_batch*>(p);auto*e=reinterpret_cast<bo_batch_entry*>(uintptr_t(v.entries));for(unsigned i=0;i<v.count;i++){if(e[i].kind==BO_BATCH_COPY)call(BO_MEM_COPY,&e[i].op.copy);else if(e[i].kind==BO_BATCH_FILL)call(BO_MEM_FILL,&e[i].op.fill);else if(e[i].kind==BO_BATCH_BLEND)call(BO_TILE_BLEND,&e[i].op.blend);else throw std::runtime_error("unsupported mock batch");}}
+  else if(op==BO_TILE_BLEND){auto&v=*static_cast<bo_tile_blend*>(p);require(v.mode==1,"mock solid blend only");unsigned offset=(header+v.tile*256)*4;writable(BO_SCENE0+v.bank,offset,1024);auto*bytes=reinterpret_cast<uint8_t*>(mock_memory[BO_SCENE0+v.bank].data())+offset;for(unsigned i=0;i<1024;i++)if(v.mask[i/32]&(1u<<(i%32)))bytes[i]=v.color;}
   else if(op==BO_RUN){auto&v=*static_cast<bo_run*>(p);std::set<unsigned> targets;for(unsigned core=0;core<2;core++)for(unsigned i=0;i<v.jobs[core];i++){Descriptor d;std::copy_n(mock_memory[BO_DESC0+core].begin()+i*18,18,d.begin());require(uint64_t(d[0])+uint64_t(d[3]-1)*d[4]+d[2]<=v.texture_words && v.texture_words<=texture_cache.capacity,"texture descriptor bounds");require(targets.insert(d[1]).second,"overlapping projector destinations");writable(BO_SCENE0+v.bank,d[1]*4,1024);v.cells[core]+=project_reference(mock_memory[BO_TEXTURE],mock_memory[BO_SCENE0+v.bank],d);}}
-  else if(op==BO_PUBLISH){auto&v=*static_cast<bo_publish*>(p);writable(BO_SCENE0+v.present.bank,0,header*4);std::copy_n(reinterpret_cast<uint32_t*>(uintptr_t(v.metadata)),header,mock_memory[BO_SCENE0+v.present.bank].begin());}
+  else if(op==BO_PUBLISH){auto&v=*static_cast<bo_publish*>(p);writable(BO_SCENE0+v.present.bank,0,header*4);require(!mock_configured||!std::memcmp(mock_camera.data(),v.present.camera,sizeof(v.present.camera)),"pose must be changed with BO_SET_POSE before publication");std::copy_n(v.present.camera,180,mock_camera.begin());mock_configured=true;std::copy_n(reinterpret_cast<uint32_t*>(uintptr_t(v.metadata)),header,mock_memory[BO_SCENE0+v.present.bank].begin());}
+  else if(op==BO_SET_POSE){auto&v=*static_cast<bo_pose*>(p);std::copy_n(v.camera,180,mock_camera.begin());}
  }
  unsigned solid(unsigned c){require(c<256,"palette index");if(colors.count(c))return colors.at(c);require(next_slot<64,"solid palette capacity");unsigned s=next_slot++;colors[c]=s;
   for(unsigned b=0;b<2;b++){// Stop/initialization only: never fill a displayed bank.
@@ -94,6 +109,7 @@ struct Engine {
   }
   return result;
  }
+#include "ui_render.inc"
 #include "content_render.inc"
  J operate(const J&q){double begin=now();std::string op=q.at("op");J result;
   if(op=="create") {int id=q.at("id");require(id>0&&!windows.count(id),"unique positive window id");Window w{};w.id=id;w.yaw=q.value("yaw",0.);w.pitch=q.value("pitch",0.);w.width=q.value("width",20.);w.height=q.value("height",14.);w.padding=q.value("padding",2.);w.color=q.value("color",84u);validate(w);require(colors.count(w.color),"color not reserved");w.footprint=footprint(w);windows.emplace(id,w);order.push_back(id);result=render();}
@@ -105,14 +121,14 @@ struct Engine {
   else if(op=="content"){result=attach(windows.at(q.at("id").get<int>()),q);}
   else if(op=="component"||op=="remove_component"){auto&w=windows.at(q.at("id").get<int>());require(w.has_content,"attach content first");DamageRect d=op=="component"?w.surface.put(q.at("component")):w.surface.erase(q.at("component_id"));damage(w,d);result=render();}
   else if(op=="snapshot"){result=snapshot();}
-  else if(op=="pose"){require(active>=0,"present a scene first");double y=q.value("yaw",0.),p=q.value("pitch",0.);require(std::isfinite(y)&&std::abs(y)<=180&&std::isfinite(p)&&std::abs(p)<=85,"pose bounds");auto c=fast_camera(y,p);result=set_pose(c);}
-  else if(op=="pose_sweep"){unsigned n=q.value("samples",61u);require(n>=3&&n<=361,"pose sample bounds");double amp=q.value("amplitude",8.);require(std::isfinite(amp)&&amp>=0&&amp<=30,"pose amplitude");std::vector<std::array<int32_t,180>> frames;double setup=now();for(unsigned i=0;i<n;i++){double phase=2*pi*i/(n-1);frames.push_back(fast_camera(amp*std::sin(phase),amp*.4*std::sin(2*phase)));}double prep=(now()-setup)*1000;std::vector<double> times;for(auto &f:frames){double t=now();set_pose(f);times.push_back((now()-t)*1000);usleep(16667);}set_pose(geometry.camera());result=summary(times);result["preparation_ms"]=prep;result["scope"]="precomputed camera submit to output acknowledgment; excludes pacing";}
+  else if(op=="pose"){require(active>=0,"present a scene first");double y=q.value("yaw",0.),p=q.value("pitch",0.);require(std::isfinite(y)&&std::abs(y)<=180&&std::isfinite(p)&&std::abs(p)<=85,"pose bounds");auto c=fast_camera(y,p);set_ui_view(y,p);result=set_pose(c);}
+  else if(op=="pose_sweep"){unsigned n=q.value("samples",61u);require(n>=3&&n<=361,"pose sample bounds");double amp=q.value("amplitude",8.);require(std::isfinite(amp)&&amp>=0&&amp<=30,"pose amplitude");std::vector<std::array<int32_t,180>> frames;double setup=now();for(unsigned i=0;i<n;i++){double phase=2*pi*i/(n-1);frames.push_back(fast_camera(amp*std::sin(phase),amp*.4*std::sin(2*phase)));}double prep=(now()-setup)*1000;std::vector<double> times;for(unsigned i=0;i<frames.size();i++){double phase=2*pi*i/(n-1);set_ui_view(amp*std::sin(phase),amp*.4*std::sin(2*phase));double t=now();set_pose(frames[i]);times.push_back((now()-t)*1000);usleep(16667);}set_ui_view(0,0);set_pose(geometry.camera());result=summary(times);result["preparation_ms"]=prep;result["scope"]="precomputed camera submit to output acknowledgment; excludes pacing";}
   else if(op=="status"){result={{"windows",windows.size()},{"commits",commits},{"poses",pose_count},{"fill_bytes",fill_bytes},{"mock",mock},{"active_bank",active}};}
   else throw std::runtime_error("unknown operation");
   result["operation"]=op;result["total_ms"]=(now()-begin)*1000;return result;
  }
  static void validate(const Window&w){require(std::isfinite(w.yaw)&&std::abs(w.yaw)<=180&&std::isfinite(w.pitch)&&std::abs(w.pitch)<=80&&std::isfinite(w.width)&&w.width>=1&&w.width<=100&&std::isfinite(w.height)&&w.height>=1&&w.height<=100&&std::isfinite(w.padding)&&w.padding>=0&&w.padding<=10,"window bounds");}
- J set_pose(const std::array<int32_t,180>&c){bo_pose p{};p.timeout_ms=30000;std::copy(c.begin(),c.end(),p.camera);double t=now();call(BO_SET_POSE,&p);camera=c;pose_count++;return {{"pose_ms",(now()-t)*1000},{"scene_commits",commits}};}
+ J set_pose(const std::array<int32_t,180>&c){bo_pose p{};p.timeout_ms=30000;std::copy(c.begin(),c.end(),p.camera);double t=now();call(BO_SET_POSE,&p);camera=c;if(ui_enabled){ui_dirty=true;render(false);}pose_count++;return {{"pose_ms",(now()-t)*1000},{"scene_commits",commits}};}
 };
 #ifndef TRIANGLE_ENGINE_ONLY
 static void send_all(int fd,const std::string&s){size_t off=0;while(off<s.size()){auto n=write(fd,s.data()+off,s.size()-off);require(n>0,"socket write");off+=n;}}

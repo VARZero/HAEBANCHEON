@@ -43,11 +43,13 @@ struct Server {
   bool dirty=false;
   double service_render_ms=0;RequestProfile request_profile,last_mutation;
   double yaw=0, pitch=0;
+#include "ui_input.inc"
 
   explicit Server(bool mock):path(socket_path()) {
     lock.fd=open((path+".lock").c_str(),O_CREAT|O_RDWR|O_CLOEXEC,0600);
     require(lock.fd>=0 && flock(lock.fd,LOCK_EX|LOCK_NB)==0,"WM already running or lock unavailable");
     engine=std::make_unique<Engine>(mock);
+    engine->ui_enabled=!(getenv("TRIANGLE_INPUT")&&std::string(getenv("TRIANGLE_INPUT"))=="0");
     for(unsigned c:{84u,164u,109u,38u,228u,255u}) engine->solid(c);
     listener.fd=listen_at(path); control.fd=listen_at(path+".control");
   }
@@ -75,7 +77,7 @@ struct Server {
     if(listener.fd>=0) unlink(path.c_str());
     if(control.fd>=0) unlink((path+".control").c_str());
   }
-  void changed() { ++generation; dirty=true; }
+  void changed(bool layout=true) { ++generation; dirty=true;engine->ui_dirty=true;if(layout){engine->ui_layout_dirty=true;engine->ui_mask_dirty=true;} }
   Record &owned(Peer &p,const J &a) {
     int id=integer(a,"window_id",0,1,INT_MAX);
     auto it=records.find(id); require(it!=records.end(),"window not found");
@@ -92,6 +94,7 @@ struct Server {
       "padding_deg",coordinate(w.padding),"mapped",w.visible,"decorated",false,"generation",generation);
   }
   void erase(int id) {
+    if(capture.id==id)cancel_input();
     const auto &r=records.at(id); reserved_bytes-=size_t(r.width)*r.height*(r.shared?4+2*r.shared->pixel_bytes:10);
     records.erase(id); engine->windows.erase(id);
     auto &order=engine->order; order.erase(std::remove(order.begin(),order.end(),id),order.end());
@@ -100,6 +103,7 @@ struct Server {
     changed();
   }
   void disconnect(int fd) {
+    if(capture.owner==fd){cancel_input();changed();}
     std::vector<int> gone; for(const auto &[id,r]:records) if(r.owner==fd) gone.push_back(id);
     for(int id:gone) erase(id);
     close(fd); peers.erase(fd);
@@ -112,6 +116,7 @@ struct Server {
   }
   J dispatch(Peer &p,const std::string &op,const J &a) {
     require(a.is_object(),"args must be an object");
+    if(op.rfind("input_",0)==0)return input(p,op,a);
     if(op=="create_window") {
       require(!p.control,"create windows using an application connection");
       require(records.size()<64,"window limit");
@@ -145,6 +150,8 @@ struct Server {
       require(p.control,"view_set requires the internal control connection");
       double y=a.value("yaw",0.), pi=a.value("pitch",0.);
       require(a.value("roll",0.)==0.,"view roll is not supported");
+      require(std::isfinite(y)&&std::abs(y)<=180&&std::isfinite(pi)&&std::abs(pi)<=85,"view bounds");
+      if(capture.owner>=0)cancel_input();
       if(engine->active<0) { engine->render(false);service_render_ms=engine->stats.render_ms;presented=generation; dirty=false; }
       auto result=engine->operate({{"op","pose"},{"yaw",y},{"pitch",pi}});
       yaw=y; pitch=pi; result["yaw"]=yaw; result["pitch"]=pitch; result["roll"]=0; return result;
@@ -207,10 +214,11 @@ struct Server {
       request_profile.pixels_us=microseconds_now()-phase;phase=microseconds_now();
       bool did_change=!w.has_content || total.w;
       if(did_change) {
+        bool first_content=!w.has_content;
         if(!w.has_content) { total={0,0,int(r.width),int(r.height)}; w.plan_ready=false; }
         w.has_content=true; s.pending=unite(s.pending,total); s.revision=++engine->serial;
         for(auto d:areas) engine->damage(w,d);
-        changed();
+        changed(first_content);
       }
       request_profile.damage_us=microseconds_now()-phase;
       r.shared->sequence=a.at("sequence").get<uint64_t>(); r.shared->commits++; r.shared->copied_bytes+=copied;
@@ -227,6 +235,7 @@ struct Server {
       bool visible=a.value("mapped",w.visible);
       std::string title=a.value("title",r.title); require(title.size()<=256,"title too long");
       bool geometry=bounds.yaw!=w.yaw || bounds.pitch!=w.pitch || bounds.width!=w.width || bounds.height!=w.height || bounds.padding!=w.padding;
+      if(capture.id==id&&(geometry||visible!=w.visible))cancel_input();
       if(geometry || visible!=w.visible || title!=r.title) {
         if(geometry) { w.yaw=bounds.yaw; w.pitch=bounds.pitch; w.width=bounds.width; w.height=bounds.height; w.padding=bounds.padding;
           auto phase=microseconds_now();w.footprint=engine->footprint(w);request_profile.footprint_us=microseconds_now()-phase;w.plan_ready=false; }
@@ -279,6 +288,7 @@ struct Server {
     std::cout<<"TRIANGLE_BOAYO_READY "<<path<<std::endl;
     std::vector<pollfd> fds;fds.reserve(66);
     while(!stopping) {
+      if(capture.owner>=0&&microseconds_now()-last_input_us>30000000){cancel_input();changed(false);}
       fds.clear();fds.push_back({listener.fd,POLLIN,0});fds.push_back({control.fd,POLLIN,0});
       for(auto &[fd,p]:peers) fds.push_back({fd,short(POLLIN|(p.out.empty()?0:POLLOUT)),0});
       int rc=poll(fds.data(),fds.size(),dirty?0:100);

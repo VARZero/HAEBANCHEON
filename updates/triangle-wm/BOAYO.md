@@ -8,7 +8,8 @@ The experimental `triangle-wm` executable remains available for reproducing the 
 
 ```sh
 bash updates/triangle-wm/build.sh /var/tmp/triangle-boayo-host host
-python3 updates/triangle-wm/tests/test_boayo.py /var/tmp/triangle-boayo-host/triangle-boayo
+TRIANGLE_INPUT=0 python3 updates/triangle-wm/tests/test_boayo.py /var/tmp/triangle-boayo-host/triangle-boayo
+python3 updates/triangle-wm/tests/test_input.py /var/tmp/triangle-boayo-host/triangle-boayo
 bash updates/triangle-wm/build.sh /var/tmp/triangle-boayo-rv32 rv32
 ```
 
@@ -24,9 +25,9 @@ triangle-app --demo
 triangle-app
 ```
 
-The demo draws its own text and rectangles in application memory. It contains no move, resize, or close buttons. The image has the same background color as its padded triangle silhouette. The demo now defaults to native RGB332 drawing and shared slots; `--rgb24` and `--rgb32` select comparison paths. Legacy applications still receive RGB24 when they omit the format.
+The demo draws its own text and rectangles in application memory. The WM now supplies split close/move/resize controls and a pointer; the app does not draw these itself. See [INPUT.md](INPUT.md). The image has the same background color as its padded triangle silhouette. The demo now defaults to native RGB332 drawing and shared slots; `--rgb24` and `--rgb32` select comparison paths. Legacy applications still receive RGB24 when they omit the format.
 
-For the current board session, the staged executables are `/tmp/triangle-boayo-v7` and `/tmp/triangle-app-v3`; substitute those paths in the commands above and below. The live service PID is recorded in `/tmp/triangle-wm.pid`, and the demo PID in `/tmp/triangle-app.pid`. These are temporary development deployments, not boot-time service installation.
+For the current board session, the staged executables are `/tmp/triangle-boayo-v8` and `/tmp/triangle-app-v3`; substitute those paths in the commands above and below. The live service PID is recorded in `/tmp/triangle-wm.pid`, and the demo PID in `/tmp/triangle-app.pid`. These are temporary development deployments, not boot-time service installation.
 
 The service uses `$BOAYO_SOCKET` (default `/tmp/bosio-wm.sock`) for applications and `$BOAYO_SOCKET.control` for internal management. Socket files are mode 0600; peer UIDs must match the WM UID. Window ownership follows the live connection, not the client-provided `app` string. Disconnecting an application removes its windows and releases their shared surfaces. Applications must keep their connection open.
 
@@ -40,7 +41,7 @@ Requests: `{"id":1,"app":"example","op":"create_window","args":{...}}`. Response
 4. The commit response releases the slot after a private CPU snapshot. It returns `generation`, `changed`, and `copied_bytes`. Reusing the slot after this response cannot affect the submitted image.
 5. `wait_present` with that `generation` waits for hardware publication. This is the latency endpoint used in the benchmark. Unknown future generations are rejected. An unchanged image consumes the sequence but keeps its generation.
 
-Own-window `configure_window`, `destroy_window`, `raise_window`, and `focus_window` are also available. `get_state`, `sync_scene`, `app_events`, and `poll_events` provide state; event arrays are currently empty because input routing and buttons are deferred. Old rounded `shape` and decoration hints are not used. Legacy full-image/base64 APIs, app launching, workspace management, input dispatch, and roll are outside this implementation's compatibility scope.
+Own-window `configure_window`, `destroy_window`, `raise_window`, and `focus_window` are also available. `get_state`, `sync_scene`, `app_events`, and `poll_events` provide state; event arrays are currently empty because application widget input routing is deferred. WM pointer actions use the trusted control socket. Old rounded `shape` and decoration hints are not used. Legacy full-image/base64 APIs, app launching, workspace management, application widget input dispatch, and roll are outside this implementation's compatibility scope.
 
 ## Internal management
 
@@ -65,7 +66,7 @@ Resizing changes the angular projection dimensions and preserves the source reso
 - Window yaw ±180°, pitch ±80°, angular width/height 1–100°, padding 0–10°. Output yaw ±180°, pitch ±85°, roll 0.
 - Background palette indices: 84, 164, 109, 38, 228, 255. These are reserved before the first hardware publication.
 - Damage rectangles remain separate for projection invalidation. v5 keeps multiple source textures in the existing DDR arena. Source uploads use full-width rows or a bounded sparse staging path. See [TEXTURE_CACHE.md](TEXTURE_CACHE.md) for cache replacement and upload measurements.
-- A single service event loop owns rendering. Commit responses are flushed before rendering, but new requests arriving during projection wait for it to finish. Output pose avoids scene recomposition but does not preempt a running render. This is not a 60 FPS interaction guarantee.
+- A single service event loop owns rendering. Commit responses are flushed before rendering, but new requests arriving during projection wait for it to finish. With `TRIANGLE_INPUT=0`, output pose avoids scene recomposition. With controls enabled it republishes the screen-positioned overlay. Neither path preempts a running render. This is not a 60 FPS interaction guarantee.
 - Benchmark `accept_ms` ends at the commit/configuration reply. `present_ms` includes the subsequent `wait_present` round trip. Neither includes HDMI/capture optical delay. Source image generation is outside content submission measurements; the app's source-to-memfd copy is inside them.
 
 See [BOAYO_RESULTS.md](BOAYO_RESULTS.md) for the original baseline, [PIXEL_FORMATS.md](PIXEL_FORMATS.md) for format details and projection optimization, and [OPTIMIZATION_RESULTS.md](OPTIMIZATION_RESULTS.md) for the RGB332 comparison. The fixed-point CPU implementation is in [CPU_OPTIMIZATION.md](CPU_OPTIMIZATION.md), followed by [resident-texture and transform-cache measurements](TEXTURE_CACHE.md).

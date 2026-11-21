@@ -1,0 +1,707 @@
+{
+  "source": "TRI_740d132a57.log",
+  "version": "v8 final, input=1, sparse=0, trim",
+  "create": {
+    "create_and_map_ms": 2234.990299999714,
+    "window_id": 1
+  },
+  "metrics": [
+    {
+      "name": "initial_content",
+      "n": 1,
+      "median_ms": 2112.415,
+      "p95_ms": 2112.415,
+      "max_ms": 2112.415
+    },
+    {
+      "name": "partial_8x8",
+      "n": 11,
+      "median_ms": 471.117,
+      "p95_ms": 725.048,
+      "max_ms": 725.048
+    },
+    {
+      "name": "destroy_owned",
+      "n": 1,
+      "median_ms": 756.258,
+      "p95_ms": 756.258,
+      "max_ms": 756.258
+    }
+  ],
+  "samples": [
+    {
+      "accept_ms": 808.5284199975431,
+      "name": "initial_content",
+      "present_ms": 2112.4145999997854,
+      "render": {
+        "active_bank": 1,
+        "changed_tiles": 40,
+        "content_changed_tiles": 40,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          20,
+          20
+        ],
+        "metadata_ms": 50.481,
+        "overlay_tiles": 8,
+        "owned_tiles": 70,
+        "plan_fallbacks": 1,
+        "plan_ms": 237.93583999940893,
+        "plan_rejected": 30,
+        "plan_tiles": 70,
+        "projected_tiles": 40,
+        "projection_ms": 244.41641999874264,
+        "publish_ms": 113.60892000084277,
+        "published": true,
+        "render_ms": 1297.5607400003355,
+        "request_profile": {
+          "damage_us": 416,
+          "dispatch_us": 579851,
+          "footprint_us": 0,
+          "operation": "commit_surface",
+          "parse_us": 26901,
+          "pixels_us": 486655,
+          "reply_us": 8575,
+          "snapshot_us": 70343
+        },
+        "resident_textures": 1,
+        "service_render_ms": 1308.8276400012546,
+        "texture_evictions": 0,
+        "texture_scatter_bytes": 0,
+        "texture_upload_bytes": 138240,
+        "ui_ms": 651.4788200001931,
+        "validate_ms": 35.286,
+        "wait_ms": 10.446
+      },
+      "result": {
+        "changed": true,
+        "copied_bytes": 34560,
+        "generation": 2,
+        "sequence": 1,
+        "window_id": 1
+      }
+    },
+    {
+      "accept_ms": 208.49101999774575,
+      "name": "partial_8x8",
+      "present_ms": 725.0475199967623,
+      "render": {
+        "active_bank": 0,
+        "changed_tiles": 4,
+        "content_changed_tiles": 4,
+        "copied_tiles": 36,
+        "jobs_per_core": [
+          2,
+          2
+        ],
+        "metadata_ms": 50.43,
+        "overlay_tiles": 8,
+        "owned_tiles": 70,
+        "plan_fallbacks": 0,
+        "plan_ms": 0.0,
+        "plan_rejected": 0,
+        "plan_tiles": 0,
+        "projected_tiles": 4,
+        "projection_ms": 28.88015999997151,
+        "publish_ms": 109.59907999858842,
+        "published": true,
+        "render_ms": 495.21656000069925,
+        "request_profile": {
+          "damage_us": 9744,
+          "dispatch_us": 22831,
+          "footprint_us": 0,
+          "operation": "commit_surface",
+          "parse_us": 34291,
+          "pixels_us": 875,
+          "reply_us": 8699,
+          "snapshot_us": 5556
+        },
+        "resident_textures": 1,
+        "service_render_ms": 505.5821599999035,
+        "texture_evictions": 0,
+        "texture_scatter_bytes": 0,
+        "texture_upload_bytes": 7680,
+        "ui_ms": 79.51586000126554,
+        "validate_ms": 35.402,
+        "wait_ms": 8.524
+      },
+      "result": {
+        "changed": true,
+        "copied_bytes": 64,
+        "generation": 3,
+        "sequence": 2,
+        "window_id": 1
+      }
+    },
+    {
+      "accept_ms": 211.9984200000763,
+      "name": "partial_8x8",
+      "present_ms": 471.74260000139475,
+      "render": {
+        "active_bank": 1,
+        "changed_tiles": 4,
+        "content_changed_tiles": 4,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          2,
+          2
+        ],
+        "metadata_ms": 49.533,
+        "overlay_tiles": 8,
+        "owned_tiles": 70,
+        "plan_fallbacks": 0,
+        "plan_ms": 0.0,
+        "plan_rejected": 0,
+        "plan_tiles": 0,
+        "projected_tiles": 4,
+        "projection_ms": 48.68073999750777,
+        "publish_ms": 130.61087999813026,
+        "published": true,
+        "render_ms": 265.1942999982566,
+        "request_profile": {
+          "damage_us": 10135,
+          "dispatch_us": 22224,
+          "footprint_us": 0,
+          "operation": "commit_surface",
+          "parse_us": 21250,
+          "pixels_us": 897,
+          "reply_us": 8791,
+          "snapshot_us": 2255
+        },
+        "resident_textures": 1,
+        "service_render_ms": 275.5657199995767,
+        "texture_evictions": 0,
+        "texture_scatter_bytes": 0,
+        "texture_upload_bytes": 7680,
+        "ui_ms": 40.614100002130726,
+        "validate_ms": 35.118,
+        "wait_ms": 30.692
+      },
+      "result": {
+        "changed": true,
+        "copied_bytes": 64,
+        "generation": 4,
+        "sequence": 3,
+        "window_id": 1
+      }
+    },
+    {
+      "accept_ms": 189.62491999939084,
+      "name": "partial_8x8",
+      "present_ms": 454.55130000039935,
+      "render": {
+        "active_bank": 0,
+        "changed_tiles": 4,
+        "content_changed_tiles": 4,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          2,
+          2
+        ],
+        "metadata_ms": 49.823,
+        "overlay_tiles": 8,
+        "owned_tiles": 70,
+        "plan_fallbacks": 0,
+        "plan_ms": 0.0,
+        "plan_rejected": 0,
+        "plan_tiles": 0,
+        "projected_tiles": 4,
+        "projection_ms": 48.5212200001115,
+        "publish_ms": 112.87154000092414,
+        "published": true,
+        "render_ms": 244.50526000146056,
+        "request_profile": {
+          "damage_us": 9863,
+          "dispatch_us": 22224,
+          "footprint_us": 0,
+          "operation": "commit_surface",
+          "parse_us": 27198,
+          "pixels_us": 3472,
+          "reply_us": 8237,
+          "snapshot_us": 2254
+        },
+        "resident_textures": 1,
+        "service_render_ms": 255.35350000063772,
+        "texture_evictions": 0,
+        "texture_scatter_bytes": 0,
+        "texture_upload_bytes": 7680,
+        "ui_ms": 38.20909999922151,
+        "validate_ms": 33.465,
+        "wait_ms": 14.392
+      },
+      "result": {
+        "changed": true,
+        "copied_bytes": 64,
+        "generation": 5,
+        "sequence": 4,
+        "window_id": 1
+      }
+    },
+    {
+      "accept_ms": 208.71205999702215,
+      "name": "partial_8x8",
+      "present_ms": 471.1169599965215,
+      "render": {
+        "active_bank": 1,
+        "changed_tiles": 4,
+        "content_changed_tiles": 4,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          2,
+          2
+        ],
+        "metadata_ms": 49.345,
+        "overlay_tiles": 8,
+        "owned_tiles": 70,
+        "plan_fallbacks": 0,
+        "plan_ms": 0.0,
+        "plan_rejected": 0,
+        "plan_tiles": 0,
+        "projected_tiles": 4,
+        "projection_ms": 48.45414000010351,
+        "publish_ms": 132.41289999859873,
+        "published": true,
+        "render_ms": 265.1581799982523,
+        "request_profile": {
+          "damage_us": 17019,
+          "dispatch_us": 29571,
+          "footprint_us": 0,
+          "operation": "commit_surface",
+          "parse_us": 21132,
+          "pixels_us": 877,
+          "reply_us": 8954,
+          "snapshot_us": 2243
+        },
+        "resident_textures": 1,
+        "service_render_ms": 276.05680000124266,
+        "texture_evictions": 0,
+        "texture_scatter_bytes": 0,
+        "texture_upload_bytes": 7680,
+        "ui_ms": 38.649779999104794,
+        "validate_ms": 37.335,
+        "wait_ms": 30.295
+      },
+      "result": {
+        "changed": true,
+        "copied_bytes": 64,
+        "generation": 6,
+        "sequence": 5,
+        "window_id": 1
+      }
+    },
+    {
+      "accept_ms": 193.05635999888182,
+      "name": "partial_8x8",
+      "present_ms": 459.1662999987602,
+      "render": {
+        "active_bank": 0,
+        "changed_tiles": 4,
+        "content_changed_tiles": 4,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          2,
+          2
+        ],
+        "metadata_ms": 49.852,
+        "overlay_tiles": 8,
+        "owned_tiles": 70,
+        "plan_fallbacks": 0,
+        "plan_ms": 0.0,
+        "plan_rejected": 0,
+        "plan_tiles": 0,
+        "projected_tiles": 4,
+        "projection_ms": 42.50158000286319,
+        "publish_ms": 112.42256000332418,
+        "published": true,
+        "render_ms": 244.70790000123088,
+        "request_profile": {
+          "damage_us": 10162,
+          "dispatch_us": 22656,
+          "footprint_us": 0,
+          "operation": "commit_surface",
+          "parse_us": 26984,
+          "pixels_us": 913,
+          "reply_us": 8153,
+          "snapshot_us": 4998
+        },
+        "resident_textures": 1,
+        "service_render_ms": 263.13374000164913,
+        "texture_evictions": 0,
+        "texture_scatter_bytes": 0,
+        "texture_upload_bytes": 7680,
+        "ui_ms": 37.22693999952753,
+        "validate_ms": 33.281,
+        "wait_ms": 14.221
+      },
+      "result": {
+        "changed": true,
+        "copied_bytes": 64,
+        "generation": 7,
+        "sequence": 6,
+        "window_id": 1
+      }
+    },
+    {
+      "accept_ms": 190.62987999990582,
+      "name": "partial_8x8",
+      "present_ms": 442.7755599990487,
+      "render": {
+        "active_bank": 1,
+        "changed_tiles": 4,
+        "content_changed_tiles": 4,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          2,
+          2
+        ],
+        "metadata_ms": 50.224,
+        "overlay_tiles": 8,
+        "owned_tiles": 70,
+        "plan_fallbacks": 0,
+        "plan_ms": 0.0,
+        "plan_rejected": 0,
+        "plan_tiles": 0,
+        "projected_tiles": 4,
+        "projection_ms": 57.12701999800629,
+        "publish_ms": 109.85000000073342,
+        "published": true,
+        "render_ms": 238.94262000249,
+        "request_profile": {
+          "damage_us": 10020,
+          "dispatch_us": 24672,
+          "footprint_us": 0,
+          "operation": "commit_surface",
+          "parse_us": 30257,
+          "pixels_us": 919,
+          "reply_us": 5900,
+          "snapshot_us": 2316
+        },
+        "resident_textures": 1,
+        "service_render_ms": 250.0893600008567,
+        "texture_evictions": 0,
+        "texture_scatter_bytes": 0,
+        "texture_upload_bytes": 7680,
+        "ui_ms": 24.791820000245934,
+        "validate_ms": 36.322,
+        "wait_ms": 8.223
+      },
+      "result": {
+        "changed": true,
+        "copied_bytes": 64,
+        "generation": 8,
+        "sequence": 7,
+        "window_id": 1
+      }
+    },
+    {
+      "accept_ms": 182.5284199975431,
+      "name": "partial_8x8",
+      "present_ms": 476.00187999755144,
+      "render": {
+        "active_bank": 0,
+        "changed_tiles": 4,
+        "content_changed_tiles": 4,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          2,
+          2
+        ],
+        "metadata_ms": 49.412,
+        "overlay_tiles": 8,
+        "owned_tiles": 70,
+        "plan_fallbacks": 0,
+        "plan_ms": 0.0,
+        "plan_rejected": 0,
+        "plan_tiles": 0,
+        "projected_tiles": 4,
+        "projection_ms": 43.35250000076485,
+        "publish_ms": 133.51588000296033,
+        "published": true,
+        "render_ms": 261.6534600019804,
+        "request_profile": {
+          "damage_us": 9830,
+          "dispatch_us": 24835,
+          "footprint_us": 0,
+          "operation": "commit_surface",
+          "parse_us": 21243,
+          "pixels_us": 877,
+          "reply_us": 6120,
+          "snapshot_us": 2259
+        },
+        "resident_textures": 1,
+        "service_render_ms": 279.9556199970539,
+        "texture_evictions": 0,
+        "texture_scatter_bytes": 0,
+        "texture_upload_bytes": 7680,
+        "ui_ms": 36.98515999712981,
+        "validate_ms": 33.061,
+        "wait_ms": 35.815
+      },
+      "result": {
+        "changed": true,
+        "copied_bytes": 64,
+        "generation": 9,
+        "sequence": 8,
+        "window_id": 1
+      }
+    },
+    {
+      "accept_ms": 186.26889999955893,
+      "name": "partial_8x8",
+      "present_ms": 452.61574000120163,
+      "render": {
+        "active_bank": 1,
+        "changed_tiles": 4,
+        "content_changed_tiles": 4,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          2,
+          2
+        ],
+        "metadata_ms": 49.262,
+        "overlay_tiles": 8,
+        "owned_tiles": 70,
+        "plan_fallbacks": 0,
+        "plan_ms": 0.0,
+        "plan_rejected": 0,
+        "plan_tiles": 0,
+        "projected_tiles": 4,
+        "projection_ms": 48.916960000497056,
+        "publish_ms": 122.47059999936027,
+        "published": true,
+        "render_ms": 245.06649999966612,
+        "request_profile": {
+          "damage_us": 10154,
+          "dispatch_us": 22261,
+          "footprint_us": 0,
+          "operation": "commit_surface",
+          "parse_us": 26772,
+          "pixels_us": 914,
+          "reply_us": 8650,
+          "snapshot_us": 4603
+        },
+        "resident_textures": 1,
+        "service_render_ms": 256.59576000180095,
+        "texture_evictions": 0,
+        "texture_scatter_bytes": 0,
+        "texture_upload_bytes": 7680,
+        "ui_ms": 38.39866000271286,
+        "validate_ms": 33.038,
+        "wait_ms": 24.453
+      },
+      "result": {
+        "changed": true,
+        "copied_bytes": 64,
+        "generation": 10,
+        "sequence": 9,
+        "window_id": 1
+      }
+    },
+    {
+      "accept_ms": 220.5488799996674,
+      "name": "partial_8x8",
+      "present_ms": 487.9604000002146,
+      "render": {
+        "active_bank": 0,
+        "changed_tiles": 4,
+        "content_changed_tiles": 4,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          2,
+          2
+        ],
+        "metadata_ms": 49.283,
+        "overlay_tiles": 8,
+        "owned_tiles": 70,
+        "plan_fallbacks": 0,
+        "plan_ms": 0.0,
+        "plan_rejected": 0,
+        "plan_tiles": 0,
+        "projected_tiles": 4,
+        "projection_ms": 55.359540001518326,
+        "publish_ms": 134.94189999983064,
+        "published": true,
+        "render_ms": 273.77465999961714,
+        "request_profile": {
+          "damage_us": 9765,
+          "dispatch_us": 22496,
+          "footprint_us": 0,
+          "operation": "commit_surface",
+          "parse_us": 23482,
+          "pixels_us": 3705,
+          "reply_us": 8564,
+          "snapshot_us": 2274
+        },
+        "resident_textures": 1,
+        "service_render_ms": 288.11399999904097,
+        "texture_evictions": 0,
+        "texture_scatter_bytes": 0,
+        "texture_upload_bytes": 7680,
+        "ui_ms": 24.872579997463617,
+        "validate_ms": 33.617,
+        "wait_ms": 36.497
+      },
+      "result": {
+        "changed": true,
+        "copied_bytes": 64,
+        "generation": 11,
+        "sequence": 10,
+        "window_id": 1
+      }
+    },
+    {
+      "accept_ms": 217.79580000042915,
+      "name": "partial_8x8",
+      "present_ms": 485.60474000126123,
+      "render": {
+        "active_bank": 1,
+        "changed_tiles": 4,
+        "content_changed_tiles": 4,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          2,
+          2
+        ],
+        "metadata_ms": 49.496,
+        "overlay_tiles": 8,
+        "owned_tiles": 70,
+        "plan_fallbacks": 0,
+        "plan_ms": 0.0,
+        "plan_rejected": 0,
+        "plan_tiles": 0,
+        "projected_tiles": 4,
+        "projection_ms": 44.5177399997192,
+        "publish_ms": 131.20853999862447,
+        "published": true,
+        "render_ms": 263.85128000038094,
+        "request_profile": {
+          "damage_us": 9883,
+          "dispatch_us": 22338,
+          "footprint_us": 0,
+          "operation": "commit_surface",
+          "parse_us": 26383,
+          "pixels_us": 907,
+          "reply_us": 8714,
+          "snapshot_us": 4898
+        },
+        "resident_textures": 1,
+        "service_render_ms": 274.2158600012772,
+        "texture_evictions": 0,
+        "texture_scatter_bytes": 0,
+        "texture_upload_bytes": 7680,
+        "ui_ms": 24.816119999741204,
+        "validate_ms": 32.598,
+        "wait_ms": 33.877
+      },
+      "result": {
+        "changed": true,
+        "copied_bytes": 64,
+        "generation": 12,
+        "sequence": 11,
+        "window_id": 1
+      }
+    },
+    {
+      "accept_ms": 188.67771999910474,
+      "name": "partial_8x8",
+      "present_ms": 469.7958599999547,
+      "render": {
+        "active_bank": 0,
+        "changed_tiles": 4,
+        "content_changed_tiles": 4,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          2,
+          2
+        ],
+        "metadata_ms": 47.016,
+        "overlay_tiles": 8,
+        "owned_tiles": 70,
+        "plan_fallbacks": 0,
+        "plan_ms": 0.0,
+        "plan_rejected": 0,
+        "plan_tiles": 0,
+        "projected_tiles": 4,
+        "projection_ms": 48.70482000114862,
+        "publish_ms": 131.8375400005607,
+        "published": true,
+        "render_ms": 264.7482200009108,
+        "request_profile": {
+          "damage_us": 9838,
+          "dispatch_us": 24858,
+          "footprint_us": 0,
+          "operation": "commit_surface",
+          "parse_us": 21279,
+          "pixels_us": 878,
+          "reply_us": 6178,
+          "snapshot_us": 2262
+        },
+        "resident_textures": 1,
+        "service_render_ms": 276.03545999954804,
+        "texture_evictions": 0,
+        "texture_scatter_bytes": 0,
+        "texture_upload_bytes": 7680,
+        "ui_ms": 38.971679998212494,
+        "validate_ms": 35.864,
+        "wait_ms": 31.334
+      },
+      "result": {
+        "changed": true,
+        "copied_bytes": 64,
+        "generation": 13,
+        "sequence": 12,
+        "window_id": 1
+      }
+    },
+    {
+      "accept_ms": 226.11580000072718,
+      "name": "destroy_owned",
+      "present_ms": 756.2584199979901,
+      "render": {
+        "active_bank": 1,
+        "changed_tiles": 70,
+        "content_changed_tiles": 0,
+        "copied_tiles": 0,
+        "jobs_per_core": [
+          0,
+          0
+        ],
+        "metadata_ms": 49.919,
+        "overlay_tiles": 5,
+        "owned_tiles": 0,
+        "plan_fallbacks": 0,
+        "plan_ms": 0.0,
+        "plan_rejected": 0,
+        "plan_tiles": 0,
+        "projected_tiles": 0,
+        "projection_ms": 0.5389400030253455,
+        "publish_ms": 119.12279999887687,
+        "published": true,
+        "render_ms": 521.3667600000917,
+        "request_profile": {
+          "damage_us": 0,
+          "dispatch_us": 53756,
+          "footprint_us": 0,
+          "operation": "destroy_window",
+          "parse_us": 12562,
+          "pixels_us": 0,
+          "reply_us": 4624,
+          "snapshot_us": 0
+        },
+        "resident_textures": 0,
+        "service_render_ms": 531.8601399994805,
+        "texture_evictions": 0,
+        "texture_scatter_bytes": 0,
+        "texture_upload_bytes": 0,
+        "ui_ms": 355.47095999936573,
+        "validate_ms": 32.666,
+        "wait_ms": 17.628
+      },
+      "result": {
+        "generation": 14,
+        "window_id": 1
+      }
+    }
+  ],
+  "complete": true
+}

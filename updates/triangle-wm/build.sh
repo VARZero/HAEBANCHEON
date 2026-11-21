@@ -20,6 +20,7 @@ sha256sum "$out/triangle-wm" > "$out/triangle-wm.sha256"
 sha256sum "$out/triangle-boayo" > "$out/triangle-boayo.sha256"
 "$compiler" "${flags[@]}" -Wall -Wextra -I"$native" "$here/src/boayo_app.cpp" -o "$out/triangle-app"
 sha256sum "$out/triangle-app" > "$out/triangle-app.sha256"
+"$compiler" "${flags[@]}" -Wall -Wextra -I"$native" "$here/src/input_client.cpp" -o "$out/triangle-input"
 cc=gcc;cflags=(-Os)
 if [[ "$mode" == rv32 ]];then cc=${RV32_CC:-${compiler%g++}gcc};cflags+=(-static -s -march=rv32ima_zicsr_zifencei -mabi=ilp32);fi
 "$cc" "${cflags[@]}" -Wall -Wextra "$here/tools/board_client.c" -o "$out/triangle-client"

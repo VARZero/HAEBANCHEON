@@ -7,7 +7,7 @@ The subsequent `triangle-boayo` service preserves BoAYO's application-side socke
 
 ## Design contract
 
-The later RGB332/RGB32 application buffers and CPU projection planning optimization are documented in [PIXEL_FORMATS.md](PIXEL_FORMATS.md), with measured comparisons in [OPTIMIZATION_RESULTS.md](OPTIMIZATION_RESULTS.md). The subsequent Q44 CPU implementation is documented in [CPU_OPTIMIZATION.md](CPU_OPTIMIZATION.md). The resident-texture and shared-transform changes are in [TEXTURE_CACHE.md](TEXTURE_CACHE.md). Completion-response and diagnostic overhead are addressed in [RESPONSE_PATH.md](RESPONSE_PATH.md). The outline cleanup experiment is documented in [OUTLINE.md](OUTLINE.md). The current live application deployment uses `triangle-boayo-v7` and the unchanged `triangle-app-v3`; the six-stage measurements below describe the earlier standalone experiment.
+The later RGB332/RGB32 application buffers and CPU projection planning optimization are documented in [PIXEL_FORMATS.md](PIXEL_FORMATS.md), with measured comparisons in [OPTIMIZATION_RESULTS.md](OPTIMIZATION_RESULTS.md). The subsequent Q44 CPU implementation is documented in [CPU_OPTIMIZATION.md](CPU_OPTIMIZATION.md). The resident-texture and shared-transform changes are in [TEXTURE_CACHE.md](TEXTURE_CACHE.md). Completion-response and diagnostic overhead are addressed in [RESPONSE_PATH.md](RESPONSE_PATH.md). The outline cleanup experiment is documented in [OUTLINE.md](OUTLINE.md). Split controls and the software pointer are documented in [INPUT.md](INPUT.md), with [measured board latency and limits](INPUT_RESULTS.md). The current live application deployment uses `triangle-boayo-v8` and the unchanged `triangle-app-v3`; the six-stage measurements below describe the earlier standalone experiment.
 
 - A window owns whole spherical triangle tiles. There is no rounded corner mask, outline, or inner rectangular frame.
 - Background coverage exceeds the content rectangle by an angular padding. Triangle edges are the visible window silhouette.
@@ -16,7 +16,7 @@ The later RGB332/RGB32 application buffers and CPU projection planning optimizat
 - Content is a retained list of rectangles and bitmap text. Repainting a damaged source rectangle restores the background and replays intersecting components in order.
 - Only affected projected tiles are regenerated. Unchanged tiles in the other bank are reused or DMA-copied. Two projection cores have disjoint destination tiles.
 - Planning resets and visits the union of the previous and current visible footprints. It does not clear/scan all 4,220 tile bookkeeping entries on every request. The current ABI still submits a complete 4,476-word metadata snapshot to the driver.
-- Output yaw/pitch uses the pose ioctl independently of scene composition. Pose-only updates must not increase the scene commit count.
+- The standalone experiment and `TRIANGLE_INPUT=0` use the pose ioctl independently of scene composition. The interactive overlay path republishes on pose changes to keep its pointer screen-positioned.
 - Every hardware submission is synchronous. An ioctl failure latches a fault; the experiment must inspect device state before restarting.
 
 ## Stage gates
