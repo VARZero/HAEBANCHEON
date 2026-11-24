@@ -89,6 +89,7 @@ struct bo_batch { __u32 count, reserved; __aligned_u64 entries; };
 /* Full immutable CPU metadata snapshot; driver writes only changed ranges and
  * commits under the same mutex. No caller-supplied dirty mask or bus address. */
 #define BO_DMA_PUBLISH 128u
+#define BO_DMA_PUBLISH_COPY 256u
 struct bo_publish_profile {
     __aligned_u64 validate_us, upload_us, configure_us, select_us, wait_us, finish_us, user_copy_us;
     __u32 uploaded_words, upload_ranges, command, reserved;
@@ -100,4 +101,8 @@ struct bo_publish {
     struct bo_publish_profile profile;
 };
 #define BO_PUBLISH _IOWR('B', 0x4e, struct bo_publish)
+/* Privileged trusted-scene experiment: full metadata upload, no directory scan,
+ * snapshot comparison or patch selection. Caller owns metadata validity.
+ * Scalar bounds, inactive bank, stable camera, faults and completion still checked. */
+#define BO_PUBLISH_COPY _IOWR('B', 0x4f, struct bo_publish)
 #endif

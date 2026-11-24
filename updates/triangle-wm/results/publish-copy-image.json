@@ -1,0 +1,72 @@
+{
+  "boot_lba": 2048,
+  "root_lba": 14336,
+  "root_sectors": 2097152,
+  "segments": [
+    {
+      "address": "0x80000000",
+      "sectors": 519,
+      "crc32": "edd168be"
+    },
+    {
+      "address": "0x80400000",
+      "sectors": 10191,
+      "crc32": "b6081feb"
+    },
+    {
+      "address": "0x87f00000",
+      "sectors": 7,
+      "crc32": "ac347877"
+    }
+  ],
+  "image": "HAEBANCHEON-publish-copy.img",
+  "sha256": "7e984ba0628537fd4578af6c96125b0cdfe24abd2cb9b777a48f127420a88c98",
+  "kernel_sha256": "91a89cc145d2df3b8781e7803d9159d1ce58cb4b994cc938c86627e2326eee99",
+  "rootfs_sha256": "4ece01aa4353bd0018566c2c30d9e0465560f8815b674bb11cad3eb726d6fa80",
+  "bosio_output_map": {
+    "output_mmio": {
+      "base": "0x20020000",
+      "bytes": 128
+    },
+    "projection_plic_sources": {
+      "projection0": 5,
+      "projection1": 6
+    },
+    "scene_arena": {
+      "base": "0xbd000000",
+      "bytes": 16777216,
+      "no_map": true
+    },
+    "hdmi_scanout": {
+      "base": "0xbf800000",
+      "bytes": 8388608,
+      "no_map": true,
+      "bank_bases": [
+        "0xbf800000",
+        "0xbfc00000"
+      ],
+      "bank_bytes": 4194304,
+      "width": 1280,
+      "height": 720,
+      "stride_bytes": 5120,
+      "format": "0x00RRGGBB little-endian",
+      "frame_bytes": 3686400
+    }
+  },
+  "hardware_tested": false,
+  "requires": "Unchanged L1-16K DMA3 LRU-RAM bitstream; reflash SD, boot experimental kernel",
+  "kernel_release": "6.12.0-haebancheon-publishcopy",
+  "benchmarks": [
+    "/usr/bin/publish-bench",
+    "/usr/bin/primitive-bench"
+  ],
+  "command": "publish-bench --copy",
+  "copy_api": "BO_PUBLISH_COPY (CAP_SYS_RAWIO)",
+  "source_files": {
+    "variants/l1-16k-dma3-lru-ram/software/bosio/common/bosio_engine.c": "abc117805d7483883b8e44ad5dbd3c72e9a772264a2bcc0b36178eae8e1da14e",
+    "variants/l1-16k-dma3-lru-ram/software/bosio/common/bosio_engine.h": "12d87c9e99fe4e111cd315618c3fa565f0944200bad45a201f6645e5ac798d62",
+    "variants/l1-16k-dma3-lru-ram/software/bosio/include/bosio_uapi.h": "c77f511805d1f92e3c17fb6426d82f10c4f5fba337e5ea436f7034d5a8993eeb",
+    "variants/l1-16k-dma3-lru-ram/software/bosio/driver/bosio_kfb.c": "f464496be140ada0b2314568a709464ba1438b9c69638a341a983a7a3162acbe"
+  },
+  "bytes": 1081081856
+}

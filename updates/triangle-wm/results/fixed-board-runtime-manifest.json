@@ -1,0 +1,23 @@
+{
+  "image": "fixed-wm-binary-v1",
+  "kernel": "6.12.0-haebancheon-publishcopy",
+  "publication": "BO_PUBLISH_COPY default restored",
+  "running_service": "/tmp/triangle-boayo-fixed",
+  "client": "/tmp/triangle-input-fixed",
+  "app": "/tmp/triangle-app-fixed --rgb332 --demo",
+  "pid_files": [
+    "/tmp/triangle-wm.pid",
+    "/tmp/triangle-app.pid",
+    "/run/triangle-wm.pid",
+    "/run/triangle-app.pid"
+  ],
+  "bridge_online": true,
+  "actual_hdmi_final_dot_verified": true,
+  "publication_log": "TRI_95f7314f95.log",
+  "primitive_checked_log": "TRI_e19e1cb417.log",
+  "primitive_copy_log": "TRI_e7abd15b14.log",
+  "native_copy_log": "TRI_e45ee96eb5.log",
+  "native_checked_log": "TRI_4620a18efc.log",
+  "final_restart_log": "TRI_518e729852.log",
+  "changes_this_task": "Benchmark copy-selection option and analysis/reporting only; no production WM/driver changes or new SD image."
+}

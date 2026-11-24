@@ -1,0 +1,44 @@
+{
+  "boot_lba": 2048,
+  "root_lba": 14336,
+  "root_sectors": 2097152,
+  "segments": [
+    {
+      "address": "0x80000000",
+      "sectors": 519,
+      "crc32": "edd168be"
+    },
+    {
+      "address": "0x80400000",
+      "sectors": 10191,
+      "crc32": "b6081feb"
+    },
+    {
+      "address": "0x87f00000",
+      "sectors": 7,
+      "crc32": "ac347877"
+    }
+  ],
+  "version": "fixed-wm-single-tile-v3",
+  "geometry": "integer Q24",
+  "angles": "signed quarter degrees in 16-bit range; normalized yaw [-180,180)",
+  "wire": "BWM1 little-endian length + CBOR integer payload; angle Q2, other fractions Q24",
+  "publication": "BO_PUBLISH_COPY default; TRIANGLE_PUBLISH_COPY=0 selects checked baseline",
+  "preview": "Frozen window, one central S-colored triangle patch during move; corner marker during resize. One final transform publication. TRIANGLE_PREVIEW=outline selects reference path.",
+  "execution": "Startup stages executables in /run/triangle-wm-runtime before launch",
+  "feedback_target_ms": 300,
+  "feedback_target_hardware_verified": false,
+  "hardware_tested": false,
+  "binaries": {
+    "triangle-boayo-fixed": "c578a7f06b3c8cf4334e257fa01f10dbafc00591d250b5db908dbb75f94d882a",
+    "triangle-app": "59d1ee5d322040fc4a31b072d9536b07ec97c64c0d0f28929eb588395110581d",
+    "triangle-input": "19d78403061c6c406d85ecf666642a0355377420cba3364c15fcc928cbbaedc8"
+  },
+  "image": "HAEBANCHEON-single-tile-preview.img",
+  "bytes": 1081081856,
+  "sha256": "61df684d8a5ab54e13b5458d1c4ca782211eba3dcb1d48101b6dd327b56f9d21",
+  "kernel_sha256": "91a89cc145d2df3b8781e7803d9159d1ce58cb4b994cc938c86627e2326eee99",
+  "kernel_release": "6.12.0-haebancheon-publishcopy",
+  "rootfs_sha256": "f61c6ff7ab12bee2d3e17c769193822fe0305ba2a2436a1a491da49a4f230a97",
+  "notes": "Driver improvement and kernel retained. Automatically stages WM/app/input in RAM and starts demo when /dev/bosio0 exists. Prepared offline; no physical board was contacted. Native/QEMU checks do not measure hardware latency."
+}

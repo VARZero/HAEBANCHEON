@@ -1,3 +1,4 @@
+import binary_test_wire
 """Real socket/memfd bursts: latest overlapping pixels and accumulated damage.
 
 SIGSTOP only makes the initial ready backlog deterministic on a fast host.
@@ -24,10 +25,10 @@ class Client:
 
     def encode(self, op, args=None, padding=''):
         self.sequence += 1
-        return (json.dumps(dict(id=self.sequence, op=op, args=args or {}, app=padding)) + '\n').encode()
+        return binary_test_wire.encode(dict(id=self.sequence, op=op, args=args or {}, app=padding))
 
     def receive(self):
-        result = json.loads(self.file.readline())
+        result = binary_test_wire.read(self.file)
         return result
 
     def call(self, op, args=None, ok=True):
@@ -173,7 +174,7 @@ with tempfile.TemporaryDirectory(prefix='triangle-coalesce-') as folder:
             reference.app.wait(reference.app.call('commit_surface', dict(window_id=refid,
                                sequence=2, slot=0, damage=[[0, 0, 64, 48]])))
             assert main.ctl.call('snapshot') == reference.ctl.call('snapshot'), (fmt, 'damage cap')
-            # Content accepted during an outline drag survives cancellation; no
+            # Content accepted during a drag survives cancellation; no
             # preview operation may overwrite or roll back the private latest image.
             handle=next(c for c in main.ctl.call('input_status')['controls'] if c['window_id']==ident and c['action']=='move')
             main.ctl.wait(main.ctl.call('input_button',dict(x=handle['x'],y=handle['y'],pressed=True)))
@@ -182,9 +183,15 @@ with tempfile.TemporaryDirectory(prefix='triangle-coalesce-') as folder:
             pixels[:info['slot_bytes']]=packed(12,fmt)*(64*48)
             damage=[[4,4,8,8],[40,30,6,6]]
             for area in damage:paint(expected,area,packed(12,fmt))
-            main.app.wait(main.app.call('commit_surface',dict(window_id=ident,sequence=overflow[-1]['result']['sequence']+1,slot=0,damage=damage)))
+            frozen=main.ctl.call('snapshot')
+            pending=main.app.call('commit_surface',dict(window_id=ident,sequence=overflow[-1]['result']['sequence']+1,slot=0,damage=damage))
+            if main.ctl.call('input_status')['preview']['mode']=='single-tile':
+                assert main.ctl.call('snapshot')==frozen,'content escaped frozen preview'
+            else:
+                main.app.wait(pending)
             assert main.ctl.call('input_status')['preview']['active']
             main.ctl.wait(main.ctl.call('input_cancel',dict(hide=True)))
+            main.app.wait(pending)
             refpixels[:refinfo['slot_bytes']]=expected
             reference.app.wait(reference.app.call('commit_surface',dict(window_id=refid,sequence=3,slot=0,damage=[[0,0,64,48]])))
             assert main.ctl.call('snapshot')==reference.ctl.call('snapshot'),(fmt,'content during drag')

@@ -255,15 +255,18 @@ static long bosio_ioctl(struct file *file,unsigned int cmd,unsigned long arg)
         if(copy_to_user(u,&run,sizeof(run)))ret=-EFAULT;
         break;
     }
-    case BO_PUBLISH: {
+    case BO_PUBLISH:
+    case BO_PUBLISH_COPY: {
         struct bo_publish *p;__u32 *metadata;__u64 begin=ktime_to_us(ktime_get()),copy_us;
+        if(cmd==BO_PUBLISH_COPY && !capable(CAP_SYS_RAWIO)){ret=-EPERM;break;}
         p=memdup_user(u,sizeof(*p));if(IS_ERR(p)){ret=PTR_ERR(p);break;}
         if(p->reserved || p->words!=BO_HEADER_WORDS || !p->metadata || p->metadata>ULONG_MAX){ret=-EINVAL;goto publish_free;}
         if(!d->channel){ret=-ENODEV;goto publish_free;}
         metadata=vmemdup_user(u64_to_user_ptr(p->metadata),BO_HEADER_WORDS*4);
         if(IS_ERR(metadata)){ret=PTR_ERR(metadata);goto publish_free;}
         copy_us=ktime_to_us(ktime_get())-begin;
-        ret=bo_publish(&d->engine,&p->present,metadata,publish_upload,d);
+        ret=cmd==BO_PUBLISH_COPY ? bo_publish_copy(&d->engine,&p->present,metadata,publish_upload,d) :
+                                  bo_publish(&d->engine,&p->present,metadata,publish_upload,d);
         kvfree(metadata);
         p->profile=d->engine.profile;p->profile.user_copy_us=copy_us;
         if(!ret && copy_to_user(u,p,sizeof(*p)))ret=-EFAULT;
@@ -437,7 +440,7 @@ static int bosio_probe(struct platform_device *pdev)
     if(!dma_has_cap(DMA_MEMCPY,d->channel->device->cap_mask) ||
        !dma_has_cap(DMA_MEMSET,d->channel->device->cap_mask)){ret=-EINVAL;goto release_channel;}
     init_completion(&d->dma_wait.done);
-    d->dma_info.version=1;d->dma_info.features=BO_DMA_COPY|BO_DMA_FILL|BO_DMA_UPLOAD|BO_DMA_RGB_USER|BO_DMA_DIRECT_USER|BO_DMA_TILE_BLEND|BO_DMA_BATCH|BO_DMA_PUBLISH;
+    d->dma_info.version=1;d->dma_info.features=BO_DMA_COPY|BO_DMA_FILL|BO_DMA_UPLOAD|BO_DMA_RGB_USER|BO_DMA_DIRECT_USER|BO_DMA_TILE_BLEND|BO_DMA_BATCH|BO_DMA_PUBLISH|BO_DMA_PUBLISH_COPY;
     d->dma_info.upload_threshold=BO_UPLOAD_DMA_THRESHOLD;
     /* Board-specific, exclusive no-map DDR; map with the same WC attribute
      * used by the old coherent pool, without its unconditional 16MiB memset.

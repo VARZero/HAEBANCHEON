@@ -1,5 +1,87 @@
 # Triangle-tile WM board experiment
 
+## Current release — filled splash resize v13
+
+The [current design and physical results](SOLID_RESIZE.md) use independent S splash
+and B window-background colors. Move keeps the real window frozen and moves one
+complete S triangle. Resize hides the captured content and controls, then fills
+the entire target footprint with S. All preview triangles share one immutable
+1 KiB color payload per scene bank; recurring previews change metadata, not pixels.
+Release publishes B plus the latest accumulated content once. Cancel restores the
+original window. The optional pointer dot remains independent of input tracking.
+
+The physical board was updated and the boot files saved on 2026-11-25. The release
+retains Q24 geometry with quarter-degree angles, BWM1 binary application messages,
+PTR1 latest-coordinate input and the improved `BO_PUBLISH_COPY` driver. Application
+socket/shared-surface call names remain available; see [BOAYO.md](BOAYO.md).
+
+| Actual PC input to USB HDMI capture | Median | Observed range | Samples |
+|---|---:|---:|---:|
+| v13 move, one S tile | 239.6 ms | 215.7–277.8 ms | 3 |
+| v12 resize, outer tile rim | 497.3 ms | 465.9–513.0 ms | 3 |
+| v13 resize, complete S region | 529.5 ms | 458.3–674.3 ms | 3 |
+
+These use 20 coordinates at 10 Hz and a distinct final target, including HTTP,
+UART and USB capture sampling. The resize comparison uses the same 20×14-degree
+window, target geometry and capture pixel probe. **No resize speed improvement
+was demonstrated.** Final real-window completion was 1.52 s in the native socket
+test and 1.82 s in a separate visual grow test (one sample each); a one-second
+completion target remains unmet. Emulator times are not hardware measurements.
+Raw summaries: [board](results/solid-resize-board.json),
+[validation](results/solid-resize-validation.json),
+[image manifest](results/solid-resize-image.json),
+[RV32 image boot](results/solid-resize-boot.json).
+
+## Build, validate and package the current release
+
+Run from the repository root in WSL/Linux:
+
+```sh
+bash updates/triangle-wm/tools/build_fixed.sh /var/tmp/triangle-solid-resize-release
+bash updates/triangle-wm/tools/validate_solid_resize.sh /var/tmp/triangle-solid-resize-release
+python3 updates/triangle-wm/tools/package_fixed.py \
+  --build /var/tmp/triangle-solid-resize-release \
+  --output /var/tmp/triangle-solid-resize-image \
+  --name HAEBANCHEON-solid-resize-preview.img
+python3 updates/triangle-wm/tools/test_publish_image.py --marker \
+  --image /var/tmp/triangle-solid-resize-image/HAEBANCHEON-solid-resize-preview.img \
+  --output /var/tmp/triangle-solid-resize-image/focused-boot
+```
+
+`build_fixed.sh` requires the validated RV32 Buildroot compiler under
+`/var/tmp/haebancheon-userland-validation/buildroot/host/bin/`, plus host C++ and
+Python. Packaging additionally requires the checked publication-copy base
+rootfs/kernel/boot image under `/var/tmp/triangle-publish-copy/`, `debugfs` and
+`e2fsck`; it is not a self-contained clean-machine image build. Prepare that
+foundation with [PUBLISH_COPY.md](PUBLISH_COPY.md) and the
+[reproducible userland build](../../software/userland/README.md). The focused boot
+check requires QEMU RV32 and `dtc`. Validation never substitutes for HDMI checks.
+
+The image starts `triangle-fixed-start`, which stages the WM, demo app and input
+client in `/run/triangle-wm-runtime/` and launches the RGB332 demo. The loopback PC
+capture/input setup and independent color controls are in [INPUT.md](INPUT.md).
+Image binaries, capture videos, build trees and machine-local evidence are not
+committed; manifests and measurement summaries are tracked.
+
+## Earlier experiments and foundations
+
+| Topic | Record |
+|---|---|
+| Driver publication stages and copy-only path | [PUBLISH_COPY.md](PUBLISH_COPY.md) |
+| Single tile / cell update costs | [PRIMITIVE_RESULTS.md](PRIMITIVE_RESULTS.md) |
+| Fixed-point formats and BWM1 transport | [FIXED_BINARY.md](FIXED_BINARY.md) |
+| Initial fixed/binary board comparison | [FIXED_BOARD_RESULTS.md](FIXED_BOARD_RESULTS.md) |
+| Isolated math/transport comparison and codec fix | [FACTORIAL_RESULTS.md](FACTORIAL_RESULTS.md) |
+| Latest-only input acceptance | [INPUT_ASYNC.md](INPUT_ASYNC.md) |
+| Original central-marker preview | [SINGLE_TILE_PREVIEW.md](SINGLE_TILE_PREVIEW.md), [board results](SINGLE_TILE_BOARD_RESULTS.md) |
+| Previous outer-tile resize policy | [TILE_RIM_PREVIEW.md](TILE_RIM_PREVIEW.md) |
+| Whole move tile | [FULL_TILE_MOVE.md](FULL_TILE_MOVE.md) |
+| Fast held-move path | [FAST_MOTION.md](FAST_MOTION.md) |
+| Cached fixed-point resize preparation | [FAST_RESIZE.md](FAST_RESIZE.md) |
+
+The remaining six-stage description and older measurements below are the original
+standalone experiment, not the current v13 application's latency results.
+
 Base: `feat/reproducible-linux-userland`, commit `5f6ff539fae3e529ef53c1d90952dbe72ba609ea`.
 The test worktree uses branch `feat/triangle-tile-wm`. The existing checkout and SD boot installation are preserved.
 
@@ -7,7 +89,7 @@ The subsequent `triangle-boayo` service preserves BoAYO's application-side socke
 
 ## Design contract
 
-The later RGB332/RGB32 application buffers and CPU projection planning optimization are documented in [PIXEL_FORMATS.md](PIXEL_FORMATS.md), with measured comparisons in [OPTIMIZATION_RESULTS.md](OPTIMIZATION_RESULTS.md). The subsequent Q44 CPU implementation is documented in [CPU_OPTIMIZATION.md](CPU_OPTIMIZATION.md). The resident-texture and shared-transform changes are in [TEXTURE_CACHE.md](TEXTURE_CACHE.md). Completion-response and diagnostic overhead are addressed in [RESPONSE_PATH.md](RESPONSE_PATH.md). The outline cleanup experiment is documented in [OUTLINE.md](OUTLINE.md). Split controls and the software pointer are documented in [INPUT.md](INPUT.md), with [measured board latency and limits](INPUT_RESULTS.md). The [pointer CPU and visibility update](INPUT_OPTIMIZATION.md) adds runtime dot visibility and exact projected-sample caching. The [button-mask and first-content update](INPUT_CACHE.md) follows it. [Latest-content coalescing](CONTENT_COALESCING.md) merges queued damage before conversion and publication. [Background-first feedback](FEEDBACK.md) adds separate S/B colors and tile-outline move/resize previews. The current live application deployment uses `triangle-boayo-v12` and the unchanged `triangle-app-v3`; the six-stage measurements below describe the earlier standalone experiment.
+The later RGB332/RGB32 application buffers and CPU projection planning optimization are documented in [PIXEL_FORMATS.md](PIXEL_FORMATS.md), with measured comparisons in [OPTIMIZATION_RESULTS.md](OPTIMIZATION_RESULTS.md). The subsequent Q44 CPU implementation is documented in [CPU_OPTIMIZATION.md](CPU_OPTIMIZATION.md). The resident-texture and shared-transform changes are in [TEXTURE_CACHE.md](TEXTURE_CACHE.md). Completion-response and diagnostic overhead are addressed in [RESPONSE_PATH.md](RESPONSE_PATH.md). The outline cleanup experiment is documented in [OUTLINE.md](OUTLINE.md). Split controls and the software pointer are documented in [INPUT.md](INPUT.md), with [measured board latency and limits](INPUT_RESULTS.md). The [pointer CPU and visibility update](INPUT_OPTIMIZATION.md) adds runtime dot visibility and exact projected-sample caching. The [button-mask and first-content update](INPUT_CACHE.md) follows it. [Latest-content coalescing](CONTENT_COALESCING.md) merges queued damage before conversion and publication. [Background-first feedback](FEEDBACK.md) adds separate S/B colors and tile-outline move/resize previews. [Thin-outline cell updates](CELL_DELTA.md) reuse masks and update changed overlay cells. [Independent pointer acceptance](INPUT_ASYNC.md) keeps only the latest queued coordinates and prioritizes pointer publication ahead of pending content. The historical v15 application deployment used `triangle-boayo-v15-tuned` and the unchanged `triangle-app-v3`; the six-stage measurements below describe the earlier standalone experiment.
 
 - A window owns whole spherical triangle tiles. There is no rounded corner mask, permanent outline, or inner rectangular frame.
 - Background coverage exceeds the content rectangle by an angular padding. Triangle edges are the visible window silhouette.
@@ -78,3 +160,7 @@ The verified final session runs `/tmp/triangle-wm-v3`; its PID is saved in `/tmp
 JSON requests are one line per connection. Operations: `create`, `move`, `visible`, `raise`, `close`, `clear`, `content`, `component`, `remove_component`, `pose`, `pose_sweep`, `status`. `snapshot` is available only in the host reference mode. `content` accepts a bounded surface and a component array; `component` replaces/inserts by ID; `remove_component` takes `component_id`. Colors are RGB332 indices. Background colors initially reserved: 84, 164, 109, 38, 228, 255.
 
 Physical stage results and remaining limitations are recorded in `RESULTS.md` as they are measured.
+
+Latest held-move input path and physical latency results: [FAST_MOTION.md](FAST_MOTION.md). The current fast input bridge uses `--fast-input`; recurring demo diagnostics are kept out of the interaction loop.
+
+Whole-tile resize direct input and exact fixed-point preparation: [FAST_RESIZE.md](FAST_RESIZE.md).

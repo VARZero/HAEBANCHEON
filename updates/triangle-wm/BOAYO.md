@@ -1,10 +1,12 @@
 # BoAYO application protocol on the triangle WM
 
-The new `triangle-boayo` service owns the triangle renderer directly. It does not run the old BoAYO WM, compositor, decorations, or application supervisor. Applications retain the persistent Unix socket, newline JSON, two-slot RGB24 shared surface, damage submission, and presentation acknowledgement calling convention. `boayo_app.cpp` uses the existing `native/src/ipc.hpp` Client unchanged.
+The service owns the triangle renderer directly and preserves the application-side persistent Unix socket, two-slot shared surface, damage submission and presentation acknowledgement call sequence. The current `triangle-boayo-fixed` release uses BWM1 binary messages by default, with RGB332/RGB24/XRGB8888 shared surfaces. `TRIANGLE_WIRE=json` selects the diagnostic JSON compatibility path. Applications keep the Client calling convention and link the updated codec. See [FIXED_BINARY.md](FIXED_BINARY.md) for wire formats and [SOLID_RESIZE.md](SOLID_RESIZE.md) for current S/B and preview behavior.
 
 The experimental `triangle-wm` executable remains available for reproducing the original six-stage measurements. Both executables require exclusive ownership of `/dev/bosio0`; run only one at a time.
 
-## Build and validation
+Current fixed-point build, validation and packaging commands are in [README.md](README.md#build-validate-and-package-the-current-release). The reference builds below retain the floating-point geometry path.
+
+## Reference build and validation
 
 ```sh
 bash updates/triangle-wm/build.sh /var/tmp/triangle-boayo-host host
@@ -27,7 +29,7 @@ triangle-app
 
 The demo draws its own text and rectangles in application memory. The WM now supplies split close/move/resize controls and a pointer; the app does not draw these itself. See [INPUT.md](INPUT.md). The image has the same background color as its padded triangle silhouette. The demo now defaults to native RGB332 drawing and shared slots; `--rgb24` and `--rgb32` select comparison paths. Legacy applications still receive RGB24 when they omit the format.
 
-For the current board session, the staged executables are `/tmp/triangle-boayo-v12` and `/tmp/triangle-app-v3`; substitute those paths in the commands above and below. The live service PID is recorded in `/tmp/triangle-wm.pid`, and the demo PID in `/tmp/triangle-app.pid`. These are temporary development deployments, not boot-time service installation.
+The current image installs `/usr/bin/triangle-boayo-fixed`, `triangle-app` and `triangle-input`. `triangle-fixed-start` copies them to `/run/triangle-wm-runtime/` before starting the WM/demo; PID files are `/run/triangle-wm.pid` and `/run/triangle-app.pid`. Substitute `triangle-boayo-fixed` in the control examples below. The image starts the service at boot; `triangle-fixed-start stop` stops it.
 
 The service uses `$BOAYO_SOCKET` (default `/tmp/bosio-wm.sock`) for applications and `$BOAYO_SOCKET.control` for internal management. Socket files are mode 0600; peer UIDs must match the WM UID. Window ownership follows the live connection, not the client-provided `app` string. Disconnecting an application removes its windows and releases their shared surfaces. Applications must keep their connection open.
 
@@ -64,7 +66,7 @@ Resizing changes the angular projection dimensions and preserves the source reso
 
 - Up to 64 windows and 64 peer connections; source dimensions 1–1024 in each direction. Initial reservations charge 13 bytes per pixel. Surface creation adjusts this to 7/13/16 bytes per pixel for RGB332/RGB24/XRGB8888 (two slots, one latest packed image, and private RGB32), capped at 64 MiB.
 - Window yaw ±180°, pitch ±80°, angular width/height 1–100°, padding 0–10°. Output yaw ±180°, pitch ±85°, roll 0.
-- Background palette indices: 84, 164, 109, 38, 228, 255. These are reserved before the first hardware publication.
+- Current background and splash palette indices: 0–255, independently configurable through `create_window` and `configure_window`. All solid payloads are prepared before the first publication. B affects WM background/projector padding; opaque application pixels remain application-owned. The standalone historical `triangle-wm` experiment still reserves six colors.
 - Queued damage is accumulated per window; overlapping rectangles merge, while disjoint rectangles remain separate up to 128 regions. Overflow falls back to a conservative bounding rectangle. Conversion reads the latest packed image once per accumulated region, and each affected tile is invalidated once per batch. See [CONTENT_COALESCING.md](CONTENT_COALESCING.md). v5 keeps multiple source textures in the existing DDR arena. Source uploads use full-width rows or a bounded sparse staging path. See [TEXTURE_CACHE.md](TEXTURE_CACHE.md) for cache replacement and upload measurements.
 - A single service event loop owns rendering. Commit responses are flushed before rendering. Each publication drains up to four nonblocking I/O sweeps, with at most 32 requests total and four per peer per sweep; ready control peers run first and app peers rotate. There is no debounce sleep. New requests arriving during projection still wait for it to finish. With `TRIANGLE_INPUT=0`, output pose avoids scene recomposition. With controls enabled it republishes the screen-positioned overlay. Neither path preempts a running render. This is not a 60 FPS interaction guarantee.
 - Benchmark `accept_ms` ends at the commit/configuration reply. `present_ms` includes the subsequent `wait_present` round trip. Neither includes HDMI/capture optical delay. Source image generation is outside content submission measurements; the app's source-to-memfd copy is inside them.

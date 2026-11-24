@@ -1,0 +1,68 @@
+{
+  "input": {
+    "accept_ms": 1376.74899995327,
+    "feedback_ms": 1810.5949999690056,
+    "ok": true,
+    "present_ms": 1846.8499999642372,
+    "result": {
+      "captured_window": 0,
+      "commit_on_release": true,
+      "controls": [
+        {
+          "action": "close",
+          "hit_size": 32,
+          "tile": 3901,
+          "window_id": 1,
+          "x": 593,
+          "y": 157
+        },
+        {
+          "action": "move",
+          "hit_size": 32,
+          "tile": 56,
+          "window_id": 1,
+          "x": 689,
+          "y": 561
+        },
+        {
+          "action": "resize",
+          "hit_size": 32,
+          "tile": 180,
+          "window_id": 1,
+          "x": 916,
+          "y": 544
+        }
+      ],
+      "display_enabled": true,
+      "generation": 16,
+      "layout": "split",
+      "pressed": false,
+      "preview": {
+        "active": false,
+        "outline_tiles": 0,
+        "splash_index": 228,
+        "window_id": 0
+      },
+      "visible": true,
+      "x": 700,
+      "y": 680
+    }
+  },
+  "progress": {
+    "accept_ms": 1557.6180000305176,
+    "completion_pending": false,
+    "ok": true,
+    "result": {
+      "accepted_ticket": 1,
+      "applied_ticket": 1,
+      "coalesced_moves": 0,
+      "last_accept_to_visible_us": 1275005,
+      "priority_publications": 0,
+      "visible_ticket": 1,
+      "visible_x": 700,
+      "visible_y": 680
+    }
+  },
+  "endpoint_white_pixels": 17,
+  "scope": "Actual HDMI confirms latest dot near 700,680; new fixed WM and copy publication restored; no preview/capture; demo running."
+}

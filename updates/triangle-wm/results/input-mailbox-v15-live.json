@@ -1,0 +1,305 @@
+{
+  "burst": {
+    "samples": [
+      {
+        "accept_ms": 277.0369800031185,
+        "completion_pending": true,
+        "ok": true,
+        "result": {
+          "accepted_ticket": 20,
+          "coalesced_moves": 3,
+          "visible_ticket": 19
+        },
+        "pc_response_ms": 498.4584999983781
+      },
+      {
+        "accept_ms": 409.2695199996233,
+        "completion_pending": true,
+        "ok": true,
+        "result": {
+          "accepted_ticket": 21,
+          "coalesced_moves": 3,
+          "visible_ticket": 19
+        },
+        "pc_response_ms": 650.9318999997049
+      },
+      {
+        "accept_ms": 281.7193599976599,
+        "completion_pending": true,
+        "ok": true,
+        "result": {
+          "accepted_ticket": 22,
+          "coalesced_moves": 4,
+          "visible_ticket": 20
+        },
+        "pc_response_ms": 461.0470000006899
+      },
+      {
+        "accept_ms": 235.51906000077724,
+        "completion_pending": true,
+        "ok": true,
+        "result": {
+          "accepted_ticket": 23,
+          "coalesced_moves": 4,
+          "visible_ticket": 20
+        },
+        "pc_response_ms": 449.64270000127726
+      },
+      {
+        "accept_ms": 159.21411999687552,
+        "completion_pending": true,
+        "ok": true,
+        "result": {
+          "accepted_ticket": 24,
+          "coalesced_moves": 5,
+          "visible_ticket": 22
+        },
+        "pc_response_ms": 411.96790000321926
+      },
+      {
+        "accept_ms": 258.72867999970913,
+        "completion_pending": true,
+        "ok": true,
+        "result": {
+          "accepted_ticket": 25,
+          "coalesced_moves": 5,
+          "visible_ticket": 22
+        },
+        "pc_response_ms": 477.9688000016904
+      },
+      {
+        "accept_ms": 178.38672000169754,
+        "completion_pending": true,
+        "ok": true,
+        "result": {
+          "accepted_ticket": 26,
+          "coalesced_moves": 6,
+          "visible_ticket": 24
+        },
+        "pc_response_ms": 501.42589999813936
+      },
+      {
+        "accept_ms": 272.648679997772,
+        "completion_pending": true,
+        "ok": true,
+        "result": {
+          "accepted_ticket": 27,
+          "coalesced_moves": 6,
+          "visible_ticket": 24
+        },
+        "pc_response_ms": 548.5765000012179
+      },
+      {
+        "accept_ms": 706.9853800013661,
+        "completion_pending": true,
+        "ok": true,
+        "result": {
+          "accepted_ticket": 28,
+          "coalesced_moves": 7,
+          "visible_ticket": 26
+        },
+        "pc_response_ms": 1023.5958999983268
+      },
+      {
+        "accept_ms": 376.477460000664,
+        "completion_pending": true,
+        "ok": true,
+        "result": {
+          "accepted_ticket": 29,
+          "coalesced_moves": 7,
+          "visible_ticket": 26
+        },
+        "pc_response_ms": 716.8915000002016
+      },
+      {
+        "accept_ms": 308.6372999995947,
+        "completion_pending": true,
+        "ok": true,
+        "result": {
+          "accepted_ticket": 30,
+          "coalesced_moves": 8,
+          "visible_ticket": 28
+        },
+        "pc_response_ms": 520.4350999993039
+      },
+      {
+        "accept_ms": 398.7551200017333,
+        "completion_pending": true,
+        "ok": true,
+        "result": {
+          "accepted_ticket": 31,
+          "coalesced_moves": 8,
+          "visible_ticket": 28
+        },
+        "pc_response_ms": 719.1428999976779
+      },
+      {
+        "accept_ms": 311.9426400028169,
+        "completion_pending": true,
+        "ok": true,
+        "result": {
+          "accepted_ticket": 32,
+          "coalesced_moves": 9,
+          "visible_ticket": 30
+        },
+        "pc_response_ms": 614.0211999991152
+      },
+      {
+        "accept_ms": 415.8454799987376,
+        "completion_pending": true,
+        "ok": true,
+        "result": {
+          "accepted_ticket": 33,
+          "coalesced_moves": 9,
+          "visible_ticket": 32
+        },
+        "pc_response_ms": 630.0431000017852
+      },
+      {
+        "accept_ms": 186.60238000005484,
+        "completion_pending": true,
+        "ok": true,
+        "result": {
+          "accepted_ticket": 34,
+          "coalesced_moves": 9,
+          "visible_ticket": 32
+        },
+        "pc_response_ms": 365.3959999974177
+      },
+      {
+        "accept_ms": 350.6390199996531,
+        "completion_pending": true,
+        "ok": true,
+        "result": {
+          "accepted_ticket": 35,
+          "coalesced_moves": 10,
+          "visible_ticket": 33
+        },
+        "pc_response_ms": 580.6072000013955
+      }
+    ],
+    "progress": {
+      "accept_ms": 769.3179000020027,
+      "completion_pending": false,
+      "ok": true,
+      "result": {
+        "accepted_ticket": 35,
+        "applied_ticket": 35,
+        "coalesced_moves": 10,
+        "last_accept_to_visible_us": 1350420,
+        "priority_publications": 2,
+        "visible_ticket": 35,
+        "visible_x": 700,
+        "visible_y": 680
+      },
+      "pc_response_ms": 1023.0516000010539
+    },
+    "all_accepted_ms": 9170.257899997523,
+    "last_display_confirmed_ms": 11343.352699997922,
+    "endpoint_white_pixels": 17
+  },
+  "hidden_drag": {
+    "preview": {
+      "accept_ms": 681.1843799985945,
+      "feedback_ms": 899.6010999977589,
+      "ok": true,
+      "present_ms": 938.2270799987018,
+      "result": {
+        "captured_window": 1,
+        "commit_on_release": true,
+        "controls": [
+          {
+            "action": "close",
+            "hit_size": 32,
+            "tile": 3901,
+            "window_id": 1,
+            "x": 593,
+            "y": 157
+          },
+          {
+            "action": "move",
+            "hit_size": 32,
+            "tile": 56,
+            "window_id": 1,
+            "x": 689,
+            "y": 561
+          },
+          {
+            "action": "resize",
+            "hit_size": 32,
+            "tile": 180,
+            "window_id": 1,
+            "x": 916,
+            "y": 544
+          }
+        ],
+        "display_enabled": false,
+        "generation": 65,
+        "layout": "split",
+        "pressed": true,
+        "preview": {
+          "active": true,
+          "outline_tiles": 20,
+          "splash_index": 228,
+          "window_id": 1
+        },
+        "visible": false,
+        "x": 739,
+        "y": 541
+      },
+      "pc_response_ms": 1330.0047000011546
+    },
+    "changed_red_pixels": 1971,
+    "residual_red_pixels": 0
+  },
+  "final": {
+    "accept_ms": 699.6369599997997,
+    "feedback_ms": 921.2547000013292,
+    "ok": true,
+    "present_ms": 957.5620200000703,
+    "result": {
+      "captured_window": 0,
+      "commit_on_release": true,
+      "controls": [
+        {
+          "action": "close",
+          "hit_size": 32,
+          "tile": 3901,
+          "window_id": 1,
+          "x": 593,
+          "y": 157
+        },
+        {
+          "action": "move",
+          "hit_size": 32,
+          "tile": 56,
+          "window_id": 1,
+          "x": 689,
+          "y": 561
+        },
+        {
+          "action": "resize",
+          "hit_size": 32,
+          "tile": 180,
+          "window_id": 1,
+          "x": 916,
+          "y": 544
+        }
+      ],
+      "display_enabled": true,
+      "generation": 69,
+      "layout": "split",
+      "pressed": false,
+      "preview": {
+        "active": false,
+        "outline_tiles": 0,
+        "splash_index": 228,
+        "window_id": 0
+      },
+      "visible": true,
+      "x": 700,
+      "y": 680
+    },
+    "pc_response_ms": 1340.9236000006786
+  }
+}

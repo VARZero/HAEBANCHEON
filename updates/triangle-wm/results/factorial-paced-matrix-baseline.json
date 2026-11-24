@@ -1,0 +1,1681 @@
+{
+  "label": "matrix-baseline",
+  "scope": "Three live-app trials. Twenty source positions at 10 Hz; one HTTP request in flight, newest queued coordinate only in BOTH modes. PC monotonic timestamps; HDMI includes USB capture/polling delay, not optical latency. Native acceptance durations exclude HTTP/UART overhead.",
+  "rounds": [
+    {
+      "round": 0,
+      "async_input": true,
+      "events": [
+        {
+          "index": 0,
+          "x": 200,
+          "time": 9342.081372
+        },
+        {
+          "index": 1,
+          "x": 220,
+          "time": 9342.1818749
+        },
+        {
+          "index": 2,
+          "x": 240,
+          "time": 9342.2818321
+        },
+        {
+          "index": 3,
+          "x": 260,
+          "time": 9342.3816558
+        },
+        {
+          "index": 4,
+          "x": 280,
+          "time": 9342.4816801
+        },
+        {
+          "index": 5,
+          "x": 300,
+          "time": 9342.5817096
+        },
+        {
+          "index": 6,
+          "x": 320,
+          "time": 9342.6814771
+        },
+        {
+          "index": 7,
+          "x": 340,
+          "time": 9342.7816606
+        },
+        {
+          "index": 8,
+          "x": 360,
+          "time": 9342.8815876
+        },
+        {
+          "index": 9,
+          "x": 380,
+          "time": 9342.9815559
+        },
+        {
+          "index": 10,
+          "x": 400,
+          "time": 9343.0817253
+        },
+        {
+          "index": 11,
+          "x": 420,
+          "time": 9343.181865
+        },
+        {
+          "index": 12,
+          "x": 440,
+          "time": 9343.2814368
+        },
+        {
+          "index": 13,
+          "x": 460,
+          "time": 9343.3817824
+        },
+        {
+          "index": 14,
+          "x": 480,
+          "time": 9343.4817725
+        },
+        {
+          "index": 15,
+          "x": 500,
+          "time": 9343.5814462
+        },
+        {
+          "index": 16,
+          "x": 520,
+          "time": 9343.6816584
+        },
+        {
+          "index": 17,
+          "x": 540,
+          "time": 9343.7818241
+        },
+        {
+          "index": 18,
+          "x": 560,
+          "time": 9343.8815765
+        },
+        {
+          "index": 19,
+          "x": 580,
+          "time": 9343.9818523
+        }
+      ],
+      "sent": [
+        {
+          "start": 9342.0813984,
+          "end": 9342.5795284,
+          "response": {
+            "accept_ms": 320.1004599998705,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 2,
+              "coalesced_moves": 0,
+              "visible_ticket": 1
+            }
+          },
+          "event": {
+            "index": 0,
+            "x": 200,
+            "time": 9342.081372
+          }
+        },
+        {
+          "start": 9342.5795389,
+          "end": 9343.1344099,
+          "response": {
+            "accept_ms": 391.27516000019386,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 3,
+              "coalesced_moves": 0,
+              "visible_ticket": 2
+            }
+          },
+          "event": {
+            "index": 4,
+            "x": 280,
+            "time": 9342.4816801
+          }
+        },
+        {
+          "start": 9343.1344191,
+          "end": 9343.9535481,
+          "response": {
+            "accept_ms": 552.3080600001849,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 4,
+              "coalesced_moves": 0,
+              "visible_ticket": 2
+            }
+          },
+          "event": {
+            "index": 10,
+            "x": 400,
+            "time": 9343.0817253
+          }
+        },
+        {
+          "start": 9343.9535579,
+          "end": 9344.9356307,
+          "response": {
+            "accept_ms": 722.8017599997111,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 5,
+              "coalesced_moves": 0,
+              "visible_ticket": 3
+            }
+          },
+          "event": {
+            "index": 18,
+            "x": 560,
+            "time": 9343.8815765
+          }
+        },
+        {
+          "start": 9344.9356442,
+          "end": 9346.7862515,
+          "response": {
+            "accept_ms": 1621.2692399998195,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 6,
+              "coalesced_moves": 1,
+              "visible_ticket": 4
+            }
+          },
+          "event": {
+            "index": 19,
+            "x": 580,
+            "time": 9343.9818523
+          }
+        }
+      ],
+      "completion": {
+        "start": 9348.0680061,
+        "end": 9348.9693407,
+        "response": {
+          "accept_ms": 572.1684599998407,
+          "completion_pending": false,
+          "ok": true,
+          "result": {
+            "accepted_ticket": 6,
+            "applied_ticket": 6,
+            "coalesced_moves": 1,
+            "last_accept_to_visible_us": 1738033,
+            "priority_publications": 1,
+            "visible_ticket": 6,
+            "visible_x": 580,
+            "visible_y": 680
+          }
+        }
+      },
+      "frames": [
+        {
+          "time": 9342.0731698,
+          "file": "0000.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9342.1647745,
+          "file": "0001.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9342.285517,
+          "file": "0002.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9342.3789233,
+          "file": "0003.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9342.4839976,
+          "file": "0004.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9342.6041757,
+          "file": "0005.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9342.6971283,
+          "file": "0006.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9342.8038442,
+          "file": "0007.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9342.9113182,
+          "file": "0008.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9343.0186791,
+          "file": "0009.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9343.1253301,
+          "file": "0010.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9343.2329305,
+          "file": "0011.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9343.339966,
+          "file": "0012.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9343.4613626,
+          "file": "0013.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9343.5531991,
+          "file": "0014.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9343.6598246,
+          "file": "0015.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9343.7673575,
+          "file": "0016.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9343.87494,
+          "file": "0017.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9343.9813168,
+          "file": "0018.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9344.0870299,
+          "file": "0019.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9344.2079688,
+          "file": "0020.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9344.3006149,
+          "file": "0021.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9344.4212449,
+          "file": "0022.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9344.5270803,
+          "file": "0023.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9344.6192443,
+          "file": "0024.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9344.726826,
+          "file": "0025.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9344.8328809,
+          "file": "0026.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9344.9391454,
+          "file": "0027.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9345.0471278,
+          "file": "0028.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9345.1530514,
+          "file": "0029.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9345.274225,
+          "file": "0030.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9345.3664986,
+          "file": "0031.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9345.4870953,
+          "file": "0032.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9345.59231,
+          "file": "0033.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9345.684987,
+          "file": "0034.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9345.7939347,
+          "file": "0035.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9345.9013458,
+          "file": "0036.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9346.008419,
+          "file": "0037.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9346.1303668,
+          "file": "0038.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9346.2362795,
+          "file": "0039.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9346.3423762,
+          "file": "0040.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9346.4349062,
+          "file": "0041.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9346.5571531,
+          "file": "0042.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9346.6498567,
+          "file": "0043.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9346.7723622,
+          "file": "0044.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9346.864525,
+          "file": "0045.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9346.9730809,
+          "file": "0046.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9347.0923554,
+          "file": "0047.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9347.1849742,
+          "file": "0048.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9347.307738,
+          "file": "0049.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9347.4000334,
+          "file": "0050.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9347.5065813,
+          "file": "0051.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9347.6138046,
+          "file": "0052.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9347.7200202,
+          "file": "0053.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9347.840443,
+          "file": "0054.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9347.9338047,
+          "file": "0055.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9348.0393743,
+          "file": "0056.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9348.1468604,
+          "file": "0057.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9348.2677747,
+          "file": "0058.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9348.3751367,
+          "file": "0059.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9348.4664401,
+          "file": "0060.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9348.5872014,
+          "file": "0061.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9348.6780168,
+          "file": "0062.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9348.7848339,
+          "file": "0063.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9348.8910669,
+          "file": "0064.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9349.013061,
+          "file": "0065.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9349.1183087,
+          "file": "0066.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9349.2252659,
+          "file": "0067.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9349.3160723,
+          "file": "0068.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9349.4224191,
+          "file": "0069.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9349.5290937,
+          "file": "0070.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9349.6354955,
+          "file": "0071.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9349.7573881,
+          "file": "0072.jpg",
+          "endpoint_white_pixels": 29
+        }
+      ],
+      "transmitted": 5,
+      "host_coalesced": 15,
+      "final_event_to_confirm_ms": 4987.488400000075,
+      "final_event_to_hdmi_ms": 4285.922400000345,
+      "acceptance_ms": [
+        320.1004599998705,
+        391.27516000019386,
+        552.3080600001849,
+        722.8017599997111,
+        1621.2692399998195
+      ]
+    },
+    {
+      "round": 1,
+      "async_input": true,
+      "events": [
+        {
+          "index": 0,
+          "x": 200,
+          "time": 9351.0004521
+        },
+        {
+          "index": 1,
+          "x": 220,
+          "time": 9351.1008133
+        },
+        {
+          "index": 2,
+          "x": 240,
+          "time": 9351.200755
+        },
+        {
+          "index": 3,
+          "x": 260,
+          "time": 9351.3008653
+        },
+        {
+          "index": 4,
+          "x": 280,
+          "time": 9351.4005972
+        },
+        {
+          "index": 5,
+          "x": 300,
+          "time": 9351.5009247
+        },
+        {
+          "index": 6,
+          "x": 320,
+          "time": 9351.6008858
+        },
+        {
+          "index": 7,
+          "x": 340,
+          "time": 9351.700872
+        },
+        {
+          "index": 8,
+          "x": 360,
+          "time": 9351.801123
+        },
+        {
+          "index": 9,
+          "x": 380,
+          "time": 9351.9007693
+        },
+        {
+          "index": 10,
+          "x": 400,
+          "time": 9352.0007836
+        },
+        {
+          "index": 11,
+          "x": 420,
+          "time": 9352.1008981
+        },
+        {
+          "index": 12,
+          "x": 440,
+          "time": 9352.2009048
+        },
+        {
+          "index": 13,
+          "x": 460,
+          "time": 9352.3007861
+        },
+        {
+          "index": 14,
+          "x": 480,
+          "time": 9352.4009412
+        },
+        {
+          "index": 15,
+          "x": 500,
+          "time": 9352.5007991
+        },
+        {
+          "index": 16,
+          "x": 520,
+          "time": 9352.6009684
+        },
+        {
+          "index": 17,
+          "x": 540,
+          "time": 9352.7007937
+        },
+        {
+          "index": 18,
+          "x": 560,
+          "time": 9352.8008522
+        },
+        {
+          "index": 19,
+          "x": 580,
+          "time": 9352.9008209
+        }
+      ],
+      "sent": [
+        {
+          "start": 9351.0004692,
+          "end": 9351.489112,
+          "response": {
+            "accept_ms": 343.6891800002195,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 8,
+              "coalesced_moves": 1,
+              "visible_ticket": 7
+            }
+          },
+          "event": {
+            "index": 0,
+            "x": 200,
+            "time": 9351.0004521
+          }
+        },
+        {
+          "start": 9351.4891267,
+          "end": 9352.0617492,
+          "response": {
+            "accept_ms": 381.19011999992654,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 9,
+              "coalesced_moves": 1,
+              "visible_ticket": 8
+            }
+          },
+          "event": {
+            "index": 4,
+            "x": 280,
+            "time": 9351.4005972
+          }
+        },
+        {
+          "start": 9352.0617602,
+          "end": 9354.0953385,
+          "response": {
+            "accept_ms": 1728.7740400000475,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 10,
+              "coalesced_moves": 1,
+              "visible_ticket": 9
+            }
+          },
+          "event": {
+            "index": 10,
+            "x": 400,
+            "time": 9352.0007836
+          }
+        },
+        {
+          "start": 9354.095348,
+          "end": 9354.866845,
+          "response": {
+            "accept_ms": 499.46097999997437,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 11,
+              "coalesced_moves": 1,
+              "visible_ticket": 9
+            }
+          },
+          "event": {
+            "index": 19,
+            "x": 580,
+            "time": 9352.9008209
+          }
+        }
+      ],
+      "completion": {
+        "start": 9356.0379701,
+        "end": 9356.7298258,
+        "response": {
+          "accept_ms": 459.3537800000049,
+          "completion_pending": false,
+          "ok": true,
+          "result": {
+            "accepted_ticket": 11,
+            "applied_ticket": 11,
+            "coalesced_moves": 1,
+            "last_accept_to_visible_us": 1474117,
+            "priority_publications": 1,
+            "visible_ticket": 11,
+            "visible_x": 580,
+            "visible_y": 680
+          }
+        }
+      },
+      "frames": [
+        {
+          "time": 9350.9983138,
+          "file": "0000.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9351.0999127,
+          "file": "0001.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9351.2067513,
+          "file": "0002.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9351.3143309,
+          "file": "0003.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9351.4205123,
+          "file": "0004.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9351.5428672,
+          "file": "0005.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9351.63524,
+          "file": "0006.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9351.7561649,
+          "file": "0007.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9351.8482861,
+          "file": "0008.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9351.9687455,
+          "file": "0009.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9352.075328,
+          "file": "0010.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9352.1687379,
+          "file": "0011.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9352.2918464,
+          "file": "0012.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9352.4005011,
+          "file": "0013.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9352.4935944,
+          "file": "0014.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9352.601083,
+          "file": "0015.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9352.7078527,
+          "file": "0016.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9352.8141863,
+          "file": "0017.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9352.920171,
+          "file": "0018.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9353.0285215,
+          "file": "0019.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9353.1507331,
+          "file": "0020.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9353.2439996,
+          "file": "0021.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9353.3513852,
+          "file": "0022.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9353.4592727,
+          "file": "0023.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9353.5665065,
+          "file": "0024.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9353.6743411,
+          "file": "0025.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9353.7973234,
+          "file": "0026.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9353.9034005,
+          "file": "0027.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9353.9954524,
+          "file": "0028.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9354.1188848,
+          "file": "0029.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9354.2255155,
+          "file": "0030.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9354.3167671,
+          "file": "0031.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9354.4243052,
+          "file": "0032.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9354.531462,
+          "file": "0033.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9354.6517158,
+          "file": "0034.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9354.7451901,
+          "file": "0035.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9354.8525417,
+          "file": "0036.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9354.9739254,
+          "file": "0037.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9355.0660574,
+          "file": "0038.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9355.1720409,
+          "file": "0039.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9355.2782733,
+          "file": "0040.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9355.3855249,
+          "file": "0041.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9355.4928491,
+          "file": "0042.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9355.6001787,
+          "file": "0043.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9355.7062979,
+          "file": "0044.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9355.8146695,
+          "file": "0045.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9355.9353358,
+          "file": "0046.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9356.0288664,
+          "file": "0047.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9356.1345232,
+          "file": "0048.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9356.2554672,
+          "file": "0049.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9356.3471337,
+          "file": "0050.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9356.4679529,
+          "file": "0051.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9356.5611798,
+          "file": "0052.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9356.6825663,
+          "file": "0053.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9356.7755271,
+          "file": "0054.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9356.8824935,
+          "file": "0055.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9356.9903237,
+          "file": "0056.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9357.0980397,
+          "file": "0057.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9357.2044733,
+          "file": "0058.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9357.3111639,
+          "file": "0059.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9357.4178761,
+          "file": "0060.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9357.523632,
+          "file": "0061.jpg",
+          "endpoint_white_pixels": 29
+        }
+      ],
+      "transmitted": 4,
+      "host_coalesced": 16,
+      "final_event_to_confirm_ms": 3829.0048999988358,
+      "final_event_to_hdmi_ms": 3128.0454999996437,
+      "acceptance_ms": [
+        343.6891800002195,
+        381.19011999992654,
+        1728.7740400000475,
+        499.46097999997437
+      ]
+    },
+    {
+      "round": 2,
+      "async_input": true,
+      "events": [
+        {
+          "index": 0,
+          "x": 200,
+          "time": 9358.9956753
+        },
+        {
+          "index": 1,
+          "x": 220,
+          "time": 9359.0959671
+        },
+        {
+          "index": 2,
+          "x": 240,
+          "time": 9359.195948
+        },
+        {
+          "index": 3,
+          "x": 260,
+          "time": 9359.2958887
+        },
+        {
+          "index": 4,
+          "x": 280,
+          "time": 9359.395973
+        },
+        {
+          "index": 5,
+          "x": 300,
+          "time": 9359.4958937
+        },
+        {
+          "index": 6,
+          "x": 320,
+          "time": 9359.5959017
+        },
+        {
+          "index": 7,
+          "x": 340,
+          "time": 9359.6961758
+        },
+        {
+          "index": 8,
+          "x": 360,
+          "time": 9359.7960795
+        },
+        {
+          "index": 9,
+          "x": 380,
+          "time": 9359.896197
+        },
+        {
+          "index": 10,
+          "x": 400,
+          "time": 9359.9961328
+        },
+        {
+          "index": 11,
+          "x": 420,
+          "time": 9360.0960066
+        },
+        {
+          "index": 12,
+          "x": 440,
+          "time": 9360.1959162
+        },
+        {
+          "index": 13,
+          "x": 460,
+          "time": 9360.2960579
+        },
+        {
+          "index": 14,
+          "x": 480,
+          "time": 9360.3960207
+        },
+        {
+          "index": 15,
+          "x": 500,
+          "time": 9360.4959166
+        },
+        {
+          "index": 16,
+          "x": 520,
+          "time": 9360.5960179
+        },
+        {
+          "index": 17,
+          "x": 540,
+          "time": 9360.6959218
+        },
+        {
+          "index": 18,
+          "x": 560,
+          "time": 9360.7960584
+        },
+        {
+          "index": 19,
+          "x": 580,
+          "time": 9360.8960249
+        }
+      ],
+      "sent": [
+        {
+          "start": 9358.995696,
+          "end": 9359.327827,
+          "response": {
+            "accept_ms": 203.35223999992013,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 13,
+              "coalesced_moves": 1,
+              "visible_ticket": 12
+            }
+          },
+          "event": {
+            "index": 0,
+            "x": 200,
+            "time": 9358.9956753
+          }
+        },
+        {
+          "start": 9359.3278354,
+          "end": 9359.8395261,
+          "response": {
+            "accept_ms": 263.8403400001116,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 14,
+              "coalesced_moves": 1,
+              "visible_ticket": 13
+            }
+          },
+          "event": {
+            "index": 3,
+            "x": 260,
+            "time": 9359.2958887
+          }
+        },
+        {
+          "start": 9359.839536,
+          "end": 9360.4555688,
+          "response": {
+            "accept_ms": 312.3916599997319,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 15,
+              "coalesced_moves": 1,
+              "visible_ticket": 13
+            }
+          },
+          "event": {
+            "index": 8,
+            "x": 360,
+            "time": 9359.7960795
+          }
+        },
+        {
+          "start": 9360.4555779,
+          "end": 9362.0196143,
+          "response": {
+            "accept_ms": 1334.1120200003497,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 16,
+              "coalesced_moves": 2,
+              "visible_ticket": 14
+            }
+          },
+          "event": {
+            "index": 14,
+            "x": 480,
+            "time": 9360.3960207
+          }
+        },
+        {
+          "start": 9362.0196237,
+          "end": 9362.8978614,
+          "response": {
+            "accept_ms": 646.5272799995728,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 17,
+              "coalesced_moves": 2,
+              "visible_ticket": 14
+            }
+          },
+          "event": {
+            "index": 19,
+            "x": 580,
+            "time": 9360.8960249
+          }
+        }
+      ],
+      "completion": {
+        "start": 9364.1165386,
+        "end": 9364.8956513,
+        "response": {
+          "accept_ms": 484.6810800000094,
+          "completion_pending": false,
+          "ok": true,
+          "result": {
+            "accepted_ticket": 17,
+            "applied_ticket": 17,
+            "coalesced_moves": 2,
+            "last_accept_to_visible_us": 1909497,
+            "priority_publications": 1,
+            "visible_ticket": 17,
+            "visible_x": 580,
+            "visible_y": 680
+          }
+        }
+      },
+      "frames": [
+        {
+          "time": 9358.9931878,
+          "file": "0000.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9359.1162827,
+          "file": "0001.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9359.2094746,
+          "file": "0002.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9359.3169197,
+          "file": "0003.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9359.4232288,
+          "file": "0004.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9359.5301882,
+          "file": "0005.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9359.6506123,
+          "file": "0006.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9359.743612,
+          "file": "0007.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9359.8511078,
+          "file": "0008.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9359.9573201,
+          "file": "0009.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9360.0648453,
+          "file": "0010.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9360.1712451,
+          "file": "0011.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9360.2782614,
+          "file": "0012.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9360.4005834,
+          "file": "0013.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9360.5065163,
+          "file": "0014.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9360.5989626,
+          "file": "0015.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9360.7197779,
+          "file": "0016.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9360.8123979,
+          "file": "0017.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9360.933933,
+          "file": "0018.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9361.0252822,
+          "file": "0019.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9361.1327634,
+          "file": "0020.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9361.2403673,
+          "file": "0021.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9361.3475049,
+          "file": "0022.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9361.4537935,
+          "file": "0023.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9361.5611493,
+          "file": "0024.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9361.6684951,
+          "file": "0025.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9361.7761687,
+          "file": "0026.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9361.8981791,
+          "file": "0027.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9361.9914801,
+          "file": "0028.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9362.0977991,
+          "file": "0029.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9362.2191332,
+          "file": "0030.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9362.3115956,
+          "file": "0031.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9362.4327519,
+          "file": "0032.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9362.5255933,
+          "file": "0033.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9362.632683,
+          "file": "0034.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9362.7539026,
+          "file": "0035.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9362.8623715,
+          "file": "0036.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9362.9690845,
+          "file": "0037.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9363.0616283,
+          "file": "0038.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9363.1677981,
+          "file": "0039.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9363.2746912,
+          "file": "0040.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9363.3813899,
+          "file": "0041.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9363.5025077,
+          "file": "0042.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9363.6096628,
+          "file": "0043.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9363.7155417,
+          "file": "0044.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9363.8093254,
+          "file": "0045.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9363.9157307,
+          "file": "0046.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9364.0233988,
+          "file": "0047.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9364.1302783,
+          "file": "0048.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9364.2529061,
+          "file": "0049.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9364.3473328,
+          "file": "0050.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9364.4694539,
+          "file": "0051.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9364.5622621,
+          "file": "0052.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9364.6848005,
+          "file": "0053.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9364.77747,
+          "file": "0054.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9364.8992041,
+          "file": "0055.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9365.0086845,
+          "file": "0056.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9365.1158151,
+          "file": "0057.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9365.2086989,
+          "file": "0058.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9365.3157283,
+          "file": "0059.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9365.4231767,
+          "file": "0060.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9365.5443264,
+          "file": "0061.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9365.6384945,
+          "file": "0062.jpg",
+          "endpoint_white_pixels": 29
+        }
+      ],
+      "transmitted": 5,
+      "host_coalesced": 15,
+      "final_event_to_confirm_ms": 3999.6264000001247,
+      "final_event_to_hdmi_ms": 3666.237200000978,
+      "acceptance_ms": [
+        203.35223999992013,
+        263.8403400001116,
+        312.3916599997319,
+        1334.1120200003497,
+        646.5272799995728
+      ]
+    }
+  ]
+}

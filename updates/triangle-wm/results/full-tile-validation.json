@@ -1,0 +1,28 @@
+{
+  "result": "PASS_FULL_TILE_MOVE",
+  "version": "fixed-wm-full-tile-v5",
+  "move_marker_cells": 1024,
+  "resize": "whole boundary tiles retained",
+  "hardware_tested": false,
+  "image_sha256": "7262b0c05725705394e8c346b1cc7c3b20eeae90dd6746482e7132c0deb03b7d",
+  "host_sanitizers": [
+    "address",
+    "undefined"
+  ],
+  "host_checks": [
+    "all tile bytes and directory references",
+    "alternating banks and original-pixel restoration",
+    "occlusion",
+    "shared solid payload with zero marker pixel work",
+    "binary and JSON marker lifecycle/rollback/input mailbox/visibility"
+  ],
+  "qemu": {
+    "result": "PASS_FOCUSED_QEMU_BOOT",
+    "image_sha256": "7262b0c05725705394e8c346b1cc7c3b20eeae90dd6746482e7132c0deb03b7d",
+    "hardware": false,
+    "scope": "Final image boot, actual RV32 fixed WM + RGB332 app + async input client exchanging BWM1 binary messages against mock BOSIO. Final cursor endpoints verified by native stream benchmark. No physical hardware/performance measurement. Move marker and resize preview exercised on RV32; frozen motion has no descriptor/projection submissions; tile-rim resize performs boundary geometry only; final transform completed. Emulator elapsed values are not hardware latency.",
+    "runtime_preview": "tile"
+  },
+  "physical_board_contacted": false,
+  "latency": "No new physical-board latency measurement"
+}

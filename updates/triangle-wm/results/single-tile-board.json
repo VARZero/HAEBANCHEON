@@ -1,0 +1,469 @@
+{
+  "hardware": true,
+  "scope": "Native RV32 client on physical board; UART transfer/printing, USB capture and optical latency excluded. Preview completion is output publication acknowledgment.",
+  "samples_per_action": 16,
+  "modes": {
+    "tile": {
+      "move": {
+        "coordinate_acceptance": {
+          "n": 16,
+          "median_ms": 159.17450001835823,
+          "p95_ms": 216.63300001621246,
+          "max_ms": 216.63300001621246
+        },
+        "accepted_to_publication": {
+          "n": 16,
+          "median_ms": 172.183,
+          "p95_ms": 233.459,
+          "max_ms": 233.459
+        },
+        "command_to_completion": {
+          "n": 16,
+          "median_ms": 349.69799998402596,
+          "p95_ms": 452.5529999732971,
+          "max_ms": 452.5529999732971
+        },
+        "press": {
+          "accept_ms": 311.30799996852875,
+          "feedback_ms": 1655.317999958992,
+          "present_ms": 1671.8449999690056,
+          "result": {
+            "action": 0,
+            "applied": false,
+            "captured_window": 1,
+            "generation": 27
+          }
+        },
+        "release": {
+          "accept_ms": 181.85799998044968,
+          "feedback_ms": 1285.8219999670982,
+          "present_ms": 1455.1419999599457,
+          "result": {
+            "action": 2,
+            "applied": true,
+            "captured_window": 0,
+            "commit_pending": true,
+            "generation": 45,
+            "transform": {
+              "error": "",
+              "state": "complete",
+              "ticket": 1
+            },
+            "transform_ticket": 1
+          }
+        },
+        "motion_work": {
+          "footprint_calls_total": 0,
+          "plan_builds_total": 0,
+          "run_submissions_total": 0
+        },
+        "release_publications": 1,
+        "render_breakdown_median_ms": {
+          "render_ms": 107.07846283912659,
+          "service_render_ms": 108.64150524139404,
+          "publish_ms": 91.87999367713928
+        }
+      },
+      "resize": {
+        "coordinate_acceptance": {
+          "n": 16,
+          "median_ms": 169.00450003147125,
+          "p95_ms": 222.1389999985695,
+          "max_ms": 222.1389999985695
+        },
+        "accepted_to_publication": {
+          "n": 16,
+          "median_ms": 176.542,
+          "p95_ms": 231.104,
+          "max_ms": 231.104
+        },
+        "command_to_completion": {
+          "n": 16,
+          "median_ms": 352.0430000126362,
+          "p95_ms": 407.8129999637604,
+          "max_ms": 407.8129999637604
+        },
+        "press": {
+          "accept_ms": 1075.8230000138283,
+          "feedback_ms": 1938.2430000305176,
+          "present_ms": 1955.8759999871254,
+          "result": {
+            "action": 0,
+            "applied": false,
+            "captured_window": 1,
+            "generation": 47
+          }
+        },
+        "release": {
+          "accept_ms": 190.5009999871254,
+          "feedback_ms": 1412.2309999465942,
+          "present_ms": 1585.9969999790192,
+          "result": {
+            "action": 3,
+            "applied": true,
+            "captured_window": 0,
+            "commit_pending": true,
+            "generation": 65,
+            "transform": {
+              "error": "",
+              "state": "complete",
+              "ticket": 2
+            },
+            "transform_ticket": 2
+          }
+        },
+        "motion_work": {
+          "footprint_calls_total": 0,
+          "plan_builds_total": 0,
+          "run_submissions_total": 0
+        },
+        "release_publications": 1,
+        "render_breakdown_median_ms": {
+          "render_ms": 112.61898279190063,
+          "service_render_ms": 113.75197768211365,
+          "publish_ms": 100.85499286651611
+        }
+      }
+    },
+    "outline": {
+      "move": {
+        "coordinate_acceptance": {
+          "n": 16,
+          "median_ms": 249.3120000064373,
+          "p95_ms": 999.277999997139,
+          "max_ms": 999.277999997139
+        },
+        "accepted_to_publication": {
+          "n": 16,
+          "median_ms": 866.755,
+          "p95_ms": 1659.219,
+          "max_ms": 1659.219
+        },
+        "command_to_completion": {
+          "n": 16,
+          "median_ms": 1147.4570000171661,
+          "p95_ms": 2733.393999993801,
+          "max_ms": 2733.393999993801
+        },
+        "press": {
+          "accept_ms": 705.5200000405312,
+          "feedback_ms": 1425.8429999947548,
+          "present_ms": 1429.0300000309944,
+          "result": {
+            "action": 0,
+            "applied": false,
+            "captured_window": 1,
+            "generation": 7
+          }
+        },
+        "release": {
+          "accept_ms": 280.1609999537468,
+          "feedback_ms": 945.2479999661446,
+          "present_ms": 1701.92199999094,
+          "result": {
+            "action": 2,
+            "applied": true,
+            "captured_window": 0,
+            "generation": 33
+          }
+        },
+        "motion_work": {
+          "footprint_calls_total": 16,
+          "plan_builds_total": 0,
+          "run_submissions_total": 8
+        },
+        "release_publications": 3
+      },
+      "resize": {
+        "coordinate_acceptance": {
+          "n": 16,
+          "median_ms": 210.52449998259544,
+          "p95_ms": 297.37900000810623,
+          "max_ms": 297.37900000810623
+        },
+        "accepted_to_publication": {
+          "n": 16,
+          "median_ms": 726.645,
+          "p95_ms": 1009.152,
+          "max_ms": 1009.152
+        },
+        "command_to_completion": {
+          "n": 16,
+          "median_ms": 946.21099999547,
+          "p95_ms": 1275.29699999094,
+          "max_ms": 1275.29699999094
+        },
+        "press": {
+          "accept_ms": 620.9050000309944,
+          "feedback_ms": 1668.9870000481606,
+          "present_ms": 1695.6830000281334,
+          "result": {
+            "action": 0,
+            "applied": false,
+            "captured_window": 1,
+            "generation": 35
+          }
+        },
+        "release": {
+          "accept_ms": 1130.7250000238419,
+          "feedback_ms": 2444.6370000243187,
+          "present_ms": 3450.9610000252724,
+          "result": {
+            "action": 3,
+            "applied": true,
+            "captured_window": 0,
+            "generation": 61
+          }
+        },
+        "motion_work": {
+          "footprint_calls_total": 16,
+          "plan_builds_total": 0,
+          "run_submissions_total": 7
+        },
+        "release_publications": 3
+      }
+    }
+  },
+  "date": "2026-11-24",
+  "image_version": "fixed-wm-single-tile-v3",
+  "image_sha256": "61df684d8a5ab54e13b5458d1c4ca782211eba3dcb1d48101b6dd327b56f9d21",
+  "kernel": "6.12.0-haebancheon-publishcopy",
+  "workload": "One 20x14 degree window with 240x144 RGB332 demo, active two-second content updates; 16 alternating pointer positions, x +/-90px and y +/-24px, per move/resize. Same image, retained outline vs new tile mode.",
+  "hdmi_verified": true,
+  "hdmi_observation": "Initially black; user reconnected HDMI, then reopening the capture stream recovered the actual window. Move and resize HDMI verification passed; the earlier native timings remain publication acknowledgment, not optical measurements.",
+  "release_sample_count_per_action": 1,
+  "improvement_percent": {
+    "move": 69.52408674322486,
+    "resize": 62.794450707683424
+  },
+  "notes": [
+    "First press and final release are one sample each, not latency distributions. P95 for 16 motion samples is the maximum (nearest-rank).",
+    "Legacy outline permits live app content projections (8 move/7 resize BO_RUN submissions in this trial); single-tile freezes content (zero). Those legacy submissions are not moving-window reprojections.",
+    "Reference release publications include a live app update: 3 observed vs 1. Offline no-concurrent-update comparison was 2 vs 1.",
+    "300 ms command-start-to-completion target not met; do not substitute acceptance-to-publication timing."
+  ],
+  "output_readback": {
+    "abi": 3,
+    "signature": "42533235",
+    "capability": "44544631",
+    "status": "4a5d0003",
+    "active_bank": 1,
+    "active_base": "bd450000",
+    "poison": 0,
+    "dma_errors": 0,
+    "dma_timeouts": 0,
+    "visible_tiles": 70,
+    "first_tile_nonzero_cells": 1024,
+    "first_tile_rgb": "4800b6"
+  },
+  "independent_color_test": {
+    "result": "BOSIO demo and projection returned successfully; capture stayed entirely black",
+    "projection_status": [
+      0,
+      0
+    ],
+    "cells": [
+      1024,
+      1024
+    ],
+    "maximum_nonblack_capture_pixels": 0
+  },
+  "direct_monitor_test": "User currently cannot test direct HDMI monitor",
+  "usb_replug": {
+    "user_confirmed": true,
+    "capture_reopened": true,
+    "seconds_observed": 12,
+    "maximum_nonblack_pixels": 0
+  },
+  "restored_runtime": {
+    "mode": "single-tile",
+    "captured_window": 0,
+    "pressed": false,
+    "display_enabled": true,
+    "wm_pid": 183,
+    "app_pid": 186,
+    "capture_url": "http://127.0.0.1:8766/",
+    "input_url": "http://127.0.0.1:8767/"
+  },
+  "hdmi_replug_request": "User confirmed HDMI reconnected; captured actual nonblack scene after capture reopening.",
+  "capture_1080p_probe": "One 1920x1080 MJPEG/30fps frame also black; normal 1280x720 capture restored afterward.",
+  "visual_verification": {
+    "result": "PASS_PHYSICAL_HDMI_PREVIEW",
+    "scope": "Actual HDMI pixels. Frozen body bounds and text mask, S marker preview, one final transformed window, pointer preference restored. Native intervals exclude UART; host/video command intervals include HTTP/UART. Two-second holds are intentional.",
+    "actions": [
+      {
+        "action": "move",
+        "press": {
+          "accept_ms": 201.0649999976158,
+          "feedback_ms": 674.2170000076294,
+          "ok": true,
+          "present_ms": 680.3260000348091,
+          "result": {
+            "action": 0,
+            "applied": false,
+            "captured_window": 1,
+            "generation": 141
+          }
+        },
+        "move": {
+          "accept_ms": 191.39600002765656,
+          "completion_pending": true,
+          "ok": true,
+          "result": {
+            "accepted_ticket": 1,
+            "coalesced_moves": 0,
+            "visible_ticket": 0
+          }
+        },
+        "completion": {
+          "accepted_ticket": 1,
+          "applied_ticket": 1,
+          "coalesced_moves": 0,
+          "last_accept_to_visible_us": 320950,
+          "priority_publications": 0,
+          "visible_ticket": 1,
+          "visible_x": 809,
+          "visible_y": 536
+        },
+        "release": {
+          "accept_ms": 237.76800000667572,
+          "feedback_ms": 1445.891000032425,
+          "ok": true,
+          "present_ms": 1626.8030000329018,
+          "result": {
+            "action": 2,
+            "applied": true,
+            "captured_window": 0,
+            "commit_pending": true,
+            "generation": 144,
+            "transform": {
+              "error": "",
+              "state": "complete",
+              "ticket": 1
+            },
+            "transform_ticket": 1
+          }
+        },
+        "before_bbox": [
+          239,
+          88,
+          1042,
+          631
+        ],
+        "frozen_bbox": [
+          239,
+          88,
+          1042,
+          631
+        ],
+        "preview_bbox": [
+          239,
+          88,
+          1042,
+          631
+        ],
+        "after_bbox": [
+          363,
+          88,
+          1181,
+          535
+        ],
+        "held_white_mask_changed_pixels": 87,
+        "static_title_white_pixels": [
+          4789,
+          4716,
+          4789
+        ]
+      },
+      {
+        "action": "resize",
+        "press": {
+          "accept_ms": 438.1439999938011,
+          "feedback_ms": 1417.2960000038147,
+          "ok": true,
+          "present_ms": 1434.1420000195503,
+          "result": {
+            "action": 0,
+            "applied": false,
+            "captured_window": 1,
+            "generation": 145
+          }
+        },
+        "move": {
+          "accept_ms": 193.6710000038147,
+          "completion_pending": true,
+          "ok": true,
+          "result": {
+            "accepted_ticket": 2,
+            "coalesced_moves": 0,
+            "visible_ticket": 1
+          }
+        },
+        "completion": {
+          "accepted_ticket": 2,
+          "applied_ticket": 2,
+          "coalesced_moves": 0,
+          "last_accept_to_visible_us": 296718,
+          "priority_publications": 0,
+          "visible_ticket": 2,
+          "visible_x": 1094,
+          "visible_y": 530
+        },
+        "release": {
+          "accept_ms": 259.69999998807907,
+          "feedback_ms": 1470.9879999756813,
+          "ok": true,
+          "present_ms": 1661.194000005722,
+          "result": {
+            "action": 3,
+            "applied": true,
+            "captured_window": 0,
+            "commit_pending": true,
+            "generation": 148,
+            "transform": {
+              "error": "",
+              "state": "complete",
+              "ticket": 2
+            },
+            "transform_ticket": 2
+          }
+        },
+        "before_bbox": [
+          363,
+          88,
+          1181,
+          535
+        ],
+        "frozen_bbox": [
+          363,
+          88,
+          1181,
+          535
+        ],
+        "preview_bbox": [
+          363,
+          88,
+          1181,
+          535
+        ],
+        "after_bbox": [
+          363,
+          88,
+          1255,
+          631
+        ],
+        "held_white_mask_changed_pixels": 0,
+        "static_title_white_pixels": [
+          4763,
+          4763,
+          4763
+        ]
+      }
+    ],
+    "hardware": true,
+    "hdmi_replug_confirmed": true,
+    "capture_reopened_after_hdmi_replug": true,
+    "video_duration_seconds": 27.5833419,
+    "video": "single-tile-preview.mp4"
+  }
+}

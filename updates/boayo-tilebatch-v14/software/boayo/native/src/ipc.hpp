@@ -1,5 +1,6 @@
 #pragma once
 #include "common.hpp"
+#include "binary_wire.hpp"
 #include <sys/socket.h>
 #include <sys/un.h>
 #include <sys/time.h>
@@ -46,7 +47,7 @@ struct Client {
   }
   J call(const std::string &op, J args = J::object()) {
     J r = {{"id", ++sequence}, {"app", app}, {"op", op}, {"args", args}};
-    std::string s = r.dump() + "\n";
+    std::string s = wire::encode(std::move(r));
     size_t off = 0;
     while (off < s.size()) {
       auto n = send(sock.fd, s.data() + off, s.size() - off, MSG_NOSIGNAL);
@@ -55,7 +56,7 @@ struct Client {
       require(n > 0, "WM write failed");
       off += n;
     }
-    while (buffer.find('\n') == std::string::npos) {
+    while (!wire::ready(buffer)) {
       char chunk[8192];
       auto n = recv(sock.fd, chunk, sizeof(chunk), 0);
       if (n < 0 && errno == EINTR)
@@ -64,9 +65,7 @@ struct Client {
       buffer.append(chunk, n);
       require(buffer.size() <= 8 * 1024 * 1024, "WM reply too large");
     }
-    auto end = buffer.find('\n');
-    auto response = J::parse(buffer.substr(0, end));
-    buffer.erase(0, end + 1);
+    auto response = wire::decode(wire::take(buffer));
     require(response.at("id") == sequence, "IPC sequence mismatch");
     require(response.at("ok").get<bool>(), response.value("error", std::string("WM error")));
     return response.at("result");

@@ -1,0 +1,44 @@
+{
+  "boot_lba": 2048,
+  "root_lba": 14336,
+  "root_sectors": 2097152,
+  "segments": [
+    {
+      "address": "0x80000000",
+      "sectors": 519,
+      "crc32": "edd168be"
+    },
+    {
+      "address": "0x80400000",
+      "sectors": 10191,
+      "crc32": "b6081feb"
+    },
+    {
+      "address": "0x87f00000",
+      "sectors": 7,
+      "crc32": "ac347877"
+    }
+  ],
+  "version": "fixed-wm-tile-rim-v4",
+  "geometry": "integer Q24",
+  "angles": "signed quarter degrees in 16-bit range; normalized yaw [-180,180)",
+  "wire": "BWM1 little-endian length + CBOR integer payload; angle Q2, other fractions Q24",
+  "publication": "BO_PUBLISH_COPY default; TRIANGLE_PUBLISH_COPY=0 selects checked baseline",
+  "preview": "Move: 64 central cells of one tile. Resize: whole boundary triangles share immutable S-color payload; bank-local metadata differences only. Real scene and content remain frozen until one final transform publication.",
+  "execution": "Startup stages executables in /run/triangle-wm-runtime before launch",
+  "feedback_target_ms": 300,
+  "feedback_target_hardware_verified": false,
+  "hardware_tested": false,
+  "binaries": {
+    "triangle-boayo-fixed": "e4d1d34c00ec04243e6a9509ac08edd9e172f5aba0e162c6709d1fe3e447070b",
+    "triangle-app": "59d1ee5d322040fc4a31b072d9536b07ec97c64c0d0f28929eb588395110581d",
+    "triangle-input": "19d78403061c6c406d85ecf666642a0355377420cba3364c15fcc928cbbaedc8"
+  },
+  "image": "HAEBANCHEON-tile-rim-preview.img",
+  "bytes": 1081081856,
+  "sha256": "e0e9f7606d59c1f746c2920fb8a52a8748ac2a638ee6692d215bd9cf232359c7",
+  "kernel_sha256": "91a89cc145d2df3b8781e7803d9159d1ce58cb4b994cc938c86627e2326eee99",
+  "kernel_release": "6.12.0-haebancheon-publishcopy",
+  "rootfs_sha256": "b02f08158466a82b4a69def6abd7df6db63f6cce754bb30604f09e38d1f06456",
+  "notes": "Driver improvement and kernel retained. Automatically stages WM/app/input in RAM and starts demo when /dev/bosio0 exists. Prepared offline; no physical board was contacted. Native/QEMU checks do not measure hardware latency."
+}

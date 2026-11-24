@@ -22,6 +22,10 @@ sha256sum "$out/triangle-wm" > "$out/triangle-wm.sha256"
 sha256sum "$out/triangle-boayo" > "$out/triangle-boayo.sha256"
 "$compiler" "${flags[@]}" -I"$native" -I"$uapi" -I"$out" "$here/tests/check_feedback.cpp" "$native/geometry.cpp" -o "$out/check-feedback"
 if [[ "$mode" != rv32 ]]; then "$out/check-feedback"; fi
+if [[ "$mode" != rv32 ]]; then
+ "$compiler" "${flags[@]}" -I"$native" -I"$uapi" -I"$out" "$here/tests/check_ui_delta.cpp" "$native/geometry.cpp" -o "$out/check-ui-delta"
+ "$out/check-ui-delta"
+fi
 "$compiler" "${flags[@]}" -Wall -Wextra -I"$native" "$here/src/boayo_app.cpp" -o "$out/triangle-app"
 sha256sum "$out/triangle-app" > "$out/triangle-app.sha256"
 "$compiler" "${flags[@]}" -Wall -Wextra -I"$native" "$here/src/input_client.cpp" -o "$out/triangle-input"

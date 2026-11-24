@@ -24,5 +24,7 @@ __pycache__/
 *.xci
 *.wcfg
 ip_user_files/
+# Generated BOSIO native engine test reports.
+/variants/l1-16k-dma3-lru-ram/software/bosio/reports/
 *.runs/
 *.gen/

@@ -1,0 +1,21 @@
+{
+  "result": "PASS",
+  "scope": "Original fixed-point resize formula vs cached direct fast input, ASan/UBSan host regression and actual RV32 image boot. No emulator hardware latency claim.",
+  "checks": [
+    "Grow/shrink, repeated coordinates and 3 starting poses: bit-identical target/rim/pixels/release to original server",
+    "Raw PTR1 latest resize, no per-point replies, ownership and release ordering",
+    "Full preview byte reference, alternating banks, restore/occlusion and immutable solid rim payload",
+    "Legacy BWM1/JSON input, visibility, content coalescing and transform rollback",
+    "Final RV32 image boot, native move/resize, async and compact UART bridge",
+    "2,279,068 exact fixed Q13 comparisons including half-step ties and fallback",
+    "All generated quarter-degree sine/cosine and eighth-degree tangent values match original integer functions; off-grid and range fallback match",
+    "1024 random full footprints (raw/trim/cache) match original flat scan",
+    "Final RV32 image with exact lookup tables boots and executes native marker/bridge suites"
+  ],
+  "binaries": {
+    "triangle-boayo-fixed": "3bf71be88a65c089ec47abef794c0418be481dc62e5e12d8d737378b11022651",
+    "triangle-app": "5560552b8ebde60abdb3fcbf07a5c5cf1bedbcf225e999f33fd0e052d09f4dc7",
+    "triangle-input": "b798b7c444bc990d43720a915313388c649836de9dabb268419a9954f30f5b15"
+  },
+  "kernel_sha256": "91a89cc145d2df3b8781e7803d9159d1ce58cb4b994cc938c86627e2326eee99"
+}

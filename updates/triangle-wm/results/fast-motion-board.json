@@ -1,0 +1,500 @@
+{
+  "date": "2026-11-24",
+  "hardware": true,
+  "version": "fixed-wm-fast-motion-v9",
+  "scope": "PC source input to first actual USB HDMI capture frame containing a distinct final target tile. HTTP, UART and USB sampling included; monitor optical timing excluded. 3 trials per workload. Source window remains frozen during drag.",
+  "continuous_workload": "Identical before/after: 20 points over 1.9 s at 10 Hz, same centered 20x14 degree window, 240x144 RGB332 demo active; one HTTP request in flight, newest waiting point only.",
+  "before": {
+    "n": 3,
+    "samples_ms": [
+      485.8350000004066,
+      948.1057000002693,
+      836.8163000004643
+    ],
+    "median_ms": 836.8163000004643,
+    "min_ms": 485.8350000004066,
+    "max_ms": 948.1057000002693
+  },
+  "after": {
+    "n": 3,
+    "samples_ms": [
+      285.1734000005308,
+      224.48679999979504,
+      236.16060000040306
+    ],
+    "median_ms": 236.16060000040306,
+    "min_ms": 224.48679999979504,
+    "max_ms": 285.1734000005308
+  },
+  "single_step": {
+    "n": 3,
+    "samples_ms": [
+      260.35719999981666,
+      274.81189999980415,
+      199.543800000356
+    ],
+    "median_ms": 260.35719999981666,
+    "min_ms": 199.543800000356,
+    "max_ms": 274.81189999980415
+  },
+  "single_step_scope": "Separate final-build workload: 3 coordinates spaced one second apart; last distinct jump measured after prior input had settled. No before-version single-step measurement.",
+  "continuous_median_reduction_percent": 71.77868069727226,
+  "position_changes": {
+    "scope": "Distinct observed full S-triangle bounding boxes. Geometry quantizes motion; this is not a frame rate or individual-coordinate latency.",
+    "before": [
+      {
+        "trial": 0,
+        "changes_during_input": 4,
+        "changes": [
+          {
+            "seconds": -0.003915100000085658,
+            "bbox": [
+              642,
+              278,
+              121,
+              82
+            ]
+          },
+          {
+            "seconds": 0.575020699999186,
+            "bbox": [
+              305,
+              199,
+              118,
+              81
+            ]
+          },
+          {
+            "seconds": 0.8992694999997184,
+            "bbox": [
+              363,
+              204,
+              116,
+              80
+            ]
+          },
+          {
+            "seconds": 1.2705497999995714,
+            "bbox": [
+              427,
+              203,
+              112,
+              79
+            ]
+          },
+          {
+            "seconds": 1.6506606999992073,
+            "bbox": [
+              528,
+              184,
+              124,
+              89
+            ]
+          },
+          {
+            "seconds": 2.0029110999994373,
+            "bbox": [
+              587,
+              191,
+              119,
+              86
+            ]
+          },
+          {
+            "seconds": 2.38603779999994,
+            "bbox": [
+              905,
+              184,
+              131,
+              86
+            ]
+          }
+        ]
+      },
+      {
+        "trial": 1,
+        "changes_during_input": 1,
+        "changes": [
+          {
+            "seconds": -0.0025882999998430023,
+            "bbox": [
+              642,
+              278,
+              121,
+              82
+            ]
+          },
+          {
+            "seconds": 0.7640202000002319,
+            "bbox": [
+              305,
+              199,
+              118,
+              81
+            ]
+          },
+          {
+            "seconds": 2.1609377000004315,
+            "bbox": [
+              427,
+              203,
+              112,
+              79
+            ]
+          },
+          {
+            "seconds": 2.8485348000003796,
+            "bbox": [
+              905,
+              184,
+              131,
+              86
+            ]
+          }
+        ]
+      },
+      {
+        "trial": 2,
+        "changes_during_input": 0,
+        "changes": [
+          {
+            "seconds": -0.002899500000239641,
+            "bbox": [
+              642,
+              278,
+              121,
+              82
+            ]
+          },
+          {
+            "seconds": 2.200200700000096,
+            "bbox": [
+              427,
+              203,
+              112,
+              79
+            ]
+          },
+          {
+            "seconds": 2.737184700000398,
+            "bbox": [
+              905,
+              184,
+              131,
+              86
+            ]
+          }
+        ]
+      }
+    ],
+    "after": [
+      {
+        "trial": 0,
+        "changes_during_input": 6,
+        "changes": [
+          {
+            "seconds": -0.0023564000002807006,
+            "bbox": [
+              642,
+              278,
+              121,
+              82
+            ]
+          },
+          {
+            "seconds": 0.31611379999958444,
+            "bbox": [
+              305,
+              199,
+              118,
+              81
+            ]
+          },
+          {
+            "seconds": 0.5422693000000436,
+            "bbox": [
+              363,
+              204,
+              116,
+              80
+            ]
+          },
+          {
+            "seconds": 0.8276562999999442,
+            "bbox": [
+              427,
+              203,
+              112,
+              79
+            ]
+          },
+          {
+            "seconds": 1.1748015000002852,
+            "bbox": [
+              481,
+              209,
+              109,
+              76
+            ]
+          },
+          {
+            "seconds": 1.4460390000003827,
+            "bbox": [
+              528,
+              184,
+              124,
+              89
+            ]
+          },
+          {
+            "seconds": 1.6413880999998582,
+            "bbox": [
+              587,
+              191,
+              119,
+              86
+            ]
+          },
+          {
+            "seconds": 1.945418399999653,
+            "bbox": [
+              656,
+              189,
+              116,
+              87
+            ]
+          },
+          {
+            "seconds": 2.1854898000001413,
+            "bbox": [
+              905,
+              184,
+              131,
+              86
+            ]
+          }
+        ]
+      },
+      {
+        "trial": 1,
+        "changes_during_input": 6,
+        "changes": [
+          {
+            "seconds": -0.0021661000000676722,
+            "bbox": [
+              642,
+              278,
+              121,
+              82
+            ]
+          },
+          {
+            "seconds": 0.2575230000002193,
+            "bbox": [
+              305,
+              199,
+              118,
+              81
+            ]
+          },
+          {
+            "seconds": 0.5759053000001586,
+            "bbox": [
+              363,
+              204,
+              116,
+              80
+            ]
+          },
+          {
+            "seconds": 0.7574979999999414,
+            "bbox": [
+              427,
+              203,
+              112,
+              79
+            ]
+          },
+          {
+            "seconds": 1.167887000000519,
+            "bbox": [
+              481,
+              209,
+              109,
+              76
+            ]
+          },
+          {
+            "seconds": 1.3645510000005743,
+            "bbox": [
+              528,
+              184,
+              124,
+              89
+            ]
+          },
+          {
+            "seconds": 1.6682737999999517,
+            "bbox": [
+              587,
+              191,
+              119,
+              86
+            ]
+          },
+          {
+            "seconds": 1.942417100000057,
+            "bbox": [
+              656,
+              189,
+              116,
+              87
+            ]
+          },
+          {
+            "seconds": 2.125016599999981,
+            "bbox": [
+              905,
+              184,
+              131,
+              86
+            ]
+          }
+        ]
+      },
+      {
+        "trial": 2,
+        "changes_during_input": 6,
+        "changes": [
+          {
+            "seconds": -0.002303600000232109,
+            "bbox": [
+              642,
+              278,
+              121,
+              82
+            ]
+          },
+          {
+            "seconds": 0.3020344999995359,
+            "bbox": [
+              305,
+              199,
+              118,
+              81
+            ]
+          },
+          {
+            "seconds": 0.5753349999995407,
+            "bbox": [
+              363,
+              204,
+              116,
+              80
+            ]
+          },
+          {
+            "seconds": 0.7717064999997092,
+            "bbox": [
+              427,
+              203,
+              112,
+              79
+            ]
+          },
+          {
+            "seconds": 1.1673142999998163,
+            "bbox": [
+              481,
+              209,
+              109,
+              76
+            ]
+          },
+          {
+            "seconds": 1.3494136999997863,
+            "bbox": [
+              528,
+              184,
+              124,
+              89
+            ]
+          },
+          {
+            "seconds": 1.681650599999557,
+            "bbox": [
+              587,
+              191,
+              119,
+              86
+            ]
+          },
+          {
+            "seconds": 1.9538722999996025,
+            "bbox": [
+              656,
+              189,
+              116,
+              87
+            ]
+          },
+          {
+            "seconds": 2.136487699999634,
+            "bbox": [
+              905,
+              184,
+              131,
+              86
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "realtime_target_achieved": true,
+  "remaining": "Full header upload and publication wait remain. Tile topology quantizes visible motion. Diagnostic get_state remains a heavy explicit query; it is removed from the demo update loop, not from the API.",
+  "excluded_criterion": "User excluded 60 inputs/s from acceptance. Intermediate v6 diagnostic is retained in evidence, not retested on final build or pooled with the normal comparison.",
+  "physical_release_validation": {
+    "result": "PASS_PHYSICAL_HDMI_PREVIEW",
+    "scope": "Actual HDMI pixels. Frozen scene outside S-colored preview, representative move tile and optional whole-tile resize rim, final transformed window, pointer preference restored. Native intervals exclude UART; host/video command intervals include HTTP/UART. Two-second holds are intentional.",
+    "evidence": "evidence/fast-motion-board/v9/hdmi/verification.json",
+    "actions": [
+      {
+        "action": "move",
+        "native_press_ms": 609.9849999547005,
+        "native_release_ms": 1572.8560000061989,
+        "held_white_mask_changed_pixels": 0
+      },
+      {
+        "action": "resize",
+        "native_press_ms": 910.2639999985695,
+        "native_release_ms": 1588.777999997139,
+        "held_white_mask_changed_pixels": 1
+      }
+    ]
+  },
+  "binaries": {
+    "triangle-boayo-fixed": "5289a9671b9584782ba0af842a7cd311cdc7e37e2017a676fce5cb31f3b68a96",
+    "triangle-app": "5560552b8ebde60abdb3fcbf07a5c5cf1bedbcf225e999f33fd0e052d09f4dc7",
+    "triangle-input": "b798b7c444bc990d43720a915313388c649836de9dabb268419a9954f30f5b15"
+  },
+  "image_sha256": "fdd0e356ffea569d20319d4f4e3a308fabe30dbe13d41ac33b10377c469d0693",
+  "target_scope": "All three final continuous samples below 300 ms; no 60 Hz/60 FPS claim and no statistical tail guarantee from n=3. Target covers held-move feedback, not drag acquisition or final transform.",
+  "root_cause": "The demo requested full get_state each cycle to check window existence. WM serialized creation/encoding of large diagnostic replies with pointer input. Pausing the app removed long holds. Replacing this poll with normal commit/error handling removes recurring diagnostics; relative process priorities also favor WM/input.",
+  "runtime_priority": {
+    "wm": -10,
+    "input": -5,
+    "app": 10
+  },
+  "app_running_during_final_measurement": true,
+  "diagnosis": {
+    "app_paused": 227.36020000047574,
+    "priority_only": 244.34000000019296,
+    "priority_only_max_ms": 803.1293
+  },
+  "sd_saved": true,
+  "board_left_running": true,
+  "demo_left_running": true,
+  "live_capture": "http://127.0.0.1:8766/",
+  "live_input": "http://127.0.0.1:8767/"
+}

@@ -1,0 +1,322 @@
+{
+  "hardware": true,
+  "scope": "Native RV32 client on physical board; UART transfer/printing, USB capture and optical latency excluded. Preview completion is output publication acknowledgment.",
+  "samples_per_action": 16,
+  "modes": {
+    "tile": {
+      "move": {
+        "preview_mode": "single-tile",
+        "coordinate_acceptance": {
+          "n": 16,
+          "median_ms": 158.52200001478195,
+          "p95_ms": 172.78099995851517,
+          "max_ms": 172.78099995851517
+        },
+        "accepted_to_publication": {
+          "n": 16,
+          "median_ms": 176.7175,
+          "p95_ms": 213.016,
+          "max_ms": 213.016
+        },
+        "command_to_completion": {
+          "n": 16,
+          "median_ms": 351.09800001978874,
+          "p95_ms": 449.25999999046326,
+          "max_ms": 449.25999999046326
+        },
+        "press": {
+          "accept_ms": 222.14800000190735,
+          "feedback_ms": 1738.2319999933243,
+          "present_ms": 1771.2170000076294,
+          "result": {
+            "action": 0,
+            "applied": false,
+            "captured_window": 1,
+            "generation": 44
+          }
+        },
+        "release": {
+          "accept_ms": 277.1630000472069,
+          "feedback_ms": 1400.0450000166893,
+          "present_ms": 1629.3940000534058,
+          "result": {
+            "action": 2,
+            "applied": true,
+            "captured_window": 0,
+            "commit_pending": true,
+            "generation": 62,
+            "transform": {
+              "error": "",
+              "state": "complete",
+              "ticket": 3
+            },
+            "transform_ticket": 3
+          }
+        },
+        "motion_work": {
+          "footprint_calls_total": 0,
+          "plan_builds_total": 0,
+          "run_submissions_total": 0
+        },
+        "release_publications": 1,
+        "render_medians_ms": {
+          "render_ms": 106.8054735660553,
+          "publish_ms": 92.31898188591003,
+          "service_render_ms": 107.90947079658508
+        }
+      },
+      "resize": {
+        "preview_mode": "tile-rim",
+        "coordinate_acceptance": {
+          "n": 16,
+          "median_ms": 140.64850002527237,
+          "p95_ms": 152.82099997997284,
+          "max_ms": 152.82099997997284
+        },
+        "accepted_to_publication": {
+          "n": 16,
+          "median_ms": 320.5585,
+          "p95_ms": 337.888,
+          "max_ms": 337.888
+        },
+        "command_to_completion": {
+          "n": 16,
+          "median_ms": 462.00899997353554,
+          "p95_ms": 489.0209999680519,
+          "max_ms": 489.0209999680519
+        },
+        "press": {
+          "accept_ms": 1041.49899995327,
+          "feedback_ms": 1940.0019999742508,
+          "present_ms": 1961.9169999957085,
+          "result": {
+            "action": 0,
+            "applied": false,
+            "captured_window": 1,
+            "generation": 64
+          }
+        },
+        "release": {
+          "accept_ms": 199.31999999284744,
+          "feedback_ms": 1387.8370000123978,
+          "present_ms": 1558.2099999785423,
+          "result": {
+            "action": 3,
+            "applied": true,
+            "captured_window": 0,
+            "commit_pending": true,
+            "generation": 82,
+            "transform": {
+              "error": "",
+              "state": "complete",
+              "ticket": 4
+            },
+            "transform_ticket": 4
+          }
+        },
+        "motion_work": {
+          "footprint_calls_total": 16,
+          "plan_builds_total": 0,
+          "run_submissions_total": 0
+        },
+        "release_publications": 1,
+        "boundary_prepare": {
+          "n": 16,
+          "median_ms": 112.387,
+          "p95_ms": 126.901,
+          "max_ms": 126.901
+        },
+        "boundary_tiles": [
+          19,
+          23,
+          19,
+          23,
+          19,
+          23,
+          19,
+          23,
+          19,
+          23,
+          19,
+          23,
+          19,
+          23,
+          19,
+          23
+        ],
+        "render_medians_ms": {
+          "render_ms": 96.49601578712463,
+          "publish_ms": 60.5979859828949,
+          "service_render_ms": 98.9145040512085
+        }
+      }
+    }
+  },
+  "date": "2026-11-24",
+  "version": "fixed-wm-tile-rim-v4",
+  "binary_sha256": "e4d1d34c00ec04243e6a9509ac08edd9e172f5aba0e162c6709d1fe3e447070b",
+  "sd_image_sha256": "e0e9f7606d59c1f746c2920fb8a52a8748ac2a638ee6692d215bd9cf232359c7",
+  "kernel": "6.12.0-haebancheon-publishcopy",
+  "workload": "One 20x14 degree window with 240x144 RGB332 demo, active two-second content updates; 16 alternating pointer positions, x +/-90px and y +/-24px, per move/resize. Same image, retained outline vs new tile mode.",
+  "hdmi_verified": true,
+  "feedback_target_ms": 300,
+  "feedback_target_met": false,
+  "release_samples_per_action": 1,
+  "comparison_v3_to_v4": {
+    "move": {
+      "v3_marker_median_ms": 349.69799998402596,
+      "v4_median_ms": 351.09800001978874,
+      "change_ms": 1.4000000357627869,
+      "legacy_thin_outline_median_ms": 1147.4570000171661,
+      "reduction_vs_legacy_percent": 69.40207781079934
+    },
+    "resize": {
+      "v3_marker_median_ms": 352.0430000126362,
+      "v4_median_ms": 462.00899997353554,
+      "change_ms": 109.96599996089935,
+      "legacy_thin_outline_median_ms": 946.21099999547,
+      "reduction_vs_legacy_percent": 51.17272997505341
+    }
+  },
+  "notes": [
+    "Each movement/resize has 16 samples. P95 nearest-rank is maximum at n=16.",
+    "Move remains the original 64-cell central patch. Resize is a complete target boundary of 19 or 23 uniformly colored triangles in this workload.",
+    "Resize adds target footprint/rim calculation; no cell masks, payload operations, projection or texture upload during steady preview.",
+    "Latency is native command start to output publication confirmation; UART, capture and optical latency excluded.",
+    "Full SD SHA256 attempt was interrupted due excessive CPU cost; transferred gzip CRC/rolling transport checksum, installed sizes and independent runtime/HDMI checks passed. Optional SD full-file comparison was also canceled; full-byte equality is not claimed."
+  ],
+  "installation": {
+    "persistent": true,
+    "program": "/usr/bin/triangle-boayo-fixed",
+    "manifest": "/etc/triangle-wm-build.json",
+    "old_program_backup": "/usr/bin/triangle-boayo-fixed.v3",
+    "installed_program_bytes": 2193040,
+    "manifest_version": "fixed-wm-tile-rim-v4",
+    "runtime": "/run/triangle-wm-runtime/triangle-boayo-fixed",
+    "validation": "Rolling transport checksum, gzip CRC, extracted/staged sizes, successful staging/atomic rename, v4 manifest, native semantics and HDMI functional verification.",
+    "full_sd_file_sha256_completed": false,
+    "optional_full_byte_comparison_completed": false,
+    "optional_checks_note": "Both full-file diagnostics were canceled after long CPU waits; no SD byte-match claim. No diagnostic remains running."
+  },
+  "final_input": {
+    "captured_window": 0,
+    "commit_on_release": true,
+    "controls": [
+      {
+        "action": "close",
+        "hit_size": 32,
+        "tile": 3901,
+        "window_id": 1,
+        "x": 593,
+        "y": 157
+      },
+      {
+        "action": "move",
+        "hit_size": 32,
+        "tile": 56,
+        "window_id": 1,
+        "x": 689,
+        "y": 561
+      },
+      {
+        "action": "resize",
+        "hit_size": 32,
+        "tile": 180,
+        "window_id": 1,
+        "x": 916,
+        "y": 544
+      }
+    ],
+    "display_enabled": true,
+    "generation": 132,
+    "layout": "split",
+    "pointer_drawn": false,
+    "pressed": false,
+    "preview": {
+      "active": false,
+      "changed_entries": 14,
+      "committing": false,
+      "drawn": true,
+      "frames": 17,
+      "freeze_copy_ops": 1,
+      "frozen": false,
+      "kind": 3,
+      "mode": "tile-rim",
+      "outline_tiles": 23,
+      "payload_builds": 0,
+      "payload_ops": 0,
+      "payload_reuses": 17,
+      "resize_prepare_us": 110631,
+      "rim_tiles": [
+        26,
+        28,
+        30,
+        31,
+        43,
+        53,
+        55,
+        57,
+        176,
+        177,
+        179,
+        181,
+        188,
+        202,
+        3822,
+        3831,
+        3843,
+        3844,
+        3897,
+        3899,
+        3982,
+        3983,
+        3997
+      ],
+      "rim_updates": 17,
+      "splash_index": 228,
+      "target": {
+        "azimuth": 5.25,
+        "elevation": -1.75,
+        "height_deg": 15.25,
+        "width_deg": 23.25
+      },
+      "tile": null,
+      "visible_rim_tiles": [
+        26,
+        28,
+        30,
+        31,
+        43,
+        53,
+        55,
+        57,
+        176,
+        177,
+        179,
+        181,
+        188,
+        202,
+        3822,
+        3831,
+        3843,
+        3844,
+        3897,
+        3899,
+        3982,
+        3983,
+        3997
+      ],
+      "window_id": 1
+    },
+    "transform": {
+      "error": "",
+      "state": "complete",
+      "ticket": 4
+    },
+    "visible": false,
+    "x": 1064,
+    "y": 600
+  },
+  "preview_url": "http://127.0.0.1:8767/",
+  "visual_evidence": "tile-rim-hdmi.json"
+}

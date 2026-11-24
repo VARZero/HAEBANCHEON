@@ -1,0 +1,22 @@
+{
+  "result": "PASS",
+  "scope": "Host ASan/UBSan fixed-math service, raw PTR1 socket protocol and BWM1/JSON regression; RV32 image boot checked separately. Not hardware latency.",
+  "checks": [
+    "fast latest-only, fragmentation, no unsolicited ACK, stale sequence suppression, ownership, invalid packet isolation, ordered release",
+    "full 1024-cell byte reference, both banks, restoration and occlusion",
+    "legacy mailbox, content fairness, transform rollback and thin-outline reference",
+    "host mailbox coalescing and UART button barriers",
+    "frontend queue and receipt labels",
+    "native bridge: 200 buffered UART coordinates collapse before ordered release; legacy async command handler retained",
+    "final v8 RV32 image: bounded native drain path and actual binary CLI bridge exercised in QEMU",
+    "Actual demo binary: only startup diagnostics, incremental updates and successful normal exit when its window is closed",
+    "Final RV32 image includes light demo update loop and priority settings; boots mock WM/app and exercises async, raw UART and marker paths",
+    "Final physical move/resize release, frozen content and pointer preference verified on v9",
+    "Final source formatting check and host queue tests"
+  ],
+  "binaries": {
+    "triangle-boayo-fixed": "5289a9671b9584782ba0af842a7cd311cdc7e37e2017a676fce5cb31f3b68a96",
+    "triangle-app": "5560552b8ebde60abdb3fcbf07a5c5cf1bedbcf225e999f33fd0e052d09f4dc7",
+    "triangle-input": "b798b7c444bc990d43720a915313388c649836de9dabb268419a9954f30f5b15"
+  }
+}

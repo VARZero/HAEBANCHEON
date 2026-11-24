@@ -1,0 +1,52 @@
+{
+  "boot_lba": 2048,
+  "root_lba": 14336,
+  "root_sectors": 2097152,
+  "segments": [
+    {
+      "address": "0x80000000",
+      "sectors": 519,
+      "crc32": "edd168be"
+    },
+    {
+      "address": "0x80400000",
+      "sectors": 10191,
+      "crc32": "b6081feb"
+    },
+    {
+      "address": "0x87f00000",
+      "sectors": 7,
+      "crc32": "ac347877"
+    }
+  ],
+  "version": "fixed-wm-fast-motion-v9",
+  "geometry": "integer Q24",
+  "angles": "signed quarter degrees in 16-bit range; normalized yaw [-180,180)",
+  "wire": "BWM1 little-endian length + CBOR integer payload; angle Q2, other fractions Q24",
+  "publication": "BO_PUBLISH_COPY default; TRIANGLE_PUBLISH_COPY=0 selects checked baseline",
+  "preview": "Move: one complete 1024-cell S-colored triangle, sharing an immutable solid payload. Resize: unchanged whole boundary triangles sharing S-color payload. Frozen content, latest input and one final transform publication retained.",
+  "execution": "Startup stages executables in /run/triangle-wm-runtime before launch",
+  "feedback_target_ms": 300,
+  "feedback_target_hardware_verified": false,
+  "hardware_tested": false,
+  "binaries": {
+    "triangle-boayo-fixed": "5289a9671b9584782ba0af842a7cd311cdc7e37e2017a676fce5cb31f3b68a96",
+    "triangle-app": "5560552b8ebde60abdb3fcbf07a5c5cf1bedbcf225e999f33fd0e052d09f4dc7",
+    "triangle-input": "b798b7c444bc990d43720a915313388c649836de9dabb268419a9954f30f5b15"
+  },
+  "move_marker_cells": 1024,
+  "fast_motion": "PTR1-one-way-drain-bounded",
+  "demo_diagnostics": "startup-only",
+  "runtime_priority": {
+    "wm": -10,
+    "input": -5,
+    "app": 10
+  },
+  "image": "HAEBANCHEON-fast-motion-preview.img",
+  "bytes": 1081081856,
+  "sha256": "fdd0e356ffea569d20319d4f4e3a308fabe30dbe13d41ac33b10377c469d0693",
+  "kernel_sha256": "91a89cc145d2df3b8781e7803d9159d1ce58cb4b994cc938c86627e2326eee99",
+  "kernel_release": "6.12.0-haebancheon-publishcopy",
+  "rootfs_sha256": "519c6447d25e71367a0c2f8bc90ae3d0b3d9b45a2894895850c6c7d162572a26",
+  "notes": "Driver improvement and kernel retained. Automatically stages WM/app/input in RAM and starts demo when /dev/bosio0 exists. Prepared offline; no physical board was contacted. Native/QEMU checks do not measure hardware latency."
+}

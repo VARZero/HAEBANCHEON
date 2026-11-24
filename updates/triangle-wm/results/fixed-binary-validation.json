@@ -1,0 +1,24 @@
+{
+  "hardware_tested": false,
+  "numeric_core": "PASS integer RV32 symbol audit",
+  "trig_max_sampled_error": 1.07972e-07,
+  "projection_max_sampled_source_pixel_error": 0.000319976,
+  "covered_samples": 3068,
+  "tests": [
+    "ASan/UBSan fixed arithmetic and trig",
+    "ASan/UBSan binary framing and Q2/Q24 values",
+    "input placement/visibility/trails/lifecycle",
+    "input mailbox order/ownership/latest-only/fairness",
+    "3-format coalescing 40 to 4",
+    "application API full/partial/overlap/ownership",
+    "QEMU RV32 WM/app/async-input integration"
+  ],
+  "wire": "BWM1 frame + integer-only CBOR",
+  "angle_fractional_bits": 2,
+  "math_fractional_bits": 24,
+  "limitations": [
+    "Quarter-degree external angles intentionally quantize older sub-quarter-degree API inputs.",
+    "Dynamic object model and diagnostic/HTTP/UART text front ends still contain floating types/formatters; numerical core does not use floating arithmetic.",
+    "No hardware latency or performance gain claimed."
+  ]
+}

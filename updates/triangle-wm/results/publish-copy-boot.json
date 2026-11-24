@@ -1,0 +1,6 @@
+{
+  "result": "PASS_FOCUSED_QEMU_BOOT",
+  "image_sha256": "7e984ba0628537fd4578af6c96125b0cdfe24abd2cb9b777a48f127420a88c98",
+  "hardware": false,
+  "scope": "Final image kernel release, userspace boot, benchmark executables and new UAPI header. No output hardware timing. Full unrelated mock-app suite was interrupted at shutdown wait."
+}

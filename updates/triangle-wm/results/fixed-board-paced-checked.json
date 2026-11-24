@@ -1,0 +1,675 @@
+{
+  "label": "paced-fixed-checked",
+  "scope": "Three live-app trials. Twenty source positions at 10 Hz; one HTTP request in flight, newest queued coordinate only in BOTH modes. PC monotonic timestamps; HDMI includes USB capture/polling delay, not optical latency. Native acceptance durations exclude HTTP/UART overhead.",
+  "rounds": [
+    {
+      "round": 0,
+      "async_input": true,
+      "events": [
+        {
+          "index": 0,
+          "x": 200,
+          "time": 7377.8768518
+        },
+        {
+          "index": 1,
+          "x": 220,
+          "time": 7377.9772797
+        },
+        {
+          "index": 2,
+          "x": 240,
+          "time": 7378.0772244
+        },
+        {
+          "index": 3,
+          "x": 260,
+          "time": 7378.1772101
+        },
+        {
+          "index": 4,
+          "x": 280,
+          "time": 7378.2771031
+        },
+        {
+          "index": 5,
+          "x": 300,
+          "time": 7378.377144
+        },
+        {
+          "index": 6,
+          "x": 320,
+          "time": 7378.4771604
+        },
+        {
+          "index": 7,
+          "x": 340,
+          "time": 7378.5773233
+        },
+        {
+          "index": 8,
+          "x": 360,
+          "time": 7378.6770488
+        },
+        {
+          "index": 9,
+          "x": 380,
+          "time": 7378.7771441
+        },
+        {
+          "index": 10,
+          "x": 400,
+          "time": 7378.8772486
+        },
+        {
+          "index": 11,
+          "x": 420,
+          "time": 7378.9772597
+        },
+        {
+          "index": 12,
+          "x": 440,
+          "time": 7379.0771789
+        },
+        {
+          "index": 13,
+          "x": 460,
+          "time": 7379.1771873
+        },
+        {
+          "index": 14,
+          "x": 480,
+          "time": 7379.2771921
+        },
+        {
+          "index": 15,
+          "x": 500,
+          "time": 7379.3771732
+        },
+        {
+          "index": 16,
+          "x": 520,
+          "time": 7379.4772754
+        },
+        {
+          "index": 17,
+          "x": 540,
+          "time": 7379.5775223
+        },
+        {
+          "index": 18,
+          "x": 560,
+          "time": 7379.6772086
+        },
+        {
+          "index": 19,
+          "x": 580,
+          "time": 7379.777051
+        }
+      ],
+      "sent": [
+        {
+          "start": 7377.8768798,
+          "end": 7378.393423,
+          "response": {
+            "accept_ms": 364.5400000214577,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 2,
+              "coalesced_moves": 0,
+              "visible_ticket": 1
+            }
+          },
+          "event": {
+            "index": 0,
+            "x": 200,
+            "time": 7377.8768518
+          }
+        },
+        {
+          "start": 7378.3934381,
+          "end": 7378.9815557,
+          "response": {
+            "accept_ms": 410.04100000858307,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 3,
+              "coalesced_moves": 0,
+              "visible_ticket": 2
+            }
+          },
+          "event": {
+            "index": 5,
+            "x": 300,
+            "time": 7378.377144
+          }
+        },
+        {
+          "start": 7378.9815698,
+          "end": 7379.8075675,
+          "response": {
+            "accept_ms": 589.0030000209808,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 4,
+              "coalesced_moves": 0,
+              "visible_ticket": 2
+            }
+          },
+          "event": {
+            "index": 11,
+            "x": 420,
+            "time": 7378.9772597
+          }
+        },
+        {
+          "start": 7379.807581,
+          "end": 7380.9874444,
+          "response": {
+            "accept_ms": 826.9410000443459,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 5,
+              "coalesced_moves": 0,
+              "visible_ticket": 3
+            }
+          },
+          "event": {
+            "index": 19,
+            "x": 580,
+            "time": 7379.777051
+          }
+        }
+      ],
+      "completion": {
+        "start": 7384.2948179,
+        "end": 7385.1950605,
+        "response": {
+          "accept_ms": 648.4700000286102,
+          "completion_pending": false,
+          "ok": true,
+          "result": {
+            "accepted_ticket": 5,
+            "applied_ticket": 5,
+            "coalesced_moves": 0,
+            "last_accept_to_visible_us": 3646492,
+            "priority_publications": 1,
+            "visible_ticket": 5,
+            "visible_x": 580,
+            "visible_y": 680
+          }
+        }
+      },
+      "transmitted": 4,
+      "host_coalesced": 16,
+      "final_event_to_confirm_ms": 5418.009500000153,
+      "final_event_to_hdmi_ms": 4440.501899999617,
+      "acceptance_ms": [
+        364.5400000214577,
+        410.04100000858307,
+        589.0030000209808,
+        826.9410000443459
+      ],
+      "frame_count": 76
+    },
+    {
+      "round": 1,
+      "async_input": true,
+      "events": [
+        {
+          "index": 0,
+          "x": 200,
+          "time": 7387.3898118
+        },
+        {
+          "index": 1,
+          "x": 220,
+          "time": 7387.4903273
+        },
+        {
+          "index": 2,
+          "x": 240,
+          "time": 7387.5901603
+        },
+        {
+          "index": 3,
+          "x": 260,
+          "time": 7387.690079
+        },
+        {
+          "index": 4,
+          "x": 280,
+          "time": 7387.7903605
+        },
+        {
+          "index": 5,
+          "x": 300,
+          "time": 7387.8898997
+        },
+        {
+          "index": 6,
+          "x": 320,
+          "time": 7387.989927
+        },
+        {
+          "index": 7,
+          "x": 340,
+          "time": 7388.0899614
+        },
+        {
+          "index": 8,
+          "x": 360,
+          "time": 7388.1898907
+        },
+        {
+          "index": 9,
+          "x": 380,
+          "time": 7388.2899737
+        },
+        {
+          "index": 10,
+          "x": 400,
+          "time": 7388.3899739
+        },
+        {
+          "index": 11,
+          "x": 420,
+          "time": 7388.4899652
+        },
+        {
+          "index": 12,
+          "x": 440,
+          "time": 7388.589955
+        },
+        {
+          "index": 13,
+          "x": 460,
+          "time": 7388.6899739
+        },
+        {
+          "index": 14,
+          "x": 480,
+          "time": 7388.7899797
+        },
+        {
+          "index": 15,
+          "x": 500,
+          "time": 7388.8898623
+        },
+        {
+          "index": 16,
+          "x": 520,
+          "time": 7388.9903191
+        },
+        {
+          "index": 17,
+          "x": 540,
+          "time": 7389.0899657
+        },
+        {
+          "index": 18,
+          "x": 560,
+          "time": 7389.1899456
+        },
+        {
+          "index": 19,
+          "x": 580,
+          "time": 7389.2903456
+        }
+      ],
+      "sent": [
+        {
+          "start": 7387.3898408,
+          "end": 7387.9115636,
+          "response": {
+            "accept_ms": 396.4739999771118,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 7,
+              "coalesced_moves": 0,
+              "visible_ticket": 6
+            }
+          },
+          "event": {
+            "index": 0,
+            "x": 200,
+            "time": 7387.3898118
+          }
+        },
+        {
+          "start": 7387.9115744,
+          "end": 7388.5830905,
+          "response": {
+            "accept_ms": 468.1980000138283,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 8,
+              "coalesced_moves": 0,
+              "visible_ticket": 7
+            }
+          },
+          "event": {
+            "index": 5,
+            "x": 300,
+            "time": 7387.8898997
+          }
+        },
+        {
+          "start": 7388.5831026,
+          "end": 7390.5924035,
+          "response": {
+            "accept_ms": 1628.561999976635,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 9,
+              "coalesced_moves": 0,
+              "visible_ticket": 8
+            }
+          },
+          "event": {
+            "index": 11,
+            "x": 420,
+            "time": 7388.4899652
+          }
+        },
+        {
+          "start": 7390.5924137,
+          "end": 7391.9078043,
+          "response": {
+            "accept_ms": 949.2000000476837,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 10,
+              "coalesced_moves": 0,
+              "visible_ticket": 9
+            }
+          },
+          "event": {
+            "index": 19,
+            "x": 580,
+            "time": 7389.2903456
+          }
+        }
+      ],
+      "completion": {
+        "start": 7391.9079574,
+        "end": 7393.1166136,
+        "response": {
+          "accept_ms": 848.3000000119209,
+          "completion_pending": false,
+          "ok": true,
+          "result": {
+            "accepted_ticket": 10,
+            "applied_ticket": 10,
+            "coalesced_moves": 0,
+            "last_accept_to_visible_us": 974146,
+            "priority_publications": 1,
+            "visible_ticket": 10,
+            "visible_x": 580,
+            "visible_y": 680
+          }
+        }
+      },
+      "transmitted": 4,
+      "host_coalesced": 16,
+      "final_event_to_confirm_ms": 3826.2679999998,
+      "final_event_to_hdmi_ms": 3135.769199999231,
+      "acceptance_ms": [
+        396.4739999771118,
+        468.1980000138283,
+        1628.561999976635,
+        949.2000000476837
+      ],
+      "frame_count": 61
+    },
+    {
+      "round": 2,
+      "async_input": true,
+      "events": [
+        {
+          "index": 0,
+          "x": 200,
+          "time": 7395.3989523
+        },
+        {
+          "index": 1,
+          "x": 220,
+          "time": 7395.4992991
+        },
+        {
+          "index": 2,
+          "x": 240,
+          "time": 7395.5993986
+        },
+        {
+          "index": 3,
+          "x": 260,
+          "time": 7395.6993426
+        },
+        {
+          "index": 4,
+          "x": 280,
+          "time": 7395.7991051
+        },
+        {
+          "index": 5,
+          "x": 300,
+          "time": 7395.8992343
+        },
+        {
+          "index": 6,
+          "x": 320,
+          "time": 7395.9992046
+        },
+        {
+          "index": 7,
+          "x": 340,
+          "time": 7396.0991886
+        },
+        {
+          "index": 8,
+          "x": 360,
+          "time": 7396.1990774
+        },
+        {
+          "index": 9,
+          "x": 380,
+          "time": 7396.2992557
+        },
+        {
+          "index": 10,
+          "x": 400,
+          "time": 7396.3994132
+        },
+        {
+          "index": 11,
+          "x": 420,
+          "time": 7396.4994265
+        },
+        {
+          "index": 12,
+          "x": 440,
+          "time": 7396.5990547
+        },
+        {
+          "index": 13,
+          "x": 460,
+          "time": 7396.6991103
+        },
+        {
+          "index": 14,
+          "x": 480,
+          "time": 7396.7991018
+        },
+        {
+          "index": 15,
+          "x": 500,
+          "time": 7396.8993955
+        },
+        {
+          "index": 16,
+          "x": 520,
+          "time": 7396.9992151
+        },
+        {
+          "index": 17,
+          "x": 540,
+          "time": 7397.0993133
+        },
+        {
+          "index": 18,
+          "x": 560,
+          "time": 7397.1991347
+        },
+        {
+          "index": 19,
+          "x": 580,
+          "time": 7397.2990898
+        }
+      ],
+      "sent": [
+        {
+          "start": 7395.3989709,
+          "end": 7395.9046694,
+          "response": {
+            "accept_ms": 368.9020000100136,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 12,
+              "coalesced_moves": 0,
+              "visible_ticket": 11
+            }
+          },
+          "event": {
+            "index": 0,
+            "x": 200,
+            "time": 7395.3989523
+          }
+        },
+        {
+          "start": 7395.9046856,
+          "end": 7396.7018414,
+          "response": {
+            "accept_ms": 614.1840000152588,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 13,
+              "coalesced_moves": 0,
+              "visible_ticket": 12
+            }
+          },
+          "event": {
+            "index": 5,
+            "x": 300,
+            "time": 7395.8992343
+          }
+        },
+        {
+          "start": 7396.701851,
+          "end": 7398.5249265,
+          "response": {
+            "accept_ms": 1582.3100000023842,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 14,
+              "coalesced_moves": 0,
+              "visible_ticket": 13
+            }
+          },
+          "event": {
+            "index": 13,
+            "x": 460,
+            "time": 7396.6991103
+          }
+        },
+        {
+          "start": 7398.5249366,
+          "end": 7399.6258978,
+          "response": {
+            "accept_ms": 676.5600000023842,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 15,
+              "coalesced_moves": 0,
+              "visible_ticket": 13
+            }
+          },
+          "event": {
+            "index": 19,
+            "x": 580,
+            "time": 7397.2990898
+          }
+        }
+      ],
+      "completion": {
+        "start": 7400.7071966,
+        "end": 7401.5780217,
+        "response": {
+          "accept_ms": 522.2859999537468,
+          "completion_pending": false,
+          "ok": true,
+          "result": {
+            "accepted_ticket": 15,
+            "applied_ticket": 15,
+            "coalesced_moves": 0,
+            "last_accept_to_visible_us": 1939316,
+            "priority_publications": 1,
+            "visible_ticket": 15,
+            "visible_x": 580,
+            "visible_y": 680
+          }
+        }
+      },
+      "transmitted": 4,
+      "host_coalesced": 16,
+      "final_event_to_confirm_ms": 4278.931900000316,
+      "final_event_to_hdmi_ms": 3682.127400000354,
+      "acceptance_ms": [
+        368.9020000100136,
+        614.1840000152588,
+        1582.3100000023842,
+        676.5600000023842
+      ],
+      "frame_count": 66
+    }
+  ],
+  "metrics": {
+    "final_event_to_hdmi_ms": {
+      "n": 3,
+      "median_ms": 3682.127400000354,
+      "maximum_ms": 4440.501899999617,
+      "samples_ms": [
+        4440.501899999617,
+        3135.769199999231,
+        3682.127400000354
+      ]
+    },
+    "final_event_to_confirm_ms": {
+      "n": 3,
+      "median_ms": 4278.931900000316,
+      "maximum_ms": 5418.009500000153,
+      "samples_ms": [
+        5418.009500000153,
+        3826.2679999998,
+        4278.931900000316
+      ]
+    },
+    "transmitted": [
+      4,
+      4,
+      4
+    ]
+  }
+}

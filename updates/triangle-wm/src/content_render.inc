@@ -2,6 +2,7 @@
  void upload(unsigned region,unsigned offset,const uint32_t*data,unsigned words){bo_upload u{};u.region=region;u.offset=offset*4;u.bytes=words*4;u.data=uintptr_t(data);call(BO_UPLOAD,&u);}
  void prepare(Window&w){
   if(!w.has_content||w.plan_ready)return;
+  ++plan_builds;
   double started=now();
   w.transform.update(w.yaw,w.pitch,w.width,w.height,w.padding);
   auto projection=w.transform.projection(w.surface.width,w.surface.height);
@@ -17,29 +18,36 @@
    "changed_tiles",s.changed,"content_changed_tiles",s.content_changed,"owned_tiles",s.owned,"projected_tiles",s.projected,"copied_tiles",s.copied,
    "jobs_per_core",s.jobs,"texture_upload_bytes",s.uploaded,"texture_scatter_bytes",s.scatter,"texture_evictions",s.evictions,"resident_textures",s.resident,
    "projection_ms",s.projection_ms,"published",true,"render_ms",s.render_ms,"publish_ms",s.publish_ms,"validate_ms",s.profile.validate_us/1000.,
-   "metadata_ms",s.profile.upload_us/1000.,"wait_ms",s.profile.wait_us/1000.,"active_bank",s.bank,"ui_ms",ui_ms,"overlay_tiles",ui_tile_count);
+   "metadata_ms",s.profile.upload_us/1000.,"wait_ms",s.profile.wait_us/1000.,"active_bank",s.bank,"ui_ms",ui_ms,"overlay_tiles",ui_tile_count,
+   "ui_rebuilt_tiles",ui_rebuilt,"ui_incremental_tiles",ui_incremental,"ui_reused_tiles",ui_reused,"ui_written_cells",ui_written_cells,"ui_restored_cells",ui_restored_cells,"ui_base_transfer_bytes",ui_copy_bytes,
+   "ui_mask_reused_total",ui_mask_reused,"ui_mask_built_total",ui_mask_built,
+   "ui_layout_us",ui_layout_us,"ui_pick_us",ui_pick_us,"ui_masks_us",ui_masks_us,"ui_payload_us",ui_payload_us,
+   "plan_builds_total",plan_builds,"footprint_calls_total",footprint_calls,"run_submissions_total",run_submissions,"marker",marker_report());
  }
  J render(bool describe=true,bool overlay_only=false){
+  bool hide_resize=move_marker.active&&move_marker.kind==3&&!move_marker.frozen&&!move_marker.committing;
+  if(hide_resize||marker_restore_scene)overlay_only=false;
   double begin=now();stats={};plan_ms=0;texture_cache.evictions=0;plan_tiles=plan_fallbacks=plan_rejected=0;auto &next=scratch_metadata;next=metadata;auto&owner=planned_owner;auto&wanted=planned_version;auto &touched=scratch_touched;auto &new_visible=scratch_visible;touched.clear();new_visible.clear();
   unsigned owned=visible_tiles.size(),changed=0,content_changed=0;
   if(!overlay_only||active<0){touched=visible_tiles;
   for(unsigned t:touched){owner[t]=0;wanted[t]=0;next[256+t]=UINT32_MAX;touched_flag[t]=1;}
-  for(int id:order){auto&w=windows.at(id);if(w.visible){for(unsigned t:w.footprint){if(!touched_flag[t]){touched.push_back(t);touched_flag[t]=1;wanted[t]=0;}if(!owner[t])new_visible.push_back(t);owner[t]=id;}}}
+  for(int id:order){auto&w=windows.at(id);if(w.visible&&!(hide_resize&&id==move_marker.window)){for(unsigned t:w.footprint){if(!touched_flag[t]){touched.push_back(t);touched_flag[t]=1;wanted[t]=0;}if(!owner[t])new_visible.push_back(t);owner[t]=id;}}}
   for(int id:order){auto &w=windows.at(id);if(w.visible && w.has_content && !w.shell_pending && !w.plan_ready && std::any_of(w.footprint.begin(),w.footprint.end(),[&](unsigned t){return owner[t]==id;}))prepare(w);}
   owned=new_visible.size();for(unsigned t:new_visible){auto&w=windows.at(owner[t]);next[256+t]=colors.at(w.splash_pending?w.splash_color:w.color)*1024;if(w.has_content&&!w.shell_pending){auto p=w.plan.find(t);if(p!=w.plan.end())wanted[t]=p->second.version;}}
   for(unsigned t:touched)if(!wanted[t]&&slots[t]>=0){free_slots.push_back(slots[t]);slots[t]=-1;versions[0][t]=versions[1][t]=0;}
-  for(unsigned t:new_visible)if(wanted[t]){if(slots[t]<0){if(!free_slots.empty()){slots[t]=free_slots.back();free_slots.pop_back();}else{require(next_slot<(ui_enabled?tiles-256:tiles),"scene payload capacity");slots[t]=next_slot++;}versions[0][t]=versions[1][t]=0;}next[256+t]=unsigned(slots[t])*1024;}
+  for(unsigned t:new_visible)if(wanted[t]){if(slots[t]<0){if(!free_slots.empty()){slots[t]=free_slots.back();free_slots.pop_back();}else{require(next_slot<(ui_enabled?marker_payload:tiles),"scene payload capacity");slots[t]=next_slot++;}versions[0][t]=versions[1][t]=0;}next[256+t]=unsigned(slots[t])*1024;}
   for(unsigned t:touched){changed+=next[256+t]!=metadata[256+t]||wanted[t]!=presented[t];content_changed+=wanted[t]&&wanted[t]!=presented[t];}
   visible_tiles.swap(new_visible);for(unsigned t:touched)touched_flag[t]=0;
   }
   if(active>=0&&!changed&&!(ui_enabled&&ui_dirty)){stats.owned=owned;stats.render_ms=(now()-begin)*1000;return describe?render_report():J();}
   unsigned bank=active<0?0:unsigned(active)^1;auto &copies=copy_batch;copies.clear();std::map<int,std::vector<unsigned>> project;unsigned copied=0,projected=0,uploaded=0,scatter_bytes=0;std::array<unsigned,2> jobs{};
   for(unsigned t:visible_tiles)if(wanted[t]&&versions[bank][t]!=wanted[t]){
-   if(active>=0&&versions[active][t]==wanted[t]){bo_batch_entry e{};e.kind=BO_BATCH_COPY;e.op.copy={BO_SCENE0+unsigned(active),(header+unsigned(slots[t])*256)*4,BO_SCENE0+bank,(header+unsigned(slots[t])*256)*4,1024,0};copies.push_back(e);copied++;}
+   if(active>=0&&versions[active][t]==wanted[t]){append_copy(copies,BO_SCENE0+unsigned(active),BO_SCENE0+bank,(header+unsigned(slots[t])*256)*4);copied++;}
    else project[owner[t]].push_back(t);
   }
   for(size_t i=0;i<copies.size();i+=BO_BATCH_MAX){bo_batch b{};b.count=std::min(size_t(BO_BATCH_MAX),copies.size()-i);b.entries=uintptr_t(copies.data()+i);call(BO_BATCH,&b);}
   double projection_begin=now();
+  if(input_checkpoint)input_checkpoint(false);
   for(auto&[id,ids]:project){auto&w=windows.at(id);auto&s=w.surface;
    auto &resident=texture_cache.acquire(id,s.pixels.size());
    if(!resident.valid || resident.revision!=s.revision){
@@ -63,16 +71,22 @@
    for(size_t off=0;off<ids.size();off+=128){unsigned count=std::min(size_t(128),ids.size()-off);auto &d=descriptor_batch;for(unsigned i=0;i<count;i++){unsigned t=ids[off+i];auto v=w.plan.at(t).descriptor;v[0]=resident.offset;v[1]=header+slots[t]*256;v[5]=1|(w.color<<8);d[i]=v;}
     unsigned n0=(count+1)/2,n1=count-n0;upload(BO_DESC0,0,d[0].data(),n0*18);if(n1)upload(BO_DESC1,0,d[n0].data(),n1*18);
     bo_run run{};run.bank=bank;run.scene_words=scene_size();run.texture_words=resident.offset+s.pixels.size();run.jobs[0]=n0;run.jobs[1]=n1;run.timeout_ms=30000;call(BO_RUN,&run);jobs[0]+=n0;jobs[1]+=n1;projected+=count;
+    if(input_checkpoint)input_checkpoint(false);
    }
   }
   double projection_end=now();for(unsigned t:visible_tiles)if(wanted[t])versions[bank][t]=wanted[t];
+  if(input_checkpoint)input_checkpoint(true);
   next[0]=(next[0]&0xffffffu)|((bank+1)<<24);if(ui_enabled)ui_compose(next,bank);auto &published_metadata=ui_enabled?ui_metadata:next;
+  bool freeze=move_marker.active&&!move_marker.frozen&&!move_marker.committing;
+  if(freeze){marker_capture(published_metadata);marker_inject(published_metadata,bank);}
   bo_publish p{};p.present.bank=bank;p.present.scene_words=scene_size();p.present.resolution=2;p.present.timeout_ms=30000;std::copy(camera.begin(),camera.end(),p.present.camera);p.metadata=uintptr_t(published_metadata.data());p.words=header;
   double call_start=now();call(BO_PUBLISH,&p);double end=now();if(ui_enabled)display_metadata=ui_metadata;metadata.swap(next);for(unsigned t:touched)presented[t]=wanted[t];profile=p.profile;active=bank;commits++;
   stats.published=true;stats.changed=changed;stats.content_changed=content_changed;stats.owned=owned;stats.projected=projected;stats.copied=copied;
   stats.uploaded=uploaded;stats.scatter=scatter_bytes;stats.evictions=texture_cache.evictions;stats.resident=texture_cache.entries.size();stats.bank=bank;stats.jobs=jobs;
   stats.plan_ms=plan_ms;stats.plan_tiles=plan_tiles;stats.plan_rejected=plan_rejected;stats.plan_fallbacks=plan_fallbacks;
   stats.projection_ms=(projection_end-projection_begin)*1000;stats.render_ms=(end-begin)*1000;stats.publish_ms=(end-call_start)*1000;stats.profile=profile;
+  if(freeze){move_marker.frames++;move_marker.needs_publish=false;marker_sync_other(bank);}
+  marker_restore_scene=false;
   return describe?render_report():J();
  }
  J attach(Window&w,const J&q){

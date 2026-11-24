@@ -1,3 +1,4 @@
+import binary_test_wire
 """Exercise the real socket/memfd ABI and compare partial rendering with full rebuilds."""
 import json, mmap, os, socket, subprocess, sys, tempfile, time, struct
 
@@ -7,8 +8,8 @@ class Client:
         self.file=self.sock.makefile('rwb',buffering=0); self.seq=0
     def call(self, op, args=None, ok=True):
         self.seq+=1
-        self.file.write((json.dumps(dict(id=self.seq,app='same-name',op=op,args=args or {}))+'\n').encode())
-        reply=json.loads(self.file.readline()); assert reply['id']==self.seq,reply
+        self.file.write(binary_test_wire.encode(dict(id=self.seq,app='same-name',op=op,args=args or {})))
+        reply=binary_test_wire.read(self.file); assert reply['id']==self.seq,reply
         assert reply['ok']==ok,reply
         return reply.get('result',reply)
     def wait(self,result): return self.call('wait_present',{'generation':result['generation']})

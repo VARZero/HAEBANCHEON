@@ -1,0 +1,75 @@
+{
+  "scope": "Dedicated fixed WM/app/input runtime handoff; one cursor endpoint confirmed on actual HDMI, not a latency distribution.",
+  "move": {
+    "accept_ms": 171.37299996614456,
+    "completion_pending": true,
+    "ok": true,
+    "result": {
+      "accepted_ticket": 50,
+      "coalesced_moves": 27,
+      "visible_ticket": 49
+    }
+  },
+  "progress": {
+    "accepted_ticket": 50,
+    "applied_ticket": 50,
+    "coalesced_moves": 27,
+    "last_accept_to_visible_us": 77788,
+    "priority_publications": 3,
+    "visible_ticket": 50,
+    "visible_x": 700,
+    "visible_y": 680
+  },
+  "state": {
+    "captured_window": 0,
+    "commit_on_release": true,
+    "controls": [
+      {
+        "action": "close",
+        "hit_size": 32,
+        "tile": 3901,
+        "window_id": 1,
+        "x": 593,
+        "y": 157
+      },
+      {
+        "action": "move",
+        "hit_size": 32,
+        "tile": 56,
+        "window_id": 1,
+        "x": 689,
+        "y": 561
+      },
+      {
+        "action": "resize",
+        "hit_size": 32,
+        "tile": 180,
+        "window_id": 1,
+        "x": 916,
+        "y": 544
+      }
+    ],
+    "display_enabled": true,
+    "generation": 290,
+    "layout": "split",
+    "pressed": false,
+    "preview": {
+      "active": false,
+      "outline_tiles": 0,
+      "splash_index": 228,
+      "window_id": 0
+    },
+    "visible": true,
+    "x": 700,
+    "y": 680
+  },
+  "white_pixels": 17,
+  "static_title_control_white_pixels": [
+    4789,
+    73,
+    139,
+    58
+  ],
+  "preview": "http://127.0.0.1:8766",
+  "interactive": "http://127.0.0.1:8767"
+}

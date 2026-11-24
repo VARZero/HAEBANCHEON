@@ -1,0 +1,51 @@
+{
+  "date": "2026-11-22",
+  "version": "fixed-wm-binary-v2-codec",
+  "kernel": "6.12.0-haebancheon-publishcopy",
+  "kernel_changed": false,
+  "sd_install": true,
+  "boot_script_syntax_checked": true,
+  "installed_sizes": {
+    "triangle-boayo-fixed": 2156176,
+    "triangle-app": 1283720,
+    "triangle-input": 1246856
+  },
+  "expected_build": {
+    "version": "fixed-wm-binary-v2-codec",
+    "kernel_release": "6.12.0-haebancheon-publishcopy",
+    "driver": "BO_PUBLISH_COPY, unchanged",
+    "geometry": "integer Q24; quarter-degree angle boundary",
+    "wire": "BWM1/CBOR, compatible in-place codec",
+    "optimizations": [
+      "in-place codec",
+      "deferred control decode",
+      "cached ray constants"
+    ],
+    "binaries": {
+      "triangle-boayo-fixed": {
+        "sha256": "46f15069f67be64a9dadd24e3f13d4acdcb19e3eb02123a07c5baa574e3af031",
+        "bytes": 2156176,
+        "patch_gzip_bytes": 254050
+      },
+      "triangle-app": {
+        "sha256": "59d1ee5d322040fc4a31b072d9536b07ec97c64c0d0f28929eb588395110581d",
+        "bytes": 1283720,
+        "patch_gzip_bytes": 177523
+      },
+      "triangle-input": {
+        "sha256": "dbb63ee201b1417da52430f6c55a90738fee30e28e4662125df3c908b8e9a1f6",
+        "bytes": 1246856,
+        "patch_gzip_bytes": 168228
+      }
+    }
+  },
+  "verification": [
+    "UART receiver checksum and gzip CRC",
+    "COPY/LITERAL reconstruction size and FNV",
+    "successful SD copy/rename/sync",
+    "SD file metadata sizes and manifest readback",
+    "dedicated runtime native and HDMI checks"
+  ],
+  "source": "TRI_981a6831a2.log",
+  "live": "http://127.0.0.1:8767"
+}

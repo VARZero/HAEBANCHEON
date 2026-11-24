@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-22",
+  "hardware_tested": true,
+  "kernel": "6.12.0-haebancheon-publishcopy",
+  "wm": "fixed-wm-binary-v1",
+  "execution": "WM/app/input copied from SD into /tmp RAM before controlled tests; initial cold boot excluded.",
+  "old_baseline": "v15 historical records, same demo/path; different boot and binary/protocol. Not a randomized same-boot CPU-only comparison.",
+  "current_control": "Same fixed WM/binary clients on same boot with TRIANGLE_PUBLISH_COPY=0 versus default copy mode.",
+  "sources": [
+    "fixed-board-publish.json",
+    "fixed-board-primitives-checked.json",
+    "fixed-board-primitives-copy.json",
+    "fixed-board-input-checked.json",
+    "fixed-board-input-copy.json",
+    "fixed-board-paced-checked.json",
+    "fixed-board-paced-copy.json"
+  ],
+  "publication_median_ms": {
+    "checked_publish": 121.85142,
+    "full_upload_then_checked_present": 93.72774000000001,
+    "trusted_copy": 61.61936
+  },
+  "hdmi_median_ms": {
+    "old_v15": 1696.1588999984087,
+    "fixed_checked": 3682.127400000354,
+    "fixed_copy": 2618.012699999781
+  },
+  "conclusion": "Publication improved; payload writes did not consistently improve. The fixed-math/binary bundle regressed pointer latency against historical v15. No claim that fixed math alone caused the regression."
+}

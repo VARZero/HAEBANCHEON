@@ -2,6 +2,8 @@
 #define TRIANGLE_SERVICE_ONLY
 #include "../src/boayo_service.cpp"
 int main(){
+ // Keep the former thin-outline/B-first path as an explicit reference mode.
+ setenv("TRIANGLE_PREVIEW","outline",1);
  std::string path="/tmp/triangle-feedback-"+std::to_string(getpid());setenv("BOAYO_SOCKET",path.c_str(),1);
  triangle_service::Server server(true);auto&e=*server.engine;
  triangle_service::Peer app{-10,false,{},{},nullptr,0},ctl{-11,true,{},{},nullptr,0};

@@ -1,18 +1,23 @@
  // Construct only boundary cells, using the same footprint as the final window.
  bool ui_preview(Window &proposal,int id,unsigned color){
   auto ids=footprint(proposal);
-  if(preview.window==id&&preview.footprint==ids)return false;
+  if(preview.window==id&&preview.color==color&&preview.footprint==ids){preview.yaw=proposal.yaw;preview.pitch=proposal.pitch;preview.width=proposal.width;preview.height=proposal.height;return false;}
   preview={};preview.window=id;preview.color=color;preview.yaw=proposal.yaw;preview.pitch=proposal.pitch;preview.width=proposal.width;preview.height=proposal.height;preview.footprint=std::move(ids);
   std::array<uint8_t,tiles> inside{};for(unsigned t:preview.footprint)inside[t]=1;
-  for(unsigned t:preview.footprint)for(unsigned edge=0;edge<3;edge++){
-   uint32_t exposed=0;
-   for(unsigned n=0;n<2;n++){unsigned other=tile_neighbors[t][edge][n];if(other!=65535&&!inside[other])exposed|=tile_edge_coverage[t][edge][n];}
-   if(!exposed)continue;
-   auto &mask=preview.masks[t];
-   for(unsigned k=0;k<32;k++)if(exposed&(1u<<k)){
-    unsigned row=edge==0?k:edge==1?31:31-k,col=edge==0?0:edge==1?k:row;
-    unsigned cell=row*row+2*col;mask[cell/32]|=1u<<(cell%32);
+  for(unsigned t:preview.footprint){
+   std::array<uint32_t,3> exposed{};
+   for(unsigned edge=0;edge<3;edge++)for(unsigned n=0;n<2;n++){unsigned other=tile_neighbors[t][edge][n];if(other!=65535&&!inside[other])exposed[edge]|=tile_edge_coverage[t][edge][n];}
+   if(!(exposed[0]|exposed[1]|exposed[2]))continue;
+   auto &cached=ui_edge_masks[t];
+   if(cached.exposed==exposed)++ui_mask_reused;
+   else {
+    cached.exposed=exposed;cached.mask={};++ui_mask_built;
+    for(unsigned edge=0;edge<3;edge++)for(unsigned k=0;k<32;k++)if(exposed[edge]&(1u<<k)){
+     unsigned row=edge==0?k:edge==1?31:31-k,col=edge==0?0:edge==1?k:row;
+     unsigned cell=row*row+2*col;cached.mask[cell/32]|=1u<<(cell%32);
+    }
    }
+   preview.masks[t]=cached.mask;
   }
   ui_mask_dirty=true;ui_dirty=true;return true;
  }
@@ -22,11 +27,19 @@
   view_yaw=y;view_pitch=p;view_axes=axes(y,p);ui_projection.reset();ui_transform.reset();ui_descriptors.clear();ui_inverses.clear();ui_samples.clear();ui_cold_view=true;ui_dirty=true;ui_layout_dirty=true;ui_mask_dirty=true;
  }
  V ui_ray(int x,int y)const{
+  static bool cached=!(getenv("TRIANGLE_MATH_OPT")&&std::string(getenv("TRIANGLE_MATH_OPT"))=="0");
+  if(cached){
+   static const double horizontal=2*std::tan(rad(24.))/1280,vertical=2*std::tan(rad(18.))/720;
+   return view_axes[0]+view_axes[1]*((x-639.5)*horizontal)+view_axes[2]*((359.5-y)*vertical);
+  }
   return view_axes[0]+view_axes[1]*((x-639.5)*(2*std::tan(rad(24.))/1280))+
     view_axes[2]*((359.5-y)*(2*std::tan(rad(18.))/720));
  }
  unsigned ui_pick(int x,int y)const{
-  auto ray=ui_ray(x,y);int64_t q[3];for(int k=0;k<3;k++)q[k]=std::llround(ray[k]*0x1p30);
+  return ui_pick_ray(ui_ray(x,y));
+ }
+ unsigned ui_pick_ray(const V&ray)const{
+  int64_t q[3];for(int k=0;k<3;k++)q[k]=std::llround(ray[k]*0x1p30);
   for(unsigned f=0;f<20;f++){
    int64_t b[3]{};for(int j=0;j<3;j++){for(int k=0;k<3;k++)b[j]+=int64_t(camera_inverse[f][j][k])*q[k];b[j]>>=20;}
    if(*std::min_element(b,b+3)<-128)continue;
@@ -56,7 +69,7 @@
  }
  void ui_layout(){
   ui_controls.clear();
-  for(int id:order){auto&w=windows.at(id);if(!w.visible)continue;
+  for(int id:order){auto&w=windows.at(id);if(!w.visible||(move_marker.active&&move_marker.kind==3&&!move_marker.committing&&id==move_marker.window))continue;
    int32_t a[3][3];for(int j=0;j<3;j++)for(int k=0;k<3;k++)a[j][k]=std::lround(w.transform.ax[j][k]*8192);
    int tx=int(w.transform.tx*2048),ty=int(w.transform.ty*2048),pad=std::max(80,int(w.padding*72));
    unsigned best[3]={tiles,tiles,tiles};int64_t score[3]={INT64_MAX,INT64_MAX,INT64_MAX};
@@ -99,16 +112,18 @@
   return false;
  }
  void ui_compose(Words& base,unsigned bank){
-  double start=now();if(ui_layout_dirty){ui_button_cache.clear();ui_layout();ui_layout_dirty=false;ui_mask_dirty=true;}auto &paint=ui_paints;
+  double start=now();uint64_t phase=microseconds_now();ui_pick_us=0;
+  if(ui_layout_dirty){ui_button_cache.clear();ui_layout();ui_layout_dirty=false;ui_mask_dirty=true;}
+  ui_layout_us=microseconds_now()-phase;phase=microseconds_now();auto &paint=ui_paints;
   if(ui_mask_dirty){paint.clear();
   for(auto&c:ui_controls)paint[c.tile];
   std::set<unsigned> cursor;
-  if(pointer.visible&&pointer.display){unsigned t=ui_pick(pointer.x,pointer.y);if(t<tiles)cursor.insert(t);
+  if(pointer.visible&&pointer.display&&(!move_marker.active||move_marker.committing)){uint64_t pick_start=microseconds_now();unsigned t=ui_pick(pointer.x,pointer.y);ui_pick_us=microseconds_now()-pick_start;if(t<tiles)cursor.insert(t);
    for(int round=0;round<2;round++){auto previous=cursor;for(unsigned v:previous)for(auto&e:tile_neighbors[v]){cursor.insert(e[0]);if(e[1]!=65535)cursor.insert(e[1]);}}
    for(unsigned v:cursor)paint[v];
   }
   int nearest=INT_MAX;unsigned near_tile=tiles,near_cell=0;bool white=false;
-  for(auto &[t,p]:paint){auto&d=ui_descriptor(t);
+  for(auto &[t,p]:paint){if(input_checkpoint)input_checkpoint(false);auto&d=ui_descriptor(t);
    bool pointer_tile=pointer.visible&&pointer.display&&cursor.count(t)&&affected(d,{pointer.x-12,pointer.y-12,25,25});
    std::vector<UiControl> buttons;for(auto&c:ui_controls)if(c.tile==t)buttons.push_back(c);
    if(!pointer_tile&&buttons.empty())continue;
@@ -184,29 +199,63 @@
   if(pointer.visible&&pointer.display&&!white&&near_tile<tiles){auto&p=paint[near_tile];uint32_t bit=1u<<(near_cell%32);p.mask[0][near_cell/32]&=~bit;p.mask[pointer.down?2:1][near_cell/32]|=bit;}
   for(auto it=paint.begin();it!=paint.end();){bool any=false;for(auto&m:it->second.mask)for(auto v:m)any|=v!=0;if(!any)it=paint.erase(it);else ++it;}
   for(auto &[t,mask]:preview.masks){auto &p=paint[t];p.mask[3]=mask;for(unsigned i=0;i<32;i++)p.mask[3][i]&=~(p.mask[0][i]|p.mask[1][i]|p.mask[2][i]);}
+  // Store final visible colors, including rare pointer/button overlaps.
+  for(auto &[t,p]:paint)for(unsigned i=0;i<32;i++){uint32_t above=0;for(int c=3;c>=0;c--){p.mask[c][i]&=~above;above|=p.mask[c][i];}}
   ui_mask_dirty=false;ui_cold_view=false;
   }
+  ui_masks_us=microseconds_now()-phase;phase=microseconds_now();
   require(paint.size()<=256,"overlay tile budget");
-  for(auto it=ui_slots.begin();it!=ui_slots.end();)if(!paint.count(it->first))it=ui_slots.erase(it);else ++it;
+  // Keep dormant mappings so alternating scene banks can reuse their pixels.
   std::array<bool,256> used{};for(auto&[t,s]:ui_slots)used[s]=true;
   ui_metadata=base;std::vector<bo_batch_entry> ops;
+  ui_rebuilt=ui_incremental=ui_reused=ui_written_cells=ui_restored_cells=ui_copy_bytes=0;
   for(auto &[t,p]:paint){
-   if(!ui_slots.count(t)){unsigned s=0;while(used[s])s++;ui_slots[t]=s;used[s]=true;}
-   unsigned slot=ui_slots.at(t),payload=tiles-256+slot,source=base[256+t];uint64_t hash=1469598103934665603ull^preview.color;
-   for(auto&m:p.mask)for(auto v:m)hash=(hash^v)*1099511628211ull;
+   if(input_checkpoint)input_checkpoint(false);
+   if(!ui_slots.count(t)){
+    if(ui_slots.size()==256){auto evict=ui_slots.begin();while(evict!=ui_slots.end()&&paint.count(evict->first))++evict;require(evict!=ui_slots.end(),"overlay eviction");used[evict->second]=false;ui_slots.erase(evict);}
+    unsigned s=0;while(s<256&&used[s])s++;require(s<256,"overlay slot");ui_slots[t]=s;used[s]=true;
+   }
+   unsigned slot=ui_slots.at(t),payload=tiles-256+slot,source=base[256+t];
    auto &stamp=ui_stamps[bank][slot];uint64_t version=planned_version[t];
-   if(stamp.tile!=t||stamp.source!=source||stamp.version!=version||stamp.hash!=hash){
+   bool same_base=stamp.tile==t&&stamp.source==source&&stamp.version==version;
+   if(same_base&&stamp.color==preview.color&&ui_same_mask(stamp.paint,p)){++ui_reused;ui_metadata[256+t]=payload*1024;continue;}
+   auto color=[](unsigned c,unsigned splash){return c==0?0u:c==1?255u:c==2?228u:splash;};
+   auto add_blend=[&](const std::array<uint32_t,32>&mask,unsigned mode,unsigned value){
+    unsigned cells=0;for(uint32_t v:mask)cells+=__builtin_popcount(v);if(!cells)return;
+    bo_batch_entry blend{};blend.kind=BO_BATCH_BLEND;auto&b=blend.op.blend;b.bank=bank;b.tile=payload;b.mode=mode;b.color=value;b.scratch_word=mode?0:header;std::copy(mask.begin(),mask.end(),b.mask);ops.push_back(blend);ui_written_cells+=cells;
+   };
+   // A small pointer often moves to disjoint cells: restoring it costs more
+   // than a DMA base copy. Keep the delta path for entering/leaving outlines.
+   auto has_outline=[](const UiPaint&v){return std::any_of(v.mask[3].begin(),v.mask[3].end(),[](uint32_t bits){return bits!=0;});};
+   if(!ui_delta||!same_base||(!has_outline(p)&&!has_outline(stamp.paint))){
+    ++ui_rebuilt;
     bo_batch_entry op{};
     if(source==UINT32_MAX){op.kind=BO_BATCH_FILL;op.op.fill={BO_SCENE0+bank,(header+payload*256)*4,1024,0,0};}
     else {op.kind=BO_BATCH_COPY;op.op.copy={BO_SCENE0+bank,header*4+source,BO_SCENE0+bank,(header+payload*256)*4,1024,0};}
-    ops.push_back(op);
-    for(unsigned c=0;c<4;c++){bool any=false;for(auto v:p.mask[c])any|=v!=0;if(!any)continue;
-     bo_batch_entry blend{};blend.kind=BO_BATCH_BLEND;blend.op.blend.bank=bank;blend.op.blend.tile=payload;blend.op.blend.mode=1;blend.op.blend.color=c==0?0:c==1?255:c==2?228:preview.color;std::copy(p.mask[c].begin(),p.mask[c].end(),blend.op.blend.mask);ops.push_back(blend);
+    ops.push_back(op);ui_copy_bytes+=1024;
+    for(unsigned c=0;c<4;c++)add_blend(p.mask[c],1,color(c,preview.color));
+   }else{
+    ++ui_incremental;std::array<uint32_t,32> restore{};bool removed=false;
+    for(unsigned i=0;i<32;i++){uint32_t before=0,after=0;for(unsigned c=0;c<4;c++){before|=stamp.paint.mask[c][i];after|=p.mask[c][i];}restore[i]=before&~after;removed|=restore[i]!=0;ui_restored_cells+=__builtin_popcount(restore[i]);}
+    if(removed){
+     int solid_color=source==UINT32_MAX?0:-1;for(auto [c,s]:colors)if(source==s*1024)solid_color=c;
+     if(solid_color>=0)add_blend(restore,1,unsigned(solid_color));
+     else {
+      // The ABI reads masked source bytes from scratch. Stage the clean latest
+      // tile there; never read back or overwrite the active display bank.
+      bo_batch_entry copy{};copy.kind=BO_BATCH_COPY;copy.op.copy={BO_SCENE0+bank,header*4+source,BO_SCRATCH,header*4,1024,0};ops.push_back(copy);ui_copy_bytes+=1024;add_blend(restore,0,0);
+     }
     }
-    stamp={t,source,version,hash};
+    for(unsigned c=0;c<4;c++){
+     std::array<uint32_t,32> same{},delta{};
+     for(unsigned old=0;old<4;old++)if(color(old,stamp.color)==color(c,preview.color))for(unsigned i=0;i<32;i++)same[i]|=stamp.paint.mask[old][i];
+     for(unsigned i=0;i<32;i++)delta[i]=p.mask[c][i]&~same[i];
+     add_blend(delta,1,color(c,preview.color));
+    }
    }
+   stamp.tile=t;stamp.source=source;stamp.version=version;stamp.color=preview.color;stamp.paint=p;
    ui_metadata[256+t]=payload*1024;
   }
   for(size_t i=0;i<ops.size();i+=BO_BATCH_MAX){bo_batch b{};b.count=std::min(size_t(BO_BATCH_MAX),ops.size()-i);b.entries=uintptr_t(ops.data()+i);call(BO_BATCH,&b);}
-  ui_tile_count=paint.size();ui_ms=(now()-start)*1000;ui_dirty=false;
+  ui_payload_us=microseconds_now()-phase;ui_tile_count=paint.size();ui_ms=(now()-start)*1000;ui_dirty=false;
  }

@@ -1,0 +1,652 @@
+{
+  "source": "TRI_de7af9e0aa.log",
+  "scope": "Board-local native client timings; UART, capture and optical latency excluded. Three sequential 16-point bursts per condition. Async may omit intermediate positions.",
+  "conditions": {
+    "paused": {
+      "rounds": [
+        {
+          "async": true,
+          "final_visible_ms": 8221.943720001727,
+          "last_accept_ms": 7745.185219999403,
+          "progress": {
+            "accepted_ticket": 16,
+            "applied_ticket": 16,
+            "coalesced_moves": 0,
+            "last_accept_to_visible_us": 471298,
+            "priority_publications": 0,
+            "visible_ticket": 16,
+            "visible_x": 700,
+            "visible_y": 350
+          },
+          "requests": 16,
+          "round": 0,
+          "samples": [
+            {
+              "accept_ms": 138.79907999932766,
+              "index": 0,
+              "ticket": 1
+            },
+            {
+              "accept_ms": 595.9679000005126,
+              "index": 1,
+              "ticket": 2
+            },
+            {
+              "accept_ms": 482.4097399972379,
+              "index": 2,
+              "ticket": 3
+            },
+            {
+              "accept_ms": 462.315680000931,
+              "index": 3,
+              "ticket": 4
+            },
+            {
+              "accept_ms": 423.0982399992645,
+              "index": 4,
+              "ticket": 5
+            },
+            {
+              "accept_ms": 501.993939999491,
+              "index": 5,
+              "ticket": 6
+            },
+            {
+              "accept_ms": 481.66186000034213,
+              "index": 6,
+              "ticket": 7
+            },
+            {
+              "accept_ms": 468.35646000131965,
+              "index": 7,
+              "ticket": 8
+            },
+            {
+              "accept_ms": 465.10514000058174,
+              "index": 8,
+              "ticket": 9
+            },
+            {
+              "accept_ms": 439.03017999976873,
+              "index": 9,
+              "ticket": 10
+            },
+            {
+              "accept_ms": 500.2373000010848,
+              "index": 10,
+              "ticket": 11
+            },
+            {
+              "accept_ms": 430.6576000005007,
+              "index": 11,
+              "ticket": 12
+            },
+            {
+              "accept_ms": 430.334739997983,
+              "index": 12,
+              "ticket": 13
+            },
+            {
+              "accept_ms": 451.45670000091195,
+              "index": 13,
+              "ticket": 14
+            },
+            {
+              "accept_ms": 450.2199000008404,
+              "index": 14,
+              "ticket": 15
+            },
+            {
+              "accept_ms": 454.7173999994993,
+              "index": 15,
+              "ticket": 16
+            }
+          ]
+        },
+        {
+          "async": true,
+          "final_visible_ms": 7885.529079999775,
+          "last_accept_ms": 7448.5843399986625,
+          "progress": {
+            "accepted_ticket": 32,
+            "applied_ticket": 32,
+            "coalesced_moves": 0,
+            "last_accept_to_visible_us": 472157,
+            "priority_publications": 0,
+            "visible_ticket": 32,
+            "visible_x": 700,
+            "visible_y": 350
+          },
+          "requests": 16,
+          "round": 1,
+          "samples": [
+            {
+              "accept_ms": 130.41435999795794,
+              "index": 0,
+              "ticket": 17
+            },
+            {
+              "accept_ms": 404.8148599974811,
+              "index": 1,
+              "ticket": 18
+            },
+            {
+              "accept_ms": 469.95605999976397,
+              "index": 2,
+              "ticket": 19
+            },
+            {
+              "accept_ms": 447.4758800007403,
+              "index": 3,
+              "ticket": 20
+            },
+            {
+              "accept_ms": 416.16214000061154,
+              "index": 4,
+              "ticket": 21
+            },
+            {
+              "accept_ms": 440.0541200004518,
+              "index": 5,
+              "ticket": 22
+            },
+            {
+              "accept_ms": 463.00044000148773,
+              "index": 6,
+              "ticket": 23
+            },
+            {
+              "accept_ms": 429.22336000204086,
+              "index": 7,
+              "ticket": 24
+            },
+            {
+              "accept_ms": 497.6134799979627,
+              "index": 8,
+              "ticket": 25
+            },
+            {
+              "accept_ms": 408.20222000032663,
+              "index": 9,
+              "ticket": 26
+            },
+            {
+              "accept_ms": 393.63884000107646,
+              "index": 10,
+              "ticket": 27
+            },
+            {
+              "accept_ms": 459.7391199991107,
+              "index": 11,
+              "ticket": 28
+            },
+            {
+              "accept_ms": 417.58509999886155,
+              "index": 12,
+              "ticket": 29
+            },
+            {
+              "accept_ms": 506.24432000145316,
+              "index": 13,
+              "ticket": 30
+            },
+            {
+              "accept_ms": 510.07476000115275,
+              "index": 14,
+              "ticket": 31
+            },
+            {
+              "accept_ms": 459.68340000137687,
+              "index": 15,
+              "ticket": 32
+            }
+          ]
+        },
+        {
+          "async": true,
+          "final_visible_ms": 7728.7775599993765,
+          "last_accept_ms": 7293.518059998751,
+          "progress": {
+            "accepted_ticket": 48,
+            "applied_ticket": 48,
+            "coalesced_moves": 0,
+            "last_accept_to_visible_us": 474566,
+            "priority_publications": 0,
+            "visible_ticket": 48,
+            "visible_x": 700,
+            "visible_y": 350
+          },
+          "requests": 16,
+          "round": 2,
+          "samples": [
+            {
+              "accept_ms": 122.63791999965906,
+              "index": 0,
+              "ticket": 33
+            },
+            {
+              "accept_ms": 406.4831200018525,
+              "index": 1,
+              "ticket": 34
+            },
+            {
+              "accept_ms": 448.282120000571,
+              "index": 2,
+              "ticket": 35
+            },
+            {
+              "accept_ms": 451.2528399974108,
+              "index": 3,
+              "ticket": 36
+            },
+            {
+              "accept_ms": 412.38584000244737,
+              "index": 4,
+              "ticket": 37
+            },
+            {
+              "accept_ms": 458.5948599986732,
+              "index": 5,
+              "ticket": 38
+            },
+            {
+              "accept_ms": 462.2346399985254,
+              "index": 6,
+              "ticket": 39
+            },
+            {
+              "accept_ms": 437.1286600008607,
+              "index": 7,
+              "ticket": 40
+            },
+            {
+              "accept_ms": 526.4786200001836,
+              "index": 8,
+              "ticket": 41
+            },
+            {
+              "accept_ms": 389.63433999940753,
+              "index": 9,
+              "ticket": 42
+            },
+            {
+              "accept_ms": 401.62663999944925,
+              "index": 10,
+              "ticket": 43
+            },
+            {
+              "accept_ms": 459.0705000013113,
+              "index": 11,
+              "ticket": 44
+            },
+            {
+              "accept_ms": 421.92587999999523,
+              "index": 12,
+              "ticket": 45
+            },
+            {
+              "accept_ms": 423.4896799996495,
+              "index": 13,
+              "ticket": 46
+            },
+            {
+              "accept_ms": 457.8608600012958,
+              "index": 14,
+              "ticket": 47
+            },
+            {
+              "accept_ms": 471.708299998194,
+              "index": 15,
+              "ticket": 48
+            }
+          ]
+        }
+      ],
+      "metrics": {
+        "acceptance": {
+          "n": 48,
+          "median_ms": 450.7363699991256,
+          "p95_ms": 510.07476000115275,
+          "maximum_ms": 595.9679000005126
+        },
+        "burst_final_visible": {
+          "n": 3,
+          "median_ms": 7885.529079999775,
+          "p95_ms": 8221.943720001727,
+          "maximum_ms": 8221.943720001727
+        },
+        "final_point_completion": {
+          "n": 3,
+          "median_ms": 906.9677999988198,
+          "p95_ms": 931.4759000018239,
+          "maximum_ms": 931.4759000018239
+        },
+        "coalesced_moves": 0,
+        "priority_publications": 0
+      }
+    },
+    "active": {
+      "rounds": [
+        {
+          "async": true,
+          "final_visible_ms": 11106.954799998552,
+          "last_accept_ms": 10308.984579999,
+          "progress": {
+            "accepted_ticket": 64,
+            "applied_ticket": 64,
+            "coalesced_moves": 0,
+            "last_accept_to_visible_us": 654324,
+            "priority_publications": 1,
+            "visible_ticket": 64,
+            "visible_x": 700,
+            "visible_y": 350
+          },
+          "requests": 16,
+          "round": 0,
+          "samples": [
+            {
+              "accept_ms": 230.61318000033498,
+              "index": 0,
+              "ticket": 49
+            },
+            {
+              "accept_ms": 818.0633000023663,
+              "index": 1,
+              "ticket": 50
+            },
+            {
+              "accept_ms": 499.6827799975872,
+              "index": 2,
+              "ticket": 51
+            },
+            {
+              "accept_ms": 173.74091999977827,
+              "index": 3,
+              "ticket": 52
+            },
+            {
+              "accept_ms": 472.08535999804735,
+              "index": 4,
+              "ticket": 53
+            },
+            {
+              "accept_ms": 978.4640200026333,
+              "index": 5,
+              "ticket": 54
+            },
+            {
+              "accept_ms": 842.2043999992311,
+              "index": 6,
+              "ticket": 55
+            },
+            {
+              "accept_ms": 766.4798799976707,
+              "index": 7,
+              "ticket": 56
+            },
+            {
+              "accept_ms": 610.0526399984956,
+              "index": 8,
+              "ticket": 57
+            },
+            {
+              "accept_ms": 425.14535999670625,
+              "index": 9,
+              "ticket": 58
+            },
+            {
+              "accept_ms": 403.40074000135064,
+              "index": 10,
+              "ticket": 59
+            },
+            {
+              "accept_ms": 465.7160599976778,
+              "index": 11,
+              "ticket": 60
+            },
+            {
+              "accept_ms": 415.2032399997115,
+              "index": 12,
+              "ticket": 61
+            },
+            {
+              "accept_ms": 1067.586179997772,
+              "index": 13,
+              "ticket": 62
+            },
+            {
+              "accept_ms": 764.4805199988186,
+              "index": 14,
+              "ticket": 63
+            },
+            {
+              "accept_ms": 767.4766199998558,
+              "index": 15,
+              "ticket": 64
+            }
+          ]
+        },
+        {
+          "async": true,
+          "final_visible_ms": 11144.385660000145,
+          "last_accept_ms": 10327.136500000954,
+          "progress": {
+            "accepted_ticket": 80,
+            "applied_ticket": 80,
+            "coalesced_moves": 0,
+            "last_accept_to_visible_us": 1231499,
+            "priority_publications": 2,
+            "visible_ticket": 80,
+            "visible_x": 700,
+            "visible_y": 350
+          },
+          "requests": 16,
+          "round": 1,
+          "samples": [
+            {
+              "accept_ms": 224.72913999855518,
+              "index": 0,
+              "ticket": 65
+            },
+            {
+              "accept_ms": 744.9954399988055,
+              "index": 1,
+              "ticket": 66
+            },
+            {
+              "accept_ms": 811.3229999989271,
+              "index": 2,
+              "ticket": 67
+            },
+            {
+              "accept_ms": 475.8234799988568,
+              "index": 3,
+              "ticket": 68
+            },
+            {
+              "accept_ms": 447.03062000125647,
+              "index": 4,
+              "ticket": 69
+            },
+            {
+              "accept_ms": 440.3048000000417,
+              "index": 5,
+              "ticket": 70
+            },
+            {
+              "accept_ms": 466.2399000003934,
+              "index": 6,
+              "ticket": 71
+            },
+            {
+              "accept_ms": 509.82513999938965,
+              "index": 7,
+              "ticket": 72
+            },
+            {
+              "accept_ms": 1111.5173199996352,
+              "index": 8,
+              "ticket": 73
+            },
+            {
+              "accept_ms": 689.849920000881,
+              "index": 9,
+              "ticket": 74
+            },
+            {
+              "accept_ms": 776.7541199997067,
+              "index": 10,
+              "ticket": 75
+            },
+            {
+              "accept_ms": 691.9598000012338,
+              "index": 11,
+              "ticket": 76
+            },
+            {
+              "accept_ms": 500.3568000011146,
+              "index": 12,
+              "ticket": 77
+            },
+            {
+              "accept_ms": 210.2663799971342,
+              "index": 13,
+              "ticket": 78
+            },
+            {
+              "accept_ms": 515.7718000002205,
+              "index": 14,
+              "ticket": 79
+            },
+            {
+              "accept_ms": 950.0400000028312,
+              "index": 15,
+              "ticket": 80
+            }
+          ]
+        },
+        {
+          "async": true,
+          "final_visible_ms": 10779.534299999475,
+          "last_accept_ms": 10349.374419998378,
+          "progress": {
+            "accepted_ticket": 96,
+            "applied_ticket": 96,
+            "coalesced_moves": 0,
+            "last_accept_to_visible_us": 474283,
+            "priority_publications": 3,
+            "visible_ticket": 96,
+            "visible_x": 700,
+            "visible_y": 350
+          },
+          "requests": 16,
+          "round": 2,
+          "samples": [
+            {
+              "accept_ms": 137.07296000048518,
+              "index": 0,
+              "ticket": 81
+            },
+            {
+              "accept_ms": 438.71505999937654,
+              "index": 1,
+              "ticket": 82
+            },
+            {
+              "accept_ms": 472.1725800000131,
+              "index": 2,
+              "ticket": 83
+            },
+            {
+              "accept_ms": 452.3962199985981,
+              "index": 3,
+              "ticket": 84
+            },
+            {
+              "accept_ms": 461.42590000107884,
+              "index": 4,
+              "ticket": 85
+            },
+            {
+              "accept_ms": 1108.4629200026393,
+              "index": 5,
+              "ticket": 86
+            },
+            {
+              "accept_ms": 815.5833799988031,
+              "index": 6,
+              "ticket": 87
+            },
+            {
+              "accept_ms": 781.5015400014818,
+              "index": 7,
+              "ticket": 88
+            },
+            {
+              "accept_ms": 790.0473600029945,
+              "index": 8,
+              "ticket": 89
+            },
+            {
+              "accept_ms": 390.8141000010073,
+              "index": 9,
+              "ticket": 90
+            },
+            {
+              "accept_ms": 231.05986000224948,
+              "index": 10,
+              "ticket": 91
+            },
+            {
+              "accept_ms": 531.5051200017333,
+              "index": 11,
+              "ticket": 92
+            },
+            {
+              "accept_ms": 875.0738199986517,
+              "index": 12,
+              "ticket": 93
+            },
+            {
+              "accept_ms": 782.9506199993193,
+              "index": 13,
+              "ticket": 94
+            },
+            {
+              "accept_ms": 854.136819999665,
+              "index": 14,
+              "ticket": 95
+            },
+            {
+              "accept_ms": 541.7574199996889,
+              "index": 15,
+              "ticket": 96
+            }
+          ]
+        }
+      ],
+      "metrics": {
+        "acceptance": {
+          "n": 48,
+          "median_ms": 523.6384600009769,
+          "p95_ms": 1067.586179997772,
+          "maximum_ms": 1111.5173199996352
+        },
+        "burst_final_visible": {
+          "n": 3,
+          "median_ms": 11106.954799998552,
+          "p95_ms": 11144.385660000145,
+          "maximum_ms": 11144.385660000145
+        },
+        "final_point_completion": {
+          "n": 3,
+          "median_ms": 1565.4468399994075,
+          "p95_ms": 1767.289160002023,
+          "maximum_ms": 1767.289160002023
+        },
+        "coalesced_moves": 0,
+        "priority_publications": 3
+      }
+    }
+  }
+}

@@ -1,0 +1,166 @@
+{
+  "date": "2026-11-25",
+  "hardware": true,
+  "version": "fixed-wm-fast-resize-v12",
+  "scope": "Held resize coordinate source to first actual USB HDMI capture frame showing a distinct final outer-rim area. HTTP/UART/USB sampling included, monitor optical timing excluded. 3 trials per version, no tail guarantee.",
+  "workload": "Same active 240x144 RGB332 demo; centered 20x14 degree window; same 20 coordinates at 10Hz over 1.9s: shrink/grow/shrink then distinct final grow by +120,+70 pixels. No progress queries during timed stream. Latest input only, real content remains frozen.",
+  "calibration": {
+    "initial_geometry": {
+      "azimuth": 0,
+      "elevation": 0,
+      "height_deg": 14,
+      "width_deg": 20
+    },
+    "target": {
+      "azimuth": 2.25,
+      "elevation": -1.75,
+      "height_deg": 17.5,
+      "width_deg": 24.5
+    },
+    "rim_tiles": [
+      17,
+      19,
+      20,
+      30,
+      42,
+      53,
+      55,
+      57,
+      167,
+      168,
+      170,
+      171,
+      177,
+      189,
+      203,
+      3820,
+      3821,
+      3830,
+      3842,
+      3901,
+      3902,
+      3904,
+      3970,
+      3971,
+      3972,
+      3985,
+      3999
+    ],
+    "probe_pixels": 15591,
+    "final_delta": [
+      120,
+      70
+    ],
+    "path_delta": [
+      [
+        -30,
+        -15
+      ],
+      [
+        40,
+        20
+      ]
+    ]
+  },
+  "before": {
+    "n": 3,
+    "samples_ms": [
+      584.5420999994531,
+      524.1456999992806,
+      497.6403000000573
+    ],
+    "median_ms": 524.1456999992806,
+    "min_ms": 497.6403000000573,
+    "max_ms": 584.5420999994531,
+    "geometry_prepare_samples_ms": [
+      121.803,
+      130.27,
+      129.594
+    ],
+    "geometry_prepare_median_ms": 129.594
+  },
+  "after": {
+    "n": 3,
+    "samples_ms": [
+      580.9473999997863,
+      469.54619999996794,
+      442.00480000108655
+    ],
+    "median_ms": 469.54619999996794,
+    "min_ms": 442.00480000108655,
+    "max_ms": 580.9473999997863,
+    "geometry_prepare_samples_ms": [
+      117.963,
+      117.436,
+      112.276
+    ],
+    "geometry_prepare_median_ms": 117.436
+  },
+  "median_reduction_percent": 10.416855465834718,
+  "interpretation": "Modest measured median change, with overlapping sample ranges. No claim that resize matches move feedback or guarantees 300ms. Preview remains whole outer triangles; final full transform is separate.",
+  "intermediates": {
+    "direct_cached_only": {
+      "n": 3,
+      "samples_ms": [
+        613.4182000005239,
+        514.2180000002554,
+        547.2575000003417
+      ],
+      "median_ms": 547.2575000003417,
+      "min_ms": 514.2180000002554,
+      "max_ms": 613.4182000005239,
+      "geometry_prepare_samples_ms": [
+        132.507,
+        131.656,
+        126.387
+      ],
+      "geometry_prepare_median_ms": 131.656
+    },
+    "q13_coarse": {
+      "n": 3,
+      "samples_ms": [
+        499.2662000004202,
+        579.666300000099,
+        520.3313000001799
+      ],
+      "median_ms": 520.3313000001799,
+      "min_ms": 499.2662000004202,
+      "max_ms": 579.666300000099,
+      "geometry_prepare_samples_ms": [
+        128.972,
+        127.69,
+        128.456
+      ],
+      "geometry_prepare_median_ms": 128.456
+    }
+  },
+  "excluded": "Original before folder used a different live window geometry; retained in evidence but excluded from comparison.",
+  "binaries": {
+    "triangle-boayo-fixed": "3bf71be88a65c089ec47abef794c0418be481dc62e5e12d8d737378b11022651",
+    "triangle-app": "5560552b8ebde60abdb3fcbf07a5c5cf1bedbcf225e999f33fd0e052d09f4dc7",
+    "triangle-input": "b798b7c444bc990d43720a915313388c649836de9dabb268419a9954f30f5b15"
+  },
+  "image_sha256": "b4f3e919ae7d77fd95f93a4f8f97ad5c2343c1eb646dfd1ff5a155de42694c62",
+  "kernel_changed": false,
+  "physical_smoke": {
+    "result": "PASS_PHYSICAL_HDMI_PREVIEW",
+    "scope": "Actual HDMI pixels. Frozen scene outside S-colored preview, representative move tile and optional whole-tile resize rim, final transformed window, pointer preference restored. Native intervals exclude UART; host/video command intervals include HTTP/UART. Two-second holds are intentional.",
+    "actions": [
+      {
+        "action": "move",
+        "native_release_ms": 1616.24899995327,
+        "held_white_mask_changed_pixels": 0
+      },
+      {
+        "action": "resize",
+        "native_release_ms": 1616.5999999642372,
+        "held_white_mask_changed_pixels": 2
+      }
+    ]
+  },
+  "sd_saved": true,
+  "board_left_running": true,
+  "demo_left_running": true,
+  "live_input": "http://127.0.0.1:8767/",
+  "live_capture": "http://127.0.0.1:8766/"
+}

@@ -1,0 +1,179 @@
+{
+  "result": "PASS_PHYSICAL_HDMI_PREVIEW",
+  "scope": "Actual HDMI pixels. Frozen body bounds and text mask, S marker preview, one final transformed window, pointer preference restored. Native intervals exclude UART; host/video command intervals include HTTP/UART. Two-second holds are intentional.",
+  "actions": [
+    {
+      "action": "move",
+      "press": {
+        "accept_ms": 201.0649999976158,
+        "feedback_ms": 674.2170000076294,
+        "ok": true,
+        "present_ms": 680.3260000348091,
+        "result": {
+          "action": 0,
+          "applied": false,
+          "captured_window": 1,
+          "generation": 141
+        }
+      },
+      "move": {
+        "accept_ms": 191.39600002765656,
+        "completion_pending": true,
+        "ok": true,
+        "result": {
+          "accepted_ticket": 1,
+          "coalesced_moves": 0,
+          "visible_ticket": 0
+        }
+      },
+      "completion": {
+        "accepted_ticket": 1,
+        "applied_ticket": 1,
+        "coalesced_moves": 0,
+        "last_accept_to_visible_us": 320950,
+        "priority_publications": 0,
+        "visible_ticket": 1,
+        "visible_x": 809,
+        "visible_y": 536
+      },
+      "release": {
+        "accept_ms": 237.76800000667572,
+        "feedback_ms": 1445.891000032425,
+        "ok": true,
+        "present_ms": 1626.8030000329018,
+        "result": {
+          "action": 2,
+          "applied": true,
+          "captured_window": 0,
+          "commit_pending": true,
+          "generation": 144,
+          "transform": {
+            "error": "",
+            "state": "complete",
+            "ticket": 1
+          },
+          "transform_ticket": 1
+        }
+      },
+      "before_bbox": [
+        239,
+        88,
+        1042,
+        631
+      ],
+      "frozen_bbox": [
+        239,
+        88,
+        1042,
+        631
+      ],
+      "preview_bbox": [
+        239,
+        88,
+        1042,
+        631
+      ],
+      "after_bbox": [
+        363,
+        88,
+        1181,
+        535
+      ],
+      "held_white_mask_changed_pixels": 87,
+      "static_title_white_pixels": [
+        4789,
+        4716,
+        4789
+      ]
+    },
+    {
+      "action": "resize",
+      "press": {
+        "accept_ms": 438.1439999938011,
+        "feedback_ms": 1417.2960000038147,
+        "ok": true,
+        "present_ms": 1434.1420000195503,
+        "result": {
+          "action": 0,
+          "applied": false,
+          "captured_window": 1,
+          "generation": 145
+        }
+      },
+      "move": {
+        "accept_ms": 193.6710000038147,
+        "completion_pending": true,
+        "ok": true,
+        "result": {
+          "accepted_ticket": 2,
+          "coalesced_moves": 0,
+          "visible_ticket": 1
+        }
+      },
+      "completion": {
+        "accepted_ticket": 2,
+        "applied_ticket": 2,
+        "coalesced_moves": 0,
+        "last_accept_to_visible_us": 296718,
+        "priority_publications": 0,
+        "visible_ticket": 2,
+        "visible_x": 1094,
+        "visible_y": 530
+      },
+      "release": {
+        "accept_ms": 259.69999998807907,
+        "feedback_ms": 1470.9879999756813,
+        "ok": true,
+        "present_ms": 1661.194000005722,
+        "result": {
+          "action": 3,
+          "applied": true,
+          "captured_window": 0,
+          "commit_pending": true,
+          "generation": 148,
+          "transform": {
+            "error": "",
+            "state": "complete",
+            "ticket": 2
+          },
+          "transform_ticket": 2
+        }
+      },
+      "before_bbox": [
+        363,
+        88,
+        1181,
+        535
+      ],
+      "frozen_bbox": [
+        363,
+        88,
+        1181,
+        535
+      ],
+      "preview_bbox": [
+        363,
+        88,
+        1181,
+        535
+      ],
+      "after_bbox": [
+        363,
+        88,
+        1255,
+        631
+      ],
+      "held_white_mask_changed_pixels": 0,
+      "static_title_white_pixels": [
+        4763,
+        4763,
+        4763
+      ]
+    }
+  ],
+  "hardware": true,
+  "hdmi_replug_confirmed": true,
+  "capture_reopened_after_hdmi_replug": true,
+  "video_duration_seconds": 27.5833419,
+  "video": "single-tile-preview.mp4"
+}

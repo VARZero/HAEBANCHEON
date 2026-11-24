@@ -1,0 +1,7 @@
+{
+  "result": "PASS_FOCUSED_QEMU_BOOT",
+  "image_sha256": "e0e9f7606d59c1f746c2920fb8a52a8748ac2a638ee6692d215bd9cf232359c7",
+  "hardware": false,
+  "scope": "Final image boot, actual RV32 fixed WM + RGB332 app + async input client exchanging BWM1 binary messages against mock BOSIO. Final cursor endpoints verified by native stream benchmark. No physical hardware/performance measurement. Move marker and resize preview exercised on RV32; frozen motion has no descriptor/projection submissions; tile-rim resize performs boundary geometry only; final transform completed. Emulator elapsed values are not hardware latency.",
+  "runtime_preview": "tile"
+}

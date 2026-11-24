@@ -4,6 +4,7 @@
 #include "ipc.hpp"
 #include "application_buffer.hpp"
 #include "pending_content.hpp"
+#include "fast_motion.hpp"
 #include <poll.h>
 #include <sys/file.h>
 #include <sys/stat.h>
@@ -27,7 +28,9 @@ struct Record {
 struct Peer {
   int fd; bool control; std::string in, out;
   // One outstanding wait per connection, just like the synchronous app Client.
-  J wait_id; uint64_t wait_generation=0;bool feedback_wait=false;
+  J wait_id; uint64_t wait_generation=0;bool feedback_wait=false,input_wait=false;
+  bool checkpoint_blocked=false;J deferred_request;
+  uint32_t fast_last_sequence=0;bool fast_invalid=false;
 };
 struct RequestProfile {
  std::string op;uint64_t parse_us=0,dispatch_us=0,reply_us=0,snapshot_us=0,pixels_us=0,damage_us=0,footprint_us=0;
@@ -48,14 +51,17 @@ struct Server {
   uint64_t shell_publications=0;J last_shell_render=J::object();
   double service_render_ms=0;RequestProfile request_profile,last_mutation;
   double yaw=0, pitch=0;
+#include "move_commit.inc"
 #include "ui_input.inc"
+#include "input_mailbox.inc"
 
   explicit Server(bool mock):path(socket_path()) {
     lock.fd=open((path+".lock").c_str(),O_CREAT|O_RDWR|O_CLOEXEC,0600);
     require(lock.fd>=0 && flock(lock.fd,LOCK_EX|LOCK_NB)==0,"WM already running or lock unavailable");
     engine=std::make_unique<Engine>(mock);
     engine->ui_enabled=!(getenv("TRIANGLE_INPUT")&&std::string(getenv("TRIANGLE_INPUT"))=="0");
-    for(unsigned c:{84u,164u,109u,38u,228u,255u}) engine->solid(c);
+    engine->input_checkpoint=[this](bool apply){input_checkpoint(apply);};
+    engine->reserve_window_colors();
     listener.fd=listen_at(path); control.fd=listen_at(path+".control");
   }
   int listen_at(const std::string &p) {
@@ -99,7 +105,9 @@ struct Server {
       "padding_deg",coordinate(w.padding),"background_index",w.color,"splash_index",w.splash_color,"phase",w.splash_pending?"splash":(w.shell_pending||!w.plan_ready)?"background":"content","mapped",w.visible,"decorated",false,"generation",generation);
   }
   void erase(int id) {
-    if(capture.id==id)cancel_input();
+    if(pending_transform){pending_transform.reset();transform_phase="failed";transform_error="scene changed before transform publication";}
+    if(transform_rollback)rollback_transform("scene changed before transform publication");
+    if(capture.id==id||engine->move_marker.active)cancel_input();
     const auto &r=records.at(id); reserved_bytes-=size_t(r.width)*r.height*(r.shared?4+3*r.shared->pixel_bytes:13);
     records.erase(id); engine->windows.erase(id);
     auto &order=engine->order; order.erase(std::remove(order.begin(),order.end(),id),order.end());
@@ -108,19 +116,22 @@ struct Server {
     changed();
   }
   void disconnect(int fd) {
+    if(pending_input.owner==fd)apply_pending_input();
     if(capture.owner==fd){cancel_input();changed();}
     std::vector<int> gone; for(const auto &[id,r]:records) if(r.owner==fd) gone.push_back(id);
     for(int id:gone) erase(id);
     close(fd); peers.erase(fd);
   }
   void reply(Peer &p,const J &id,const J &result) {
-    // Serialize before touching the output queue, so encoding errors remain atomic.
-    auto body=result.dump(),identifier=id.dump();
-    p.out.reserve(p.out.size()+body.size()+identifier.size()+32);
-    p.out+="{\"id\":";p.out+=identifier;p.out+=",\"ok\":true,\"result\":";p.out+=body;p.out+="}\n";
+    p.out+=wire::encode(J{{"id",id},{"ok",true},{"result",result}});
   }
   J dispatch(Peer &p,const std::string &op,const J &a) {
     require(a.is_object(),"args must be an object");
+    if((transform_rollback||pending_transform)&&op!="input_submit"&&op!="input_progress"&&op!="input_status"&&op!="get_state"&&op!="app_events"&&op!="poll_events")present();
+    if(op=="input_button"&&a.value("pressed",false)&&!engine->move_marker.active&&engine->ui_layout_dirty&&dirty)present();
+    if(op=="input_submit")return submit_input(p,a);
+    if(op=="input_progress"){require(p.control,"input requires control socket");return input_progress();}
+    if(op.rfind("input_",0)==0&&op!="input_status")apply_pending_input();
     if(op.rfind("input_",0)==0)return input(p,op,a);
     if(op=="create_window") {
       require(!p.control,"create windows using an application connection");
@@ -132,11 +143,11 @@ struct Server {
       w.width=a.value("width_deg",34.); w.height=a.value("height_deg",24.);
       w.padding=a.value("padding_deg",2.); w.visible=a.value("mapped",true);
       w.color=integer(a,"background_index",84,0,255);
-      w.splash_color=integer(a,"splash_index",228,0,255);require(engine->colors.count(w.splash_color),"splash_index must be reserved");w.shell_pending=true;w.splash_pending=true;
-      require(engine->colors.count(w.color),"background_index must be 84,164,109,38,228,255");
+      w.splash_color=integer(a,"splash_index",228,0,255);w.shell_pending=true;w.splash_pending=true;
       require(a.value("roll",0.)==0.,"window roll is not supported");
       Engine::validate(w);auto phase=microseconds_now();w.footprint=engine->footprint(w);request_profile.footprint_us=microseconds_now()-phase;
       std::string title=a.value("title",std::string("Application")); require(title.size()<=256,"title too long");
+      if(engine->move_marker.active)cancel_input();
       records.emplace(next_id,Record{p.fd,title,sw,sh,{},{}});
       engine->windows.emplace(next_id,std::move(w)); engine->order.push_back(next_id);
       reserved_bytes+=bytes; focused=next_id; changed(); return description(next_id++);
@@ -157,7 +168,7 @@ struct Server {
       double y=a.value("yaw",0.), pi=a.value("pitch",0.);
       require(a.value("roll",0.)==0.,"view roll is not supported");
       require(std::isfinite(y)&&std::abs(y)<=180&&std::isfinite(pi)&&std::abs(pi)<=85,"view bounds");
-      if(capture.owner>=0)cancel_input();
+      if(capture.owner>=0){cancel_input();changed(false,false);}
       apply_pending_content();
       if(engine->active<0)present();
       auto result=engine->operate({{"op","pose"},{"yaw",y},{"pitch",pi}});
@@ -165,6 +176,9 @@ struct Server {
     }
     if(op=="pose_sweep") {
       require(p.control && engine->active>=0,"pose_sweep requires internal control and a scene");
+      unsigned count=a.value("samples",61u);double amplitude=a.value("amplitude",8.);
+      require(count>=3&&count<=361&&std::isfinite(amplitude)&&amplitude>=0&&amplitude<=30,"pose sweep bounds");
+      if(capture.owner>=0){cancel_input();changed(false,false);}
       apply_pending_content();auto q=a; q["op"]="pose_sweep"; auto result=engine->operate(q); yaw=pitch=0; return result;
     }
     if(op=="snapshot") { require(p.control,"internal operation"); return engine->snapshot(); }
@@ -230,17 +244,20 @@ struct Server {
       bounds.padding=a.value("padding_deg",w.padding); Engine::validate(bounds);
       bool visible=a.value("mapped",w.visible);
       std::string title=a.value("title",r.title); require(title.size()<=256,"title too long");
+      unsigned background=integer(a,"background_index",w.color,0,255),splash=integer(a,"splash_index",w.splash_color,0,255);
+      bool color_changed=background!=w.color||splash!=w.splash_color;
       bool geometry=bounds.yaw!=w.yaw || bounds.pitch!=w.pitch || bounds.width!=w.width || bounds.height!=w.height || bounds.padding!=w.padding;
-      if(capture.id==id&&(geometry||visible!=w.visible))cancel_input();
-      if(geometry || visible!=w.visible || title!=r.title) {
+      if((capture.id==id||engine->move_marker.active)&&(geometry||color_changed||visible!=w.visible||title!=r.title))cancel_input();
+      if(geometry || color_changed || visible!=w.visible || title!=r.title) {
         if(geometry) { w.yaw=bounds.yaw; w.pitch=bounds.pitch; w.width=bounds.width; w.height=bounds.height; w.padding=bounds.padding;
           auto phase=microseconds_now();w.footprint=engine->footprint(w);request_profile.footprint_us=microseconds_now()-phase;w.plan_ready=false; }
-        w.visible=visible; r.title=title; changed();
+        if(background!=w.color){w.color=background;w.plan_ready=false;}
+        w.splash_color=splash;w.visible=visible; r.title=title; changed();
       }
       return description(id);
     }
     if(op=="focus_window" || op=="raise_window") {
-      if(engine->order.back()!=id) { auto &order=engine->order; order.erase(std::find(order.begin(),order.end(),id)); order.push_back(id); changed(); }
+      if(engine->order.back()!=id) { if(engine->move_marker.active)cancel_input();auto &order=engine->order; order.erase(std::find(order.begin(),order.end(),id)); order.push_back(id); changed(); }
       focused=id; return description(id);
     }
     if(op=="destroy_window") { erase(id); return {{"window_id",id},{"generation",generation}}; }
@@ -274,19 +291,26 @@ struct Server {
         "converted_pixels",pixels,"invalidated_tiles",invalidated,"prepare_us",microseconds_now()-start);
     }
   }
-  void request(Peer &p,const std::string &line) {
+  void request(Peer &p,const std::string &line,J q=J()) {
+    if(!wire::json_mode()&&fast_motion::recognizable(line)){accept_fast_motion(p,line);return;}
     J id=nullptr;auto started=microseconds_now();request_profile={};
     try {
-      auto q=J::parse(line); id=q.at("id"); require(id.is_number_integer(),"integer request id required");
+      if(q.is_null())q=wire::decode(line); id=q.at("id"); require(id.is_number_integer(),"integer request id required");
       require(p.wait_id.is_null(),"wait_present already pending");
       const auto &op=q.at("op").get_ref<const std::string&>();static const J empty=J::object();const J &a=q.contains("args")?q.at("args"):empty;
       request_profile.parse_us=microseconds_now()-started;
-      if(op=="wait_present"||op=="wait_feedback") {
+      if(op=="wait_input") {
+        require(p.control,"input requires control socket");
+        require(a.at("ticket").is_number_integer(),"integer input ticket required");
+        int64_t ticket=a.at("ticket");require(ticket>=0&&uint64_t(ticket)<=input_accepted,"unknown future input ticket");
+        if(uint64_t(ticket)>input_visible){p.wait_id=id;p.wait_generation=ticket;p.input_wait=true;}
+        else reply(p,id,input_progress());
+      } else if(op=="wait_present"||op=="wait_feedback") {
         require(a.at("generation").is_number_integer(),"integer generation required");
         int64_t gen=a.at("generation"); require(gen>=0 && uint64_t(gen)<=generation,"unknown future generation");
-        bool early=op=="wait_feedback";uint64_t ready=early?feedback:presented;
-        if(uint64_t(gen)>ready) { p.wait_id=id; p.wait_generation=gen;p.feedback_wait=early; }
-        else reply(p,id,json_object("generation",ready,"presented",!early,"feedback",early));
+        bool early=op=="wait_feedback",preview=p.control&&engine->move_marker.active&&!engine->move_marker.committing;uint64_t ready=(early||preview)?feedback:presented;
+        if(uint64_t(gen)>ready) { p.wait_id=id; p.wait_generation=gen;p.feedback_wait=early;p.input_wait=false; }
+        else reply(p,id,presentation_result(ready,early,preview));
       } else {
         auto phase=microseconds_now();auto result=dispatch(p,op,a);request_profile.dispatch_us=microseconds_now()-phase;phase=microseconds_now();
         reply(p,id,result);request_profile.reply_us=microseconds_now()-phase;
@@ -294,7 +318,7 @@ struct Server {
           request_profile.op=op;last_mutation=std::move(request_profile);
         }
       }
-    } catch(const std::exception &e) { p.out+=J{{"id",id},{"ok",false},{"error",e.what()}}.dump()+"\n"; }
+    } catch(const std::exception &e) { p.out+=wire::encode(J{{"id",id},{"ok",false},{"error",e.what()}}); }
   }
   void flush() {
     std::vector<int> gone;
@@ -317,7 +341,7 @@ struct Server {
     // the whole request budget before an already-ready input connection is read.
     auto add=[&](int fd,Peer &p){
       fds.push_back({fd,short(POLLIN|(p.out.empty()?0:POLLOUT)),0});
-      buffered|=p.in.find('\n')!=std::string::npos;
+      buffered|=wire::ready(p.in);
     };
     for(auto &[fd,p]:peers)if(p.control)add(fd,p);
     for(auto &[fd,p]:peers)if(!p.control&&fd>=next_app_fd)add(fd,p);
@@ -336,18 +360,20 @@ struct Server {
     }
     for(size_t i=2;i<fds.size()&&budget&&!stopping;i++) {
       int fd=fds[i].fd;auto it=peers.find(fd);if(it==peers.end())continue;
-      auto &p=it->second;bool dead=fds[i].revents&(POLLERR|POLLNVAL);
-      if((fds[i].revents&(POLLIN|POLLHUP))&&p.in.find('\n')==std::string::npos) {
+      auto &p=it->second;bool dead=p.fast_invalid||(fds[i].revents&(POLLERR|POLLNVAL));
+      if((fds[i].revents&(POLLIN|POLLHUP))&&!wire::ready(p.in)) {
         char buffer[8192];auto n=recv(fd,buffer,sizeof(buffer),0);
         if(n>0){p.in.append(buffer,n);progress=true;}
         else if(n==0||(errno!=EAGAIN&&errno!=EWOULDBLOCK&&errno!=EINTR))dead=true;
       }
-      if(p.in.size()>65536)dead=true;
+      if(p.in.size()>65536||wire::invalid(p.in))dead=true;
       if(dead){disconnect(fd);progress=true;continue;}
       if(!p.control)next_app_fd=fd+1;
-      size_t end;unsigned per_peer=4;
-      while(budget&&per_peer--&&!stopping&&(end=p.in.find('\n'))!=std::string::npos) {
-        auto line=p.in.substr(0,end);p.in.erase(0,end+1);request(p,line);--budget;progress=true;
+      unsigned per_peer=4;
+      while(budget&&per_peer--&&!stopping&&wire::ready(p.in)) {
+        auto line=wire::take(p.in);J cached=std::move(p.deferred_request);p.deferred_request=nullptr;p.checkpoint_blocked=false;
+        request(p,line,std::move(cached));--budget;progress=true;
+        if(p.fast_invalid){dead=true;break;}
         if(p.out.size()>1024*1024){dead=true;break;}
       }
       if(dead)disconnect(fd);
@@ -357,9 +383,30 @@ struct Server {
   }
   void present() {
         double start=now();bool shells=false;
+        if(engine->move_marker.active&&!engine->move_marker.committing){
+          if(!engine->move_marker.frozen)engine->render(false,true);
+          else if(engine->move_marker.needs_publish)engine->render_marker();
+          engine->ui_dirty=false;
+          service_render_ms=(now()-start)*1000;complete_input();feedback=generation;dirty=false;
+          for(auto&[fd,p]:peers)if((p.control||p.feedback_wait)&&!p.input_wait&&!p.wait_id.is_null()&&p.wait_generation<=feedback){reply(p,p.wait_id,presentation_result(feedback,p.feedback_wait,true));p.wait_id=nullptr;p.feedback_wait=false;}
+          flush();return;
+        }
         for(auto &[id,w]:engine->windows)shells|=w.visible&&w.shell_pending;
+        // One old-content overlay publication may precede a pending content
+        // batch. Never acknowledge application generations for this publication.
+        if(input_applied>input_visible&&scene_dirty&&!shells&&!engine->ui_layout_dirty&&engine->active>=0&&!input_priority_used){
+          input_priority_used=true;++input_priority_publications;
+          engine->render(false,true);service_render_ms=(now()-start)*1000;
+          complete_input();flush();return;
+        }
         if(!shells)apply_pending_content();
-        engine->render(false,!scene_dirty);service_render_ms=(now()-start)*1000;scene_dirty=false;
+        prepare_transform();
+        try{
+          if(transform_rollback&&engine->mock&&getenv("TRIANGLE_MOCK_FAIL_TRANSFORM"))throw std::runtime_error("injected transform preparation failure");
+          engine->render(false,!scene_dirty);finish_transform();
+        }catch(const std::exception&e){if(!transform_rollback)throw;rollback_transform(e.what());if(engine->failed)throw;return;}
+        service_render_ms=(now()-start)*1000;scene_dirty=false;
+        input_priority_used=false;complete_input();
         if(shells){if(engine->stats.published)++shell_publications;last_shell_render=engine->render_report();}
         feedback=generation;dirty=false;
         for(auto &[id,w]:engine->windows)if(w.visible&&w.shell_pending){
@@ -369,8 +416,8 @@ struct Server {
         // Keep pending conversions alive when another window's shell was shown first.
         if(shells)for(auto &[id,r]:records)if(r.pending.commits){dirty=true;scene_dirty=true;}
         if(!dirty)presented=generation;
-        for(auto &[fd,p]:peers)if(!p.wait_id.is_null()&&p.wait_generation<=(p.feedback_wait?feedback:presented)) {
-          reply(p,p.wait_id,json_object("generation",p.feedback_wait?feedback:presented,"presented",!p.feedback_wait,"feedback",p.feedback_wait));p.wait_id=nullptr;
+        for(auto &[fd,p]:peers)if(!p.wait_id.is_null()&&!p.input_wait&&p.wait_generation<=(p.feedback_wait?feedback:presented)) {
+          reply(p,p.wait_id,presentation_result(p.feedback_wait?feedback:presented,p.feedback_wait));p.wait_id=nullptr;
         }
         flush();
   }
@@ -379,7 +426,8 @@ struct Server {
     while(!stopping) {
       if(capture.owner>=0&&microseconds_now()-last_input_us>30000000){cancel_input();changed(false,false);}
       unsigned budget=32;
-      for(unsigned pass=0;pass<4&&budget&&!stopping;pass++)if(!pump(dirty||pass!=0,budget))break;
+      for(unsigned pass=0;pass<4&&budget&&!stopping;pass++)if(!pump(dirty||pending_input.owner>=0||pass!=0,budget))break;
+      apply_pending_input();
       // No debounce sleep: drain a bounded ready backlog, then publish its latest state.
       if(dirty&&!stopping) {
         present();
@@ -401,7 +449,7 @@ int main(int argc,char **argv) {
       if(result.is_object() && result.contains("generation")) client.call("wait_present",{{"generation",result.at("generation")}});
       std::cout<<result.dump()<<std::endl; return 0;
     }
-    triangle_service::Server server(argc==2 && std::string(argv[1])=="--mock"); server.run();
+    triangle_service::Server server(argc==2 && std::string(argv[1])=="--mock"); server.run();return 0;
   } catch(const std::exception &e) { std::cerr<<e.what()<<std::endl; return 1; }
 }
 

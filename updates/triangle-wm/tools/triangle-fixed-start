@@ -1,0 +1,31 @@
+#!/bin/sh
+# New kernel with BO_PUBLISH_COPY required. BWM1 binary application socket.
+case "${1:-start}" in
+ start|mock)
+  if test -f /run/triangle-wm.pid && kill -0 "$(cat /run/triangle-wm.pid)" 2>/dev/null; then exit 0; fi
+  if test "${1:-start}" = mock; then set -- --mock; else test -c /dev/bosio0 || exit 0;set --;fi
+  runtime=/run/triangle-wm-runtime
+  mkdir -p "$runtime" && chmod 700 "$runtime" || exit 1
+  for binary in triangle-boayo-fixed triangle-app triangle-input; do
+   cp "/usr/bin/$binary" "$runtime/$binary.next" && chmod 755 "$runtime/$binary.next" && mv "$runtime/$binary.next" "$runtime/$binary" || exit 1
+  done
+  TRIANGLE_PREVIEW=${TRIANGLE_PREVIEW:-tile};export TRIANGLE_PREVIEW
+  nice -n -10 "$runtime/triangle-boayo-fixed" "$@" > /tmp/triangle-wm.log 2>&1 &
+  echo $! > /run/triangle-wm.pid
+  remaining=60
+  while ! test -S /tmp/bosio-wm.sock; do
+   kill -0 "$(cat /run/triangle-wm.pid)" 2>/dev/null || exit 1
+   test "$remaining" -gt 0 || exit 1
+   remaining=$((remaining-1));sleep 1
+  done
+  nice -n 10 "$runtime/triangle-app" --rgb332 --demo > /tmp/triangle-app.log 2>&1 &
+  echo $! > /run/triangle-app.pid
+  ;;
+ stop)
+  for name in triangle-app triangle-wm; do
+   if test -f /run/$name.pid; then kill -TERM "$(cat /run/$name.pid)" 2>/dev/null || true; fi
+  done
+  ;;
+ restart) "$0" stop;sleep 2;"$0" start;;
+ *) echo 'usage: triangle-fixed-start [start|stop|restart|mock]';exit 2;;
+esac

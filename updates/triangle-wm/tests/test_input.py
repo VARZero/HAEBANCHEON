@@ -1,3 +1,4 @@
+import binary_test_wire
 """Real socket controls, ownership, clean overlay restoration and capture lifecycle."""
 import json,os,socket,subprocess,sys,tempfile,mmap,hashlib
 trace=[]
@@ -6,7 +7,7 @@ class Client:
  def __init__(self,path):
   self.s=socket.socket(socket.AF_UNIX);self.s.settimeout(30);self.s.connect(path);self.f=self.s.makefile('rwb',buffering=0);self.seq=0
  def call(self,op,args=None,ok=True):
-  self.seq+=1;self.f.write((json.dumps(dict(id=self.seq,op=op,args=args or {}))+'\n').encode());r=json.loads(self.f.readline());assert r['ok']==ok,r;return r.get('result',r)
+  self.seq+=1;self.f.write(binary_test_wire.encode(dict(id=self.seq,op=op,args=args or {})));r=binary_test_wire.read(self.f);assert r['ok']==ok,r;return r.get('result',r)
  def do(self,op,args=None):
   r=self.call(op,args)
   if 'generation' in r:self.call('wait_present',{'generation':r['generation']})
@@ -41,10 +42,10 @@ with tempfile.TemporaryDirectory() as folder:
   requests=[('configure_window',{'window_id':first,'azimuth':2}),('input_move',{'x':611,'y':373})]
   wire=[]
   for op,args in requests:
-   ctl.seq+=1;wire.append(json.dumps(dict(id=ctl.seq,op=op,args=args))+'\n')
-  ctl.f.write(''.join(wire).encode())
+   ctl.seq+=1;wire.append(binary_test_wire.encode(dict(id=ctl.seq,op=op,args=args)))
+  ctl.f.write(b''.join(wire))
   for _ in requests:
-   result=json.loads(ctl.f.readline());assert result['ok'],result
+   result=binary_test_wire.read(ctl.f);assert result['ok'],result
   ctl.call('wait_present',{'generation':result['result']['generation']})
   ctl.do('input_cancel',{'hide':True})
   moved=ctl.call('snapshot')['tile_hashes'];assert moved!=updated,'queued geometry was lost'

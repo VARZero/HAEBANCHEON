@@ -65,12 +65,12 @@ int main(int argc,char **argv) {
     if(demo) {
       unsigned n=0;
       while(!done) {
-        auto state=app.call("get_state"); bool exists=false;
-        for(auto &w:state.at("windows")) if(w.at("window_id")==surface.id) exists=true;
-        if(!exists) break;
         auto d=surface.put({{"id",4},{"type","text"},{"x",18},{"y",115},{"scale",2},
           {"text",std::string("FRAME ")+char('0'+(n/10)%10)+char('0'+n%10)}});
-        if(d.w) measure(app,"demo_update",[&]{return surface.commit(app,d);});
+        // Keep diagnostics out of the interactive update loop. A closed window
+        // is reported by the existing commit operation; other errors stay fatal.
+        try { if(d.w) wait(app,surface.commit(app,d)); }
+        catch(const std::runtime_error&e){if(std::string(e.what())=="window not found")break;throw;}
         n++; for(unsigned i=0;i<20 && !done;i++) usleep(100000);
       }
       return 0;
@@ -101,6 +101,6 @@ int main(int argc,char **argv) {
     auto sweep=control.call("pose_sweep",{{"samples",61},{"amplitude",8}});
     std::cout<<"BOAYO_TRIANGLE_POSE_SWEEP "<<sweep.dump()<<std::endl;
     measure(app,"destroy_owned",[&]{return app.call("destroy_window",{{"window_id",surface.id}});});
-    std::cout<<"BOAYO_TRIANGLE_BENCH_DONE"<<std::endl;
+    std::cout<<"BOAYO_TRIANGLE_BENCH_DONE"<<std::endl;return 0;
   } catch(const std::exception &e) { std::cerr<<e.what()<<std::endl; return 1; }
 }

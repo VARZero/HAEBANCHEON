@@ -1,0 +1,552 @@
+{
+  "date": "2026-11-24",
+  "scope": "Same-board same-session native before/after, 16 inputs per action. Command start to publication completion confirmation; UART, capture and optical latency excluded.",
+  "hardware": true,
+  "before_version": "fixed-wm-tile-rim-v4",
+  "after_version": "fixed-wm-full-tile-v5",
+  "after_binary_sha256": "0c9e84853c82d5e415bcf7ddfa064f385b133c3921f7419991416fb4006dcb5a",
+  "sd_image_sha256": "7262b0c05725705394e8c346b1cc7c3b20eeae90dd6746482e7132c0deb03b7d",
+  "workload": "One 20x14 degree window, 240x144 RGB332 demo with active two-second updates; 16 alternating x +/-90/y +/-24 positions.",
+  "before": {
+    "move": {
+      "preview_mode": "single-tile",
+      "coordinate_acceptance": {
+        "n": 16,
+        "median_ms": 164.38100001215935,
+        "p95_ms": 205.04100000858307,
+        "max_ms": 205.04100000858307
+      },
+      "accepted_to_publication": {
+        "n": 16,
+        "median_ms": 183.9835,
+        "p95_ms": 242.166,
+        "max_ms": 242.166
+      },
+      "command_to_completion": {
+        "n": 16,
+        "median_ms": 359.8144999742508,
+        "p95_ms": 421.8740000128746,
+        "max_ms": 421.8740000128746
+      },
+      "press": {
+        "accept_ms": 239.89600002765656,
+        "feedback_ms": 1737.326000034809,
+        "present_ms": 1740.6669999957085,
+        "result": {
+          "action": 0,
+          "applied": false,
+          "captured_window": 1,
+          "generation": 265
+        }
+      },
+      "release": {
+        "accept_ms": 181.7630000114441,
+        "feedback_ms": 1296.1100000143051,
+        "present_ms": 1463.8650000095367,
+        "result": {
+          "action": 2,
+          "applied": true,
+          "captured_window": 0,
+          "commit_pending": true,
+          "generation": 283,
+          "transform": {
+            "error": "",
+            "state": "complete",
+            "ticket": 1
+          },
+          "transform_ticket": 1
+        }
+      },
+      "motion_work": {
+        "footprint_calls_total": 0,
+        "plan_builds_total": 0,
+        "run_submissions_total": 0
+      },
+      "release_publications": 1,
+      "render_medians_ms": {
+        "render_ms": 116.11500382423401,
+        "publish_ms": 95.79700231552124,
+        "service_render_ms": 117.23947525024414
+      },
+      "pixel_operation_samples": [
+        2,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "worst_sample": {
+        "index": 0,
+        "accept_ms": 151.63199996948242,
+        "accept_to_visible_us": 242166,
+        "client_complete_ms": 421.8740000128746
+      }
+    },
+    "resize": {
+      "preview_mode": "tile-rim",
+      "coordinate_acceptance": {
+        "n": 16,
+        "median_ms": 141.46450001001358,
+        "p95_ms": 199.61500000953674,
+        "max_ms": 199.61500000953674
+      },
+      "accepted_to_publication": {
+        "n": 16,
+        "median_ms": 310.762,
+        "p95_ms": 350.553,
+        "max_ms": 350.553
+      },
+      "command_to_completion": {
+        "n": 16,
+        "median_ms": 459.52149999141693,
+        "p95_ms": 521.1230000257492,
+        "max_ms": 521.1230000257492
+      },
+      "press": {
+        "accept_ms": 943.005999982357,
+        "feedback_ms": 1792.3330000042915,
+        "present_ms": 1808.7530000209808,
+        "result": {
+          "action": 0,
+          "applied": false,
+          "captured_window": 1,
+          "generation": 285
+        }
+      },
+      "release": {
+        "accept_ms": 201.53700000047684,
+        "feedback_ms": 1362.6800000071526,
+        "present_ms": 1531.4340000152588,
+        "result": {
+          "action": 3,
+          "applied": true,
+          "captured_window": 0,
+          "commit_pending": true,
+          "generation": 303,
+          "transform": {
+            "error": "",
+            "state": "complete",
+            "ticket": 2
+          },
+          "transform_ticket": 2
+        }
+      },
+      "motion_work": {
+        "footprint_calls_total": 16,
+        "plan_builds_total": 0,
+        "run_submissions_total": 0
+      },
+      "release_publications": 1,
+      "boundary_prepare": {
+        "n": 16,
+        "median_ms": 112.5975,
+        "p95_ms": 137.209,
+        "max_ms": 137.209
+      },
+      "boundary_tiles": [
+        19,
+        23,
+        19,
+        23,
+        19,
+        23,
+        19,
+        23,
+        19,
+        23,
+        19,
+        23,
+        19,
+        23,
+        19,
+        23
+      ],
+      "render_medians_ms": {
+        "render_ms": 85.90450882911682,
+        "publish_ms": 55.754512548446655,
+        "service_render_ms": 87.0094895362854
+      },
+      "pixel_operation_samples": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "after": {
+    "move": {
+      "preview_mode": "single-tile",
+      "colored_cells_per_tile": 1024,
+      "coordinate_acceptance": {
+        "n": 16,
+        "median_ms": 159.64699998497963,
+        "p95_ms": 371.6240000128746,
+        "max_ms": 371.6240000128746
+      },
+      "accepted_to_publication": {
+        "n": 16,
+        "median_ms": 179.456,
+        "p95_ms": 330.567,
+        "max_ms": 330.567
+      },
+      "command_to_completion": {
+        "n": 16,
+        "median_ms": 355.8429999947548,
+        "p95_ms": 819.7730000019073,
+        "max_ms": 819.7730000019073
+      },
+      "press": {
+        "accept_ms": 170.44800001382828,
+        "feedback_ms": 602.2089999914169,
+        "present_ms": 610.0199999809265,
+        "result": {
+          "action": 0,
+          "applied": false,
+          "captured_window": 1,
+          "generation": 7
+        }
+      },
+      "release": {
+        "accept_ms": 181.79399996995926,
+        "feedback_ms": 1279.2649999856949,
+        "present_ms": 1449.5299999713898,
+        "result": {
+          "action": 2,
+          "applied": true,
+          "captured_window": 0,
+          "commit_pending": true,
+          "generation": 25,
+          "transform": {
+            "error": "",
+            "state": "complete",
+            "ticket": 1
+          },
+          "transform_ticket": 1
+        }
+      },
+      "motion_work": {
+        "footprint_calls_total": 0,
+        "plan_builds_total": 0,
+        "run_submissions_total": 0
+      },
+      "release_publications": 1,
+      "render_medians_ms": {
+        "render_ms": 115.71651697158813,
+        "publish_ms": 100.16751289367676,
+        "service_render_ms": 116.84450507164001
+      },
+      "pixel_operation_samples": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "worst_sample": {
+        "index": 0,
+        "accept_ms": 371.6240000128746,
+        "accept_to_visible_us": 330567,
+        "client_complete_ms": 819.7730000019073
+      }
+    },
+    "resize": {
+      "preview_mode": "tile-rim",
+      "colored_cells_per_tile": 1024,
+      "coordinate_acceptance": {
+        "n": 16,
+        "median_ms": 132.77000001072884,
+        "p95_ms": 157.13400000333786,
+        "max_ms": 157.13400000333786
+      },
+      "accepted_to_publication": {
+        "n": 16,
+        "median_ms": 320.1615,
+        "p95_ms": 348.289,
+        "max_ms": 348.289
+      },
+      "command_to_completion": {
+        "n": 16,
+        "median_ms": 465.8729999959469,
+        "p95_ms": 519.1439999938011,
+        "max_ms": 519.1439999938011
+      },
+      "press": {
+        "accept_ms": 1009.7060000300407,
+        "feedback_ms": 1887.3759999871254,
+        "present_ms": 1914.4739999771118,
+        "result": {
+          "action": 0,
+          "applied": false,
+          "captured_window": 1,
+          "generation": 27
+        }
+      },
+      "release": {
+        "accept_ms": 201.16699999570847,
+        "feedback_ms": 1369.160000026226,
+        "present_ms": 1539.0320000052452,
+        "result": {
+          "action": 3,
+          "applied": true,
+          "captured_window": 0,
+          "commit_pending": true,
+          "generation": 45,
+          "transform": {
+            "error": "",
+            "state": "complete",
+            "ticket": 2
+          },
+          "transform_ticket": 2
+        }
+      },
+      "motion_work": {
+        "footprint_calls_total": 16,
+        "plan_builds_total": 0,
+        "run_submissions_total": 0
+      },
+      "release_publications": 1,
+      "boundary_prepare": {
+        "n": 16,
+        "median_ms": 109.8265,
+        "p95_ms": 120.087,
+        "max_ms": 120.087
+      },
+      "boundary_tiles": [
+        19,
+        23,
+        19,
+        23,
+        19,
+        23,
+        19,
+        23,
+        19,
+        23,
+        19,
+        23,
+        19,
+        23,
+        19,
+        23
+      ],
+      "render_medians_ms": {
+        "render_ms": 94.76500749588013,
+        "publish_ms": 59.88597869873047,
+        "service_render_ms": 95.86697816848755
+      },
+      "pixel_operation_samples": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "comparison": {
+    "move": {
+      "before_median_ms": 359.8144999742508,
+      "after_median_ms": 355.8429999947548,
+      "median_change_ms": -3.971499979496002,
+      "before_p95_max_ms": 421.8740000128746,
+      "after_p95_max_ms": 819.7730000019073
+    },
+    "resize": {
+      "before_median_ms": 459.52149999141693,
+      "after_median_ms": 465.8729999959469,
+      "median_change_ms": 6.351500004529953,
+      "before_p95_max_ms": 521.1230000257492,
+      "after_p95_max_ms": 519.1439999938011
+    }
+  },
+  "conclusion": "No clear additional median-latency improvement from 64-cell to whole-tile move. Full-tile is primarily clearer feedback; all move payload builds/operations eliminated, but v4 already reused 14/16 movement payloads. The first v5 move reached 819.8ms; tail did not improve in the main trial. A short repeat is recorded separately, not pooled.",
+  "installation": {
+    "persistent": true,
+    "program": "/usr/bin/triangle-boayo-fixed",
+    "previous_program_backup": "/usr/bin/triangle-boayo-fixed.v4",
+    "identity": "/etc/triangle-wm-build.json",
+    "runtime": "/run/triangle-wm-runtime/triangle-boayo-fixed",
+    "verification": "Host patch reconstruction compared byte-for-byte with v5 ELF; corrupt base rejected; UART rolling checksum and gzip CRC; on-board reconstruction target FNV and size; v5 native behavior required by benchmark. No full-file board SHA/cmp scans."
+  },
+  "short_repeat": {
+    "hardware": true,
+    "scope": "Native RV32 client on physical board; UART transfer/printing, USB capture and optical latency excluded. Preview completion is output publication acknowledgment.",
+    "samples_per_action": 4,
+    "modes": {
+      "tile": {
+        "move": {
+          "preview_mode": "single-tile",
+          "colored_cells_per_tile": 1024,
+          "coordinate_acceptance": {
+            "n": 4,
+            "median_ms": 143.80000001192093,
+            "p95_ms": 164.59800004959106,
+            "max_ms": 164.59800004959106
+          },
+          "accepted_to_publication": {
+            "n": 4,
+            "median_ms": 171.722,
+            "p95_ms": 190.879,
+            "max_ms": 190.879
+          },
+          "command_to_completion": {
+            "n": 4,
+            "median_ms": 348.8525000214577,
+            "p95_ms": 365.87299996614456,
+            "max_ms": 365.87299996614456
+          },
+          "press": {
+            "accept_ms": 270.7829999923706,
+            "feedback_ms": 1716.852999985218,
+            "present_ms": 1720.1650000214577,
+            "result": {
+              "action": 0,
+              "applied": false,
+              "captured_window": 1,
+              "generation": 83
+            }
+          },
+          "release": {
+            "accept_ms": 170.77799999713898,
+            "feedback_ms": 1288.8450000286102,
+            "present_ms": 1459.464999973774,
+            "result": {
+              "action": 2,
+              "applied": true,
+              "captured_window": 0,
+              "commit_pending": true,
+              "generation": 89,
+              "transform": {
+                "error": "",
+                "state": "complete",
+                "ticket": 3
+              },
+              "transform_ticket": 3
+            }
+          },
+          "motion_work": {
+            "footprint_calls_total": 0,
+            "plan_builds_total": 0,
+            "run_submissions_total": 0
+          },
+          "release_publications": 1
+        },
+        "resize": {
+          "preview_mode": "tile-rim",
+          "colored_cells_per_tile": 1024,
+          "coordinate_acceptance": {
+            "n": 4,
+            "median_ms": 147.2010000050068,
+            "p95_ms": 1195.2240000367165,
+            "max_ms": 1195.2240000367165
+          },
+          "accepted_to_publication": {
+            "n": 4,
+            "median_ms": 335.55,
+            "p95_ms": 647.385,
+            "max_ms": 647.385
+          },
+          "command_to_completion": {
+            "n": 4,
+            "median_ms": 482.499499976635,
+            "p95_ms": 1901.6800000071526,
+            "max_ms": 1901.6800000071526
+          },
+          "press": {
+            "accept_ms": 531.8030000329018,
+            "feedback_ms": 988.1340000033379,
+            "present_ms": 991.319000005722,
+            "result": {
+              "action": 0,
+              "applied": false,
+              "captured_window": 1,
+              "generation": 91
+            }
+          },
+          "release": {
+            "accept_ms": 193.54000002145767,
+            "feedback_ms": 1372.1990000009537,
+            "present_ms": 1557.9769999980927,
+            "result": {
+              "action": 3,
+              "applied": true,
+              "captured_window": 0,
+              "commit_pending": true,
+              "generation": 97,
+              "transform": {
+                "error": "",
+                "state": "complete",
+                "ticket": 4
+              },
+              "transform_ticket": 4
+            }
+          },
+          "motion_work": {
+            "footprint_calls_total": 4,
+            "plan_builds_total": 0,
+            "run_submissions_total": 0
+          },
+          "release_publications": 1,
+          "boundary_prepare": {
+            "n": 4,
+            "median_ms": 120.08500000000001,
+            "p95_ms": 223.737,
+            "max_ms": 223.737
+          },
+          "boundary_tiles": [
+            19,
+            23,
+            19,
+            23
+          ]
+        }
+      }
+    }
+  }
+}

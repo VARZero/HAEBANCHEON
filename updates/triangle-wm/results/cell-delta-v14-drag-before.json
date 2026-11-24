@@ -1,0 +1,753 @@
+{
+  "scope": "Paused demo; fresh v12 service; one press then 16 moves, 6 screen pixels horizontal per move. Board request-to-final publication; UART/capture excluded. No release geometry commit: cancel after each drag.",
+  "samples": [
+    {
+      "accept_ms": 111.94926000013947,
+      "feedback_ms": 215.5462999995798,
+      "ok": true,
+      "present_ms": 218.562820000574,
+      "result": {
+        "display_enabled": true,
+        "generation": 4
+      },
+      "name": "dot_on",
+      "request": {
+        "op": "input_visibility",
+        "args": {
+          "visible": true
+        }
+      }
+    },
+    {
+      "accept_ms": 340.72884000092745,
+      "feedback_ms": 1289.8968000002205,
+      "ok": true,
+      "present_ms": 1293.1930999998003,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 5
+      },
+      "name": "move_press",
+      "request": {
+        "op": "input_button",
+        "args": {
+          "x": 689,
+          "y": 561,
+          "pressed": true
+        }
+      }
+    },
+    {
+      "accept_ms": 517.5361600015312,
+      "feedback_ms": 1267.8269200008363,
+      "ok": true,
+      "present_ms": 1275.1747600007802,
+      "result": {
+        "action": 2,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 6
+      },
+      "name": "move_continuous",
+      "request": {
+        "op": "input_move",
+        "args": {
+          "x": 695,
+          "y": 559
+        }
+      }
+    },
+    {
+      "accept_ms": 464.12031999975443,
+      "feedback_ms": 1016.1830399986356,
+      "ok": true,
+      "present_ms": 1022.3773199990392,
+      "result": {
+        "action": 2,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 7
+      },
+      "name": "move_continuous",
+      "request": {
+        "op": "input_move",
+        "args": {
+          "x": 701,
+          "y": 557
+        }
+      }
+    },
+    {
+      "accept_ms": 504.96781999990344,
+      "feedback_ms": 1066.8143399991095,
+      "ok": true,
+      "present_ms": 1070.2158799991012,
+      "result": {
+        "action": 2,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 8
+      },
+      "name": "move_continuous",
+      "request": {
+        "op": "input_move",
+        "args": {
+          "x": 707,
+          "y": 555
+        }
+      }
+    },
+    {
+      "accept_ms": 488.30127999931574,
+      "feedback_ms": 1070.1128399986774,
+      "ok": true,
+      "present_ms": 1080.7472999989986,
+      "result": {
+        "action": 2,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 9
+      },
+      "name": "move_continuous",
+      "request": {
+        "op": "input_move",
+        "args": {
+          "x": 713,
+          "y": 553
+        }
+      }
+    },
+    {
+      "accept_ms": 493.1176200006157,
+      "feedback_ms": 1113.8211800009012,
+      "ok": true,
+      "present_ms": 1123.9930799994618,
+      "result": {
+        "action": 2,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 10
+      },
+      "name": "move_continuous",
+      "request": {
+        "op": "input_move",
+        "args": {
+          "x": 719,
+          "y": 551
+        }
+      }
+    },
+    {
+      "accept_ms": 486.3880000002682,
+      "feedback_ms": 1119.8822399992496,
+      "ok": true,
+      "present_ms": 1123.3798599988222,
+      "result": {
+        "action": 2,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 11
+      },
+      "name": "move_continuous",
+      "request": {
+        "op": "input_move",
+        "args": {
+          "x": 725,
+          "y": 549
+        }
+      }
+    },
+    {
+      "accept_ms": 445.5182600002736,
+      "feedback_ms": 1073.0552399996668,
+      "ok": true,
+      "present_ms": 1079.075280001387,
+      "result": {
+        "action": 2,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 12
+      },
+      "name": "move_continuous",
+      "request": {
+        "op": "input_move",
+        "args": {
+          "x": 731,
+          "y": 547
+        }
+      }
+    },
+    {
+      "accept_ms": 467.857420001179,
+      "feedback_ms": 960.8130400013179,
+      "ok": true,
+      "present_ms": 967.1342000011355,
+      "result": {
+        "action": 2,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 13
+      },
+      "name": "move_continuous",
+      "request": {
+        "op": "input_move",
+        "args": {
+          "x": 737,
+          "y": 545
+        }
+      }
+    },
+    {
+      "accept_ms": 486.680779999122,
+      "feedback_ms": 1047.3829800002277,
+      "ok": true,
+      "present_ms": 1054.037760000676,
+      "result": {
+        "action": 2,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 14
+      },
+      "name": "move_continuous",
+      "request": {
+        "op": "input_move",
+        "args": {
+          "x": 743,
+          "y": 543
+        }
+      }
+    },
+    {
+      "accept_ms": 482.7845599986613,
+      "feedback_ms": 1081.2188199982047,
+      "ok": true,
+      "present_ms": 1088.6334999985993,
+      "result": {
+        "action": 2,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 15
+      },
+      "name": "move_continuous",
+      "request": {
+        "op": "input_move",
+        "args": {
+          "x": 749,
+          "y": 541
+        }
+      }
+    },
+    {
+      "accept_ms": 466.12450000084937,
+      "feedback_ms": 1041.2171599995345,
+      "ok": true,
+      "present_ms": 1047.5454799998552,
+      "result": {
+        "action": 2,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 16
+      },
+      "name": "move_continuous",
+      "request": {
+        "op": "input_move",
+        "args": {
+          "x": 755,
+          "y": 539
+        }
+      }
+    },
+    {
+      "accept_ms": 392.5183800011873,
+      "feedback_ms": 941.9948399998248,
+      "ok": true,
+      "present_ms": 948.9636400006711,
+      "result": {
+        "action": 2,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 17
+      },
+      "name": "move_continuous",
+      "request": {
+        "op": "input_move",
+        "args": {
+          "x": 761,
+          "y": 537
+        }
+      }
+    },
+    {
+      "accept_ms": 387.40067999996245,
+      "feedback_ms": 839.226800000295,
+      "ok": true,
+      "present_ms": 842.6043400000781,
+      "result": {
+        "action": 2,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 18
+      },
+      "name": "move_continuous",
+      "request": {
+        "op": "input_move",
+        "args": {
+          "x": 767,
+          "y": 535
+        }
+      }
+    },
+    {
+      "accept_ms": 401.2414400000125,
+      "feedback_ms": 913.6193800009787,
+      "ok": true,
+      "present_ms": 919.5651000011712,
+      "result": {
+        "action": 2,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 19
+      },
+      "name": "move_continuous",
+      "request": {
+        "op": "input_move",
+        "args": {
+          "x": 773,
+          "y": 533
+        }
+      }
+    },
+    {
+      "accept_ms": 412.12522000074387,
+      "feedback_ms": 953.6420600004494,
+      "ok": true,
+      "present_ms": 960.0047000013292,
+      "result": {
+        "action": 2,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 20
+      },
+      "name": "move_continuous",
+      "request": {
+        "op": "input_move",
+        "args": {
+          "x": 779,
+          "y": 531
+        }
+      }
+    },
+    {
+      "accept_ms": 401.3440800011158,
+      "feedback_ms": 942.0930800009519,
+      "ok": true,
+      "present_ms": 948.1945600006729,
+      "result": {
+        "action": 2,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 21
+      },
+      "name": "move_continuous",
+      "request": {
+        "op": "input_move",
+        "args": {
+          "x": 785,
+          "y": 529
+        }
+      }
+    },
+    {
+      "accept_ms": 159.63026000000536,
+      "feedback_ms": 430.2783199995756,
+      "ok": true,
+      "present_ms": 433.4025799985975,
+      "result": {
+        "cancelled": true,
+        "generation": 22
+      },
+      "name": "move_cancel",
+      "request": {
+        "op": "input_cancel",
+        "args": {
+          "hide": true
+        }
+      }
+    },
+    {
+      "accept_ms": 339.4822400007397,
+      "feedback_ms": 1108.1673799995333,
+      "ok": true,
+      "present_ms": 1111.525940001011,
+      "result": {
+        "action": 0,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 23
+      },
+      "name": "resize_press",
+      "request": {
+        "op": "input_button",
+        "args": {
+          "x": 916,
+          "y": 544,
+          "pressed": true
+        }
+      }
+    },
+    {
+      "accept_ms": 438.15687999874353,
+      "feedback_ms": 1148.391139999032,
+      "ok": true,
+      "present_ms": 1155.728259999305,
+      "result": {
+        "action": 3,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 24
+      },
+      "name": "resize_continuous",
+      "request": {
+        "op": "input_move",
+        "args": {
+          "x": 922,
+          "y": 547
+        }
+      }
+    },
+    {
+      "accept_ms": 424.1859600003809,
+      "feedback_ms": 904.703480001539,
+      "ok": true,
+      "present_ms": 910.725240001455,
+      "result": {
+        "action": 3,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 25
+      },
+      "name": "resize_continuous",
+      "request": {
+        "op": "input_move",
+        "args": {
+          "x": 928,
+          "y": 550
+        }
+      }
+    },
+    {
+      "accept_ms": 414.62090000137687,
+      "feedback_ms": 911.3173000011593,
+      "ok": true,
+      "present_ms": 914.694220000878,
+      "result": {
+        "action": 3,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 26
+      },
+      "name": "resize_continuous",
+      "request": {
+        "op": "input_move",
+        "args": {
+          "x": 934,
+          "y": 553
+        }
+      }
+    },
+    {
+      "accept_ms": 427.91135999932885,
+      "feedback_ms": 909.929359998554,
+      "ok": true,
+      "present_ms": 915.5818799994886,
+      "result": {
+        "action": 3,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 27
+      },
+      "name": "resize_continuous",
+      "request": {
+        "op": "input_move",
+        "args": {
+          "x": 940,
+          "y": 556
+        }
+      }
+    },
+    {
+      "accept_ms": 322.95361999981105,
+      "feedback_ms": 880.3460399992764,
+      "ok": true,
+      "present_ms": 883.7112399991602,
+      "result": {
+        "action": 3,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 28
+      },
+      "name": "resize_continuous",
+      "request": {
+        "op": "input_move",
+        "args": {
+          "x": 946,
+          "y": 559
+        }
+      }
+    },
+    {
+      "accept_ms": 354.6421400010586,
+      "feedback_ms": 949.4054000005126,
+      "ok": true,
+      "present_ms": 955.0380199998617,
+      "result": {
+        "action": 3,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 29
+      },
+      "name": "resize_continuous",
+      "request": {
+        "op": "input_move",
+        "args": {
+          "x": 952,
+          "y": 562
+        }
+      }
+    },
+    {
+      "accept_ms": 386.29232000000775,
+      "feedback_ms": 943.6283800005913,
+      "ok": true,
+      "present_ms": 949.6048200000077,
+      "result": {
+        "action": 3,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 30
+      },
+      "name": "resize_continuous",
+      "request": {
+        "op": "input_move",
+        "args": {
+          "x": 958,
+          "y": 565
+        }
+      }
+    },
+    {
+      "accept_ms": 391.9274799991399,
+      "feedback_ms": 912.6197799984366,
+      "ok": true,
+      "present_ms": 918.5691399984062,
+      "result": {
+        "action": 3,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 31
+      },
+      "name": "resize_continuous",
+      "request": {
+        "op": "input_move",
+        "args": {
+          "x": 964,
+          "y": 568
+        }
+      }
+    },
+    {
+      "accept_ms": 385.09586000069976,
+      "feedback_ms": 903.6599400006235,
+      "ok": true,
+      "present_ms": 909.3147400002927,
+      "result": {
+        "action": 3,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 32
+      },
+      "name": "resize_continuous",
+      "request": {
+        "op": "input_move",
+        "args": {
+          "x": 970,
+          "y": 571
+        }
+      }
+    },
+    {
+      "accept_ms": 385.23230000026524,
+      "feedback_ms": 883.3576800003648,
+      "ok": true,
+      "present_ms": 889.0438799988478,
+      "result": {
+        "action": 3,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 33
+      },
+      "name": "resize_continuous",
+      "request": {
+        "op": "input_move",
+        "args": {
+          "x": 976,
+          "y": 574
+        }
+      }
+    },
+    {
+      "accept_ms": 384.5180599987507,
+      "feedback_ms": 904.752100000158,
+      "ok": true,
+      "present_ms": 910.4013599995524,
+      "result": {
+        "action": 3,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 34
+      },
+      "name": "resize_continuous",
+      "request": {
+        "op": "input_move",
+        "args": {
+          "x": 982,
+          "y": 577
+        }
+      }
+    },
+    {
+      "accept_ms": 391.73938000015914,
+      "feedback_ms": 911.8080399986356,
+      "ok": true,
+      "present_ms": 917.4648199994117,
+      "result": {
+        "action": 3,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 35
+      },
+      "name": "resize_continuous",
+      "request": {
+        "op": "input_move",
+        "args": {
+          "x": 988,
+          "y": 580
+        }
+      }
+    },
+    {
+      "accept_ms": 395.2753600012511,
+      "feedback_ms": 845.0278400015086,
+      "ok": true,
+      "present_ms": 850.6507800016552,
+      "result": {
+        "action": 3,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 36
+      },
+      "name": "resize_continuous",
+      "request": {
+        "op": "input_move",
+        "args": {
+          "x": 994,
+          "y": 583
+        }
+      }
+    },
+    {
+      "accept_ms": 381.1550799999386,
+      "feedback_ms": 840.3269400000572,
+      "ok": true,
+      "present_ms": 845.9571000002325,
+      "result": {
+        "action": 3,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 37
+      },
+      "name": "resize_continuous",
+      "request": {
+        "op": "input_move",
+        "args": {
+          "x": 1000,
+          "y": 586
+        }
+      }
+    },
+    {
+      "accept_ms": 354.9527400005609,
+      "feedback_ms": 865.5180399995297,
+      "ok": true,
+      "present_ms": 871.4343400001526,
+      "result": {
+        "action": 3,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 38
+      },
+      "name": "resize_continuous",
+      "request": {
+        "op": "input_move",
+        "args": {
+          "x": 1006,
+          "y": 589
+        }
+      }
+    },
+    {
+      "accept_ms": 355.2037000004202,
+      "feedback_ms": 881.3716000001878,
+      "ok": true,
+      "present_ms": 884.7830800004303,
+      "result": {
+        "action": 3,
+        "applied": false,
+        "captured_window": 1,
+        "generation": 39
+      },
+      "name": "resize_continuous",
+      "request": {
+        "op": "input_move",
+        "args": {
+          "x": 1012,
+          "y": 592
+        }
+      }
+    },
+    {
+      "accept_ms": 128.53246000036597,
+      "feedback_ms": 416.3210199996829,
+      "ok": true,
+      "present_ms": 419.2990199998021,
+      "result": {
+        "cancelled": true,
+        "generation": 40
+      },
+      "name": "resize_cancel",
+      "request": {
+        "op": "input_cancel",
+        "args": {
+          "hide": true
+        }
+      }
+    }
+  ],
+  "metrics": {
+    "move_continuous": {
+      "n": 16,
+      "median_ms": 1050.7916200002655,
+      "p95_ms": 1275.1747600007802,
+      "max_ms": 1275.1747600007802
+    },
+    "resize_continuous": {
+      "n": 16,
+      "median_ms": 910.5633000005037,
+      "p95_ms": 1155.728259999305,
+      "max_ms": 1155.728259999305
+    }
+  },
+  "cleanup_note": "All 37 JSON requests completed successfully. An unmeasured trailing quit had CRLF and produced a parse error before EOF; cancellation already completed. Final probe omits quit and uses LF/EOF."
+}

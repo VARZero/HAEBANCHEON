@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-22",
+  "baseline_commit": "ab49eb6f098216a410d319ba9b450e044d9cd491",
+  "binary": "triangle-boayo-v14-tuned",
+  "sha256_host": "f6f59d289fa55cbdc1eae348f4cd7b18578000876a0476bbb4368765bb2fc42f",
+  "board_running": "/tmp/triangle-boayo-v14-tuned",
+  "board_persisted": "/root/triangle-wm-v14/triangle-boayo-v14-tuned",
+  "verification": "Patch transfer checksum, output size/FNV PATCH_OK, runtime readlink, persistence copy success. No independent board SHA256 readback.",
+  "patch_log": "TRI_2a56f5634c.log",
+  "runtime_log": "TRI_956ae3ebef.log",
+  "mixed_before": "cell-delta-v14-before.json",
+  "mixed_after": "cell-delta-v14-after.json",
+  "continuous_before": "cell-delta-v14-drag-before.json",
+  "continuous_after": "cell-delta-v14-drag-after.json",
+  "live": "cell-delta-v14-live.json",
+  "automatic_boot_changed": false,
+  "source_committed": false
+}

@@ -1,0 +1,45 @@
+{
+  "boot_lba": 2048,
+  "root_lba": 14336,
+  "root_sectors": 2097152,
+  "segments": [
+    {
+      "address": "0x80000000",
+      "sectors": 519,
+      "crc32": "edd168be"
+    },
+    {
+      "address": "0x80400000",
+      "sectors": 10191,
+      "crc32": "b6081feb"
+    },
+    {
+      "address": "0x87f00000",
+      "sectors": 7,
+      "crc32": "ac347877"
+    }
+  ],
+  "version": "fixed-wm-full-tile-v5",
+  "geometry": "integer Q24",
+  "angles": "signed quarter degrees in 16-bit range; normalized yaw [-180,180)",
+  "wire": "BWM1 little-endian length + CBOR integer payload; angle Q2, other fractions Q24",
+  "publication": "BO_PUBLISH_COPY default; TRIANGLE_PUBLISH_COPY=0 selects checked baseline",
+  "preview": "Move: one complete 1024-cell S-colored triangle, sharing an immutable solid payload. Resize: unchanged whole boundary triangles sharing S-color payload. Frozen content, latest input and one final transform publication retained.",
+  "execution": "Startup stages executables in /run/triangle-wm-runtime before launch",
+  "feedback_target_ms": 300,
+  "feedback_target_hardware_verified": false,
+  "hardware_tested": false,
+  "binaries": {
+    "triangle-boayo-fixed": "0c9e84853c82d5e415bcf7ddfa064f385b133c3921f7419991416fb4006dcb5a",
+    "triangle-app": "59d1ee5d322040fc4a31b072d9536b07ec97c64c0d0f28929eb588395110581d",
+    "triangle-input": "19d78403061c6c406d85ecf666642a0355377420cba3364c15fcc928cbbaedc8"
+  },
+  "move_marker_cells": 1024,
+  "image": "HAEBANCHEON-full-tile-preview.img",
+  "bytes": 1081081856,
+  "sha256": "7262b0c05725705394e8c346b1cc7c3b20eeae90dd6746482e7132c0deb03b7d",
+  "kernel_sha256": "91a89cc145d2df3b8781e7803d9159d1ce58cb4b994cc938c86627e2326eee99",
+  "kernel_release": "6.12.0-haebancheon-publishcopy",
+  "rootfs_sha256": "4886658add14cf0c14a4a75b7cad9c4132c748adacf4f7cc93100f75c409e49b",
+  "notes": "Driver improvement and kernel retained. Automatically stages WM/app/input in RAM and starts demo when /dev/bosio0 exists. Prepared offline; no physical board was contacted. Native/QEMU checks do not measure hardware latency."
+}

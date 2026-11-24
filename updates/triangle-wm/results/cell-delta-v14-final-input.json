@@ -1,0 +1,49 @@
+{
+  "accept_ms": 345.8795999996364,
+  "feedback_ms": 459.51997999846935,
+  "ok": true,
+  "present_ms": 476.08153999969363,
+  "result": {
+    "captured_window": 0,
+    "commit_on_release": true,
+    "controls": [
+      {
+        "action": "close",
+        "hit_size": 32,
+        "tile": 3901,
+        "window_id": 1,
+        "x": 593,
+        "y": 157
+      },
+      {
+        "action": "move",
+        "hit_size": 32,
+        "tile": 54,
+        "window_id": 1,
+        "x": 564,
+        "y": 556
+      },
+      {
+        "action": "resize",
+        "hit_size": 32,
+        "tile": 182,
+        "window_id": 1,
+        "x": 796,
+        "y": 539
+      }
+    ],
+    "display_enabled": true,
+    "generation": 143,
+    "layout": "split",
+    "pressed": false,
+    "preview": {
+      "active": false,
+      "outline_tiles": 0,
+      "splash_index": 228,
+      "window_id": 0
+    },
+    "visible": true,
+    "x": 855,
+    "y": 524
+  }
+}

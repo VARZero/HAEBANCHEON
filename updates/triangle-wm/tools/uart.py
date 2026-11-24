@@ -3,7 +3,11 @@ import argparse,json,re,time,uuid
 from pathlib import Path
 import serial
 ap=argparse.ArgumentParser();ap.add_argument('command');ap.add_argument('--timeout',type=float,default=60);ap.add_argument('--output',required=True)
-a=ap.parse_args();out=Path(a.output);out.mkdir(parents=True,exist_ok=True)
+a=ap.parse_args()
+# Board BusyBox line editing is limited to 1024 bytes. Leave room for the
+# completion marker; a truncated compound command can wait forever for `fi`.
+if len(a.command.encode('utf-8'))>960:ap.error('UART command too long; split into commands of at most 960 bytes')
+out=Path(a.output);out.mkdir(parents=True,exist_ok=True)
 p=serial.Serial(port=None,baudrate=115200,timeout=.05);p.dtr=False;p.rts=False;p.port='COM4';p.open()
 token='TRI_'+uuid.uuid4().hex[:10];start=time.monotonic();raw=b''
 p.write((a.command+'; echo '+token+'_RC:$?\n').encode());p.flush()

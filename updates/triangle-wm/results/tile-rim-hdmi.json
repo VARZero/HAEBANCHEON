@@ -1,0 +1,207 @@
+{
+  "result": "PASS_PHYSICAL_HDMI_PREVIEW",
+  "scope": "Actual HDMI pixels. Frozen scene outside S-colored preview, central move marker and optional whole-tile resize rim, final transformed window, pointer preference restored. Native intervals exclude UART; host/video command intervals include HTTP/UART. Two-second holds are intentional.",
+  "actions": [
+    {
+      "action": "move",
+      "preview_mode": "single-tile",
+      "rim_tiles": [],
+      "press": {
+        "accept_ms": 410.48900002241135,
+        "feedback_ms": 1858.8210000395775,
+        "ok": true,
+        "present_ms": 1867.1200000047684,
+        "result": {
+          "action": 0,
+          "applied": false,
+          "captured_window": 1,
+          "generation": 17
+        }
+      },
+      "move": {
+        "accept_ms": 367.744000017643,
+        "completion_pending": true,
+        "ok": true,
+        "result": {
+          "accepted_ticket": 1,
+          "coalesced_moves": 0,
+          "visible_ticket": 0
+        }
+      },
+      "completion": {
+        "accepted_ticket": 1,
+        "applied_ticket": 1,
+        "coalesced_moves": 0,
+        "last_accept_to_visible_us": 508328,
+        "priority_publications": 0,
+        "visible_ticket": 1,
+        "visible_x": 809,
+        "visible_y": 536
+      },
+      "release": {
+        "accept_ms": 235.7379999756813,
+        "feedback_ms": 1452.2699999809265,
+        "ok": true,
+        "present_ms": 1642.49899995327,
+        "result": {
+          "action": 2,
+          "applied": true,
+          "captured_window": 0,
+          "commit_pending": true,
+          "generation": 20,
+          "transform": {
+            "error": "",
+            "state": "complete",
+            "ticket": 1
+          },
+          "transform_ticket": 1
+        }
+      },
+      "before_bbox": [
+        239,
+        88,
+        1042,
+        631
+      ],
+      "frozen_bbox": [
+        239,
+        88,
+        1042,
+        631
+      ],
+      "preview_bbox": [
+        239,
+        88,
+        1042,
+        631
+      ],
+      "after_bbox": [
+        363,
+        88,
+        1181,
+        535
+      ],
+      "static_title_white_pixels": [
+        4789,
+        4716,
+        4789
+      ],
+      "held_white_mask_changed_pixels": 10
+    },
+    {
+      "action": "resize",
+      "preview_mode": "tile-rim",
+      "rim_tiles": [
+        17,
+        19,
+        20,
+        31,
+        43,
+        53,
+        55,
+        57,
+        176,
+        177,
+        179,
+        181,
+        188,
+        202,
+        3822,
+        3832,
+        3844,
+        3900,
+        3902,
+        3904,
+        3970,
+        3983,
+        3997
+      ],
+      "press": {
+        "accept_ms": 449.44999998807907,
+        "feedback_ms": 1446.9330000281334,
+        "ok": true,
+        "present_ms": 1464.4710000157356,
+        "result": {
+          "action": 0,
+          "applied": false,
+          "captured_window": 1,
+          "generation": 21
+        }
+      },
+      "move": {
+        "accept_ms": 186.01699995994568,
+        "completion_pending": true,
+        "ok": true,
+        "result": {
+          "accepted_ticket": 2,
+          "coalesced_moves": 0,
+          "visible_ticket": 1
+        }
+      },
+      "completion": {
+        "accepted_ticket": 2,
+        "applied_ticket": 2,
+        "coalesced_moves": 0,
+        "last_accept_to_visible_us": 663840,
+        "priority_publications": 0,
+        "visible_ticket": 2,
+        "visible_x": 1094,
+        "visible_y": 530
+      },
+      "release": {
+        "accept_ms": 252.85900002717972,
+        "feedback_ms": 1458.4230000376701,
+        "ok": true,
+        "present_ms": 1648.333999991417,
+        "result": {
+          "action": 3,
+          "applied": true,
+          "captured_window": 0,
+          "commit_pending": true,
+          "generation": 24,
+          "transform": {
+            "error": "",
+            "state": "complete",
+            "ticket": 2
+          },
+          "transform_ticket": 2
+        }
+      },
+      "before_bbox": [
+        363,
+        88,
+        1181,
+        535
+      ],
+      "frozen_bbox": [
+        421,
+        98,
+        1105,
+        527
+      ],
+      "preview_bbox": [
+        421,
+        98,
+        1180,
+        535
+      ],
+      "after_bbox": [
+        363,
+        88,
+        1255,
+        631
+      ],
+      "static_title_white_pixels": [
+        4763,
+        4763,
+        4763
+      ],
+      "held_white_mask_changed_pixels": 1
+    }
+  ],
+  "hardware": true,
+  "version": "fixed-wm-tile-rim-v4",
+  "binary_sha256": "e4d1d34c00ec04243e6a9509ac08edd9e172f5aba0e162c6709d1fe3e447070b",
+  "sd_image_sha256": "e0e9f7606d59c1f746c2920fb8a52a8748ac2a638ee6692d215bd9cf232359c7",
+  "video_duration_seconds": 30.3317925
+}

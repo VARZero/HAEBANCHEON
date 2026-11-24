@@ -218,19 +218,23 @@ int bo_stop(struct bo_engine *e,unsigned int ms)
         if(expired(e,end))return poison(e,-ETIMEDOUT);
     }
 }
-static int present_check(struct bo_engine *e,const struct bo_present *p,const __u32 *scene)
+static int present_bounds(struct bo_engine *e,const struct bo_present *p)
 {
-    unsigned n;
     if(e->poisoned)return -EIO;
     if(p->bank>1 || !scene_ok(p->scene_words) || p->resolution>2 || !timeout_ok(p->timeout_ms))return -EINVAL;
     if((int)p->bank==e->active)return -EBUSY;
-    for(n=256;n<BO_HEADER_WORDS;n++)if(scene[n]!=0xffffffffu &&
-        (__u64)scene[n]+(64u<<(2*p->resolution))>(p->scene_words-BO_HEADER_WORDS)*4u)return -EINVAL;
     /* Changing pose/resolution while running needs a separate atomic transaction. */
     if(e->configured && (p->resolution!=e->resolution || memcmp(p->camera,e->camera,sizeof(e->camera))))return -EBUSY;
     return 0;
 }
-static int present_execute(struct bo_engine *e,const struct bo_present *p,const __u32 *scene)
+static int present_check(struct bo_engine *e,const struct bo_present *p,const __u32 *scene)
+{
+    unsigned n;int ret=present_bounds(e,p);if(ret)return ret;
+    for(n=256;n<BO_HEADER_WORDS;n++)if(scene[n]!=0xffffffffu &&
+        (__u64)scene[n]+(64u<<(2*p->resolution))>(p->scene_words-BO_HEADER_WORDS)*4u)return -EINVAL;
+    return 0;
+}
+static int present_execute(struct bo_engine *e,const struct bo_present *p,const __u32 *scene,int copy_only)
 {
     unsigned n;__u32 status,base,command;__u64 end,begin=e->io.now_us(e->io.opaque);
     if(!e->configured){
@@ -244,7 +248,7 @@ static int present_execute(struct bo_engine *e,const struct bo_present *p,const 
     base=e->dma_base+bo_offsets[BO_SCENE0+p->bank];
     /* Patch retains BS25's current metadata, so exact equality is required.
      * Only 4476 metadata words are inspected, never inactive cell data. */
-    command=e->configured && e->metadata_valid && e->metadata_words==p->scene_words &&
+    command=!copy_only && e->configured && e->metadata_valid && e->metadata_words==p->scene_words &&
         !memcmp(e->metadata,scene,sizeof(e->metadata)) ? 2 : 1;
     e->profile.select_us=e->io.now_us(e->io.opaque)-begin;e->profile.command=command;begin=e->io.now_us(e->io.opaque);
     if(wr(e,2,8,base)||wr(e,2,0x0c,p->scene_words)||wr(e,2,0x6c,command))return poison(e,-EIO);
@@ -266,8 +270,8 @@ static int present_execute(struct bo_engine *e,const struct bo_present *p,const 
         if(expired(e,end))return poison(e,-ETIMEDOUT);
     }
     e->profile.wait_us=e->io.now_us(e->io.opaque)-begin;begin=e->io.now_us(e->io.opaque);
-    memcpy(e->metadata,scene,sizeof(e->metadata));
-    e->metadata_words=p->scene_words;e->metadata_valid=1;
+    if(!copy_only)memcpy(e->metadata,scene,sizeof(e->metadata));
+    e->metadata_words=p->scene_words;e->metadata_valid=!copy_only;
     e->active=p->bank;e->configured=1;e->resolution=p->resolution;
     memcpy(e->camera,p->camera,sizeof(e->camera));
     e->profile.finish_us=e->io.now_us(e->io.opaque)-begin;return 0;
@@ -278,7 +282,7 @@ int bo_present(struct bo_engine *e,const struct bo_present *p,const __u32 *scene
     int ret;__u64 begin=e->io.now_us(e->io.opaque);
     memset(&e->profile,0,sizeof(e->profile));ret=present_check(e,p,scene);
     e->profile.validate_us=e->io.now_us(e->io.opaque)-begin;
-    return ret?ret:present_execute(e,p,scene);
+    return ret?ret:present_execute(e,p,scene,0);
 }
 int bo_publish(struct bo_engine *e,const struct bo_present *p,const __u32 *metadata,
                int (*upload)(void *,unsigned,__u32,const __u32 *,__u32),void *opaque)
@@ -303,5 +307,22 @@ int bo_publish(struct bo_engine *e,const struct bo_present *p,const __u32 *metad
     e->bank_metadata_valid[bank]=1;
     e->profile.upload_us=e->io.now_us(e->io.opaque)-begin;
     /* Snapshot stays alive through acknowledgment. No DDR metadata reread. */
-    return present_execute(e,p,metadata);
+    return present_execute(e,p,metadata,0);
+}
+
+int bo_publish_copy(struct bo_engine *e,const struct bo_present *p,const __u32 *metadata,
+               int (*upload)(void *,unsigned,__u32,const __u32 *,__u32),void *opaque)
+{
+    int ret;__u64 begin=e->io.now_us(e->io.opaque);
+    memset(&e->profile,0,sizeof(e->profile));ret=present_bounds(e,p);
+    e->profile.validate_us=e->io.now_us(e->io.opaque)-begin;
+    if(ret)return ret;
+    /* A subsequent checked call must not reuse a stale snapshot. */
+    e->bank_metadata_valid[p->bank]=0;e->metadata_valid=0;
+    begin=e->io.now_us(e->io.opaque);
+    ret=upload(opaque,BO_SCENE0+p->bank,0,metadata,BO_HEADER_WORDS);
+    if(ret)return poison(e,ret);
+    e->profile.uploaded_words=BO_HEADER_WORDS;e->profile.upload_ranges=1;
+    e->profile.upload_us=e->io.now_us(e->io.opaque)-begin;
+    return present_execute(e,p,metadata,1);
 }

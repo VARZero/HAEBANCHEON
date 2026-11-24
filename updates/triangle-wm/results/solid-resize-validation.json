@@ -1,0 +1,26 @@
+{
+  "result": "PASS",
+  "version": "fixed-wm-solid-resize-v13",
+  "hardware": false,
+  "scope": "Host ASan/UBSan pixel/reference and binary/JSON socket tests; actual RV32 SD image boot against mock BOSIO. Physical results recorded separately.",
+  "checks": [
+    "Filled blank resize removes old content and controls",
+    "Grow/shrink reveals underlying windows, respects occlusion; both banks checked byte for byte",
+    "Cancel restores original pixels and geometry",
+    "Latest pending content and damage union rendered once on release",
+    "Transform preflight/publish rollback",
+    "Independent arbitrary 0..255 S/B colors and invalid mutation atomicity",
+    "Actual output palette quantization incl channel ordering and gray mapping",
+    "Pointer dot disabled keeps tracking/capture",
+    "Binary/JSON application/input and content coalescing regressions",
+    "200 buffered PTR1 coordinates coalesced with ordered release",
+    "RV32 image boot, demo startup, move/resize and fast bridge",
+    "Integer core unresolved symbol audit"
+  ],
+  "binaries": {
+    "triangle-boayo-fixed": "267532309863ae80316b82d4e353ad373d40266889ba66e295716ff37f96563b",
+    "triangle-app": "5560552b8ebde60abdb3fcbf07a5c5cf1bedbcf225e999f33fd0e052d09f4dc7",
+    "triangle-input": "b798b7c444bc990d43720a915313388c649836de9dabb268419a9954f30f5b15"
+  },
+  "image_sha256": "d28a5d6f693f8ad899aa44f55e4051cb8010f6cdcfdcd6acbf1ccb312567b772"
+}

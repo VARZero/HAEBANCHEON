@@ -1,0 +1,32 @@
+{
+  "result": "PASS",
+  "hardware_tested": false,
+  "host_sanitizers": [
+    "address",
+    "undefined"
+  ],
+  "suite_invocations": 13,
+  "suites": [
+    "fixed marker byte/directory reference",
+    "legacy thin-outline feedback",
+    "overlay cell deltas",
+    "binary input/visibility",
+    "binary latest input mailbox",
+    "binary marker socket and rollback",
+    "JSON input/visibility",
+    "JSON latest input mailbox",
+    "JSON marker socket and rollback",
+    "application ABI",
+    "single-tile coalescing (3 pixel formats)",
+    "outline coalescing (3 pixel formats)",
+    "legacy outline input/visibility"
+  ],
+  "qemu_modes": [
+    "tile",
+    "outline"
+  ],
+  "image_sha256": "61df684d8a5ab54e13b5458d1c4ca782211eba3dcb1d48101b6dd327b56f9d21",
+  "physical_latency_measured": false,
+  "feedback_target_ms": 300,
+  "feedback_target_hardware_verified": false
+}

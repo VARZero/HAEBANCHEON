@@ -1,4 +1,10 @@
-# Background-first feedback (v12)
+# Historical background-first / outline experiment (v12)
+
+Current policy: [filled S resize and independent S/B colors](SOLID_RESIZE.md). Move keeps the real window frozen and moves one complete S tile. Resize hides the captured window and fills the complete proposed footprint with S. Release publishes B plus latest content once; 0–255 colors can be configured at creation or later. Initial creation retains S-first feedback. The reserved six-color list, two-publication release and timing values below describe the earlier outline experiment. `TRIANGLE_PREVIEW=outline` retains that comparison path.
+
+The later [v14 thin-outline optimization](CELL_DELTA.md) preserves this visual
+behavior while reusing masks and applying cell deltas. The measurements below
+are the original v12 results.
 
 BoAYO application calls are preserved. The WM separates the splash/preview color
 S (`splash_index`, default 228) from the actual background B (`background_index`,

@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-22",
+  "baseline_service": "triangle-boayo-v14-tuned",
+  "baseline_sha256_host": "f6f59d289fa55cbdc1eae348f4cd7b18578000876a0476bbb4368765bb2fc42f",
+  "service": "triangle-boayo-v15-tuned",
+  "service_sha256_host": "6745c2ae2a7705d655653970d253e72c836236f7d3306b40ce7f6fc854186530",
+  "client": "triangle-input-v15",
+  "client_sha256": "8c71f41263ebd7e27a448d7d5c88c23067f6ba9e21db137e7e3a8550099fcbae",
+  "service_verification": "Transport checksum + gzip CRC/size + PATCH_OK output FNV/size; host SHA256 only",
+  "client_verification": "Transport checksum + board SHA256",
+  "patch_log": "TRI_a33679cee8.log",
+  "native_before": "input-mailbox-v15-before.json",
+  "native_after": "input-mailbox-v15-after.json",
+  "paced_comparison": "input-mailbox-v15-paced.json",
+  "live": "input-mailbox-v15-live.json",
+  "automatic_boot_changed": false,
+  "tests": [
+    "ASan/UBSan input mailbox",
+    "160 existing input snapshots exactly match baseline",
+    "application ABI",
+    "three-format latest-content coalescing",
+    "browser queue and timing-label tests"
+  ],
+  "persistence_log": "TRI_7831535161.log",
+  "running": "/tmp/triangle-boayo-v15-tuned",
+  "persisted": [
+    "/root/triangle-wm-v15/triangle-boayo-v15-tuned",
+    "/root/triangle-wm-v15/triangle-input-v15"
+  ],
+  "persistence_verified": "cp successful and runtime readlink; no bytewise readback of saved copy"
+}

@@ -1,0 +1,6 @@
+{
+  "result": "PASS_FOCUSED_QEMU_BOOT",
+  "image_sha256": "6133b5ec183f8e918ba5b910daa72709d649bd495e0a046177b14b7d6d27ac88",
+  "hardware": false,
+  "scope": "Final image boot, actual RV32 fixed WM + RGB332 app + async input client exchanging BWM1 binary messages against mock BOSIO. Final cursor endpoints verified by native stream benchmark. No physical hardware/performance measurement."
+}

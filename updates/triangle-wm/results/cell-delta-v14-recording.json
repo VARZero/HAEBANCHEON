@@ -1,0 +1,328 @@
+[
+  {
+    "action": "move",
+    "start": 16354.8815197,
+    "end": 16398.4630652,
+    "events": [
+      {
+        "label": "누르기",
+        "op": "input_button",
+        "args": {
+          "x": 689,
+          "y": 561,
+          "pressed": true
+        },
+        "start": 16356.082434,
+        "end": 16363.2224049,
+        "response": {
+          "accept_ms": 4022.2997399996966,
+          "feedback_ms": 6410.2382599990815,
+          "ok": true,
+          "present_ms": 6446.7503999993205,
+          "result": {
+            "action": 0,
+            "applied": false,
+            "captured_window": 1,
+            "generation": 105
+          }
+        },
+        "visual_time": 16362.3060114,
+        "background_time": null,
+        "content_time": null,
+        "pc_total_ms": 7139.970899999753,
+        "visual_ms": 6223.577400000067,
+        "background_ms": null,
+        "content_ms": null
+      },
+      {
+        "label": "드래그 1",
+        "op": "input_move",
+        "args": {
+          "x": 649,
+          "y": 551
+        },
+        "start": 16363.672701,
+        "end": 16372.0127843,
+        "response": {
+          "accept_ms": 1567.1797400005162,
+          "feedback_ms": 7439.342320000753,
+          "ok": true,
+          "present_ms": 7535.533779999241,
+          "result": {
+            "action": 2,
+            "applied": false,
+            "captured_window": 1,
+            "generation": 106
+          }
+        },
+        "visual_time": 16368.4873309,
+        "background_time": null,
+        "content_time": null,
+        "pc_total_ms": 8340.083299999606,
+        "visual_ms": 4814.6299,
+        "background_ms": null,
+        "content_ms": null
+      },
+      {
+        "label": "드래그 2",
+        "op": "input_move",
+        "args": {
+          "x": 609,
+          "y": 541
+        },
+        "start": 16372.4631967,
+        "end": 16380.3989993,
+        "response": {
+          "accept_ms": 2459.612859999761,
+          "feedback_ms": 7034.418180000037,
+          "ok": true,
+          "present_ms": 7091.696800000966,
+          "result": {
+            "action": 2,
+            "applied": false,
+            "captured_window": 1,
+            "generation": 107
+          }
+        },
+        "visual_time": 16378.9125308,
+        "background_time": null,
+        "content_time": null,
+        "pc_total_ms": 7935.802599999079,
+        "visual_ms": 6449.33409999976,
+        "background_ms": null,
+        "content_ms": null
+      },
+      {
+        "label": "드래그 3",
+        "op": "input_move",
+        "args": {
+          "x": 569,
+          "y": 531
+        },
+        "start": 16380.8492883,
+        "end": 16387.8737119,
+        "response": {
+          "accept_ms": 2433.608559999615,
+          "feedback_ms": 6525.440379999578,
+          "ok": true,
+          "present_ms": 6552.885759999976,
+          "result": {
+            "action": 2,
+            "applied": false,
+            "captured_window": 1,
+            "generation": 109
+          }
+        },
+        "visual_time": 16385.7014157,
+        "background_time": null,
+        "content_time": null,
+        "pc_total_ms": 7024.423599999864,
+        "visual_ms": 4852.127400001336,
+        "background_ms": null,
+        "content_ms": null
+      },
+      {
+        "label": "놓기 · 위치 확정",
+        "op": "input_button",
+        "args": {
+          "x": 569,
+          "y": 531,
+          "pressed": false
+        },
+        "start": 16388.3241842,
+        "end": 16396.462583,
+        "response": {
+          "accept_ms": 1308.3507400006056,
+          "feedback_ms": 3991.8558200001717,
+          "ok": true,
+          "present_ms": 7690.293460000306,
+          "result": {
+            "action": 2,
+            "applied": true,
+            "captured_window": 0,
+            "generation": 110
+          }
+        },
+        "visual_time": 16392.238671,
+        "background_time": 16392.238671,
+        "content_time": 16394.4215227,
+        "pc_total_ms": 8138.398800001596,
+        "visual_ms": 3914.4868000003044,
+        "background_ms": 3914.4868000003044,
+        "content_ms": 6097.338499999751
+      }
+    ],
+    "condition": "Live app continues updating; commands are sent sequentially after each prior completion plus 450 ms. Actual HDMI; no simulated cursor or window.",
+    "scope": "PC monotonic clock: HTTP request start to response receipt. Board internal timings use a separate clock and are durations only. USB HDMI first observation includes capture buffering/polling; not optical latency.",
+    "summary": {
+      "command_sequence_ms": 40380.14900000053,
+      "to_final_content_ms": 38339.08869999868,
+      "release_response_ms": 8138.398800001596,
+      "release_B_ms": 3914.4868000003044,
+      "release_content_ms": 6097.338499999751
+    }
+  },
+  {
+    "action": "resize",
+    "start": 16405.5152125,
+    "end": 16424.0021007,
+    "events": [
+      {
+        "label": "누르기",
+        "op": "input_button",
+        "args": {
+          "x": 795,
+          "y": 488,
+          "pressed": true
+        },
+        "start": 16406.7161402,
+        "end": 16408.1297171,
+        "response": {
+          "accept_ms": 439.4188599996269,
+          "feedback_ms": 1178.5574599988759,
+          "ok": true,
+          "present_ms": 1181.8916400000453,
+          "result": {
+            "action": 0,
+            "applied": false,
+            "captured_window": 1,
+            "generation": 113
+          }
+        },
+        "visual_time": 16408.0320424,
+        "background_time": null,
+        "content_time": null,
+        "pc_total_ms": 1413.5769000022265,
+        "visual_ms": 1315.9021999999823,
+        "background_ms": null,
+        "content_ms": null
+      },
+      {
+        "label": "드래그 1",
+        "op": "input_move",
+        "args": {
+          "x": 815,
+          "y": 500
+        },
+        "start": 16408.5805142,
+        "end": 16411.8584203,
+        "response": {
+          "accept_ms": 780.3003000002354,
+          "feedback_ms": 3022.5082000009716,
+          "ok": true,
+          "present_ms": 3043.524720000103,
+          "result": {
+            "action": 3,
+            "applied": false,
+            "captured_window": 1,
+            "generation": 114
+          }
+        },
+        "visual_time": 16411.6000465,
+        "background_time": null,
+        "content_time": null,
+        "pc_total_ms": 3277.9061000001093,
+        "visual_ms": 3019.5323000007193,
+        "background_ms": null,
+        "content_ms": null
+      },
+      {
+        "label": "드래그 2",
+        "op": "input_move",
+        "args": {
+          "x": 835,
+          "y": 512
+        },
+        "start": 16412.3089336,
+        "end": 16414.5855749,
+        "response": {
+          "accept_ms": 745.0173199996352,
+          "feedback_ms": 2017.9858199991286,
+          "ok": true,
+          "present_ms": 2032.4736599996686,
+          "result": {
+            "action": 3,
+            "applied": false,
+            "captured_window": 1,
+            "generation": 116
+          }
+        },
+        "visual_time": 16413.9782545,
+        "background_time": null,
+        "content_time": null,
+        "pc_total_ms": 2276.641299999028,
+        "visual_ms": 1669.3209000004572,
+        "background_ms": null,
+        "content_ms": null
+      },
+      {
+        "label": "드래그 3",
+        "op": "input_move",
+        "args": {
+          "x": 855,
+          "y": 524
+        },
+        "start": 16415.0362318,
+        "end": 16416.9588668,
+        "response": {
+          "accept_ms": 881.1763400007039,
+          "feedback_ms": 1680.015000000596,
+          "ok": true,
+          "present_ms": 1683.3797800000757,
+          "result": {
+            "action": 3,
+            "applied": false,
+            "captured_window": 1,
+            "generation": 117
+          }
+        },
+        "visual_time": 16416.9010497,
+        "background_time": null,
+        "content_time": null,
+        "pc_total_ms": 1922.6349999989907,
+        "visual_ms": 1864.8179000010714,
+        "background_ms": null,
+        "content_ms": null
+      },
+      {
+        "label": "놓기 · 크기 확정",
+        "op": "input_button",
+        "args": {
+          "x": 855,
+          "y": 524,
+          "pressed": false
+        },
+        "start": 16417.40949,
+        "end": 16422.0018829,
+        "response": {
+          "accept_ms": 414.3782200012356,
+          "feedback_ms": 1921.1150800008327,
+          "ok": true,
+          "present_ms": 4309.895500000566,
+          "result": {
+            "action": 3,
+            "applied": true,
+            "captured_window": 0,
+            "generation": 118
+          }
+        },
+        "visual_time": 16418.9600718,
+        "background_time": 16418.9600718,
+        "content_time": 16421.7176236,
+        "pc_total_ms": 4592.392900001869,
+        "visual_ms": 1550.5818000019644,
+        "background_ms": 1550.5818000019644,
+        "content_ms": 4308.133600003202
+      }
+    ],
+    "condition": "Live app continues updating; commands are sent sequentially after each prior completion plus 450 ms. Actual HDMI; no simulated cursor or window.",
+    "scope": "PC monotonic clock: HTTP request start to response receipt. Board internal timings use a separate clock and are durations only. USB HDMI first observation includes capture buffering/polling; not optical latency.",
+    "summary": {
+      "command_sequence_ms": 15285.74270000172,
+      "to_final_content_ms": 15001.483400003053,
+      "release_response_ms": 4592.392900001869,
+      "release_B_ms": 1550.5818000019644,
+      "release_content_ms": 4308.133600003202
+    }
+  }
+]

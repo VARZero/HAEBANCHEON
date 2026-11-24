@@ -44,6 +44,8 @@ int bo_run(struct bo_engine *, struct bo_run *, const __u32 *, const __u32 *);
 int bo_present(struct bo_engine *, const struct bo_present *, const __u32 *);
 int bo_publish(struct bo_engine *,const struct bo_present *,const __u32 *,
                int (*upload)(void *,unsigned,__u32,const __u32 *,__u32),void *);
+int bo_publish_copy(struct bo_engine *,const struct bo_present *,const __u32 *,
+               int (*upload)(void *,unsigned,__u32,const __u32 *,__u32),void *);
 int bo_stop(struct bo_engine *, unsigned int);
 int bo_set_pose(struct bo_engine *, const struct bo_pose *);
 #endif

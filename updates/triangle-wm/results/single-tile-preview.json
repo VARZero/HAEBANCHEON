@@ -1,0 +1,52 @@
+{
+  "scope": "Operation counts on actual RV32 executables in QEMU, mock BOSIO; same final SD image. No physical board connection or latency measurement.",
+  "hardware_tested": false,
+  "feedback_target_ms": 300,
+  "feedback_target_hardware_verified": false,
+  "image_sha256": "61df684d8a5ab54e13b5458d1c4ca782211eba3dcb1d48101b6dd327b56f9d21",
+  "reference": "Retained optimized thin-cell outline, TRIANGLE_PREVIEW=outline. Not the historical November 19 baseline.",
+  "comparison": {
+    "tile": {
+      "move": {
+        "footprint_calls_total": 0,
+        "plan_builds_total": 0,
+        "run_submissions_total": 0,
+        "samples": 8,
+        "release_publications": 1,
+        "release_plan_builds": 1,
+        "max_changed_directory_entries": 2,
+        "motion_ui_mask_work": "none"
+      },
+      "resize": {
+        "footprint_calls_total": 0,
+        "plan_builds_total": 0,
+        "run_submissions_total": 0,
+        "samples": 8,
+        "release_publications": 1,
+        "release_plan_builds": 1,
+        "max_changed_directory_entries": 2,
+        "motion_ui_mask_work": "none"
+      }
+    },
+    "outline": {
+      "move": {
+        "footprint_calls_total": 8,
+        "plan_builds_total": 0,
+        "run_submissions_total": 0,
+        "samples": 8,
+        "release_publications": 2,
+        "release_plan_builds": 1
+      },
+      "resize": {
+        "footprint_calls_total": 8,
+        "plan_builds_total": 0,
+        "run_submissions_total": 0,
+        "samples": 8,
+        "release_publications": 2,
+        "release_plan_builds": 1
+      }
+    }
+  },
+  "latency": "Unmeasured on hardware. Raw emulator times are diagnostic only.",
+  "validation": "Host ASan/UBSan marker, overlay, input, mailbox, binary/JSON transport, latest-content coalescing, ABI and pre-publication rollback suites passed."
+}

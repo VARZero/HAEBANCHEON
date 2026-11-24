@@ -2,7 +2,7 @@
 import argparse,base64,gzip,hashlib,json,re,struct,time
 from pathlib import Path
 import serial
-ap=argparse.ArgumentParser();ap.add_argument('source');ap.add_argument('target');ap.add_argument('--receiver',required=True);ap.add_argument('--output',required=True);ap.add_argument('--bootstrap',action='store_true')
+ap=argparse.ArgumentParser();ap.add_argument('source');ap.add_argument('target');ap.add_argument('--receiver',required=True);ap.add_argument('--output',required=True);ap.add_argument('--bootstrap',action='store_true');ap.add_argument('--verify',choices=['sha256','transport'],default='sha256',help='transport verifies receiver checksum, gzip CRC and extracted size; no board SHA256')
 a=ap.parse_args();out=Path(a.output);out.mkdir(parents=True,exist_ok=True)
 require_target=re.fullmatch(r'/tmp/[A-Za-z0-9_.-]+',a.target)
 if not require_target:raise ValueError('Target must be a simple /tmp path')
@@ -36,7 +36,14 @@ try:
   if offset%16384==0:print(json.dumps({'sent':offset+len(part),'total':len(data),'seconds':round(time.monotonic()-start,1)}),flush=True)
  wait(rb'RX_DONE\r*\n')
  wait(rb'haebancheon# ')
- write(('gzip -dc '+a.target+'.gz > '+a.target+'; chmod +x '+a.target+'; sha256sum '+a.target+'; echo TRANSFER_READY\n').encode())
- answer=wait(rb'(?:^|\n)TRANSFER_READY\r*\n',420);expected=hashlib.sha256(payload).hexdigest().encode();assert expected in answer,answer
- print(json.dumps({'result':'PASS','target':a.target,'bytes':len(payload),'compressed':len(data),'sha256':expected.decode(),'seconds':time.monotonic()-start}),flush=True)
+ # BusyBox wc scans the whole executable on this board. ls reads inode size;
+ # transport FNV and gzip CRC already check the transferred bytes.
+ verify=('sha256sum ' if a.verify=='sha256' else 'ls -ld ')+a.target
+ write(('gzip -dc '+a.target+'.gz > '+a.target+' && chmod +x '+a.target+' && '+verify+' && echo TRANSFER_READY\n').encode())
+ answer=wait(rb'(?:^|\n)TRANSFER_READY\r*\n',420);expected=hashlib.sha256(payload).hexdigest().encode()
+ if a.verify=='sha256':assert expected in answer,answer
+ else:
+  plain=re.sub(rb'\x1b\[[0-?]*[ -/]*[@-~]',b'',answer)
+  size=re.search(rb'(?:^|\n)\S+\s+\d+\s+\S+\s+\S+\s+(\d+)\s+[^\r\n]*\s'+re.escape(a.target.encode())+rb'\r*\n',plain);assert size and int(size[1])==len(payload),answer
+ print(json.dumps({'result':'PASS','target':a.target,'bytes':len(payload),'compressed':len(data),'sha256_host':expected.decode(),'verification':a.verify,'seconds':time.monotonic()-start}),flush=True)
 finally:p.close();log.close()

@@ -1,0 +1,1361 @@
+{
+  "label": "matrix-optimized",
+  "scope": "Three live-app trials. Twenty source positions at 10 Hz; one HTTP request in flight, newest queued coordinate only in BOTH modes. PC monotonic timestamps; HDMI includes USB capture/polling delay, not optical latency. Native acceptance durations exclude HTTP/UART overhead.",
+  "rounds": [
+    {
+      "round": 0,
+      "async_input": true,
+      "events": [
+        {
+          "index": 0,
+          "x": 200,
+          "time": 9624.2843787
+        },
+        {
+          "index": 1,
+          "x": 220,
+          "time": 9624.3845343
+        },
+        {
+          "index": 2,
+          "x": 240,
+          "time": 9624.484435
+        },
+        {
+          "index": 3,
+          "x": 260,
+          "time": 9624.5846343
+        },
+        {
+          "index": 4,
+          "x": 280,
+          "time": 9624.6849982
+        },
+        {
+          "index": 5,
+          "x": 300,
+          "time": 9624.784486
+        },
+        {
+          "index": 6,
+          "x": 320,
+          "time": 9624.8845162
+        },
+        {
+          "index": 7,
+          "x": 340,
+          "time": 9624.9844287
+        },
+        {
+          "index": 8,
+          "x": 360,
+          "time": 9625.0848972
+        },
+        {
+          "index": 9,
+          "x": 380,
+          "time": 9625.1847079
+        },
+        {
+          "index": 10,
+          "x": 400,
+          "time": 9625.2844937
+        },
+        {
+          "index": 11,
+          "x": 420,
+          "time": 9625.3847674
+        },
+        {
+          "index": 12,
+          "x": 440,
+          "time": 9625.4848495
+        },
+        {
+          "index": 13,
+          "x": 460,
+          "time": 9625.5848836
+        },
+        {
+          "index": 14,
+          "x": 480,
+          "time": 9625.6847642
+        },
+        {
+          "index": 15,
+          "x": 500,
+          "time": 9625.7848548
+        },
+        {
+          "index": 16,
+          "x": 520,
+          "time": 9625.8848116
+        },
+        {
+          "index": 17,
+          "x": 540,
+          "time": 9625.9845975
+        },
+        {
+          "index": 18,
+          "x": 560,
+          "time": 9626.0848716
+        },
+        {
+          "index": 19,
+          "x": 580,
+          "time": 9626.184889
+        }
+      ],
+      "sent": [
+        {
+          "start": 9624.2844078,
+          "end": 9624.894346,
+          "response": {
+            "accept_ms": 359.7640599999577,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 98,
+              "coalesced_moves": 55,
+              "visible_ticket": 97
+            }
+          },
+          "event": {
+            "index": 0,
+            "x": 200,
+            "time": 9624.2843787
+          }
+        },
+        {
+          "start": 9624.8943591,
+          "end": 9625.4728476,
+          "response": {
+            "accept_ms": 327.2881400003098,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 99,
+              "coalesced_moves": 55,
+              "visible_ticket": 98
+            }
+          },
+          "event": {
+            "index": 6,
+            "x": 320,
+            "time": 9624.8845162
+          }
+        },
+        {
+          "start": 9625.4728617,
+          "end": 9626.2258931,
+          "response": {
+            "accept_ms": 410.33535999991,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 100,
+              "coalesced_moves": 55,
+              "visible_ticket": 98
+            }
+          },
+          "event": {
+            "index": 11,
+            "x": 420,
+            "time": 9625.3847674
+          }
+        },
+        {
+          "start": 9626.2259149,
+          "end": 9626.7079054,
+          "response": {
+            "accept_ms": 288.64205999998376,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 101,
+              "coalesced_moves": 55,
+              "visible_ticket": 99
+            }
+          },
+          "event": {
+            "index": 19,
+            "x": 580,
+            "time": 9626.184889
+          }
+        }
+      ],
+      "completion": {
+        "start": 9627.3764213,
+        "end": 9628.0988489,
+        "response": {
+          "accept_ms": 468.414000000339,
+          "completion_pending": false,
+          "ok": true,
+          "result": {
+            "accepted_ticket": 101,
+            "applied_ticket": 101,
+            "coalesced_moves": 55,
+            "last_accept_to_visible_us": 1075512,
+            "priority_publications": 3,
+            "visible_ticket": 101,
+            "visible_x": 580,
+            "visible_y": 680
+          }
+        }
+      },
+      "frames": [
+        {
+          "time": 9624.2813351,
+          "file": "0000.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9624.4108141,
+          "file": "0001.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9624.503517,
+          "file": "0002.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9624.6104634,
+          "file": "0003.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9624.716801,
+          "file": "0004.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9624.8243249,
+          "file": "0005.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9624.9316481,
+          "file": "0006.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9625.0526464,
+          "file": "0007.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9625.1454538,
+          "file": "0008.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9625.2524174,
+          "file": "0009.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9625.3596812,
+          "file": "0010.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9625.4669038,
+          "file": "0011.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9625.5744078,
+          "file": "0012.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9625.6813321,
+          "file": "0013.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9625.7885794,
+          "file": "0014.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9625.8945707,
+          "file": "0015.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9626.0147145,
+          "file": "0016.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9626.1086007,
+          "file": "0017.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9626.2164554,
+          "file": "0018.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9626.3216907,
+          "file": "0019.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9626.4445194,
+          "file": "0020.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9626.5377239,
+          "file": "0021.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9626.6456568,
+          "file": "0022.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9626.754444,
+          "file": "0023.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9626.8764121,
+          "file": "0024.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9626.9696887,
+          "file": "0025.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9627.0764874,
+          "file": "0026.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9627.1855089,
+          "file": "0027.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9627.3076018,
+          "file": "0028.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9627.3992558,
+          "file": "0029.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9627.5065054,
+          "file": "0030.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9627.6146544,
+          "file": "0031.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9627.7216569,
+          "file": "0032.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9627.8288198,
+          "file": "0033.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9627.9364246,
+          "file": "0034.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9628.057845,
+          "file": "0035.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9628.1509387,
+          "file": "0036.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9628.2725424,
+          "file": "0037.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9628.365853,
+          "file": "0038.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9628.4743646,
+          "file": "0039.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9628.5966358,
+          "file": "0040.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9628.6891913,
+          "file": "0041.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9628.7965627,
+          "file": "0042.jpg",
+          "endpoint_white_pixels": 29
+        }
+      ],
+      "transmitted": 4,
+      "host_coalesced": 16,
+      "final_event_to_confirm_ms": 1913.9598999990994,
+      "final_event_to_hdmi_ms": 1429.7654000001785,
+      "acceptance_ms": [
+        359.7640599999577,
+        327.2881400003098,
+        410.33535999991,
+        288.64205999998376
+      ]
+    },
+    {
+      "round": 1,
+      "async_input": true,
+      "events": [
+        {
+          "index": 0,
+          "x": 200,
+          "time": 9630.954852
+        },
+        {
+          "index": 1,
+          "x": 220,
+          "time": 9631.0549899
+        },
+        {
+          "index": 2,
+          "x": 240,
+          "time": 9631.1552421
+        },
+        {
+          "index": 3,
+          "x": 260,
+          "time": 9631.255285
+        },
+        {
+          "index": 4,
+          "x": 280,
+          "time": 9631.3553216
+        },
+        {
+          "index": 5,
+          "x": 300,
+          "time": 9631.4549323
+        },
+        {
+          "index": 6,
+          "x": 320,
+          "time": 9631.5553727
+        },
+        {
+          "index": 7,
+          "x": 340,
+          "time": 9631.6553622
+        },
+        {
+          "index": 8,
+          "x": 360,
+          "time": 9631.7552992
+        },
+        {
+          "index": 9,
+          "x": 380,
+          "time": 9631.8549341
+        },
+        {
+          "index": 10,
+          "x": 400,
+          "time": 9631.9553416
+        },
+        {
+          "index": 11,
+          "x": 420,
+          "time": 9632.0552974
+        },
+        {
+          "index": 12,
+          "x": 440,
+          "time": 9632.155257
+        },
+        {
+          "index": 13,
+          "x": 460,
+          "time": 9632.255299
+        },
+        {
+          "index": 14,
+          "x": 480,
+          "time": 9632.3553167
+        },
+        {
+          "index": 15,
+          "x": 500,
+          "time": 9632.4553534
+        },
+        {
+          "index": 16,
+          "x": 520,
+          "time": 9632.5552977
+        },
+        {
+          "index": 17,
+          "x": 540,
+          "time": 9632.6549815
+        },
+        {
+          "index": 18,
+          "x": 560,
+          "time": 9632.7552555
+        },
+        {
+          "index": 19,
+          "x": 580,
+          "time": 9632.8553432
+        }
+      ],
+      "sent": [
+        {
+          "start": 9630.9548786,
+          "end": 9631.5953181,
+          "response": {
+            "accept_ms": 322.19177999999374,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 103,
+              "coalesced_moves": 55,
+              "visible_ticket": 102
+            }
+          },
+          "event": {
+            "index": 0,
+            "x": 200,
+            "time": 9630.954852
+          }
+        },
+        {
+          "start": 9631.5953283,
+          "end": 9632.0853955,
+          "response": {
+            "accept_ms": 291.23549999995157,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 104,
+              "coalesced_moves": 55,
+              "visible_ticket": 103
+            }
+          },
+          "event": {
+            "index": 6,
+            "x": 320,
+            "time": 9631.5553727
+          }
+        },
+        {
+          "start": 9632.0854069,
+          "end": 9632.5586666,
+          "response": {
+            "accept_ms": 272.02046000026166,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 105,
+              "coalesced_moves": 55,
+              "visible_ticket": 103
+            }
+          },
+          "event": {
+            "index": 11,
+            "x": 420,
+            "time": 9632.0552974
+          }
+        },
+        {
+          "start": 9632.5586917,
+          "end": 9632.9994666,
+          "response": {
+            "accept_ms": 218.96254000021145,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 106,
+              "coalesced_moves": 55,
+              "visible_ticket": 104
+            }
+          },
+          "event": {
+            "index": 16,
+            "x": 520,
+            "time": 9632.5552977
+          }
+        },
+        {
+          "start": 9632.9994776,
+          "end": 9633.4469589,
+          "response": {
+            "accept_ms": 240.68075999990106,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 107,
+              "coalesced_moves": 56,
+              "visible_ticket": 104
+            }
+          },
+          "event": {
+            "index": 19,
+            "x": 580,
+            "time": 9632.8553432
+          }
+        }
+      ],
+      "completion": {
+        "start": 9634.1906502,
+        "end": 9635.0192199,
+        "response": {
+          "accept_ms": 488.71638000011444,
+          "completion_pending": false,
+          "ok": true,
+          "result": {
+            "accepted_ticket": 107,
+            "applied_ticket": 107,
+            "coalesced_moves": 56,
+            "last_accept_to_visible_us": 1276028,
+            "priority_publications": 3,
+            "visible_ticket": 107,
+            "visible_x": 580,
+            "visible_y": 680
+          }
+        }
+      },
+      "frames": [
+        {
+          "time": 9630.9519422,
+          "file": "0000.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9631.0525321,
+          "file": "0001.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9631.1600365,
+          "file": "0002.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9631.265996,
+          "file": "0003.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9631.3744577,
+          "file": "0004.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9631.4796399,
+          "file": "0005.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9631.5875586,
+          "file": "0006.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9631.6962924,
+          "file": "0007.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9631.8053835,
+          "file": "0008.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9631.9127534,
+          "file": "0009.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9632.019937,
+          "file": "0010.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9632.1290695,
+          "file": "0011.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9632.2362951,
+          "file": "0012.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9632.3583556,
+          "file": "0013.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9632.4508251,
+          "file": "0014.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9632.5594954,
+          "file": "0015.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9632.6667922,
+          "file": "0016.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9632.7757735,
+          "file": "0017.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9632.8840355,
+          "file": "0018.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9632.9922786,
+          "file": "0019.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9633.100157,
+          "file": "0020.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9633.2092796,
+          "file": "0021.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9633.3180447,
+          "file": "0022.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9633.4269261,
+          "file": "0023.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9633.5319082,
+          "file": "0024.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9633.6376657,
+          "file": "0025.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9633.7596989,
+          "file": "0026.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9633.8534452,
+          "file": "0027.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9633.9598508,
+          "file": "0028.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9634.068695,
+          "file": "0029.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9634.1765146,
+          "file": "0030.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9634.2844203,
+          "file": "0031.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9634.4082074,
+          "file": "0032.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9634.5009493,
+          "file": "0033.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9634.6081623,
+          "file": "0034.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9634.7200357,
+          "file": "0035.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9634.8235837,
+          "file": "0036.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9634.9316735,
+          "file": "0037.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9635.0388027,
+          "file": "0038.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9635.1464542,
+          "file": "0039.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9635.2541727,
+          "file": "0040.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9635.3596907,
+          "file": "0041.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9635.4661278,
+          "file": "0042.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9635.5746101,
+          "file": "0043.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9635.6821453,
+          "file": "0044.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9635.7918026,
+          "file": "0045.jpg",
+          "endpoint_white_pixels": 29
+        }
+      ],
+      "transmitted": 5,
+      "host_coalesced": 15,
+      "final_event_to_confirm_ms": 2163.876699998582,
+      "final_event_to_hdmi_ms": 1752.8190999983053,
+      "acceptance_ms": [
+        322.19177999999374,
+        291.23549999995157,
+        272.02046000026166,
+        218.96254000021145,
+        240.68075999990106
+      ]
+    },
+    {
+      "round": 2,
+      "async_input": true,
+      "events": [
+        {
+          "index": 0,
+          "x": 200,
+          "time": 9637.4403015
+        },
+        {
+          "index": 1,
+          "x": 220,
+          "time": 9637.5407317
+        },
+        {
+          "index": 2,
+          "x": 240,
+          "time": 9637.6405447
+        },
+        {
+          "index": 3,
+          "x": 260,
+          "time": 9637.7404807
+        },
+        {
+          "index": 4,
+          "x": 280,
+          "time": 9637.8406518
+        },
+        {
+          "index": 5,
+          "x": 300,
+          "time": 9637.9404017
+        },
+        {
+          "index": 6,
+          "x": 320,
+          "time": 9638.0404566
+        },
+        {
+          "index": 7,
+          "x": 340,
+          "time": 9638.1404587
+        },
+        {
+          "index": 8,
+          "x": 360,
+          "time": 9638.2406881
+        },
+        {
+          "index": 9,
+          "x": 380,
+          "time": 9638.3404304
+        },
+        {
+          "index": 10,
+          "x": 400,
+          "time": 9638.440548
+        },
+        {
+          "index": 11,
+          "x": 420,
+          "time": 9638.5405566
+        },
+        {
+          "index": 12,
+          "x": 440,
+          "time": 9638.6406604
+        },
+        {
+          "index": 13,
+          "x": 460,
+          "time": 9638.7404742
+        },
+        {
+          "index": 14,
+          "x": 480,
+          "time": 9638.8407225
+        },
+        {
+          "index": 15,
+          "x": 500,
+          "time": 9638.9408174
+        },
+        {
+          "index": 16,
+          "x": 520,
+          "time": 9639.0404112
+        },
+        {
+          "index": 17,
+          "x": 540,
+          "time": 9639.1404518
+        },
+        {
+          "index": 18,
+          "x": 560,
+          "time": 9639.2404383
+        },
+        {
+          "index": 19,
+          "x": 580,
+          "time": 9639.340847
+        }
+      ],
+      "sent": [
+        {
+          "start": 9637.440327,
+          "end": 9637.9915267,
+          "response": {
+            "accept_ms": 300.5434200000018,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 109,
+              "coalesced_moves": 56,
+              "visible_ticket": 108
+            }
+          },
+          "event": {
+            "index": 0,
+            "x": 200,
+            "time": 9637.4403015
+          }
+        },
+        {
+          "start": 9637.9915366,
+          "end": 9638.6647922,
+          "response": {
+            "accept_ms": 383.5536799998954,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 110,
+              "coalesced_moves": 56,
+              "visible_ticket": 109
+            }
+          },
+          "event": {
+            "index": 5,
+            "x": 300,
+            "time": 9637.9404017
+          }
+        },
+        {
+          "start": 9638.6648059,
+          "end": 9639.179735,
+          "response": {
+            "accept_ms": 272.34926000004634,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 111,
+              "coalesced_moves": 56,
+              "visible_ticket": 109
+            }
+          },
+          "event": {
+            "index": 12,
+            "x": 440,
+            "time": 9638.6406604
+          }
+        },
+        {
+          "start": 9639.1797475,
+          "end": 9639.8066292,
+          "response": {
+            "accept_ms": 324.5658599999733,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 112,
+              "coalesced_moves": 57,
+              "visible_ticket": 110
+            }
+          },
+          "event": {
+            "index": 17,
+            "x": 540,
+            "time": 9639.1404518
+          }
+        },
+        {
+          "start": 9639.8066402,
+          "end": 9640.33059,
+          "response": {
+            "accept_ms": 281.45687999995425,
+            "completion_pending": true,
+            "ok": true,
+            "result": {
+              "accepted_ticket": 113,
+              "coalesced_moves": 57,
+              "visible_ticket": 110
+            }
+          },
+          "event": {
+            "index": 19,
+            "x": 580,
+            "time": 9639.340847
+          }
+        }
+      ],
+      "completion": {
+        "start": 9640.9962646,
+        "end": 9641.4242214,
+        "response": {
+          "accept_ms": 212.5247400002554,
+          "completion_pending": false,
+          "ok": true,
+          "result": {
+            "accepted_ticket": 113,
+            "applied_ticket": 113,
+            "coalesced_moves": 57,
+            "last_accept_to_visible_us": 998881,
+            "priority_publications": 4,
+            "visible_ticket": 113,
+            "visible_x": 580,
+            "visible_y": 680
+          }
+        }
+      },
+      "frames": [
+        {
+          "time": 9637.4364131,
+          "file": "0000.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9637.5510519,
+          "file": "0001.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9637.6606066,
+          "file": "0002.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9637.7679855,
+          "file": "0003.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9637.8765099,
+          "file": "0004.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9637.9844354,
+          "file": "0005.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9638.0910602,
+          "file": "0006.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9638.2006204,
+          "file": "0007.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9638.3081085,
+          "file": "0008.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9638.4321265,
+          "file": "0009.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9638.5389293,
+          "file": "0010.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9638.6460888,
+          "file": "0011.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9638.7372635,
+          "file": "0012.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9638.8447655,
+          "file": "0013.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9638.9531356,
+          "file": "0014.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9639.0614348,
+          "file": "0015.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9639.169857,
+          "file": "0016.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9639.2777004,
+          "file": "0017.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9639.384568,
+          "file": "0018.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9639.4936679,
+          "file": "0019.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9639.6006589,
+          "file": "0020.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9639.7083578,
+          "file": "0021.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9639.8151022,
+          "file": "0022.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9639.9209464,
+          "file": "0023.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9640.029269,
+          "file": "0024.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9640.1355724,
+          "file": "0025.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9640.2421403,
+          "file": "0026.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9640.349101,
+          "file": "0027.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9640.4577575,
+          "file": "0028.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9640.5647315,
+          "file": "0029.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9640.6710121,
+          "file": "0030.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9640.7771126,
+          "file": "0031.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9640.8829899,
+          "file": "0032.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9640.9900086,
+          "file": "0033.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9641.0961639,
+          "file": "0034.jpg",
+          "endpoint_white_pixels": 0
+        },
+        {
+          "time": 9641.2182131,
+          "file": "0035.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9641.310911,
+          "file": "0036.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9641.4197555,
+          "file": "0037.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9641.525578,
+          "file": "0038.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9641.6348579,
+          "file": "0039.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9641.7421114,
+          "file": "0040.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9641.8492295,
+          "file": "0041.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9641.9567383,
+          "file": "0042.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9642.0643124,
+          "file": "0043.jpg",
+          "endpoint_white_pixels": 29
+        },
+        {
+          "time": 9642.1853251,
+          "file": "0044.jpg",
+          "endpoint_white_pixels": 29
+        }
+      ],
+      "transmitted": 5,
+      "host_coalesced": 15,
+      "final_event_to_confirm_ms": 2083.3744000010483,
+      "final_event_to_hdmi_ms": 1877.3661000013817,
+      "acceptance_ms": [
+        300.5434200000018,
+        383.5536799998954,
+        272.34926000004634,
+        324.5658599999733,
+        281.45687999995425
+      ]
+    }
+  ]
+}

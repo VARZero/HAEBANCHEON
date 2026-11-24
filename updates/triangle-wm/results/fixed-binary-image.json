@@ -1,0 +1,40 @@
+{
+  "boot_lba": 2048,
+  "root_lba": 14336,
+  "root_sectors": 2097152,
+  "segments": [
+    {
+      "address": "0x80000000",
+      "sectors": 519,
+      "crc32": "edd168be"
+    },
+    {
+      "address": "0x80400000",
+      "sectors": 10191,
+      "crc32": "b6081feb"
+    },
+    {
+      "address": "0x87f00000",
+      "sectors": 7,
+      "crc32": "ac347877"
+    }
+  ],
+  "version": "fixed-wm-binary-v1",
+  "geometry": "integer Q24",
+  "angles": "signed quarter degrees in 16-bit range; normalized yaw [-180,180)",
+  "wire": "BWM1 little-endian length + CBOR integer payload; angle Q2, other fractions Q24",
+  "publication": "BO_PUBLISH_COPY default; TRIANGLE_PUBLISH_COPY=0 selects checked baseline",
+  "hardware_tested": false,
+  "binaries": {
+    "triangle-boayo-fixed": "41e60bd91c0b3c3a64c8256258244390d1ca6944813f9e2ae3c0cfc1604eec56",
+    "triangle-app": "0d697993d9fe3c437863a864c31f1a4f7ffe0d3662c8504e142e319dadb86b76",
+    "triangle-input": "b7421a738d92df49bce1c3bd7882e58a4d57270ea2002e4fac2eaa93b8b420d0"
+  },
+  "image": "HAEBANCHEON-fixed-wm-binary.img",
+  "bytes": 1081081856,
+  "sha256": "6133b5ec183f8e918ba5b910daa72709d649bd495e0a046177b14b7d6d27ac88",
+  "kernel_sha256": "91a89cc145d2df3b8781e7803d9159d1ce58cb4b994cc938c86627e2326eee99",
+  "kernel_release": "6.12.0-haebancheon-publishcopy",
+  "rootfs_sha256": "6f74f2a9fecd6e387c1aa5b8579798aa538e6d353784b2d5b6d52cc0e8749b5e",
+  "notes": "Base userland plus new WM; automatically starts demo only when /dev/bosio0 exists. Binary protocol requires rebuilt apps. Board remains powered off during preparation."
+}

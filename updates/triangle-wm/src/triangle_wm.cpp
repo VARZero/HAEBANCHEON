@@ -13,6 +13,7 @@
 #include <cerrno>
 #include <csignal>
 #include <climits>
+#include <functional>
 #include "content.hpp"
 using namespace boayo;
 #include "fast_camera.hpp"
@@ -39,10 +40,19 @@ struct RenderStats {
  double plan_ms=0,projection_ms=0,render_ms=0,publish_ms=0;bo_publish_profile profile{};
 };
 struct Engine {
+ // Checkpoints only accept input; the final checkpoint may update the overlay.
+ std::function<void(bool)> input_checkpoint;
  RenderStats stats;
  bool ui_enabled=false,ui_dirty=true,ui_layout_dirty=true,ui_mask_dirty=true,ui_cold_view=true;UiPointer pointer;
  std::map<unsigned,UiPaint> ui_paints;
  UiPreview preview;
+ std::map<unsigned,UiEdgeMask> ui_edge_masks;
+ bool ui_delta=true;
+ bool tile_preview=true;MoveMarker move_marker;
+ uint64_t plan_builds=0,footprint_calls=0,run_submissions=0;
+ unsigned ui_rebuilt=0,ui_incremental=0,ui_reused=0,ui_written_cells=0,ui_restored_cells=0,ui_copy_bytes=0;
+ uint64_t ui_mask_reused=0,ui_mask_built=0;
+ uint64_t ui_layout_us=0,ui_pick_us=0,ui_masks_us=0,ui_payload_us=0;
  std::map<unsigned,UiButtonCache> ui_button_cache;
  std::map<unsigned,UiInverse> ui_inverses;
  std::map<unsigned,UiSamples> ui_samples;
@@ -62,6 +72,8 @@ struct Engine {
  uint64_t serial=0;std::array<int,tiles> slots;std::vector<unsigned> free_slots;std::array<uint64_t,tiles> presented{};std::array<std::array<uint64_t,tiles>,2> versions{};TextureCache texture_cache;Words texture_stage;std::vector<bo_batch_entry> texture_scatter;bool sparse_upload=false;bool failed=false;std::array<Words,BO_REGIONS> mock_memory;
  std::array<int,tiles> planned_owner{};std::array<uint64_t,tiles> planned_version{};std::array<uint8_t,tiles> touched_flag{};std::vector<unsigned> visible_tiles;
  Engine(bool m):mock(m),camera(geometry.camera()),metadata(header,UINT32_MAX){
+  if(const char *v=getenv("TRIANGLE_UI_DELTA"))ui_delta=std::string(v)!="0";
+  if(const char *v=getenv("TRIANGLE_PREVIEW")){require(std::string(v)=="tile"||std::string(v)=="outline","preview mode must be tile or outline");tile_preview=std::string(v)=="tile";}
   if(const char *v=getenv("TRIANGLE_OUTLINE")){require(std::string(v)=="raw"||std::string(v)=="trim","outline mode must be raw or trim");trim_background=std::string(v)=="trim";}
   if(const char *v=getenv("TRIANGLE_SPARSE_UPLOAD"))sparse_upload=std::string(v)!="0";
   if(mock)if(const char *v=getenv("TRIANGLE_TEXTURE_WORDS")){unsigned n=std::stoul(v);require(n>=1024&&n<=1048576,"mock texture capacity");texture_cache.capacity=n;}
@@ -71,6 +83,7 @@ struct Engine {
  }
  ~Engine(){if(fd>=0){ioctl(fd,BO_STOP);close(fd);}}
  void call(unsigned long op,void *p){
+  if(op==BO_RUN)++run_submissions;
   require(!failed,"hardware failure latched; restart after inspecting BOSIO status");
   if(!mock){if(ioctl(fd,op,p)<0){failed=true;throw std::runtime_error("ioctl "+std::to_string(op)+": "+strerror(errno));}return;}
   auto writable=[&](unsigned region,unsigned offset,unsigned bytes){require(region<BO_REGIONS&&uint64_t(offset)+bytes<=mock_memory[region].size()*4,"mock memory bounds");require(active<0||region!=BO_SCENE0+unsigned(active),"active bank write");};
@@ -78,7 +91,7 @@ struct Engine {
   else if(op==BO_MEM_COPY){auto&v=*static_cast<bo_mem_copy*>(p);writable(v.dst_region,v.dst_offset,v.bytes);require(uint64_t(v.src_offset)+v.bytes<=mock_memory[v.src_region].size()*4,"copy source bounds");std::memcpy(reinterpret_cast<char*>(mock_memory[v.dst_region].data())+v.dst_offset,reinterpret_cast<char*>(mock_memory[v.src_region].data())+v.src_offset,v.bytes);}
   else if(op==BO_UPLOAD){auto&v=*static_cast<bo_upload*>(p);writable(v.region,v.offset,v.bytes);std::memcpy(reinterpret_cast<char*>(mock_memory[v.region].data())+v.offset,reinterpret_cast<void*>(uintptr_t(v.data)),v.bytes);}
   else if(op==BO_BATCH){auto&v=*static_cast<bo_batch*>(p);auto*e=reinterpret_cast<bo_batch_entry*>(uintptr_t(v.entries));for(unsigned i=0;i<v.count;i++){if(e[i].kind==BO_BATCH_COPY)call(BO_MEM_COPY,&e[i].op.copy);else if(e[i].kind==BO_BATCH_FILL)call(BO_MEM_FILL,&e[i].op.fill);else if(e[i].kind==BO_BATCH_BLEND)call(BO_TILE_BLEND,&e[i].op.blend);else throw std::runtime_error("unsupported mock batch");}}
-  else if(op==BO_TILE_BLEND){auto&v=*static_cast<bo_tile_blend*>(p);require(v.mode==1,"mock solid blend only");unsigned offset=(header+v.tile*256)*4;writable(BO_SCENE0+v.bank,offset,1024);auto*bytes=reinterpret_cast<uint8_t*>(mock_memory[BO_SCENE0+v.bank].data())+offset;for(unsigned i=0;i<1024;i++)if(v.mask[i/32]&(1u<<(i%32)))bytes[i]=v.color;}
+  else if(op==BO_TILE_BLEND){auto&v=*static_cast<bo_tile_blend*>(p);require(v.mode<=1,"mock blend mode");require(v.mode||(v.scratch_word>=header&&v.scratch_word+256<=mock_memory[BO_SCRATCH].size()),"mock blend scratch bounds");unsigned offset=(header+v.tile*256)*4;writable(BO_SCENE0+v.bank,offset,1024);auto*bytes=reinterpret_cast<uint8_t*>(mock_memory[BO_SCENE0+v.bank].data())+offset;for(unsigned i=0;i<1024;i++)if(v.mask[i/32]&(1u<<(i%32)))bytes[i]=v.mode?v.color:reinterpret_cast<const uint8_t*>(mock_memory[BO_SCRATCH].data()+v.scratch_word)[i];}
   else if(op==BO_RUN){auto&v=*static_cast<bo_run*>(p);std::set<unsigned> targets;for(unsigned core=0;core<2;core++)for(unsigned i=0;i<v.jobs[core];i++){Descriptor d;std::copy_n(mock_memory[BO_DESC0+core].begin()+i*18,18,d.begin());require(uint64_t(d[0])+uint64_t(d[3]-1)*d[4]+d[2]<=v.texture_words && v.texture_words<=texture_cache.capacity,"texture descriptor bounds");require(targets.insert(d[1]).second,"overlapping projector destinations");writable(BO_SCENE0+v.bank,d[1]*4,1024);v.cells[core]+=project_reference(mock_memory[BO_TEXTURE],mock_memory[BO_SCENE0+v.bank],d);}}
   else if(op==BO_PUBLISH){auto&v=*static_cast<bo_publish*>(p);writable(BO_SCENE0+v.present.bank,0,header*4);require(!mock_configured||!std::memcmp(mock_camera.data(),v.present.camera,sizeof(v.present.camera)),"pose must be changed with BO_SET_POSE before publication");std::copy_n(v.present.camera,180,mock_camera.begin());mock_configured=true;std::copy_n(reinterpret_cast<uint32_t*>(uintptr_t(v.metadata)),header,mock_memory[BO_SCENE0+v.present.bank].begin());}
   else if(op==BO_SET_POSE){auto&v=*static_cast<bo_pose*>(p);std::copy_n(v.camera,180,mock_camera.begin());}
@@ -88,15 +101,32 @@ struct Engine {
    require(active<0,"new background colors must be reserved before first presentation");bo_mem_fill f{BO_SCENE0+b,(header+s*256)*4,1024,c,0};call(BO_MEM_FILL,&f);fill_bytes+=1024;
   }return s;
  }
+ void reserve_window_colors(){
+  require(active<0&&next_slot==0,"reserve palette before first scene");
+  std::vector<bo_batch_entry> ops;ops.reserve(512);
+  for(unsigned c=0;c<256;c++){unsigned slot=next_slot++;colors[c]=slot;
+   for(unsigned b=0;b<2;b++){bo_batch_entry e{};e.kind=BO_BATCH_FILL;e.op.fill={BO_SCENE0+b,(header+slot*256)*4,1024,c,0};ops.push_back(e);}
+  }
+  run_batches(ops);fill_bytes+=512*1024;
+ }
+ static constexpr auto coarse_bounds=[](){
+  std::array<std::array<int16_t,6>,33> out{};
+  for(unsigned c=0;c<33;c++){
+   for(unsigned k=0;k<3;k++){out[c][k]=32767;out[c][k+3]=-32767;}
+   for(unsigned g=c*4;g<std::min(132u,(c+1)*4);g++)for(unsigned k=0;k<3;k++){out[c][k]=std::min(out[c][k],group_bounds[g][k]);out[c][k+3]=std::max(out[c][k+3],group_bounds[g][k+3]);}
+  }return out;
+ }();
  std::vector<unsigned> footprint(Window&w){
+  ++footprint_calls;
   w.transform.update(w.yaw,w.pitch,w.width,w.height,w.padding);const auto &ax=w.transform.ax;double tx=w.transform.padded_x,ty=w.transform.padded_y;
   std::array<V,5> normal{ax[0],ax[0]*tx+ax[1],ax[0]*tx-ax[1],ax[0]*ty+ax[2],ax[0]*ty-ax[2]};int32_t plane[5][3];
   for(int p=0;p<5;p++){double largest=0;for(double v:normal[p])largest=std::max(largest,std::abs(v));for(int k=0;k<3;k++)plane[p][k]=int32_t(std::lround(normal[p][k]/largest*8192));}
   std::vector<unsigned> result;
   // Conservative plane rejection keeps whole edge tiles; no cell masks.
-  for(unsigned group=0;group<132;group++){bool keep=true;for(int p=0;p<5&&keep;p++){int32_t upper=0;for(int k=0;k<3;k++)upper+=plane[p][k]*group_bounds[group][k+(plane[p][k]>=0?3:0)];keep=upper>=-32768;}if(!keep)continue;
+  for(unsigned coarse=0;coarse<33;coarse++){bool covered=true;for(int p=0;p<5&&covered;p++){int32_t upper=0;for(int k=0;k<3;k++)upper+=plane[p][k]*coarse_bounds[coarse][k+(plane[p][k]>=0?3:0)];covered=upper>=-32768;}if(!covered)continue;
+  for(unsigned group=coarse*4;group<std::min(132u,(coarse+1)*4);group++){bool keep=true;for(int p=0;p<5&&keep;p++){int32_t upper=0;for(int k=0;k<3;k++)upper+=plane[p][k]*group_bounds[group][k+(plane[p][k]>=0?3:0)];keep=upper>=-32768;}if(!keep)continue;
    for(unsigned t=group*32;t<std::min(tiles,(group+1)*32);t++){bool hit=true;for(int p=0;p<5&&hit;p++){int32_t upper=INT32_MIN;for(int v=0;v<3;v++){int32_t d=0;for(int k=0;k<3;k++)d+=plane[p][k]*tile_vertex[t][v][k];upper=std::max(upper,d);}hit=upper>=-32768;}if(hit)result.push_back(t);}
-  }
+  }}
   if(trim_background){
    // Only tip candidates need the unpadded test; avoid a second full mesh scan.
    std::array<V,5> content_normal{ax[0],ax[0]*(w.transform.tx/2)+ax[1],ax[0]*(w.transform.tx/2)-ax[1],ax[0]*(w.transform.ty/2)+ax[2],ax[0]*(w.transform.ty/2)-ax[2]};
@@ -114,6 +144,7 @@ struct Engine {
   return result;
  }
 #include "ui_render.inc"
+#include "move_marker.inc"
 #include "content_render.inc"
  J operate(const J&q){double begin=now();std::string op=q.at("op");J result;
   if(op=="create") {int id=q.at("id");require(id>0&&!windows.count(id),"unique positive window id");Window w{};w.id=id;w.yaw=q.value("yaw",0.);w.pitch=q.value("pitch",0.);w.width=q.value("width",20.);w.height=q.value("height",14.);w.padding=q.value("padding",2.);w.color=q.value("color",84u);validate(w);require(colors.count(w.color),"color not reserved");w.footprint=footprint(w);windows.emplace(id,w);order.push_back(id);result=render();}
