@@ -1,85 +1,64 @@
-# Filled splash resize — v13
+# S색으로 채운 크기 조절 미리보기 — v13
 
-The approved interaction separates the S splash color from the B window
-background. Move preserves the real window and moves one complete S triangle.
-Resize hides the captured window and fills the entire proposed footprint with S.
-There is no outline or content during resize. Release publishes the final B window
-and the latest accumulated application content together, once. Cancel restores
-the original geometry; pending application damage follows the existing policy.
+[문서 목록](README.md) · [English](SOLID_RESIZE_EN.md)
 
-All preview triangles share one immutable 1 KiB S payload per scene bank. Only
-directory entries change during held input. No boundary-neighbor extraction,
-cell masks, pixel filling, or projection jobs run for recurring resize previews.
-The existing exact fixed-point footprint calculation still runs when the target
-geometry changes. Metadata transmission and synchronous publication still cost
-time; filling the region does not eliminate those costs.
+스플래시 색 S와 실제 창의 배경색 B를 따로 지정한다. 이동 중에는 원래 창을 그대로 두고 S색 삼각형 타일 하나만 움직인다. 크기 조절 중에는 원래 창을 숨기고, 목표 크기의 영역 전체를 S색으로 채운다. 윤곽선이나 콘텐츠는 그리지 않는다.
 
-At resize acquisition, the base scene is composed once without the captured
-window. This reveals lower windows, including previously covered content, and
-removes the captured window's controls. It is necessary for shrinking: painting
-the proposed footprint over the old window would leave stale content outside the
-smaller preview. That underlying scene is then frozen and synchronized between
-banks. Higher windows retain occlusion. Bank-local changed-entry restoration
-restores the base as the target grows and shrinks. Cancel forces a complete
-ownership recomposition and restores the captured window's controls and pixels.
+마우스를 놓으면 확정된 위치·크기의 B색 창과 최신 콘텐츠를 한 번에 표시한다. 취소하면 원래 위치와 크기로 돌아간다. 조작 중 들어온 콘텐츠 변경은 기존의 변경 영역 누적 정책에 따라 보관한다.
 
-`create_window` and `configure_window` accept independent `splash_index` and
-`background_index`, each an RGB332 index from 0 through 255. The WM prepares all
-256 immutable solid payloads in both banks at startup using DMA fill batches,
-before either bank is visible. This consumes 256 KiB per bank and reserves 256
-payload slots. Color changes therefore need no writes to active payloads. Invalid
-colors are rejected before mutating live state. B changes invalidate projection
-plans so background samples use the new color; application-owned pixels remain
-application-owned. The local monitor offers separate native color pickers,
-quantized to the output palette (including its channel ordering and gray rule).
-Its `input_colors` operation is restricted to the control socket and rejects
-color changes while a drag is held. Applications can use `configure_window`.
+## 같은 단색 타일 데이터를 공유한다
 
-Diagnostics report resize `mode: solid-resize`, `filled_tiles`,
-`visible_filled_tiles`, `footprint_updates`, and `resize_prepare_us`.
-`outline_tiles` is zero. Move remains `single-tile`. Pointer dot visibility,
-latest-coordinate coalescing, BWM1/PTR1, fixed-point arithmetic and
-`BO_PUBLISH_COPY` are preserved.
+미리보기의 모든 삼각형은 각 장면 뱅크에 준비된 **1 KiB짜리 S색 타일 데이터 하나**를 함께 참조한다. 드래그 중에는 타일별 참조 정보만 바꾼다. 외곽 타일을 골라내는 이웃 탐색, 셀 마스크 생성, 픽셀 채우기, 콘텐츠 투영은 반복하지 않는다.
 
-Validation includes byte comparisons across both banks, grow/shrink/cancel,
-underlying content restoration, higher-window occlusion, independent colors,
-invalid-request atomicity, content updates during previews, single final
-publication, failed-transform rollback, hidden-pointer tracking, binary/JSON
-socket compatibility, and native fast-client ordering. Physical timings and
-capture evidence are recorded separately in `results/solid-resize-board.json`.
+목표 위치나 크기가 달라지면 해당 영역을 구성하는 타일 목록은 고정소수점 계산으로 다시 구한다. 메타데이터 전송과 출력 완료 대기도 남는다. 화면을 단색으로 채웠다고 이 비용까지 없어지는 것은 아니다.
 
-## Physical results — 2026-11-25
+## 줄어든 영역에 옛 콘텐츠가 남지 않도록 한다
 
-The v13 WM was SHA256-verified on the physical board before execution. The
-kernel/publication driver and application/input binaries are unchanged. Actual
-USB HDMI checks passed for full solid filling, hidden content and controls,
-grow/shrink, release, cancellation, and non-default independent S/B colors.
+크기 조절을 시작할 때 조절 중인 창을 제외한 장면을 한 번 합성한다. 가려져 있던 아래쪽 창과 그 콘텐츠를 복원하고, 조절 중인 창의 버튼도 숨긴다. 원래 창 위에 작은 S색 영역만 덧칠하면 바깥에 옛 콘텐츠가 남으므로 이 준비가 필요하다.
 
-| Held-drag final distinct input to actual HDMI capture | Median | Observed range | Trials |
+준비한 바탕 장면은 두 뱅크에 맞춰 둔 뒤 유지한다. 더 위에 있는 창은 계속 미리보기를 가린다. 각 뱅크에서 바뀐 타일 참조만 복원·교체하므로, 크기를 줄이면 그 자리에 원래 보이던 바탕이 나타난다. 취소할 때는 타일 소유 관계를 다시 계산하고 원래 창의 픽셀과 버튼을 복원한다.
+
+## S/B 색 설정
+
+`create_window`와 `configure_window`에서 `splash_index`와 `background_index`를 따로 지정한다. 두 값 모두 RGB332 색상 번호 **0–255**를 받는다.
+
+WM은 첫 화면을 내보내기 전에 DMA 채우기를 묶어서 실행해 두 뱅크에 256색의 단색 타일을 준비한다. 뱅크당 256 KiB와 타일 데이터 슬롯 256개를 사용한다. 이후 색을 바꿔도 현재 표시 중인 뱅크의 픽셀 데이터를 수정할 필요가 없다.
+
+잘못된 색상 번호는 상태를 바꾸기 전에 거부한다. B를 바꾸면 투영 계획을 다시 준비해 창 배경과 콘텐츠 바깥 샘플에 새 색을 적용한다. 앱이 직접 작성한 불투명 픽셀은 앱 소유이므로 WM이 다른 색으로 덮어쓰지 않는다.
+
+PC 입력 화면에는 S/B 색 선택기가 따로 있다. 선택한 색은 실제 출력 팔레트에서 가장 가까운 색으로 맞춘다. 이때 출력의 채널 순서와 회색 처리 규칙도 반영한다. `input_colors`는 제어 소켓에서만 사용할 수 있고, 드래그 중에는 색 변경을 거부한다. 앱에서는 `configure_window`를 쓰면 된다.
+
+## 상태 정보와 검증
+
+크기 조절 상태는 다음 항목으로 확인한다.
+
+| 항목 | 의미 |
+|---|---|
+| `mode: solid-resize` | S색 전체 채우기 경로 |
+| `filled_tiles`, `visible_filled_tiles` | 목표 타일 목록과 실제로 보이는 타일 목록 |
+| `footprint_updates`, `resize_prepare_us` | 타일 목록 갱신 횟수와 준비 시간 |
+| `outline_tiles: 0` | 윤곽선 경로를 사용하지 않음 |
+
+이동은 계속 `single-tile`로 보고한다. 포인터 닷 표시 설정, 최신 좌표만 반영하는 처리, BWM1/PTR1, 고정소수점 연산, `BO_PUBLISH_COPY`도 유지한다.
+
+두 뱅크의 바이트 단위 출력 비교, 확대·축소·취소, 아래쪽 콘텐츠 복원, 위쪽 창에 의한 가림, S/B 독립 설정, 잘못된 요청의 무변경 처리, 미리보기 중 콘텐츠 갱신, 마지막 한 번의 화면 반영, 변환 실패 시 복구를 검사했다. 닷을 숨긴 상태의 입력 추적, 바이너리/JSON 소켓 호환성, 빠른 입력 클라이언트의 요청 순서도 확인했다. 실보드 측정 요약은 [results/solid-resize-board.json](results/solid-resize-board.json)에 있다.
+
+## 실보드 결과 — 2026-11-25
+
+실행 전에 보드에서 v13 WM의 SHA256을 확인했다. 커널·게시 드라이버와 앱·입력 클라이언트 실행 파일은 이전 버전을 유지했다. 실제 USB HDMI 캡처에서 전체 S색 채우기, 콘텐츠·버튼 숨김, 확대·축소, 확정, 취소, 기본값이 아닌 S/B 색을 확인했다.
+
+| 마지막 드래그 입력 → 목표 영역이 실제 HDMI 캡처에 나타날 때까지 | 중앙값 | 관측 범위 | 횟수 |
 |---|---:|---:|---:|
-| v12 resize, outer tile rim | 497.3 ms | 465.9–513.0 ms | 3 |
-| v13 resize, full S region | 529.5 ms | 458.3–674.3 ms | 3 |
-| v13 move, one full S triangle | 239.6 ms | 215.7–277.8 ms | 3 |
+| v12 크기 조절: 외곽 타일 | 497.3 ms | 465.9–513.0 ms | 3 |
+| v13 크기 조절: S색 전체 영역 | 529.5 ms | 458.3–674.3 ms | 3 |
+| v13 이동: S색 타일 하나 | 239.6 ms | 215.7–277.8 ms | 3 |
 
-Both resize versions start at azimuth/elevation zero, size 20×14 degrees, with
-the same active 240×144 RGB332 demo. Twenty coordinates at 10 Hz end in the same
-distinct +120,+70-pixel jump. The final geometry and the same real final-only
-capture pixel probe are checked. This includes HTTP, UART and USB capture
-sampling, and excludes monitor optical latency. Three trials do not establish
-tail latency or a small improvement. **This change does not demonstrate a resize
-speed improvement.** Its median is 32.2 ms higher and observed ranges overlap.
+크기 조절 두 버전 모두 방위각·고도각 0, 창 크기 20×14도로 시작했다. 같은 240×144 RGB332 데모를 실행하고 10 Hz로 좌표 20개를 보냈다. 마지막에는 앞선 경로와 구분되는 +120,+70픽셀 이동을 주었다. 최종 기하 정보가 같은지 확인하고, 마지막 목표에서만 색이 나타나는 동일한 캡처 영역으로 도착 시점을 판정했다.
 
-A separate native socket benchmark measured resize footprint preparation at
-99.4 ms median and publication at 74.3 ms median (8 samples). No held-preview
-projection jobs, descriptor plan builds, or pixel payload operations occurred.
-Final actual-window completion was 1,520.8 ms in that native resize test and
-1,817.6 ms in a separate larger-grow visual check, one sample each. Each final
-transform had one publication; neither result meets a one-second completion
-target. Normal input-submit socket timings are recorded separately from the
-compact PTR1 held-drag path and must not be substituted for its visual latency.
+위 시간에는 HTTP·UART·USB 캡처 지연과 프레임 샘플링이 포함된다. 모니터 자체의 광학 지연은 포함하지 않는다. 3회만으로 지연의 꼬리 분포나 작은 차이를 판단할 수 없다. **이번 변경에서 크기 조절의 속도 개선은 확인되지 않았다.** 중앙값은 32.2 ms 높아졌고 관측 범위는 겹친다.
 
-The saved timeline comparison is
-`evidence/solid-resize/video/resize-live-comparison.mp4`. Crosshairs in that video
-are PC input targets, not board-rendered pointer dots. The live PC monitor is
-`http://127.0.0.1:8767/?v=13`. The separately checked SD image is
-`D:\temp\haebancheon-solid-resize-preview\HAEBANCHEON-solid-resize-preview.img`.
+별도의 보드 내부 소켓 검사에서는 8회 중앙값으로 크기 조절 타일 준비 **99.4 ms**, 화면 게시 **74.3 ms**가 나왔다. 드래그 중 투영 작업, 디스크립터 계획 생성, 픽셀 데이터 처리는 없었다.
+
+놓은 뒤 실제 창 완성까지는 내부 소켓 검사에서 **1,520.8 ms**, 별도의 더 큰 확대 동작 검사에서 **1,817.6 ms**였다. 각각 한 번 측정했고, 최종 변환의 화면 반영은 한 번씩이었다. 둘 다 1초 목표에 도달하지 못했다. 일반 `input_submit` 소켓 검사 시간과 PTR1 드래그 경로의 실화면 지연은 측정 구간이 다르므로 섞어 비교하지 않는다.
+
+비교 영상은 `evidence/solid-resize/video/resize-live-comparison.mp4`에 있다. 영상의 십자 표시는 PC가 보낸 입력 목표이며 보드가 그린 포인터 닷이 아니다. 실시간 입력 화면 주소는 `http://127.0.0.1:8767/?v=13`, 별도로 검사한 SD 이미지는 `D:\temp\haebancheon-solid-resize-preview\HAEBANCHEON-solid-resize-preview.img`다.

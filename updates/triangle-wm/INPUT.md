@@ -1,107 +1,115 @@
-# WM controls, pointer and current S/B previews
+# 포인터·창 조작·실시간 화면
 
-The current [filled splash resize](SOLID_RESIZE.md), release `fixed-wm-solid-resize-v13`, moves one complete shared S triangle and resizes a content-free region filled with S. Release publishes B and latest content once. The optional pointer dot is suppressed during capture; internal coordinates and the user's visibility preference remain active. Earlier v12/v15 labels in linked reports identify historical experiments, not the current image.
+[문서 목록](README.md) · [English](INPUT_EN.md)
 
-The v15 [input scheduling update](INPUT_ASYNC.md) separates movement receipts from display completion; the split controls and visibility contract below remain.
+현재 보드 버전은 `fixed-wm-solid-resize-v13`이다. 이동할 때는 S색 삼각형 타일 하나를 움직이고, 크기를 조절할 때는 콘텐츠 없는 S색 영역 전체를 늘리거나 줄인다. 마우스를 놓으면 B색 배경과 최신 콘텐츠를 한 번에 표시한다. 자세한 화면 처리와 실측은 [SOLID_RESIZE.md](SOLID_RESIZE.md)에 있다.
 
-`triangle-boayo` now enables internal pointer controls by default. Applications keep the existing BoAYO socket/shared-surface interface. `TRIANGLE_INPUT=0` disables the overlay and preserves the previous rendering and fast pose path.
+앱은 기존 소켓·공유 화면 버퍼 호출 방식을 사용한다. 버튼과 포인터는 WM이 직접 관리한다. `TRIANGLE_INPUT=0`은 이 입력 덧그림 기능 전체를 끄는 설정이며, 포인터 닷만 숨기는 설정과는 다르다.
 
-The original measurements are in [INPUT_RESULTS.md](INPUT_RESULTS.md); v9 CPU improvements and runtime visibility are in [INPUT_OPTIMIZATION.md](INPUT_OPTIMIZATION.md), followed by [button-mask and first-content optimization](INPUT_CACHE.md) and [latest-content coalescing](CONTENT_COALESCING.md).
+## 버튼 배치와 조작
 
-## Placement and behavior
+| 조작 | 위치 | 동작 |
+|---|---|---|
+| 닫기 | 창 위쪽 여백 | 같은 버튼에서 누르고 놓아야 닫힘. 바깥에서 놓으면 취소 |
+| 이동 | 창 아래쪽 여백 | 원래 창을 유지한 채 S색 타일 하나가 이동. 놓으면 실제 위치 확정 |
+| 크기 조절 | 창 오른쪽 아래 여백 | 원래 창·콘텐츠·버튼을 숨기고 S색 빈 영역을 확대·축소. 놓으면 실제 크기 확정 |
 
-- Close: upper padding. Move: lower padding. Resize: lower-right padding.
-- Placement follows the window's actual owned spherical tiles, position, size and output view. It does not impose a fixed polygon or add a frame. Fully occluded/offscreen handles are omitted.
-- Icons are about 16 screen pixels; hit regions are 32 pixels and also check the visible tile owner. A mixed content/background tile may carry an icon, but application-covered samples are protected.
-- Pointer display is independently switchable at runtime with **포인터 표시** or `input_visibility`. Hiding the dot retains coordinates, hover and capture; window operations still work. Hidden motion outside handles does not publish an unchanged frame. This is separate from disabling PC input transmission or setting `TRIANGLE_INPUT=0`.
-- Pointer: approximately 5 screen pixels of white with a black surround; amber while pressed. The triangle sampling grid can change its apparent shape/size. This is a software overlay, not a hardware cursor.
-- Move preserves the actual window/content and moves one complete S-colored triangle. Resize hides the captured window/content/controls and fills the full target footprint with S, restoring the underlying scene as it shrinks. All preview entries share one immutable color payload per bank. Release commits geometry and publishes B plus latest content once. Resize preserves the opposite top-left angular corner and the application surface resolution. See [SOLID_RESIZE.md](SOLID_RESIZE.md).
-- Close requires press and release on the same close handle. Releasing outside cancels. Capture survives leaving a handle. Escape/cancel, input disconnection, window destruction and 30 seconds without input release capture.
+버튼은 창이 실제로 차지한 구면 삼각형 타일, 창의 위치·크기, 출력 방향을 기준으로 배치한다. 고정 다각형이나 테두리를 추가하지 않는다. 가려졌거나 화면 밖에 있는 버튼은 생략한다.
 
-## Rendering
+아이콘 크기는 화면에서 약 16픽셀, 누를 수 있는 범위는 32픽셀이다. 타일의 보이는 소유자도 확인한다. 콘텐츠와 배경이 섞인 타일에 아이콘이 놓일 수 있지만, 앱이 차지한 샘플은 보호한다.
 
-Base scene payloads remain clean. The 4,220-slot scene reserves 256 slots for overlays, one legacy marker slot, and 256 immutable solid-color slots, leaving up to 3,707 content payload slots in the current image. The historical standalone six-color renderer has a different allocation budget. At most 256 reserved payload slots hold copies of the few tiles touched by controls/pointer/temporary outline. Masked RGB332 fills draw the overlay in the inactive bank, then its directory is published. The next pointer position starts from clean base tiles, including any newer application content. Each bank caches overlay masks and source revisions. The [v14 cell-delta path](CELL_DELTA.md) retains dormant slots and changes only overlay cells whose visible color or coverage changed when the base version matches. A changed base is rebuilt from current content. A cached integer projective inverse bounds the few cells around each icon/dot. Cofactors are computed once per tile/view, normalized to 46 bits, and evaluated with integer dot products/divisions. A three-cell guard and conservative full-tile fallback cover quantization and mappings near a pole. When pointer/view/layout stay unchanged, the CPU reuses the complete paint masks while still refreshing changed underlying content. Unchanged application content is not reprojected just to move the pointer. Projected cell coordinates are now cached lazily per output view (4 KiB per visited tile). Integer floor, fractional-edge and rounding bits preserve the original sample coverage exactly. For visible coordinates, a normalized 32-bit division supplies an estimate that is corrected against the original 64-bit numerator and denominator; the small-denominator fallback retains exact division. A view change discards this cache and uses the original sparse calculation for its first publication, avoiding a cache warm-up penalty; subsequent motion uses the cache. Pointer-only publications reuse the existing scene ownership and content plan; any pending application or geometry mutation still forces normal scene planning.
+한 번 누른 조작은 버튼 범위를 벗어나도 유지된다. 크기 조절은 반대쪽인 왼쪽 위 각도 모서리를 유지하며 앱 원본 해상도를 바꾸지 않는다. Esc·취소, 입력 연결 종료, 창 삭제, 입력 없이 30초 경과 시에는 조작을 해제한다.
 
-The present ABI has no independent cursor plane. Pointer-only publication still pays for scene metadata validation/publication. With input enabled, output pose changes first issue the required `BO_SET_POSE` transaction, then rebuild the screen-positioned overlay and publish a scene; the earlier pose-only latency is not applicable. The two transactions are not atomic together, so an overlay can briefly shift before its recomposed frame arrives. Board measurements are reported separately from HDMI/capture optical delay.
+## 포인터 닷은 따로 켜고 끈다
 
-## Input and live monitor
+**포인터 표시** 또는 `input_visibility`로 닷 표시만 바꿀 수 있다. 숨겨도 좌표 추적, 버튼 위에 있는지 확인하는 처리, 누른 상태와 창 조작은 계속된다. 닷이 숨겨져 있고 버튼 상태도 바뀌지 않았다면 좌표만 갱신하고 같은 화면을 불필요하게 게시하지 않는다.
 
-The current board kernel exposes no input device. The development input route is PC mouse → loopback HTTP → COM4 → persistent board control socket. It does not require changing the kernel, FPGA or SD boot installation.
+닷은 검은 가장자리를 두른 약 5픽셀의 흰 점이며, 누르면 황색으로 표시한다. 삼각형 샘플 격자에 따라 모양과 크기가 조금 달라 보일 수 있다. 독립된 하드웨어 커서가 아니라 소프트웨어 덧그림이다.
 
-The current SD image launches the WM and RGB332 demo at boot. On the board:
+이동·크기 조절 중에는 닷을 잠시 숨긴다. 내부 좌표와 사용자가 선택한 표시 설정은 유지하므로 조작이 끝난 뒤에도 같은 설정을 사용한다. PC에서 입력 전송을 끄는 것, 닷만 숨기는 것, `TRIANGLE_INPUT=0`으로 덧그림 전체를 끄는 것은 서로 다른 동작이다.
+
+## 타일과 덧그림 처리
+
+장면의 원본 타일 데이터는 버튼·포인터 때문에 훼손하지 않는다. 현재 장면의 4,220개 데이터 슬롯 중 256개는 덧그림, 256개는 단색 타일, 1개는 이전 표시자 경로의 예약 공간으로 남겨 두므로 콘텐츠에는 최대 3,707개를 쓸 수 있다.
+
+버튼과 닷은 필요한 소수의 타일을 비활성 뱅크의 덧그림 슬롯으로 복사하고 RGB332 마스크로 칠한다. 그다음 타일 참조 정보를 게시한다. 각 뱅크는 덧그림 마스크와 원본 버전을 기억한다. 원본이 같으면 바뀐 셀의 색·범위만 갱신하고, 원본이 바뀌면 최신 데이터로 다시 만든다. 다음 포인터 위치도 깨끗한 원본에서 시작하므로 이동 흔적을 남기지 않는다.
+
+아이콘·닷 주변에서 검사할 셀 범위는 정수 투영 역변환으로 좁힌다. 여인수는 타일·시점마다 한 번 계산해 46비트로 정규화하고, 이후에는 정수 내적·나눗셈을 사용한다. 양자화 오차를 고려해 셀 3개를 여유로 잡으며, 극점 부근 등 좁힌 범위를 안전하게 쓰기 어려우면 타일 전체를 검사한다.
+
+화면 방향별 셀 좌표는 필요할 때 캐시에 채운다. 방문한 타일당 4 KiB를 사용한다. 정수 몫, 경계의 소수 부분, 반올림 정보를 보존하고, 정규화한 32비트 나눗셈의 추정값은 원래 64비트 분자·분모로 보정한다. 분모가 작으면 기존의 정확한 나눗셈을 사용한다. 화면 방향이 바뀌면 캐시를 비우고 첫 화면은 기존의 좁은 범위 계산으로 처리해, 캐시를 미리 채우는 비용을 한꺼번에 내지 않는다.
+
+포인터·시점·버튼 배치가 같으면 마스크 전체를 재사용하면서 아래쪽 콘텐츠의 변경은 반영한다. 포인터만 움직일 때는 기존 타일 소유 관계와 콘텐츠 투영 계획을 재사용한다. 앱 데이터나 창 기하 정보가 바뀌면 필요한 장면 계획을 다시 계산한다.
+
+드래그 중의 미리보기는 이 버튼·닷 경로와 구분한다. 이동은 타일 한 개, 크기 조절은 목표 영역의 모든 타일이 이미 만든 S색 데이터를 참조한다. 크기 조절을 시작할 때만 원래 창을 제외한 바탕 장면을 준비하며, 이후에는 바뀐 타일 참조를 갱신한다.
+
+## 출력 시점 변경과 지연
+
+현재 ABI에는 별도의 커서 표시 계층이 없다. 포인터만 바뀌어도 메타데이터 전송과 화면 게시 비용을 낸다. 입력 기능을 켠 상태에서 출력 방향을 바꾸면 `BO_SET_POSE`를 먼저 실행하고, 화면 좌표에 맞춘 덧그림을 다시 게시한다.
+
+두 작업은 하나의 원자적 동작으로 묶여 있지 않아 덧그림이 잠깐 어긋나 보일 수 있다. 과거에 측정한 시점 변경만의 지연을 이 경로에 그대로 적용하지 않는다. 보드의 완료 응답과 실제 HDMI 캡처 도착 시간도 구분한다.
+
+## PC 입력과 실제 HDMI 연결
+
+현재 보드 커널에는 입력 장치가 없어서 개발 중에는 **PC 마우스 → 로컬 HTTP → COM4 → 보드의 제어 소켓**으로 입력을 전달한다. 이 연결을 위해 FPGA나 커널을 다시 만들 필요는 없다.
+
+SD 이미지는 부팅할 때 WM과 RGB332 데모를 시작한다. 보드에서 수동으로 실행하거나 내부 측정을 할 때는 다음 명령을 쓴다. UART 도구를 실행하기 전에는 PC 입력 연결을 종료해야 한다.
 
 ```sh
 triangle-fixed-start start
-# Optional native benchmark; stop the PC input bridge before using UART:
 /run/triangle-wm-runtime/triangle-input --marker-bench 8
 ```
 
-On the PC, start the capture and fast input bridge from the repository root:
+PC에서는 저장소 루트를 기준으로 아래 두 명령을 **각각 다른 터미널**에서 실행한다. 캡처 장치와 UART는 각각 한 프로세스만 사용한다.
 
 ```powershell
 python updates/triangle-wm/tools/monitor.py --output updates/triangle-wm/evidence/live
 python updates/triangle-wm/tools/pointer_bridge.py --fast-input --client /run/triangle-wm-runtime/triangle-input --output updates/triangle-wm/evidence/live
 ```
 
-Run those commands in separate terminals; one process may own each device.
-Open <http://127.0.0.1:8767/?v=13> and enable pointer input. S/B color pickers
-configure the selected window independently and quantize to its output palette.
-Finish/cancel a drag before applying colors. **포인터 표시** controls only the dot.
-The image is actual HDMI capture; the browser does not draw a substitute scene.
+`http://127.0.0.1:8767/?v=13`을 열고 **포인터 입력 켜기**를 선택한다. S/B 색 선택기는 선택한 창에 따로 적용하며 실제 출력 팔레트에 맞춰 색을 조정한다. 드래그를 끝내거나 취소한 뒤 색을 적용한다.
 
-The fast path keeps the newest queued coordinate while preserving button edges.
-Its PC queue receipt is not display completion. Native acceptance, publication
-acknowledgement and USB capture arrival are separate timing endpoints; see
-[SOLID_RESIZE.md](SOLID_RESIZE.md). Queue receipt is not input-to-screen latency.
+화면에 보이는 영상은 실제 HDMI 캡처다. 브라우저에서 대신 그린 창이나 포인터가 아니다. 캡처 프레임이 얼마나 오래됐는지도 표시하므로 영상이 멈췄는지 확인할 수 있다. Windows에서 스냅샷 파일을 잠깐 잡고 있어도 캡처가 중단되지 않도록 처리한다.
 
-The bridge exclusively owns COM4. Use **입력 연결 종료** before another UART tool;
-it sends `quit` and restores console echo. Stop the PC HTTP server process before
-launching a replacement on port 8767. After an unexpected bridge failure, send a
-literal `quit\n` through COM4 and wait for `INPUT_EXIT` before console commands.
-Keep one WM and one UART owner at a time.
+빠른 경로는 대기 중인 좌표를 최신 값으로 교체하고 누름·놓기 순서를 보존한다. PC 전송 대기열에 들어갔다는 응답은 화면 반영 완료가 아니다. 입력 접수, 출력 완료 응답, USB 캡처 도착은 각각 다른 측정 구간이다. 페이지의 대기열 접수 시간을 입력→화면 지연으로 읽지 않는다.
 
-## Restoring after a reboot
+COM4를 다른 도구에서 쓰려면 **입력 연결 종료**를 누른다. 보드 입력 클라이언트에 `quit`을 보내고 콘솔 에코를 복원한다. 8767번 포트에서 새 서버를 띄우기 전에는 기존 PC HTTP 서버 프로세스도 종료한다. 입력 프로그램이 비정상 종료됐다면 COM4에 `quit`과 줄바꿈을 보내고 `INPUT_EXIT`를 확인한 뒤 셸 명령을 보낸다. WM과 UART 소유자는 각각 하나만 유지한다.
 
-The current image's `/etc/init.d/S99triangle-fixed` starts the service when
-`/dev/bosio0` exists, staging executables in `/run/triangle-wm-runtime/` before
-launch. After `poweroff`, power on the board; restart the PC capture/input
-processes if they ended. The previous `/root/triangle-wm-v12/` and temporary
-`/tmp/triangle-boayo-v12` deployment is no longer needed. Staging and startup are
-outside measured interaction intervals. `TRIANGLE_PREVIEW=outline` retains the
-earlier thin-outline comparison path.
+## 재부팅 후 실행
 
-## Control API
+`/etc/init.d/S99triangle-fixed`가 `/dev/bosio0`를 확인한 뒤 실행 파일을 `/run/triangle-wm-runtime/`에 복사하고 시작한다. 부팅과 RAM 복사 시간은 창 조작 지연 측정에 포함하지 않는다.
 
-Only the trusted `.control` socket accepts these operations:
+`poweroff` 뒤에는 보드 전원을 다시 켜야 한다. PC 캡처·입력 프로그램이 종료됐다면 함께 다시 실행한다. 과거의 `/root/triangle-wm-v12/`, `/tmp/triangle-boayo-v12` 복원 절차는 현재 이미지에 필요 없다. `TRIANGLE_PREVIEW=outline`은 이전 얇은 윤곽선과 비교할 때만 사용한다.
 
-| Operation | Arguments | Behavior |
+## 제어 API
+
+아래 연산은 `.control` 소켓에서만 받는다.
+
+| 연산 | 인수 | 동작 |
 |---|---|---|
-| `input_status` | none | Coordinates, visibility, capture, handles, `window_colors`, preview and transform state |
-| `input_visibility` | boolean `visible` | Persistently toggle dot rendering; preserve input tracking and capture |
-| `input_move` | integer `x` 0–1279, `y` 0–719 | Move/show pointer |
-| `input_button` | `x`, `y`, boolean `pressed` | Capture or release/commit |
-| `input_cancel` | optional `hide` | Cancel capture; optionally hide pointer |
-| `input_colors` | `window_id`, optional `splash_index`, `background_index` (0–255) | Change independent S/B colors; reject while dragging |
-| `input_submit` / `input_progress` / `wait_input` | Latest coordinates / none / ticket | Separate acceptance and display completion; see [INPUT_ASYNC.md](INPUT_ASYNC.md) |
+| `input_status` | 없음 | 좌표, 표시 설정, 조작 중인 창, 버튼, `window_colors`, 미리보기·변환 상태 확인 |
+| `input_visibility` | 불리언 `visible` | 좌표 추적과 조작을 유지하면서 닷 표시만 변경 |
+| `input_move` | 정수 `x` 0–1279, `y` 0–719 | 좌표 갱신. 닷 표시를 켜 두었다면 새 위치에 표시 |
+| `input_button` | `x`, `y`, 불리언 `pressed` | 버튼을 누르거나 놓고 조작을 확정 |
+| `input_cancel` | 선택 항목 `hide` | 조작 취소. 필요하면 포인터도 숨김 |
+| `input_colors` | `window_id`, 선택 항목 `splash_index`, `background_index` 0–255 | S/B 색을 따로 변경. 드래그 중에는 거부 |
+| `input_submit` | 최신 좌표 | 일반 소켓 경로에서 입력을 접수하고 티켓 반환 |
+| `input_progress` | 없음 | 입력 접수·표시 완료 상태 확인 |
+| `wait_input` | `ticket` | 지정한 입력 티켓의 표시 완료 대기 |
 
-Visual mutations return a generation; `wait_present` acknowledges completion. Motion with the dot hidden and no handle hover change updates coordinates immediately and reuses the existing visual generation, without an unnecessary frame publication. One input connection owns an active capture. Invalid coordinates are rejected before changing state. Application widget input events remain outside this version; `app_events`/`poll_events` remain empty.
+화면이 바뀌는 요청은 `generation`을 반환하며 `wait_present`로 반영을 확인할 수 있다. 닷이 숨겨져 있고 버튼 상태도 그대로인 이동은 좌표만 갱신해 기존 화면 세대를 재사용한다. 한 입력 연결만 현재 드래그를 소유할 수 있다. 잘못된 좌표는 상태를 바꾸기 전에 거부한다.
 
-## Validation
+앱 위젯에 입력 이벤트를 전달하는 기능은 아직 없으므로 `app_events`와 `poll_events`의 이벤트 배열은 비어 있다. 빠른 PTR1 드래그 경로와 일반 소켓 요청의 시간을 섞어 비교하지 않는다.
+
+## 검증
+
+현재 버전의 전체 검증은 다음 명령으로 실행한다.
 
 ```sh
-TEST_INPUT_VISIBILITY=1 python3 updates/triangle-wm/tests/test_input.py /var/tmp/triangle-v11-host/triangle-boayo
-TEST_INPUT_VISIBILITY=1 python3 updates/triangle-wm/tests/test_input.py /var/tmp/triangle-v11-san/triangle-boayo
-TRIANGLE_INPUT=0 python3 updates/triangle-wm/tests/test_boayo.py /var/tmp/triangle-v11-san/triangle-boayo
+bash updates/triangle-wm/tools/validate_solid_resize.sh /var/tmp/triangle-solid-resize-release
 ```
 
-The mock enforces the driver rule that a changed camera requires `BO_SET_POSE` before `BO_PUBLISH`. The original bounded-raster check uses `TRIANGLE_UI_FULL_SCAN=1`. For v10/v11, a trace comparison against v9 checks identical tile hashes across 160 presented states, including tile-edge round trips, queued geometry followed by pointer motion, first partial RGB332 content, and cached button states with the dot hidden and shown. The optional visibility checks also cover hidden tracking without redundant publication, capture retention and restoring the original pixels. `check_ui_samples.cpp` checks one million random quotients plus integer/normalization boundaries against exact 64-bit division.
+검사에서는 실제 Unix 소켓과 공유 RGB332 버퍼를 사용하되 보시오 장치만 모의 구현으로 바꾼다. 잘못된 입력의 무변경 처리, 제어 권한, 포인터 흔적 제거, 닷 아래 콘텐츠 갱신, 겹친 창 복원, 닫기 취소, 놓을 때만 위치·크기 확정, 연결 종료, 시점 변경, 36개 창 크기·위치 배치와 마지막 닫기를 검사한다. 호환 검사는 세 픽셀 형식과 입력 기능을 끈 경로도 다룬다.
 
-The input test uses real Unix sockets/shared RGB332 buffers with a mock hardware backend: invalid input atomicity, control ownership, cursor trail restoration, content updates beneath the cursor, overlap restoration, canceled close, move/resize on release, disconnect, view changes, 36 size/position layouts, and final close. The compatibility suite covers all three surface formats with the prior UI-disabled pose contract. ASan/UBSan builds run both suites.
+모의 장치도 시점 변경에는 화면 게시 전 `BO_SET_POSE`가 필요하다는 규칙을 강제한다. 이전 검사에서 사용한 전체 셀 탐색 비교는 `TRIANGLE_UI_FULL_SCAN=1`로 남아 있다. 셀 좌표 검사는 무작위 나눗셈 100만 건과 정수·정규화 경계값을 정확한 64비트 나눗셈과 비교한다. ASan/UBSan 검사와 실보드 HDMI 확인은 구분해 기록한다.
 
-The monitor tolerates a transient Windows snapshot-file lock, and the input page displays capture frame age to make a frozen capture visible.
-
-For explicit live browser acceptance (moves a real window and stops the bridge):
-
-```powershell
-python updates/triangle-wm/tests/test_pointer_page.py --url http://127.0.0.1:8767 --output updates/triangle-wm/results/content-v11-browser.json
-```
+과거 v9–v11 출력 비교, 160개 상태의 타일 해시 대조와 브라우저 직접 조작 절차는 [영문 원문](INPUT_EN.md#validation)에 보존돼 있다. 당시 실행 파일 경로와 측정값을 현재 버전의 실행·성능 기준으로 쓰지 않는다.
