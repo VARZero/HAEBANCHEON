@@ -7,7 +7,7 @@ import argparse,re,shutil
 from pathlib import Path
 ap=argparse.ArgumentParser();ap.add_argument('output',type=Path);a=ap.parse_args()
 src=Path(__file__).resolve().parents[1]/'src';a.output.mkdir(parents=True,exist_ok=True)
-files=['triangle_wm.cpp','boayo_service.cpp','ui_input.inc','ui_render.inc','content_render.inc','move_marker.inc','move_commit.inc','ui_types.hpp','window_transform.hpp','boayo_app.cpp','input_client.cpp']
+files=['triangle_wm.cpp','boayo_service.cpp','app_input.inc','ui_input.inc','ui_render.inc','content_render.inc','move_marker.inc','move_commit.inc','ui_types.hpp','window_transform.hpp','boayo_app.cpp','input_client.cpp']
 for p in src.iterdir():
  if p.is_file():shutil.copyfile(p,a.output/p.name)
 for name in files:

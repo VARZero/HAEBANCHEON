@@ -1,0 +1,51 @@
+{
+  "version": "fixed-wm-ui-examples-v14",
+  "date": "2026-11-25",
+  "hardware": false,
+  "hardware_latency_measured": false,
+  "image_sha256": "0d37a642ac4e53a8733f5d760d9bfa98fb320b751d7b87c4c626abe70ce195a1",
+  "binaries": {
+    "triangle-boayo-fixed": "860c1c421666f271232a69ad1b69b5882eaa522b983a86e13af08cc7aa4cfd83",
+    "triangle-app": "5560552b8ebde60abdb3fcbf07a5c5cf1bedbcf225e999f33fd0e052d09f4dc7",
+    "triangle-input": "b798b7c444bc990d43720a915313388c649836de9dabb268419a9954f30f5b15",
+    "triangle-examples": "55b7dd7568b44314c9be000440dbfca5a7a7fab871bcd42e69923f5caeae35f4"
+  },
+  "checks": {
+    "rv32_cross_build_and_integer_audit": "PASS",
+    "legacy_solid_resize_and_input_regressions": "PASS",
+    "asan_ubsan_app_models": "PASS",
+    "projected_large_controls": "PASS",
+    "binary_and_json_app_events": "PASS",
+    "native_example_apps_against_mock_wm": "PASS",
+    "final_sd_rv32_qemu_boot_all_three_apps": "PASS",
+    "browser_input_queue_and_keyboard": "PASS",
+    "browser_palette_and_independent_colors": "PASS",
+    "interactive_preview_320_736_1024": "PASS"
+  },
+  "controls": {
+    "icon_nominal_px": 28,
+    "plate_px": 36,
+    "hit_px": 48,
+    "projected_ink_extent_px": {
+      "close": [
+        23,
+        23
+      ],
+      "move": [
+        26,
+        28
+      ],
+      "resize": [
+        26,
+        26
+      ]
+    }
+  },
+  "limits": [
+    "Physical board not connected or modified.",
+    "Native examples support resident ASCII font; Korean glyphs and IME are not implemented.",
+    "Browser prototype is illustrative, not a board capture or performance measurement.",
+    "Settings colors affect their own window; pointer visibility is global; settings are not persisted."
+  ],
+  "image_path": "D:/temp/haebancheon-ui-examples-v14/HAEBANCHEON-ui-examples-v14.img"
+}

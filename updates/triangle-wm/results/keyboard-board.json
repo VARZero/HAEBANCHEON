@@ -1,0 +1,168 @@
+{
+  "result": "REAL_BOARD_FUNCTIONS_OBSERVED_WITH_LATENCY_AND_REOPEN_LIMITATIONS",
+  "created_kst": "2026-11-27T21:23:25.196072+09:00",
+  "version": "fixed-wm-keyboard-v16a",
+  "kernel_release": "6.12.0-haebancheon-keyboard",
+  "fpga_bitstream_changed": false,
+  "hardware_tested": true,
+  "uart_tty_and_hdmi_tested": true,
+  "generic_uart_spi_i2c_registered": true,
+  "external_uart_spi_i2c_transactions_tested": false,
+  "board_wm_sha256": "dc02361a2eedce4f2c22523f45967def61a2bd23aca7710284eaecb86294a9f5",
+  "new_sd_image_sha256": "ac43a23985093726c3d0483ee23dfb7a9549446e8ee3618ec626a06e5a7b0761",
+  "new_sd_image_booted_on_board": false,
+  "deployment": "User flashed original v16. Only WM executable hot-patched to v16a on SD and runtime restarted. New complete v16a image validated separately with actual RV32 QEMU.",
+  "live_url": "http://127.0.0.1:8770/",
+  "uart": "COM4 CP210x 115200, foreground boayo-input stdin on SBI console",
+  "capture": "USB3.0 Video 1280x720@30, physical HDMI recovered after user replugged cable",
+  "measurement": "Host UART flush completion to first observed real captured HDMI ROI change. Includes input, application, WM, publication, capture buffering, and polling; not optical latency or isolated board CPU/driver time.",
+  "observed": [
+    "Home opens and raises dashboard",
+    "ArrowUp close focus visibly red after warm-cache fix",
+    "ArrowDown returns to content",
+    "Enter closes dashboard; fixed title ROI used in final check",
+    "Settings Right/Right/Left/Down/Right/Enter and final target background2",
+    "Ctrl+C returns to shell, stdin input can restart"
+  ],
+  "dashboard_final_samples": [
+    {
+      "name": "01-Home-raise-dashboard",
+      "key": "Home",
+      "host_to_first_capture_change_ms": 4469.74,
+      "roi": [
+        305,
+        185,
+        570,
+        222
+      ],
+      "changed_pixels": 1668
+    },
+    {
+      "name": "02-Up-focus-close",
+      "key": "ArrowUp",
+      "host_to_first_capture_change_ms": 2735.77,
+      "roi": [
+        590,
+        80,
+        730,
+        165
+      ],
+      "changed_pixels": 596
+    },
+    {
+      "name": "03-Enter-close-dashboard",
+      "key": "Enter",
+      "host_to_first_capture_change_ms": 3360.42,
+      "roi": [
+        305,
+        185,
+        570,
+        222
+      ],
+      "changed_pixels": 1668
+    }
+  ],
+  "settings_samples": [
+    {
+      "name": "09-splash-right",
+      "key": "ArrowRight",
+      "host_to_first_capture_change_ms": 13521.36,
+      "changed_pixels": 2537,
+      "roi": null
+    },
+    {
+      "name": "10-splash-right",
+      "key": "ArrowRight",
+      "host_to_first_capture_change_ms": 15951.42,
+      "changed_pixels": 2452,
+      "roi": null
+    },
+    {
+      "name": "11-splash-left",
+      "key": "ArrowLeft",
+      "host_to_first_capture_change_ms": 15813.51,
+      "changed_pixels": 2452,
+      "roi": null
+    },
+    {
+      "name": "12-background-down",
+      "key": "ArrowDown",
+      "host_to_first_capture_change_ms": 14280.73,
+      "changed_pixels": 1809,
+      "roi": null
+    },
+    {
+      "name": "13-background-right",
+      "key": "ArrowRight",
+      "host_to_first_capture_change_ms": 14389.66,
+      "changed_pixels": 1449,
+      "roi": null
+    },
+    {
+      "name": "14-enter-select-background",
+      "key": "Enter",
+      "host_to_first_capture_change_ms": 16008.49,
+      "changed_pixels": 527,
+      "roi": null
+    }
+  ],
+  "settings_arrow_summary_ms": {
+    "n": 5,
+    "median": 14389.66,
+    "min": 13521.36,
+    "max": 15951.42
+  },
+  "first_dashboard_home_sample_ms": {
+    "feedback": 3590.67,
+    "content": 11448.17,
+    "n": 1
+  },
+  "priority_experiment": {
+    "normal_settings_nice": 10,
+    "temporary_settings_nice": 0,
+    "samples": [
+      {
+        "key": "ArrowLeft",
+        "host_to_first_capture_change_ms": 8461.6,
+        "changed_pixels": 1449
+      },
+      {
+        "key": "ArrowRight",
+        "host_to_first_capture_change_ms": 9076.71,
+        "changed_pixels": 1449
+      },
+      {
+        "key": "ArrowLeft",
+        "host_to_first_capture_change_ms": 9372.27,
+        "changed_pixels": 1449
+      }
+    ],
+    "restored_nice": 10,
+    "persisted_in_sd": false,
+    "scope": "Exploratory different sequence, hidden dashboard running; not a controlled speedup claim. Home dashboard inherits WM nice -10."
+  },
+  "issues": [
+    "Input-to-visible latency remains seconds; no latency target pass.",
+    "One Home immediately after close showed no new screen for 30 seconds; later native CLI Home retry succeeded. Child exit vs TTY transport not isolated.",
+    "Initial close timing ROI included content focus updates. Those Enter samples are not close-completion results; final fixed-title ROI sample is used.",
+    "An initial settings readiness command timed out; a later log and actual HDMI confirmed Settings READY.",
+    "PC viewer startup state had a late previous shell-prompt race; fixed state recognition before final tests."
+  ],
+  "evidence_files": [
+    "install-status.json",
+    "patch-verify.json",
+    "TRI_682c2b3263.log",
+    "settings-test-fixed-2/result.json",
+    "settings-test-fixed-2/final-navigation.json",
+    "dashboard-final/samples.json",
+    "home-retry.json",
+    "final.jpg",
+    "dashboard-keyboard.mp4",
+    "dashboard-final.mp4",
+    "settings-keyboard.mp4",
+    "live/console.jsonl"
+  ],
+  "viewer_left_running": true,
+  "input_left_running": true,
+  "board_left_on": true
+}

@@ -1,0 +1,63 @@
+{
+  "boot_lba": 2048,
+  "root_lba": 14336,
+  "root_sectors": 2097152,
+  "segments": [
+    {
+      "address": "0x80000000",
+      "sectors": 519,
+      "crc32": "edd168be"
+    },
+    {
+      "address": "0x80400000",
+      "sectors": 10191,
+      "crc32": "b6081feb"
+    },
+    {
+      "address": "0x87f00000",
+      "sectors": 7,
+      "crc32": "ac347877"
+    }
+  ],
+  "version": "fixed-wm-ui-examples-v14",
+  "geometry": "integer Q24",
+  "angles": "signed quarter degrees in 16-bit range; normalized yaw [-180,180)",
+  "wire": "BWM1 little-endian length + CBOR integer payload; angle Q2, other fractions Q24",
+  "publication": "BO_PUBLISH_COPY default; TRIANGLE_PUBLISH_COPY=0 selects checked baseline",
+  "preview": "Move: frozen real window and one complete shared S tile. Resize: hide captured window once, fill complete target footprint with shared S payload. Shrinking restores underlying scene, higher windows occlude. Release publishes B and latest content once.",
+  "execution": "Startup stages executables in /run/triangle-wm-runtime before launch",
+  "feedback_target_ms": 300,
+  "feedback_target_hardware_verified": false,
+  "hardware_tested": false,
+  "binaries": {
+    "triangle-boayo-fixed": "860c1c421666f271232a69ad1b69b5882eaa522b983a86e13af08cc7aa4cfd83",
+    "triangle-app": "5560552b8ebde60abdb3fcbf07a5c5cf1bedbcf225e999f33fd0e052d09f4dc7",
+    "triangle-input": "b798b7c444bc990d43720a915313388c649836de9dabb268419a9954f30f5b15",
+    "triangle-examples": "55b7dd7568b44314c9be000440dbfca5a7a7fab871bcd42e69923f5caeae35f4"
+  },
+  "move_marker_cells": 1024,
+  "fast_motion": "PTR1-one-way-drain-bounded",
+  "demo_diagnostics": "startup-only",
+  "runtime_priority": {
+    "wm": -10,
+    "input": -5,
+    "app": 10
+  },
+  "resize_preview": "solid-filled-direct-cached-trig-q13-coarse",
+  "window_colors": "RGB332-256-independent-SB",
+  "ui_controls": "28px-glyph-48px-hit",
+  "application_events": "bounded-FIFO-wait-events",
+  "example_apps": [
+    "editor",
+    "settings",
+    "dashboard"
+  ],
+  "example_font": "resident ASCII; Korean glyphs/IME deferred",
+  "image": "HAEBANCHEON-ui-examples-v14.img",
+  "bytes": 1081081856,
+  "sha256": "0d37a642ac4e53a8733f5d760d9bfa98fb320b751d7b87c4c626abe70ce195a1",
+  "kernel_sha256": "91a89cc145d2df3b8781e7803d9159d1ce58cb4b994cc938c86627e2326eee99",
+  "kernel_release": "6.12.0-haebancheon-publishcopy",
+  "rootfs_sha256": "4f1664871930db107e73d53e80a75228b7455f421097380c621dfb76cae7cc9e",
+  "notes": "Driver improvement and kernel retained. Automatically stages WM/app/input in RAM and starts demo when /dev/bosio0 exists. Prepared offline; no physical board was contacted. Native/QEMU checks do not measure hardware latency."
+}

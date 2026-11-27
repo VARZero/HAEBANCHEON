@@ -6,10 +6,12 @@ case "${1:-start}" in
   if test "${1:-start}" = mock; then set -- --mock; else test -c /dev/bosio0 || exit 0;set --;fi
   runtime=/run/triangle-wm-runtime
   mkdir -p "$runtime" && chmod 700 "$runtime" || exit 1
-  for binary in triangle-boayo-fixed triangle-app triangle-input; do
+  for binary in triangle-boayo-fixed triangle-app triangle-input triangle-examples boayo-input; do
+   if test "$binary" = boayo-input && ! test -x "/usr/bin/$binary";then continue;fi
    cp "/usr/bin/$binary" "$runtime/$binary.next" && chmod 755 "$runtime/$binary.next" && mv "$runtime/$binary.next" "$runtime/$binary" || exit 1
   done
   TRIANGLE_PREVIEW=${TRIANGLE_PREVIEW:-tile};export TRIANGLE_PREVIEW
+  TRIANGLE_EXAMPLES_BIN="$runtime/triangle-examples";export TRIANGLE_EXAMPLES_BIN
   nice -n -10 "$runtime/triangle-boayo-fixed" "$@" > /tmp/triangle-wm.log 2>&1 &
   echo $! > /run/triangle-wm.pid
   remaining=60
@@ -18,10 +20,16 @@ case "${1:-start}" in
    test "$remaining" -gt 0 || exit 1
    remaining=$((remaining-1));sleep 1
   done
-  nice -n 10 "$runtime/triangle-app" --rgb332 --demo > /tmp/triangle-app.log 2>&1 &
+  if test "${TRIANGLE_START_APP:-launcher}" = demo; then
+   nice -n 10 "$runtime/triangle-app" --rgb332 --demo > /tmp/triangle-app.log 2>&1 &
+  else
+   nice -n 10 "$runtime/triangle-examples" launcher --apps /etc/boayo/apps.json > /tmp/triangle-app.log 2>&1 &
+  fi
   echo $! > /run/triangle-app.pid
   ;;
  stop)
+  # Stop every example launched from Home before stopping its owning WM.
+  # wm destroys remaining windows; clients exit after receiving closed/error.
   for name in triangle-app triangle-wm; do
    if test -f /run/$name.pid; then kill -TERM "$(cat /run/$name.pid)" 2>/dev/null || true; fi
   done

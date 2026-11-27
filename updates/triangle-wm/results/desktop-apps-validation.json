@@ -1,0 +1,35 @@
+{
+  "version": "fixed-wm-desktop-apps-v15",
+  "date": "2026-11-25",
+  "hardware": false,
+  "physical_board_contacted": false,
+  "physical_poweroff_executed": false,
+  "hardware_latency_measured": false,
+  "image_sha256": "438637d7009438aa088aef3c6bcf635616abfa96e72d321ef3acb50fe977fcfb",
+  "binaries": {
+    "triangle-boayo-fixed": "7c1dbc41841d558c9fe576c92205029bd22d67e43b2a0a1b6e3c8e872f4cc01e",
+    "triangle-app": "5560552b8ebde60abdb3fcbf07a5c5cf1bedbcf225e999f33fd0e052d09f4dc7",
+    "triangle-input": "b798b7c444bc990d43720a915313388c649836de9dabb268419a9954f30f5b15",
+    "triangle-examples": "61d85ed558982cc243c8849f2e21f48baa468df6e585c91460de35e08933854c"
+  },
+  "catalog_sha256": "69f7464e6bbc54fee78df0761ae9409c40109119037706546d8e95f3287a2cba",
+  "checks": {
+    "rv32_cross_build_and_integer_audit": "PASS",
+    "legacy_wm_render_input_resize_coalescing": "PASS",
+    "asan_ubsan_models_parser_real_pty": "PASS",
+    "native_all_six_apps_against_mock_wm": "PASS",
+    "launcher_real_child_window": "PASS",
+    "control_front_center_from_changed_view": "PASS",
+    "mock_poweroff_guard": "PASS",
+    "pty_command_interrupt_exit_cleanup_and_winsize": "PASS",
+    "sd_qemu_launcher_boot_all_six_apps_live_shell": "PASS",
+    "browser_keyboard_controls": "PASS",
+    "interactive_preview_three_widths": "PASS"
+  },
+  "notes": [
+    "Poweroff integration checked only through rejection in mock mode; /sbin/poweroff was not executed.",
+    "Native apps use ASCII; no Korean glyphs or IME.",
+    "Terminal supports a bounded VT subset, not full xterm compatibility.",
+    "No physical HDMI capture or input latency measurements."
+  ]
+}

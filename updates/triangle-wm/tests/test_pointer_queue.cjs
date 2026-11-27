@@ -42,5 +42,20 @@ async function reply(result, extra={accept_ms:2,present_ms:3}) {
   send("send('input_move',{x:40,y:10})");await reply({queued_sequence:50},{queued_to_uart:true,host_queue_ms:0.1});
   assert.match(elements.get('status').textContent,/전송 예약 50/,'host queue receipt mislabeled as board acceptance');
   assert.match(elements.get('status').textContent,/0\.1 ms/);
-  console.log('PASS_POINTER_QUEUE: latest movement, ordered button, early receipt, separate completion, correct timing labels');
+  // Keyboard input preserves all text and special-key barriers while receipts wait.
+  send("send('input_text',{text:'a'});send('input_text',{text:'b'});send('input_text',{text:'c'});send('input_key',{key:'Backspace'});send('input_text',{text:'d'});send('input_text',{text:'e'})");
+  assert.equal(requests[0].q.args.text,'a');await reply({accepted:true});
+  assert.match(elements.get('status').textContent,/앱 입력 접수.*콘텐츠 반영 완료는 별도/);
+  assert.equal(requests[0].q.args.text,'bc');await reply({accepted:true});
+  assert.equal(requests[0].q.args.key,'Backspace');await reply({accepted:true});
+  assert.equal(requests[0].q.args.text,'de');await reply({accepted:true});
+  send("enabled=true;document.getElementById('send-keys').checked=true");
+  const key=(value,tag='IMG',extra={})=>context.window.onkeydown({key:value,target:{tagName:tag},preventDefault(){},...extra});
+  key('q','INPUT');key('가');key('x','IMG',{isComposing:true});assert.equal(requests.length,0);
+  key('z');assert.equal(requests[0].q.args.text,'z');await reply({accepted:true});
+  key('s','IMG',{ctrlKey:true});assert.equal(requests[0].q.args.key,'Save');await reply({accepted:true});
+  for(const [letter,expected] of [['c','Interrupt'],['d','EOF'],['l','ClearScreen']]){key(letter,'IMG',{ctrlKey:true});assert.equal(requests[0].q.args.key,expected);await reply({accepted:true});}
+  key('PageUp');assert.equal(requests[0].q.args.key,'PageUp');await reply({accepted:true});
+  key('Escape');assert.equal(elements.get('send-keys').checked,false);assert.equal(requests[0].q.op,'input_cancel');await reply({});
+  console.log('PASS_POINTER_QUEUE: latest movement, ordered buttons/text/keys, separate completion, opt-in ASCII keyboard and Escape');
 })().catch(e=>{console.error(e);process.exitCode=1;});

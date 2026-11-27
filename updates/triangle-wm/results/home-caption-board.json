@@ -1,0 +1,45 @@
+{
+  "result": "PASS_REAL_BOARD_CAPTIONLESS_HOME_AND_PTY_TERMINAL",
+  "version": "fixed-wm-keyboard-v16c",
+  "home_controls_count": 0,
+  "home_up_target": "reload",
+  "caption_pixel_comparison": [
+    {
+      "button": "close",
+      "old_white_pixels": 237,
+      "new_white_pixels": 0
+    },
+    {
+      "button": "move",
+      "old_white_pixels": 379,
+      "new_white_pixels": 0
+    },
+    {
+      "button": "resize",
+      "old_white_pixels": 150,
+      "new_white_pixels": 0
+    }
+  ],
+  "terminal_controls_count": 3,
+  "terminal_shell": "/bin/sh -i through PTY",
+  "terminal_tty": "/dev/pts/0",
+  "terminal_kernel": "6.12.0-haebancheon-keyboard",
+  "terminal_shell_created_file": "/tmp/boayo-pty-86d0db74",
+  "terminal_input_test_path": "Existing WM input_text API, not six-key boayo-input character forwarding",
+  "home_return_capture_ms": 1314.02,
+  "home_return_samples": 1,
+  "measurement": "UART flush to captured Home heading match, including capture buffering; not optical latency",
+  "input_left_running": true,
+  "wm_paused": false,
+  "live_url": "http://127.0.0.1:8770",
+  "created_kst": "2026-11-27T22:29:24.957686+09:00",
+  "hardware_tested": true,
+  "fpga_bitstream_changed": false,
+  "wm_expected_sha256": "2ac8386710c43234bcd9e5610aefe1a04dde0e960f9bfca31c808fb824cf325e",
+  "sd_image_sha256": "7848a47ba1013c638106d8a0782dc3ffa13b81f460b2d660e5d8a5e1154fb5a4",
+  "sd_image_booted_on_board": false,
+  "actual_rv32_qemu_image_passed": true,
+  "deployment": "Only WM differs from v16b. Uploaded delta checked by SHA-256; native reconstruction checked output length and FNV-1a. Installed to SD and RAM atomically and restarted WM/launcher using unchanged staged apps.",
+  "evidence": "evidence/home-caption-20261127/",
+  "input_limit": "boayo-input and live monitor key buttons still six navigation keys. Terminal proof used the existing WM input_text API; no general UART character forwarding was added."
+}

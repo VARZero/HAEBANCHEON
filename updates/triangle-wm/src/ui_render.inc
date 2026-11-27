@@ -69,7 +69,7 @@
  }
  void ui_layout(){
   ui_controls.clear();
-  for(int id:order){auto&w=windows.at(id);if(!w.visible||(move_marker.active&&move_marker.kind==3&&!move_marker.committing&&id==move_marker.window))continue;
+  for(int id:order){auto&w=windows.at(id);if(!w.visible||!w.controls_enabled||(move_marker.active&&move_marker.kind==3&&!move_marker.committing&&id==move_marker.window))continue;
    int32_t a[3][3];for(int j=0;j<3;j++)for(int k=0;k<3;k++)a[j][k]=std::lround(w.transform.ax[j][k]*8192);
    int tx=int(w.transform.tx*2048),ty=int(w.transform.ty*2048),pad=std::max(80,int(w.padding*72));
    unsigned best[3]={tiles,tiles,tiles};int64_t score[3]={INT64_MAX,INT64_MAX,INT64_MAX};
@@ -90,7 +90,7 @@
    if(best[1]==best[2])best[1]=second_move;
    for(unsigned k=0;k<3;k++)if(best[k]<tiles){
     bool used=false;for(auto&c:ui_controls)used|=c.tile==best[k];if(used)continue;
-    auto [x,y]=ui_center(best[k]);if(x<16||x>1263||y<16||y>703)continue;
+    auto [x,y]=ui_center(best[k]);if(x<24||x>1255||y<24||y>695)continue;
     ui_controls.push_back({id,int(k+1),x,y,best[k]});
    }
   }
@@ -98,15 +98,15 @@
  UiControl ui_hit(int x,int y)const{
   unsigned t=ui_pick(x,y);if(t>=tiles)return {};
   for(auto it=ui_controls.rbegin();it!=ui_controls.rend();++it)
-   if(planned_owner[t]==it->window&&std::abs(x-it->x)<=16&&std::abs(y-it->y)<=16)return *it;
+   if(planned_owner[t]==it->window&&std::abs(x-it->x)<=wm_controls::hit_radius&&std::abs(y-it->y)<=wm_controls::hit_radius)return *it;
   return {};
  }
  bool ui_pointer_changed(const UiPointer&before)const{
   bool was_drawn=before.visible&&before.display,drawn=pointer.visible&&pointer.display;
   if(was_drawn!=drawn||(drawn&&(before.x!=pointer.x||before.y!=pointer.y||before.down!=pointer.down)))return true;
   for(const auto&c:ui_controls){
-   bool old_hover=before.visible&&std::abs(before.x-c.x)<=16&&std::abs(before.y-c.y)<=16;
-   bool hover=pointer.visible&&std::abs(pointer.x-c.x)<=16&&std::abs(pointer.y-c.y)<=16;
+   bool old_hover=before.visible&&std::abs(before.x-c.x)<=wm_controls::hit_radius&&std::abs(before.y-c.y)<=wm_controls::hit_radius;
+   bool hover=pointer.visible&&std::abs(pointer.x-c.x)<=wm_controls::hit_radius&&std::abs(pointer.y-c.y)<=wm_controls::hit_radius;
    if(old_hover!=hover||(hover&&before.down!=pointer.down))return true;
   }
   return false;
@@ -116,7 +116,10 @@
   if(ui_layout_dirty){ui_button_cache.clear();ui_layout();ui_layout_dirty=false;ui_mask_dirty=true;}
   ui_layout_us=microseconds_now()-phase;phase=microseconds_now();auto &paint=ui_paints;
   if(ui_mask_dirty){paint.clear();
-  for(auto&c:ui_controls)paint[c.tile];
+  for(auto&c:ui_controls){
+   std::set<unsigned> nearby{c.tile};for(auto&edge:tile_neighbors[c.tile]){nearby.insert(edge[0]);if(edge[1]!=65535)nearby.insert(edge[1]);}
+   for(unsigned t:nearby)if(t<tiles&&planned_owner[t]==c.window&&affected(ui_descriptor(t),{c.x-19,c.y-19,39,39}))paint[t];
+  }
   std::set<unsigned> cursor;
   if(pointer.visible&&pointer.display&&(!move_marker.active||move_marker.committing)){uint64_t pick_start=microseconds_now();unsigned t=ui_pick(pointer.x,pointer.y);ui_pick_us=microseconds_now()-pick_start;if(t<tiles)cursor.insert(t);
    for(int round=0;round<2;round++){auto previous=cursor;for(unsigned v:previous)for(auto&e:tile_neighbors[v]){cursor.insert(e[0]);if(e[1]!=65535)cursor.insert(e[1]);}}
@@ -125,19 +128,20 @@
   int nearest=INT_MAX;unsigned near_tile=tiles,near_cell=0;bool white=false;
   for(auto &[t,p]:paint){if(input_checkpoint)input_checkpoint(false);auto&d=ui_descriptor(t);
    bool pointer_tile=pointer.visible&&pointer.display&&cursor.count(t)&&affected(d,{pointer.x-12,pointer.y-12,25,25});
-   std::vector<UiControl> buttons;for(auto&c:ui_controls)if(c.tile==t)buttons.push_back(c);
+   std::vector<UiControl> buttons;for(auto&c:ui_controls)if(planned_owner[t]==c.window&&affected(d,{c.x-19,c.y-19,39,39}))buttons.push_back(c);
    if(!pointer_tile&&buttons.empty())continue;
    UiButtonCache *cached_button=nullptr;unsigned button_state=0;
-   if(!pointer_tile&&!buttons.empty()){
+   if(!pointer_tile&&buttons.size()==1){
     const auto &button=buttons.front();
-    bool hover=pointer.visible&&std::abs(pointer.x-button.x)<=16&&std::abs(pointer.y-button.y)<=16;
-    button_state=hover?(pointer.down?2:1):0;cached_button=&ui_button_cache[t];
+    bool hover=pointer.visible&&std::abs(pointer.x-button.x)<=wm_controls::hit_radius&&std::abs(pointer.y-button.y)<=wm_controls::hit_radius;
+    bool keyboard_focus=button.kind==1&&keyboard_close_window==button.window;
+    button_state=keyboard_focus?2:hover?(pointer.down?2:1):0;cached_button=&ui_button_cache[t];
     if(cached_button->valid[button_state]){p=cached_button->paints[button_state];continue;}
    }
 
    int x0=1280,y0=720,x1=-1,y1=-1;
    auto extend=[&](int x,int y){x0=std::min(x0,x-12);y0=std::min(y0,y-12);x1=std::max(x1,x+12);y1=std::max(y1,y+12);};
-   if(pointer_tile)extend(pointer.x,pointer.y);for(auto&b:buttons)extend(b.x,b.y);
+   if(pointer_tile)extend(pointer.x,pointer.y);for(auto&b:buttons){x0=std::min(x0,b.x-19);y0=std::min(y0,b.y-19);x1=std::max(x1,b.x+19);y1=std::max(y1,b.y+19);}
    auto inverse=ui_inverses.find(t);if(inverse==ui_inverses.end())inverse=ui_inverses.emplace(t,UiInverse(d)).first;
    // Reuse coordinates already populated by the pointer, but do not warm
    // a new sample grid just to draw a static button.
@@ -157,7 +161,7 @@
     if(samples){
      uint32_t sample=samples->get(d,cell,row,c,inv);if(sample==UINT32_MAX)continue;
      bool relevant=pointer_tile&&UiSamples::near(sample,pointer.x,pointer.y,12);
-     for(auto&button:buttons)relevant|=UiSamples::near(sample,button.x,button.y,12);if(!relevant)continue;
+     for(auto&button:buttons)relevant|=UiSamples::near(sample,button.x,button.y,19);if(!relevant)continue;
      x=UiSamples::x(sample);y=UiSamples::y(sample);
     }else{
      u+=int32_t(d[8]);v+=int32_t(d[12]);z+=int32_t(d[16]);
@@ -165,7 +169,7 @@
      // Filling a new cache's guard cells would delay this first publication.
      if(z<=0||u<0||v<0||u>z*1279||v>z*719)continue;
      auto near=[&](int px,int py){return u>=int64_t(px-12)*z&&u<=int64_t(px+12)*z&&v>=int64_t(py-12)*z&&v<=int64_t(py+12)*z;};
-     bool relevant=pointer_tile&&near(pointer.x,pointer.y);for(auto&button:buttons)relevant|=near(button.x,button.y);if(!relevant)continue;
+     bool relevant=pointer_tile&&near(pointer.x,pointer.y);for(auto&button:buttons)relevant|=u>=int64_t(button.x-19)*z&&u<=int64_t(button.x+19)*z&&v>=int64_t(button.y-19)*z&&v<=int64_t(button.y+19)*z;if(!relevant)continue;
      x=int((u+z/2)/z);y=int((v+z/2)/z);
     }
     int color=-1;
@@ -178,13 +182,11 @@
       for(unsigned k=0;k<3;k++)q[k]=int32_t(cd[6+4*k])+int64_t(row)*int32_t(cd[7+4*k])+int64_t(c)*int32_t(cd[8+4*k])+inv*int64_t(int32_t(cd[9+4*k]));
       if(covered(cd,q))continue;
      }
-     bool hover=std::abs(pointer.x-button.x)<=16&&std::abs(pointer.y-button.y)<=16&&pointer.visible;
-     if(hover&&std::abs(dx)<=10&&std::abs(dy)<=10)color=0;
-     bool ink=false;
-     if(button.kind==1)ink=std::abs(dx)<=7&&std::abs(dy)<=7&&(std::abs(dx-dy)<=1||std::abs(dx+dy)<=1);
-     if(button.kind==2)ink=(std::abs(dx)<=1&&std::abs(dy)<=8)||(std::abs(dy)<=1&&std::abs(dx)<=8)||(std::abs(dx)>=5&&std::abs(dx)<=8&&std::abs(std::abs(dy)-(8-std::abs(dx)))<=1)||(std::abs(dy)>=5&&std::abs(dy)<=8&&std::abs(std::abs(dx)-(8-std::abs(dy)))<=1);
-     if(button.kind==3)ink=std::abs(dx)<=7&&std::abs(dy)<=7&&(std::abs(dx-dy)<=1||(dx>=4&&dy>=4&&(dx>=6||dy>=6))||(dx<=-4&&dy<=-4&&(dx<=-6||dy<=-6)));
-     if(ink)color=hover&&pointer.down?2:1;
+     bool hover=std::abs(pointer.x-button.x)<=wm_controls::hit_radius&&std::abs(pointer.y-button.y)<=wm_controls::hit_radius&&pointer.visible;
+     if(std::abs(dx)<=wm_controls::plate_radius&&std::abs(dy)<=wm_controls::plate_radius)color=0;
+     bool keyboard_focus=button.kind==1&&keyboard_close_window==button.window;
+     bool ink=wm_controls::ink(button.kind,dx,dy)||((hover||keyboard_focus)&&std::max(std::abs(dx),std::abs(dy))==17);
+     if(ink)color=(hover&&pointer.down)||(button.kind==1&&keyboard_close_window==button.window)?2:1;
     }
     if(pointer_tile){int dx=x-pointer.x,dy=y-pointer.y,dist=dx*dx+dy*dy;
      if(dist<nearest){nearest=dist;near_tile=t;near_cell=cell;}

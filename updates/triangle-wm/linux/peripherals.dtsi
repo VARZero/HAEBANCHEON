@@ -1,0 +1,27 @@
+/* Insert under /soc; console remains SBI hvc0. */
+hb_uart: serial@10005000 {
+ compatible = "oryukdo,uart-poll-v1";
+ reg = <0x10005000 8>;
+ clock-frequency = <100000000>;
+};
+hb_spi: spi@10006000 {
+ compatible = "oryukdo,spi-v1";
+ reg = <0x10006000 0x14>;
+ clock-frequency = <100000000>;
+ #address-cells = <1>;
+ #size-cells = <0>;
+ keyboard@0 {
+  compatible = "oryukdo,esp32-keyboard";
+  reg = <0>;
+  spi-max-frequency = <1000000>;
+  spi-cpha;
+ };
+};
+hb_i2c: i2c@10007000 {
+ compatible = "oryukdo,i2c-v1";
+ reg = <0x10007000 0x14>;
+ clock-frequency = <100000000>;
+ bus-frequency = <100000>;
+ #address-cells = <1>;
+ #size-cells = <0>;
+};

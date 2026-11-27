@@ -9,6 +9,8 @@
 #include <sys/file.h>
 #include <sys/stat.h>
 #include <climits>
+#include <spawn.h>
+#include <sys/wait.h>
 
 namespace triangle_service {
 static volatile sig_atomic_t stopping = 0;
@@ -31,6 +33,7 @@ struct Peer {
   J wait_id; uint64_t wait_generation=0;bool feedback_wait=false,input_wait=false;
   bool checkpoint_blocked=false;J deferred_request;
   uint32_t fast_last_sequence=0;bool fast_invalid=false;
+  bool event_wait=false;uint64_t event_deadline_us=0;
 };
 struct RequestProfile {
  std::string op;uint64_t parse_us=0,dispatch_us=0,reply_us=0,snapshot_us=0,pixels_us=0,damage_us=0,footprint_us=0;
@@ -52,7 +55,9 @@ struct Server {
   double service_render_ms=0;RequestProfile request_profile,last_mutation;
   double yaw=0, pitch=0;
 #include "move_commit.inc"
+#include "app_input.inc"
 #include "ui_input.inc"
+#include "keyboard_navigation.inc"
 #include "input_mailbox.inc"
 
   explicit Server(bool mock):path(socket_path()) {
@@ -102,18 +107,21 @@ struct Server {
     const auto &r=records.at(id); const auto &w=engine->windows.at(id);
     return json_object("window_id",id,"title",r.title,"surface_width",r.width,"surface_height",r.height,
       "azimuth",coordinate(w.yaw),"elevation",coordinate(w.pitch),"roll",0,"width_deg",coordinate(w.width),"height_deg",coordinate(w.height),
-      "padding_deg",coordinate(w.padding),"background_index",w.color,"splash_index",w.splash_color,"phase",w.splash_pending?"splash":(w.shell_pending||!w.plan_ready)?"background":"content","mapped",w.visible,"decorated",false,"generation",generation);
+      "padding_deg",coordinate(w.padding),"background_index",w.color,"splash_index",w.splash_color,"phase",w.splash_pending?"splash":(w.shell_pending||!w.plan_ready)?"background":"content","mapped",w.visible,"decorated",false,"controls_enabled",w.controls_enabled,"generation",generation);
   }
   void erase(int id) {
+    focus_targets.erase(id);if(nav_window==id){nav_window=0;nav_target.clear();engine->keyboard_close_window=0;engine->ui_mask_dirty=true;}
     if(pending_transform){pending_transform.reset();transform_phase="failed";transform_error="scene changed before transform publication";}
     if(transform_rollback)rollback_transform("scene changed before transform publication");
     if(capture.id==id||engine->move_marker.active)cancel_input();
     const auto &r=records.at(id); reserved_bytes-=size_t(r.width)*r.height*(r.shared?4+3*r.shared->pixel_bytes:13);
+    auto&events=app_input[r.owner];events.erase(std::remove_if(events.begin(),events.end(),[&](const J&e){return e.at("window_id")==id;}),events.end());
+    if(events.size()<app_event_limit)events.push_back(json_object("type","closed","window_id",id));
     records.erase(id); engine->windows.erase(id);
     auto &order=engine->order; order.erase(std::remove(order.begin(),order.end(),id),order.end());
     engine->texture_cache.erase(id);
     if(focused==id) focused=order.empty()?0:order.back();
-    changed();
+    changed();complete_app_waits();
   }
   void disconnect(int fd) {
     if(pending_input.owner==fd)apply_pending_input();
@@ -121,6 +129,7 @@ struct Server {
     std::vector<int> gone; for(const auto &[id,r]:records) if(r.owner==fd) gone.push_back(id);
     for(int id:gone) erase(id);
     close(fd); peers.erase(fd);
+    app_input.erase(fd);
   }
   void reply(Peer &p,const J &id,const J &result) {
     p.out+=wire::encode(J{{"id",id},{"ok",true},{"result",result}});
@@ -133,6 +142,8 @@ struct Server {
     if(op=="input_progress"){require(p.control,"input requires control socket");return input_progress();}
     if(op.rfind("input_",0)==0&&op!="input_status")apply_pending_input();
     if(op.rfind("input_",0)==0)return input(p,op,a);
+    if(op=="set_focusables")return register_focusables(p,a);
+    if(op=="navigation_status"){require(p.control,"control connection required");return navigation_status();}
     if(op=="create_window") {
       require(!p.control,"create windows using an application connection");
       require(records.size()<64,"window limit");
@@ -147,6 +158,7 @@ struct Server {
       require(a.value("roll",0.)==0.,"window roll is not supported");
       Engine::validate(w);auto phase=microseconds_now();w.footprint=engine->footprint(w);request_profile.footprint_us=microseconds_now()-phase;
       std::string title=a.value("title",std::string("Application")); require(title.size()<=256,"title too long");
+      w.controls_enabled=title!="BoAYO launcher";
       if(engine->move_marker.active)cancel_input();
       records.emplace(next_id,Record{p.fd,title,sw,sh,{},{}});
       engine->windows.emplace(next_id,std::move(w)); engine->order.push_back(next_id);
@@ -159,9 +171,10 @@ struct Server {
         {"service",{{"phase","ready"},{"renderer","triangle"},{"mock",engine->mock}}},
         {"performance",{{"rendered_generation",presented},{"feedback_generation",feedback},{"shell_publications",shell_publications},{"last_shell_render",last_shell_render},{"publications",engine->commits},{"content_batches",content_batches},{"content_updates",content_updates},{"coalesced_updates",coalesced_updates},{"last_content_batch",last_content_batch},{"last_render",last_render}}}};
     }
-    if(op=="app_events" || op=="poll_events")
-      return {{"events",J::array()},{"focused_window",focused},{"view",{yaw,pitch,0}},
-        {"apps",J::array()},{"stored",J::array()},{"generation",generation}};
+    if(op=="app_events" || op=="poll_events"){
+      require(!p.control,"application events require an application connection");
+      auto result=drain_app_events(p.fd);result["view"]={yaw,pitch,0};result["apps"]=J::array();result["stored"]=J::array();return result;
+    }
     if(op=="sync_scene") return generation;
     if(op=="view_set") {
       require(p.control,"view_set requires the internal control connection");
@@ -199,6 +212,8 @@ struct Server {
       auto result=r.shared->description(); result["window_id"]=id; return result;
     }
     if(op=="commit_surface") {
+      unsigned background=integer(a,"background_index",w.color,0,255),splash=integer(a,"splash_index",w.splash_color,0,255);
+      bool style_changed=background!=w.color||splash!=w.splash_color;
       require(bool(r.shared),"create_surface first");auto phase=microseconds_now();auto patches=r.shared->snapshot(a);request_profile.snapshot_us=microseconds_now()-phase;phase=microseconds_now();
       auto &s=w.surface;
       if(!w.has_content) {
@@ -220,15 +235,16 @@ struct Server {
         copied+=patch.rgb.size();
       }
       request_profile.pixels_us=microseconds_now()-phase;phase=microseconds_now();
-      bool did_change=!w.has_content || total.w;
+      bool did_change=!w.has_content || total.w || style_changed;
       if(did_change) {
         bool first_content=!w.has_content;
+        if(background!=w.color){w.color=background;w.plan_ready=false;}w.splash_color=splash;
         if(!w.shell_pending)w.splash_pending=false;
         if(!w.has_content) { total={0,0,int(r.width),int(r.height)}; w.plan_ready=false; }
         w.has_content=true; s.pending=unite(s.pending,total);
         r.pending.merge(areas);
         ++r.pending.commits;
-        changed(first_content);
+        changed(first_content||style_changed);
       }
       request_profile.damage_us=microseconds_now()-phase;
       r.shared->sequence=a.at("sequence").get<uint64_t>(); r.shared->commits++; r.shared->copied_bytes+=copied;
@@ -252,7 +268,7 @@ struct Server {
         if(geometry) { w.yaw=bounds.yaw; w.pitch=bounds.pitch; w.width=bounds.width; w.height=bounds.height; w.padding=bounds.padding;
           auto phase=microseconds_now();w.footprint=engine->footprint(w);request_profile.footprint_us=microseconds_now()-phase;w.plan_ready=false; }
         if(background!=w.color){w.color=background;w.plan_ready=false;}
-        w.splash_color=splash;w.visible=visible; r.title=title; changed();
+        w.splash_color=splash;w.visible=visible;w.controls_enabled=title!="BoAYO launcher"; r.title=title; changed();
       }
       return description(id);
     }
@@ -299,7 +315,12 @@ struct Server {
       require(p.wait_id.is_null(),"wait_present already pending");
       const auto &op=q.at("op").get_ref<const std::string&>();static const J empty=J::object();const J &a=q.contains("args")?q.at("args"):empty;
       request_profile.parse_us=microseconds_now()-started;
-      if(op=="wait_input") {
+      if(op=="wait_events") {
+        require(!p.control,"application events require an application connection");
+        int timeout=integer(a,"timeout_ms",1000,1,1000);
+        if(!app_input[p.fd].empty())reply(p,id,drain_app_events(p.fd));
+        else{p.wait_id=id;p.event_wait=true;p.event_deadline_us=microseconds_now()+uint64_t(timeout)*1000;}
+      } else if(op=="wait_input") {
         require(p.control,"input requires control socket");
         require(a.at("ticket").is_number_integer(),"integer input ticket required");
         int64_t ticket=a.at("ticket");require(ticket>=0&&uint64_t(ticket)<=input_accepted,"unknown future input ticket");
@@ -388,7 +409,7 @@ struct Server {
           else if(engine->move_marker.needs_publish)engine->render_marker();
           engine->ui_dirty=false;
           service_render_ms=(now()-start)*1000;complete_input();feedback=generation;dirty=false;
-          for(auto&[fd,p]:peers)if((p.control||p.feedback_wait)&&!p.input_wait&&!p.wait_id.is_null()&&p.wait_generation<=feedback){reply(p,p.wait_id,presentation_result(feedback,p.feedback_wait,true));p.wait_id=nullptr;p.feedback_wait=false;}
+          for(auto&[fd,p]:peers)if((p.control||p.feedback_wait)&&!p.event_wait&&!p.input_wait&&!p.wait_id.is_null()&&p.wait_generation<=feedback){reply(p,p.wait_id,presentation_result(feedback,p.feedback_wait,true));p.wait_id=nullptr;p.feedback_wait=false;}
           flush();return;
         }
         for(auto &[id,w]:engine->windows)shells|=w.visible&&w.shell_pending;
@@ -416,7 +437,7 @@ struct Server {
         // Keep pending conversions alive when another window's shell was shown first.
         if(shells)for(auto &[id,r]:records)if(r.pending.commits){dirty=true;scene_dirty=true;}
         if(!dirty)presented=generation;
-        for(auto &[fd,p]:peers)if(!p.wait_id.is_null()&&!p.input_wait&&p.wait_generation<=(p.feedback_wait?feedback:presented)) {
+        for(auto &[fd,p]:peers)if(!p.wait_id.is_null()&&!p.event_wait&&!p.input_wait&&p.wait_generation<=(p.feedback_wait?feedback:presented)) {
           reply(p,p.wait_id,presentation_result(p.feedback_wait?feedback:presented,p.feedback_wait));p.wait_id=nullptr;
         }
         flush();
@@ -424,6 +445,7 @@ struct Server {
   void run() {
     std::cout<<"TRIANGLE_BOAYO_READY "<<path<<std::endl;
     while(!stopping) {
+      reap_home();
       if(capture.owner>=0&&microseconds_now()-last_input_us>30000000){cancel_input();changed(false,false);}
       unsigned budget=32;
       for(unsigned pass=0;pass<4&&budget&&!stopping;pass++)if(!pump(dirty||pending_input.owner>=0||pass!=0,budget))break;
@@ -432,6 +454,7 @@ struct Server {
       if(dirty&&!stopping) {
         present();
       }
+      complete_app_waits();flush();
     }
     flush();
   }

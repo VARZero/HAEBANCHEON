@@ -1,0 +1,75 @@
+{
+  "result": "PASS_REAL_BOARD_HOME_LAUNCHER",
+  "version": "fixed-wm-keyboard-v16b",
+  "samples": [
+    {
+      "name": "01-select-dashboard-icon",
+      "key": "ArrowDown",
+      "host_to_first_capture_change_ms": 3770.36,
+      "roi": [
+        280,
+        165,
+        1000,
+        380
+      ],
+      "changed_pixels": 2655
+    },
+    {
+      "name": "02-enter-dashboard",
+      "key": "Enter",
+      "host_to_first_capture_change_ms": 5646.39,
+      "roi": [
+        305,
+        185,
+        570,
+        222
+      ],
+      "changed_pixels": 9805
+    },
+    {
+      "name": "03-home-returns-to-launcher",
+      "key": "Home",
+      "host_to_first_capture_change_ms": 2684.26,
+      "roi": [
+        305,
+        185,
+        570,
+        222
+      ],
+      "changed_pixels": 9805
+    }
+  ],
+  "home_window_id": 1,
+  "home_window_count": 1,
+  "dashboard_window_count": 1,
+  "repeated_home_reused_existing": true,
+  "actual_uart_ansi": true,
+  "physical_hdmi_observed": true,
+  "scope": "Actual UART Down/Enter launches Dashboard from the Home icon. After the native control path raises the rendered Dashboard, UART Home returns to an image matching the existing Home heading. Repeated Home reuses one launcher; both app windows remain. Captured latency includes UART/app/WM/publication/USB buffering; one observation, not an optical measurement.",
+  "wm_paused": false,
+  "input_left_running": true,
+  "live_url": "http://127.0.0.1:8770",
+  "confirmed_home_sample": {
+    "name": "Home-from-ready-dashboard-to-confirmed-home-title",
+    "key": "Home",
+    "host_to_confirmed_home_title_ms": 2321.71,
+    "roi": [
+      305,
+      185,
+      570,
+      222
+    ],
+    "home_reference_mean_abs_error": 0.0,
+    "n": 1
+  },
+  "created_kst": "2026-11-27T22:12:03.394328+09:00",
+  "kernel_release": "6.12.0-haebancheon-keyboard",
+  "fpga_bitstream_changed": false,
+  "wm_expected_sha256": "8503eee2a47e57c83ff22d74c1c26819e897f86365492e3ed906a0e30a9f1e8e",
+  "new_sd_sha256": "9458276e10338cb5660dea8f1a440613d87c328893aecf365956944b336b8509",
+  "new_sd_image_booted_on_board": false,
+  "rv32_qemu_image_boot_passed": true,
+  "board_integrity": "Uploaded delta SHA-256 checked on board; native reconstruction checks target length and full-file FNV-1a before installation. Board metadata version and actual behavior checked after service restart.",
+  "evidence": "evidence/home-launcher-20261127/",
+  "physical_hardware_tested": true
+}

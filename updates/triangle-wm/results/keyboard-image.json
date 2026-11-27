@@ -1,0 +1,89 @@
+{
+  "boot_lba": 2048,
+  "root_lba": 14336,
+  "root_sectors": 2097152,
+  "segments": [
+    {
+      "address": "0x80000000",
+      "sectors": 519,
+      "crc32": "edd168be"
+    },
+    {
+      "address": "0x80400000",
+      "sectors": 10713,
+      "crc32": "26dd3d1b"
+    },
+    {
+      "address": "0x87f00000",
+      "sectors": 8,
+      "crc32": "57f4923d"
+    }
+  ],
+  "version": "fixed-wm-keyboard-v16c",
+  "geometry": "integer Q24",
+  "angles": "signed quarter degrees in 16-bit range; normalized yaw [-180,180)",
+  "wire": "BWM1 little-endian length + CBOR integer payload; angle Q2, other fractions Q24",
+  "publication": "BO_PUBLISH_COPY default; TRIANGLE_PUBLISH_COPY=0 selects checked baseline",
+  "preview": "Move: frozen real window and one complete shared S tile. Resize: hide captured window once, fill complete target footprint with shared S payload. Shrinking restores underlying scene, higher windows occlude. Release publishes B and latest content once.",
+  "execution": "Startup stages executables in /run/triangle-wm-runtime before launch",
+  "feedback_target_ms": 300,
+  "feedback_target_hardware_verified": false,
+  "hardware_tested": false,
+  "binaries": {
+    "triangle-boayo-fixed": "2ac8386710c43234bcd9e5610aefe1a04dde0e960f9bfca31c808fb824cf325e",
+    "triangle-app": "5560552b8ebde60abdb3fcbf07a5c5cf1bedbcf225e999f33fd0e052d09f4dc7",
+    "triangle-input": "b798b7c444bc990d43720a915313388c649836de9dabb268419a9954f30f5b15",
+    "triangle-examples": "388710aada88f477d40a8bfee25261aa4ae5d626788d30884f23a69c1837b245",
+    "boayo-input": "0d26d5d0bb20ef5d01c0cf87f888ea7ce62eadbe6699fe1c00ad5c939ac9c4ab"
+  },
+  "move_marker_cells": 1024,
+  "fast_motion": "PTR1-one-way-drain-bounded",
+  "demo_diagnostics": "startup-only",
+  "runtime_priority": {
+    "wm": -10,
+    "input": -5,
+    "app": 10
+  },
+  "resize_preview": "solid-filled-direct-cached-trig-q13-coarse",
+  "window_colors": "RGB332-256-independent-SB",
+  "ui_controls": "28px-glyph-48px-hit",
+  "application_events": "bounded-FIFO-wait-events",
+  "example_apps": [
+    "editor",
+    "settings",
+    "dashboard",
+    "launcher",
+    "control",
+    "terminal"
+  ],
+  "example_font": "resident ASCII; Korean glyphs/IME deferred",
+  "desktop_apps": "catalog-launcher-pty-front-reset",
+  "startup_app": "launcher",
+  "launcher_catalog": "/etc/boayo/apps.json",
+  "launcher_catalog_sha256": "69f7464e6bbc54fee78df0761ae9409c40109119037706546d8e95f3287a2cba",
+  "terminal": "PTY /bin/sh -i; 54x18 ASCII; bounded VT subset; 200 history lines",
+  "system_actions": "view_set 0/0; confirmed /sbin/poweroff blocked against mock WM",
+  "keyboard_navigation": "Home-launcher-spatial-focus-Enter-click",
+  "keyboard_transports": [
+    "TTY-ANSI",
+    "evdev",
+    "ESP32-SPI-KBD1-20B"
+  ],
+  "input_app": "/usr/bin/boayo-input",
+  "input_start": "manual; stdin TTY by default; --tty, --event, --auto, --spi optional",
+  "linux_peripherals": [
+    "ttyS0 polling 8N1",
+    "spidev0.0 SPI master",
+    "i2c-0 master"
+  ],
+  "navigation_retry": "source-session-sequence-dedup-32",
+  "keyboard_close_focus": "cached-active-mask-v16a",
+  "home_controls": "hidden-and-excluded-from-keyboard",
+  "image": "HAEBANCHEON-keyboard-v16.img",
+  "bytes": 1081081856,
+  "sha256": "7848a47ba1013c638106d8a0782dc3ffa13b81f460b2d660e5d8a5e1154fb5a4",
+  "kernel_sha256": "bf7d4cb118aee7291b13b6a88d23bfd6b995eb60151fecd96525e8d84738b4bd",
+  "kernel_release": "6.12.0-haebancheon-keyboard",
+  "rootfs_sha256": "114698137e402abc393ad5ebe8c2f8c96722510fe41a5ae603019e4e51718e2a",
+  "notes": "BO_PUBLISH_COPY retained. Automatically stages executables in RAM and starts Home launcher when /dev/bosio0 exists. Prepared offline; no physical board was contacted. Native/QEMU checks do not measure hardware latency."
+}

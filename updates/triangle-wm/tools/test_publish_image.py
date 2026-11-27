@@ -37,7 +37,7 @@ with tempfile.TemporaryDirectory() as temp:
     c.run('triangle-boayo-fixed --ctl \'{"op":"get_state"}\' | grep -F fixed-q24',timeout=120)
     c.run('triangle-input --stream-bench-async >/tmp/stream.log && grep STREAM_BENCH_DONE /tmp/stream.log',timeout=180)
     if args.marker:
-     c.run('grep -E "fixed-wm-(single-tile-v3|tile-rim-v4|full-tile-v5|fast-motion-v6|fast-motion-v7|fast-motion-v8|fast-motion-v9|fast-resize-v10|fast-resize-v11|fast-resize-v12|solid-resize-v13)" /etc/triangle-wm-build.json',timeout=30)
+     c.run('grep -E "fixed-wm-(single-tile-v3|tile-rim-v4|full-tile-v5|fast-motion-v6|fast-motion-v7|fast-motion-v8|fast-motion-v9|fast-resize-v10|fast-resize-v11|fast-resize-v12|solid-resize-v13|ui-examples-v14|desktop-apps-v15)" /etc/triangle-wm-build.json',timeout=30)
      identity_text=c.run('cat /etc/triangle-wm-build.json',timeout=30).decode(errors='replace')
      build_identity=json.loads(identity_text[identity_text.index('{'):identity_text.rindex('}')+1])
      if build_identity.get('fast_motion'):c.run('triangle-input --fast-marker-bench >/tmp/fast.log && grep FAST_MARKER_BENCH_DONE /tmp/fast.log',timeout=180)
@@ -63,6 +63,17 @@ with tempfile.TemporaryDirectory() as temp:
        else:assert move['preview']['mode']=='outline'
       if args.preview=='outline':assert row['moves'][-1]['render']['footprint_calls_total']>base['footprint_calls_total']
      (out/'marker-samples.json').write_text(json.dumps(samples,indent=2)+'\n')
+     if build_identity.get('example_apps'):
+      for kind in build_identity['example_apps']:
+       c.run(f'triangle-examples {kind} --once >/tmp/example-{kind}.log && grep EXAMPLE_READY /tmp/example-{kind}.log',timeout=180)
+      c.run('test -x /usr/bin/triangle-examples',timeout=30)
+     if build_identity.get('desktop_apps'):
+      c.run('grep "EXAMPLE_READY.*launcher" /tmp/triangle-app.log && test -s /etc/boayo/apps.json && test -c /dev/ptmx && test -d /dev/pts',timeout=30)
+      c.run('triangle-examples terminal >/tmp/terminal-live.log 2>&1 & echo $! >/tmp/terminal.pid',timeout=30)
+      c.run('sleep 3; grep EXAMPLE_READY /tmp/terminal-live.log',timeout=180)
+      c.run('triangle-boayo-fixed --ctl \'{"op":"input_text","args":{"text":"printf RV32_PTY_OK > /tmp/pty-result"}}\'',timeout=180)
+      c.run('triangle-boayo-fixed --ctl \'{"op":"input_key","args":{"key":"Enter"}}\'',timeout=180)
+      c.run('sleep 2; grep RV32_PTY_OK /tmp/pty-result; kill $(cat /tmp/terminal.pid)',timeout=180)
     c.run('kill $(cat /tmp/demo.pid); kill $(cat /tmp/fixed.pid)',timeout=30)
   finally:c.close()
 report=dict(result='PASS_FOCUSED_QEMU_BOOT',image_sha256=s.image.sha(image),hardware=False,scope='Final image kernel release, userspace boot, benchmark executables and new UAPI header. No output hardware timing. Full unrelated mock-app suite was interrupted at shutdown wait.')
@@ -70,4 +81,5 @@ if args.fixed:report['scope']='Final image boot, actual RV32 fixed WM + RGB332 a
 if args.marker:
  report['runtime_preview']=args.preview
  report['scope']+=(' Move marker and resize preview exercised on RV32; frozen motion has no descriptor/projection submissions; resize performs footprint geometry only; final transform completed.' if args.preview=='tile' else ' Legacy thin-outline reference mode exercised on the same image.')+' Emulator elapsed values are not hardware latency.'
+ if build_identity.get('desktop_apps'):report.update(desktop_apps='PASS: launcher startup, all six app frames, catalog install and live RV32 PTY shell command; no poweroff executed')
 (out/'result.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report))

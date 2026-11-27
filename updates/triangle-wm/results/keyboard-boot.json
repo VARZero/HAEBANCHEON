@@ -1,0 +1,12 @@
+{
+  "result": "PASS_KEYBOARD_QEMU_IMAGE",
+  "image_sha256": "7848a47ba1013c638106d8a0782dc3ffa13b81f460b2d660e5d8a5e1154fb5a4",
+  "kernel_release": "6.12.0-haebancheon-keyboard",
+  "actual_rv32_apps": true,
+  "tty_pty_navigation": true,
+  "stdin_ctrl_c_restoration": true,
+  "home_launcher": true,
+  "staged_startup": true,
+  "hardware_tested": false,
+  "scope": "Actual RV32 binaries on delivered Linux kernel, TTY/PTTY and binary WM input. QEMU virt device tree only; board MMIO SPI/I2C/UART, ESP32, HDMI and physical latency are not emulated."
+}

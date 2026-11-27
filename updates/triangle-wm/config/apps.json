@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "apps": [
+    {
+      "id": "editor", "title": "Notes", "color": 255,
+      "command": ["@examples", "editor"],
+      "icon16": ["0000","1FF0","1018","100C","1004","1FE4","1004","1FC4","1004","1FE4","1004","1FC4","1004","1FFC","0000","0000"]
+    },
+    {
+      "id": "settings", "title": "Settings", "color": 31,
+      "command": ["@examples", "settings"],
+      "icon16": ["0000","0180","0180","0DB0","1FF8","07E0","0660","7C3E","7C3E","0660","07E0","1FF8","0DB0","0180","0180","0000"]
+    },
+    {
+      "id": "dashboard", "title": "Dashboard", "color": 3,
+      "command": ["@examples", "dashboard"],
+      "icon16": ["0000","7FFE","4002","4002","4182","4242","4422","4812","500A","4002","4062","4062","4002","7FFE","0000","0000"]
+    },
+    {
+      "id": "control", "title": "Control", "color": 227,
+      "command": ["@examples", "control"],
+      "icon16": ["0000","0000","0400","0E00","7FFE","0E00","0400","0000","0020","0070","7FFE","0070","0020","0000","0000","0000"]
+    },
+    {
+      "id": "terminal", "title": "Terminal", "color": 255,
+      "command": ["@examples", "terminal"],
+      "icon16": ["0000","7FFE","4002","4002","5002","4802","4402","4202","4402","4802","501E","4002","4002","7FFE","0000","0000"]
+    }
+  ]
+}

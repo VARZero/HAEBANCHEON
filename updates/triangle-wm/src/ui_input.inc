@@ -43,7 +43,7 @@
  }
  static std::pair<double,double> angles(V r){return {std::atan2(r[0],-r[2])*180/pi,std::atan2(r[1],std::hypot(r[0],r[2]))*180/pi};}
  J input_status(){
-  J controls=J::array();for(auto&c:engine->ui_controls)controls.push_back(json_object("window_id",c.window,"action",c.kind==1?"close":c.kind==2?"move":"resize","x",c.x,"y",c.y,"tile",c.tile,"hit_size",32));
+  J controls=J::array();for(auto&c:engine->ui_controls)controls.push_back(json_object("window_id",c.window,"action",c.kind==1?"close":c.kind==2?"move":"resize","x",c.x,"y",c.y,"tile",c.tile,"hit_size",wm_controls::hit_size,"icon_size",wm_controls::icon_size));
   auto preview=json_object("active",engine->preview.window!=0,"window_id",engine->preview.window,"outline_tiles",engine->preview.masks.size(),"splash_index",engine->preview.color,"mode","outline");
   if(engine->tile_preview){preview=engine->marker_report();preview["outline_tiles"]=0;}
   J colors=J::array();for(int id:engine->order){const auto&w=engine->windows.at(id);colors.push_back(json_object("window_id",id,"background_index",w.color,"splash_index",w.splash_color));}
@@ -52,7 +52,9 @@
  J input(Peer&p,const std::string&op,const J&a){
   require(p.control,"input requires control socket");require(engine->ui_enabled,"interactive mode disabled");
   if(op=="input_status")return input_status();
+  if(op=="input_nav")return navigation_request(a);
   require(capture.owner<0||capture.owner==p.fd,"pointer captured by another input connection");
+  if(op=="input_text"||op=="input_key")return app_keyboard(op,a);
   if(op=="input_colors"){
    require(!engine->pointer.down,"finish or cancel the drag before changing colors");
    int id=integer(a,"window_id",focused,1,INT_MAX);require(records.count(id),"unknown window");
@@ -70,7 +72,9 @@
   bool marker_changed=false;bool had_marker=engine->move_marker.active;uint64_t ticket=0;
   if(engine->tile_preview&&engine->pointer.down&&capture.id&&(capture.kind==2||capture.kind==3))marker_changed=update_marker(x,y);
   if(op=="input_button"&&pressed!=engine->pointer.down){
-   if(pressed){auto hit=engine->ui_hit(x,y);capture.owner=p.fd;capture.x=x;capture.y=y;capture.id=hit.window;capture.kind=hit.kind;
+   if(pressed){auto hit=engine->ui_hit(x,y);auto target=hit.window?AppPoint{}:app_point(x,y);
+    if(target.window){require(app_input[records.at(target.window).owner].size()<app_event_limit,"application input queue full");hit.window=target.window;hit.kind=4;}
+    capture.owner=p.fd;capture.x=x;capture.y=y;capture.id=hit.window;capture.kind=hit.kind;
     if(hit.window){auto&w=engine->windows.at(hit.window);capture.yaw=w.yaw;capture.pitch=w.pitch;capture.width=w.width;capture.height=w.height;focused=hit.window;
      if(engine->tile_preview&&(hit.kind==2||hit.kind==3)){
       capture.press_ray=engine->ui_ray(x,y);auto center=w.transform.ready?w.transform.ax[0]:axes(w.yaw,w.pitch)[0];auto depth=dot(center,engine->view_axes[0]);
@@ -82,6 +86,7 @@
    }else if(capture.id&&records.count(capture.id)){
     int id=capture.id;auto &w=engine->windows.at(id);action=capture.kind;
     if(action==1){auto hit=engine->ui_hit(x,y);if(hit.window==id&&hit.kind==1){erase(id);applied=true;}}
+    else if(action==4){auto target=app_point(x,y);if(target.window==id)app_event(id,json_object("type","click","x",target.x,"y",target.y));}
     else if(action==2||action==3){
      Window proposed=proposal(x,y);
      if(engine->tile_preview&&std::abs(proposed.pitch)>80){ticket=++transform_ticket;transform_phase="failed";transform_error="target transform outside view bounds";}

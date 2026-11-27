@@ -90,7 +90,7 @@ class Handler(BaseHTTPRequestHandler):
    if not 0<size<=2048:return self.send({'error':'Invalid request size'},400)
    q=json.loads(self.rfile.read(size))
    if self.path=='/stop':stop();return self.send({'online':False})
-   if self.path!='/input' or q.get('op') not in ('input_status','input_progress','input_move','input_button','input_cancel','input_visibility','input_colors'):return self.send({'error':'Invalid operation'},400)
+   if self.path!='/input' or q.get('op') not in ('input_status','input_progress','input_move','input_button','input_cancel','input_visibility','input_colors','input_text','input_key'):return self.send({'error':'Invalid operation'},400)
    self.send(request(q))
   except Exception as e:self.send({'ok':False,'error':str(e)},500)
 print(json.dumps({'url':f'http://127.0.0.1:{args.port}','input':'COM4','ready':True}),flush=True)

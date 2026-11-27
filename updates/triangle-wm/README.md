@@ -1,9 +1,16 @@
 # 해반천 삼각 타일 WM
 
-현재 보드에 적용한 버전은 **`fixed-wm-solid-resize-v13`**이다. 한국어 문서를 기본으로 사용한다. [영문 원문](README_EN.md)은 참고용으로 보존한다.
+현재 보드에 적용한 버전은 **`fixed-wm-keyboard-v16c`**다. 한국어 문서를 기본으로 사용한다. [영문 원문](README_EN.md)은 참고용으로 보존한다.
+
+**v16c 키 탐색과 `boayo-input`**을 실제 보드에 적용했다. TTY 앱을 실행하면 Home·방향키·Enter를 보아요에 전달한다. Home은 홈런처를 열거나 기존 홈 화면을 앞으로 가져오며, 대시보드는 홈의 아이콘으로 실행한다. 홈 화면 바깥에는 닫기·이동·크기 조절 버튼을 표시하지 않는다. 향후 ESP32용 SPI 입력도 같은 경로로 받는다. 기존 FPGA를 유지한 채 리눅스의 범용 UART·SPI·I²C 연결을 추가했다. 실제 UART 콘솔의 키 입력과 HDMI 화면을 확인했으며, 외부 SPI·I²C 장치와의 통신은 아직 검사하지 않았다. 실행 방법과 검증 범위는 [키보드·외부 리모컨 입력](KEYBOARD.ko.md)을 참고한다.
+
+**v15 홈런처·제어센터·터미널**과 v14의 큰 창 조작 아이콘, 앱 입력, 텍스트 에디터·설정·대시보드도 포함한다. PC 검사와 RV32 이미지 부팅 검사를 통과했으며, 이번 보드 검사에서는 홈런처·대시보드·설정창·터미널을 확인했다. [홈런처·제어센터·터미널](DESKTOP_APPS.md)과 [공통 UI·기본 앱](UI_EXAMPLES.md)을 참고한다. 아래 v13 측정값은 이전에 보드에서 확인한 기록이며, 새 개발분의 성능을 뜻하지 않는다. v13 소스는 `6d343f6`에 보존돼 있다.
 
 | 문서 | 내용 |
 |---|---|
+| [키보드·외부 리모컨 입력](KEYBOARD.ko.md) | v16c, 홈 복귀·홈 창 버튼 숨김, TTY 입력 앱, 포커스 탐색, ESP32 SPI 규약, 리눅스 연결 |
+| [홈런처·제어센터·터미널](DESKTOP_APPS.md) | v15 개발분, 앱 등록 파일, 전원·시점 제어, 실제 셸 |
+| [UI와 기본 앱 예제](UI_EXAMPLES.md) | v14 개발분, 큰 아이콘, 앱 입력, 실행·검증 방법 |
 | [S/B 색과 이동·크기 조절](SOLID_RESIZE.md) | 현재 화면 동작, 타일 데이터 공유, 실보드 측정과 남은 문제 |
 | [앱 연동](BOAYO.md) | 소켓 연결, 공유 화면 버퍼, 변경 영역 전송, 색 설정, 완료 확인 |
 | [포인터와 실시간 화면](INPUT.md) | 버튼 배치, 포인터 닷 설정, PC 입력 연결, 상태 확인 |
@@ -36,7 +43,22 @@
 
 타일 목록 계산, 메타데이터 전송, 출력 완료 대기는 여전히 필요하다. 독립된 하드웨어 커서나 비동기 명령 처리기를 추가한 것은 아니다.
 
-## 실보드에서 확인한 성능
+## 현재 검증 범위
+
+v16c에서 UART Home·방향키·Enter, 홈 창의 외부 버튼 숨김, 일반 앱의 버튼, 실제 PTY 셸 명령을 실보드와 HDMI 캡처로 확인했다. 터미널에서 홈으로 복귀하는 시간은 UART 전송 완료부터 캡처의 홈 제목이 기준 화면과 일치하기까지 **1.31초**였다. 1회 관측이며 캡처 버퍼 지연을 포함한다. 일반 문자 타이핑은 기존 앱 입력 API로 가능하지만, 현재 `boayo-input`과 콘솔·HDMI 중계의 입력 버튼은 여섯 탐색 키만 전달한다.
+
+| 기록 | 범위 |
+|---|---|
+| [home-caption-board.json](results/home-caption-board.json) | v16c 홈 창 버튼 숨김, 실제 PTY 셸, HDMI |
+| [home-launcher-board.json](results/home-launcher-board.json) | v16b Home의 홈런처 재사용 |
+| [keyboard-board.json](results/keyboard-board.json) | v16a 키 탐색과 느린 설정 갱신, 남은 문제 |
+| [keyboard-validation.json](results/keyboard-validation.json) | 현재 소스·실행 파일 해시와 PC 검사 |
+| [keyboard-image.json](results/keyboard-image.json) | v16c SD 이미지 구성·해시 |
+| [keyboard-boot.json](results/keyboard-boot.json) | 실제 RV32 바이너리와 커널의 QEMU 부팅 검사 |
+
+새 SD 이미지 자체를 보드에서 다시 부팅한 것은 아니다. 보드는 새 커널로 부팅한 뒤 WM 실행 파일을 v16c로 교체해 검사했다. 범용 UART·SPI·I²C 장치 등록은 확인했으며, 외부 장치와의 통신은 아직 검사하지 않았다. QEMU·모의 장치 검사는 실물 통신이나 화면 지연을 대신하지 않는다.
+
+## v13 실보드 성능 기록
 
 2026-11-25에 실제 보드에서 동작을 검사하고 부팅 파일을 저장했다. 아래 시간은 **PC의 마지막 드래그 입력부터 해당 목표가 실제 USB HDMI 캡처에 나타날 때까지**다.
 
@@ -66,29 +88,22 @@
 
 저장소 루트에서 WSL/Linux로 실행한다.
 
+현재 소스는 v16c를 만든다. Linux **6.12.0**, Buildroot **2025.02.19**의 RV32 GCC **13.4.0** 도구 모음을 사용했다. 커널도 같은 크로스 컴파일러로 빌드한다.
+
 ```sh
-bash updates/triangle-wm/tools/build_fixed.sh /var/tmp/triangle-solid-resize-release
-bash updates/triangle-wm/tools/validate_solid_resize.sh /var/tmp/triangle-solid-resize-release
-python3 updates/triangle-wm/tools/package_fixed.py \
-  --build /var/tmp/triangle-solid-resize-release \
-  --output /var/tmp/triangle-solid-resize-image \
-  --name HAEBANCHEON-solid-resize-preview.img
-python3 updates/triangle-wm/tools/test_publish_image.py --marker \
-  --image /var/tmp/triangle-solid-resize-image/HAEBANCHEON-solid-resize-preview.img \
-  --output /var/tmp/triangle-solid-resize-image/focused-boot
+bash updates/triangle-wm/tools/build_fixed.sh /var/tmp/triangle-keyboard-v16/userland
+bash updates/triangle-wm/tools/build_keyboard_kernel.sh
+bash updates/triangle-wm/tools/validate_keyboard.sh > /var/tmp/triangle-keyboard-native-tests.log
+bash updates/triangle-wm/tools/package_keyboard.sh
+python3 updates/triangle-wm/tools/test_keyboard_image.py
+python3 updates/triangle-wm/tools/collect_keyboard.py --output /mnt/d/temp/haebancheon-keyboard-v16c
 ```
 
-빌드에는 호스트 C++ 컴파일러·Python과 다음 경로의 검증된 RV32 Buildroot 도구 모음이 필요하다.
-
-`/var/tmp/haebancheon-userland-validation/buildroot/host/bin/`
-
-이미지 제작에는 `/var/tmp/triangle-publish-copy/` 아래에 준비한 기준 rootfs·커널·부팅 이미지, `debugfs`, `e2fsck`도 필요하다. 위 명령만으로 새 PC에서 모든 기반 파일을 처음부터 만드는 것은 아니다. 기반 환경은 [재현 가능한 사용자 환경 빌드](../../software/userland/README.md)를 참고한다. 게시 드라이버의 준비 과정은 과거 기록인 [PUBLISH_COPY.md](PUBLISH_COPY.md)에 남아 있다.
-
-이미지 부팅 검사에는 RV32 QEMU와 `dtc`가 필요하다. 검증 스크립트는 두 뱅크의 픽셀 비교, 확대·축소·취소, 창 가림과 복원, S/B 색 설정, 최신 콘텐츠 반영, 입력 순서, 실패 시 복구를 검사한다. 호스트 검사와 이미지 부팅 검사가 실제 HDMI 검증을 대신하지는 않는다.
+검증된 도구 모음은 `/var/tmp/haebancheon-userland-validation/buildroot/host/bin/`에 있다. 호스트 C++ 컴파일러·Python·`dtc`·`debugfs`·`e2fsck`·RV32 QEMU와 `/var/tmp/triangle-publish-copy/`의 기준 rootfs·커널·부팅 파일이 필요하다. 새 PC의 기반 환경 준비는 [재현 가능한 사용자 환경 빌드](../../software/userland/README.md)를 따른다. [키 입력 문서](KEYBOARD.ko.md#빌드와-검사)에 실행 순서와 검증 범위를 정리했다.
 
 ## 보드 실행과 실시간 화면
 
-SD 이미지의 `/etc/init.d/S99triangle-fixed`는 `/dev/bosio0`가 있으면 WM과 RGB332 데모를 시작한다. 실행 파일은 먼저 `/run/triangle-wm-runtime/`으로 복사해 RAM에서 실행한다.
+현재 SD 이미지의 `/etc/init.d/S99triangle-fixed`는 `/dev/bosio0`가 있으면 WM과 홈런처를 시작한다. 실행 파일은 먼저 `/run/triangle-wm-runtime/`으로 복사해 RAM에서 실행한다. `boayo-input`은 필요한 TTY에서 수동 실행한다.
 
 | 항목 | 경로 |
 |---|---|
@@ -105,12 +120,12 @@ triangle-fixed-start start
 triangle-fixed-start stop
 ```
 
-PC에서 실제 HDMI 캡처와 포인터 입력을 연결하는 방법은 [INPUT.md](INPUT.md)를 따른다. UART는 COM4, 115200 baud이며 DTR/RTS는 끈다. UART를 사용하는 PC 프로세스는 하나만 실행한다. 창 조작 화면은 `http://127.0.0.1:8767/?v=13`이다.
+현재 콘솔·키 입력·실제 HDMI 중계는 [키 입력 문서](KEYBOARD.ko.md#live-monitor)의 `board_monitor.py`를 실행하고 `http://127.0.0.1:8770/`에서 본다. UART는 COM4, 115200 baud이며 DTR/RTS는 끈다. UART를 사용하는 PC 프로세스는 하나만 실행한다. 기존 포인터·앱 문자 입력 중계는 [INPUT.md](INPUT.md)를 참고한다.
 
-검사한 SD 이미지의 로컬 경로는 `D:\temp\haebancheon-solid-resize-preview\HAEBANCHEON-solid-resize-preview.img`다. 이미지·영상·빌드 결과·장치별 원본 로그는 Git에 넣지 않는다. 재현 절차, 이미지 구성·해시와 측정 요약은 저장소에 보관한다.
+검사한 SD 이미지의 로컬 경로는 `D:\temp\haebancheon-keyboard-v16c\HAEBANCHEON-keyboard-v16.img`다. 이미지·영상·빌드 결과·장치별 원본 로그는 Git에 넣지 않는다. 재현 절차, 이미지 구성·해시와 측정 요약은 저장소에 보관한다.
 
 ## 이전 버전 기록
 
 현재 구현은 `feat/reproducible-linux-userland`의 `5f6ff539fae3e529ef53c1d90952dbe72ba609ea`를 바탕으로 `feat/triangle-tile-wm` 브랜치에서 개발했다.
 
-초기의 6단계 실험, 외곽 타일·얇은 셀 윤곽 비교, 고정소수점·통신 방식의 분리 비교 등은 과거 기록으로 남겨 두었다. 당시 동작·경로·측정값을 현재 v13의 결과로 읽지 않도록 주의한다. 이 문서의 [영문 원문](README_EN.md#earlier-experiments-and-foundations)에서 과거 문서 목록과 독립 실행형 `triangle-wm` 실험 절차를 확인할 수 있다.
+초기의 6단계 실험, 외곽 타일·얇은 셀 윤곽 비교, 고정소수점·통신 방식의 분리 비교 등은 과거 기록으로 남겨 두었다. 당시 동작·경로·측정값을 현재 v16c의 결과로 읽지 않도록 주의한다. 이 문서의 [영문 원문](README_EN.md#earlier-experiments-and-foundations)에서 과거 문서 목록과 독립 실행형 `triangle-wm` 실험 절차를 확인할 수 있다.
